@@ -196,7 +196,7 @@ async def send_risk_submenu(message: Union[Message, types.CallbackQuery], is_edi
     if riesgo_activo:
         riesgo_actual_pct = obtener_riesgo_actual() * 100
         duracion_riesgo = duracion_riesgo_forzado()
-        ganancias = ganancias_duracion_riesgo_forzado()
+        ganancias = ganancias_durante_riesgo_forzado()
         ops = operaciones_en_riesgo_forzado()
         text += f"""
 Modo actual: <b>Forzado ({riesgo_actual_pct:.2f}%)</b>
@@ -580,7 +580,7 @@ async def process_risk_percentage(message: Message, state: FSMContext):
         if not (0 <= risk_percentage <= 100):
             await message.answer("❌ El porcentaje de riesgo debe estar entre 0 y 100.")
             return
-        activar_riesgo_forzado(risk_percentage / 100) # Convert to decimal
+        activar_riesgo_forzado(risk_percentage) # Pass percentage directly
         await message.answer(f"✅ Riesgo forzado activado al <b>{risk_percentage:.2f}%</b>.")
         await state.clear()
         await send_risk_submenu(message, is_edit=False)

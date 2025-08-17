@@ -41,3 +41,7 @@ redis
 mlflow
 lightgbm
 deap
+pytest
+pytest-cov
+freezegun
+pytest-asyncio

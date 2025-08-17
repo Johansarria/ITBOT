@@ -14,6 +14,23 @@ services:
       interval: 1s
       timeout: 3s
       retries: 5
+    networks:
+      - bot_network
+
+  db:
+    image: postgres:16-alpine # Using Alpine for smaller image size
+    container_name: itbot_postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistent data storage
+    ports:
+      - "5432:5432" # Optional: Expose port to host for direct access (e.g., for pgAdmin)
+    networks:
+      - bot_network
 
   listener:
     container_name: itbot_listener
@@ -27,8 +44,17 @@ services:
       - storage-volume:/app/storage
     depends_on:
       - redis
+      - db # Add dependency on PostgreSQL
     restart: unless-stopped
     mem_limit: 1g
+    environment: # Pass PostgreSQL connection details to the bot
+      POSTGRES_HOST: db # Service name of the PostgreSQL container
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - bot_network
 
   worker:
     container_name: itbot_worker
@@ -43,10 +69,24 @@ services:
       - ./data/analisis:/app/data/analisis
     depends_on:
       - redis
+      - db # Add dependency on PostgreSQL
     restart: unless-stopped
+    environment: # Pass PostgreSQL connection details to the bot
+      POSTGRES_HOST: db # Service name of the PostgreSQL container
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - bot_network
 
 volumes:
   redis-data:
+  postgres_data: # New volume for PostgreSQL data
   data-volume:
   logs-volume:
   storage-volume:
+
+networks:
+  bot_network:
+    driver: bridge

@@ -52,6 +52,11 @@ Hemos logrado importantes avances en la infraestructura y la gestión del ciclo 
     *   **Reproducibilidad:** Capacidad de recrear fácilmente los resultados de experimentos pasados.
     *   **Gestión Centralizada de Modelos:** Un repositorio unificado para versionar y organizar los modelos entrenados.
 
+*   **Depuración y Estabilización (Agosto 2025):**
+    *   Se solucionó un error crítico de red en la configuración de Docker (`docker-compose.yml`) que impedía la comunicación entre el bot y la base de datos en Redis.
+    *   Se corrigieron múltiples bugs en el bot de Telegram (`listener_bot.py`), incluyendo un `NameError` que impedía mostrar menús y un error de cálculo en la visualización del riesgo forzado.
+    *   Estos cambios restauran la funcionalidad completa del bot y mejoran significativamente su estabilidad en el entorno dockerizado.
+
 ## Dependencias Principales
 
 *   **Python >=3.12**

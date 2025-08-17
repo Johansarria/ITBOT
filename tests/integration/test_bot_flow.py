@@ -11,11 +11,11 @@ import re
 from utils.telegram_handler import send_message
 from utils.binance_client import get_binance_client # Importar la función para obtener el cliente de Binance
 from utils.state_manager import StateManager
-from database.database_manager import init_db, add_operation, update_position_status, DB_PATH
+from database.database_manager import init_db, add_operation, update_position_status
 from aiogram import Bot # Import Bot for mocking
 
 # Define a test-specific DB path for integration tests
-TEST_INTEGRATION_DB_PATH = "storage/test_integration_itbot.db"
+
 
 @pytest.fixture(autouse=True)
 def setup_integration_test_env():
@@ -28,17 +28,15 @@ def setup_integration_test_env():
     # Reset StateManager singleton
     StateManager._instance = None
 
-    # Clean up test database file
-    if os.path.exists(TEST_INTEGRATION_DB_PATH):
-        os.remove(TEST_INTEGRATION_DB_PATH)
+    
     
     # Patch DB_PATH in database_manager to use the test-specific DB
-    with patch('database.database_manager.DB_PATH', TEST_INTEGRATION_DB_PATH):
-        # Initialize the test database
-        init_db() # This will create the test DB file and table
 
-        # Mock external dependencies
-        with patch('modules.analisis_bot.send_message', new_callable=AsyncMock) as mock_send_message, \
+    # Initialize the test database
+    init_db() # This will create the test DB file and table
+
+    # Mock external dependencies
+    with patch('modules.analisis_bot.send_message', new_callable=AsyncMock) as mock_send_message, \
              patch('modules.analisis_bot.get_historical_klines', new_callable=AsyncMock) as mock_get_historical_klines, \
              patch('utils.binance_client.Client.create_order', new_callable=AsyncMock) as mock_create_order, \
              patch('utils.binance_client.Client.get_all_orders', new_callable=AsyncMock) as mock_get_all_orders, \

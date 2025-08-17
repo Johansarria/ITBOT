@@ -32,13 +32,22 @@ REDIS_DB = None
 REDIS_DECISION_QUEUE_NAME = None
 LOG_LEVEL = None # ADDED
 
+# --- CONFIGURACIÓN DE BASE DE DATOS ---
+DB_TYPE = None
+POSTGRES_HOST = None
+POSTGRES_PORT = None
+POSTGRES_DB = None
+POSTGRES_USER = None
+POSTGRES_PASSWORD = None
+DATABASE_URL = None
+
 VERBOSE_NOTIFICATIONS = None
 
 def load_configurations():
     """
     Carga o recarga todas las configuraciones desde las variables de entorno.
     """
-    global TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, BINANCE_API_KEY, BINANCE_SECRET_KEY,            TRADING_PAIR, TRADING_INTERVAL, MODE, LIVE_UNLOCK_FILE_PATH, DEFAULT_RISK_PERCENTAGE,            TAKE_PROFIT_PERCENTAGE, STOP_LOSS_PERCENTAGE, MAX_DAILY_OPERATIONS,            MAX_DAILY_LOSS_PCT, MAX_TRADE_RISK_PCT, MAX_CONCURRENT_POSITIONS,            AUTONOMOUS_CYCLE_SECONDS, RETRY_ON_ERROR_SECONDS, ANALYSIS_INTERVAL_SECONDS,            REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_DECISION_QUEUE_NAME, PRODUCTION_MODE
+    global TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, BINANCE_API_KEY, BINANCE_SECRET_KEY,            TRADING_PAIR, TRADING_INTERVAL, MODE, LIVE_UNLOCK_FILE_PATH, DEFAULT_RISK_PERCENTAGE,            TAKE_PROFIT_PERCENTAGE, STOP_LOSS_PERCENTAGE, MAX_DAILY_OPERATIONS,            MAX_DAILY_LOSS_PCT, MAX_TRADE_RISK_PCT, MAX_CONCURRENT_POSITIONS,            AUTONOMOUS_CYCLE_SECONDS, RETRY_ON_ERROR_SECONDS, ANALYSIS_INTERVAL_SECONDS,            REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_DECISION_QUEUE_NAME, PRODUCTION_MODE,            DB_TYPE, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, DATABASE_URL
 
 
     _env_vars = load_env()
@@ -74,6 +83,22 @@ def load_configurations():
     AUTONOMOUS_CYCLE_SECONDS = int(os.environ.get("AUTONOMOUS_CYCLE_SECONDS", 3600))
     RETRY_ON_ERROR_SECONDS = int(os.environ.get("RETRY_ON_ERROR_SECONDS", 300))
     ANALYSIS_INTERVAL_SECONDS = int(os.environ.get("ANALYSIS_INTERVAL_SECONDS", 300))
+
+    # --- CONFIGURACIÓN DE BASE DE DATOS ---
+    DB_TYPE = os.environ.get("DB_TYPE", "sqlite") # Default to sqlite for backward compatibility
+    POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+    POSTGRES_PORT = int(os.environ.get("POSTGRES_PORT", 5432))
+    POSTGRES_DB = os.environ.get("POSTGRES_DB")
+    POSTGRES_USER = os.environ.get("POSTGRES_USER")
+    POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+
+    if DB_TYPE == "postgresql":
+        if not all([POSTGRES_HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD]):
+            logger.error("Faltan variables de entorno para la conexión a PostgreSQL.")
+            # Consider raising an exception or setting a default behavior if critical
+        DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    else: # Default to SQLite
+        DATABASE_URL = "sqlite:///./storage/itbot.db" # Assuming default SQLite path
 
     # --- CONFIGURACIÓN DE REDIS ---
     REDIS_HOST = os.environ.get("REDIS_HOST", "redis")
