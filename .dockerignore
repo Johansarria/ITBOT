@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Bases de datos y datos de estado
+*.db
+*.db-journal
+*.sqlite3
+
+storage/
+estado_actual.json
+bot_state.json
+daily_operations_count.json
+
+# Logs
+logs/
+*.log
+
+# Reportes y artefactos de testing
+.coverage
+.pytest_cache/
+htmlcov/
+reportes/
+
+# Ficheros de entorno
+.env
+
+# Documentación y notebooks
+README.md
+ai_module/
+
+
+!data/analisis/

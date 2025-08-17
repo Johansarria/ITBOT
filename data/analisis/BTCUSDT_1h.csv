@@ -1,0 +1,66 @@
+timestamp,symbol,interval,rsi,macd,macd_signal,stoch_k,stoch_d,cci,adx,atr,bb_upper,bb_lower,rsi_state,macd_state,stoch_state,cci_state,adx_strength,bb_position,decision
+2025-08-06 23:28:48,BTCUSDT,1h,48.64,126.8806,212.0105,12.93,31.89,-33.32,15.12,412.7352,115759.4089,113842.7441,neutral,bajista,bajista,neutral,débil,en rango,Mercado lateral o indefinido
+2025-08-06 23:31:48,BTCUSDT,1h,47.87,123.8836,211.4111,10.06,30.94,-35.22,15.12,412.7352,115759.4506,113838.9454,neutral,bajista,bajista,neutral,débil,en rango,Mercado lateral o indefinido
+2025-08-07 01:56:01,BTCUSDT,1h,50.94,76.9904,162.5067,27.93,18.47,-30.1,15.56,409.7842,115708.5187,113978.6533,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114666.01
+2025-08-07 01:56:02,BTCUSDT,1h,50.92,76.9042,162.4895,27.86,18.45,-30.16,15.56,409.7842,115708.5092,113978.5548,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114664.93
+2025-08-07 01:56:21,BTCUSDT,1h,50.59,75.5289,162.2144,26.68,18.05,-31.14,15.56,409.7842,115708.3914,113976.9486,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114647.69
+2025-08-07 02:01:21,BTCUSDT,1h,51.17,68.0332,143.4862,28.62,25.57,-34.71,15.2,383.0821,115688.0054,114042.5036,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114676.06
+2025-08-07 02:01:36,BTCUSDT,1h,51.17,68.0332,143.4862,28.62,25.57,-34.71,15.2,383.0821,115688.0054,114042.5036,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114676.06
+2025-08-07 02:02:24,BTCUSDT,1h,51.84,70.7327,144.0261,30.95,26.35,-30.58,15.2,385.4993,115688.272,114045.621,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114709.9
+2025-08-07 02:50:45,BTCUSDT,1h,52.71,74.3312,144.7458,34.04,27.38,-17.42,14.86,397.42,115689.0364,114049.3676,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114755.01
+2025-08-07 02:55:53,BTCUSDT,1h,53.22,76.4842,145.1764,35.9,28.0,-15.72,14.86,397.42,115689.7182,114051.3848,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114782.0
+2025-08-07 03:43:04,BTCUSDT,1h,57.19,93.8548,134.9019,58.51,40.55,22.04,14.38,397.0344,115617.5106,114232.7604,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115000.0
+2025-08-07 03:43:39,BTCUSDT,1h,57.3,94.359,135.0027,59.01,40.72,22.49,14.38,397.0344,115617.9687,114232.9343,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115006.32
+2025-08-07 03:47:52,BTCUSDT,1h,57.69,96.2448,135.3799,60.87,41.34,24.17,14.38,397.0344,115619.7792,114233.4878,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115029.96
+2025-08-07 03:55:18,BTCUSDT,1h,57.85,97.0449,135.5399,61.67,41.6,24.88,14.38,397.0344,115620.5935,114233.6765,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115039.99
+2025-08-07 04:37:14,BTCUSDT,1h,56.31,98.8181,127.065,68.85,53.21,2.54,13.92,382.6797,115579.9647,114332.9943,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114948.23
+2025-08-07 04:39:36,BTCUSDT,1h,55.49,96.0779,126.517,65.42,52.06,-0.41,13.92,382.6797,115578.5178,114331.0062,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114913.88
+2025-08-07 04:42:01,BTCUSDT,1h,56.27,98.6864,127.0387,68.69,53.15,2.4,13.92,382.6797,115579.8869,114332.9071,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114946.58
+2025-08-07 04:43:03,BTCUSDT,1h,56.88,101.2758,127.5566,71.93,54.23,5.18,13.92,382.6797,115581.5683,114334.4717,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,114979.04
+2025-08-07 04:52:07,BTCUSDT,1h,58.02,106.4036,128.5821,78.35,56.37,10.86,13.92,382.8597,115585.8443,114336.6237,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115043.32
+2025-08-07 04:52:55,BTCUSDT,1h,58.02,106.4028,128.582,78.35,56.37,10.86,13.92,382.8597,115585.8435,114336.6235,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115043.31
+2025-08-07 04:57:55,BTCUSDT,1h,58.55,108.8614,129.0737,81.43,57.4,16.06,13.92,385.0611,115588.3382,114337.2108,neutral,bajista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,115074.13
+2025-08-07 12:47:52,BTCUSDT,1h,64.46,515.5882,412.7949,84.78,85.73,83.73,23.51,516.8528,117142.6464,113745.1886,neutral,alcista,bajista,neutral,débil,en rango,Mercado lateral o indefinido,116437.79
+2025-08-07 12:54:18,BTCUSDT,1h,64.62,516.8646,413.0501,85.4,85.94,84.14,23.51,516.8528,117145.3319,113744.1031,neutral,alcista,bajista,neutral,débil,en rango,Mercado lateral o indefinido,116453.79
+2025-08-07 13:00:17,BTCUSDT,1h,65.38,522.8751,435.6559,88.36,84.61,85.3,23.12,481.3842,117281.7249,113756.0181,neutral,alcista,alcista,neutral,débil,en rango,Mercado lateral o indefinido,116532.0,2
+2025-08-07 13:15:46,BTCUSDT,1h,59.47,495.2827,430.1374,74.8,80.09,68.53,23.12,507.4363,117230.7998,113772.3542,neutral,alcista,bajista,neutral,débil,en rango,Mercado lateral o indefinido,116186.11,0
+2025-08-07 13:21:44,BTCUSDT,1h,59.98,497.7867,430.6382,76.03,80.5,68.44,23.12,509.9306,117234.9068,113771.3862,neutral,alcista,bajista,neutral,débil,en rango,Mercado lateral o indefinido,116217.5,0
+2025-08-07 13:24:19,BTCUSDT,1h,60.03,498.0611,430.6931,76.17,80.55,68.53,23.12,509.9306,117235.3632,113771.2738,neutral,alcista,bajista,neutral,débil,en rango,Mercado lateral o indefinido,116220.94,0
+2025-08-07 13:26:34,BTCUSDT,1h,61.21,503.7298,431.8269,78.95,81.48,70.29,23.12,509.9306,117245.0705,113768.6725,neutral,alcista,bajista,neutral,débil,en rango,Mercado lateral o indefinido,116292.0,0
+2025-08-07 13:29:29,BTCUSDT,1h,62.16,508.1013,432.7012,81.1,82.19,71.64,23.12,509.9306,117252.9177,113766.3053,neutral,alcista,bajista,neutral,débil,en rango,Tendencia alcista fuerte - posible compra,116346.8,5
+2025-08-07 13:33:50,BTCUSDT,1h,61.09,503.1211,431.7051,78.65,81.38,70.1,23.12,509.9306,117244.0028,113768.9772,neutral,alcista,bajista,neutral,débil,en rango,Tendencia alcista fuerte - posible compra,116284.37,5
+2025-08-07 13:36:21,BTCUSDT,1h,60.82,501.8679,431.4545,78.04,81.17,69.71,23.12,509.9306,117241.8236,113769.5854,neutral,alcista,bajista,neutral,débil,en rango,Tendencia alcista fuerte - posible compra,116268.66,5
+2025-08-07 13:39:09,BTCUSDT,1h,61.81,506.4994,432.3808,80.31,81.93,71.15,23.12,509.9306,117250.006,113767.209,neutral,alcista,bajista,neutral,débil,en rango,Tendencia alcista fuerte - posible compra,116326.72,5
+2025-08-07 13:46:46,BTCUSDT,1h,60.48,500.2413,431.1292,77.24,80.91,69.21,23.12,509.9306,117239.0338,113770.3362,neutral,alcista,bajista,neutral,débil,en rango,Tendencia alcista fuerte - posible compra,116248.27,5
+2025-08-07 17:07:06,BTCUSDT,1h,67.21,626.0219,543.7531,85.96,86.36,90.98,26.47,494.4267,118025.9864,113982.9256,neutral,alcista,bajista,neutral,fuerte,en rango,Tendencia alcista fuerte - posible compra,117144.35,5
+2025-08-07 17:19:10,BTCUSDT,1h,68.89,641.6628,546.8813,93.29,88.8,100.63,26.63,512.0009,118059.5685,113968.9505,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117340.42,5
+2025-08-07 17:27:19,BTCUSDT,1h,69.45,647.3258,548.0139,95.94,89.68,102.69,26.66,513.5352,118072.5362,113963.0818,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117411.41,5
+2025-08-07 17:28:35,BTCUSDT,1h,69.76,650.4465,548.638,97.4,90.17,103.55,26.66,513.5352,118079.8625,113959.6675,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117450.53,5
+2025-08-07 17:41:43,BTCUSDT,1h,69.45,647.262,548.0011,95.91,89.67,103.2,26.7,515.2438,118072.3877,113963.1503,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117410.61,5
+2025-08-07 17:43:01,BTCUSDT,1h,69.41,646.895,547.9278,95.74,89.62,103.1,26.7,515.2438,118071.535,113963.543,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117406.01,5
+2025-08-07 17:49:24,BTCUSDT,1h,70.12,654.313,549.4114,96.76,89.95,106.84,26.8,520.6781,118089.1157,113955.2613,sobrecompra,alcista,alcista,sobrecompra,fuerte,en rango,Mercado lateral o indefinido,117499.0
+2025-08-07 18:03:04,BTCUSDT,1h,69.49,673.0168,574.7735,95.24,92.56,110.33,27.71,491.5127,118225.543,114119.554,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117498.0,5
+2025-08-07 18:04:07,BTCUSDT,1h,68.84,670.1586,574.2019,93.85,92.09,108.66,27.71,494.072,118219.1793,114122.3347,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117462.17,5
+2025-08-07 18:06:20,BTCUSDT,1h,68.83,670.1067,574.1915,93.83,92.09,108.63,27.71,494.1191,118219.0648,114122.3842,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117461.52,5
+2025-08-07 18:06:51,BTCUSDT,1h,68.54,668.7761,573.9254,93.18,91.87,107.86,27.71,495.3098,118216.1404,114123.6406,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117444.84,5
+2025-08-07 18:43:26,BTCUSDT,1h,67.3,663.1386,572.7979,90.44,90.96,102.67,27.71,506.1641,118204.0144,114128.6996,neutral,alcista,bajista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117374.17,5
+2025-08-07 18:44:07,BTCUSDT,1h,66.97,661.5927,572.4887,89.69,90.71,102.22,27.71,506.1641,118200.7641,114130.0119,neutral,alcista,bajista,sobrecompra,fuerte,en rango,Mercado lateral o indefinido,117354.79
+2025-08-07 18:47:21,BTCUSDT,1h,68.38,668.0582,573.7818,92.83,91.75,104.11,27.71,506.1641,118214.5724,114124.3086,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117435.84,5
+2025-08-07 18:47:53,BTCUSDT,1h,68.63,669.187,574.0076,93.38,91.94,104.44,27.71,506.1641,118217.0408,114123.2552,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117449.99,5
+2025-08-07 18:50:21,BTCUSDT,1h,68.63,669.187,574.0076,93.38,91.94,104.44,27.71,506.1641,118217.0408,114123.2552,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117449.99,5
+2025-08-07 18:52:23,BTCUSDT,1h,68.84,670.1586,574.2019,93.85,92.09,104.72,27.71,506.1641,118219.1793,114122.3347,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117462.17,5
+2025-08-07 18:52:30,BTCUSDT,1h,68.84,670.1594,574.202,93.85,92.09,104.72,27.71,506.1641,118219.181,114122.334,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117462.18,5
+2025-08-07 18:52:35,BTCUSDT,1h,68.84,670.1594,574.202,93.85,92.09,104.72,27.71,506.1641,118219.181,114122.334,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117462.18,5
+2025-08-07 18:52:42,BTCUSDT,1h,68.79,669.9328,574.1567,93.74,92.06,104.66,27.71,506.1641,118218.6813,114122.5497,neutral,alcista,alcista,sobrecompra,fuerte,en rango,Tendencia alcista fuerte - posible compra,117459.34,5
+2025-08-07 19:39:36,BTCUSDT,1h,70.3,685.1822,596.5168,100.0,97.28,96.16,27.25,523.9911,118298.0326,114372.0894,sobrecompra,alcista,alcista,neutral,fuerte,en rango,Mercado lateral o indefinido,117625.82
+2025-08-07 20:34:43,BTCUSDT,1h,59.54,610.8327,594.8273,64.98,80.3,62.41,26.75,518.3708,118195.6223,114674.4977,neutral,alcista,bajista,neutral,fuerte,en rango,Mercado lateral o indefinido,116930.41
+2025-08-07 21:29:11,BTCUSDT,1h,57.02,552.8298,585.9537,56.95,67.16,38.51,26.01,494.6989,118098.9182,114978.9618,neutral,bajista,bajista,neutral,fuerte,en rango,Mercado lateral o indefinido,116770.0
+2025-08-07 22:29:56,BTCUSDT,1h,58.58,511.1905,569.7086,64.56,60.29,37.22,25.12,484.419,117984.3859,115299.8951,neutral,bajista,alcista,neutral,fuerte,en rango,Mercado lateral o indefinido,116922.0
+2025-08-08 07:56:45,BTCUSDT,1h,50.61,198.5714,309.0788,15.85,25.64,-53.73,16.12,419.5135,117545.0049,116209.2911,neutral,bajista,bajista,neutral,débil,en rango,MANTENER,116525.15,-1
+2025-08-08 07:56:48,BTCUSDT,1h,50.61,198.5714,309.0788,15.85,25.64,-53.73,16.12,419.5135,117545.0049,116209.2911,neutral,bajista,bajista,neutral,débil,en rango,MANTENER,116525.15,-1
+2025-08-08 07:56:50,BTCUSDT,1h,50.61,198.5714,309.0788,15.85,25.64,-53.73,16.12,419.5135,117545.0049,116209.2911,neutral,bajista,bajista,neutral,débil,en rango,MANTENER,116525.15,-1
+2025-08-08 08:50:58,BTCUSDT,1h,53.69,183.3688,283.6647,30.8,29.51,-38.06,15.47,421.4214,117540.168,116232.65,neutral,bajista,alcista,neutral,débil,en rango,MANTENER,116721.43,-1
+2025-08-08 08:51:06,BTCUSDT,1h,54.4,187.3088,284.4527,34.56,30.76,-34.12,15.47,421.4214,117540.4957,116237.2613,neutral,bajista,alcista,neutral,débil,en rango,MANTENER,116770.82,-1
+2025-08-08 08:53:27,BTCUSDT,1h,55.22,192.0297,285.3969,39.07,32.26,-29.37,15.47,421.4214,117541.8188,116241.8562,neutral,bajista,alcista,neutral,débil,en rango,MANTENER,116830.0,-1
+2025-08-08 09:27:48,BTCUSDT,1h,54.51,189.9919,267.2994,51.7,37.14,2.02,15.79,436.9447,117541.2834,116276.1456,neutral,bajista,alcista,neutral,débil,en rango,COMPRAR,116810.62,1
+2025-08-08 09:31:01,BTCUSDT,1h,52.73,181.2784,265.5567,40.26,33.33,-7.53,15.79,436.9447,117540.9804,116265.5256,neutral,bajista,alcista,neutral,débil,en rango,MANTENER,116701.39,0

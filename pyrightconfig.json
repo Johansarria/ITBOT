@@ -1,0 +1,7 @@
+{
+  "typeCheckingMode": "basic",
+  "reportMissingImports": false,
+  "reportGeneralTypeIssues": false,
+  "reportOptionalMemberAccess": false,
+  "reportMissingTypeStubs": false
+}

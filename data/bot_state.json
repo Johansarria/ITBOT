@@ -1,0 +1,28 @@
+{
+    "risk_manager": {
+        "riesgo_actual": 0.01,
+        "riesgo_forzado": false,
+        "tiempo_riesgo_forzado": null,
+        "ganancias_riesgo_forzado": 0.0,
+        "operaciones_riesgo_forzado": [],
+        "recordatorio_riesgo_forzado_hoy": true
+    },
+    "shield_manager": {
+        "escudo_activo": true,
+        "tipo_escudo": "extremo",
+        "fuente_escudo": "bot",
+        "activado_at": "2025-08-16T11:30:05.686931",
+        "desactivado_at": "2025-08-16T11:30:05.454042"
+    },
+    "ia_manager": {
+        "ia_activa": false,
+        "modo_ia": "normal"
+    },
+    "last_daily_report_date": null,
+    "session": {
+        "mode": "paper"
+    },
+    "live_mode": {
+        "unlocked": false
+    }
+}

@@ -1,0 +1,26 @@
+# Archivos de entorno y credenciales
+.env
+LIVE_UNLOCK.txt
+best_risk_thresholds.json # Si contiene umbrales sensibles que no deben ser públicos
+
+# Entornos virtuales
+.venv/
+env/
+
+# Archivos generados por Python
+__pycache__/
+*.pyc
+
+# Archivos de caché y temporales
+.pytest_cache/
+logs/
+data/ # Ignorar la carpeta de datos por defecto. Si necesitas versionar algo específico dentro, lo podemos ajustar.
+mlruns/ # Artefactos de MLflow
+
+# Bases de datos
+*.db
+*.sqlite3
+storage/itbot.db
+
+# Logs
+*.log

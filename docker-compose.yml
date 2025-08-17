@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  redis:
+    image: "redis:alpine"
+    container_name: itbot_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+
+  listener:
+    container_name: itbot_listener
+    build: .
+    command: python listener_bot.py
+    env_file:
+      - .env
+    volumes:
+      - data-volume:/app/data
+      - logs-volume:/app/logs
+      - storage-volume:/app/storage
+    depends_on:
+      - redis
+    restart: unless-stopped
+    mem_limit: 1g
+
+  worker:
+    container_name: itbot_worker
+    build: .
+    command: python execution_worker.py
+    env_file:
+      - .env
+    volumes:
+      - data-volume:/app/data
+      - logs-volume:/app/logs
+      - storage-volume:/app/storage
+      - ./data/analisis:/app/data/analisis
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  data-volume:
+  logs-volume:
+  storage-volume:
