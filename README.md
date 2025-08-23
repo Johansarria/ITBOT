@@ -50,6 +50,14 @@ Se ha completado una refactorización masiva que introduce mejoras críticas en 
 *   **Prueba End-to-End (E2E):** Se establece una prueba de integración completa que valida todo el flujo de la aplicación, desde la decisión en `run_bot` hasta la ejecución en `execution_worker` y la persistencia en la base de datos, garantizando la fiabilidad del sistema.
 *   **Mejoras en KPIs y Pruebas:** Se actualizan los cálculos de KPIs para ser más precisos y se expande la cobertura de pruebas para el `listener_bot`.
 
+### Formalización y Versionado del Feature Store
+
+Se ha integrado la formalización y versionado del Feature Store, lo que permite una gestión más robusta y reproducible de las características utilizadas por los modelos de Machine Learning. Esto incluye:
+
+*   **Esquema y Alias:** Carga de datos robusta con manejo de esquemas y alias para mayor flexibilidad.
+*   **Actualización Incremental:** Lógica de actualización incremental para la carga de datos históricos, optimizando el rendimiento.
+*   **Manejo de Datetime:** Corrección en el manejo de `datetime` con `zoneinfo` para asegurar la consistencia temporal.
+
 ### Infraestructura y MLOps
 
 *   **Dockerización Completa:** La aplicación ha sido completamente dockerizada, lo que garantiza portabilidad, aislamiento y un despliegue simplificado.
