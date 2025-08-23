@@ -42,6 +42,7 @@ from utils.position_manager import (
 from utils.reporte_manager import (
     generar_reporte_diario,
     generar_reporte_kpis,
+    generar_reporte_journal,
     ignorar_reporte,
     listar_reportes,
     mover_a_descargados,
@@ -265,6 +266,7 @@ async def send_reports_submenu(message: Union[Message, types.CallbackQuery], is_
     if not isinstance(msg_target, Message):
         return
     builder = InlineKeyboardBuilder()
+    builder.button(text="📓 Generar Diario de Trading", callback_data="CMD_REPORTES_GENERAR_JOURNAL")
     builder.button(text="📄 Generar Reporte Diario", callback_data="CMD_REPORTES_GENERAR_DIARIO")
     builder.button(text="📜 Ver Historial de Operaciones", callback_data="CMD_REPORTES_VER_HISTORIAL")
     builder.button(text="📥 Descargar Reporte", callback_data="CMD_REPORTES_DESCARGAR")
@@ -529,6 +531,11 @@ async def handle_callback_query(cq: types.CallbackQuery, state: FSMContext):
     elif data == "CMD_REPORTES_GENERAR_DIARIO":
         await message.edit_text("📄 Generando reporte diario...")
         await generar_reporte_diario(bot, chat_id)
+        await send_reports_submenu(cq, is_edit=False)
+    elif data == "CMD_REPORTES_GENERAR_JOURNAL":
+        await message.edit_text("📓 Generando diario de trading...")
+        # Por defecto, el diario de los últimos 7 días
+        await generar_reporte_journal(bot, chat_id, days=7)
         await send_reports_submenu(cq, is_edit=False)
     elif data == "CMD_MANUAL_BUY_BTC":
         decision_data = {
