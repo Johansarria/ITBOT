@@ -221,105 +221,104 @@ async def shutdown_all_subprocesses():
                 pass
     active_subprocesses.clear()
 
-# Bloque para ejecución directa (sin cambios significativos, solo para pruebas)
-if __name__ == "__main__":
-    # Cargar variables de entorno para el bot de Telegram
-    # REMOVED: env_vars = load_env()
-    # REMOVED: TELEGRAM_TOKEN = env_vars.get("TELEGRAM_BOT_TOKEN")
-    # REMOVED: TELEGRAM_CHAT_ID = env_vars.get("TELEGRAM_CHAT_ID")
+async def run_analysis_cycle(bot_instance: Bot, chat_id: int) -> None:
+    """
+    Ejecuta un único ciclo de análisis de mercado y trading.
+    """
+    logger.info("--- Iniciando nuevo ciclo de análisis ---")
+    await flujo_principal(bot_instance, chat_id)
+    logger.info(f"--- Ciclo de análisis completado. ---")
 
-    # REMOVED: if not TELEGRAM_TOKEN:
-    # REMOVED:     raise ValueError("❌ TELEGRAM_TOKEN no está definido en el archivo .env")
-    # REMOVED: if not TELEGRAM_CHAT_ID or not TELEGRAM_CHAT_ID.isdigit():
-    # REMOVED:     raise ValueError("❌ TELEGRAM_CHAT_ID no es un número válido o no está definido")
 
-    chat_id_int = config.TELEGRAM_CHAT_ID # MODIFIED
+async def main_run_bot() -> None:
+    """
+    Inicializa el bot según el modo de operación y ejecuta el flujo principal.
+    Controla el modo LIVE/PAPER y asegura que la lógica crítica solo se ejecute si corresponde.
+    """
+    logger.info("run_bot.py ejecutado directamente.")
+
+    chat_id_int = config.TELEGRAM_CHAT_ID
     if not config.TELEGRAM_TOKEN:
         raise ValueError("❌ TELEGRAM_TOKEN no está definido en las variables de entorno ni en .env")
     bot_instance = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
-    async def main_run_bot() -> None:
-        """
-        Inicializa el bot según el modo de operación y ejecuta el flujo principal.
-        Controla el modo LIVE/PAPER y asegura que la lógica crítica solo se ejecute si corresponde.
-        """
-        logger.info("run_bot.py ejecutado directamente.")
-        state_manager = StateManager()
+    state_manager = StateManager()
 
-        # Obtener el modo de operación de la sesión (establecido por listener_bot.py)
-        session_mode = state_manager.get_state("session", "mode", config.MODE) # Usar config.MODE como fallback
+    # Obtener el modo de operación de la sesión (establecido por listener_bot.py)
+    session_mode = state_manager.get_state("session", "mode", config.MODE) # Usar config.MODE como fallback
 
-        # Registrar tareas asíncronas
-        tasks = []
-        # Initialize scheduler
-        scheduler = AsyncIOScheduler()
-        scheduler.start()
-        logger.info("Scheduler iniciado con tareas programadas.")
+    # Registrar tareas asíncronas
+    tasks = []
+    # Initialize scheduler
+    scheduler = AsyncIOScheduler()
+    scheduler.start()
+    logger.info("Scheduler iniciado con tareas programadas.")
 
-        retrain_task = asyncio.create_task(retrain_ml_model_periodically(bot_instance, chat_id_int, interval_hours=24))
-        tasks.append(retrain_task)
+    retrain_task = asyncio.create_task(retrain_ml_model_periodically(bot_instance, chat_id_int, interval_hours=24))
+    tasks.append(retrain_task)
 
-        # Programar la tarea de actualización diaria de datos históricos
-        scheduler.add_job(daily_data_update_task, 'cron', hour=0, minute=0, args=[bot_instance, chat_id_int])
+    # Programar la tarea de actualización diaria de datos históricos
+    scheduler.add_job(daily_data_update_task, 'cron', hour=0, minute=0, args=[bot_instance, chat_id_int])
 
-        # AÑADIR ESTA LÍNEA PARA INICIAR EL POLLING DEL BOT
-        polling_task = asyncio.create_task(dp.start_polling(bot_instance))
-        tasks.append(polling_task)
+    # AÑADIR ESTA LÍNEA PARA INICIAR EL POLLING DEL BOT
+    polling_task = asyncio.create_task(dp.start_polling(bot_instance))
+    tasks.append(polling_task)
 
-        try:
-            # Determinar el modo de operación al inicio
-            if session_mode == "live":
-                logger.info("Modo de operación de la sesión: LIVE.")
-                live_unlocked = state_manager.get_state("live_mode", "unlocked", False)
-                if not live_unlocked:
-                    logger.warning("Bot en modo LIVE pero no desbloqueado. Operando en modo SIMULADO.")
-                    await send_message(bot_instance, chat_id_int, "⚠️ Bot en modo LIVE pero no desbloqueado. La operación se realizará en modo SIMULADO.")
-                else:
-                    logger.info("Bot en modo LIVE y desbloqueado. Procediendo con operaciones reales.")
-                    await send_message(bot_instance, chat_id_int, "✅ ¡El bot está operando en modo LIVE!")
-            elif session_mode == "paper":
-                logger.info("Modo de operación de la sesión: PAPER (simulación).")
-                await send_message(bot_instance, chat_id_int, "🤖 Bot en modo PAPER (simulación). No se realizarán operaciones reales.")
-                state_manager.set_state("live_mode", "unlocked", False) # Ensure live mode is locked
+    try:
+        # Determinar el modo de operación al inicio
+        if session_mode == "live":
+            logger.info("Modo de operación de la sesión: LIVE.")
+            live_unlocked = state_manager.get_state("live_mode", "unlocked", False)
+            if not live_unlocked:
+                logger.warning("Bot en modo LIVE pero no desbloqueado. Operando en modo SIMULADO.")
+                await send_message(bot_instance, chat_id_int, "⚠️ Bot en modo LIVE pero no desbloqueado. La operación se realizará en modo SIMULADO.")
             else:
-                error_msg = f"❌ Modo de operación desconocido: {session_mode}. Se usará modo PAPER por defecto."
-                logger.error(error_msg)
-                await send_message(bot_instance, chat_id_int, error_msg)
-                state_manager.set_state("session", "mode", "paper") # Default to paper
-                state_manager.set_state("live_mode", "unlocked", False) # Ensure live mode is locked
+                logger.info("Bot en modo LIVE y desbloqueado. Procediendo con operaciones reales.")
+                await send_message(bot_instance, chat_id_int, "✅ ¡El bot está operando en modo LIVE!")
+        elif session_mode == "paper":
+            logger.info("Modo de operación de la sesión: PAPER (simulación).")
+            await send_message(bot_instance, chat_id_int, "🤖 Bot en modo PAPER (simulación). No se realizarán operaciones reales.")
+            state_manager.set_state("live_mode", "unlocked", False) # Ensure live mode is locked
+        else:
+            error_msg = f"❌ Modo de operación desconocido: {session_mode}. Se usará modo PAPER por defecto."
+            logger.error(error_msg)
+            await send_message(bot_instance, chat_id_int, error_msg)
+            state_manager.set_state("session", "mode", "paper") # Default to paper
+            state_manager.set_state("live_mode", "unlocked", False) # Ensure live mode is locked
 
-            # Bucle principal para ejecutar el análisis periódicamente
-            while True:
-                logger.info("--- Iniciando nuevo ciclo de análisis ---")
-                await flujo_principal(bot_instance, chat_id_int)
-                logger.info(f"--- Ciclo de análisis completado. Esperando {config.ANALYSIS_INTERVAL_SECONDS} segundos ---")
-                await asyncio.sleep(config.ANALYSIS_INTERVAL_SECONDS)
+        # Bucle principal para ejecutar el análisis periódicamente
+        while True:
+            await run_analysis_cycle(bot_instance, chat_id_int)
+            logger.info(f"--- Esperando {config.ANALYSIS_INTERVAL_SECONDS} segundos para el siguiente ciclo ---")
+            await asyncio.sleep(config.ANALYSIS_INTERVAL_SECONDS)
 
-        except asyncio.CancelledError:
-            logger.info("Bucle principal cancelado. Procediendo al apagado.")
-        finally:
-            logger.info("Iniciando secuencia de apagado del bot...")
-            # Cancelar y esperar todas las tareas pendientes
-            for task in tasks:
-                if not task.done():
-                    task.cancel()
-                    try:
-                        await task
-                    except asyncio.CancelledError:
-                        logger.info(f"Tarea {task.get_name()} cancelada durante el apagado.")
-            
-            # Cerrar cliente de Binance
-            await close_binance_client()
+    except asyncio.CancelledError:
+        logger.info("Bucle principal cancelado. Procediendo al apagado.")
+    finally:
+        logger.info("Iniciando secuencia de apagado del bot...")
+        # Cancelar y esperar todas las tareas pendientes
+        for task in tasks:
+            if not task.done():
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    logger.info(f"Tarea {task.get_name()} cancelada durante el apagado.")
 
-            # Cerrar procesos hijos
-            await shutdown_all_subprocesses()
-            
-            # Asegurar cierre completo de recursos de Telegram
-            await shutdown_bot(bot_instance)
-            
-            logger.info("Apagado del bot completado.")
-            await asyncio.sleep(0.1)  # Breve pausa para garantizar cierre completo
+        # Cerrar cliente de Binance
+        await close_binance_client()
 
+        # Cerrar procesos hijos
+        await shutdown_all_subprocesses()
+
+        # Asegurar cierre completo de recursos de Telegram
+        await shutdown_bot(bot_instance)
+
+        logger.info("Apagado del bot completado.")
+        await asyncio.sleep(0.1)  # Breve pausa para garantizar cierre completo
+
+# Bloque para ejecución directa
+if __name__ == "__main__":
     try:
         asyncio.run(main_run_bot())
     except Exception as e:

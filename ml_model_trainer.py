@@ -26,8 +26,8 @@ setup_logging() # Configurar logging para este script
 logger = logging.getLogger(__name__)
 
 # Configurar MLflow tracking URI (para desarrollo local)
-# Esto creará un directorio 'mlruns' en la raíz del proyecto si no existe
-mlflow.set_tracking_uri("file://" + os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "mlruns")))
+# Esto creará un directorio 'mlruns' en el directorio de trabajo actual si no existe
+mlflow.set_tracking_uri("file:./mlruns")
 mlflow.set_experiment("ITBot_ML_Model_Training")
 
 def train_and_save_model(
