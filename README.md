@@ -55,6 +55,15 @@ Se ha completado una refactorización masiva que introduce mejoras críticas en 
 *   **Dockerización Completa:** La aplicación ha sido completamente dockerizada, lo que garantiza portabilidad, aislamiento y un despliegue simplificado.
 *   **Integración de MLflow:** Se ha integrado MLflow para una gestión robusta de los experimentos de Machine Learning, permitiendo el seguimiento de experimentos, la reproducibilidad y la gestión centralizada de modelos.
 
+### Automatización y CI/CD
+
+*   **Pipeline de Re-entrenamiento Automático:** Se ha configurado un pipeline de CI/CD con GitHub Actions (`.github/workflows/retrain_model.yml`) que automatiza el ciclo de vida del modelo de ML. Este pipeline se ejecuta semanalmente y realiza las siguientes tareas:
+    1.  Descarga los datos de mercado más recientes.
+    2.  Reconstruye el feature store.
+    3.  Re-entrena el modelo de Machine Learning.
+    4.  Commitea y pushea los artefactos actualizados (runs de MLflow y modelos) al repositorio, asegurando que el sistema siempre cuente con un modelo reciente.
+*   **(Futuro) Promoción de Modelos:** Como siguiente paso, se podría implementar una etapa de "promoción" en el pipeline. Esto implicaría comparar las métricas del nuevo modelo con el modelo actualmente en producción (usando el MLflow Model Registry) y, si el nuevo modelo es superior, promoverlo automáticamente a la etapa de "Producción".
+
 ## Dependencias Principales
 
 *   **Python >=3.12**
