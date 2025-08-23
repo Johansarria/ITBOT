@@ -7,12 +7,20 @@ from sqlalchemy.exc import SQLAlchemyError
 import config
 from database.database_manager import init_db, get_db_session, create_tables
 
-# Fixture to set up an in-memory SQLite database for testing
-@pytest.fixture(scope="function")
-def in_memory_db():
-    # Temporarily override DATABASE_URL for in-memory SQLite
-    original_db_url = config.DATABASE_URL
-    config.DATABASE_URL = "sqlite:///:memory:"
+# Fixture para asegurar un estado limpio para cada test
+@pytest.fixture(autouse=True)
+def setup_db_test(monkeypatch):
+    # Usar una base de datos en memoria para los tests unitarios
+    monkeypatch.setattr('database.database_manager.DB_PATH', ':memory:')
+    monkeypatch.setattr('database.database_manager.DB_DIR', '/tmp/test_db_dir') # No se usará para :memory: pero es buena práctica
+
+    # Asegurarse de que el directorio temporal exista si no es :memory:
+    if not os.path.exists('/tmp/test_db_dir'):
+        os.makedirs('/tmp/test_db_dir', exist_ok=True)
+
+    yield
+
+    # No es necesario limpiar para :memory:
 
     # Re-initialize the database manager with the in-memory DB
     # This will also call create_tables()
@@ -46,6 +54,11 @@ def test_init_db_handles_sqlalchemy_error():
 
     with pytest.raises(SQLAlchemyError):
         init_db()
+        
+        mock_makedirs.assert_called_once_with('/tmp/test_db_dir', exist_ok=True)
+        mock_connect.assert_called_once_with(':memory:')
+        mock_conn.cursor.assert_called_once()
+        mock_conn.commit.assert_called_once()
 
     config.DATABASE_URL = original_db_url # Restore for other tests
 
@@ -182,3 +195,17 @@ def test_save_discarded_signal(in_memory_db):
         assert result is not None
         assert result.decision == 'SELL'
         assert 'feat1' in result.features # Features is TEXT, so it's a JSON string
+def test_init_db_handles_sqlite_error():
+    """
+    Test that init_db handles sqlite3.Error during connection or execution.
+    """
+    with patch('os.makedirs'), \
+         patch('sqlite3.connect') as mock_connect:
+        
+        mock_connect.side_effect = sqlite3.Error("Test DB Error")
+        
+        with pytest.raises(sqlite3.Error) as excinfo:
+            init_db()
+        
+        assert "Test DB Error" in str(excinfo.value)
+        mock_connect.assert_called_once_with(':memory:')

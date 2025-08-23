@@ -40,6 +40,7 @@ os.makedirs(f"{REPO_PATH}/operaciones", exist_ok=True)
 os.makedirs(f"{REPO_PATH}/pendientes", exist_ok=True)
 os.makedirs(f"{REPO_PATH}/descargados", exist_ok=True)
 os.makedirs(f"{REPO_PATH}/kpis", exist_ok=True)
+os.makedirs(f"{REPO_PATH}/journal", exist_ok=True)
 logger.info(f"Estructura de carpetas de reportes verificada en {REPO_PATH}. ")
 
 def guardar_reporte(dataframe: pd.DataFrame, tipo: Literal['diario', 'semanal', 'mensual', 'riesgo', 'operaciones'], preguntar_descarga: bool = True) -> Optional[str]:
@@ -197,6 +198,79 @@ def guardar_reporte_texto(content: str, tipo: str, preguntar_descarga: bool = Tr
         logger.exception(f"Error al guardar el reporte de texto '{filename}': {e}")
         return None
 
+async def generar_reporte_journal(bot, chat_id: int, days: int = 7):
+    """
+    Genera un "diario de trading" detallado para un período específico.
+    """
+    logger.info(f"Iniciando la generación de diario de trading para los últimos {days} días.")
+    await bot.send_message(chat_id, f"⏳ Generando diario de trading para los últimos {days} días...")
+
+    try:
+        # 1. Obtener datos de operaciones
+        operations_df = get_operations_df(days=days)
+
+        if operations_df.empty:
+            logger.warning(f"No se encontraron operaciones en los últimos {days} días para el diario.")
+            await bot.send_message(chat_id, f"ℹ️ No hay operaciones registradas en los últimos {days} días.")
+            return
+
+        # 2. Ordenar por fecha de apertura
+        operations_df = operations_df.sort_values(by='timestamp_open', ascending=False)
+
+        # 3. Construir el contenido del reporte
+        journal_content = f"📓 **Diario de Trading (Últimos {days} Días)** 📓\n"
+        journal_content += "=" * 40 + "\n\n"
+
+        for _, trade in operations_df.iterrows():
+            trade_duration = "N/A"
+            if pd.notna(trade['timestamp_close']) and pd.notna(trade['timestamp_open']):
+                duration_td = trade['timestamp_close'] - trade['timestamp_open']
+                trade_duration = str(duration_td).split('.')[0] # Formato más limpio
+
+            pnl_status = "✅ GANANCIA" if trade['pnl_usdt'] > 0 else "❌ PÉRDIDA" if trade['pnl_usdt'] < 0 else "➖ SIN CAMBIO"
+
+            journal_content += (
+                f"🗓️ **Fecha:** {trade['timestamp_open'].strftime('%Y-%m-%d %H:%M')}\n"
+                f"🆔 **ID:** `{trade['operation_id']}`\n"
+                f"📈 **Símbolo:** {trade['symbol']} ({trade['side']})\n"
+                f"-------------------------------------------------\n"
+                f"**Entrada:**\n"
+                f"  - **Precio:** {trade['entry_price']:.4f}\n"
+                f"  - **Razón:** {trade.get('reason_open', 'N/A')}\n"
+                f"  - **Score de Mercado:** {trade.get('market_score_open', 'N/A')}\n"
+                f"**Salida:**\n"
+                f"  - **Precio:** {trade['exit_price']:.4f}\n"
+                f"  - **Razón:** {trade.get('reason_close', 'N/A')}\n"
+                f"  - **Score de Mercado:** {trade.get('market_score_close', 'N/A')}\n"
+                f"**Resultado:**\n"
+                f"  - **PnL:** {trade['pnl_usdt']:.2f} USDT ({trade['pnl_percent']:.2f}%) {pnl_status}\n"
+                f"  - **Duración:** {trade_duration}\n"
+                f"**Configuración de Riesgo:**\n"
+                f"  - **Take Profit:** {trade['take_profit']:.4f}\n"
+                f"  - **Stop Loss:** {trade['stop_loss']:.4f}\n"
+                f"  - **Riesgo Planeado:** {trade.get('risk_percent', 'N/A')}%\n"
+                f"  - **Notas:** {trade.get('notes', 'Sin notas.')}\n"
+                f"\n" + "="*40 + "\n\n"
+            )
+
+        # 4. Guardar y notificar
+        mensaje_confirmacion = guardar_reporte_texto(journal_content, tipo='journal', preguntar_descarga=True)
+        if mensaje_confirmacion:
+            # Enviar un resumen al chat y luego la opción de descargar
+            summary_message = (
+                f"✅ Diario de trading generado con {len(operations_df)} operaciones.\n"
+                "El reporte completo está listo para ser descargado."
+            )
+            await bot.send_message(chat_id, summary_message)
+            await bot.send_message(chat_id, mensaje_confirmacion)
+        else:
+            await bot.send_message(chat_id, "❌ Ocurrió un error al guardar el diario de trading.")
+
+    except Exception as e:
+        logger.exception(f"Error catastrófico al generar el diario de trading: {e}")
+        await bot.send_message(chat_id, f"❌ Error crítico al generar el diario de trading: {e}")
+
+
 async def generar_reporte_kpis(bot, chat_id: int, days: int = 30):
     """
     Genera un reporte de KPIs de rendimiento y lo envía a Telegram.
@@ -257,3 +331,48 @@ async def generar_reporte_kpis(bot, chat_id: int, days: int = 30):
     except Exception as e:
         logger.exception(f"Error catastrófico al generar el reporte de KPIs: {e}")
         await bot.send_message(chat_id, f"❌ Error crítico al generar el reporte de KPIs: {e}")
+
+if __name__ == '__main__':
+    import asyncio
+    from unittest.mock import MagicMock, AsyncMock
+
+    # Configurar logging para pruebas
+    from utils.logger_setup import setup_logging
+    setup_logging()
+
+    async def test_journal_generation():
+        print("\n--- Probando Generación de Diario de Trading ---")
+
+        # Mock del bot de Telegram y chat_id
+        mock_bot = MagicMock()
+        mock_bot.send_message = AsyncMock()
+        test_chat_id = 12345
+
+        # Llamar a la función para generar el diario
+        # Asumimos que la base de datos tiene datos de los últimos 7 días.
+        # Si no, la función debe manejarlo elegantemente.
+        await generar_reporte_journal(mock_bot, test_chat_id, days=7)
+
+        # Verificar que send_message fue llamado (al menos para el mensaje inicial)
+        try:
+            mock_bot.send_message.assert_called()
+            print("✅ La función `generar_reporte_journal` se ejecutó y llamó a `send_message`.")
+
+            # Listar los reportes generados para confirmar
+            reportes_journal = listar_reportes("pendientes")
+            journal_files = [r for r in reportes_journal if r.startswith('journal_')]
+            if journal_files:
+                print(f"✅ Se encontró un nuevo reporte de diario: {journal_files[-1]}")
+                # Opcional: leer el contenido para verificar
+                # df = obtener_reporte(journal_files[-1]) # No es un df, es un txt
+                # print(f"Contenido de muestra: ...")
+            else:
+                print("⚠️ No se generó un nuevo archivo de diario (puede ser normal si no hay operaciones).")
+
+        except AssertionError:
+            print("❌ La función `generar_reporte_journal` no llamó a `send_message` como se esperaba.")
+        except Exception as e:
+            print(f"❌ Ocurrió un error durante la prueba del diario: {e}")
+
+    # Ejecutar la prueba asíncrona
+    asyncio.run(test_journal_generation())

@@ -5,7 +5,7 @@ from typing import Dict, Any
 import logging
 
 from strategies.base_strategy import BaseStrategy
-from utils.technical_analysis import calculate_all_indicators # Asumimos que esta función existirá
+from utils.feature_pipeline import FeaturePipeline
 
 logger = logging.getLogger("strategies.simple_technical_strategy")
 
@@ -29,7 +29,8 @@ class SimpleTechnicalStrategy(BaseStrategy):
         logger.info("Ejecutando análisis para SimpleTechnicalStrategy.")
         
         # Calcular todos los indicadores usando la función auxiliar
-        df_indicators = calculate_all_indicators(historical_data.copy()) # Pasar una copia para no modificar el original
+        feature_pipeline = FeaturePipeline()
+        df_indicators = feature_pipeline.transform(historical_data.copy()) # Pasar una copia para no modificar el original
 
         if df_indicators.empty:
             logger.warning("DataFrame de indicadores vacío. No se puede analizar.")
@@ -59,6 +60,14 @@ class SimpleTechnicalStrategy(BaseStrategy):
         # Bollinger Bands
         if latest["close"] <= latest["bb_lower"]: score += 1 # Cerca del piso, posible rebote
         elif latest["close"] >= latest["bb_upper"]: score -= 1 # Cerca del techo, posible corrección
+
+        # Confirmación de Volumen
+        if latest["volume"] > latest["volume_sma_20"]:
+            # Si el volumen es alto, se refuerza la dirección de la puntuación actual
+            if score > 0:
+                score += 1
+            elif score < 0:
+                score -= 1
 
         decision = "MANTENER"
         if score >= self._buy_score_threshold: decision = "COMPRAR"

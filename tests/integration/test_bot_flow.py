@@ -38,20 +38,30 @@ def setup_integration_test_env():
     # Mock external dependencies
     with patch('modules.analisis_bot.send_message', new_callable=AsyncMock) as mock_send_message, \
              patch('modules.analisis_bot.get_historical_klines', new_callable=AsyncMock) as mock_get_historical_klines, \
-             patch('utils.binance_client.Client.create_order', new_callable=AsyncMock) as mock_create_order, \
-             patch('utils.binance_client.Client.get_all_orders', new_callable=AsyncMock) as mock_get_all_orders, \
-             patch('utils.binance_client.Client.get_asset_balance', new_callable=AsyncMock) as mock_get_asset_balance, \
+             patch('utils.binance_client.get_binance_client', new_callable=AsyncMock) as mock_get_binance_client, \
              patch('database.database_manager.add_operation', new_callable=MagicMock) as mock_add_operation, \
              patch('database.database_manager.update_position_status', new_callable=MagicMock) as mock_update_position_status, \
              patch('database.database_manager.get_open_positions_df', new_callable=MagicMock) as mock_get_open_positions_df, \
              patch('listener_bot.bot', new_callable=AsyncMock) as mock_listener_bot_instance, \
              patch('listener_bot.chat_id_int', 12345) as mock_listener_chat_id: # Hardcode chat_id for test
+
+            # Configure the mock client that get_binance_client will return
+            mock_binance_instance = AsyncMock()
+            mock_get_binance_client.return_value = mock_binance_instance
             
-            # Yield mocks for the test to use
-            yield mock_send_message, mock_get_historical_klines, mock_create_order, \
-                  mock_get_all_orders, mock_get_asset_balance, mock_add_operation, \
-                  mock_update_position_status, mock_get_open_positions_df, \
-                  mock_listener_bot_instance, mock_listener_chat_id
+            # Yield mocks in the same structure as the original fixture
+            yield (
+                mock_send_message,
+                mock_get_historical_klines,
+                mock_binance_instance.create_order,  # Pass the method mock
+                mock_binance_instance.get_all_orders, # Pass the method mock
+                mock_binance_instance.get_asset_balance, # Pass the method mock
+                mock_add_operation,
+                mock_update_position_status,
+                mock_get_open_positions_df,
+                mock_listener_bot_instance,
+                mock_listener_chat_id
+            )
     
     # Clean up test database file after test
     if os.path.exists(TEST_INTEGRATION_DB_PATH):
@@ -119,6 +129,7 @@ async def test_full_analisis_flow(setup_integration_test_env):
     from modules.analisis_bot import procesar_comando_analisis
     from strategies.strategy_manager import StrategyManager
     strategy_manager = StrategyManager()
+    strategy_manager.set_active_strategy("SimpleTechnicalStrategy")
     active_strategy = strategy_manager.get_active_strategy()
     async def mock_analyze(*args, **kwargs):
         return {"symbol": "BTCUSDT", "interval": "1h", "decision": "COMPRAR", "score": 3}

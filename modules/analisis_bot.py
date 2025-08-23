@@ -84,7 +84,7 @@ async def procesar_comando_analisis(bot_instance: Bot, chat_id: int, mensaje: st
             return {"status": "error", "message": f"Ocurrió un error inesperado al realizar el análisis: {e}"}
 
     elif texto_lower in ["posiciones", "estado"]:
-        summary = get_open_positions_summary(bot_instance)
+        summary = await get_open_positions_summary(bot_instance)
         if send_telegram_message:
             await send_message(bot_instance, chat_id, summary)
             logger.info("Resumen de posiciones enviado a Telegram.")

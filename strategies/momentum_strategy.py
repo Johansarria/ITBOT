@@ -5,7 +5,6 @@ from typing import Dict, Any
 import logging
 
 from strategies.base_strategy import BaseStrategy
-from utils.technical_analysis import calculate_all_indicators
 
 logger = logging.getLogger("strategies.momentum_strategy")
 

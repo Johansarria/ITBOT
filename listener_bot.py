@@ -4,6 +4,7 @@ import asyncio
 import logging
 import sys
 import os
+from typing import Optional
 from zoneinfo import ZoneInfo
 from datetime import datetime
 from typing import Union, cast
@@ -42,6 +43,7 @@ from utils.position_manager import (
 from utils.reporte_manager import (
     generar_reporte_diario,
     generar_reporte_kpis,
+    generar_reporte_journal,
     ignorar_reporte,
     listar_reportes,
     mover_a_descargados,
@@ -68,6 +70,7 @@ from utils.shield_manager import (
 from utils.telegram_handler import send_message
 from utils.data_loader import load_operations_data
 from utils.message_queue import mq
+from utils.alerta_manager import alerter, SeverityLevel
 import re
 from typing import Optional, Tuple
 
@@ -75,14 +78,22 @@ from typing import Optional, Tuple
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if not config.TELEGRAM_TOKEN:
-    raise ValueError("TELEGRAM_TOKEN not found in config")
-
-bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher()
-chat_id_int = config.TELEGRAM_CHAT_ID
+# Initialize bot to None and other variables. They will be initialized properly
+# when the bot is run directly, but not during test collection.
+bot: Optional[Bot] = None
+dp = Dispatcher()  # Dispatcher can be initialized, it has no side-effects.
+chat_id_int: Optional[int] = None
 strategy_manager = StrategyManager()
 state_manager = StateManager()
+
+# This block will only run when the script is not being imported by pytest
+if "pytest" not in sys.modules:
+    if not config.TELEGRAM_TOKEN:
+        raise ValueError("TELEGRAM_TOKEN not found in config")
+
+    bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+    if config.TELEGRAM_CHAT_ID:
+        chat_id_int = int(config.TELEGRAM_CHAT_ID)
 
 # === Definición de Estados (FSM) ===
 class RiskStates(StatesGroup):
@@ -265,6 +276,7 @@ async def send_reports_submenu(message: Union[Message, types.CallbackQuery], is_
     if not isinstance(msg_target, Message):
         return
     builder = InlineKeyboardBuilder()
+    builder.button(text="📓 Generar Diario de Trading", callback_data="CMD_REPORTES_GENERAR_JOURNAL")
     builder.button(text="📄 Generar Reporte Diario", callback_data="CMD_REPORTES_GENERAR_DIARIO")
     builder.button(text="📜 Ver Historial de Operaciones", callback_data="CMD_REPORTES_VER_HISTORIAL")
     builder.button(text="📥 Descargar Reporte", callback_data="CMD_REPORTES_DESCARGAR")
@@ -530,6 +542,11 @@ async def handle_callback_query(cq: types.CallbackQuery, state: FSMContext):
         await message.edit_text("📄 Generando reporte diario...")
         await generar_reporte_diario(bot, chat_id)
         await send_reports_submenu(cq, is_edit=False)
+    elif data == "CMD_REPORTES_GENERAR_JOURNAL":
+        await message.edit_text("📓 Generando diario de trading...")
+        # Por defecto, el diario de los últimos 7 días
+        await generar_reporte_journal(bot, chat_id, days=7)
+        await send_reports_submenu(cq, is_edit=False)
     elif data == "CMD_MANUAL_BUY_BTC":
         decision_data = {
             "type": "MANUAL_TRADE",
@@ -623,19 +640,35 @@ async def process_limit_value(message: Message, state: FSMContext):
 
 # === Main execution ===
 async def main():
+    # Configure the alerter singleton
+    alerter.configure(bot_instance=bot, chat_id=chat_id_int)
+
     # Set bot commands
     await set_main_bot_commands(bot)
     # Test message after startup
     try:
-        await send_message(bot, chat_id_int, "✅ Bot iniciado y listo para operar.")
-        logger.info(f"Mensaje de prueba enviado a {chat_id_int}")
+        await alerter.send_alert(
+            alert_key="bot_startup",
+            severity=SeverityLevel.INFO,
+            source="System",
+            message="Bot iniciado y listo para operar.",
+            details={"bot_version": "1.2.3"} # Example detail
+        )
+        logger.info(f"Mensaje de inicio enviado a {chat_id_int}")
     except Exception as e:
-        logger.error(f"Error al enviar mensaje de prueba al inicio: {e}", exc_info=True)
+        logger.error(f"Error al enviar mensaje de inicio: {e}", exc_info=True)
     # Start polling
     try:
         await dp.start_polling(bot)
     except Exception as e:
         logger.error(f"Error durante el polling del bot: {e}", exc_info=True)
+        await alerter.send_alert(
+            alert_key="bot_critical_failure",
+            severity=SeverityLevel.CRITICAL,
+            source="System",
+            message="El bot ha fallado de forma crítica y se ha detenido.",
+            details={"error": str(e)}
+        )
 
 if __name__ == "__main__":
     # Load configurations at startup

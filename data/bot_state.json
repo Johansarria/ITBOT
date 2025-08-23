@@ -9,10 +9,10 @@
     },
     "shield_manager": {
         "escudo_activo": true,
-        "tipo_escudo": "extremo",
+        "tipo_escudo": "volatilidad_alta",
         "fuente_escudo": "bot",
-        "activado_at": "2025-08-16T11:30:05.686931",
-        "desactivado_at": "2025-08-16T11:30:05.454042"
+        "activado_at": "2025-08-23T21:51:21.730402",
+        "desactivado_at": "2025-08-23T21:51:21.720450"
     },
     "ia_manager": {
         "ia_activa": false,
@@ -21,8 +21,5 @@
     "last_daily_report_date": null,
     "session": {
         "mode": "paper"
-    },
-    "live_mode": {
-        "unlocked": false
     }
 }

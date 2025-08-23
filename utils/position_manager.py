@@ -153,7 +153,7 @@ async def manage_open_positions(bot: Bot):
         except Exception as e:
             logger.exception(f"Error inesperado al gestionar la posición {position['operation_id']}: {e}")
 
-def get_open_positions_summary(bot: Bot) -> str:
+async def get_open_positions_summary(bot: Bot) -> str:
     """Devuelve un resumen formateado de las posiciones abiertas."""
     open_positions = get_open_positions()
 
@@ -167,7 +167,7 @@ def get_open_positions_summary(bot: Bot) -> str:
     recent_open_positions = open_positions.sort_values(by='timestamp_open', ascending=False).head(5)
 
     summary = "📊 <b>Últimas 5 Posiciones Abiertas:</b>\n"
-    client = get_binance_client() # Get the client instance here
+    client = await get_binance_client() # Get the client instance here
     for _, position in recent_open_positions.iterrows():
         symbol = position["symbol"]
         entry_price = position["entry_price"]
@@ -175,7 +175,7 @@ def get_open_positions_summary(bot: Bot) -> str:
         timestamp_open = position["timestamp_open"]
 
         try:
-            ticker = client.get_symbol_ticker(symbol=symbol)
+            ticker = await client.get_symbol_ticker(symbol=symbol)
             current_price = float(ticker['price'])
             
             pnl_percent = ((current_price - entry_price) / entry_price) * 100

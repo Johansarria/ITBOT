@@ -4,6 +4,7 @@ import pytest
 import pandas as pd
 from unittest.mock import AsyncMock, patch, MagicMock
 from datetime import datetime, timedelta
+import numpy as np # Added numpy import
 
 # Importar la función a probar
 from utils.technical_analysis import analyze_market, load_ml_model
@@ -23,6 +24,7 @@ def mock_export_analysis_result():
 # Fixture para mockear el modelo de ML
 @pytest.fixture
 def mock_ml_model():
+    # Usar autospec=True para que el mock se comporte como el objeto real
     with patch('utils.technical_analysis.ml_model', new_callable=MagicMock) as mock_model:
         yield mock_model
 
@@ -67,7 +69,7 @@ async def test_analyze_market_no_model_loaded(mock_get_historical_klines, mock_e
 async def test_analyze_market_buy_prediction(mock_get_historical_klines, mock_export_analysis_result, mock_ml_model):
     mock_get_historical_klines.return_value = get_sample_klines()
     # Simular predicción de COMPRA (probabilidad de clase 1 > threshold)
-    mock_ml_model.predict_proba.return_value = [[0.1, 0.9]] # [prob_sell, prob_buy]
+    mock_ml_model.predict.return_value = pd.DataFrame({'sell_probability': [0.1], 'buy_probability': [0.9]})
     
     result = await analyze_market("TESTUSDT", "1h", 50, umbral_alto=0.8, umbral_medio=0.7, umbral_bajo=0.5)
     
@@ -79,7 +81,7 @@ async def test_analyze_market_buy_prediction(mock_get_historical_klines, mock_ex
 async def test_analyze_market_sell_prediction(mock_get_historical_klines, mock_export_analysis_result, mock_ml_model):
     mock_get_historical_klines.return_value = get_sample_klines()
     # Simular predicción de VENTA (probabilidad de clase 0 > threshold)
-    mock_ml_model.predict_proba.return_value = [[0.85, 0.15]] # [prob_sell, prob_buy]
+    mock_ml_model.predict.return_value = pd.DataFrame({'sell_probability': [0.85], 'buy_probability': [0.15]})
     
     result = await analyze_market("TESTUSDT", "1h", 50, umbral_alto=0.8, umbral_medio=0.7, umbral_bajo=0.5)
     
@@ -91,7 +93,7 @@ async def test_analyze_market_sell_prediction(mock_get_historical_klines, mock_e
 async def test_analyze_market_hold_prediction(mock_get_historical_klines, mock_export_analysis_result, mock_ml_model):
     mock_get_historical_klines.return_value = get_sample_klines()
     # Simular predicción de MANTENER (ninguna probabilidad supera el threshold)
-    mock_ml_model.predict_proba.return_value = [[0.6, 0.4]] # [prob_sell, prob_buy]
+    mock_ml_model.predict.return_value = pd.DataFrame({'sell_probability': [0.6], 'buy_probability': [0.4]})
     
     result = await analyze_market("TESTUSDT", "1h", 50, umbral_alto=0.7, umbral_medio=0.65, umbral_bajo=0.65)
     
@@ -103,7 +105,7 @@ async def test_analyze_market_hold_prediction(mock_get_historical_klines, mock_e
 async def test_analyze_market_prediction_error(mock_get_historical_klines, mock_export_analysis_result, mock_ml_model):
     mock_get_historical_klines.return_value = get_sample_klines()
     # Simular un error durante la predicción
-    mock_ml_model.predict_proba.side_effect = Exception("Prediction failed")
+    mock_ml_model.predict.side_effect = Exception("Prediction failed")
     
     result = await analyze_market("TESTUSDT", "1h", 50)
     

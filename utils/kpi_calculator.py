@@ -49,7 +49,7 @@ def get_operations_df(days: int = 30) -> pd.DataFrame:
             numeric_cols = ['pnl_usdt', 'pnl_percent', 'size_usdt']
             for col in numeric_cols:
                 if col in df.columns:
-                    df[col] = pd.to_numeric(col, errors='coerce').fillna(0)
+                    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
 
             logger.info(f"Se obtuvieron {len(df)} registros de operaciones.")
             return df
@@ -74,10 +74,12 @@ def calculate_pnl(operations_df: pd.DataFrame) -> Dict[str, Any]:
     df = operations_df.copy()
 
     # Calcular pnl_usdt si no existe o es nulo, a partir de pnl_percent y size_usdt
-    if 'pnl_usdt' not in df.columns or df['pnl_usdt'].isnull().all():
+    if 'pnl_usdt' not in df.columns:
         df['pnl_usdt'] = df['size_usdt'] * (df['pnl_percent'] / 100)
+    else:
+        df['pnl_usdt'] = df['pnl_usdt'].fillna(df['size_usdt'] * (df['pnl_percent'] / 100))
     
-    total_pnl_usdt = df['pnl_usdt'].sum()
+    total_pnl_usdt = df['pnl_usdt'].fillna(0).sum()
 
     # Calcular PnL diario
     daily_pnl_df = pd.DataFrame()
@@ -214,21 +216,31 @@ def calculate_trade_frequency_and_duration(operations_df: pd.DataFrame) -> Dict[
 
     df = operations_df.copy()
 
-    # Trades por día
-    if 'timestamp_open' in df.columns:
-        daily_trades = df.groupby(df['timestamp_open'].dt.date).size()
-        trades_per_day = daily_trades.mean() if not daily_trades.empty else 0.0
-    else:
-        trades_per_day = 0.0
+    # Asegurar que las columnas necesarias existan y normalizar
+    required_cols = ['timestamp_open', 'timestamp_close']
+    if not all(col in df.columns for col in required_cols):
+        logger.warning(f"Columnas {required_cols} no encontradas para cálculo de frecuencia/duración.")
+        return {"trades_per_day": 0.0, "avg_trade_duration_minutes": 0.0}
 
-    # Duración media por trade
+    df['timestamp_open'] = pd.to_datetime(df['timestamp_open'], errors='coerce', utc=True)
+    df['timestamp_close'] = pd.to_datetime(df['timestamp_close'], errors='coerce', utc=True)
+    
+    # Filtrar trades cerrados para cálculos
+    closed_trades = df[df['timestamp_open'].notna() & df['timestamp_close'].notna() & (df['timestamp_close'] > df['timestamp_open'])].copy()
+
+    # Cálculo de Duración Media
     avg_trade_duration_minutes = 0.0
-    if 'timestamp_open' in df.columns and 'timestamp_close' in df.columns:
-        # Filtrar trades que tienen ambas marcas de tiempo y donde close > open
-        closed_trades = df[(df['timestamp_open'].notna()) & (df['timestamp_close'].notna()) & (df['timestamp_close'] > df['timestamp_open'])]
-        if not closed_trades.empty:
-            trade_durations = (closed_trades['timestamp_close'] - closed_trades['timestamp_open']).dt.total_seconds() / 60
-            avg_trade_duration_minutes = trade_durations.mean()
+    if not closed_trades.empty:
+        durations = (closed_trades['timestamp_close'] - closed_trades['timestamp_open']).dt.total_seconds() / 60
+        avg_trade_duration_minutes = durations.mean()
+
+    # Cálculo de Trades por Día
+    trades_per_day = 0.0
+    valid_open_timestamps = closed_trades['timestamp_open'].dropna()
+    if not valid_open_timestamps.empty:
+        unique_days = valid_open_timestamps.dt.date.nunique()
+        if unique_days > 0:
+            trades_per_day = len(closed_trades) / unique_days
 
     return {
         "trades_per_day": trades_per_day,
