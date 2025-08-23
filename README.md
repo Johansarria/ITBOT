@@ -40,17 +40,20 @@ ITBOT opera con una **arquitectura desacoplada** que separa la toma de decisione
 
 ## Avances Recientes
 
-Hemos logrado importantes avances en la infraestructura y la gestión del ciclo de vida del Machine Learning:
+### v2.1: Refactorización E2E y Arquitectura Multi-Activo
 
-*   **Dockerización Completa:** La aplicación ha sido completamente dockerizada, lo que garantiza:
-    *   **Portabilidad:** Ejecución consistente en cualquier entorno (desarrollo, pruebas, producción).
-    *   **Aislamiento:** Los componentes operan de forma independiente, evitando conflictos de dependencias.
-    *   **Despliegue Simplificado:** Facilita la puesta en marcha y escalabilidad de la aplicación.
+Se ha completado una refactorización masiva que introduce mejoras críticas en la arquitectura y la fiabilidad del bot:
 
-*   **Integración de MLflow:** Hemos integrado MLflow para una gestión robusta de los experimentos de Machine Learning, permitiendo:
-    *   **Seguimiento de Experimentos:** Registro detallado de parámetros, métricas y artefactos (modelos) de cada ejecución de entrenamiento.
-    *   **Reproducibilidad:** Capacidad de recrear fácilmente los resultados de experimentos pasados.
-    *   **Gestión Centralizada de Modelos:** Un repositorio unificado para versionar y organizar los modelos entrenados.
+*   **Arquitectura Multi-Activo:** Se refactoriza `run_bot.py` para soportar el **análisis concurrente de múltiples pares de trading**, reemplazando el antiguo modelo mono-activo y permitiendo una mayor escalabilidad.
+*   **Pipeline de Features Robusto:** Se consolida el uso del `FeaturePipeline` y el formato Parquet, eliminando la dependencia de archivos CSV intermedios y mejorando el rendimiento.
+*   **Entrenamiento ML Avanzado:** Se integra una versión refactorizada de `ml_model_trainer.py`, que incluye funciones modulares, versionado del código de features y logging avanzado con MLflow para una mejor trazabilidad.
+*   **Prueba End-to-End (E2E):** Se establece una prueba de integración completa que valida todo el flujo de la aplicación, desde la decisión en `run_bot` hasta la ejecución en `execution_worker` y la persistencia en la base de datos, garantizando la fiabilidad del sistema.
+*   **Mejoras en KPIs y Pruebas:** Se actualizan los cálculos de KPIs para ser más precisos y se expande la cobertura de pruebas para el `listener_bot`.
+
+### Infraestructura y MLOps
+
+*   **Dockerización Completa:** La aplicación ha sido completamente dockerizada, lo que garantiza portabilidad, aislamiento y un despliegue simplificado.
+*   **Integración de MLflow:** Se ha integrado MLflow para una gestión robusta de los experimentos de Machine Learning, permitiendo el seguimiento de experimentos, la reproducibilidad y la gestión centralizada de modelos.
 
 ## Dependencias Principales
 
