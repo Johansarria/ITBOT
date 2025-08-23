@@ -69,6 +69,7 @@ from utils.shield_manager import (
 from utils.telegram_handler import send_message
 from utils.data_loader import load_operations_data
 from utils.message_queue import mq
+from utils.alerta_manager import alerter, SeverityLevel
 import re
 from typing import Optional, Tuple
 
@@ -630,19 +631,35 @@ async def process_limit_value(message: Message, state: FSMContext):
 
 # === Main execution ===
 async def main():
+    # Configure the alerter singleton
+    alerter.configure(bot_instance=bot, chat_id=chat_id_int)
+
     # Set bot commands
     await set_main_bot_commands(bot)
     # Test message after startup
     try:
-        await send_message(bot, chat_id_int, "✅ Bot iniciado y listo para operar.")
-        logger.info(f"Mensaje de prueba enviado a {chat_id_int}")
+        await alerter.send_alert(
+            alert_key="bot_startup",
+            severity=SeverityLevel.INFO,
+            source="System",
+            message="Bot iniciado y listo para operar.",
+            details={"bot_version": "1.2.3"} # Example detail
+        )
+        logger.info(f"Mensaje de inicio enviado a {chat_id_int}")
     except Exception as e:
-        logger.error(f"Error al enviar mensaje de prueba al inicio: {e}", exc_info=True)
+        logger.error(f"Error al enviar mensaje de inicio: {e}", exc_info=True)
     # Start polling
     try:
         await dp.start_polling(bot)
     except Exception as e:
         logger.error(f"Error durante el polling del bot: {e}", exc_info=True)
+        await alerter.send_alert(
+            alert_key="bot_critical_failure",
+            severity=SeverityLevel.CRITICAL,
+            source="System",
+            message="El bot ha fallado de forma crítica y se ha detenido.",
+            details={"error": str(e)}
+        )
 
 if __name__ == "__main__":
     # Load configurations at startup
