@@ -121,7 +121,7 @@ def test_calculate_all_indicators_long_input():
     high = np.linspace(1, periods, periods)
     low = high - 0.5
     close = high
-    df = pd.DataFrame({'high': high, 'low': low, 'close': close}, index=idx)
+    df = pd.DataFrame({'high': high, 'low': low, 'close': close, 'volume': [100]*periods}, index=idx)
     pipeline = FeaturePipeline()
     out = pipeline.transform(df)
     assert 'rsi' in out.columns

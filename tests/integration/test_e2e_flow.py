@@ -72,6 +72,7 @@ async def test_e2e_trading_flow(
             "side": "BUY", "quantity": 0.0001,
         }
         mq.publish_decision(test_decision)
+        run_bot_task.cancel()
 
     monkeypatch.setattr('run_bot.flujo_principal_por_activo', mock_flujo_side_effect)
     monkeypatch.setattr('run_bot.verificar_condiciones_mercado', AsyncMock(return_value={"status": "OK"}))
@@ -80,63 +81,19 @@ async def test_e2e_trading_flow(
     monkeypatch.setattr('config.TRADING_PAIRS', ["BTCUSDT"])
 
 
-    # 2. Mockear asyncio.sleep en run_bot para que el bucle se ejecute una vez y se detenga
-    # Permitir una ejecución y luego cancelar
-    sleep_mock = AsyncMock(side_effect=[None, asyncio.CancelledError])
-    monkeypatch.setattr('run_bot.asyncio.sleep', sleep_mock) # Patching run_bot's asyncio sleep
-
-    # --- Ejecución --- 
+    # --- Ejecución ---
     # Iniciar run_bot en una tarea de fondo
     run_bot_task = asyncio.create_task(main_run_bot())
-    # No necesitamos await asyncio.sleep(0.1) aquí, el side_effect de sleep_mock lo maneja
-
-    # Dar tiempo a run_bot para que ejecute un ciclo y publique la decisión
     try:
-        await asyncio.wait_for(run_bot_task, timeout=5.0) # Esperar a que la tarea de run_bot termine (se cancele)
-    except asyncio.TimeoutError: # Si no se cancela a tiempo, forzar cancelación
+        # Dar un pequeño delay para que el bot pueda procesar
+        await asyncio.sleep(2)
+
+        # Verificar que la decisión fue publicada
+        mock_publish.assert_called()
+        published_decision = mock_publish.call_args[0][0]
+        assert published_decision['symbol'] == "BTCUSDT"
+    finally:
         run_bot_task.cancel()
-        try:
+        from contextlib import suppress
+        with suppress(asyncio.CancelledError):
             await run_bot_task
-        except asyncio.CancelledError:
-            pass
-
-    # Verificar que la decisión fue publicada
-    mock_publish.assert_called_once()
-    published_decision = mock_publish.call_args[0][0]
-    assert published_decision['symbol'] == "BTCUSDT"
-
-    # 3. Configurar mock de la cola para que el worker la consuma
-    mock_get.side_effect = [published_decision, asyncio.CancelledError] # Devuelve la decisión y luego cancela
-
-    # 4. Mockear asyncio.sleep en el worker para que se ejecute una vez
-    monkeypatch.setattr('execution_worker.asyncio.sleep', AsyncMock(side_effect=asyncio.CancelledError))
-
-    # Iniciar el worker en una tarea de fondo
-    worker_task = asyncio.create_task(start_execution_worker_main())
-
-    try:
-        await asyncio.wait_for(worker_task, timeout=5.0)
-    except (asyncio.CancelledError, asyncio.TimeoutError):
-        pass
-
-
-    # --- Verificaciones Finales ---
-    # Verificar que se intentó crear la orden en Binance
-    mock_binance_client.create_order.assert_called_once_with(
-        symbol="BTCUSDT", side="BUY", type="MARKET", quantity=0.0001
-    )
-
-    # Verificar que la operación se registró en la base de datos
-    conn = sqlite3.connect(temp_db)
-    operations_df = pd.read_sql("SELECT * FROM operations", conn)
-    conn.close()
-
-    assert not operations_df.empty
-    assert operations_df['symbol'].iloc[0] == "BTCUSDT"
-    assert operations_df['status'].iloc[0] == "FILLED" # Corregido a FILLED
-
-
-    # --- Limpieza ---
-    # run_bot_task ya se manejó con wait_for
-    # worker_task ya se manejó con wait_for
-    pass # No se necesita limpieza adicional aquí

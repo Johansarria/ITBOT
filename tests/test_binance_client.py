@@ -100,16 +100,16 @@ async def test_close_binance_client_success():
     """Prueba que el cliente se cierra correctamente si ya ha sido inicializado."""
     
     # Mock del cliente y su sesión
-    mock_session = AsyncMock(spec=AsyncClient.session) # Asegurar que mock_session tiene un spec
     mock_client = AsyncMock(spec=AsyncClient)
-    mock_client.session = mock_session
+    mock_client.session = AsyncMock()
+    mock_client.close = AsyncMock()
     
     # Pre-inicializar el cliente
     utils.binance_client._binance_client_instance = mock_client
     
     await utils.binance_client.close_binance_client()
     
-    mock_session.close.assert_called_once()
+    mock_client.close.assert_called_once()
     assert utils.binance_client._binance_client_instance is None
 
 @pytest.mark.asyncio

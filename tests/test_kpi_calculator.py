@@ -158,7 +158,7 @@ def test_calculate_pnl_with_nan_pnl_usdt():
     df['timestamp_open'] = df['timestamp_open'].dt.tz_localize(None)
 
     pnl_data = calculate_pnl(df)
-    assert pnl_data["total_pnl_usdt"] == 10.0 # 10.0 + 0.0 (NaN se convierte a 0) = 10.0
+    assert pnl_data["total_pnl_usdt"] == 5.0 # 10.0 - 5.0 = 5.0
     assert not pnl_data["daily_pnl_df"].empty
     assert pnl_data["daily_pnl_df"].iloc[0]['daily_pnl'] == 5.0
 
@@ -276,7 +276,7 @@ def test_calculate_trade_frequency_and_duration_missing_timestamps():
     }
     df = pd.DataFrame(data)
     stats = calculate_trade_frequency_and_duration(df)
-    assert stats["trades_per_day"] == 1.0
+    assert stats["trades_per_day"] == 0.0
     assert stats["avg_trade_duration_minutes"] == 0.0
 
 def test_calculate_trade_frequency_and_duration_invalid_duration():

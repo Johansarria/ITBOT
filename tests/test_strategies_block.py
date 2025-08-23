@@ -63,7 +63,7 @@ def test_strategy_manager_all_strategies(monkeypatch):
     sm._strategies = {'DUMMY': DummyStrategy()}
 
     # Mock database.database_manager.get_klines to return a non-empty df
-    monkeypatch.setattr(database_manager, 'get_klines', lambda symbol, interval: make_df(50))
+    monkeypatch.setattr(technical_analysis, 'get_klines', lambda symbol, interval, limit=None: make_df(50))
 
     import strategies.strategy_manager as smodule
     # The real get_historical_klines will now call the mocked database_manager.get_klines

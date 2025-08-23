@@ -24,12 +24,14 @@ def test_get_open_positions_with_data(tmp_path, monkeypatch):
     assert len(result) == 1
     assert result.iloc[0]["symbol"] == "BTCUSDT"
 
-def test_get_open_positions_summary_no_positions(monkeypatch):
+@pytest.mark.asyncio
+async def test_get_open_positions_summary_no_positions(monkeypatch):
     monkeypatch.setattr(pm, "get_open_positions", lambda: pd.DataFrame())
-    summary = pm.get_open_positions_summary(MagicMock())
+    summary = await pm.get_open_positions_summary(MagicMock())
     assert "No hay posiciones abiertas" in summary
 
-def test_get_open_positions_summary_with_positions(monkeypatch):
+@pytest.mark.asyncio
+async def test_get_open_positions_summary_with_positions(monkeypatch):
     # Simula una posición abierta
     df = pd.DataFrame([
         {"symbol": "BTCUSDT", "entry_price": 100, "size_usdt": 50, "timestamp_open": "2025-08-12T10:00:00"}
@@ -37,11 +39,11 @@ def test_get_open_positions_summary_with_positions(monkeypatch):
     monkeypatch.setattr(pm, "get_open_positions", lambda: df)
     
     # Mockear get_binance_client y la instancia del cliente
-    mock_client_instance = MagicMock()
+    mock_client_instance = AsyncMock()
     mock_client_instance.get_symbol_ticker = AsyncMock(return_value={"price": "110"})
     
     with patch('utils.position_manager.get_binance_client', return_value=mock_client_instance) as mock_get_client:
-        summary = pm.get_open_positions_summary(MagicMock())
+        summary = await pm.get_open_positions_summary(MagicMock())
         assert "BTCUSDT" in summary
         assert "+10.00%" in summary
         mock_get_client.assert_called_once()

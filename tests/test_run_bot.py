@@ -38,8 +38,6 @@ async def test_flujo_principal_analisis_y_decision(monkeypatch):
     })
     monkeypatch.setattr(run_bot, "StrategyManager", MagicMock(return_value=mock_manager))
 
-    # Mock get_historical_klines
-    monkeypatch.setattr(run_bot.technical_analysis, "get_historical_klines", AsyncMock(return_value=MagicMock(empty=False)))
     # Mock mq.publish_decision
     monkeypatch.setattr(run_bot.mq, "publish_decision", MagicMock(return_value=True))
     # Mock send_message

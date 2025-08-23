@@ -131,6 +131,7 @@ async def test_full_analisis_flow(setup_integration_test_env):
     from modules.analisis_bot import procesar_comando_analisis
     from strategies.strategy_manager import StrategyManager
     strategy_manager = StrategyManager()
+    strategy_manager.set_active_strategy("SimpleTechnicalStrategy")
     active_strategy = strategy_manager.get_active_strategy()
     async def mock_analyze(*args, **kwargs):
         return {"symbol": "BTCUSDT", "interval": "1h", "decision": "COMPRAR", "score": 3}

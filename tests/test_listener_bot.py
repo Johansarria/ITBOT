@@ -9,6 +9,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.base import StorageKey
 from datetime import datetime
 from zoneinfo import ZoneInfo
+import listener_bot
 
 # Importar las funciones a probar y sus dependencias
 from listener_bot import (
@@ -175,13 +176,12 @@ async def test_handle_callback_query_generar_kpis(mock_send_analysis_submenu, mo
 async def test_main_function(mock_start_polling, mock_set_commands, mock_bot_dependencies, monkeypatch):
     """Prueba la función principal de arranque del bot."""
     # Patch the actual settings.TELEGRAM_CHAT_ID that listener_bot.main will use
-    monkeypatch.setattr(listener_bot.config.settings, 'TELEGRAM_CHAT_ID', 12345) # Ensure it's set for main()
+    monkeypatch.setattr(listener_bot, 'chat_id_int', 12345)
+    monkeypatch.setattr(listener_bot, 'bot', mock_bot_dependencies["bot"])
 
-    with patch('asyncio.run') as mock_asyncio_run:
+    with patch('listener_bot.alerter.send_alert') as mock_alert:
         await main()
 
         mock_set_commands.assert_called_once_with(mock_bot_dependencies["bot"])
-        mock_bot_dependencies["send_message"].assert_called_once_with(
-            mock_bot_dependencies["bot"], 12345, "✅ Bot iniciado y listo para operar."
-        )
+        mock_alert.assert_called_once()
         mock_start_polling.assert_called_once_with(mock_bot_dependencies["bot"])

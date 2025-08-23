@@ -24,6 +24,19 @@ async def test_get_historical_klines_db_empty_and_binance_failure(monkeypatch):
 
 from utils.feature_pipeline import FeaturePipeline
 
+def mock_transform(self, df):
+    df['rsi'] = 50
+    df['macd'] = 0
+    df['macd_signal'] = 0
+    df['stoch_k'] = 50
+    df['stoch_d'] = 50
+    df['cci'] = 0
+    df['adx'] = 20
+    df['atr'] = 1
+    df['bb_upper'] = 100
+    df['bb_lower'] = 90
+    return df
+
 def test_calculate_all_indicators_nan_handling():
     # create longer df (ta indicators like ADX expect a larger window)
     periods = 30
@@ -31,7 +44,7 @@ def test_calculate_all_indicators_nan_handling():
     high = list(range(1, periods + 1))
     low = [h - 0.5 for h in high]
     close = ['a'] + [str(x) for x in range(2, periods + 1)]
-    df = pd.DataFrame({'high': high, 'low': low, 'close': close}, index=idx)
+    df = pd.DataFrame({'high': high, 'low': low, 'close': close, 'volume': [100]*periods}, index=idx)
     pipeline = FeaturePipeline()
     out = pipeline.transform(df)
     # Indicators should be present and DataFrame should not be empty
@@ -53,8 +66,7 @@ async def test_analyze_market_ml_not_loaded(monkeypatch):
     # prevent model loading
     monkeypatch.setattr(ta, "ml_model", None)
     monkeypatch.setattr(ta, "load_ml_model", lambda : None)
-    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df)
-    monkeypatch.setattr(ta, "detect_market_regime", lambda x: {"volatility_regime": "LOW", "trend_regime": "BULL_TREND"})
+    monkeypatch.setattr(FeaturePipeline, 'transform', mock_transform)
     monkeypatch.setattr(ta, "export_analysis_result", lambda *a, **k: None)
     monkeypatch.setattr(ta, "export_features", lambda *a, **k: None)
 
@@ -72,11 +84,10 @@ async def test_analyze_market_ml_prediction_exception(monkeypatch):
         'close': list(range(1, periods + 1)),
         'volume': [1] * periods
     }, index=idx)
-    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df)
-    monkeypatch.setattr(ta, "detect_market_regime", lambda x: {"volatility_regime": "LOW", "trend_regime": "UNKNOWN"})
+    monkeypatch.setattr(FeaturePipeline, 'transform', mock_transform)
 
     class BadModel:
-        def predict_proba(self, X):
+        def predict(self, X):
             raise RuntimeError("predict failed")
 
     monkeypatch.setattr(ta, "ml_model", BadModel())

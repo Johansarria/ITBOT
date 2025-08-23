@@ -87,7 +87,7 @@ async def test_verificar_condiciones_mercado_volatilidad_alta(mock_bot_instance,
     with patch('utils.shield_manager.get_binance_client', return_value=mock_client):
         result = await shield_manager.verificar_condiciones_mercado(mock_bot_instance, 123)
         assert result["status"] == "DANGER"
-        assert shield_manager.escudo_activo() == "extremo" # Changed expected value
+        assert shield_manager.escudo_activo() == "volatilidad_alta"
         mock_send_message.assert_called_once()
 
 @pytest.mark.asyncio

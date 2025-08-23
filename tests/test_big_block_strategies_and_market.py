@@ -35,10 +35,9 @@ async def test_analyze_all_strategies_happy_path(monkeypatch):
     # inject a dummy strategy
     mgr._strategies = {"DUMMY": DummyStrategy()}
     # patch get_historical_klines where strategy_manager imports it to return df without DB
-    import strategies.strategy_manager as smgr
     async def fake_get_klines(symbol, interval, limit=200):
         return make_klines_df(20)
-    monkeypatch.setattr(smgr, "get_historical_klines", fake_get_klines)
+    monkeypatch.setattr(ta, "get_historical_klines", fake_get_klines)
     res = await mgr.analyze_all_strategies("BTCUSDT", "1h")
     assert res.get("best_strategy") == "DUMMY"
     assert res.get("best_decision") == "COMPRAR"
@@ -50,19 +49,29 @@ def test_calculate_all_indicators_empty():
     out = pipeline.transform(df)
     assert out.empty
 
+def mock_transform(self, df):
+    df['rsi'] = 50
+    df['macd'] = 0
+    df['macd_signal'] = 0
+    df['stoch_k'] = 50
+    df['stoch_d'] = 50
+    df['cci'] = 0
+    df['adx'] = 20
+    df['atr'] = 1
+    df['bb_upper'] = 100
+    df['bb_lower'] = 90
+    return df
 
 @pytest.mark.asyncio
 async def test_analyze_market_ml_prediction(monkeypatch, tmp_path):
     # Create a valid df and patch dependencies
     df = make_klines_df(30)
     # patch enrich_features to be identity
-    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df)
-    # patch detect_market_regime to neutral
-    monkeypatch.setattr(ta, "detect_market_regime", lambda x: {"volatility_regime": "LOW", "trend_regime": "BULL_TREND"})
-    # patch load_ml_model and model with predict_proba
+    monkeypatch.setattr(FeaturePipeline, 'transform', mock_transform)
+    # patch load_ml_model and model with predict
     class FakeModel:
-        def predict_proba(self, X):
-            return [[0.2, 0.8]]
+        def predict(self, X):
+            return pd.DataFrame({'sell_probability': [0.2], 'buy_probability': [0.8]})
 
     monkeypatch.setattr(ta, "ml_model", FakeModel())
     monkeypatch.setattr(ta, "export_analysis_result", lambda *args, **kwargs: None)

@@ -42,3 +42,4 @@ mlflow
 lightgbm
 deap
 freezegun
+pytest-asyncio

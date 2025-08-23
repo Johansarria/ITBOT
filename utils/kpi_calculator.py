@@ -74,8 +74,10 @@ def calculate_pnl(operations_df: pd.DataFrame) -> Dict[str, Any]:
     df = operations_df.copy()
 
     # Calcular pnl_usdt si no existe o es nulo, a partir de pnl_percent y size_usdt
-    if 'pnl_usdt' not in df.columns or df['pnl_usdt'].isnull().all():
+    if 'pnl_usdt' not in df.columns:
         df['pnl_usdt'] = df['size_usdt'] * (df['pnl_percent'] / 100)
+    else:
+        df['pnl_usdt'] = df['pnl_usdt'].fillna(df['size_usdt'] * (df['pnl_percent'] / 100))
     
     total_pnl_usdt = df['pnl_usdt'].fillna(0).sum()
 

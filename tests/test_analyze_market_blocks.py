@@ -9,6 +9,20 @@ from utils import technical_analysis as ta
 from utils.feature_pipeline import FeaturePipeline
 
 
+def mock_transform(self, df):
+    df['rsi'] = 50
+    df['macd'] = 0
+    df['macd_signal'] = 0
+    df['stoch_k'] = 50
+    df['stoch_d'] = 50
+    df['cci'] = 0
+    df['adx'] = 20
+    df['atr'] = 1
+    df['bb_upper'] = 100
+    df['bb_lower'] = 90
+    return df
+
+
 @pytest.mark.asyncio
 async def test_analyze_market_no_data(monkeypatch):
     # Force get_historical_klines to return empty
@@ -28,8 +42,7 @@ async def test_analyze_market_with_df_and_no_ml(monkeypatch, tmp_path):
                        'low': np.linspace(0.9,1.9,len(idx)), 'close': np.linspace(1,2,len(idx)), 'volume': np.linspace(1,2,len(idx))}, index=idx)
 
     # Monkeypatch enrich_features to return df as-is and detect_market_regime
-    monkeypatch.setattr(ta, 'enrich_features', lambda d: d)
-    monkeypatch.setattr(ta, 'detect_market_regime', lambda d: {'volatility_regime': 'LOW', 'trend_regime': 'BULL_TREND'})
+    monkeypatch.setattr(FeaturePipeline, 'transform', mock_transform)
     # Ensure ml_model is None
     monkeypatch.setattr(ta, 'ml_model', None)
     # Avoid file exports
@@ -49,11 +62,10 @@ async def test_analyze_market_ml_prediction_branch(monkeypatch):
                        'low': np.linspace(0.9,1.9,len(idx)), 'close': np.linspace(1,2,len(idx)), 'volume': np.linspace(1,2,len(idx))}, index=idx)
 
     class FakeModel:
-        def predict_proba(self, X):
-            return [[0.1, 0.9]]
+        def predict(self, X):
+            return pd.DataFrame({'sell_probability': [0.1], 'buy_probability': [0.9]})
 
-    monkeypatch.setattr(ta, 'enrich_features', lambda d: d)
-    monkeypatch.setattr(ta, 'detect_market_regime', lambda d: {'volatility_regime': 'NORMAL', 'trend_regime': 'NEUTRAL'})
+    monkeypatch.setattr(FeaturePipeline, 'transform', mock_transform)
     monkeypatch.setattr(ta, 'export_analysis_result', lambda *a, **k: None)
     monkeypatch.setattr(ta, 'export_features', lambda *a, **k: None)
     monkeypatch.setattr(ta, 'ml_model', FakeModel())

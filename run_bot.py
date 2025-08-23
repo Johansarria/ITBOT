@@ -86,7 +86,7 @@ async def flujo_principal_por_activo(bot_instance: Bot, chat_id: int, symbol: st
     try:
         logger.info(f"Cargando Strategy Manager y ejecutando análisis para {symbol}.")
         strategy_manager = StrategyManager()
-        interval = settings.ASSET_CONFIG.get(symbol, {}).get("interval", "1h")
+        interval = "1h" # TODO: Implement per-asset configuration
         analysis_summary = await strategy_manager.analyze_all_strategies(symbol=symbol, interval=interval, limit=200)
 
         if "error" in analysis_summary:
@@ -138,9 +138,9 @@ async def main_run_bot() -> None:
     init_db()
 
     chat_id_int = settings.TELEGRAM_CHAT_ID
-    if not settings.TELEGRAM_BOT_TOKEN:
+    if not settings.TELEGRAM_TOKEN:
         raise ValueError("❌ TELEGRAM_TOKEN no está definido.")
-    bot_instance = Bot(token=settings.TELEGRAM_BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot_instance = Bot(token=settings.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     state_manager = StateManager()
     session_mode = state_manager.get_state("session", "mode", settings.MODE)
