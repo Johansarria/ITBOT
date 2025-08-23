@@ -199,10 +199,9 @@ async def analyze_market(symbol: str = "BTCUSDT", interval: str = "1h", limit: i
         logger.warning(f"No se pudieron obtener datos para el análisis de {symbol}.")
         return {"symbol": symbol, "interval": interval, "decision": "No hay datos para analizar", "score": 0}
 
-    # Enriquecer el DataFrame con features avanzados
-    df = enrich_features(df)
-    # También calcular los indicadores clásicos para compatibilidad
-    df = calculate_all_indicators(df)
+    # Aplicar el pipeline de feature engineering
+    feature_pipeline = FeaturePipeline()
+    df = feature_pipeline.transform(df)
 
     latest = df.iloc[-1]
 

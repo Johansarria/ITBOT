@@ -80,14 +80,18 @@ def _evaluate_thresholds_for_ga(individual, historical_data: pd.DataFrame):
 
     # Use asyncio.run() to execute the async backtest in the current thread.
     # This creates a new event loop for the thread, runs the coroutine, and closes it.
-    metrics = asyncio.run(backtester.run(strategy))
-    
-    if metrics:
-        current_return = metrics.get("total_return_pct", -float('inf'))
-        current_drawdown = metrics.get("max_drawdown_pct", float('inf'))
-        return current_return, -current_drawdown # Negative drawdown for maximization
-    else:
-        return -float('inf'), float('inf') # Poor fitness if backtest fails
+    try:
+        metrics = asyncio.run(backtester.run(strategy))
+        
+        if metrics:
+            current_return = metrics.get("total_return_pct", -float('inf'))
+            current_drawdown = metrics.get("max_drawdown_pct", float('inf'))
+            return current_return, -current_drawdown # Negative drawdown for maximization
+        else:
+            return -float('inf'), float('inf') # Poor fitness if backtest returns no metrics
+    except Exception as e:
+        logger.error(f"Error durante la ejecución del backtest para GA: {e}", exc_info=True)
+        return -float('inf'), float('inf') # Poor fitness if backtest raises an exception
     logger.info(f"Evaluación completada para: Alto={umbral_alto:.2f}, Medio={umbral_medio:.2f}, Bajo={umbral_bajo:.2f})")
     sys.stdout.flush()
 
@@ -136,8 +140,21 @@ async def optimize_risk_thresholds_ga():
     stats.register("max", np.max)
 
     # Run the GA
-    pop, log = await asyncio.to_thread(algorithms.eaSimple, pop, toolbox, cxpb=CXPB, mutpb=MUTPB, 
-                                       ngen=NUM_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
+    try:
+        pop, log = await asyncio.to_thread(
+            algorithms.eaSimple,
+            pop,
+            toolbox,
+            cxpb=CXPB,
+            mutpb=MUTPB,
+            ngen=NUM_GENERATIONS,
+            stats=stats,
+            halloffame=hof,
+            verbose=True,
+        )
+    except Exception as e:
+        logger.error(f"Error inesperado durante la optimización GA: {e}", exc_info=True)
+        return
 
     logger.info("\n--- Resultados de la Optimización de Umbrales de Riesgo (GA) ---")
     sys.stdout.flush()

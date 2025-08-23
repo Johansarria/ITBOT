@@ -11,6 +11,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from utils.feature_engineering import enrich_features
 from utils.technical_analysis import calculate_all_indicators
 from database.database_manager import get_klines # Importar la función para obtener klines de la BD
+from utils.feature_pipeline import FeaturePipeline # Added import
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -45,15 +46,11 @@ def build_and_save_feature_store(symbol: str = "BTCUSDT", interval: str = "4h"):
         logger.error(f"Error al cargar datos de klines desde la base de datos: {e}", exc_info=True)
         return
 
-    # 3. Enriquecer con features
-    logger.info("Iniciando enriquecimiento de features...")
-    df_enriched = enrich_features(df.copy())
-    logger.info("Enriquecimiento de features completado.")
-
-    # 4. Calcular indicadores técnicos clásicos
-    logger.info("Iniciando cálculo de indicadores técnicos...")
-    df_final = calculate_all_indicators(df_enriched)
-    logger.info("Cálculo de indicadores técnicos completado.")
+    # 3. Aplicar el pipeline de feature engineering
+    logger.info("Iniciando aplicación del FeaturePipeline...")
+    feature_pipeline = FeaturePipeline()
+    df_final = feature_pipeline.transform(df)
+    logger.info("Aplicación del FeaturePipeline completada.")
 
     # 5. Guardar en formato Parquet
     try:
@@ -64,6 +61,35 @@ def build_and_save_feature_store(symbol: str = "BTCUSDT", interval: str = "4h"):
         logger.error(f"Error al guardar el archivo Parquet: {e}", exc_info=True)
         logger.warning("Asegúrate de tener 'pyarrow' instalado: pip install pyarrow")
 
-if __name__ == "__main__":
+import mlflow
+
+def main():
     # Ejemplo de uso: Construir el feature store para BTCUSDT en 1h
-    build_and_save_feature_store(symbol="BTCUSDT", interval="1h")
+    symbol_to_build = "BTCUSDT"
+    interval_to_build = "1h"
+    
+    # Import the module explicitly and call the function from the module object. This
+    # ensures that when tests patch `build_feature_store.build_and_save_feature_store`
+    # the patched function is used even if the module is executed under the name
+    # "__main__" (for example via runpy.run_module).
+    import importlib
+    mod = importlib.import_module('build_feature_store')
+
+    with mlflow.start_run(run_name=f"Feature Engineering - {symbol_to_build}-{interval_to_build}"):
+        mlflow.log_param("symbol", symbol_to_build)
+        mlflow.log_param("interval", interval_to_build)
+
+        # Call the function from the imported module so tests that patch the
+        # function on the module object will intercept this call.
+        mod.build_and_save_feature_store(symbol=symbol_to_build, interval=interval_to_build)
+
+        # Log the generated feature store as an artifact
+        try:
+            mlflow.log_artifact(mod.OUTPUT_PATH, artifact_path="feature_store")
+        except Exception:
+            # If artifact path is not present or logging fails, keep behavior
+            # simple and continue (tests assert that log_artifact is called).
+            logger.exception("Fallo al loggear el artifact del feature store")
+
+if __name__ == "__main__":
+    main()
