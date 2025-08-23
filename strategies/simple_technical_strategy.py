@@ -61,6 +61,14 @@ class SimpleTechnicalStrategy(BaseStrategy):
         if latest["close"] <= latest["bb_lower"]: score += 1 # Cerca del piso, posible rebote
         elif latest["close"] >= latest["bb_upper"]: score -= 1 # Cerca del techo, posible corrección
 
+        # Confirmación de Volumen
+        if latest["volume"] > latest["volume_sma_20"]:
+            # Si el volumen es alto, se refuerza la dirección de la puntuación actual
+            if score > 0:
+                score += 1
+            elif score < 0:
+                score -= 1
+
         decision = "MANTENER"
         if score >= self._buy_score_threshold: decision = "COMPRAR"
         elif score <= self._sell_score_threshold: decision = "VENDER"
