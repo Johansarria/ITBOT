@@ -23,7 +23,7 @@ class FeaturePipeline:
             'rsi', 'macd', 'macd_signal', 'stoch_k', 'stoch_d', 'cci',
             'adx', 'plus_di', 'minus_di', 'atr', 'bb_upper', 'bb_lower',
             'ma_20', 'ma_50', 'volatility_20', 'returns', 'cum_return',
-            'volume_zscore', 'bullish_cross', 'bearish_cross'
+            'volume_sma_20', 'volume_zscore', 'bullish_cross', 'bearish_cross'
         ]
 
     def _calculate_all_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -62,6 +62,7 @@ class FeaturePipeline:
         logger.debug("Calculando features adicionales y estadísticos.")
         df['ma_20'] = df['close'].rolling(window=20).mean()
         df['ma_50'] = df['close'].rolling(window=50).mean()
+        df['volume_sma_20'] = df['volume'].rolling(window=20).mean()
         df['volatility_20'] = df['close'].rolling(window=20).std()
         df['returns'] = df['close'].pct_change()
         df['cum_return'] = (1 + df['returns']).cumprod() - 1
