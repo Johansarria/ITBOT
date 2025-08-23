@@ -5,7 +5,7 @@ from typing import Dict, Any
 import logging
 
 from strategies.base_strategy import BaseStrategy
-from utils.technical_analysis import calculate_all_indicators # Asumimos que esta función existirá
+from utils.feature_pipeline import FeaturePipeline
 
 logger = logging.getLogger("strategies.simple_technical_strategy")
 
@@ -29,7 +29,8 @@ class SimpleTechnicalStrategy(BaseStrategy):
         logger.info("Ejecutando análisis para SimpleTechnicalStrategy.")
         
         # Calcular todos los indicadores usando la función auxiliar
-        df_indicators = calculate_all_indicators(historical_data.copy()) # Pasar una copia para no modificar el original
+        feature_pipeline = FeaturePipeline()
+        df_indicators = feature_pipeline.transform(historical_data.copy()) # Pasar una copia para no modificar el original
 
         if df_indicators.empty:
             logger.warning("DataFrame de indicadores vacío. No se puede analizar.")

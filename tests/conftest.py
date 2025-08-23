@@ -1,3 +1,8 @@
+import sys
+# HACK: Force pytest to find the installed packages.
+# This is needed because of a strange issue with the test environment.
+sys.path.append('/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages')
+
 import pytest
 import config
 

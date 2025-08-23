@@ -41,3 +41,4 @@ redis
 mlflow
 lightgbm
 deap
+freezegun

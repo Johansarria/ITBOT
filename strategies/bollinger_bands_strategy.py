@@ -5,7 +5,7 @@ from typing import Dict, Any
 import logging
 
 from strategies.base_strategy import BaseStrategy
-from utils.technical_analysis import calculate_all_indicators # Para asegurar que los datos tienen los indicadores
+from utils.feature_pipeline import FeaturePipeline
 
 logger = logging.getLogger("strategies.bollinger_bands_strategy")
 
@@ -27,7 +27,8 @@ class BollingerBandsStrategy(BaseStrategy):
 
         # Calcular Bandas de Bollinger (ya se hace en calculate_all_indicators, pero lo haremos explícito aquí si no se usa esa función)
         # Si calculate_all_indicators ya se encarga, solo necesitamos acceder a las columnas
-        df_with_indicators = calculate_all_indicators(historical_data.copy())
+        feature_pipeline = FeaturePipeline()
+        df_with_indicators = feature_pipeline.transform(historical_data.copy())
 
         latest = df_with_indicators.iloc[-1]
 

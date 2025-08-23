@@ -8,40 +8,42 @@ import logging
 
 logger = logging.getLogger(__name__) # Obtener logger para este módulo
 
-from ta.momentum import RSIIndicator, StochasticOscillator
-from ta.trend import MACD, CCIIndicator, ADXIndicator
-from ta.volatility import AverageTrueRange, BollingerBands
 from utils.exporter import export_analysis_result, export_features
 import joblib # Importar joblib para cargar el modelo
 from utils.binance_client import get_binance_client # Importar la función para obtener el cliente de Binance
-# Importar feature engineering avanzado
-from utils.feature_engineering import enrich_features
 from database.database_manager import get_klines # Importar get_klines de la BD
+from utils.feature_pipeline import FeaturePipeline
 
 import asyncio
 import time
 from functools import wraps
 from binance.exceptions import BinanceAPIException, BinanceRequestException # Importar excepciones específicas
 
-# Ruta al modelo de ML entrenado
-MODEL_PATH = "data/ml_models/lightgbm_model.pkl"
+import mlflow.pyfunc
+
+# Ruta al modelo de ML entrenado en MLflow
+# Esto debería ser gestionado de forma más dinámica, por ejemplo, usando el Model Registry.
+# Por ahora, usamos el último run ID conocido.
+LAST_RUN_ID = "5006527129a74ad4bb014b9ce8553f51" # Reemplazar con el último run_id si es necesario
+MODEL_PATH = f"runs:/{LAST_RUN_ID}/model"
 ml_model = None
 
 def load_ml_model() -> None:
     """
-    Carga el modelo de Machine Learning desde el disco si no está cargado.
+    Carga el modelo de Machine Learning desde el MLflow Model Registry.
     Asigna el modelo global ml_model.
     """
     global ml_model
     if ml_model is None:
         try:
-            ml_model = joblib.load(MODEL_PATH)
-            logger.info(f"Modelo de ML cargado exitosamente desde {MODEL_PATH}")
-        except FileNotFoundError:
-            logger.error(f"Modelo de ML no encontrado en {MODEL_PATH}. Asegúrate de haberlo entrenado y guardado.")
-            ml_model = None
+            # Se necesita inicializar el tracking URI para que MLflow sepa dónde buscar los runs
+            tracking_uri = "file://" + os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "mlruns"))
+            mlflow.set_tracking_uri(tracking_uri)
+
+            ml_model = mlflow.pyfunc.load_model(MODEL_PATH)
+            logger.info(f"Modelo PyFunc de ML cargado exitosamente desde {MODEL_PATH}")
         except Exception as e:
-            logger.exception(f"Error al cargar el modelo de ML: {e}")
+            logger.exception(f"Error al cargar el modelo PyFunc de ML desde MLflow: {e}")
             ml_model = None
 
 
@@ -112,140 +114,42 @@ async def get_historical_klines(symbol: str, interval: str, limit: int = 100) ->
     logger.info(f"Klines históricos obtenidos exitosamente para {symbol} desde la BD. Filas: {len(df)}.")
     return df
 
-def calculate_all_indicators(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Calcula todos los indicadores técnicos necesarios y los añade al DataFrame.
-    """
-    if df.empty:
-        return df
-
-    # Ensure 'high', 'low', and 'close' columns are numeric
-    df["high"] = pd.to_numeric(df["high"], errors="coerce")
-    df["low"] = pd.to_numeric(df["low"], errors="coerce")
-    
-    # Convert 'close' column to numeric and check for NaNs
-    initial_nan_count = df["close"].isnull().sum()
-    df["close"] = pd.to_numeric(df["close"], errors="coerce")
-    final_nan_count = df["close"].isnull().sum()
-
-    if final_nan_count > initial_nan_count:
-        newly_coerced_nans = final_nan_count - initial_nan_count
-        nan_indices = df[df["close"].isnull()].index
-        
-        # Group consecutive NaNs to report date ranges
-        if not nan_indices.empty:
-            # Convert index to datetime if it's not already
-            if not isinstance(nan_indices, pd.DatetimeIndex):
-                nan_indices = pd.to_datetime(nan_indices)
-
-            # Find consecutive groups of NaNs
-            s = pd.Series(nan_indices)
-            breaks = s.diff().dt.total_seconds() > 1 # Assuming 1 second is enough to break a sequence
-            groups = s.groupby(breaks.cumsum())
-
-            date_ranges = []
-            for _, group in groups:
-                if not group.empty:
-                    start_date = group.min().strftime("%Y-%m-%d %H:%M:%S")
-                    end_date = group.max().strftime("%Y-%m-%d %H:%M:%S")
-                    date_ranges.append(f"[{start_date} to {end_date}]")
-            
-            logger.warning(f"Se convirtieron {newly_coerced_nans} valores a NaN en la columna 'close'. Rangos de fechas afectados: {'; '.join(date_ranges)}")
-
-    logger.debug("Calculando indicadores técnicos.")
-    # Indicadores técnicos
-    df["rsi"] = RSIIndicator(close=df["close"]).rsi().fillna(0)
-    macd = MACD(close=df["close"])
-    df["macd"] = macd.macd().fillna(0)
-    df["macd_signal"] = macd.macd_signal().fillna(0)
-    stoch = StochasticOscillator(high=df["high"], low=df["low"], close=df["close"])
-    df["stoch_k"] = stoch.stoch().fillna(0)
-    df["stoch_d"] = stoch.stoch_signal().fillna(0)
-    df["cci"] = CCIIndicator(high=df["high"], low=df["low"], close=df["close"]).cci().fillna(0)
-    adx = ADXIndicator(high=df["high"], low=df["low"], close=df["close"])
-    df["adx"] = adx.adx().fillna(0)
-    df["plus_di"] = adx.adx_pos().fillna(0)
-    df["minus_di"] = adx.adx_neg().fillna(0)
-    df["atr"] = AverageTrueRange(high=df["high"], low=df["low"], close=df["close"]).average_true_range().fillna(0)
-    bb = BollingerBands(close=df["close"])
-    df["bb_upper"] = bb.bollinger_hband().fillna(0)
-    df["bb_lower"] = bb.bollinger_lband().fillna(0)
-
-    # Rellenar NaN con 0 después de calcular todos los indicadores
-    df = df.fillna(0)
-
-    logger.debug("Cálculo de indicadores completado.")
-    return df
-
 from typing import Optional
 
 async def analyze_market(symbol: str = "BTCUSDT", interval: str = "1h", limit: int = 100, export: bool = True, df_klines: Optional[pd.DataFrame] = None, current_index: Optional[int] = None, umbral_alto: float = 0.85, umbral_medio: float = 0.70, umbral_bajo: float = 0.55) -> dict:
     logger.info(f"Iniciando análisis de mercado para {symbol} - {interval}.")
     
-
+    df_raw = None
     if df_klines is not None:
-        # Use the provided df_klines, slicing it if current_index is given
         if current_index is not None:
-            df = df_klines.iloc[:current_index].copy() # Copy only the relevant slice
-            logger.debug(f"Usando slice de DataFrame de klines proporcionado para el análisis hasta índice {current_index}.")
+            df_raw = df_klines.iloc[:current_index].copy()
         else:
-            df = df_klines.copy() # If no index, assume full df is passed for a single analysis
-            logger.debug("Usando DataFrame de klines proporcionado para el análisis (sin slice).")
+            df_raw = df_klines.copy()
     else:
-        df = await get_historical_klines(symbol, interval, limit)
-        logger.info("Obteniendo klines históricos de Binance para el análisis.")
+        df_raw = await get_historical_klines(symbol, interval, limit)
 
-    if df.empty:
+    if df_raw.empty or 'close' not in df_raw.columns:
         logger.warning(f"No se pudieron obtener datos para el análisis de {symbol}.")
         return {"symbol": symbol, "interval": interval, "decision": "No hay datos para analizar", "score": 0}
 
-    # Aplicar el pipeline de feature engineering
-    feature_pipeline = FeaturePipeline()
-    df = feature_pipeline.transform(df)
-
-    latest = df.iloc[-1]
-
-    # Interpretaciones técnicas (siempre calculadas para el reporte)
-    rsi_state = "sobreventa" if latest["rsi"] < 30 else "sobrecompra" if latest["rsi"] > 70 else "neutral"
-    macd_state = "alcista" if latest["macd"] > latest["macd_signal"] else "bajista"
-    stoch_state = "alcista" if latest["stoch_k"] > latest["stoch_d"] else "bajista"
-    cci_state = "sobreventa" if latest["cci"] < -100 else "sobrecompra" if latest["cci"] > 100 else "neutral"
-    adx_strength = "fuerte" if latest["adx"] > 25 else "débil"
-    bb_position = "cerca del techo" if latest["close"] >= latest["bb_upper"] else "cerca del piso" if latest["close"] <= latest["bb_lower"] else "en rango"
-
-    # Seleccionar las características para la predicción del modelo de ML
-    feature_columns = [
-        'rsi', 'macd', 'macd_signal', 'stoch_k', 'stoch_d', 'cci',
-        'adx', 'plus_di', 'minus_di', 'atr', 'bb_upper', 'bb_lower'
-    ]
-    
-    # Asegurarse de que todas las columnas de características existen y son numéricas
-    # Esto es crucial para la inferencia del modelo
-    for col in feature_columns:
-        if col not in df.columns:
-            logger.warning(f"Columna de característica '{col}' no encontrada en el DataFrame. Se omitirá.")
-            feature_columns.remove(col)
-        else:
-            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0) # Asegurar numérico y rellenar NaN
-
-    # Preparar los datos para la predicción del modelo de ML
-    X_latest = df[feature_columns].iloc[-1:].copy() # Tomar la última fila para la predicción
-
-    decision = "MANTENER"
-    score = 0
+    latest_close = df_raw.iloc[-1]['close']
 
     # Cargar el modelo si es necesario (lazy loading)
     if ml_model is None:
         load_ml_model()
 
-    # Usar los umbrales pasados como argumento
+    decision = "MANTENER"
+    score = 0
+
     if ml_model is not None:
         try:
-            # Obtener las probabilidades de predicción
-            probabilities = ml_model.predict_proba(X_latest)[0]
-            # Las clases son 0.0 (VENDER) y 1.0 (COMPRAR)
-            prob_sell = probabilities[0] # Probabilidad de VENDER
-            prob_buy = probabilities[1]  # Probabilidad de COMPRAR
+            # El modelo pyfunc se encarga de la transformación de features y la predicción
+            prediction_df = ml_model.predict(df_raw)
+
+            # El resultado es un DataFrame con 'sell_probability' y 'buy_probability'
+            latest_prediction = prediction_df.iloc[-1]
+            prob_sell = latest_prediction['sell_probability']
+            prob_buy = latest_prediction['buy_probability']
 
             if prob_buy >= umbral_alto:
                 decision = "COMPRAR"
@@ -275,6 +179,20 @@ async def analyze_market(symbol: str = "BTCUSDT", interval: str = "1h", limit: i
     
     logger.info(f"Análisis completado para {symbol}. Decisión: {decision}, Score: {score}")
 
+    # Para el reporte, necesitamos los indicadores. Los calculamos aquí.
+    # Esto es redundante ya que el modelo ya los calcula, pero es necesario para el reporte.
+    # En una futura refactorización, el reporte podría ser generado de otra forma.
+    feature_pipeline = FeaturePipeline()
+    df_features = feature_pipeline.transform(df_raw.copy())
+    latest = df_features.iloc[-1]
+
+    rsi_state = "sobreventa" if latest["rsi"] < 30 else "sobrecompra" if latest["rsi"] > 70 else "neutral"
+    macd_state = "alcista" if latest["macd"] > latest["macd_signal"] else "bajista"
+    stoch_state = "alcista" if latest["stoch_k"] > latest["stoch_d"] else "bajista"
+    cci_state = "sobreventa" if latest["cci"] < -100 else "sobrecompra" if latest["cci"] > 100 else "neutral"
+    adx_strength = "fuerte" if latest["adx"] > 25 else "débil"
+    bb_position = "cerca del techo" if latest["close"] >= latest["bb_upper"] else "cerca del piso" if latest["close"] <= latest["bb_lower"] else "en rango"
+
     result = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "symbol": symbol,
@@ -296,7 +214,7 @@ async def analyze_market(symbol: str = "BTCUSDT", interval: str = "1h", limit: i
         "adx_strength": adx_strength,
         "bb_position": bb_position,
         "decision": decision,
-        "close": latest["close"],
+        "close": latest_close,
         "score": score
     }
 
@@ -304,9 +222,8 @@ async def analyze_market(symbol: str = "BTCUSDT", interval: str = "1h", limit: i
         export_analysis_result(symbol, interval, result)
         logger.info(f"Análisis exportado a CSV para {symbol}.")
 
-    # Exportar features enriquecidos para análisis histórico y entrenamiento
-    export_features(symbol, interval, df)
-    logger.info(f"Features enriquecidos exportados a CSV para {symbol}.")
+    # La exportación de features ya no es necesaria aquí.
+    # export_features(symbol, interval, df_features)
 
     return result
 

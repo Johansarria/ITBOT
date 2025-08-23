@@ -74,3 +74,46 @@ def log_model_validation(model_path: str, model, X_test, y_test, X_calib=None, y
         "metrics": metrics,
         "calibration": calibration
     }
+
+import mlflow.pyfunc
+import pandas as pd
+from .feature_pipeline import FeaturePipeline
+
+class MLModelWrapper(mlflow.pyfunc.PythonModel):
+    """
+    A custom MLflow model wrapper that includes the feature engineering pipeline.
+    This ensures that the same feature transformations are applied during inference
+    as were used during training.
+    """
+    def __init__(self, model, feature_columns_to_use: list[str]):
+        self._model = model
+        self._feature_pipeline = FeaturePipeline()
+        self._feature_columns_to_use = feature_columns_to_use
+
+    def _get_predictions(self, model, data: pd.DataFrame) -> np.ndarray:
+        """Get predictions (probabilities) from the underlying model."""
+        return model.predict_proba(data)
+
+    def predict(self, context, model_input: pd.DataFrame) -> pd.DataFrame:
+        """
+        The main prediction method for the MLflow model.
+        It takes raw klines data, processes it, and returns predictions.
+        """
+        # 1. Generate all features from raw klines
+        df_features = self._feature_pipeline.transform(model_input.copy())
+
+        # 2. Select only the features the model was trained on
+        # Ensure columns are in the same order as during training
+        X = df_features[self._feature_columns_to_use]
+
+        # 3. Get predictions (probabilities)
+        probabilities = self._get_predictions(self._model, X)
+
+        # Create a readable output
+        # The model returns probabilities for class 0 (SELL) and 1 (BUY)
+        results = pd.DataFrame({
+            "sell_probability": probabilities[:, 0],
+            "buy_probability": probabilities[:, 1]
+        })
+
+        return results

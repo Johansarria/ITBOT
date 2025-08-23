@@ -5,7 +5,6 @@ from typing import Dict, Any
 import logging
 
 from strategies.base_strategy import BaseStrategy
-from utils.technical_analysis import calculate_all_indicators # Para asegurar que los datos tienen los indicadores
 
 logger = logging.getLogger("strategies.ma_cross_strategy")
 

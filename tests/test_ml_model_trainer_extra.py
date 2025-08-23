@@ -8,7 +8,7 @@ from datetime import datetime
 import zoneinfo
 
 # Import the functions to be tested
-from ml_model_trainer import _save_model_and_log_mlflow, FEATURE_COLUMNS
+from ml_model_trainer import _save_model_and_log_mlflow
 
 # Setup logging for tests
 @pytest.fixture(autouse=True)
@@ -23,10 +23,11 @@ def setup_test_logging():
 @patch('ml_model_trainer.log_model_validation')
 def test_save_model_and_log_mlflow_success(mock_log_model_validation, mock_makedirs, mock_mlflow, mock_joblib_dump):
     # Mock the model pipeline and data
+    feature_columns = ['rsi', 'macd']
     mock_model_pipeline = MagicMock()
-    X_test = pd.DataFrame(np.random.rand(5, len(FEATURE_COLUMNS)), columns=FEATURE_COLUMNS)
+    X_test = pd.DataFrame(np.random.rand(5, len(feature_columns)), columns=feature_columns)
     y_test = pd.Series(np.array([0, 1, 1, 1, 0]))
-    X_train_full = pd.DataFrame(np.random.rand(10, len(FEATURE_COLUMNS)), columns=FEATURE_COLUMNS)
+    X_train_full = pd.DataFrame(np.random.rand(10, len(feature_columns)), columns=feature_columns)
     y_train_full = pd.Series(np.random.randint(0, 2, 10))
     best_params = {'model__n_estimators': 100}
     cv_score = 0.85
@@ -59,7 +60,7 @@ def test_save_model_and_log_mlflow_success(mock_log_model_validation, mock_maked
     assert f"{model_base_output_path}.pkl" in dump_calls[1].args[1]
     
     # Check mlflow calls
-    mock_mlflow.sklearn.log_model.assert_called_once_with(sk_model=mock_model_pipeline, artifact_path="model")
+    mock_mlflow.pyfunc.log_model.assert_called_once()
     
     # Check log_model_validation call
     mock_log_model_validation.assert_called_once()
@@ -77,10 +78,11 @@ def test_save_model_and_log_mlflow_success(mock_log_model_validation, mock_maked
 @patch('ml_model_trainer.log_model_validation', side_effect=Exception("Test Exception"))
 def test_save_model_and_log_mlflow_validation_exception(mock_log_model_validation, mock_makedirs, mock_mlflow, mock_joblib_dump):
     # Mock the model pipeline and data
+    feature_columns = ['rsi', 'macd']
     mock_model_pipeline = MagicMock()
-    X_test = pd.DataFrame(np.random.rand(5, len(FEATURE_COLUMNS)), columns=FEATURE_COLUMNS)
+    X_test = pd.DataFrame(np.random.rand(5, len(feature_columns)), columns=feature_columns)
     y_test = pd.Series(np.array([0, 1, 1, 1, 0]))
-    X_train_full = pd.DataFrame(np.random.rand(10, len(FEATURE_COLUMNS)), columns=FEATURE_COLUMNS)
+    X_train_full = pd.DataFrame(np.random.rand(10, len(feature_columns)), columns=feature_columns)
     y_train_full = pd.Series(np.random.randint(0, 2, 10))
     best_params = {'model__n_estimators': 100}
     cv_score = 0.85

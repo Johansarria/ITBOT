@@ -20,22 +20,19 @@ import hashlib
 
 from utils.logger_setup import setup_logging
 from utils.telegram_handler import send_message, await_confirmation
-from utils.ml_model_utils import log_model_validation
+from utils.ml_model_utils import log_model_validation, MLModelWrapper
 from utils.feature_pipeline import FeaturePipeline
+import mlflow.pyfunc
 
 setup_logging()
 logger = logging.getLogger(__name__)
 
 def initialize_mlflow():
     """Initializes the MLflow tracking URI and experiment."""
-    tracking_uri = "file://" + os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "mlruns"))
+    # Correct the path to be relative to the project root, not the parent of the root.
+    tracking_uri = "file://" + os.path.abspath(os.path.join(os.path.dirname(__file__), "mlruns"))
     mlflow.set_tracking_uri(tracking_uri)
     mlflow.set_experiment("ITBot_ML_Model_Training")
-
-FEATURE_COLUMNS = [
-    'rsi', 'macd', 'macd_signal', 'stoch_k', 'stoch_d', 'cci',
-    'adx', 'plus_di', 'minus_di', 'atr', 'bb_upper', 'bb_lower'
-]
 
 def _get_file_hash(filepath):
     """Calculates the SHA256 hash of a file."""
@@ -73,10 +70,23 @@ def _load_and_prepare_data(
     df_ml = df_features.dropna(subset=['target']).copy()
     df_ml['target'] = df_ml['target'].astype(int)
     
+    # NOTE: The model was originally trained on a subset of features.
+    # To maintain consistency, we'll continue to use this subset.
+    # A future improvement would be to make feature selection part of the ML pipeline.
+    columns_to_use = [
+        'rsi', 'macd', 'macd_signal', 'stoch_k', 'stoch_d', 'cci',
+        'adx', 'plus_di', 'minus_di', 'atr', 'bb_upper', 'bb_lower'
+    ]
+
+    feature_pipeline = FeaturePipeline()
+    available_features = feature_pipeline.get_feature_names()
+
     existing_feature_columns = []
-    for col in FEATURE_COLUMNS:
+    for col in columns_to_use:
         if col not in df_ml.columns:
-            logger.warning(f"Columna de característica '{col}' no encontrada. Se omitirá.")
+            logger.warning(f"Columna de característica '{col}' no encontrada en el DataFrame. Se omitirá.")
+        elif col not in available_features:
+            logger.warning(f"Columna de característica '{col}' no está en el FeaturePipeline. Se omitirá.")
         else:
             df_ml[col] = pd.to_numeric(df_ml[col], errors='coerce').fillna(0)
             existing_feature_columns.append(col)
@@ -162,13 +172,23 @@ def _save_model_and_log_mlflow(
     model_output_path_versioned = f"{model_base_output_path}_{timestamp}.pkl"
     os.makedirs(os.path.dirname(model_base_output_path), exist_ok=True)
     joblib.dump(model_pipeline, model_output_path_versioned)
-    logger.info(f"Modelo guardado en {model_output_path_versioned}")
+    logger.info(f"Modelo (pipeline scikit-learn) guardado en {model_output_path_versioned}")
 
     joblib.dump(model_pipeline, f"{model_base_output_path}.pkl")
-    logger.info(f"Copia del modelo más reciente guardada como {model_base_output_path}.pkl")
+    logger.info(f"Copia del modelo (pipeline scikit-learn) más reciente guardada como {model_base_output_path}.pkl")
 
-    mlflow.sklearn.log_model(sk_model=model_pipeline, artifact_path="model")
+    # Envolver y loggear el modelo como un pyfunc model de MLflow
+    feature_columns = X_train_full.columns.to_list()
+    mlflow_pyfunc_model = MLModelWrapper(model=model_pipeline, feature_columns_to_use=feature_columns)
 
+    mlflow.pyfunc.log_model(
+        artifact_path="model",
+        python_model=mlflow_pyfunc_model,
+        code_paths=["utils/feature_pipeline.py", "utils/ml_model_utils.py"] # Dependencias de código
+    )
+    logger.info("Modelo MLflow PyFunc (wrapper con pipeline) loggeado en MLflow.")
+
+    # El loggeo de validación avanzada puede continuar como estaba
     try:
         calib_size = int(0.1 * len(X_train_full))
         if calib_size > 0:
@@ -252,10 +272,11 @@ async def train_and_notify(bot_instance, chat_id):
         await send_message(bot_instance, chat_id, f"❌ Error durante el entrenamiento del modelo ML: {e}")
 
 if __name__ == "__main__":
-    import config
-    from aiogram import Bot
+    # import config
+    # from aiogram import Bot
 
-    bot = Bot(token=config.TELEGRAM_TOKEN)
-    chat_id = config.TELEGRAM_CHAT_ID
+    # bot = Bot(token=config.TELEGRAM_TOKEN)
+    # chat_id = config.TELEGRAM_CHAT_ID
 
-    asyncio.run(train_and_notify(bot, chat_id))
+    # asyncio.run(train_and_notify(bot, chat_id))
+    train_and_save_model()

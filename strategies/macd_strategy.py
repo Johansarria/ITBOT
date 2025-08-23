@@ -5,7 +5,7 @@ from typing import Dict, Any
 import logging
 
 from strategies.base_strategy import BaseStrategy
-from utils.technical_analysis import calculate_all_indicators # Para asegurar que los datos tienen los indicadores
+from utils.feature_pipeline import FeaturePipeline
 
 logger = logging.getLogger("strategies.macd_strategy")
 
@@ -24,7 +24,8 @@ class MACDStrategy(BaseStrategy):
         if len(historical_data) < 34: # 26 (lenta) + 9 (señal) - un poco más para estabilidad
             return {"decision": "MANTENER", "score": 0, "reason": "No hay suficientes datos para MACD.", "macd": None, "macd_signal": None}
 
-        df_with_indicators = calculate_all_indicators(historical_data.copy())
+        feature_pipeline = FeaturePipeline()
+        df_with_indicators = feature_pipeline.transform(historical_data.copy())
 
         latest = df_with_indicators.iloc[-1]
         previous = df_with_indicators.iloc[-2]

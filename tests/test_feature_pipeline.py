@@ -1,16 +1,6 @@
 import pytest
 import pandas as pd
-from unittest.mock import patch, MagicMock
 from utils.feature_pipeline import FeaturePipeline
-from utils.feature_engineering import enrich_features
-from utils.technical_analysis import calculate_all_indicators
-
-# Mock de las funciones subyacentes para aislar FeaturePipeline
-@pytest.fixture
-def mock_feature_dependencies():
-    with patch('utils.feature_pipeline.enrich_features', MagicMock(side_effect=lambda df: df.assign(new_feature=1))) as mock_enrich_features:
-        with patch('utils.feature_pipeline.calculate_all_indicators', MagicMock(side_effect=lambda df: df.assign(rsi=50))) as mock_calculate_all_indicators:
-            yield mock_enrich_features, mock_calculate_all_indicators # Yield the mock objects
 
 @pytest.fixture
 def sample_klines_df():
@@ -23,7 +13,6 @@ def sample_klines_df():
         'open_time': pd.to_datetime(pd.date_range(start='2023-01-01', periods=30, freq='H'))
     }
     df = pd.DataFrame(data)
-    df.set_index('open_time', inplace=True)
     return df
 
 def test_feature_pipeline_initialization():
@@ -36,24 +25,28 @@ def test_feature_pipeline_empty_dataframe():
     result_df = pipeline.transform(empty_df)
     assert result_df.empty
 
-def test_feature_pipeline_transform(sample_klines_df, mock_feature_dependencies):
-    mock_enrich_features, mock_calculate_all_indicators = mock_feature_dependencies # Unpack the mock objects
+def test_feature_pipeline_transform(sample_klines_df):
     pipeline = FeaturePipeline()
     result_df = pipeline.transform(sample_klines_df)
 
-    # Verificar que las funciones subyacentes fueron llamadas
-    called_df_enrich = mock_enrich_features.call_args[0][0]
-    pd.testing.assert_frame_equal(called_df_enrich, sample_klines_df.copy())
+    # Check that the original columns are still there
+    for col in sample_klines_df.columns:
+        assert col in result_df.columns
 
-    # Get the DataFrame passed to calculate_all_indicators
-    called_df_calc = mock_calculate_all_indicators.call_args[0][0]
-    # We expect this to be the return value of enrich_features, which is a DataFrame with 'new_feature'
-    expected_df_calc = sample_klines_df.copy().assign(new_feature=1) # Recreate the expected DataFrame
-    pd.testing.assert_frame_equal(called_df_calc, expected_df_calc)
+    # Check that the new feature columns are there
+    feature_names = pipeline.get_feature_names()
+    for feature in feature_names:
+        assert feature in result_df.columns
 
-    # Verificar que las nuevas features se añadieron al DataFrame
-    assert 'new_feature' in result_df.columns
-    assert 'rsi' in result_df.columns
-    assert result_df['new_feature'].iloc[0] == 1
-    assert result_df['rsi'].iloc[0] == 50
+    # Check that the number of rows is the same
     assert len(result_df) == len(sample_klines_df)
+
+    # Check that there are no NaNs
+    assert not result_df.isnull().values.any()
+
+def test_get_feature_names():
+    pipeline = FeaturePipeline()
+    feature_names = pipeline.get_feature_names()
+    assert isinstance(feature_names, list)
+    assert 'rsi' in feature_names
+    assert 'ma_20' in feature_names

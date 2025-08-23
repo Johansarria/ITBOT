@@ -8,10 +8,8 @@ import sys
 # Añadir el directorio raíz al sys.path para poder importar los módulos del proyecto
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from utils.feature_engineering import enrich_features
-from utils.technical_analysis import calculate_all_indicators
 from database.database_manager import get_klines # Importar la función para obtener klines de la BD
-from utils.feature_pipeline import FeaturePipeline # Added import
+from utils.feature_pipeline import FeaturePipeline
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
