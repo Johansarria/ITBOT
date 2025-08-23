@@ -77,7 +77,7 @@ def calculate_pnl(operations_df: pd.DataFrame) -> Dict[str, Any]:
     if 'pnl_usdt' not in df.columns or df['pnl_usdt'].isnull().all():
         df['pnl_usdt'] = df['size_usdt'] * (df['pnl_percent'] / 100)
     
-    total_pnl_usdt = df['pnl_usdt'].sum()
+    total_pnl_usdt = df['pnl_usdt'].fillna(0).sum()
 
     # Calcular PnL diario
     daily_pnl_df = pd.DataFrame()

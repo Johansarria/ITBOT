@@ -6,6 +6,7 @@ import types
 import pytest
 
 from utils import technical_analysis as ta
+from utils.feature_pipeline import FeaturePipeline
 
 
 @pytest.mark.asyncio

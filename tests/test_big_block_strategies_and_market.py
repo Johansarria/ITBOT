@@ -5,6 +5,7 @@ import pytest
 from strategies.strategy_manager import StrategyManager
 import utils.technical_analysis as ta
 import utils.shield_manager as sm
+from utils.feature_pipeline import FeaturePipeline
 
 
 class DummyStrategy:
@@ -26,8 +27,6 @@ def make_klines_df(rows=10):
     })
     return df
 
-
-from utils.feature_pipeline import FeaturePipeline
 
 @pytest.mark.asyncio
 async def test_analyze_all_strategies_happy_path(monkeypatch):
@@ -57,7 +56,7 @@ async def test_analyze_market_ml_prediction(monkeypatch, tmp_path):
     # Create a valid df and patch dependencies
     df = make_klines_df(30)
     # patch enrich_features to be identity
-    monkeypatch.setattr(ta, "enrich_features", lambda x: x)
+    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df)
     # patch detect_market_regime to neutral
     monkeypatch.setattr(ta, "detect_market_regime", lambda x: {"volatility_regime": "LOW", "trend_regime": "BULL_TREND"})
     # patch load_ml_model and model with predict_proba

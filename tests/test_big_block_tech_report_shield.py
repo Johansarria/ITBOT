@@ -53,7 +53,7 @@ async def test_analyze_market_ml_not_loaded(monkeypatch):
     # prevent model loading
     monkeypatch.setattr(ta, "ml_model", None)
     monkeypatch.setattr(ta, "load_ml_model", lambda : None)
-    monkeypatch.setattr(ta, "enrich_features", lambda x: x)
+    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df)
     monkeypatch.setattr(ta, "detect_market_regime", lambda x: {"volatility_regime": "LOW", "trend_regime": "BULL_TREND"})
     monkeypatch.setattr(ta, "export_analysis_result", lambda *a, **k: None)
     monkeypatch.setattr(ta, "export_features", lambda *a, **k: None)
@@ -72,7 +72,7 @@ async def test_analyze_market_ml_prediction_exception(monkeypatch):
         'close': list(range(1, periods + 1)),
         'volume': [1] * periods
     }, index=idx)
-    monkeypatch.setattr(ta, "enrich_features", lambda x: x)
+    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df)
     monkeypatch.setattr(ta, "detect_market_regime", lambda x: {"volatility_regime": "LOW", "trend_regime": "UNKNOWN"})
 
     class BadModel:

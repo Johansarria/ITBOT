@@ -5,16 +5,20 @@ import os
 from unittest.mock import patch, MagicMock
 from database.database_manager import init_db, DB_PATH, DB_DIR
 
-# Fixture to ensure a clean state for each test
+# Fixture para asegurar un estado limpio para cada test
 @pytest.fixture(autouse=True)
-def setup_db_test():
-    # Ensure DB file is removed before each test
-    if os.path.exists(DB_PATH):
-        os.remove(DB_PATH)
+def setup_db_test(monkeypatch):
+    # Usar una base de datos en memoria para los tests unitarios
+    monkeypatch.setattr('database.database_manager.DB_PATH', ':memory:')
+    monkeypatch.setattr('database.database_manager.DB_DIR', '/tmp/test_db_dir') # No se usará para :memory: pero es buena práctica
+
+    # Asegurarse de que el directorio temporal exista si no es :memory:
+    if not os.path.exists('/tmp/test_db_dir'):
+        os.makedirs('/tmp/test_db_dir', exist_ok=True)
+
     yield
-    # Clean up after each test
-    if os.path.exists(DB_PATH):
-        os.remove(DB_PATH)
+
+    # No es necesario limpiar para :memory:
 
 def test_init_db_creates_directory_and_file():
     """
