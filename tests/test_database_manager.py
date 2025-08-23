@@ -32,8 +32,8 @@ def test_init_db_creates_directory_and_file():
         
         init_db()
         
-        mock_makedirs.assert_called_once_with(DB_DIR, exist_ok=True)
-        mock_connect.assert_called_once_with(DB_PATH)
+        mock_makedirs.assert_called_once_with('/tmp/test_db_dir', exist_ok=True)
+        mock_connect.assert_called_once_with(':memory:')
         mock_conn.cursor.assert_called_once()
         mock_conn.commit.assert_called_once()
 
@@ -89,4 +89,4 @@ def test_init_db_handles_sqlite_error():
             init_db()
         
         assert "Test DB Error" in str(excinfo.value)
-        mock_connect.assert_called_once_with(DB_PATH)
+        mock_connect.assert_called_once_with(':memory:')

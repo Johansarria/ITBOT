@@ -172,8 +172,11 @@ async def test_handle_callback_query_generar_kpis(mock_send_analysis_submenu, mo
 @pytest.mark.asyncio
 @patch('listener_bot.set_main_bot_commands', new_callable=AsyncMock)
 @patch('listener_bot.dp.start_polling', new_callable=AsyncMock)
-async def test_main_function(mock_start_polling, mock_set_commands, mock_bot_dependencies):
+async def test_main_function(mock_start_polling, mock_set_commands, mock_bot_dependencies, monkeypatch):
     """Prueba la función principal de arranque del bot."""
+    # Patch the actual settings.TELEGRAM_CHAT_ID that listener_bot.main will use
+    monkeypatch.setattr(listener_bot.config.settings, 'TELEGRAM_CHAT_ID', 12345) # Ensure it's set for main()
+
     with patch('asyncio.run') as mock_asyncio_run:
         await main()
 

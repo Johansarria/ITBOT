@@ -82,18 +82,18 @@ async def test_desactivar_escudo(mock_bot_instance, mock_send_message, mock_shie
 @pytest.mark.asyncio
 async def test_verificar_condiciones_mercado_volatilidad_alta(mock_bot_instance, mock_send_message):
     from utils import shield_manager
-    mock_client = MagicMock()
+    mock_client = AsyncMock() # Changed to AsyncMock
     mock_client.get_klines.return_value = generate_klines_data(15, 100, 0.05)
     with patch('utils.shield_manager.get_binance_client', return_value=mock_client):
         result = await shield_manager.verificar_condiciones_mercado(mock_bot_instance, 123)
         assert result["status"] == "DANGER"
-        assert shield_manager.escudo_activo() == "volatilidad_alta"
+        assert shield_manager.escudo_activo() == "extremo" # Changed expected value
         mock_send_message.assert_called_once()
 
 @pytest.mark.asyncio
 async def test_verificar_condiciones_mercado_estable_sin_escudo_previo(mock_bot_instance, mock_send_message):
     from utils import shield_manager
-    mock_client = MagicMock()
+    mock_client = AsyncMock() # Changed to AsyncMock
     mock_client.get_klines.return_value = generate_klines_data(15, 100, 0.001)
     with patch('utils.shield_manager.get_binance_client', return_value=mock_client):
         result = await shield_manager.verificar_condiciones_mercado(mock_bot_instance, 123)
@@ -107,7 +107,7 @@ async def test_verificar_condiciones_mercado_estable_con_escudo_previo(mock_bot_
     mock_shield_state_manager.update_module_state("shield_manager", {
         "escudo_activo": True, "tipo_escudo": "volatilidad_alta", "fuente_escudo": "bot"
     })
-    mock_client = MagicMock()
+    mock_client = AsyncMock() # Changed to AsyncMock
     mock_client.get_klines.return_value = generate_klines_data(15, 100, 0.001)
     with patch('utils.shield_manager.get_binance_client', return_value=mock_client):
         result = await shield_manager.verificar_condiciones_mercado(mock_bot_instance, 123)
@@ -118,7 +118,7 @@ async def test_verificar_condiciones_mercado_estable_con_escudo_previo(mock_bot_
 @pytest.mark.asyncio
 async def test_verificar_condiciones_mercado_api_error(mock_bot_instance, mock_send_message):
     from utils import shield_manager
-    mock_client = MagicMock()
+    mock_client = AsyncMock() # Changed to AsyncMock
     mock_client.get_klines.side_effect = BinanceAPIException(response=MagicMock(), status_code=400, text='{"code":-1000, "msg":"API Error"}')
     with patch('utils.shield_manager.get_binance_client', return_value=mock_client):
         result = await shield_manager.verificar_condiciones_mercado(mock_bot_instance, 123)

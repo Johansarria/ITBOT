@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, AsyncMock
 import utils.position_manager as pm
 
 
@@ -38,7 +38,7 @@ def test_get_open_positions_summary_with_positions(monkeypatch):
     
     # Mockear get_binance_client y la instancia del cliente
     mock_client_instance = MagicMock()
-    mock_client_instance.get_symbol_ticker.return_value = {"price": "110"}
+    mock_client_instance.get_symbol_ticker = AsyncMock(return_value={"price": "110"})
     
     with patch('utils.position_manager.get_binance_client', return_value=mock_client_instance) as mock_get_client:
         summary = pm.get_open_positions_summary(MagicMock())

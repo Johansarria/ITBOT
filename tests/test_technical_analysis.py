@@ -24,7 +24,8 @@ def mock_export_analysis_result():
 # Fixture para mockear el modelo de ML
 @pytest.fixture
 def mock_ml_model():
-    with patch('utils.technical_analysis.ml_model', new_callable=MagicMock) as mock_model:
+    # Usar autospec=True para que el mock se comporte como el objeto real
+    with patch('utils.technical_analysis.ml_model', new_callable=MagicMock, autospec=True) as mock_model:
         yield mock_model
 
 # Datos de klines de ejemplo

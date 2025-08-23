@@ -100,7 +100,7 @@ async def test_close_binance_client_success():
     """Prueba que el cliente se cierra correctamente si ya ha sido inicializado."""
     
     # Mock del cliente y su sesión
-    mock_session = AsyncMock()
+    mock_session = AsyncMock(spec=AsyncClient.session) # Asegurar que mock_session tiene un spec
     mock_client = AsyncMock(spec=AsyncClient)
     mock_client.session = mock_session
     

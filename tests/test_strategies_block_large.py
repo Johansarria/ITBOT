@@ -106,15 +106,15 @@ async def test_strategy_manager_analyze_and_single(monkeypatch):
 
     # Patch technical and feature engineering functions used inside analyze_all_strategies
     import utils.technical_analysis as ta
-    import utils.feature_engineering as fe
     import utils.regime_detector as rd
+    from utils.feature_pipeline import FeaturePipeline # Import FeaturePipeline
 
     async def async_get_historical_klines(symbol, interval, limit):
         return df
     monkeypatch.setattr(ta, 'get_historical_klines', async_get_historical_klines)
     import strategies.strategy_manager as smod
     monkeypatch.setattr(smod, 'get_historical_klines', async_get_historical_klines)
-    monkeypatch.setattr(fe, 'enrich_features', lambda x: x)
+    monkeypatch.setattr(FeaturePipeline, 'transform', lambda self, df: df) # Mock FeaturePipeline.transform
     monkeypatch.setattr(ta, 'calculate_all_indicators', lambda x: x)
     monkeypatch.setattr(rd, 'detect_market_regime', lambda x: {'trend_regime': 'BULL_TREND'})
 

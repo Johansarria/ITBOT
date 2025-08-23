@@ -8,6 +8,7 @@ from strategies.macd_strategy import MACDStrategy
 from strategies.simple_technical_strategy import SimpleTechnicalStrategy
 from strategies.strategy_manager import StrategyManager
 from utils import technical_analysis
+from database import database_manager # Import database_manager
 
 
 def make_df(periods=50, base=100, step=1):
@@ -61,11 +62,10 @@ def test_strategy_manager_all_strategies(monkeypatch):
 
     sm._strategies = {'DUMMY': DummyStrategy()}
 
-    # Mock get_historical_klines to return a non-empty df
-    async def fake_get(symbol, interval, limit=200):
-        return make_df(50)
+    # Mock database.database_manager.get_klines to return a non-empty df
+    monkeypatch.setattr(database_manager, 'get_klines', lambda symbol, interval: make_df(50))
 
     import strategies.strategy_manager as smodule
-    monkeypatch.setattr(smodule, 'get_historical_klines', fake_get)
+    # The real get_historical_klines will now call the mocked database_manager.get_klines
     res = asyncio.run(sm.analyze_all_strategies('X', '1h'))
     assert res['best_strategy'] == 'DUMMY'

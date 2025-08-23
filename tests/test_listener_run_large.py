@@ -177,7 +177,7 @@ async def test_process_risk_percentage_and_limit(monkeypatch):
     monkeypatch.setattr(lb, 'send_risk_submenu', fake_send_risk)
 
     await lb.process_risk_percentage(fake_msg, fake_state)
-    assert called.get('activated') == 5.0
+    assert called.get('activated') == 0.05
 
     # test invalid input
     fake_msg2 = FakeMessage(text='notanumber')

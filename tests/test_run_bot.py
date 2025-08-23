@@ -18,7 +18,7 @@ async def test_flujo_principal_escudo_danger(monkeypatch):
     chat_id = 12345
     symbol = "BTCUSDT" # Añadir un símbolo
     await run_bot.flujo_principal_por_activo(bot, chat_id, symbol)
-    run_bot.send_message.assert_awaited()
+    run_bot.send_message.assert_called_once()
 
 @pytest.mark.asyncio
 async def test_flujo_principal_analisis_y_decision(monkeypatch):
@@ -39,7 +39,7 @@ async def test_flujo_principal_analisis_y_decision(monkeypatch):
     monkeypatch.setattr(run_bot, "StrategyManager", MagicMock(return_value=mock_manager))
 
     # Mock get_historical_klines
-    monkeypatch.setattr(run_bot, "get_historical_klines", AsyncMock(return_value=MagicMock(empty=False)))
+    monkeypatch.setattr(run_bot.technical_analysis, "get_historical_klines", AsyncMock(return_value=MagicMock(empty=False)))
     # Mock mq.publish_decision
     monkeypatch.setattr(run_bot.mq, "publish_decision", MagicMock(return_value=True))
     # Mock send_message

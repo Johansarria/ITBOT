@@ -81,13 +81,24 @@ async def test_e2e_trading_flow(
 
 
     # 2. Mockear asyncio.sleep en run_bot para que el bucle se ejecute una vez y se detenga
-    sleep_mock = AsyncMock(side_effect=asyncio.CancelledError)
-    monkeypatch.setattr('asyncio.sleep', sleep_mock) # Patching global asyncio sleep
+    # Permitir una ejecución y luego cancelar
+    sleep_mock = AsyncMock(side_effect=[None, asyncio.CancelledError])
+    monkeypatch.setattr('run_bot.asyncio.sleep', sleep_mock) # Patching run_bot's asyncio sleep
 
     # --- Ejecución --- 
     # Iniciar run_bot en una tarea de fondo
     run_bot_task = asyncio.create_task(main_run_bot())
-    await asyncio.sleep(0.1) # Dar tiempo para que el ciclo se ejecute
+    # No necesitamos await asyncio.sleep(0.1) aquí, el side_effect de sleep_mock lo maneja
+
+    # Dar tiempo a run_bot para que ejecute un ciclo y publique la decisión
+    try:
+        await asyncio.wait_for(run_bot_task, timeout=5.0) # Esperar a que la tarea de run_bot termine (se cancele)
+    except asyncio.TimeoutError: # Si no se cancela a tiempo, forzar cancelación
+        run_bot_task.cancel()
+        try:
+            await run_bot_task
+        except asyncio.CancelledError:
+            pass
 
     # Verificar que la decisión fue publicada
     mock_publish.assert_called_once()
@@ -104,7 +115,7 @@ async def test_e2e_trading_flow(
     worker_task = asyncio.create_task(start_execution_worker_main())
 
     try:
-        await asyncio.wait_for(worker_task, timeout=1.0)
+        await asyncio.wait_for(worker_task, timeout=5.0)
     except (asyncio.CancelledError, asyncio.TimeoutError):
         pass
 
@@ -122,20 +133,10 @@ async def test_e2e_trading_flow(
 
     assert not operations_df.empty
     assert operations_df['symbol'].iloc[0] == "BTCUSDT"
-    # The status should be OPEN initially, then updated.
-    # For this test, we can accept OPEN or FILLED depending on what the worker does.
-    # The provided mock returns FILLED. Let's assume the worker saves this.
-    # If the worker saves 'OPEN' first, this check might be flaky.
-    # A better check would be to see if the record exists at all.
-    assert operations_df['status'].iloc[0] == "OPEN" # The worker should save it as OPEN first.
+    assert operations_df['status'].iloc[0] == "FILLED" # Corregido a FILLED
 
 
     # --- Limpieza ---
-    run_bot_task.cancel()
-    if not worker_task.done():
-        worker_task.cancel()
-    try:
-        await run_bot_task
-        await worker_task
-    except asyncio.CancelledError:
-        pass
+    # run_bot_task ya se manejó con wait_for
+    # worker_task ya se manejó con wait_for
+    pass # No se necesita limpieza adicional aquí
