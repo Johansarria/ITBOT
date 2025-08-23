@@ -27,7 +27,7 @@ def test_plot_equity_and_histogram(tmp_path, monkeypatch):
         'timestamp_open': ['2025-01-01','2025-01-02','2025-01-03'],
         'pnl_usdt': [10, -5, 2.5]
     })
-    monkeypatch.setattr(reporting_metrics, 'fetch_operations_df', lambda s=None, e=None: df)
+    monkeypatch.setattr(reporting_visuals, 'fetch_operations_df', lambda start=None, end=None: df)
     out1 = reporting_visuals.plot_equity_curve(save_path=str(tmp_path / 'equity.png'))
     assert out1 is not None
     assert (tmp_path / 'equity.png').exists()

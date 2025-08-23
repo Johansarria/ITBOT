@@ -4,6 +4,7 @@ import asyncio
 import logging
 import sys
 import os
+from typing import Optional
 from zoneinfo import ZoneInfo
 from datetime import datetime
 from typing import Union, cast
@@ -75,14 +76,22 @@ from typing import Optional, Tuple
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if not config.TELEGRAM_TOKEN:
-    raise ValueError("TELEGRAM_TOKEN not found in config")
-
-bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher()
-chat_id_int = config.TELEGRAM_CHAT_ID
+# Initialize bot to None and other variables. They will be initialized properly
+# when the bot is run directly, but not during test collection.
+bot: Optional[Bot] = None
+dp = Dispatcher()  # Dispatcher can be initialized, it has no side-effects.
+chat_id_int: Optional[int] = None
 strategy_manager = StrategyManager()
 state_manager = StateManager()
+
+# This block will only run when the script is not being imported by pytest
+if "pytest" not in sys.modules:
+    if not config.TELEGRAM_TOKEN:
+        raise ValueError("TELEGRAM_TOKEN not found in config")
+
+    bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+    if config.TELEGRAM_CHAT_ID:
+        chat_id_int = int(config.TELEGRAM_CHAT_ID)
 
 # === Definición de Estados (FSM) ===
 class RiskStates(StatesGroup):

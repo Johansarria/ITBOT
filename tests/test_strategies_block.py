@@ -49,7 +49,7 @@ def test_simple_technical_strategy_async():
     assert 'decision' in res
 
 
-def test_strategy_manager_single(monkeypatch):
+def test_strategy_manager_all_strategies(monkeypatch):
     sm = StrategyManager()
     sm._reset_manager()
     # Inject a simple strategy into manager
@@ -62,10 +62,10 @@ def test_strategy_manager_single(monkeypatch):
     sm._strategies = {'DUMMY': DummyStrategy()}
 
     # Mock get_historical_klines to return a non-empty df
-    async def fake_get(symbol, interval, limit=100):
+    async def fake_get(symbol, interval, limit=200):
         return make_df(50)
 
     import strategies.strategy_manager as smodule
     monkeypatch.setattr(smodule, 'get_historical_klines', fake_get)
-    res = asyncio.run(sm.analyze_single_strategy('DUMMY', 'X', '1h'))
+    res = asyncio.run(sm.analyze_all_strategies('X', '1h'))
     assert res['best_strategy'] == 'DUMMY'

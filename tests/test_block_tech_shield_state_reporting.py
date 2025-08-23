@@ -113,6 +113,8 @@ def test_technical_get_historical_klines_db_and_binance_fallback(monkeypatch):
     assert isinstance(df, pd.DataFrame)
 
 
+from utils.feature_pipeline import FeaturePipeline
+
 def test_calculate_all_indicators_long_input():
     periods = 50
     idx = pd.date_range('2025-01-01', periods=periods, freq='h')
@@ -120,6 +122,7 @@ def test_calculate_all_indicators_long_input():
     low = high - 0.5
     close = high
     df = pd.DataFrame({'high': high, 'low': low, 'close': close}, index=idx)
-    out = ta.calculate_all_indicators(df)
+    pipeline = FeaturePipeline()
+    out = pipeline.transform(df)
     assert 'rsi' in out.columns
     assert 'atr' in out.columns or 'adx' in out.columns

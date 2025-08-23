@@ -49,7 +49,7 @@ def get_operations_df(days: int = 30) -> pd.DataFrame:
             numeric_cols = ['pnl_usdt', 'pnl_percent', 'size_usdt']
             for col in numeric_cols:
                 if col in df.columns:
-                    df[col] = pd.to_numeric(col, errors='coerce').fillna(0)
+                    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
 
             logger.info(f"Se obtuvieron {len(df)} registros de operaciones.")
             return df

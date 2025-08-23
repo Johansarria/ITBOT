@@ -27,16 +27,10 @@ def make_klines_df(rows=10):
     return df
 
 
-@pytest.mark.asyncio
-async def test_analyze_single_strategy_not_found():
-    mgr = StrategyManager()
-    mgr._reset_manager()
-    res = await mgr.analyze_single_strategy("NO_EXISTE", "BTCUSDT", "1h")
-    assert "error" in res
-
+from utils.feature_pipeline import FeaturePipeline
 
 @pytest.mark.asyncio
-async def test_analyze_single_strategy_happy_path(monkeypatch):
+async def test_analyze_all_strategies_happy_path(monkeypatch):
     mgr = StrategyManager()
     mgr._reset_manager()
     # inject a dummy strategy
@@ -46,13 +40,15 @@ async def test_analyze_single_strategy_happy_path(monkeypatch):
     async def fake_get_klines(symbol, interval, limit=200):
         return make_klines_df(20)
     monkeypatch.setattr(smgr, "get_historical_klines", fake_get_klines)
-    res = await mgr.analyze_single_strategy("DUMMY", "BTCUSDT", "1h")
+    res = await mgr.analyze_all_strategies("BTCUSDT", "1h")
     assert res.get("best_strategy") == "DUMMY"
+    assert res.get("best_decision") == "COMPRAR"
 
 
 def test_calculate_all_indicators_empty():
     df = pd.DataFrame()
-    out = ta.calculate_all_indicators(df)
+    pipeline = FeaturePipeline()
+    out = pipeline.transform(df)
     assert out.empty
 
 

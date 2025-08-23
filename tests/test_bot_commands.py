@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 import aiohttp
 
-from utils.bot_commands import set_bot_commands, BotCommands
+from utils.bot_commands import set_bot_commands
 
 @pytest.mark.asyncio
 async def test_set_bot_commands_success():
@@ -15,13 +15,22 @@ async def test_set_bot_commands_success():
     
     # Check that commands list is passed and contains expected commands
     commands = args[0]
-    assert len(commands) == 3
-    assert commands[0].command == f"/{BotCommands.START.value}"
-    assert commands[1].command == f"/{BotCommands.HELP.value}"
-    assert commands[2].command == f"/{BotCommands.GO_LIVE.value}"
+    assert len(commands) == 7
+
+    # Create a dictionary for easy lookup and assertion
+    commands_dict = {c.command: c.description for c in commands}
+
+    expected_commands = {
+        "/status": "Verificar si el bot está funcionando.",
+        "/posiciones": "Mostrar un resumen de las posiciones abiertas.",
+        "/ayuda": "Mostrar este mensaje de ayuda.",
+        "/reportes": "Generar reportes de operaciones.",
+        "/riesgo": "Consultar o ajustar el nivel de riesgo.",
+        "/analizar": "Realizar un análisis técnico del mercado.",
+        "/estrategia": "Ver/cambiar la estrategia de análisis.",
+    }
     
-    # Check description for one command
-    assert commands[0].description == "Iniciar el bot o volver al menú principal."
+    assert commands_dict == expected_commands
 
 @pytest.mark.asyncio
 async def test_set_bot_commands_aiohttp_client_error():

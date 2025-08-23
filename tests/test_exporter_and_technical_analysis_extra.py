@@ -30,11 +30,14 @@ def test_generate_analysis_chart_and_export(tmp_path):
         exporter.CHART_DIR = old_chart_dir
 
 
+from utils.feature_pipeline import FeaturePipeline
+
 def test_calculate_all_indicators_handles_nans_and_returns_columns():
     df = make_simple_klines(200)
     # Insert NaNs in close to trigger the NaN handling warning paths
     df.iloc[5:8, df.columns.get_loc('close')] = np.nan
-    res = ta.calculate_all_indicators(df.copy())
+    pipeline = FeaturePipeline()
+    res = pipeline.transform(df.copy())
     # Check that expected indicator columns exist
     for col in ['rsi', 'macd', 'macd_signal', 'stoch_k', 'stoch_d', 'cci', 'adx', 'atr', 'bb_upper', 'bb_lower']:
         assert col in res.columns

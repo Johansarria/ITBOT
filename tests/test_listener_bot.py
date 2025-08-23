@@ -31,7 +31,7 @@ def mock_bot_dependencies():
         patch('listener_bot.state_manager', new_callable=MagicMock) as mock_state_manager,
         patch('listener_bot.strategy_manager', new_callable=MagicMock) as mock_strategy_manager,
         patch('listener_bot.mq', new_callable=MagicMock) as mock_mq,
-        patch('listener_bot.settings') as mock_settings
+        patch('listener_bot.config') as mock_settings
     ):
         mock_settings.TELEGRAM_CHAT_ID = 12345
         mock_settings.LIVE_UNLOCK_FILE_PATH = '/mock/path/unlock.file'

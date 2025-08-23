@@ -22,6 +22,8 @@ async def test_get_historical_klines_db_empty_and_binance_failure(monkeypatch):
     assert df.empty
 
 
+from utils.feature_pipeline import FeaturePipeline
+
 def test_calculate_all_indicators_nan_handling():
     # create longer df (ta indicators like ADX expect a larger window)
     periods = 30
@@ -30,7 +32,8 @@ def test_calculate_all_indicators_nan_handling():
     low = [h - 0.5 for h in high]
     close = ['a'] + [str(x) for x in range(2, periods + 1)]
     df = pd.DataFrame({'high': high, 'low': low, 'close': close}, index=idx)
-    out = ta.calculate_all_indicators(df)
+    pipeline = FeaturePipeline()
+    out = pipeline.transform(df)
     # Indicators should be present and DataFrame should not be empty
     assert 'rsi' in out.columns
     assert 'macd' in out.columns

@@ -8,27 +8,27 @@ from build_feature_store import build_and_save_feature_store
 
 
 @patch('build_feature_store.get_klines')
-@patch('build_feature_store.enrich_features')
-@patch('build_feature_store.calculate_all_indicators')
+@patch('build_feature_store.FeaturePipeline')
 @patch('pandas.DataFrame.to_parquet')
 def test_build_and_save_feature_store(mock_to_parquet,
-                                      mock_calc_indicators,
-                                      mock_enrich_features,
+                                      mock_feature_pipeline,
                                       mock_get_klines):
     """Prueba directa de build_and_save_feature_store (sin mlflow)."""
 
     # Setup
     mock_get_klines.return_value = pd.DataFrame({'close': [1, 2, 3]})
-    mock_calc_indicators.return_value = pd.DataFrame({'close': [1, 2, 3], 'ind': [0.1, 0.2, 0.3]})
-    mock_enrich_features.return_value = pd.DataFrame({'close': [1, 2, 3], 'feat': [10, 20, 30]})
+
+    mock_pipeline_instance = MagicMock()
+    mock_pipeline_instance.transform.return_value = pd.DataFrame({'close': [1, 2, 3], 'ind': [0.1, 0.2, 0.3]})
+    mock_feature_pipeline.return_value = mock_pipeline_instance
 
     # Run
     build_and_save_feature_store()
 
     # Checks
     mock_get_klines.assert_called_once()
-    mock_calc_indicators.assert_called_once()
-    mock_enrich_features.assert_called_once()
+    mock_feature_pipeline.assert_called_once()
+    mock_pipeline_instance.transform.assert_called_once()
     mock_to_parquet.assert_called_once()
 
 
