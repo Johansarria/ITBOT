@@ -11,8 +11,8 @@
         "escudo_activo": true,
         "tipo_escudo": "volatilidad_alta",
         "fuente_escudo": "bot",
-        "activado_at": "2025-08-22T15:18:41.728367",
-        "desactivado_at": "2025-08-22T15:18:41.702762"
+        "activado_at": "2025-08-23T00:30:03.623178",
+        "desactivado_at": "2025-08-23T00:30:03.604317"
     },
     "ia_manager": {
         "ia_activa": false,
