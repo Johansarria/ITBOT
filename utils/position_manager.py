@@ -3,7 +3,7 @@ from utils.audit_operations_db import log_operation_to_db
 import os
 import pandas as pd
 import logging
-import config
+from config import settings
 from utils.telegram_handler import send_message
 import asyncio
 from datetime import datetime
@@ -137,14 +137,14 @@ async def manage_open_positions(bot: Bot):
             if take_profit and price_change_pct >= take_profit:
                 reason = "TAKE_PROFIT"
                 close_position(operation_id, current_price, reason)
-                await send_message(bot, config.TELEGRAM_CHAT_ID, f"📈 TAKE PROFIT alcanzado para {symbol}. Posición cerrada a {current_price}.")
+                await send_message(bot, settings.TELEGRAM_CHAT_ID, f"📈 TAKE PROFIT alcanzado para {symbol}. Posición cerrada a {current_price}.")
                 continue
 
             # Comprobar Stop Loss
             if stop_loss and price_change_pct <= stop_loss:
                 reason = "STOP_LOSS"
                 close_position(operation_id, current_price, reason)
-                await send_message(bot, config.TELEGRAM_CHAT_ID, f"📉 STOP LOSS alcanzado para {symbol}. Posición cerrada a {current_price}.")
+                await send_message(bot, settings.TELEGRAM_CHAT_ID, f"📉 STOP LOSS alcanzado para {symbol}. Posición cerrada a {current_price}.")
 
         except (BinanceAPIException, BinanceRequestException) as e:
             logger.error(f"Error de la API de Binance al gestionar la posición {position['operation_id']}: {e}", exc_info=True)

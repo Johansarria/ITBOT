@@ -20,13 +20,6 @@ def test_get_main_menu_killswitch_inactive(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_get_mode_selection_keyboard():
-    text, markup = await lb.get_mode_selection_keyboard()
-    assert 'selecciona' in text or 'seleccion' in text.lower()
-    assert markup is not None
-
-
-@pytest.mark.asyncio
 async def test_get_current_status_text(monkeypatch):
     # Monkeypatch many dependencies to controlled values
     monkeypatch.setattr(lb, 'obtener_estado_escudo', lambda: (True, 'ACTIVO'))

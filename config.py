@@ -1,128 +1,78 @@
 # config.py
-
 import os
-from utils.env_loader import load_env
-import logging
+from typing import List, Optional, Union
+from pydantic import Field, model_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-logger = logging.getLogger(__name__)
-
-
-# Todas las variables sensibles y de configuración se cargan solo desde variables de entorno
-TELEGRAM_TOKEN = None
-TELEGRAM_CHAT_ID = None
-BINANCE_API_KEY = None
-BINANCE_SECRET_KEY = None
-TRADING_PAIRS = None
-TRADING_INTERVAL = None
-MODE = None
-LIVE_UNLOCK_FILE_PATH = None
-DEFAULT_RISK_PERCENTAGE = None
-TAKE_PROFIT_PERCENTAGE = None
-STOP_LOSS_PERCENTAGE = None
-MAX_DAILY_OPERATIONS = None
-MAX_DAILY_LOSS_PCT = None
-MAX_TRADE_RISK_PCT = None
-MAX_CONCURRENT_POSITIONS = None
-AUTONOMOUS_CYCLE_SECONDS = None
-RETRY_ON_ERROR_SECONDS = None
-ANALYSIS_INTERVAL_SECONDS = None
-REDIS_HOST = None
-REDIS_PORT = None
-REDIS_DB = None
-REDIS_DECISION_QUEUE_NAME = None
-LOG_LEVEL = None # ADDED
-
-# --- CONFIGURACIÓN DE BASE DE DATOS ---
-DB_TYPE = None
-POSTGRES_HOST = None
-POSTGRES_PORT = None
-POSTGRES_DB = None
-POSTGRES_USER = None
-POSTGRES_PASSWORD = None
-DATABASE_URL = None
-
-VERBOSE_NOTIFICATIONS = None
-
-def load_configurations():
+class Settings(BaseSettings):
     """
-    Carga o recarga todas las configuraciones desde las variables de entorno.
+    Manages all application settings using Pydantic.
+    It automatically reads from environment variables and/or a .env file.
     """
-    global TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, BINANCE_API_KEY, BINANCE_SECRET_KEY,            TRADING_PAIRS, TRADING_INTERVAL, MODE, LIVE_UNLOCK_FILE_PATH, DEFAULT_RISK_PERCENTAGE,            TAKE_PROFIT_PERCENTAGE, STOP_LOSS_PERCENTAGE, MAX_DAILY_OPERATIONS,            MAX_DAILY_LOSS_PCT, MAX_TRADE_RISK_PCT, MAX_CONCURRENT_POSITIONS,            AUTONOMOUS_CYCLE_SECONDS, RETRY_ON_ERROR_SECONDS, ANALYSIS_INTERVAL_SECONDS,            REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_DECISION_QUEUE_NAME, PRODUCTION_MODE,            DB_TYPE, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, DATABASE_URL
-
-
-    _env_vars = load_env()
-
     # --- MODO DE OPERACIÓN ---
-    # Si PRODUCTION_MODE es True, el bot requerirá confirmaciones y operará con más seguridad.
-    PRODUCTION_MODE = os.environ.get("PRODUCTION_MODE", "False").lower() in ('true', '1', 't')
+    PRODUCTION_MODE: bool = False
 
     # --- CONFIGURACIÓN DE API Y TELEGRAM ---
-    TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-    TELEGRAM_CHAT_ID = int(os.environ.get("TELEGRAM_CHAT_ID", 0))
-    BINANCE_API_KEY = os.environ.get("BINANCE_API_KEY")
-    BINANCE_SECRET_KEY = os.environ.get("BINANCE_SECRET_KEY")
+    TELEGRAM_BOT_TOKEN: str
+    TELEGRAM_CHAT_ID: int
+    BINANCE_API_KEY: str
+    BINANCE_SECRET_KEY: str
 
     # --- CONFIGURACIÓN DE TRADING ---
-    TRADING_PAIRS = os.environ.get("TRADING_PAIRS", "BTCUSDT").split(',')
-    TRADING_INTERVAL = os.environ.get("TRADING_INTERVAL", "1h")
-    MODE = os.environ.get("MODE", "live")
-
-    # --- CONFIGURACIÓN DE SEGURIDAD PARA MODO LIVE ---
-    LIVE_UNLOCK_FILE_PATH = os.path.join(os.getcwd(), "LIVE_UNLOCK.txt")
+    TRADING_PAIRS: List[str] = Field(default=["BTCUSDT"])
+    TRADING_INTERVAL: str = "1h"
+    MODE: str = "live"
 
     # --- GESTIÓN DE RIESGO ---
-    DEFAULT_RISK_PERCENTAGE = float(os.environ.get("DEFAULT_RISK_PERCENTAGE", 1.0))
-    TAKE_PROFIT_PERCENTAGE = float(os.environ.get("TAKE_PROFIT_PERCENTAGE", 3.0))
-    STOP_LOSS_PERCENTAGE = float(os.environ.get("STOP_LOSS_PERCENTAGE", 1.5))
-    MAX_DAILY_OPERATIONS = int(os.environ.get("MAX_DAILY_OPERATIONS", 10))
-    MAX_DAILY_LOSS_PCT = float(os.environ.get("MAX_DAILY_LOSS_PCT", 5.0))
-    MAX_TRADE_RISK_PCT = float(os.environ.get("MAX_TRADE_RISK_PCT", 1.0))
-    MAX_CONCURRENT_POSITIONS = int(os.environ.get("MAX_CONCURRENT_POSITIONS", 3))
+    DEFAULT_RISK_PERCENTAGE: float = 1.0
+    TAKE_PROFIT_PERCENTAGE: float = 3.0
+    STOP_LOSS_PERCENTAGE: float = 1.5
+    MAX_DAILY_OPERATIONS: int = 10
+    MAX_DAILY_LOSS_PCT: float = 5.0
+    MAX_TRADE_RISK_PCT: float = 1.0
+    MAX_CONCURRENT_POSITIONS: int = 3
 
     # --- CONFIGURACIÓN DEL RUNNER ---
-    AUTONOMOUS_CYCLE_SECONDS = int(os.environ.get("AUTONOMOUS_CYCLE_SECONDS", 3600))
-    RETRY_ON_ERROR_SECONDS = int(os.environ.get("RETRY_ON_ERROR_SECONDS", 300))
-    ANALYSIS_INTERVAL_SECONDS = int(os.environ.get("ANALYSIS_INTERVAL_SECONDS", 300))
-
-    # --- CONFIGURACIÓN DE BASE DE DATOS ---
-    DB_TYPE = os.environ.get("DB_TYPE", "sqlite") # Default to sqlite for backward compatibility
-    POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-    POSTGRES_PORT = int(os.environ.get("POSTGRES_PORT", 5432))
-    POSTGRES_DB = os.environ.get("POSTGRES_DB")
-    POSTGRES_USER = os.environ.get("POSTGRES_USER")
-    POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-
-    if DB_TYPE == "postgresql":
-        if not all([POSTGRES_HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD]):
-            logger.error("Faltan variables de entorno para la conexión a PostgreSQL.")
-            # Consider raising an exception or setting a default behavior if critical
-        DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
-    else: # Default to SQLite
-        DATABASE_URL = "sqlite:///./storage/itbot.db" # Assuming default SQLite path
+    AUTONOMOUS_CYCLE_SECONDS: int = 3600
+    RETRY_ON_ERROR_SECONDS: int = 300
+    ANALYSIS_INTERVAL_SECONDS: int = 300
 
     # --- CONFIGURACIÓN DE REDIS ---
-    REDIS_HOST = os.environ.get("REDIS_HOST", "redis")
-    REDIS_PORT = int(os.environ.get("REDIS_PORT", 6379))
-    REDIS_DB = int(os.environ.get("REDIS_DB", 0))
-    REDIS_DECISION_QUEUE_NAME = os.environ.get("REDIS_DECISION_QUEUE_NAME", "trading_decisions_queue")
+    REDIS_HOST: str = "redis"
+    REDIS_PORT: int = 6379
+    REDIS_DB: int = 0
+    REDIS_DECISION_QUEUE_NAME: str = "trading_decisions_queue"
 
-    # --- VALIDACIONES BÁSICAS ---
-    if not TELEGRAM_TOKEN:
-        logger.error("TELEGRAM_BOT_TOKEN no está definido en las variables de entorno.")
-    if not TELEGRAM_CHAT_ID:
-        logger.error("TELEGRAM_CHAT_ID no está definido o no es un número válido en las variables de entorno.")
-    if not BINANCE_API_KEY:
-        logger.error("BINANCE_API_KEY no está definido en las variables de entorno.")
-    if not BINANCE_SECRET_KEY:
-        logger.error("BINANCE_SECRET_KEY no está definido en las variables de entorno.")
+    # --- CONFIGURACIÓN DE BASE DE DATOS ---
+    DB_TYPE: str = "sqlite"
+    POSTGRES_HOST: Optional[str] = None
+    POSTGRES_PORT: int = 5432
+    POSTGRES_DB: Optional[str] = None
+    POSTGRES_USER: Optional[str] = None
+    POSTGRES_PASSWORD: Optional[str] = None
+    DATABASE_URL: Optional[str] = None
 
-    logger.info(f"Configuraciones cargadas/recargadas. Modo Producción: {PRODUCTION_MODE}")
+    # --- OTROS ---
+    LOG_LEVEL: str = "INFO"
+    LIVE_UNLOCK_FILE_PATH: str = os.path.join(os.getcwd(), "LIVE_UNLOCK.txt")
 
+    @model_validator(mode='after')
+    def construct_database_url(self) -> 'Settings':
+        if self.DB_TYPE == "postgresql":
+            if not all([self.POSTGRES_HOST, self.POSTGRES_DB, self.POSTGRES_USER, self.POSTGRES_PASSWORD]):
+                raise ValueError("For PostgreSQL, all POSTGRES_* variables must be set.")
+            self.DATABASE_URL = (
+                f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
+                f"{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+            )
+        else:
+            # Default to a file-based SQLite DB in a persistent storage location
+            storage_dir = os.path.join(os.getcwd(), "storage")
+            os.makedirs(storage_dir, exist_ok=True)
+            self.DATABASE_URL = f"sqlite:///{os.path.join(storage_dir, 'itbot.db')}"
+        return self
 
-# Cargar configuraciones al importar el módulo por primera vez
-load_configurations()
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding='utf-8', extra='ignore')
 
-# NOTA DE SEGURIDAD:
-# Nunca almacenes claves o secretos en este archivo ni en el repositorio.
-# Usa solo variables de entorno y .env (excluido del control de versiones).
-# Realiza rotación periódica de claves y revisa los accesos.
+# Create a single, globally-accessible settings instance
+settings = Settings()

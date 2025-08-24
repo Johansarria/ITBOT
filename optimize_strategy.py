@@ -13,6 +13,7 @@ from strategies.backtester import Backtester
 from strategies.ml_strategy import MLStrategy
 from utils.risk_manager import guardar_umbrales_optimizado
 from utils.telegram_handler import send_message, await_confirmation
+from config import settings
 
 # Configuración del log
 logging.basicConfig(
@@ -224,11 +225,10 @@ async def reload_data_and_notify(bot_instance, chat_id):
         await send_message(bot_instance, chat_id, f"❌ Error durante la recarga de datos históricos: {e}")
 
 async def main_optimization_flow():
-    import config
     from aiogram import Bot
 
-    bot = Bot(token=config.TELEGRAM_TOKEN)
-    chat_id = config.TELEGRAM_CHAT_ID
+    bot = Bot(token=settings.TELEGRAM_TOKEN)
+    chat_id = settings.TELEGRAM_CHAT_ID
 
     await optimize_and_notify(bot, chat_id)
     await reload_data_and_notify(bot, chat_id)

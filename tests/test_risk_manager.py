@@ -7,11 +7,8 @@ from freezegun import freeze_time
 from unittest.mock import patch, mock_open
 import json
 
-import config
+from config import settings
 
-# Asegurarse de que config.DEFAULT_RISK_PERCENTAGE esté definido
-if not hasattr(config, 'DEFAULT_RISK_PERCENTAGE'):
-    config.DEFAULT_RISK_PERCENTAGE = 1.0
 
 @pytest.fixture(autouse=True)
 def mock_state_manager():
@@ -19,7 +16,7 @@ def mock_state_manager():
     # Estado inicial por defecto para cada test
     mock_state = {
         "risk_manager": {
-            "riesgo_actual": config.DEFAULT_RISK_PERCENTAGE / 100.0,
+            "riesgo_actual": settings.DEFAULT_RISK_PERCENTAGE / 100.0,
             "riesgo_forzado": False,
             "tiempo_riesgo_forzado": None,
             "ganancias_riesgo_forzado": 0.0,
@@ -51,7 +48,7 @@ def mock_state_manager():
 
 def test_obtener_riesgo_actual_initial():
     from utils import risk_manager
-    assert risk_manager.obtener_riesgo_actual() == config.DEFAULT_RISK_PERCENTAGE / 100
+    assert risk_manager.obtener_riesgo_actual() == settings.DEFAULT_RISK_PERCENTAGE / 100
 
 def test_riesgo_forzado_activo_initial():
     from utils import risk_manager
@@ -124,7 +121,7 @@ def test_restaurar_riesgo_automatico():
     risk_manager.registrar_resultado_operacion(5.0)
     risk_manager.restaurar_riesgo_automatico()
     state = risk_manager._get_risk_state()
-    assert risk_manager.obtener_riesgo_actual() == config.DEFAULT_RISK_PERCENTAGE / 100
+    assert risk_manager.obtener_riesgo_actual() == settings.DEFAULT_RISK_PERCENTAGE / 100
     assert not risk_manager.riesgo_forzado_activo()
     assert state.get("tiempo_riesgo_forzado") is None
     assert state.get("ganancias_riesgo_forzado") == 0.0

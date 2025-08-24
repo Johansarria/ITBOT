@@ -5,7 +5,7 @@ import json
 import os
 import pandas as pd
 from utils.state_manager import StateManager
-import config
+from config import settings
 from utils.shield_manager import escudo_activo
 from utils.position_manager import get_open_positions
 
@@ -60,16 +60,16 @@ def verificar_permiso_de_operacion() -> tuple[bool, str]:
 
     # 2. Verificar Límite de Pérdida Diaria
     daily_pnl = _get_daily_pnl_pct()
-    if daily_pnl < -config.MAX_DAILY_LOSS_PCT:
-        reason = f"Límite de pérdida diaria ({config.MAX_DAILY_LOSS_PCT}%) alcanzado. P&L de hoy: {daily_pnl:.2f}%."
+    if daily_pnl < -settings.MAX_DAILY_LOSS_PCT:
+        reason = f"Límite de pérdida diaria ({settings.MAX_DAILY_LOSS_PCT}%) alcanzado. P&L de hoy: {daily_pnl:.2f}%."
         logger.warning(f"Operación bloqueada: {reason}")
         return False, reason
 
     # 3. Verificar Límite de Posiciones Concurrentes
     open_positions_df = get_open_positions()
     current_positions = len(open_positions_df)
-    if current_positions >= config.MAX_CONCURRENT_POSITIONS:
-        reason = f"Límite de posiciones concurrentes ({config.MAX_CONCURRENT_POSITIONS}) alcanzado. Abiertas: {current_positions}."
+    if current_positions >= settings.MAX_CONCURRENT_POSITIONS:
+        reason = f"Límite de posiciones concurrentes ({settings.MAX_CONCURRENT_POSITIONS}) alcanzado. Abiertas: {current_positions}."
         logger.warning(f"Operación bloqueada: {reason}")
         return False, reason
 
@@ -158,7 +158,7 @@ def _update_risk_state(updates: dict):
     sm.update_module_state("risk_manager", updates)
 
 def obtener_riesgo_actual() -> float:
-    return _get_risk_state().get("riesgo_actual", config.DEFAULT_RISK_PERCENTAGE / 100)
+    return _get_risk_state().get("riesgo_actual", settings.DEFAULT_RISK_PERCENTAGE / 100)
 
 def riesgo_forzado_activo() -> bool:
     return _get_risk_state().get("riesgo_forzado", False)
@@ -175,7 +175,7 @@ def activar_riesgo_forzado(porcentaje: float):
 
 def restaurar_riesgo_automatico():
     updates = {
-        "riesgo_actual": config.DEFAULT_RISK_PERCENTAGE / 100,
+        "riesgo_actual": settings.DEFAULT_RISK_PERCENTAGE / 100,
         "riesgo_forzado": False,
         "tiempo_riesgo_forzado": None,
         "ganancias_riesgo_forzado": 0.0,

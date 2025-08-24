@@ -218,13 +218,13 @@ async def test_handle_shield_action_calls(monkeypatch):
         calls['des'] = (chat_id, fuente)
     monkeypatch.setattr(lb, 'activar_escudo', fake_activar)
     monkeypatch.setattr(lb, 'desactivar_escudo', fake_desactivar)
-    # patch get_main_menu and send_shield_submenu
+    # patch get_main_menu and send_risk_submenu
     monkeypatch.setattr(lb, 'get_main_menu', lambda: ('M', None))
-    async def fake_send_shield(msg, is_edit=True):
-        calls['shield_sub'] = True
-    monkeypatch.setattr(lb, 'send_shield_submenu', fake_send_shield)
+    async def fake_send_risk(msg, is_edit=True):
+        calls['risk_sub'] = True
+    monkeypatch.setattr(lb, 'send_risk_submenu', fake_send_risk)
 
     await lb.handle_shield_action(123, fake_msg, 'volatilidad_alta', True, is_main_menu=True)
     assert 'act' in calls
     await lb.handle_shield_action(123, fake_msg, '', False, is_main_menu=False)
-    assert 'des' in calls or 'shield_sub' in calls
+    assert 'des' in calls or 'risk_sub' in calls

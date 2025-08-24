@@ -2,7 +2,7 @@ import redis
 import json
 import logging
 import time # ADDED for retry mechanism
-import config # Assuming config has REDIS_HOST, REDIS_PORT, REDIS_DB
+from config import settings # Assuming config has REDIS_HOST, REDIS_PORT, REDIS_DB
 
 logger = logging.getLogger(__name__)
 
@@ -20,9 +20,9 @@ class MessageQueue:
             for i in range(MAX_RETRIES):
                 try:
                     cls._instance.redis_client = redis.StrictRedis(
-                        host=config.REDIS_HOST,
-                        port=config.REDIS_PORT,
-                        db=config.REDIS_DB,
+                        host=settings.REDIS_HOST,
+                        port=settings.REDIS_PORT,
+                        db=settings.REDIS_DB,
                         decode_responses=True # Decodes responses to UTF-8 strings
                     )
                     cls._instance.redis_client.ping() # Test connection
@@ -45,8 +45,8 @@ class MessageQueue:
         try:
             message = json.dumps(decision_data)
             # Using a list as a queue (LPUSH/BRPOP pattern)
-            self.redis_client.lpush(config.REDIS_DECISION_QUEUE_NAME, message)
-            logger.info(f"Decisión publicada en la cola '{config.REDIS_DECISION_QUEUE_NAME}': {decision_data.get('type', 'UNKNOWN_DECISION')}")
+            self.redis_client.lpush(settings.REDIS_DECISION_QUEUE_NAME, message)
+            logger.info(f"Decisión publicada en la cola '{settings.REDIS_DECISION_QUEUE_NAME}': {decision_data.get('type', 'UNKNOWN_DECISION')}")
             return True
         except Exception as e:
             logger.error(f"Error al publicar decisión en Redis: {e}", exc_info=True)
@@ -68,7 +68,7 @@ class MessageQueue:
         try:
             # BRPOP blocks until an element is available or timeout occurs
             # Returns a tuple: (queue_name, message)
-            result = self.redis_client.brpop(config.REDIS_DECISION_QUEUE_NAME, timeout=timeout)
+            result = self.redis_client.brpop(settings.REDIS_DECISION_QUEUE_NAME, timeout=timeout)
             if result: # Check if result is not None
                 _, message = result # Now it's safe to unpack
                 return json.loads(message)

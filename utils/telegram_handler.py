@@ -12,14 +12,14 @@ logger = logging.getLogger(__name__)
 
 # --- Funciones asíncronas ---
 
-async def send_message(bot_instance: Bot, chat_id: int, message: str, reply_markup=None):
+async def send_message(bot_instance: Bot, chat_id: int, message: str, reply_markup=None, parse_mode: str = ParseMode.HTML):
     """Envía un mensaje de texto al chat especificado con manejo de reintentos por Flood Control."""
     if bot_instance: # Only attempt to send if bot_instance is provided
         try:
             await bot_instance.send_message(
                 chat_id=chat_id,
                 text=message,
-                parse_mode=ParseMode.HTML, # Aseguramos que el formato HTML se interprete
+                parse_mode=parse_mode,
                 reply_markup=reply_markup
             )
         except TelegramRetryAfter as e:
@@ -29,7 +29,7 @@ async def send_message(bot_instance: Bot, chat_id: int, message: str, reply_mark
                 await bot_instance.send_message( # Retry the message
                     chat_id=chat_id,
                     text=message,
-                    parse_mode=ParseMode.HTML,
+                    parse_mode=parse_mode,
                     reply_markup=reply_markup
                 )
         except Exception as e:

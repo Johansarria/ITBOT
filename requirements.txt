@@ -45,3 +45,5 @@ pytest
 pytest-cov
 freezegun
 pytest-asyncio
+fakeredis
+pydantic-settings

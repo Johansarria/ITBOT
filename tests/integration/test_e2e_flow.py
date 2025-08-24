@@ -1,99 +1,204 @@
-# tests/integration/test_e2e_flow.py
-
 import pytest
+from unittest.mock import AsyncMock, patch, MagicMock
 import asyncio
-import sqlite3
-from unittest.mock import MagicMock, AsyncMock, patch
+import os
 from datetime import datetime
-import pandas as pd
 
 # Importar módulos del bot
-from run_bot import main_run_bot
+import run_bot # Import run_bot module directly
+from run_bot import main_run_bot, flujo_principal_por_activo
 from execution_worker import main as start_execution_worker_main
-from database.database_manager import init_db
-from config import TRADING_PAIRS
+from database.database_manager import init_db, get_db_session, add_operation, get_open_positions_df
+import config
 from utils.message_queue import mq
+import pandas as pd
 
-# Fixture para usar una base de datos temporal para cada test
-@pytest.fixture
-def temp_db(tmp_path):
-    db_path = tmp_path / "test_itbot.db"
-    with patch('database.database_manager.DB_PATH', str(db_path)):
+# Fixture para configurar la base de datos en memoria
+@pytest.fixture(autouse=True)
+def in_memory_db():
+    with patch('config.DATABASE_URL', "sqlite:///:memory:") as mock_db_url:
         init_db()
-        yield str(db_path)
+        yield
+        # Limpiar la base de datos después de cada test si es necesario
+        # (para sqlite in-memory, se destruye con la sesión, pero es buena práctica)
+        # mock_db_url.stop() # No es necesario, el patch se encarga
 
-# Fixture para mockear interacciones con Telegram
-@pytest.fixture
+# Fixture para mockear las interacciones con Telegram
+@pytest.fixture(autouse=True)
 def mock_telegram():
-    with patch('utils.telegram_handler.send_message', new_callable=AsyncMock) as mock_send_message:
-        yield mock_send_message
+    with patch('listener_bot.send_message', new_callable=AsyncMock) as mock_listener_send_message:
+        with patch('run_bot.send_message', new_callable=AsyncMock) as mock_run_bot_send_message:
+            with patch('utils.telegram_handler.send_message', new_callable=AsyncMock) as mock_utils_send_message:
+                yield mock_listener_send_message, mock_run_bot_send_message, mock_utils_send_message
 
 # Fixture para mockear la API de Binance
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def mock_binance_client():
-    with patch('utils.binance_client.get_binance_client', new_callable=AsyncMock) as mock_get_client:
-        mock_client_instance = AsyncMock()
-        mock_client_instance.create_order.return_value = {
-            'orderId': 'test_order_id',
-            'status': 'FILLED',
-            'fills': [{'price': '50000', 'qty': '0.0001'}]
-        }
-        mock_get_client.return_value = mock_client_instance
-        yield mock_client_instance
+    with patch('utils.binance_client.get_binance_client', new_callable=AsyncMock) as mock_get_binance_client:
+        with patch('utils.binance_client.close_binance_client', new_callable=AsyncMock) as mock_close_binance_client:
+            # Create a mock client instance that get_binance_client will return
+            mock_client_instance = AsyncMock()
+            mock_client_instance.create_order.return_value = {
+                'orderId': 'test_order_id',
+                'status': 'FILLED',
+                'fills': [{'price': '50000', 'qty': '0.0001'}]
+            }
+            mock_client_instance.get_asset_balance.side_effect = lambda asset: {'asset': asset, 'free': '1000', 'locked': '0'} if asset == 'USDT' else {'asset': asset, 'free': '1', 'locked': '0'}
+            
+            mock_get_binance_client.return_value = mock_client_instance
+            
+            yield mock_client_instance, mock_close_binance_client
 
 # Fixture para mockear la cola de mensajes de Redis
 @pytest.fixture
 def mock_message_queue():
-    with patch('utils.message_queue.mq.publish_decision') as mock_publish:
-        with patch('utils.message_queue.mq.get_decision', new_callable=AsyncMock) as mock_get:
-            yield mock_publish, mock_get
+    with patch('utils.message_queue.mq.publish_decision', new_callable=MagicMock) as mock_publish_decision:
+        with patch('utils.message_queue.mq.get_decision', new_callable=AsyncMock) as mock_get_decision: # Changed to get_decision
+            yield mock_publish_decision, mock_get_decision # Changed to mock_get_decision
+
+# Fixture para mockear asyncio.sleep
+@pytest.fixture(autouse=True)
+def mock_asyncio_sleep():
+    with patch('asyncio.sleep', new_callable=AsyncMock) as mock_sleep:
+        yield mock_sleep
+
+# Fixture para mockear las dependencias de run_bot que se ejecutan al inicio
+@pytest.fixture(autouse=True)
+def mock_run_bot_initial_setup(monkeypatch):
+    # Mock download_and_save_klines (source of daily_data_update_task) to prevent it from running
+    monkeypatch.setattr('download_historical_data.download_and_save_klines', AsyncMock())
+    # Also patch the reference inside run_bot in case it was imported there
+    monkeypatch.setattr('run_bot.download_and_save_klines', AsyncMock())
+
+    # Mock AsyncIOScheduler to prevent it from starting (patch both the original and run_bot's reference)
+    mock_scheduler = MagicMock(autospec=True)
+    mock_scheduler.return_value.start.return_value = None
+    monkeypatch.setattr('apscheduler.schedulers.asyncio.AsyncIOScheduler', mock_scheduler)
+    monkeypatch.setattr('run_bot.AsyncIOScheduler', mock_scheduler)
+
+    # Mock dp.start_polling to prevent Telegram polling (patch both listener_bot and run_bot references)
+    mock_dp = MagicMock(autospec=True)
+    mock_dp.start_polling = AsyncMock(return_value=None)
+    mock_dp.session = MagicMock()
+    mock_dp.session.close = AsyncMock(return_value=None)  # Ensure session.close is awaitable
+    monkeypatch.setattr('listener_bot.dp', mock_dp)
+    monkeypatch.setattr('run_bot.dp', mock_dp)
+
+    # Patch TRADING_PAIRS
+    monkeypatch.setattr(config, 'TRADING_PAIRS', ["BTCUSDT"])
+
+    # Mock aiogram.Bot to control its instances (patch run_bot.Bot specifically so run_bot uses the mock)
+    mock_bot_class = MagicMock(autospec=True)
+    mock_bot_instance = MagicMock(autospec=True)
+    mock_bot_instance.session = MagicMock()
+    mock_bot_instance.session.close = AsyncMock(return_value=None)  # Ensure session.close is awaitable
+    mock_bot_class.return_value = mock_bot_instance
+    monkeypatch.setattr('aiogram.Bot', mock_bot_class)
+    monkeypatch.setattr('run_bot.Bot', mock_bot_class)
+    # Ensure verificar_condiciones_mercado returns OK so the loop executes our patched flujo
+    mock_verif = AsyncMock(return_value={"status": "OK", "reason": ""})
+    monkeypatch.setattr('utils.shield_manager.verificar_condiciones_mercado', mock_verif)
+    monkeypatch.setattr('run_bot.verificar_condiciones_mercado', mock_verif)
 
 @pytest.mark.asyncio
-async def test_e2e_trading_flow(
-    monkeypatch,
-    temp_db,
-    mock_telegram,
-    mock_binance_client,
-    mock_message_queue
-):
-    """
-    Prueba End-to-End que simula el flujo completo:
-    1. `run_bot` analiza y publica una decisión de compra.
-    2. `execution_worker` consume la decisión y ejecuta la orden.
-    3. Se verifica que la orden se creó en Binance y se guardó en la BD.
-    """
-    mock_publish, mock_get = mock_message_queue
+async def test_e2e_trading_flow(in_memory_db, mock_telegram, mock_binance_client, mock_message_queue, mock_asyncio_sleep, mock_run_bot_initial_setup, monkeypatch):
+    mock_publish_decision, mock_get_decision = mock_message_queue # Changed to mock_get_decision
+    mock_client_instance, _ = mock_binance_client
+    mock_listener_send_message, mock_run_bot_send_message, mock_utils_send_message = mock_telegram
 
-    # --- Configuración de Mocks para el Flujo ---
-    # 1. Mockear el flujo de análisis para que publique una decisión de compra
+    # === Configuración de Mocks para el Flujo ===
+    # Mockear flujo_principal_por_activo para que publique una decisión específica
+    # y luego se detenga o no haga nada más para simplificar el test.
+    # También mockeamos verificar_condiciones_mercado para que no active escudos.
+
     async def mock_flujo_side_effect(bot_instance, chat_id, symbol):
+        print("🔥 Entré al fake flujo") # Debug print
         test_decision = {
-            "type": "AUTOMATED_TRADE", "symbol": "BTCUSDT",
-            "side": "BUY", "quantity": 0.0001,
+            "type": "AUTOMATED_TRADE",
+            "symbol": symbol,
+            "side": "BUY",
+            "quantity": 0.0001,
+            "order_type": "MARKET",
+            "strategy_id": "TestStrategy",
+            "timestamp_decision": datetime.now().isoformat(),
+            "analysis_score": 0.95,
         }
-        mq.publish_decision(test_decision)
-        run_bot_task.cancel()
+        mq.publish_decision(test_decision) # Usar el mq real (mockeado por mock_message_queue)
 
+    # Ensure run_bot uses our mocked coroutine function and shield checker
     monkeypatch.setattr('run_bot.flujo_principal_por_activo', mock_flujo_side_effect)
-    monkeypatch.setattr('run_bot.verificar_condiciones_mercado', AsyncMock(return_value={"status": "OK"}))
+    monkeypatch.setattr('run_bot.verificar_condiciones_mercado', AsyncMock(side_effect=lambda *a, **kw: {"status": "OK", "reason": ""}))
 
-    # Patch the global variable in the config module
-    monkeypatch.setattr('config.TRADING_PAIRS', ["BTCUSDT"])
+    # === Ejecutar run_bot en una tarea separada ===
+    # Parchear el bucle infinito de run_bot para que se ejecute una vez y luego se detenga
+    # Esto se logra mockeando asyncio.sleep dentro de run_bot.main_run_bot
+    # y permitiendo que el bucle se ejecute una vez.
 
+    # La primera llamada a asyncio.sleep en main_run_bot es para el scheduler, la ignoramos.
+    # La segunda es para el bucle principal, la usamos para controlar la ejecución.
+    # First call: return an awaitable that immediately returns None; second call: raise CancelledError to stop loop
+    mock_asyncio_sleep.side_effect = [
+        AsyncMock(return_value=None)(),
+        asyncio.CancelledError()
+    ]
 
-    # --- Ejecución ---
-    # Iniciar run_bot en una tarea de fondo
     run_bot_task = asyncio.create_task(main_run_bot())
-    try:
-        # Dar un pequeño delay para que el bot pueda procesar
-        await asyncio.sleep(2)
 
-        # Verificar que la decisión fue publicada
-        mock_publish.assert_called()
-        published_decision = mock_publish.call_args[0][0]
-        assert published_decision['symbol'] == "BTCUSDT"
-    finally:
-        run_bot_task.cancel()
-        from contextlib import suppress
-        with suppress(asyncio.CancelledError):
-            await run_bot_task
+    # Dar tiempo a run_bot para que ejecute un ciclo y publique la decisión
+    await asyncio.sleep(0.1) # Pequeña pausa para que el ciclo de run_bot se inicie
+
+    # Verificar que la decisión fue publicada por run_bot
+    mock_publish_decision.assert_called_once()
+    published_decision = mock_publish_decision.call_args[0][0]
+    assert published_decision['symbol'] == "BTCUSDT" # Asumiendo que TRADING_PAIRS tiene BTCUSDT
+
+    # === Ejecutar execution_worker en una tarea separada ===
+    # Configurar el mock de consume_decisions para que devuelva la decisión publicada
+    # y luego se detenga (simulando que solo hay una decisión en la cola)
+    mock_get_decision.side_effect = [published_decision, None] # Devuelve la decisión, luego None para detener el bucle
+
+    # Parchear el bucle infinito de execution_worker para que se ejecute una vez
+    # y luego se detenga.
+    with patch('execution_worker.asyncio.sleep', new_callable=AsyncMock) as mock_worker_sleep:
+        mock_worker_sleep.side_effect = asyncio.CancelledError # Detener el bucle del worker
+
+        worker_task = asyncio.create_task(start_execution_worker_main())
+
+        # Dar tiempo al worker para procesar la decisión
+        await asyncio.sleep(0.1) # Ajustar según sea necesario
+
+        # Cancelar la tarea del worker para limpiar
+        worker_task.cancel()
+        try:
+            await worker_task
+        except asyncio.CancelledError:
+            pass
+
+    # === Verificaciones ===
+    # Verificar que la orden se intentó crear en Binance
+    mock_client_instance.create_order.assert_called_once_with(
+        symbol="BTCUSDT",
+        side="BUY",
+        type="MARKET",
+        quantity=0.0001
+    )
+
+    # Verificar que la operación se registró en la base de datos
+    with get_db_session() as session:
+        operations_df = pd.read_sql("SELECT * FROM operations", session.bind)
+        assert not operations_df.empty
+        assert operations_df['symbol'].iloc[0] == "BTCUSDT"
+        assert operations_df['status'].iloc[0] == "FILLED"
+        assert operations_df['price'].iloc[0] == 50000.0
+
+    # Cancelar la tarea de run_bot para limpiar
+    run_bot_task.cancel()
+    try:
+        await run_bot_task
+    except asyncio.CancelledError:
+        pass
+
+    # Verificar que se enviaron mensajes de Telegram (opcional, si el bot envía notificaciones)
+    mock_run_bot_send_message.assert_called()
+    mock_listener_send_message.assert_called()
+    mock_utils_send_message.assert_called()

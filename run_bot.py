@@ -10,7 +10,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-import config as settings # Renombrado para claridad
+from config import settings
 from database.database_manager import init_db
 from download_historical_data import download_and_save_klines
 from listener_bot import dp

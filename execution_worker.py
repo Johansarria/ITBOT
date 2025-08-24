@@ -10,7 +10,7 @@ from typing import Any, Dict, Optional
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-import config
+from config import settings
 from utils.message_queue import mq
 from utils.order_executor import evaluar_y_ejecutar_operacion
 from utils.risk_manager import perform_pre_execution_risk_checks
@@ -281,7 +281,6 @@ def run_worker() -> None:
     """
     Punto de entrada para lanzar el worker desde otros scripts o CLI.
     """
-    config.load_configurations()
     asyncio.run(main())
 
 if __name__ == "__main__":

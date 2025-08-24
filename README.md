@@ -68,6 +68,13 @@ Se ha integrado la formalización y versionado del Feature Store, lo que permite
     *   Se corrigieron múltiples bugs en el bot de Telegram (`listener_bot.py`), incluyendo un `NameError` que impedía mostrar menús y un error de cálculo en la visualización del riesgo forzado.
     *   Estos cambios restauran la funcionalidad completa del bot y mejoran significativamente su estabilidad en el entorno dockerizado.
 
+### Depuración y Estabilización de Pruebas (Agosto 2025)
+
+*   **Corrección de Errores de Importación:** Se han solucionado una serie de errores de importación en las pruebas del `listener_bot` que impedían la ejecución de la suite de pruebas.
+*   **Corrección de Errores de Configuración:** Se han corregido errores de configuración en las pruebas que impedían el acceso a los atributos de configuración correctos.
+*   **Corrección de Errores de Base de Datos:** Se han identificado y corregido errores de conexión con la base de datos de pruebas, que impedían la ejecución de las pruebas de la base de datos.
+*   **Estabilización General de la Suite de Pruebas:** Se ha trabajado en la estabilización general de la suite de pruebas, corrigiendo una gran cantidad de errores que impedían su correcta ejecución.
+
 ## Dependencias Principales
 
 *   **Python >=3.12**
