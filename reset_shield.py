@@ -4,13 +4,13 @@ from datetime import datetime
 from utils.state_manager import StateManager
 from utils.logger_setup import setup_logging
 
-setup_logging()
-logger = logging.getLogger(__name__)
-
 def reset_shield():
     """
     Desactiva manualmente cualquier escudo activo en el state manager.
     """
+    setup_logging()
+    logger = logging.getLogger(__name__)
+
     try:
         state_manager = StateManager()
         
