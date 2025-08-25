@@ -47,3 +47,4 @@ freezegun
 pytest-asyncio
 fakeredis
 pydantic-settings
+alembic
