@@ -60,7 +60,7 @@ async def download_and_save_klines(
     logger.info(f"Iniciando descarga de datos históricos para {symbol} - {interval} desde {current_start_str} hasta {end_str if end_str else 'ahora'}.")
 
     try:
-        client_instance = get_binance_client()
+        client_instance = await get_binance_client()
         klines = await asyncio.to_thread(client_instance.get_historical_klines,
                                         symbol=symbol,
                                         interval=interval,
@@ -97,8 +97,12 @@ async def download_and_save_klines(
 
         # Guardar en CSV
         os.makedirs(output_path, exist_ok=True)
-        # Si estamos en modo append, no escribir el encabezado y usar 'a' (append)
-        df.to_csv(file_name, mode='a', header=not append_to_existing)
+        # Escribir en modo 'write' si no es append, y en modo 'append' si lo es.
+        write_mode = 'a' if append_to_existing else 'w'
+        # No escribir encabezado si estamos en modo append REAL (es decir, el archivo ya existía y era legible)
+        write_header = not append_to_existing
+
+        df.to_csv(file_name, mode=write_mode, header=write_header)
         logger.info(f"Datos históricos guardados/actualizados en: {file_name}")
 
         # Guardar en la base de datos
