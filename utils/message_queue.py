@@ -39,6 +39,7 @@ class MessageQueue:
         return cls._instance
 
     def publish_decision(self, decision_data: dict):
+        print(f"DEBUG: In publish_decision, redis_client is: {self.redis_client}")
         if not self.redis_client:
             logger.error("No se pudo publicar la decisión: Conexión a Redis no establecida.")
             return False

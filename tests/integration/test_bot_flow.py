@@ -64,9 +64,11 @@ async def test_full_analisis_flow(mock_external_services):
     mock_get_historical_klines.return_value = df_klines
 
     # --- Mock Strategy Manager and Active Strategy ---
-    with patch('strategies.strategy_manager.StrategyManager') as mock_strategy_manager_class:
+    # We patch StrategyManager where it's used (in modules.analisis_bot)
+    with patch('modules.analisis_bot.StrategyManager') as mock_strategy_manager_class:
         mock_strategy_instance = MagicMock()
-        mock_strategy_instance.analyze.return_value = {"decision": "COMPRAR", "score": 3, "symbol": "BTCUSDT", "interval": "1h"}
+        # Ensure the mock for analyze is awaitable
+        mock_strategy_instance.analyze = AsyncMock(return_value={"decision": "COMPRAR", "score": 3, "symbol": "BTCUSDT", "interval": "1h"})
         
         mock_manager_instance = MagicMock()
         mock_manager_instance.get_active_strategy.return_value = mock_strategy_instance
@@ -94,7 +96,7 @@ async def test_full_analisis_flow(mock_external_services):
         second_call_args = mock_send_message.call_args_list[1].args
 
         assert first_call_args[1] == test_chat_id
-        assert "Iniciando análisis con la estrategia activa..." in first_call_args[2]
+        assert "Realizando análisis con la estrategia activa" in first_call_args[2]
 
         assert second_call_args[1] == test_chat_id
         sent_message = second_call_args[2]
@@ -140,6 +142,9 @@ async def test_full_data_pipeline_integration(monkeypatch):
     monkeypatch.setattr('optimize_strategy.guardar_umbrales_optimizado', mock_guardar_umbrales)
     
     monkeypatch.setattr('pandas.read_parquet', MagicMock(return_value=_get_sample_enriched_df(500)))
+
+    # Set test mode to speed up the Genetic Algorithm optimization
+    monkeypatch.setenv("ITBOT_TEST_MODE", "True")
 
     # --- Execution ---
     from download_historical_data import download_and_save_klines

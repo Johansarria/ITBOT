@@ -42,20 +42,27 @@ async def procesar_comando_analisis(bot_instance: Bot, chat_id: int, mensaje: st
             active_strategy = strategy_manager.get_active_strategy()
             
             # Obtener datos históricos para el análisis
-            historical_data = await get_historical_klines("BTCUSDT", "1h")
+            historical_data = await get_historical_klines(symbol="BTCUSDT", interval="1h", limit=100)
             if historical_data.empty:
                 if send_telegram_message:
                     await send_message(bot_instance, chat_id, "⚠️ No se pudieron obtener datos del mercado para el análisis.")
                 return {"status": "error", "message": "No se pudieron obtener datos del mercado para el análisis."}
 
-            # Detectar si la estrategia requiere symbol/interval
+            # Detectar si la estrategia requiere symbol/interval y si es síncrona o asíncrona
             import inspect
             analyze_sig = inspect.signature(active_strategy.analyze)
             params = list(analyze_sig.parameters.keys())
+
+            # Preparar argumentos
+            args = [historical_data]
             if len(params) >= 3:
-                resultado = await active_strategy.analyze(historical_data, "BTCUSDT", "1h")
+                args.extend(["BTCUSDT", "1h"])
+
+            # Ejecutar síncrono o asíncrono
+            if inspect.iscoroutinefunction(active_strategy.analyze):
+                resultado = await active_strategy.analyze(*args)
             else:
-                resultado = await active_strategy.analyze(historical_data)
+                resultado = active_strategy.analyze(*args)
             
             decision = resultado.get("decision", "Indeciso")
             score = resultado.get("score", "N/A")

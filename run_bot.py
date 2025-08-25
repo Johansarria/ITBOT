@@ -138,9 +138,9 @@ async def main_run_bot() -> None:
     init_db()
 
     chat_id_int = settings.TELEGRAM_CHAT_ID
-    if not settings.TELEGRAM_TOKEN:
-        raise ValueError("❌ TELEGRAM_TOKEN no está definido.")
-    bot_instance = Bot(token=settings.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    if not settings.TELEGRAM_BOT_TOKEN:
+        raise ValueError("❌ TELEGRAM_BOT_TOKEN no está definido.")
+    bot_instance = Bot(token=settings.TELEGRAM_BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     state_manager = StateManager()
     session_mode = state_manager.get_state("session", "mode", settings.MODE)
@@ -168,6 +168,7 @@ async def main_run_bot() -> None:
                 await send_message(bot_instance, chat_id_int, f"🛡️ Escudo de Protección Activado 🛡️\nRazón: {escudo_msg_dict['reason']}\nNo se analizarán activos en este ciclo.")
             else:
                 tasks = [flujo_principal_por_activo(bot_instance, chat_id_int, symbol) for symbol in settings.TRADING_PAIRS]
+                print(f"DEBUG: Created tasks: {tasks}") # Debug print
                 logger.info(f"Lanzando análisis concurrente para {len(tasks)} activos.")
                 results = await asyncio.gather(*tasks, return_exceptions=True)
 

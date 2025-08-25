@@ -13,16 +13,6 @@ import config
 from utils.message_queue import mq
 import pandas as pd
 
-# Fixture para configurar la base de datos en memoria
-@pytest.fixture(autouse=True)
-def in_memory_db():
-    with patch('config.DATABASE_URL', "sqlite:///:memory:") as mock_db_url:
-        init_db()
-        yield
-        # Limpiar la base de datos después de cada test si es necesario
-        # (para sqlite in-memory, se destruye con la sesión, pero es buena práctica)
-        # mock_db_url.stop() # No es necesario, el patch se encarga
-
 # Fixture para mockear las interacciones con Telegram
 @pytest.fixture(autouse=True)
 def mock_telegram():
@@ -84,8 +74,8 @@ def mock_run_bot_initial_setup(monkeypatch):
     monkeypatch.setattr('listener_bot.dp', mock_dp)
     monkeypatch.setattr('run_bot.dp', mock_dp)
 
-    # Patch TRADING_PAIRS
-    monkeypatch.setattr(config, 'TRADING_PAIRS', ["BTCUSDT"])
+    # Patch TRADING_PAIRS on the settings object
+    monkeypatch.setattr(config.settings, 'TRADING_PAIRS', ["BTCUSDT"])
 
     # Mock aiogram.Bot to control its instances (patch run_bot.Bot specifically so run_bot uses the mock)
     mock_bot_class = MagicMock(autospec=True)
@@ -107,45 +97,36 @@ async def test_e2e_trading_flow(in_memory_db, mock_telegram, mock_binance_client
     mock_listener_send_message, mock_run_bot_send_message, mock_utils_send_message = mock_telegram
 
     # === Configuración de Mocks para el Flujo ===
-    # Mockear flujo_principal_por_activo para que publique una decisión específica
-    # y luego se detenga o no haga nada más para simplificar el test.
-    # También mockeamos verificar_condiciones_mercado para que no active escudos.
+    decision_published_event = asyncio.Event()
 
     async def mock_flujo_side_effect(bot_instance, chat_id, symbol):
-        print("🔥 Entré al fake flujo") # Debug print
         test_decision = {
-            "type": "AUTOMATED_TRADE",
-            "symbol": symbol,
-            "side": "BUY",
-            "quantity": 0.0001,
-            "order_type": "MARKET",
-            "strategy_id": "TestStrategy",
-            "timestamp_decision": datetime.now().isoformat(),
-            "analysis_score": 0.95,
+            "type": "AUTOMATED_TRADE", "symbol": symbol, "side": "BUY",
+            "quantity": 0.0001, "order_type": "MARKET", "strategy_id": "TestStrategy",
+            "timestamp_decision": datetime.now().isoformat(), "analysis_score": 0.95,
         }
-        mq.publish_decision(test_decision) # Usar el mq real (mockeado por mock_message_queue)
+        mq.publish_decision(test_decision)
+        decision_published_event.set() # Signal that the event occurred
 
-    # Ensure run_bot uses our mocked coroutine function and shield checker
     monkeypatch.setattr('run_bot.flujo_principal_por_activo', mock_flujo_side_effect)
-    monkeypatch.setattr('run_bot.verificar_condiciones_mercado', AsyncMock(side_effect=lambda *a, **kw: {"status": "OK", "reason": ""}))
+    monkeypatch.setattr('run_bot.verificar_condiciones_mercado', AsyncMock(return_value={"status": "OK", "reason": ""}))
 
     # === Ejecutar run_bot en una tarea separada ===
-    # Parchear el bucle infinito de run_bot para que se ejecute una vez y luego se detenga
-    # Esto se logra mockeando asyncio.sleep dentro de run_bot.main_run_bot
-    # y permitiendo que el bucle se ejecute una vez.
-
-    # La primera llamada a asyncio.sleep en main_run_bot es para el scheduler, la ignoramos.
-    # La segunda es para el bucle principal, la usamos para controlar la ejecución.
-    # First call: return an awaitable that immediately returns None; second call: raise CancelledError to stop loop
-    mock_asyncio_sleep.side_effect = [
-        AsyncMock(return_value=None)(),
-        asyncio.CancelledError()
-    ]
+    # Mock asyncio.sleep to run the main loop only once then stop it
+    async def sleep_side_effect(delay):
+        # Allow the loop to complete once, then stop it by raising an exception
+        # that the main_run_bot's finally block will catch.
+        await asyncio.sleep(0.01) # give control back to event loop briefly
+        raise asyncio.CancelledError
+    mock_asyncio_sleep.side_effect = sleep_side_effect
 
     run_bot_task = asyncio.create_task(main_run_bot())
 
-    # Dar tiempo a run_bot para que ejecute un ciclo y publique la decisión
-    await asyncio.sleep(0.1) # Pequeña pausa para que el ciclo de run_bot se inicie
+    # Wait for the decision to be published, with a timeout to prevent hanging
+    try:
+        await asyncio.wait_for(decision_published_event.wait(), timeout=5)
+    except asyncio.TimeoutError:
+        pytest.fail("Timeout: The decision was never published by the mocked flow.")
 
     # Verificar que la decisión fue publicada por run_bot
     mock_publish_decision.assert_called_once()
