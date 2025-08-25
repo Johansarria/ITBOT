@@ -28,3 +28,7 @@ storage/itbot.db
 logs/
 data/
 mlruns/
+
+
+# Archivos de estado del bot
+data/bot_state.json
