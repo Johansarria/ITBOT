@@ -2,5 +2,12 @@
 
 from utils.risk_manager import restaurar_riesgo_automatico
 
-if __name__ == "__main__":
+def main():
+    """
+    Resets the risk management to automatic mode.
+    """
     restaurar_riesgo_automatico()
+    print("El riesgo ha sido restaurado a modo automático.")
+
+if __name__ == "__main__":
+    main()
