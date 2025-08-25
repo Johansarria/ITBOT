@@ -43,7 +43,7 @@ async def enviar_estado_diario(bot_instance: Bot, chat_id: int):
     if riesgo_forzado and tiempo_riesgo_forzado:
         if isinstance(tiempo_riesgo_forzado, str):
             tiempo_riesgo_forzado = datetime.fromisoformat(tiempo_riesgo_forzado).replace(tzinfo=zoneinfo.ZoneInfo("UTC"))
-        duracion = datetime.now() - tiempo_riesgo_forzado
+        duracion = datetime.now(zoneinfo.ZoneInfo("UTC")) - tiempo_riesgo_forzado
         horas = int(duracion.total_seconds() // 3600)
         mensaje += f" desde hace {horas}h\n"
     else:

@@ -42,13 +42,14 @@ ITBOT opera con una **arquitectura desacoplada** que separa la toma de decisione
 
 ### v2.1: Refactorización E2E y Arquitectura Multi-Activo
 
-Se ha completado una refactorización masiva que introduce mejoras críticas en la arquitectura y la fiabilidad del bot:
+Se ha actualizado el README.md con una nueva sección 'Avances Recientes' que detalla la dockerización completa de la aplicación y la integración de MLflow, incluyendo sus beneficios en portabilidad, aislamiento, despliegue simplificado, seguimiento de experimentos, reproducibilidad y gestión centralizada de modelos.
 
-*   **Arquitectura Multi-Activo:** Se refactoriza `run_bot.py` para soportar el **análisis concurrente de múltiples pares de trading**, reemplazando el antiguo modelo mono-activo y permitiendo una mayor escalabilidad.
-*   **Pipeline de Features Robusto:** Se consolida el uso del `FeaturePipeline` y el formato Parquet, eliminando la dependencia de archivos CSV intermedios y mejorando el rendimiento.
-*   **Entrenamiento ML Avanzado:** Se integra una versión refactorizada de `ml_model_trainer.py`, que incluye funciones modulares, versionado del código de features y logging avanzado con MLflow para una mejor trazabilidad.
-*   **Prueba End-to-End (E2E):** Se establece una prueba de integración completa que valida todo el flujo de la aplicación, desde la decisión en `run_bot` hasta la ejecución en `execution_worker` y la persistencia en la base de datos, garantizando la fiabilidad del sistema.
-*   **Mejoras en KPIs y Pruebas:** Se actualizan los cálculos de KPIs para ser más precisos y se expande la cobertura de pruebas para el `listener_bot`.
+- **Integración de Alembic para Migraciones de Base de Datos:**
+    - Se ha incorporado Alembic para gestionar la evolución del esquema de la base de datos de forma robusta y versionada.
+    - Se han definido los modelos de SQLAlchemy para las tablas principales del sistema.
+- **Evolución y Estabilización de la Suite de Pruebas:**
+    - Se ha realizado un esfuerzo continuo para corregir y estabilizar las pruebas unitarias y de integración.
+    - Algunas pruebas complejas (E2E, Listener) han sido desactivadas temporalmente para permitir una estabilización progresiva del núcleo del sistema.
 
 ### Formalización y Versionado del Feature Store
 
