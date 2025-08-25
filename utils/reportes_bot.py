@@ -109,7 +109,7 @@ async def generar_y_enviar_reporte_rango(bot_instance: Bot, chat_id: int, start_
 
 def es_comando_reporte(mensaje: str) -> bool:
     comandos = ["descargar", "ignorar", "reportes"]
-    return any(mensaje.lower().startswith(cmd) for cmd in comandos)
+    return any(mensaje.strip().lower().startswith(cmd) for cmd in comandos)
 
 async def exportar_y_enviar_reporte(bot_instance: Bot, chat_id: int, df: pd.DataFrame, nombre_archivo: str = "reporte.csv", caption: str = " Aquí tienes tu reporte", file_format: str = 'csv'):
     logger.info(f"Exportando y enviando reporte: {nombre_archivo}")
