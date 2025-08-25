@@ -1,4 +1,11 @@
-from database.database_manager import init_discarded_signals_table
+from database.database_manager import create_tables
 
-init_discarded_signals_table()
-print("Tabla discarded_signals inicializada.")
+def main():
+    """
+    Initializes the discarded_signals table by calling the central table creation utility.
+    """
+    create_tables()
+    print("Tabla discarded_signals inicializada.")
+
+if __name__ == "__main__":
+    main()
