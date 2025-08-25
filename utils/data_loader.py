@@ -54,37 +54,37 @@ async def load_operations_data(file_path: str) -> pd.DataFrame:
                 break # Found an alias, move to next standard_name
     df = df.rename(columns=renamed_columns)
 
-    # Schema Validation
-    missing_required = [col for col in REQUIRED_COLUMNS if col not in df.columns]
-    if missing_required:
-        error_msg = f"Columnas requeridas faltantes en {file_path}: {', '.join(missing_required)}"
-        logger.error(error_msg)
-        # Depending on severity, you might raise an exception here:
-        # raise SchemaValidationError(error_msg)
-        return pd.DataFrame() # Or return empty DataFrame
-
-    # Robust Date Parsing
+    # Robust Date Parsing should happen before final schema validation
+    # to allow for the creation of missing required date columns.
     for standard_date_col, possible_names in DATE_COLUMNS_MAP.items():
         found_date_col = None
         for name in possible_names:
             if name in df.columns:
                 found_date_col = name
                 break
+
         if found_date_col:
             try:
                 df[standard_date_col] = await loop.run_in_executor(
                     None, lambda col=df[found_date_col]: pd.to_datetime(col, errors='coerce')
                 )
-                # Drop the original aliased column if it's different from standard_date_col
-                if found_date_col != standard_date_col:
+                # Drop the original aliased column if it's different
+                if found_date_col != standard_date_col and found_date_col in df.columns:
                     df = df.drop(columns=[found_date_col])
             except Exception as e:
                 logger.warning(f"Error al parsear columna de fecha '{found_date_col}' en {file_path}: {e}. Columna se mantendrá como está.", exc_info=True)
         else:
-            logger.warning(f"Columna de fecha '{standard_date_col}' o sus alias no encontrados en {file_path}.")
-            # Add the column with NaT if it's required and not found
+            # If the date column or its aliases are not found, create it if required.
             if standard_date_col in REQUIRED_COLUMNS and standard_date_col not in df.columns:
+                logger.warning(f"Columna de fecha requerida '{standard_date_col}' no encontrada. Se creará con valores nulos (NaT).")
                 df[standard_date_col] = pd.NaT
+
+    # Schema Validation
+    missing_required = [col for col in REQUIRED_COLUMNS if col not in df.columns]
+    if missing_required:
+        error_msg = f"Columnas requeridas faltantes en {file_path}: {', '.join(missing_required)}"
+        logger.error(error_msg)
+        return pd.DataFrame()
 
     logger.info(f"Datos de operaciones cargados y validados desde {file_path}.")
     return df

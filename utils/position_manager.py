@@ -116,12 +116,12 @@ async def manage_open_positions(bot: Bot):
         logger.info("No hay posiciones abiertas para gestionar.")
         return
 
-    client = get_binance_client() # Get the client instance here
+    client = await get_binance_client() # Get the client instance here
 
     for _, position in open_positions.iterrows():
         symbol = position["symbol"]
         try:
-            ticker = client.get_symbol_ticker(symbol=symbol)
+            ticker = await client.get_symbol_ticker(symbol=symbol)
             current_price = float(ticker['price'])
 
             # Usar los nuevos nombres de columna

@@ -133,7 +133,7 @@ async def mostrar_estado_riesgo(bot_instance: Optional["Bot"], chat_id: Optional
 
 @retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)
 async def get_symbol_info(symbol: str) -> dict:
-    client = get_binance_client()
+    client = await get_binance_client()
     exchange_info = await asyncio.to_thread(client.get_exchange_info)
     for s in exchange_info["symbols"]:
         if s["symbol"] == symbol:
@@ -216,7 +216,7 @@ async def evaluar_y_ejecutar_operacion(
     """
     try:
         logger.info(f"Iniciando evaluación y ejecución de orden para: {resultado_analisis.get('symbol', 'N/A')}")
-        client = get_binance_client()
+        client = await get_binance_client()
 
         permiso, razon = verificar_permiso_de_operacion()
         if not permiso:

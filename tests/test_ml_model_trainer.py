@@ -17,6 +17,26 @@ def setup_test_logging():
     yield
     logging.disable(logging.NOTSET)
 
+@pytest.fixture
+def sample_feature_df():
+    """Provides a sample DataFrame for testing ML data preparation."""
+    data = {
+        'close': np.linspace(100, 150, 100),
+        'rsi': np.random.rand(100) * 100,
+        'macd': np.random.rand(100),
+        'macd_signal': np.random.rand(100),
+        'stoch_k': np.random.rand(100) * 100,
+        'stoch_d': np.random.rand(100) * 100,
+        'cci': np.random.rand(100) * 200 - 100,
+        'adx': np.random.rand(100) * 100,
+        'plus_di': np.random.rand(100) * 100,
+        'minus_di': np.random.rand(100) * 100,
+        'atr': np.random.rand(100) * 10,
+        'bb_upper': np.linspace(110, 160, 100),
+        'bb_lower': np.linspace(90, 140, 100),
+    }
+    return pd.DataFrame(data)
+
 @patch('ml_model_trainer.joblib.dump')
 @patch('ml_model_trainer.mlflow')
 @patch('ml_model_trainer.os.makedirs')
@@ -262,3 +282,115 @@ def test_initialize_mlflow(mock_abspath, mock_mlflow):
     # Assert
     mock_mlflow.set_tracking_uri.assert_called_once_with("file:///fake/path/mlruns")
     mock_mlflow.set_experiment.assert_called_once_with("ITBot_ML_Model_Training")
+
+@patch('ml_model_trainer.classification_report')
+@patch('ml_model_trainer.mlflow')
+def test_evaluate_model(mock_mlflow, mock_report, sample_feature_df):
+    """Test the model evaluation and MLflow logging."""
+    from ml_model_trainer import _evaluate_model
+
+    # Prepare mock report
+    mock_report.return_value = {
+        "accuracy": 0.9,
+        "weighted avg": {
+            "f1-score": 0.88,
+            "precision": 0.89,
+            "recall": 0.87
+        }
+    }
+
+    # Prepare mock pipeline and data
+    mock_pipeline = MagicMock()
+    mock_pipeline.predict.return_value = [0, 1] * 50
+    X_test = sample_feature_df
+    y_test = pd.Series([0, 1] * 50)
+
+    # Call the function
+    report = _evaluate_model(mock_pipeline, X_test, y_test)
+
+    # Assertions
+    mock_pipeline.predict.assert_called_once_with(X_test)
+    assert mock_report.call_count == 2 # Called once for the dict, once for the string log
+
+    expected_metrics = {
+        "test_accuracy": 0.9,
+        "test_f1_score_weighted": 0.88,
+        "test_precision_weighted": 0.89,
+        "test_recall_weighted": 0.87
+    }
+    mock_mlflow.log_metrics.assert_called_once_with(expected_metrics)
+    assert report == mock_report.return_value
+
+@patch('ml_model_trainer.GridSearchCV')
+@patch('ml_model_trainer.mlflow')
+def test_build_and_train_pipeline(mock_mlflow, mock_grid_search_cv, sample_feature_df):
+    """Test the model building and training pipeline orchestration."""
+    from ml_model_trainer import _build_and_train_pipeline
+
+    # Prepare mock GridSearchCV instance
+    mock_grid_instance = MagicMock()
+    mock_grid_instance.best_estimator_ = "best_model"
+    mock_grid_instance.best_params_ = {"model__n_estimators": 200}
+    mock_grid_instance.best_score_ = 0.95
+    mock_grid_search_cv.return_value = mock_grid_instance
+
+    # Prepare dummy data
+    X_train = sample_feature_df
+    y_train = pd.Series([0, 1] * 50)
+
+    # Call the function
+    model, params, score = _build_and_train_pipeline(X_train, y_train)
+
+    # Assertions
+    mock_grid_search_cv.assert_called_once() # Check that GridSearchCV was initialized
+    mock_grid_instance.fit.assert_called_once_with(X_train, y_train) # Check that fit was called
+
+    assert model == "best_model"
+    assert params == {"model__n_estimators": 200}
+    assert score == 0.95
+
+    mock_mlflow.log_params.assert_called_once_with({"model__n_estimators": 200})
+    mock_mlflow.log_metric.assert_called_once_with("cv_f1_weighted_score", 0.95)
+
+# --- Tests for _load_and_prepare_data ---
+
+@patch('ml_model_trainer.pd.read_parquet', side_effect=FileNotFoundError)
+def test_load_and_prepare_data_file_not_found(mock_read_parquet):
+    """Test that the function handles a FileNotFoundError gracefully."""
+    from ml_model_trainer import _load_and_prepare_data
+
+    results = _load_and_prepare_data("dummy_path.parquet", 0.005, 1)
+    assert all(res is None for res in results)
+
+def test_load_and_prepare_data_happy_path(sample_feature_df):
+    """Test the successful data preparation path."""
+    from ml_model_trainer import _load_and_prepare_data
+
+    with patch('ml_model_trainer.pd.read_parquet', return_value=sample_feature_df.copy()), \
+         patch('ml_model_trainer.mlflow'): # Mock mlflow to avoid logging
+
+        X, y, X_train, y_train, X_test, y_test = _load_and_prepare_data("dummy_path.parquet", 0.005, 1)
+
+        assert X is not None
+        assert y is not None
+        assert not X.empty
+        assert not y.empty
+        assert len(X) == len(y)
+        assert 'target' not in X.columns
+        assert y.name == 'target'
+        assert y.dtype == int
+        assert len(X_train) + len(X_test) == len(X)
+
+def test_load_and_prepare_data_no_valid_rows(sample_feature_df):
+    """Test the case where no rows remain after dropping NaNs."""
+    from ml_model_trainer import _load_and_prepare_data
+
+    # Modify data so no target can be created
+    df = sample_feature_df.copy()
+    df['close'] = 100
+
+    with patch('ml_model_trainer.pd.read_parquet', return_value=df), \
+         patch('ml_model_trainer.mlflow'):
+
+        results = _load_and_prepare_data("dummy_path.parquet", 0.005, 1)
+        assert all(res is None for res in results)

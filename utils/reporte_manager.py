@@ -21,7 +21,8 @@ def _is_safe_filename(filename: str) -> bool:
     """Verifica si el nombre de archivo es seguro (no contiene separadores de ruta o '..')."""
     if not filename:
         return False
-    if os.path.sep in filename or os.path.altsep in filename: # Verifica / y \
+    # Check for path separators, ensuring altsep is not None before checking
+    if os.path.sep in filename or (os.path.altsep and os.path.altsep in filename):
         return False
     if ".." in filename:
         return False
@@ -46,7 +47,12 @@ logger.info(f"Estructura de carpetas de reportes verificada en {REPO_PATH}. ")
 def guardar_reporte(dataframe: pd.DataFrame, tipo: Literal['diario', 'semanal', 'mensual', 'riesgo', 'operaciones'], preguntar_descarga: bool = True) -> Optional[str]:
     fecha_actual = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     filename = f"{tipo}_{fecha_actual}.csv"
-    path_tipo = os.path.join(REPO_PATH, tipo)
+
+    # Map singular tipo to plural directory names where they differ
+    dir_map = {'diario': 'diarios', 'semanal': 'semanales', 'mensual': 'mensuales'}
+    dir_name = dir_map.get(tipo, tipo)
+    path_tipo = os.path.join(REPO_PATH, dir_name)
+
     path_pendiente = os.path.join(REPO_PATH, "pendientes", filename)
 
     try:
