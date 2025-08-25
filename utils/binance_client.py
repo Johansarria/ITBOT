@@ -2,7 +2,7 @@
 import logging
 from binance import AsyncClient
 from binance.exceptions import BinanceAPIException, BinanceRequestException
-import config
+from config import settings  # Import the pydantic settings object
 import asyncio
 
 logger = logging.getLogger(__name__)
@@ -20,8 +20,8 @@ async def get_binance_client() -> AsyncClient:
         async with _client_lock:
             if _binance_client_instance is None:
                 logger.info("Inicializando cliente de Binance asíncrono centralizado...")
-                api_key = config.BINANCE_API_KEY
-                secret_key = config.BINANCE_SECRET_KEY
+                api_key = settings.BINANCE_API_KEY
+                secret_key = settings.BINANCE_SECRET_KEY
 
                 try:
                     # Usamos create para instanciar el cliente asíncrono

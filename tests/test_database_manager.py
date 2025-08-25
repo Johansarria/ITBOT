@@ -1,8 +1,8 @@
 import pytest
 import pandas as pd
 from unittest.mock import patch
+from sqlalchemy import inspect, text
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import text
 from config import settings
 from database.database_manager import (
     init_db,
@@ -47,7 +47,7 @@ def test_init_db_handles_sqlalchemy_error(monkeypatch):
 def test_add_operation(in_memory_db):
     op_data = {
         'operation_id': 'test_op_1',
-        'timestamp': pd.to_datetime('2025-01-01 10:00:00'),
+        'timestamp': pd.to_datetime('2025-01-01 10:00:00').to_pydatetime(),
         'symbol': 'BTCUSDT',
         'side': 'BUY',
         'price': 10000.0,
@@ -75,7 +75,7 @@ def test_add_operation(in_memory_db):
 def test_get_open_positions_df(in_memory_db):
     op_data = {
         'operation_id': 'test_op_2',
-        'timestamp': pd.to_datetime('2025-01-02 10:00:00'),
+        'timestamp': pd.to_datetime('2025-01-02 10:00:00').to_pydatetime(),
         'symbol': 'ETHUSDT',
         'side': 'BUY',
         'price': 2000.0,
@@ -101,7 +101,7 @@ def test_get_open_positions_df(in_memory_db):
 def test_update_position_status(in_memory_db):
     op_data = {
         'operation_id': 'test_op_3',
-        'timestamp': pd.to_datetime('2025-01-03 10:00:00'),
+        'timestamp': pd.to_datetime('2025-01-03 10:00:00').to_pydatetime(),
         'symbol': 'LTCUSDT',
         'side': 'BUY',
         'price': 100.0,
@@ -118,7 +118,7 @@ def test_update_position_status(in_memory_db):
     }
     add_operation(op_data)
 
-    update_position_status('test_op_3', 'CLOSED', 105.0, pd.to_datetime('2025-01-03 11:00:00'), 'TP')
+    update_position_status('test_op_3', 'CLOSED', 105.0, pd.to_datetime('2025-01-03 11:00:00').to_pydatetime(), 'TP')
 
     with get_db_session() as session:
         result = session.execute(text("SELECT status, close_price FROM operations WHERE operation_id = 'test_op_3'")).fetchone()
@@ -167,7 +167,7 @@ def test_get_klines(in_memory_db):
 def test_save_discarded_signal(in_memory_db):
     import json
     signal_data = {
-        'timestamp': pd.to_datetime('2025-01-04 10:00:00'),
+        'timestamp': pd.to_datetime('2025-01-04 10:00:00').to_pydatetime(),
         'strategy': 'ML_Strategy',
         'symbol': 'XRPUSDT',
         'interval': '4h',
