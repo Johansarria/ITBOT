@@ -92,6 +92,8 @@ def generate_random_operations(num_records=50, start_date_str="2025-08-01", end_
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(output_path, index=False)
     print(f"Generated {num_records} random operations to {output_path}")
+    return df
 
-# Call the function to generate the data
-generate_random_operations()
+if __name__ == "__main__":
+    # Call the function to generate the data
+    generate_random_operations()
