@@ -35,7 +35,7 @@ services:
   listener:
     container_name: itbot_listener
     build: .
-    command: python listener_bot.py
+    command: python main.py
     env_file:
       - .env
     volumes:

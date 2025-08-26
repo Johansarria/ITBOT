@@ -13,9 +13,11 @@ async def set_bot_commands(bot: Bot):
     Esto crea el menú de comandos en la interfaz de chat.
     """
     commands = [
+                BotCommand(command="/start", description="Iniciar el bot y mostrar el menú principal."),
+        BotCommand(command="/menu", description="Mostrar el menú principal."),
+        BotCommand(command="/help", description="Mostrar este mensaje de ayuda."),
         BotCommand(command="/status", description="Verificar si el bot está funcionando."),
         BotCommand(command="/posiciones", description="Mostrar un resumen de las posiciones abiertas."),
-        BotCommand(command="/ayuda", description="Mostrar este mensaje de ayuda."),
         BotCommand(command="/reportes", description="Generar reportes de operaciones."),
         BotCommand(command="/riesgo", description="Consultar o ajustar el nivel de riesgo."),
         BotCommand(command="/analizar", description="Realizar un análisis técnico del mercado."),

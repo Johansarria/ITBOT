@@ -6,6 +6,12 @@ from typing import Any, cast
 from datetime import datetime
 import logging
 
+# Imports para RegimeDetector (movido aquí)
+import numpy as np
+from ta.volatility import BollingerBands
+from ta.trend import MACD, ADXIndicator
+from ta.momentum import RSIIndicator
+
 logger = logging.getLogger(__name__) # Obtener logger para este módulo
 
 from utils.exporter import export_analysis_result, export_features
@@ -234,3 +240,83 @@ if __name__ == "__main__":
         for k, v in data.items():
             print(f"{k}: {v}")
     asyncio.run(main_analysis())
+
+
+# --- Contenido de regime_detector.py movido aquí ---
+
+class RegimeDetector:
+    def __init__(self, data: pd.DataFrame):
+        if not isinstance(data, pd.DataFrame) or data.empty:
+            raise ValueError("Data must be a non-empty pandas DataFrame.")
+        if not all(col in data.columns for col in ['high', 'low', 'close', 'volume']):
+            raise ValueError("DataFrame must contain 'high', 'low', 'close', 'volume' columns.")
+        self.data = data.copy()
+        self._calculate_indicators()
+
+    def _calculate_indicators(self):
+        """Calcula todos los indicadores técnicos necesarios."""
+        try:
+            # Bollinger Bands
+            bb = BollingerBands(close=self.data['close'], window=20, window_dev=2)
+            self.data['bb_width'] = (bb.bollinger_hband() - bb.bollinger_lband()) / bb.bollinger_mavg()
+            self.data['bb_percent'] = (self.data['close'] - bb.bollinger_lband()) / (bb.bollinger_hband() - bb.bollinger_lband())
+
+            # MACD
+            macd = MACD(close=self.data['close'])
+            self.data['macd_diff'] = macd.macd_diff()
+
+            # ADX
+            adx = ADXIndicator(high=self.data['high'], low=self.data['low'], close=self.data['close'], window=14)
+            self.data['adx'] = adx.adx()
+
+            # RSI
+            rsi = RSIIndicator(close=self.data['close'], window=14)
+            self.data['rsi'] = rsi.rsi()
+        except Exception as e:
+            logger.error(f"Error calculating technical indicators: {e}", exc_info=True)
+            # Rellenar con NaN si hay un error para evitar fallos posteriores
+            for col in ['bb_width', 'bb_percent', 'macd_diff', 'adx', 'rsi']:
+                if col not in self.data.columns:
+                    self.data[col] = np.nan
+
+    def get_market_regime(self) -> str:
+        """
+        Determina el régimen de mercado actual basado en los indicadores.
+        Devuelve una de las siguientes cadenas:
+        - 'BULLISH_TREND'
+        - 'BEARISH_TREND'
+        - 'BULLISH_REVERSAL'
+        - 'BEARISH_REVERSAL'
+        - 'HIGH_VOLATILITY_RANGE'
+        - 'LOW_VOLATILITY_RANGE'
+        - 'UNDEFINED'
+        """
+        if self.data.isnull().values.any():
+            logger.warning("Data contains NaN values. Regime detection might be unreliable.")
+            return 'UNDEFINED'
+
+        last = self.data.iloc[-1]
+        
+        # Lógica de detección de régimen
+        is_trending = last['adx'] > 25
+        is_volatile = last['bb_width'] > self.data['bb_width'].rolling(50).mean().iloc[-1] * 1.2 # 20% por encima de la media
+
+        if is_trending:
+            if last['macd_diff'] > 0 and last['rsi'] > 55:
+                return 'BULLISH_TREND'
+            elif last['macd_diff'] < 0 and last['rsi'] < 45:
+                return 'BEARISH_TREND'
+
+        # Lógica de reversión
+        if last['bb_percent'] < 0.05 and last['rsi'] < 30:
+            return 'BULLISH_REVERSAL' # Potencial suelo
+        if last['bb_percent'] > 0.95 and last['rsi'] > 70:
+            return 'BEARISH_REVERSAL' # Potencial techo
+
+        # Lógica de rango
+        if is_volatile:
+            return 'HIGH_VOLATILITY_RANGE'
+        else:
+            return 'LOW_VOLATILITY_RANGE'
+            
+        return 'UNDEFINED'

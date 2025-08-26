@@ -30,7 +30,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 # --- Importaciones de Módulos del Proyecto ---
-from config import settings
+from config import settings, reload_settings
 from download_historical_data import download_and_save_klines
 from ml_model_trainer import train_and_save_model
 from modules.analisis_bot import get_historical_klines, procesar_comando_analisis
@@ -44,7 +44,8 @@ from utils.position_manager import (
     get_open_positions_summary,
     manage_open_positions)
 from utils.reporte_manager import generar_reporte_diario
-from utils.reportes_bot import exportar_y_enviar_reporte
+from utils.reportes_bot import exportar_y_enviar_reporte, generar_y_enviar_reporte_rango
+from utils.config_manager import update_env_variable
 from utils.risk_manager import (
                                activar_riesgo_forzado,
                                 calcular_probabilidad_ganancia_perdida,
@@ -72,6 +73,13 @@ CHAT_ID = settings.TELEGRAM_CHAT_ID
 # === Definición de Estados (FSM) para Conversaciones ===
 class RiskManagementStates(StatesGroup):
     waiting_for_force_risk_percentage = State()
+
+class ReportStates(StatesGroup):
+    waiting_for_start_date = State()
+    waiting_for_end_date = State()
+
+class ChangeModeStates(StatesGroup):
+    waiting_for_new_mode = State()
 
 # === Caché Global para el Último Análisis ===
 _last_analysis_cache = {"timestamp": None, "result": None, "strategy_name": None}
@@ -163,6 +171,22 @@ async def send_submenu(message: Message, text: str, keyboard: types.InlineKeyboa
             if is_edit:
                 await message.answer(text, reply_markup=keyboard)
 
+def get_formatted_settings(settings_obj) -> str:
+    sensitive_keys = [
+        "TELEGRAM_BOT_TOKEN",
+        "BINANCE_API_KEY",
+        "BINANCE_SECRET_KEY",
+        "POSTGRES_PASSWORD",
+        "DATABASE_URL",
+    ]
+    formatted_str = ""
+    for key, value in settings_obj.model_dump().items():
+        if key in sensitive_keys:
+            formatted_str += f"{key}: ***FILTRADO***\n"
+        else:
+            formatted_str += f"{key}: {value}\n"
+    return formatted_str.strip()
+
 
 # === Manejadores de Comandos de Telegram ===
 
@@ -191,6 +215,68 @@ async def help_command(message: Message):
         "Usa /start o /home para volver al menú principal en cualquier momento."
     )
     await message.answer(help_text)
+
+@dp.message(Command("status"))
+async def status_command(message: Message):
+    """Muestra el estado actual del bot."""
+    logger.info(f"Comando /status recibido de {message.from_user.id}")
+    status_text = await get_current_status_text()
+    await message.answer(status_text)
+
+@dp.message(Command("posiciones"))
+async def posiciones_command(message: Message):
+    """Muestra un resumen de las posiciones abiertas y cerradas."""
+    logger.info(f"Comando /posiciones recibido de {message.from_user.id}")
+    open_positions = await get_open_positions_summary(bot)
+    closed_positions = get_closed_positions_summary()
+    await message.answer(f"{open_positions}\n{closed_positions}")
+
+@dp.message(Command("reportes"))
+async def reportes_command(message: Message):
+    """Muestra el menú de reportes."""
+    logger.info(f"Comando /reportes recibido de {message.from_user.id}")
+    builder = InlineKeyboardBuilder()
+    builder.button(text="📄 Reporte Diario", callback_data="cmd:report_daily")
+    builder.button(text="📜 Reporte por Rango", callback_data="cmd:report_range")
+    builder.button(text="⬅️ Volver", callback_data="menu:main")
+    builder.adjust(1)
+    await send_submenu(message, "Menú de Reportes:", builder.as_markup(), is_edit=False)
+
+@dp.message(Command("riesgo"))
+async def riesgo_command(message: Message):
+    """Muestra el menú de gestión de riesgo."""
+    logger.info(f"Comando /riesgo recibido de {message.from_user.id}")
+    riesgo_activo = riesgo_forzado_activo()
+    builder = InlineKeyboardBuilder()
+    if riesgo_activo:
+        builder.button(text="🔓 Liberar Riesgo", callback_data="cmd:release_risk")
+    else:
+        builder.button(text="🔒 Forzar Riesgo", callback_data="cmd:force_risk")
+    builder.button(text="🛡️ Gestionar Escudos", callback_data="menu:shields")
+    builder.button(text="⬅️ Volver", callback_data="menu:main")
+    builder.adjust(1)
+    await send_submenu(message, "Menú de Gestión de Riesgo:", builder.as_markup(), is_edit=False)
+
+@dp.message(Command("analizar"))
+async def analizar_command(message: Message):
+    """Muestra el menú de análisis."""
+    logger.info(f"Comando /analizar recibido de {message.from_user.id}")
+    builder = InlineKeyboardBuilder()
+    builder.button(text="🧠 Entrenar Modelo ML", callback_data="cmd:train_ml")
+    builder.button(text="🧪 Optimizar Estrategia", callback_data="cmd:optimize_strategy")
+    builder.button(text="🔄 Recargar Datos Históricos", callback_data="cmd:reload_data")
+    builder.button(text="⬅️ Volver", callback_data="menu:main")
+    builder.adjust(1)
+    await send_submenu(message, "Menú de Análisis:", builder.as_markup(), is_edit=False)
+
+@dp.message(Command("estrategia"))
+async def estrategia_command(message: Message):
+    """Muestra la estrategia activa."""
+    logger.info(f"Comando /estrategia recibido de {message.from_user.id}")
+    active_strategy = strategy_manager.get_active_strategy()
+    active_strategy_name = active_strategy.name if active_strategy else "N/A"
+    await message.answer(f"📈 Estrategia activa: <b>{active_strategy_name}</b>")
+
 
 
 # === Manejadores de Acciones de Botones (Callback Queries) ===
@@ -237,13 +323,15 @@ async def handle_menu_callbacks(cb: types.CallbackQuery):
         builder = InlineKeyboardBuilder()
         builder.button(text="📝 Ver Configuración", callback_data="cmd:view_config")
         builder.button(text="🔄 Recargar Configuración", callback_data="cmd:reload_config")
+        builder.button(text="⚙️ Cambiar Modo", callback_data="cmd:change_mode")
         builder.button(text="⬅️ Volver", callback_data="menu:main")
         builder.adjust(1)
         await send_submenu(message, "Menú de Configuración:", builder.as_markup())
 
     elif action == "estado":
         status_text = await get_current_status_text()
-        await cb.answer(status_text, show_alert=True)
+        await cb.message.answer(status_text)
+        await cb.answer()
 
     elif action == "shields":
         is_shield_active = "ACTIVO" in obtener_estado_escudo_texto()
@@ -330,6 +418,23 @@ async def handle_command_callbacks(cb: types.CallbackQuery, state: FSMContext):
         # La función de generar reporte ya envía el mensaje, no necesitamos hacer más.
         await generar_reporte_diario(bot, CHAT_ID)
 
+    elif action == "report_range": # Nuevo bloque para reportes por rango
+        await state.set_state(ReportStates.waiting_for_start_date)
+        await message.edit_text("Por favor, envía la fecha de inicio para el reporte (YYYY-MM-DD).")
+
+    elif action == "view_config":
+        formatted_settings = get_formatted_settings(settings)
+        await message.edit_text(f"<b>⚙️ Configuración Actual:</b>\n\n<pre>{formatted_settings}</pre>")
+
+    elif action == "reload_config": # Nuevo bloque para recargar configuración
+        await message.edit_text("🔄 Recargando configuración...")
+        try:
+            reload_settings() # Llama a la función de recarga
+            await message.answer("✅ Configuración recargada exitosamente.")
+        except Exception as e:
+            logger.error(f"Error al recargar configuración: {e}", exc_info=True)
+            await message.answer(f"❌ Error al recargar configuración: {e}")
+
     # --- Lógica de Parada Segura ---
     elif action == "stop_bot":
         builder = InlineKeyboardBuilder()
@@ -372,6 +477,79 @@ async def process_forced_risk_percentage(message: Message, state: FSMContext):
     builder.button(text="⬅️ Volver", callback_data="menu:main")
     builder.adjust(1)
     await send_submenu(message, "Menú de Gestión de Riesgo:", builder.as_markup(), is_edit=False)
+
+
+@dp.message(RiskManagementStates.waiting_for_force_risk_percentage)
+async def process_forced_risk_percentage(message: Message, state: FSMContext):
+    """Procesa el porcentaje de riesgo enviado por el usuario."""
+    if not message.text or not message.text.isdigit():
+        await message.answer("Por favor, envía solo un número para el porcentaje. Inténtalo de nuevo.")
+        return
+
+    risk_pct = float(message.text)
+    activar_riesgo_forzado(risk_pct / 100.0)
+    await message.answer(f"✅ Riesgo forzado activado al <b>{risk_pct}%</b>.")
+    await state.clear()
+
+    # Regresar al menú de riesgo
+    builder = InlineKeyboardBuilder()
+    builder.button(text="🔓 Liberar Riesgo", callback_data="cmd:release_risk")
+    builder.button(text="🛡️ Gestionar Escudos", callback_data="menu:shields")
+    builder.button(text="⬅️ Volver", callback_data="menu:main")
+    builder.adjust(1)
+    await send_submenu(message, "Menú de Gestión de Riesgo:", builder.as_markup(), is_edit=False)
+
+def is_valid_date(date_str: str) -> bool:
+    try:
+        datetime.strptime(date_str, "%Y-%m-%d")
+        return True
+    except ValueError:
+        return False
+
+@dp.message(ReportStates.waiting_for_start_date)
+async def process_start_date(message: Message, state: FSMContext):
+    date_str = message.text
+    if not date_str or not is_valid_date(date_str):
+        await message.answer("Formato de fecha inválido. Por favor, usa YYYY-MM-DD (ej. 2023-01-01).")
+        return
+
+    start_date = datetime.strptime(date_str, "%Y-%m-%d")
+    await state.update_data(start_date=start_date)
+    await state.set_state(ReportStates.waiting_for_end_date)
+    await message.answer("Ahora, envía la fecha de fin para el reporte (YYYY-MM-DD).")
+
+@dp.message(ReportStates.waiting_for_end_date)
+async def process_end_date(message: Message, state: FSMContext):
+    date_str = message.text
+    if not date_str or not is_valid_date(date_str):
+        await message.answer("Formato de fecha inválido. Por favor, usa YYYY-MM-DD (ej. 2023-01-31).")
+        return
+
+    end_date = datetime.strptime(date_str, "%Y-%m-%d")
+    user_data = await state.get_data()
+    start_date = user_data.get("start_date")
+
+    if not start_date: # Esto no debería pasar si el flujo es correcto
+        await message.answer("Error: No se encontró la fecha de inicio. Por favor, reinicia el proceso con /reportes.")
+        await state.clear()
+        return
+
+    if end_date < start_date:
+        await message.answer("La fecha de fin no puede ser anterior a la fecha de inicio. Inténtalo de nuevo.")
+        return
+
+    await message.edit_text(f"📄 Generando reporte desde {start_date.date()} hasta {end_date.date()}...")
+    try:
+        # Para incluir todo el día de la fecha final, se suele añadir un día y restar un microsegundo
+        end_date_inclusive = end_date + timedelta(days=1, microseconds=-1)
+
+        await generar_y_enviar_reporte_rango(bot, CHAT_ID, start_date, end_date_inclusive, "csv")
+        await message.answer("✅ Reporte por rango de fechas generado y enviado.")
+    except Exception as e:
+        logger.error(f"Error al generar reporte por rango: {e}", exc_info=True)
+        await message.answer(f"❌ Ocurrió un error al generar el reporte: {e}")
+    finally:
+        await state.clear()
 
 
 # === Tareas Programadas (Scheduler) ===

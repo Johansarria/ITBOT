@@ -18,14 +18,7 @@ import database.database_manager as db_manager
 from config import settings
 from unittest.mock import MagicMock
 
-# --- Global Test Setup ---
-# Patch heavy objects at the module level BEFORE tests import them.
-# This prevents slow initializations from running for every test file.
-import listener_bot
-listener_bot.bot = MagicMock()
-listener_bot.dp = MagicMock()
-listener_bot.strategy_manager = MagicMock()
-listener_bot.state_manager = MagicMock()
+
 
 # --- Global Test Setup: Mock external services at import time ---
 

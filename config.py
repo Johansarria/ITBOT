@@ -19,8 +19,8 @@ class Settings(BaseSettings):
     BINANCE_SECRET_KEY: str
 
     # --- CONFIGURACIÓN DE TRADING ---
-    TRADING_PAIRS: List[str] = Field(default=["BTCUSDT"])
-    TRADING_INTERVAL: str = "1h"
+    ASSETS_TO_TRADE: List[str] = Field(default=["BTCUSDT"])
+    INTERVAL: str = "1h"
     MODE: str = "live"
 
     # --- GESTIÓN DE RIESGO ---
@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     MAX_DAILY_LOSS_PCT: float = 5.0
     MAX_TRADE_RISK_PCT: float = 1.0
     MAX_CONCURRENT_POSITIONS: int = 3
+
+    # --- MLOPS ---
+    ML_MODEL_ID: str = "v2.1.4-beta"
 
     # --- CONFIGURACIÓN DEL RUNNER ---
     AUTONOMOUS_CYCLE_SECONDS: int = 3600
@@ -76,3 +79,12 @@ class Settings(BaseSettings):
 
 # Create a single, globally-accessible settings instance
 settings = Settings()
+
+def reload_settings() -> Settings:
+    """
+    Recarga la configuración del bot creando una nueva instancia de Settings.
+    Esto permite que los cambios en las variables de entorno o .env sean aplicados.
+    """
+    global settings # Declara que vamos a modificar la variable global settings
+    settings = Settings() # Crea una nueva instancia y la asigna a la global
+    return settings

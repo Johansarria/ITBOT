@@ -4,6 +4,8 @@ import asyncio
 import logging
 import sys
 import os
+import time # Importar time
+import redis # Importar redis
 from typing import Any, Dict, Optional
 
 # Asegura que el root del proyecto esté en sys.path para ejecución directa
@@ -268,14 +270,34 @@ async def main() -> None:
     Bucle principal del worker de ejecución. Espera y procesa decisiones de la cola de mensajes.
     """
     logger.info("Worker de ejecución iniciado. Esperando decisiones...")
+    
+    # Conexión a Redis para Heartbeat
+    try:
+        redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+        redis_client.ping() # Verificar conexión
+        logger.info("Conexión con Redis para heartbeat del worker establecida.")
+    except redis.exceptions.ConnectionError as e:
+        logger.critical(f"No se pudo conectar a Redis para el heartbeat del worker: {e}")
+        redis_client = None
+
     while True:
+        # Enviar Heartbeat
+        if redis_client:
+            try:
+                redis_client.set("heartbeat:execution_worker", int(time.time()))
+            except redis.exceptions.RedisError as e:
+                logger.error(f"No se pudo enviar el heartbeat del worker a Redis: {e}")
+
         try:
-            decision = mq.get_decision()
+            decision = mq.get_decision() # Este es un llamado bloqueante con timeout
             if decision:
                 await process_decision(decision)
+            else:
+                # Si get_decision devuelve None (por timeout), el bucle continúa y envía un nuevo heartbeat.
+                pass
         except Exception as e:
             logger.error(f"Error en el bucle principal del worker: {e}", exc_info=True)
-
+            await asyncio.sleep(5) # Esperar antes de reintentar en caso de error
 
 def run_worker() -> None:
     """
