@@ -31,4 +31,4 @@ mlruns/
 
 
 # Archivos de estado del bot
-data/bot_state.json
+data/bot_state.json.gemini/
