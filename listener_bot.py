@@ -39,9 +39,10 @@ from strategies.strategy_manager import StrategyManager
 from utils.bot_commands import set_bot_commands as set_main_bot_commands
 from utils.daily_operations_counter import reset_daily_operations_count_manual
 from utils.order_executor import evaluar_y_ejecutar_operacion
-from utils.position_manager import (get_closed_positions_summary,
-                                    get_open_positions_summary,
-                                    manage_open_positions)
+from utils.position_manager import (
+    get_closed_positions_summary,
+    get_open_positions_summary,
+    manage_open_positions)
 from utils.reporte_manager import generar_reporte_diario
 from utils.reportes_bot import exportar_y_enviar_reporte
 from utils.risk_manager import (
@@ -93,7 +94,7 @@ def get_main_menu() -> tuple[str, types.InlineKeyboardMarkup]:
 async def get_current_status_text() -> str:
     """Recopila y formatea el texto de estado completo del bot."""
     escudo_estado_texto = obtener_estado_escudo_texto()
-    posiciones_summary = get_open_positions_summary()
+    posiciones_summary = await get_open_positions_summary(bot)
     riesgo_activo = riesgo_forzado_activo()
     riesgo_actual_pct = obtener_riesgo_actual() * 100
     duracion_riesgo = duracion_riesgo_forzado() if riesgo_activo else "N/A"
