@@ -15,7 +15,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from config import settings
 from database.database_manager import init_db
 from download_historical_data import download_and_save_klines
-from listener_bot import dp
+# from listener_bot import dp # No longer needed, this bot should not listen.
 from strategies.strategy_manager import StrategyManager
 from utils.binance_client import close_binance_client
 from utils.logger_setup import setup_logging
@@ -162,7 +162,9 @@ async def main_run_bot() -> None:
     scheduler.start()
     logger.info("Scheduler iniciado con tareas programadas.")
 
-    polling_task = asyncio.create_task(dp.start_polling(bot_instance))
+    # Se elimina el polling de Telegram para este proceso.
+    # La interacción con el usuario se gestionará a través de main.py.
+    # polling_task = asyncio.create_task(dp.start_polling(bot_instance))
 
     try:
         if session_mode == "live":
@@ -205,12 +207,12 @@ async def main_run_bot() -> None:
         logger.info("Iniciando secuencia de apagado del bot...")
         if scheduler.running:
             scheduler.shutdown()
-        if not polling_task.done():
-            polling_task.cancel()
-            try:
-                await polling_task
-            except asyncio.CancelledError:
-                pass
+        # if not polling_task.done():
+        #     polling_task.cancel()
+        #     try:
+        #         await polling_task
+        #     except asyncio.CancelledError:
+        #         pass
         
         await close_binance_client()
         await shutdown_all_subprocesses()

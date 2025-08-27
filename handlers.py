@@ -39,22 +39,25 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     status = await logic_stubs.get_consolidated_status()
 
     # Formateo del resumen
-    mode = status.get('mode', 'N/A')
+    mode = escape_markdown(status.get('mode', 'N/A'))
     running_status = '✅ ACTIVO' if status.get('running') else '🛑 DETENIDO'
     shields_active = any(status.get('shield_status', {}).values())
     shield_status_text = f"🛡️ ACTIVOS" if shields_active else f"✅ INACTIVOS"
-    open_positions = status.get('open_positions', 'N/A')
-    market_regime = status.get('market_regime', 'N/A')
-    total_pnl = status.get('total_pnl_percent', 0.0)
-    daily_pnl = status.get('daily_pnl_percent', 0.0)
+    open_positions = escape_markdown(str(status.get('open_positions', 'N/A')))
+    market_regime = escape_markdown(status.get('market_regime', 'N/A'))
+
+    # Escapar PNL por separado para manejar el punto decimal
+    daily_pnl_str = escape_markdown(f"{status.get('daily_pnl_percent', 0.0):.2f}")
+    total_pnl_str = escape_markdown(f"{status.get('total_pnl_percent', 0.0):.2f}")
 
     summary_text = (
         f"*Modo*: `{mode}` | *Estado*: `{running_status}`\n"
         f"*Escudos*: `{shield_status_text}` | *Posiciones*: `{open_positions}`\n"
         f"*Régimen*: `{market_regime}`\n"
-        f"*PNL Diario*: `{daily_pnl:.2f}%` | *PNL Total*: `{total_pnl:.2f}%`"
+        f"*PNL Diario*: `{daily_pnl_str}%` | *PNL Total*: `{total_pnl_str}%`"
     )
 
+    # El texto principal no necesita ser escapado porque ya está formateado
     text = f"""🤖 *Menú Principal de ITBOT* 🤖
 
 *Resumen Operativo:*

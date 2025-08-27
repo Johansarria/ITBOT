@@ -138,7 +138,7 @@ async def get_last_discarded_signals() -> List[Dict[str, str]]:
     """Obtiene las últimas señales descartadas desde la base de datos."""
     try:
         with get_db_session() as session:
-            query = "SELECT * FROM discarded_signals ORDER BY timestamp DESC LIMIT 5"
+            query = text("SELECT * FROM discarded_signals ORDER BY timestamp DESC LIMIT 5")
             df = pd.read_sql(query, session.bind)
         return df.to_dict(orient='records')
     except Exception as e:
