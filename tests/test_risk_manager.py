@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import sys
 from freezegun import freeze_time
-from unittest.mock import patch, mock_open, AsyncMock
+from unittest.mock import patch, mock_open
 import json
 
 from config import settings
@@ -193,73 +193,41 @@ def test_obtener_riesgo_ajustado():
 
 # --- Tests for Permission Checks ---
 
-@pytest.mark.asyncio
-async def test_verificar_permiso_de_operacion_kill_switch():
+def test_verificar_permiso_de_operacion_kill_switch():
     """Test that permission is denied if the extreme shield is active."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager.escudo_activo', return_value='extremo'):
-        allowed, reason = await verificar_permiso_de_operacion()
+        allowed, reason = verificar_permiso_de_operacion()
         assert not allowed
         assert "Kill Switch" in reason
 
-@pytest.mark.asyncio
-async def test_verificar_permiso_de_operacion_loss_limit():
+def test_verificar_permiso_de_operacion_loss_limit():
     """Test that permission is denied if the daily loss limit is exceeded."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager._get_daily_pnl_pct', return_value=-11.0), \
          patch('utils.risk_manager.settings.MAX_DAILY_LOSS_PCT', 10.0):
-        allowed, reason = await verificar_permiso_de_operacion()
+        allowed, reason = verificar_permiso_de_operacion()
         assert not allowed
         assert "Límite de pérdida diaria" in reason
 
-@pytest.mark.asyncio
-async def test_verificar_permiso_de_operacion_position_limit():
+def test_verificar_permiso_de_operacion_position_limit():
     """Test that permission is denied if the concurrent position limit is exceeded."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame([{}, {}, {}])), \
          patch('utils.risk_manager.settings.MAX_CONCURRENT_POSITIONS', 3):
-        allowed, reason = await verificar_permiso_de_operacion()
+        allowed, reason = verificar_permiso_de_operacion()
         assert not allowed
         assert "Límite de posiciones concurrentes" in reason
 
-@pytest.mark.asyncio
-async def test_verificar_permiso_de_operacion_exposure_limit():
-    """Test that permission is denied if the total exposure limit is exceeded."""
-    from utils.risk_manager import verificar_permiso_de_operacion
-    
-    # Mock open positions with a total size of 500 USDT
-    open_positions = pd.DataFrame([{'size_usdt': 200}, {'size_usdt': 300}])
-    
-    # Mock asyncio.to_thread to return a mock balance info directly
-    async def mock_to_thread(func, *args, **kwargs):
-        if func.__name__ == 'get_asset_balance':
-            return {'free': '500'}
-        # For other functions that might be passed to to_thread, call the original
-        return await asyncio.to_thread(func, *args, **kwargs)
-
-    with patch('utils.risk_manager.get_open_positions', return_value=open_positions), \
-         patch('utils.risk_manager.asyncio.to_thread', side_effect=mock_to_thread), \
-         patch('utils.risk_manager.settings.MAX_TOTAL_EXPOSURE_PCT', 49.0): # Set limit to 49%
-        
-        allowed, reason = await verificar_permiso_de_operacion()
-        assert not allowed
-        assert "Límite de exposición total" in reason
-
-
-@pytest.mark.asyncio
-async def test_verificar_permiso_de_operacion_allowed():
+def test_verificar_permiso_de_operacion_allowed():
     """Test that permission is granted when no limits are exceeded."""
     from utils.risk_manager import verificar_permiso_de_operacion
-    mock_client = AsyncMock()
-    mock_client.get_asset_balance.return_value = {'free': '1000'}
-
     with patch('utils.risk_manager.escudo_activo', return_value='ninguno'), \
          patch('utils.risk_manager._get_daily_pnl_pct', return_value=-1.0), \
          patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame()), \
-         patch('utils.risk_manager.get_binance_client', return_value=mock_client), \
          patch('utils.risk_manager.settings.MAX_DAILY_LOSS_PCT', 10.0), \
          patch('utils.risk_manager.settings.MAX_CONCURRENT_POSITIONS', 5):
-        allowed, reason = await verificar_permiso_de_operacion()
+        allowed, reason = verificar_permiso_de_operacion()
         assert allowed
         assert reason == "Permitido"
 
@@ -269,117 +237,17 @@ async def test_perform_pre_execution_risk_checks():
     from utils.risk_manager import perform_pre_execution_risk_checks
 
     # Test that it calls the general check
-    with patch('utils.risk_manager.verificar_permiso_de_operacion', new_callable=AsyncMock) as mock_general_check:
-        mock_general_check.return_value = (False, "Test block")
+    with patch('utils.risk_manager.verificar_permiso_de_operacion', return_value=(False, "Test block")) as mock_general_check:
         allowed, reason = await perform_pre_execution_risk_checks({})
         assert not allowed
         assert reason == "Test block"
         mock_general_check.assert_called_once()
 
     # Test invalid quantity
-    with patch('utils.risk_manager.verificar_permiso_de_operacion', new_callable=AsyncMock) as mock_general_check:
-        mock_general_check.return_value = (True, "")
+    with patch('utils.risk_manager.verificar_permiso_de_operacion', return_value=(True, "")):
         allowed, reason = await perform_pre_execution_risk_checks({'quantity': 0})
         assert not allowed
         assert "Cantidad de operación inválida" in reason
-
-# --- Tests for Stop Loss / Take Profit Checks ---
-
-def test_check_stop_loss_take_profit_buy_sl_hit():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 95.0, 'take_profit': 105.0, 'side': 'BUY'}
-    current_price = 94.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "SL hit"
-
-def test_check_stop_loss_take_profit_buy_tp_hit():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 95.0, 'take_profit': 105.0, 'side': 'BUY'}
-    current_price = 106.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "TP hit"
-
-def test_check_stop_loss_take_profit_buy_no_trigger():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 95.0, 'take_profit': 105.0, 'side': 'BUY'}
-    current_price = 100.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is False
-    assert reason == "No trigger"
-
-def test_check_stop_loss_take_profit_sell_sl_hit():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 105.0, 'take_profit': 95.0, 'side': 'SELL'}
-    current_price = 106.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "SL hit"
-
-def test_check_stop_loss_take_profit_sell_tp_hit():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 105.0, 'take_profit': 95.0, 'side': 'SELL'}
-    current_price = 94.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "TP hit"
-
-def test_check_stop_loss_take_profit_sell_no_trigger():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 105.0, 'take_profit': 95.0, 'side': 'SELL'}
-    current_price = 100.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is False
-    assert reason == "No trigger"
-
-def test_check_stop_loss_take_profit_missing_entry_price():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'stop_loss': 95.0, 'take_profit': 105.0, 'side': 'BUY'}
-    current_price = 94.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is False
-    assert "missing entry_price" in reason
-
-def test_check_stop_loss_take_profit_no_sl_tp_defined():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'side': 'BUY'}
-    current_price = 90.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is False
-    assert reason == "No trigger"
-
-def test_check_stop_loss_take_profit_buy_sl_exact():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 95.0, 'take_profit': 105.0, 'side': 'BUY'}
-    current_price = 95.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "SL hit"
-
-def test_check_stop_loss_take_profit_buy_tp_exact():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 95.0, 'take_profit': 105.0, 'side': 'BUY'}
-    current_price = 105.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "TP hit"
-
-def test_check_stop_loss_take_profit_sell_sl_exact():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 105.0, 'take_profit': 95.0, 'side': 'SELL'}
-    current_price = 105.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "SL hit"
-
-def test_check_stop_loss_take_profit_sell_tp_exact():
-    from utils.risk_manager import check_stop_loss_take_profit
-    position = {'entry_price': 100.0, 'stop_loss': 105.0, 'take_profit': 95.0, 'side': 'SELL'}
-    current_price = 95.0
-    triggered, reason = check_stop_loss_take_profit(position, current_price)
-    assert triggered is True
-    assert reason == "TP hit"
 
 # --- Tests for File I/O Functions ---
 

@@ -23,9 +23,17 @@ from telegram.constants import ParseMode
 # Importaciones locales
 import keyboards
 import telegram_logic_adapter as logic_stubs
+from config import settings
 
 # --- Estados para ConversationHandler ---
-CONFIRM_LIVE, CONFIRM_LIQUIDATE, CONFIRM_STOP, CONFIRM_MANUAL_RISK, CONFIRM_KILL_SWITCH = range(5)
+(
+    CONFIRM_LIVE,
+    CONFIRM_LIQUIDATE,
+    CONFIRM_STOP,
+    CONFIRM_MANUAL_RISK,
+    CONFIRM_KILL_SWITCH,
+    CONFIRM_RESUME,
+) = range(6)
 
 # --- Helper para escapar Markdown ---
 def escape_markdown(text: str) -> str:
@@ -90,13 +98,12 @@ async def show_control_operativo(update: Update, context: ContextTypes.DEFAULT_T
     query = update.callback_query
     await query.answer()
     current_mode = await logic_stubs.get_bot_mode()
-    # Se elimina el formato Markdown para garantizar la funcionalidad.
-    text = f"Control Operativo\n\nModo actual: {current_mode}\n\nSelecciona una acción."
+    mode_text = escape_markdown(current_mode)
+    text = f"⚙️ *Control Operativo*\n\nModo actual: `{mode_text}`\n\nSelecciona una acción."
     
     keyboard = keyboards.get_control_operativo_keyboard(current_mode)
 
-    # Se elimina parse_mode para enviar como texto plano y evitar errores.
-    await query.edit_message_text(text=text, reply_markup=keyboard)
+    await query.edit_message_text(text=text, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN_V2)
 
 async def show_gestion_riesgo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
@@ -141,10 +148,22 @@ async def show_system_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 async def show_emergency_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer()
-    text = "🚨 *MENÚ DE EMERGENCIA* 🚨\\n\\nUsa estas opciones con extrema precaución. Son acciones irreversibles\\."
+    # Corregido: Se eliminan los escapes manuales incorrectos y se usa \n.
+    # El parser de MarkdownV2 de Telegram es muy estricto.
+    text = "🚨 *MENÚ DE EMERGENCIA* 🚨\n\nUsa estas opciones con extrema precaución. Son acciones irreversibles."
     await query.edit_message_text(
         text=text,
         reply_markup=keyboards.get_emergency_menu_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+
+async def show_panel_control(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    text = "🕹️ *Panel de Control*\\n\\nMonitoriza el estado del bot en tiempo real\\."
+    await query.edit_message_text(
+        text=text,
+        reply_markup=keyboards.get_panel_control_keyboard(),
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
@@ -234,12 +253,33 @@ async def mlops_model_status(update: Update, context: ContextTypes.DEFAULT_TYPE)
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
+async def panel_show_positions(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer("Consultando posiciones abiertas...")
+    summary = await logic_stubs.get_open_positions_summary(context.bot)
+    await query.edit_message_text(
+        text=summary,
+        reply_markup=keyboards.get_panel_control_keyboard(),
+        parse_mode=ParseMode.HTML
+    )
+
+async def panel_show_shields(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    status_text = logic_stubs.get_shield_status()
+    text = f"🛡️ *Estado de los Escudos*\n\n{escape_markdown(status_text)}"
+    await query.edit_message_text(
+        text=text,
+        reply_markup=keyboards.get_panel_control_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+
 async def risk_set_auto(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer("Cambiando a riesgo automático...")
     logic_stubs.set_risk_auto()
     await query.edit_message_text(
-        text="✅ *Riesgo configurado en modo Automático*\\.\\n\\nEl sistema ajustará el riesgo según el modelo ML.",
+        text="✅ *Riesgo configurado en modo Automático*\\.\n\nEl sistema ajustará el riesgo según el modelo ML.",
         reply_markup=keyboards.get_risk_size_menu_keyboard(),
         parse_mode=ParseMode.MARKDOWN_V2
     )
@@ -258,37 +298,38 @@ async def toggle_operative_mode(update: Update, context: ContextTypes.DEFAULT_TY
 
     if current_mode == 'LIVE':
         await logic_stubs.set_bot_mode("PAPER_TRADING")
-        # Se elimina el formato Markdown para garantizar la funcionalidad.
-        text = "Modo de Operación Cambiado a PAPER_TRADING\n\nEl bot operará en modo de simulación."
-        await query.edit_message_text(text=text)
+        await query.edit_message_text(
+            text="✅ *Modo de Operación Cambiado a `PAPER_TRADING`*\n\nEl bot operará en modo de simulación.",
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
         await start(update, context)
         return ConversationHandler.END
     else: # paper o cualquier otro estado
-        # Se elimina el formato Markdown para garantizar la funcionalidad.
         text = (
-            f"Confirmación Requerida\n\n"
-            f"El bot está actualmente en modo {current_mode}.\n\n"
-            f"Para cambiar a modo LIVE, por favor, escribe: CONFIRMAR LIVE\n\n"
+            f"⚠️ *Confirmación Requerida* ⚠️\n\n"
+            f"El bot está actualmente en modo `{escape_markdown(current_mode)}`.\n\n"
+            f"Para cambiar a modo **LIVE**, por favor, escribe `CONFIRMAR LIVE`. \n\n"
             f"Esta acción expondrá capital real al mercado."
         )
-        # Se elimina parse_mode para enviar como texto plano y evitar errores.
-        await query.edit_message_text(text=text, reply_markup=keyboards.get_cancel_keyboard())
+        await query.edit_message_text(text=text, reply_markup=keyboards.get_cancel_keyboard(), parse_mode=ParseMode.MARKDOWN_V2)
         return CONFIRM_LIVE
 
 async def confirm_and_set_live_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Confirma y cambia el modo a LIVE."""
     if update.message and update.message.text == "CONFIRMAR LIVE":
         await logic_stubs.set_bot_mode("LIVE")
-        # Se elimina el formato Markdown para garantizar la funcionalidad.
-        text = "Modo de Operación Cambiado a LIVE\n\nEl bot ahora operará con capital real."
-        await update.message.reply_text(text=text)
+        await update.message.reply_text(
+            text="✅ *Modo de Operación Cambiado a `LIVE`*\n\nEl bot ahora operará con capital real.",
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
         # Simplificado: Llama a start() con el update actual para reenviar el menú.
         await start(update, context)
         return ConversationHandler.END
     else:
-        # Se elimina el formato Markdown para garantizar la funcionalidad.
-        text = "Texto incorrecto. El cambio a modo LIVE ha sido cancelado. Vuelve a intentarlo desde el menú de Control Operativo."
-        await update.message.reply_text(text=text)
+        await update.message.reply_text(
+            text="❌ Texto incorrecto. El cambio a modo LIVE ha sido cancelado. Vuelve a intentarlo desde el menú de Control Operativo.",
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
         return ConversationHandler.END
 
 async def liquidate_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -310,19 +351,21 @@ async def liquidate_start(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def confirm_liquidate(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message and update.message.text == "LIQUIDAR TODO":
         await update.message.reply_text(
-            text="🔥 Confirmado. Ejecutando liquidación total...",
+            text="🔥 Confirmado\\. Ejecutando liquidación total\\.\\.\\.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
-        await logic_stubs.liquidate_all_positions()
+        # This function is being deprecated in favor of execute_kill_switch
+        # For now, we call the new robust function
+        await logic_stubs.execute_kill_switch()
         await update.message.reply_text(
-            text="✅ *Liquidación Completada*\\.\\ Todas las posiciones han sido cerradas\\.",
+            text="✅ *Liquidación Completada*\\. Todas las posiciones han sido cerradas\\.",
             reply_markup=keyboards.get_emergency_menu_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto. Escribe `LIQUIDAR TODO` o presiona cancelar\\.",
+            text="❌ Texto incorrecto\\. Escribe `LIQUIDAR TODO` o presiona cancelar\\.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
@@ -333,7 +376,7 @@ async def stop_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await query.answer("¡ACCIÓN CRÍTICA!", show_alert=True)
     text = (
         "🛑🛑🛑 *CONFIRMACIÓN DE PAUSA TOTAL* 🛑🛑🛑\\n\\n"
-        "Estás a punto de detener **TODOS** los procesos de trading del bot. No se abrirán nuevas posiciones hasta que se reactive manualmente\\.\\n\\n"
+        "Estás a punto de detener **TODOS** los procesos de trading del bot\\. No se abrirán nuevas posiciones hasta que se reactive manualmente\\.\\n\\n"
         "Esta acción es **SEGURA** y no cierra posiciones abiertas\\.\\n\\n"
         "Para proceder, escribe `PAUSA TOTAL`\\."
     )
@@ -347,60 +390,124 @@ async def stop_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 async def confirm_stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message and update.message.text == "PAUSA TOTAL":
         await update.message.reply_text(
-            text="🛑 Confirmado. Iniciando secuencia de pausa total...",
+            text="🛑 Confirmado\\. Iniciando secuencia de pausa total\\.\\.\\.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
         await logic_stubs.full_system_stop()
         await update.message.reply_text(
-            text="✅ *Sistema en Pausa*. El bot ha dejado de operar\\.",
+            text="✅ *Sistema en Pausa*\\. El bot ha dejado de operar\\.",
             reply_markup=keyboards.get_emergency_menu_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto. Escribe `PAUSA TOTAL` o presiona cancelar\.",
+            text="❌ Texto incorrecto\\. Escribe `PAUSA TOTAL` o presiona cancelar\\.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return CONFIRM_STOP
 
+
+# --- NUEVOS HANDLERS PARA KILL SWITCH Y RESUME ---
+
+def is_admin(user_id: int) -> bool:
+    """Verifica si el ID de usuario corresponde al administrador."""
+    return user_id == settings.ADMIN_TELEGRAM_ID
+
 async def kill_switch_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia la secuencia del Kill Switch, verificando primero la autorización."""
     query = update.callback_query
-    await query.answer("¡ACCIÓN CRÍTICA EXTREMA!", show_alert=True)
+    if not is_admin(query.from_user.id):
+        await query.answer("🚫 ACCESO DENEGADO 🚫", show_alert=True)
+        return ConversationHandler.END
+
+    await query.answer("❗ ACCIÓN DE EMERGENCIA ❗", show_alert=True)
     text = (
         "🚨🚨🚨 *CONFIRMACIÓN DE KILL SWITCH* 🚨🚨🚨\n\n"
-        "Estás a punto de liquidar **TODAS** las posiciones abiertas Y detener **TODAS** las nuevas operaciones\.\n\n"
-        "Esta acción es **IRREVERSIBLE** y detendrá completamente el bot hasta reactivación manual\.\n\n"
-        "Para proceder, escribe `CONFIRMAR KILL SWITCH`\."
+        "Esta acción liquidará **TODAS** las posiciones abiertas y detendrá **TODA** la operativa del bot.\n\n"
+        "Esta acción es **IRREVERSIBLE**.\n\n"
+        "Para proceder, escribe `CONFIRMAR KILL SWITCH`."
     )
     await query.edit_message_text(
-        text=text,
+        text=escape_markdown(text),
         reply_markup=keyboards.get_cancel_keyboard(),
         parse_mode=ParseMode.MARKDOWN_V2
     )
     return CONFIRM_KILL_SWITCH
 
 async def confirm_kill_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Ejecuta el Kill Switch tras la confirmación del administrador."""
     if update.message and update.message.text == "CONFIRMAR KILL SWITCH":
+        await update.message.reply_text(escape_markdown("🔥 Confirmado. Ejecutando Kill Switch... Liquidando posiciones y pausando el sistema..."), parse_mode=ParseMode.MARKDOWN_V2)
+
+        # Ejecutar lógica de liquidación y pausa
+        results = await logic_stubs.execute_kill_switch()
+        await logic_stubs.full_system_stop()
+
+        # Formatear el reporte para el usuario
+        closed_count = len(results['closed_positions'])
+        failed_count = len(results['failed_positions'])
+        report_parts = [f"✅ *Liquidación completada*: {closed_count} posiciones cerradas."]
+        if failed_count > 0:
+            report_parts.append(f"❌ *ATENCIÓN*: {failed_count} posiciones NO pudieron cerrarse y requieren intervención manual.")
+            for pos in results['failed_positions']:
+                report_parts.append(f"  - `{escape_markdown(pos['symbol'])}`")
+
+        report_parts.append("\n🛑 *Sistema en Pausa*. El bot no realizará nuevas operaciones.")
+
         await update.message.reply_text(
-            text="🚨 Confirmado. Activando Kill Switch: liquidando posiciones y deteniendo operaciones…",
-            parse_mode=ParseMode.MARKDOWN_V2
-        )
-        await logic_stubs.activate_kill_switch_logic() # This function will be implemented next
-        await update.message.reply_text(
-            text="✅ *Kill Switch Activado*. Todas las posiciones liquidadas y nuevas operaciones detenidas\.",
+            text="\n".join(report_parts),
             reply_markup=keyboards.get_emergency_menu_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto. Escribe `CONFIRMAR KILL SWITCH` o presiona cancelar\.",
+            escape_markdown("❌ Texto incorrecto. El Kill Switch ha sido cancelado."),
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return CONFIRM_KILL_SWITCH
+
+async def resume_system_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia la secuencia para reanudar el sistema."""
+    query = update.callback_query
+    if not is_admin(query.from_user.id):
+        await query.answer("🚫 ACCESO DENEGADO 🚫", show_alert=True)
+        return ConversationHandler.END
+
+    await query.answer()
+    text = (
+        "✅ *Reanudar Operativa* ✅\n\n"
+        "Estás a punto de reactivar el bot. Volverá a analizar el mercado y a abrir posiciones según su estrategia.\n\n"
+        "Para proceder, escribe `REANUDAR SISTEMA`."
+    )
+    await query.edit_message_text(
+        text=escape_markdown(text),
+        reply_markup=keyboards.get_cancel_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+    return CONFIRM_RESUME
+
+async def confirm_resume_system(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Confirma y reanuda el sistema."""
+    if update.message and update.message.text == "REANUDAR SISTEMA":
+        await update.message.reply_text(escape_markdown("✅ Confirmado. Reanudando la operativa..."), parse_mode=ParseMode.MARKDOWN_V2)
+        await logic_stubs.resume_system()
+        await update.message.reply_text(
+            escape_markdown("🚀 *Sistema Reactivado*. El bot está operativo."),
+            reply_markup=keyboards.get_emergency_menu_keyboard(),
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        return ConversationHandler.END
+    else:
+        await update.message.reply_text(
+            escape_markdown("❌ Texto incorrecto. La reanudación ha sido cancelada."),
+            reply_markup=keyboards.get_cancel_keyboard(),
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        return CONFIRM_RESUME
 
 async def cancel_conversation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancela la acción actual y vuelve al menú principal."""
@@ -436,7 +543,7 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
         logic_stubs.set_risk_manual(risk_value)
 
         await update.message.reply_text(
-            text=f"✅ *Riesgo manual establecido en {risk_value}%*\\.\\n\\nTodas las nuevas operaciones usarán este valor.",
+            text=f"✅ *Riesgo manual establecido en {risk_value}%*\\.\n\nTodas las nuevas operaciones usarán este valor.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
         from telegram import CallbackQuery
@@ -449,7 +556,7 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
 
     except (ValueError, TypeError):
         await update.message.reply_text(
-            text="❌ *Valor inválido*\\.\\n\\nPor favor, introduce un número válido (ej. `1.5` o `2`)\\.\\ Inténtalo de nuevo o cancela la operación.",
+            text="❌ *Valor inválido*\\.\n\nPor favor, introduce un número válido (ej. `1.5` o `2`)\\. Inténtalo de nuevo o cancela la operación.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
@@ -460,6 +567,7 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
 main_menu_handlers = [
     CallbackQueryHandler(start, pattern="^main_menu$"),
     CallbackQueryHandler(show_control_operativo, pattern="^control_operativo$"),
+    CallbackQueryHandler(show_panel_control, pattern="^panel_control$"),
     CallbackQueryHandler(show_gestion_riesgo, pattern="^gestion_riesgo$"),
     CallbackQueryHandler(show_reportes_analisis, pattern="^reportes_analisis$"),
     CallbackQueryHandler(show_mlops_menu, pattern="^inteligencia_mlops$"),
@@ -473,6 +581,8 @@ action_handlers = [
     CallbackQueryHandler(risk_define_size_menu, pattern="^risk_define_size$"),
     CallbackQueryHandler(mlops_show_regime, pattern="^mlops_show_regime$"),
     CallbackQueryHandler(mlops_model_status, pattern="^mlops_model_status$"),
+    CallbackQueryHandler(panel_show_positions, pattern="^panel_show_positions$"),
+    CallbackQueryHandler(panel_show_shields, pattern="^panel_show_shields$"),
     CallbackQueryHandler(risk_set_auto, pattern="^risk_set_auto$"),
 ]
 
@@ -487,18 +597,20 @@ conv_handlers = [
         per_chat=True,
     ),
     ConversationHandler(
-        entry_points=[CallbackQueryHandler(liquidate_start, pattern="^emergency_liquidate$")],
+        # Este es el nuevo handler para el Kill Switch unificado
+        entry_points=[CallbackQueryHandler(kill_switch_start, pattern="^emergency_kill_switch$")],
         states={
-            CONFIRM_LIQUIDATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_liquidate)]
+            CONFIRM_KILL_SWITCH: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_kill_switch)]
         },
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
     ),
     ConversationHandler(
-        entry_points=[CallbackQueryHandler(stop_start, pattern="^emergency_full_stop$")],
+        # Nuevo handler para reanudar el sistema
+        entry_points=[CallbackQueryHandler(resume_system_start, pattern="^emergency_resume_system$")],
         states={
-            CONFIRM_STOP: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_stop)]
+            CONFIRM_RESUME: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_resume_system)]
         },
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
@@ -513,4 +625,5 @@ conv_handlers = [
         per_user=True,
         per_chat=True,
     ),
+    # Los handlers 'liquidate_start' y 'stop_start' se eliminan en favor del nuevo 'kill_switch_start'
 ]

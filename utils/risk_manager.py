@@ -4,12 +4,10 @@ from datetime import datetime, date
 import json
 import os
 import pandas as pd
-import asyncio
 from utils.state_manager import StateManager
 from config import settings
 from utils.shield_manager import escudo_activo
 from utils.position_manager import get_open_positions
-from utils.binance_client import get_binance_client
 
 logger = logging.getLogger(__name__)
 
@@ -47,54 +45,9 @@ def _get_daily_pnl_pct() -> float:
         logger.error(f"Error calculando P&L diario: {e}", exc_info=True)
         return 0.0
 
-def check_stop_loss_take_profit(position_data: dict, current_price: float) -> tuple[bool, str]:
-    """
-    Verifica si se ha alcanzado el Stop Loss o Take Profit para una posición abierta.
-
-    Args:
-        position_data (dict): Diccionario con los datos de la posición abierta,
-                              incluyendo 'entry_price', 'stop_loss' y 'take_profit'.
-        current_price (float): Precio actual del activo.
-
-    Returns:
-        tuple[bool, str]: (True, "SL hit") si se activó el Stop Loss,
-                          (True, "TP hit") si se activó el Take Profit,
-                          (False, "No trigger") en caso contrario.
-    """
-    entry_price = position_data.get('entry_price')
-    stop_loss = position_data.get('stop_loss')
-    take_profit = position_data.get('take_profit')
-    side = position_data.get('side') # 'BUY' or 'SELL'
-
-    if not entry_price:
-        logger.warning(f"No se encontró 'entry_price' en los datos de la posición: {position_data}")
-        return False, "No trigger (missing entry_price)"
-
-    # For BUY orders: SL is below entry, TP is above entry
-    if side == 'BUY':
-        if stop_loss and current_price <= stop_loss:
-            logger.info(f"Stop Loss activado para BUY. Precio actual: {current_price}, SL: {stop_loss}")
-            return True, "SL hit"
-        if take_profit and current_price >= take_profit:
-            logger.info(f"Take Profit activado para BUY. Precio actual: {current_price}, TP: {take_profit}")
-            return True, "TP hit"
-    # For SELL orders: SL is above entry, TP is below entry
-    elif side == 'SELL':
-        if stop_loss and current_price >= stop_loss:
-            logger.info(f"Stop Loss activado para SELL. Precio actual: {current_price}, SL: {stop_loss}")
-            return True, "SL hit"
-        if take_profit and current_price <= take_profit:
-            logger.info(f"Take Profit activado para SELL. Precio actual: {current_price}, TP: {take_profit}")
-            return True, "TP hit"
-    else:
-        logger.warning(f"Lado de operación desconocido: {side} en {position_data}")
-
-    return False, "No trigger"
-
-async def verificar_permiso_de_operacion() -> tuple[bool, str]:
+def verificar_permiso_de_operacion() -> tuple[bool, str]:
     """
     Verifica todas las reglas de riesgo antes de permitir una nueva operación.
-    Es una función asíncrona porque necesita consultar el balance actual.
     Returns:
         tuple[bool, str]: (True, "Permitido") si se puede operar, o (False, "Razón") si no.
     """
@@ -112,36 +65,13 @@ async def verificar_permiso_de_operacion() -> tuple[bool, str]:
         logger.warning(f"Operación bloqueada: {reason}")
         return False, reason
 
-    # 3. Verificar Límite de Posiciones Concurrentes y Exposición Total
+    # 3. Verificar Límite de Posiciones Concurrentes
     open_positions_df = get_open_positions()
     current_positions = len(open_positions_df)
     if current_positions >= settings.MAX_CONCURRENT_POSITIONS:
         reason = f"Límite de posiciones concurrentes ({settings.MAX_CONCURRENT_POSITIONS}) alcanzado. Abiertas: {current_positions}."
         logger.warning(f"Operación bloqueada: {reason}")
         return False, reason
-
-    # 4. Verificar Límite de Exposición Total del Capital
-    if not open_positions_df.empty:
-        try:
-            client = await get_binance_client()
-            balance_info = await asyncio.to_thread(client.get_asset_balance, asset="USDT")
-            current_balance = float(balance_info['free'])
-            
-            total_exposure_usdt = open_positions_df['size_usdt'].sum()
-            
-            # Incluir el balance actual en el cálculo de la exposición total
-            total_capital = current_balance + total_exposure_usdt
-            if total_capital > 0:
-                exposure_pct = (total_exposure_usdt / total_capital) * 100
-                if exposure_pct > settings.MAX_TOTAL_EXPOSURE_PCT:
-                    reason = f"Límite de exposición total ({settings.MAX_TOTAL_EXPOSURE_PCT}%) excedido. Exposición actual: {exposure_pct:.2f}%."
-                    logger.warning(f"Operación bloqueada: {reason}")
-                    return False, reason
-        except Exception as e:
-            logger.error(f"Error al verificar la exposición del capital: {e}", exc_info=True)
-            # Decidir si bloquear la operación en caso de error. Por seguridad, es mejor bloquearla.
-            return False, "Error al verificar la exposición del capital."
-
 
     logger.info("Verificación de permisos de operación superada. Todos los límites de riesgo están dentro de los parámetros.")
     return True, "Permitido"
@@ -160,7 +90,7 @@ async def perform_pre_execution_risk_checks(decision: Dict[str, Any]) -> Tuple[b
     logger.info(f"Realizando comprobaciones de riesgo pre-ejecución para decisión: {decision.get('type', 'UNKNOWN')} {decision.get('symbol')}")
 
     # Re-use existing general permission check
-    permiso_general, razon_general = await verificar_permiso_de_operacion()
+    permiso_general, razon_general = verificar_permiso_de_operacion()
     if not permiso_general:
         return False, razon_general
 

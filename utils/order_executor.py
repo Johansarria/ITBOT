@@ -218,7 +218,7 @@ async def evaluar_y_ejecutar_operacion(
         logger.info(f"Iniciando evaluación y ejecución de orden para: {resultado_analisis.get('symbol', 'N/A')}")
         client = await get_binance_client()
 
-        permiso, razon = await verificar_permiso_de_operacion()
+        permiso, razon = verificar_permiso_de_operacion()
         if not permiso:
             logger.warning(f"Operación cancelada. Razón: {razon}")
             await safe_send_message(bot_instance, chat_id, f"❌ Operación cancelada: {razon}")

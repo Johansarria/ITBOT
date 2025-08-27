@@ -59,6 +59,9 @@ class StateManager:
             "last_daily_report_date": None, # Para controlar el reporte diario
             "session": {
                 "mode": "paper" # Default session mode
+            },
+            "system": {
+                "is_paused": False
             }
         }
 

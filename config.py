@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     # --- CONFIGURACIÓN DE API Y TELEGRAM ---
     TELEGRAM_BOT_TOKEN: str
     TELEGRAM_CHAT_ID: int
+    ADMIN_TELEGRAM_ID: int
     BINANCE_API_KEY: str
     BINANCE_SECRET_KEY: str
 
@@ -30,9 +31,7 @@ class Settings(BaseSettings):
     MAX_DAILY_OPERATIONS: int = 10
     MAX_DAILY_LOSS_PCT: float = 5.0
     MAX_TRADE_RISK_PCT: float = 1.0
-    MAX_CONCURRENT_POSITIONS: int = Field(5, description="Número máximo de posiciones abiertas concurrentemente")
-    MAX_TOTAL_EXPOSURE_PCT: float = Field(50.0, description="Máximo porcentaje del capital total a exponer en todas las posiciones")
-    SL_TP_MONITOR_INTERVAL_SECONDS: int = Field(60, description="Intervalo en segundos para monitorear SL/TP de posiciones abiertas")
+    MAX_CONCURRENT_POSITIONS: int = 3
 
     # --- MLOPS ---
     ML_MODEL_ID: str = "v2.1.4-beta"
