@@ -14,23 +14,12 @@ def get_main_menu_keyboard() -> InlineKeyboardMarkup:
     """Genera el teclado del menú principal."""
     keyboard = [
         [InlineKeyboardButton("⚙️ Control Operativo", callback_data="control_operativo")],
-        [InlineKeyboardButton("🕹️ Panel de Control", callback_data="panel_control")],
+        
         [InlineKeyboardButton("⚖️ Gestión de Riesgo", callback_data="gestion_riesgo")],
         [InlineKeyboardButton("📈 Reportes y Análisis", callback_data="reportes_analisis")],
         [InlineKeyboardButton("🧠 Inteligencia y MLOps", callback_data="inteligencia_mlops")],
         [InlineKeyboardButton("🛠️ Sistema y Mantenimiento", callback_data="sistema_mantenimiento")],
         [InlineKeyboardButton("🚨 EMERGENCIA 🚨", callback_data="emergencia")],
-    ]
-    return InlineKeyboardMarkup(keyboard)
-
-def get_panel_control_keyboard() -> InlineKeyboardMarkup:
-    """Genera el teclado para el Panel de Control."""
-    keyboard = [
-        [InlineKeyboardButton("📈 Ver Posiciones Abiertas", callback_data="panel_show_positions")],
-        [InlineKeyboardButton("🛡️ Estado de Escudos", callback_data="panel_show_shields")],
-        [InlineKeyboardButton("⚙️ Salud del Sistema", callback_data="system_health_check")],
-        [InlineKeyboardButton("🧠 Régimen de Mercado", callback_data="mlops_show_regime")],
-        [InlineKeyboardButton("↩️ Volver al Menú Principal", callback_data="main_menu")],
     ]
     return InlineKeyboardMarkup(keyboard)
 

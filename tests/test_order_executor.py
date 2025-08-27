@@ -245,10 +245,12 @@ async def test_evaluar_y_ejecutar_real_sell(mock_bot, default_mocks):
     from utils.order_executor import evaluar_y_ejecutar_operacion
 
     # Setup for REAL mode
-    def state_manager_side_effect(*args, **kwargs):
-        if args[1] == "mode": return "live"
-        if args[1] == "unlocked": return True
-        return False
+    def state_manager_side_effect(module, key=None, default=None):
+        if module == "session" and key == "mode":
+            return "LIVE"
+        if module == "live_mode" and key == "unlocked":
+            return True
+        return default
     default_mocks['state_manager'].get_state.side_effect = state_manager_side_effect
     default_mocks['client'].create_order.return_value = {"orderId": "12345", "status": "FILLED"}
 
@@ -274,7 +276,7 @@ async def test_evaluar_y_ejecutar_live_locked_mode(mock_bot, default_mocks):
     from utils.order_executor import evaluar_y_ejecutar_operacion
 
     # LIVE mode but NOT unlocked
-    default_mocks['state_manager'].get_state.side_effect = lambda key, _, default: "live" if key == "session" else False
+    default_mocks['state_manager'].get_state.side_effect = lambda key, _, default: "LIVE" if key == "session" else False
 
     resultado_analisis = {"decision": "BUY", "symbol": "BTCUSDT", "score": 0.9}
     await evaluar_y_ejecutar_operacion(mock_bot, 123, resultado_analisis)
@@ -293,7 +295,7 @@ async def test_evaluar_y_ejecutar_binance_api_exception(mock_bot, default_mocks)
     from binance.exceptions import BinanceAPIException
 
     # Setup for REAL mode
-    default_mocks['state_manager'].get_state.side_effect = lambda k, _, d: "live" if k == "session" else True
+    default_mocks['state_manager'].get_state.side_effect = lambda k, _, d: "LIVE" if k == "session" else True
     # Correctly instantiate the exception
     error = BinanceAPIException(response=MagicMock(), status_code=400, text='{"code": -2015, "msg": "Test error"}')
     default_mocks['client'].create_order.side_effect = error
@@ -413,7 +415,7 @@ async def test_evaluar_y_ejecutar_aiohttp_error(mock_bot, default_mocks):
     from utils.order_executor import evaluar_y_ejecutar_operacion
     import aiohttp
 
-    default_mocks['state_manager'].get_state.side_effect = lambda k, _, d: "live" if k == "session" else True
+    default_mocks['state_manager'].get_state.side_effect = lambda k, _, d: "LIVE" if k == "session" else True
     error = aiohttp.ClientError("Connection failed")
     default_mocks['client'].create_order.side_effect = error
 

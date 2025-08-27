@@ -90,12 +90,13 @@ async def show_control_operativo(update: Update, context: ContextTypes.DEFAULT_T
     query = update.callback_query
     await query.answer()
     current_mode = await logic_stubs.get_bot_mode()
-    mode_text = escape_markdown(current_mode)
-    text = f"⚙️ *Control Operativo*\n\nModo actual: `{mode_text}`\n\nSelecciona una acción."
+    # Se elimina el formato Markdown para garantizar la funcionalidad.
+    text = f"Control Operativo\n\nModo actual: {current_mode}\n\nSelecciona una acción."
     
     keyboard = keyboards.get_control_operativo_keyboard(current_mode)
 
-    await query.edit_message_text(text=text, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN_V2)
+    # Se elimina parse_mode para enviar como texto plano y evitar errores.
+    await query.edit_message_text(text=text, reply_markup=keyboard)
 
 async def show_gestion_riesgo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
@@ -140,20 +141,10 @@ async def show_system_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 async def show_emergency_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer()
-    text = "🚨 *MENÚ DE EMERGENCIA* 🚨\\n\\nUsa estas opciones con extrema precaución\\. Son acciones irreversibles\\."
+    text = "🚨 *MENÚ DE EMERGENCIA* 🚨\\n\\nUsa estas opciones con extrema precaución. Son acciones irreversibles\\."
     await query.edit_message_text(
         text=text,
         reply_markup=keyboards.get_emergency_menu_keyboard(),
-        parse_mode=ParseMode.MARKDOWN_V2
-    )
-
-async def show_panel_control(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer()
-    text = "🕹️ *Panel de Control*\\n\\nMonitoriza el estado del bot en tiempo real\\."
-    await query.edit_message_text(
-        text=text,
-        reply_markup=keyboards.get_panel_control_keyboard(),
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
@@ -243,33 +234,12 @@ async def mlops_model_status(update: Update, context: ContextTypes.DEFAULT_TYPE)
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
-async def panel_show_positions(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer("Consultando posiciones abiertas...")
-    summary = await logic_stubs.get_open_positions_summary(context.bot)
-    await query.edit_message_text(
-        text=summary,
-        reply_markup=keyboards.get_panel_control_keyboard(),
-        parse_mode=ParseMode.HTML
-    )
-
-async def panel_show_shields(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer()
-    status_text = logic_stubs.get_shield_status()
-    text = f"🛡️ *Estado de los Escudos*\n\n{escape_markdown(status_text)}"
-    await query.edit_message_text(
-        text=text,
-        reply_markup=keyboards.get_panel_control_keyboard(),
-        parse_mode=ParseMode.MARKDOWN_V2
-    )
-
 async def risk_set_auto(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer("Cambiando a riesgo automático...")
     logic_stubs.set_risk_auto()
     await query.edit_message_text(
-        text="✅ *Riesgo configurado en modo Automático*\\.\n\nEl sistema ajustará el riesgo según el modelo ML.",
+        text="✅ *Riesgo configurado en modo Automático*\\.\\n\\nEl sistema ajustará el riesgo según el modelo ML.",
         reply_markup=keyboards.get_risk_size_menu_keyboard(),
         parse_mode=ParseMode.MARKDOWN_V2
     )
@@ -288,38 +258,37 @@ async def toggle_operative_mode(update: Update, context: ContextTypes.DEFAULT_TY
 
     if current_mode == 'LIVE':
         await logic_stubs.set_bot_mode("PAPER_TRADING")
-        await query.edit_message_text(
-            text="✅ *Modo de Operación Cambiado a `PAPER_TRADING`*\n\nEl bot operará en modo de simulación.",
-            parse_mode=ParseMode.MARKDOWN_V2
-        )
+        # Se elimina el formato Markdown para garantizar la funcionalidad.
+        text = "Modo de Operación Cambiado a PAPER_TRADING\n\nEl bot operará en modo de simulación."
+        await query.edit_message_text(text=text)
         await start(update, context)
         return ConversationHandler.END
     else: # paper o cualquier otro estado
+        # Se elimina el formato Markdown para garantizar la funcionalidad.
         text = (
-            f"⚠️ *Confirmación Requerida* ⚠️\n\n"
-            f"El bot está actualmente en modo `{escape_markdown(current_mode)}`.\n\n"
-            f"Para cambiar a modo **LIVE**, por favor, escribe `CONFIRMAR LIVE`. \n\n"
+            f"Confirmación Requerida\n\n"
+            f"El bot está actualmente en modo {current_mode}.\n\n"
+            f"Para cambiar a modo LIVE, por favor, escribe: CONFIRMAR LIVE\n\n"
             f"Esta acción expondrá capital real al mercado."
         )
-        await query.edit_message_text(text=text, reply_markup=keyboards.get_cancel_keyboard(), parse_mode=ParseMode.MARKDOWN_V2)
+        # Se elimina parse_mode para enviar como texto plano y evitar errores.
+        await query.edit_message_text(text=text, reply_markup=keyboards.get_cancel_keyboard())
         return CONFIRM_LIVE
 
 async def confirm_and_set_live_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Confirma y cambia el modo a LIVE."""
     if update.message and update.message.text == "CONFIRMAR LIVE":
         await logic_stubs.set_bot_mode("LIVE")
-        await update.message.reply_text(
-            text="✅ *Modo de Operación Cambiado a `LIVE`*\n\nEl bot ahora operará con capital real.",
-            parse_mode=ParseMode.MARKDOWN_V2
-        )
+        # Se elimina el formato Markdown para garantizar la funcionalidad.
+        text = "Modo de Operación Cambiado a LIVE\n\nEl bot ahora operará con capital real."
+        await update.message.reply_text(text=text)
         # Simplificado: Llama a start() con el update actual para reenviar el menú.
         await start(update, context)
         return ConversationHandler.END
     else:
-        await update.message.reply_text(
-            text="❌ Texto incorrecto. El cambio a modo LIVE ha sido cancelado. Vuelve a intentarlo desde el menú de Control Operativo.",
-            parse_mode=ParseMode.MARKDOWN_V2
-        )
+        # Se elimina el formato Markdown para garantizar la funcionalidad.
+        text = "Texto incorrecto. El cambio a modo LIVE ha sido cancelado. Vuelve a intentarlo desde el menú de Control Operativo."
+        await update.message.reply_text(text=text)
         return ConversationHandler.END
 
 async def liquidate_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -341,19 +310,19 @@ async def liquidate_start(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def confirm_liquidate(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message and update.message.text == "LIQUIDAR TODO":
         await update.message.reply_text(
-            text="🔥 Confirmado\\. Ejecutando liquidación total\\.\\.\\.",
+            text="🔥 Confirmado. Ejecutando liquidación total...",
             parse_mode=ParseMode.MARKDOWN_V2
         )
         await logic_stubs.liquidate_all_positions()
         await update.message.reply_text(
-            text="✅ *Liquidación Completada*\\. Todas las posiciones han sido cerradas\\.",
+            text="✅ *Liquidación Completada*\\.\\ Todas las posiciones han sido cerradas\\.",
             reply_markup=keyboards.get_emergency_menu_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto\\. Escribe `LIQUIDAR TODO` o presiona cancelar\\.",
+            text="❌ Texto incorrecto. Escribe `LIQUIDAR TODO` o presiona cancelar\\.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
@@ -364,7 +333,7 @@ async def stop_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await query.answer("¡ACCIÓN CRÍTICA!", show_alert=True)
     text = (
         "🛑🛑🛑 *CONFIRMACIÓN DE PAUSA TOTAL* 🛑🛑🛑\\n\\n"
-        "Estás a punto de detener **TODOS** los procesos de trading del bot\\. No se abrirán nuevas posiciones hasta que se reactive manualmente\\.\\n\\n"
+        "Estás a punto de detener **TODOS** los procesos de trading del bot. No se abrirán nuevas posiciones hasta que se reactive manualmente\\.\\n\\n"
         "Esta acción es **SEGURA** y no cierra posiciones abiertas\\.\\n\\n"
         "Para proceder, escribe `PAUSA TOTAL`\\."
     )
@@ -378,19 +347,19 @@ async def stop_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 async def confirm_stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message and update.message.text == "PAUSA TOTAL":
         await update.message.reply_text(
-            text="🛑 Confirmado\\. Iniciando secuencia de pausa total\\.\\.\\.",
+            text="🛑 Confirmado. Iniciando secuencia de pausa total...",
             parse_mode=ParseMode.MARKDOWN_V2
         )
         await logic_stubs.full_system_stop()
         await update.message.reply_text(
-            text="✅ *Sistema en Pausa*\\. El bot ha dejado de operar\\.",
+            text="✅ *Sistema en Pausa*. El bot ha dejado de operar\\.",
             reply_markup=keyboards.get_emergency_menu_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto\\. Escribe `PAUSA TOTAL` o presiona cancelar\\.",
+            text="❌ Texto incorrecto. Escribe `PAUSA TOTAL` o presiona cancelar\\.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
@@ -430,7 +399,7 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
         logic_stubs.set_risk_manual(risk_value)
 
         await update.message.reply_text(
-            text=f"✅ *Riesgo manual establecido en {risk_value}%*\\.\n\nTodas las nuevas operaciones usarán este valor.",
+            text=f"✅ *Riesgo manual establecido en {risk_value}%*\\.\\n\\nTodas las nuevas operaciones usarán este valor.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
         from telegram import CallbackQuery
@@ -443,7 +412,7 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
 
     except (ValueError, TypeError):
         await update.message.reply_text(
-            text="❌ *Valor inválido*\\.\n\nPor favor, introduce un número válido (ej. `1.5` o `2`)\\. Inténtalo de nuevo o cancela la operación.",
+            text="❌ *Valor inválido*\\.\\n\\nPor favor, introduce un número válido (ej. `1.5` o `2`)\\.\\ Inténtalo de nuevo o cancela la operación.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
@@ -454,7 +423,6 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
 main_menu_handlers = [
     CallbackQueryHandler(start, pattern="^main_menu$"),
     CallbackQueryHandler(show_control_operativo, pattern="^control_operativo$"),
-    CallbackQueryHandler(show_panel_control, pattern="^panel_control$"),
     CallbackQueryHandler(show_gestion_riesgo, pattern="^gestion_riesgo$"),
     CallbackQueryHandler(show_reportes_analisis, pattern="^reportes_analisis$"),
     CallbackQueryHandler(show_mlops_menu, pattern="^inteligencia_mlops$"),
@@ -468,8 +436,6 @@ action_handlers = [
     CallbackQueryHandler(risk_define_size_menu, pattern="^risk_define_size$"),
     CallbackQueryHandler(mlops_show_regime, pattern="^mlops_show_regime$"),
     CallbackQueryHandler(mlops_model_status, pattern="^mlops_model_status$"),
-    CallbackQueryHandler(panel_show_positions, pattern="^panel_show_positions$"),
-    CallbackQueryHandler(panel_show_shields, pattern="^panel_show_shields$"),
     CallbackQueryHandler(risk_set_auto, pattern="^risk_set_auto$"),
 ]
 
@@ -491,7 +457,6 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
-        per_message=True,
     ),
     ConversationHandler(
         entry_points=[CallbackQueryHandler(stop_start, pattern="^emergency_full_stop$")],
@@ -501,7 +466,6 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
-        per_message=True,
     ),
     ConversationHandler(
         entry_points=[CallbackQueryHandler(risk_set_manual_start, pattern="^risk_set_manual$")],
@@ -511,6 +475,5 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
-        per_message=True,
     ),
 ]
