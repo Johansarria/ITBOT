@@ -4,8 +4,7 @@
 Módulo de Handlers de Telegram.
 
 Contiene toda la lógica de la interfaz de usuario, manejando los comandos
-y las acciones de los botones (CallbackQuery). Importa las definiciones
-de teclado desde keyboards.py y la lógica de negocio simulada desde logic_stubs.py.
+y las acciones de los botones (CallbackQuery).
 """
 
 import re
@@ -26,7 +25,7 @@ import keyboards
 import telegram_logic_adapter as logic_stubs
 
 # --- Estados para ConversationHandler ---
-CONFIRM_LIVE, CONFIRM_LIQUIDATE, CONFIRM_STOP = range(3)
+CONFIRM_LIVE, CONFIRM_LIQUIDATE, CONFIRM_STOP, CONFIRM_MANUAL_RISK = range(4)
 
 # --- Helper para escapar Markdown ---
 def escape_markdown(text: str) -> str:
@@ -36,8 +35,35 @@ def escape_markdown(text: str) -> str:
 
 # --- Handlers de Comandos ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Handler para el comando /start. Muestra el menú principal."""
-    text = "🤖 *Menú Principal de ITBOT* 🤖\n\n_Selecciona una categoría para empezar_"
+    """Handler para el comando /start. Muestra el menú principal con un resumen completo."""
+    status = await logic_stubs.get_consolidated_status()
+
+    # Formateo del resumen
+    mode = status.get('mode', 'N/A')
+    running_status = '✅ ACTIVO' if status.get('running') else '🛑 DETENIDO'
+    shields_active = any(status.get('shield_status', {}).values())
+    shield_status_text = f"🛡️ ACTIVOS" if shields_active else f"✅ INACTIVOS"
+    open_positions = status.get('open_positions', 'N/A')
+    market_regime = status.get('market_regime', 'N/A')
+    total_pnl = status.get('total_pnl_percent', 0.0)
+    daily_pnl = status.get('daily_pnl_percent', 0.0)
+
+    summary_text = (
+        f"*Modo*: `{mode}` | *Estado*: `{running_status}`\n"
+        f"*Escudos*: `{shield_status_text}` | *Posiciones*: `{open_positions}`\n"
+        f"*Régimen*: `{market_regime}`\n"
+        f"*PNL Diario*: `{daily_pnl:.2f}%` | *PNL Total*: `{total_pnl:.2f}%`"
+    )
+
+    text = f"""🤖 *Menú Principal de ITBOT* 🤖
+
+*Resumen Operativo:*
+------------------------------------
+{summary_text}
+------------------------------------
+
+_Selecciona una categoría para empezar_"""
+
     keyboard = keyboards.get_main_menu_keyboard()
     
     if update.message:
@@ -56,16 +82,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         )
 
 # --- Handlers de Menús Principales ---
-async def show_panel_control(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer()
-    text = "📊 *Panel de Control*\n\nConsulta el estado general y las métricas clave del bot."
-    await query.edit_message_text(
-        text=escape_markdown(text),
-        reply_markup=keyboards.get_panel_control_keyboard(),
-        parse_mode=ParseMode.MARKDOWN_V2
-    )
-
 async def show_control_operativo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Muestra el menú de control operativo, adaptado al modo actual."""
     query = update.callback_query
@@ -73,14 +89,12 @@ async def show_control_operativo(update: Update, context: ContextTypes.DEFAULT_T
     current_mode = await logic_stubs.get_bot_mode()
     text = f"⚙️ *Control Operativo*\n\nModo actual: `{current_mode}`\n\nSelecciona una acción."
     
-    # Muestra un teclado diferente si el modo es LIVE
     if current_mode == 'LIVE':
         keyboard = keyboards.get_control_operativo_live_keyboard()
     else:
         keyboard = keyboards.get_control_operativo_keyboard()
 
     await query.edit_message_text(
-
         text=escape_markdown(text),
         reply_markup=keyboard,
         parse_mode=ParseMode.MARKDOWN_V2
@@ -138,30 +152,6 @@ async def show_emergency_menu(update: Update, context: ContextTypes.DEFAULT_TYPE
 
 # --- Handlers de Acciones Específicas ---
 
-async def dashboard_show(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer("Obteniendo estado...")
-    status = await logic_stubs.get_consolidated_status()
-    
-    text = f"""
-*PANEL DE CONTROL GENERAL*
----------------------------------
-*Modo*: `{status.get('mode', 'N/A')}`
-*Estado*: `{'✅ ACTIVO' if status.get('running') else '🛑 DETENIDO'}`
-*Escudos*: `{'🛡️ ACTIVOS' if any(status.get('shield_status', {}).values()) else '✅ INACTIVOS'}`
-*Posiciones Abiertas*: `{status.get('open_positions', 'N/A')}`
-*Régimen de Mercado*: `{status.get('market_regime', 'N/A')}`
-*Modelo ML*: `{status.get('model_id', 'N/A')}`
----------------------------------
-*PNL Total*: `{status.get('total_pnl_percent', 0.0):.2f}%`
-*PNL Diario*: `{status.get('daily_pnl_percent', 0.0):.2f}%`
-"""
-    await query.edit_message_text(
-        text=escape_markdown(text),
-        reply_markup=keyboards.get_panel_control_keyboard(),
-        parse_mode=ParseMode.MARKDOWN_V2
-    )
-
 async def reports_show_discarded(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer("Consultando señales...")
@@ -170,7 +160,7 @@ async def reports_show_discarded(update: Update, context: ContextTypes.DEFAULT_T
     if not signals:
         text = "✅ No hay señales descartadas recientemente."
     else:
-        text_parts = ["*Últimas Señales Descartadas:*\n"]
+        text_parts = ["*Últimas Señales Descartadas:*"]
         for s in signals:
             ts = s.get('timestamp', 'N/A')
             asset = s.get('asset', 'N/A')
@@ -192,7 +182,7 @@ async def system_health_check(update: Update, context: ContextTypes.DEFAULT_TYPE
     await query.answer("Verificando servicios...")
     health = await logic_stubs.check_services_health()
     
-    text_parts = ["*❤️ Verificación de Salud del Sistema*\n"]
+    text_parts = ["*❤️ Verificación de Salud del Sistema*"]
     for service, status in health.items():
         icon = "✅" if "OPERATIONAL" in status or "ACTIVE" in status else "❌"
         text_parts.append(f"{icon} *{service}*: `{status}`")
@@ -254,10 +244,8 @@ async def set_mode_paper(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     query = update.callback_query
     await query.answer("Cambiando a modo PAPER...")
     await logic_stubs.set_bot_mode("PAPER_TRADING")
-    # Después de cambiar el modo, volvemos a mostrar el menú de control operativo actualizado
     await show_control_operativo(update, context)
 
-# 1. Cambiar a modo LIVE
 async def change_mode_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Handler inteligente que decide si iniciar la conversación para pasar a LIVE o mostrar el botón para pasar a PAPER."""
     query = update.callback_query
@@ -265,7 +253,6 @@ async def change_mode_start(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     current_mode = await logic_stubs.get_bot_mode()
 
     if current_mode == 'LIVE':
-        # Si ya está en LIVE, informar al usuario y no hacer nada.
         await query.edit_message_text(
             text=escape_markdown("✅ El bot ya se encuentra en modo `LIVE`."),
             reply_markup=keyboards.get_control_operativo_live_keyboard(),
@@ -273,7 +260,6 @@ async def change_mode_start(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
         return ConversationHandler.END
     else:
-        # El modo es PAPER_TRADING, iniciamos la conversación para confirmar.
         text = (
             f"⚠️ *Confirmación Requerida* ⚠️\n\n"
             f"El bot está actualmente en modo `{current_mode}`.\n\n"
@@ -294,12 +280,10 @@ async def confirm_live_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             parse_mode=ParseMode.MARKDOWN_V2
         )
         await logic_stubs.set_bot_mode("LIVE")
-        # Creamos un objeto CallbackQuery simulado para llamar a show_control_operativo
-        # Esto es un poco hacky, una mejor solución podría ser refactorizar cómo se actualizan los menús.
         from telegram import CallbackQuery
         fake_query = CallbackQuery(id="fake_query", user=update.message.from_user, chat_instance="fake_chat")
         fake_update = Update(update.update_id, callback_query=fake_query)
-        fake_update.callback_query.message = update.message # Asignar el mensaje para poder editarlo
+        fake_update.callback_query.message = update.message
         await show_control_operativo(fake_update, context)
         return ConversationHandler.END
     else:
@@ -310,7 +294,6 @@ async def confirm_live_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
         return CONFIRM_LIVE
 
-# 2. Liquidar todo
 async def liquidate_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     query = update.callback_query
     await query.answer("¡ACCIÓN CRÍTICA!", show_alert=True)
@@ -348,7 +331,6 @@ async def confirm_liquidate(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
         return CONFIRM_LIQUIDATE
 
-# 3. Pausa Total
 async def stop_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     query = update.callback_query
     await query.answer("¡ACCIÓN CRÍTICA!", show_alert=True)
@@ -386,7 +368,6 @@ async def confirm_stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         )
         return CONFIRM_STOP
 
-# --- Cancelar Conversación ---
 async def cancel_conversation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancela la acción actual y vuelve al menú principal."""
     query = update.callback_query
@@ -396,10 +377,8 @@ async def cancel_conversation(update: Update, context: ContextTypes.DEFAULT_TYPE
 
 # --- Agrupación de Handlers para main.py ---
 
-# Handlers de CallbackQuery para los menús
 main_menu_handlers = [
     CallbackQueryHandler(start, pattern="^main_menu$"),
-    CallbackQueryHandler(show_panel_control, pattern="^panel_control$"),
     CallbackQueryHandler(show_control_operativo, pattern="^control_operativo$"),
     CallbackQueryHandler(show_gestion_riesgo, pattern="^gestion_riesgo$"),
     CallbackQueryHandler(show_reportes_analisis, pattern="^reportes_analisis$"),
@@ -408,19 +387,15 @@ main_menu_handlers = [
     CallbackQueryHandler(show_emergency_menu, pattern="^emergencia$"),
 ]
 
-# Handlers de CallbackQuery para acciones específicas
 action_handlers = [
-    CallbackQueryHandler(dashboard_show, pattern="^dashboard_show$"),
     CallbackQueryHandler(reports_show_discarded, pattern="^reports_show_discarded$"),
     CallbackQueryHandler(system_health_check, pattern="^system_health_check$"),
-    # Handlers añadidos
     CallbackQueryHandler(risk_define_size_menu, pattern="^risk_define_size$"),
     CallbackQueryHandler(mlops_show_regime, pattern="^mlops_show_regime$"),
     CallbackQueryHandler(mlops_model_status, pattern="^mlops_model_status$"),
     CallbackQueryHandler(set_mode_paper, pattern="^control_set_paper$"),
 ]
 
-# Conversation Handlers
 conv_handlers = [
     ConversationHandler(
         entry_points=[CallbackQueryHandler(change_mode_start, pattern="^control_change_mode$")],

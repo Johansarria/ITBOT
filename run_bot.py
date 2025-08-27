@@ -66,7 +66,7 @@ async def daily_data_update_task(bot_instance: Bot, chat_id: int):
             )
             await send_message(bot_instance, chat_id, f"✅ Actualización diaria de datos para {symbol} completada.")
         except Exception as e:
-            logger.error(f"Error en la tarea de actualización diaria para {symbol}: {e}", exc_info=True)
+            logger.critical(f"Error en la tarea de actualización diaria para {symbol}: {e}", exc_info=True)
             await send_message(bot_instance, chat_id, f"❌ Error en actualización diaria para {symbol}: {e}")
 
 async def shutdown_all_subprocesses():

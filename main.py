@@ -13,12 +13,12 @@ Este script se encarga de:
 import logging
 import os
 
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ConversationHandler
 from telegram.warnings import PTBUserWarning
 import warnings
 
 # Importar handlers desde el módulo de handlers
-from handlers import start, main_menu_handlers, action_handlers, conv_handlers
+from handlers import start, main_menu_handlers, action_handlers, conv_handlers, CONFIRM_LIVE, CONFIRM_LIQUIDATE, CONFIRM_STOP, CONFIRM_MANUAL_RISK, cancel_conversation, change_mode_start, confirm_live_mode, liquidate_start, confirm_liquidate, stop_start, confirm_stop
 
 # --- Configuración de Logging ---
 logging.basicConfig(
@@ -48,7 +48,32 @@ def main() -> None:
     application.add_handler(CommandHandler("start", start))
     
     # Handlers de Conversación (deben registrarse antes que los CallbackQueryHandlers generales)
-    for conv_handler in conv_handlers:
+    conv_handlers_list = [
+        ConversationHandler(
+            entry_points=[CallbackQueryHandler(change_mode_start, pattern="^control_change_mode$")],
+            states={
+                CONFIRM_LIVE: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_live_mode)]
+            },
+            fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
+        ),
+        ConversationHandler(
+            entry_points=[CallbackQueryHandler(liquidate_start, pattern="^emergency_liquidate$")],
+            states={
+                CONFIRM_LIQUIDATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_liquidate)]
+            },
+            fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
+        ),
+        ConversationHandler(
+            entry_points=[CallbackQueryHandler(stop_start, pattern="^emergency_full_stop$")],
+            states={
+                CONFIRM_STOP: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_stop)]
+            },
+            fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
+        ),
+        
+    ]
+
+    for conv_handler in conv_handlers_list:
         application.add_handler(conv_handler)
 
     # Handlers de menús y acciones

@@ -251,9 +251,9 @@ def add_klines(klines_df: pd.DataFrame, symbol: str, interval: str):
         raise
 
 
-def get_klines(symbol: str, interval: str, start_time: Optional[int] = None, end_time: Optional[int] = None) -> pd.DataFrame:
+def get_klines(symbol: str, interval: str, start_time: Optional[int] = None, end_time: Optional[int] = None, limit: Optional[int] = None) -> pd.DataFrame:
     """
-    Retrieves kline data from the database within a specified time range.
+    Retrieves kline data from the database within a specified time range, with an optional limit.
     Timestamps are handled as Unix milliseconds.
     """
     query_str = "SELECT timestamp, open, high, low, close, volume, close_time FROM klines WHERE symbol = :symbol AND interval = :interval"
@@ -264,12 +264,17 @@ def get_klines(symbol: str, interval: str, start_time: Optional[int] = None, end
     if end_time:
         query_str += " AND timestamp <= :end_time"
         params["end_time"] = end_time
-    query_str += " ORDER BY timestamp ASC"
+    query_str += " ORDER BY timestamp DESC"
+    if limit:
+        query_str += " LIMIT :limit"
+        params["limit"] = limit
     
     try:
         with get_db_session() as session:
+            # The query is ordered DESC to get the latest klines, but we need to return them in ASC order.
             df = pd.read_sql(text(query_str), session.bind, params=params)
             if not df.empty:
+                df = df.sort_values(by='timestamp', ascending=True)
                 df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
                 df.set_index("timestamp", inplace=True)
                 numeric_cols = ["open", "high", "low", "close", "volume"]
