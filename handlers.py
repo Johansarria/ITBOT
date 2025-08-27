@@ -25,7 +25,7 @@ import keyboards
 import telegram_logic_adapter as logic_stubs
 
 # --- Estados para ConversationHandler ---
-CONFIRM_LIVE, CONFIRM_LIQUIDATE, CONFIRM_STOP, CONFIRM_MANUAL_RISK = range(4)
+CONFIRM_LIVE, CONFIRM_LIQUIDATE, CONFIRM_STOP, CONFIRM_MANUAL_RISK, CONFIRM_KILL_SWITCH = range(5)
 
 # --- Helper para escapar Markdown ---
 def escape_markdown(text: str) -> str:
@@ -359,11 +359,48 @@ async def confirm_stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto. Escribe `PAUSA TOTAL` o presiona cancelar\\.",
+            text="❌ Texto incorrecto. Escribe `PAUSA TOTAL` o presiona cancelar\.",
             reply_markup=keyboards.get_cancel_keyboard(),
             parse_mode=ParseMode.MARKDOWN_V2
         )
         return CONFIRM_STOP
+
+async def kill_switch_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    query = update.callback_query
+    await query.answer("¡ACCIÓN CRÍTICA EXTREMA!", show_alert=True)
+    text = (
+        "🚨🚨🚨 *CONFIRMACIÓN DE KILL SWITCH* 🚨🚨🚨\n\n"
+        "Estás a punto de liquidar **TODAS** las posiciones abiertas Y detener **TODAS** las nuevas operaciones\.\n\n"
+        "Esta acción es **IRREVERSIBLE** y detendrá completamente el bot hasta reactivación manual\.\n\n"
+        "Para proceder, escribe `CONFIRMAR KILL SWITCH`\."
+    )
+    await query.edit_message_text(
+        text=text,
+        reply_markup=keyboards.get_cancel_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+    return CONFIRM_KILL_SWITCH
+
+async def confirm_kill_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    if update.message and update.message.text == "CONFIRMAR KILL SWITCH":
+        await update.message.reply_text(
+            text="🚨 Confirmado. Activando Kill Switch: liquidando posiciones y deteniendo operaciones…",
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        await logic_stubs.activate_kill_switch_logic() # This function will be implemented next
+        await update.message.reply_text(
+            text="✅ *Kill Switch Activado*. Todas las posiciones liquidadas y nuevas operaciones detenidas\.",
+            reply_markup=keyboards.get_emergency_menu_keyboard(),
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        return ConversationHandler.END
+    else:
+        await update.message.reply_text(
+            text="❌ Texto incorrecto. Escribe `CONFIRMAR KILL SWITCH` o presiona cancelar\.",
+            reply_markup=keyboards.get_cancel_keyboard(),
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        return CONFIRM_KILL_SWITCH
 
 async def cancel_conversation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancela la acción actual y vuelve al menú principal."""
