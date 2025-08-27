@@ -17,18 +17,13 @@ from utils.message_queue import mq
 from utils.order_executor import evaluar_y_ejecutar_operacion
 from utils.risk_manager import perform_pre_execution_risk_checks
 from utils.state_manager import StateManager
-from utils.structured_logger import setup_structured_logger
+from utils.structured_logger import StructuredLogger
+from utils.logger_setup import setup_logging
 import uuid
 
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
-
-# Logger estructurado para auditoría de decisiones
-structured_logger = setup_structured_logger("logs/decisions_structured.log")
+# Configurar el logging centralizado al inicio
+setup_logging()
+logger = StructuredLogger(__name__)
 
 state_manager = StateManager()
 
@@ -42,147 +37,69 @@ async def process_decision(decision: Dict[str, Any]) -> None:
     Args:
         decision (Dict[str, Any]): Diccionario con los datos de la decisión de trading.
     """
-    logger.info(f"Procesando decisión: {decision.get('type', 'UNKNOWN')} para {decision.get('symbol')}")
+    trade_id = str(uuid.uuid4())
+    symbol = decision.get('symbol', 'UNKNOWN')
+    logger.info(
+        "DECISION_RECEIVED",
+        f"Procesando decisión: {decision.get('type', 'N/A')} para {symbol}",
+        details={"trade_id": trade_id, **decision}
+    )
 
     # 1. Validación de estructura mínima
     required_keys = {"type", "symbol", "side", "quantity", "strategy_id", "timestamp_decision"}
-    missing = required_keys - decision.keys()
-    trade_id = str(uuid.uuid4())
-    model_version = decision.get("model_version", "N/A")
-    features = decision.get("features", {})
-    score = decision.get("analysis_score", None)
-    thresholds = decision.get("thresholds", {})
-    reason = decision.get("reason", "N/A")
+    missing_keys = required_keys - decision.keys()
+
     # Log a base de datos (Postgres/Timescale)
-    log_decision_to_db({
+    # This part can be simplified or removed if the structured log is the single source of truth
+    # For now, we keep it but ensure it's robust.
+    db_log_payload = {
         "trade_id": trade_id,
-        "symbol": decision.get("symbol"),
+        "symbol": symbol,
         "type": decision.get("type"),
         "side": decision.get("side"),
         "quantity": decision.get("quantity"),
         "strategy_id": decision.get("strategy_id"),
         "timestamp_decision": decision.get("timestamp_decision"),
-        "features": features,
-        "score": score,
-        "thresholds": thresholds,
-        "reason": reason,
-        "model_version": model_version,
+        "features": decision.get("features", {}),
+        "score": decision.get("analysis_score"),
+        "thresholds": decision.get("thresholds", {}),
+        "reason": decision.get("reason", "N/A"),
+        "model_version": decision.get("model_version", "N/A"),
         "result": None,
         "error": None
-    })
-    structured_logger.info(
-        "decision_received",
-        extra={
-            "extra": {
-                "event": "decision_received",
-                "trade_id": trade_id,
-                "symbol": decision.get("symbol"),
-                "type": decision.get("type"),
-                "side": decision.get("side"),
-                "quantity": decision.get("quantity"),
-                "strategy_id": decision.get("strategy_id"),
-                "timestamp_decision": decision.get("timestamp_decision"),
-                "features": features,
-                "score": score,
-                "thresholds": thresholds,
-                "reason": reason,
-                "model_version": model_version
-            }
-        }
-    )
-    if missing:
-        logger.error(f"Decisión inválida: faltan claves requeridas {missing}. Decisión: {decision}")
-        structured_logger.info(
-            "decision_invalid",
-            extra={
-                "extra": {
-                    "event": "decision_invalid",
-                    "trade_id": trade_id,
-                    "missing_keys": list(missing),
-                    "decision": decision
-                }
-            }
+    }
+    log_decision_to_db(db_log_payload)
+
+    if missing_keys:
+        error_msg = f"Decisión inválida: faltan claves requeridas {missing_keys}."
+        logger.error(
+            "DECISION_INVALID",
+            error_msg,
+            details={"trade_id": trade_id, "missing_keys": list(missing_keys), "decision": decision}
         )
-        log_decision_to_db({
-            "trade_id": trade_id,
-            "symbol": decision.get("symbol"),
-            "type": decision.get("type"),
-            "side": decision.get("side"),
-            "quantity": decision.get("quantity"),
-            "strategy_id": decision.get("strategy_id"),
-            "timestamp_decision": decision.get("timestamp_decision"),
-            "features": features,
-            "score": score,
-            "thresholds": thresholds,
-            "reason": reason,
-            "model_version": model_version,
-            "result": None,
-            "error": f"missing_keys: {missing}"
-        })
+        db_log_payload["error"] = error_msg
+        log_decision_to_db(db_log_payload)
         return
 
     # 2. Chequeos de riesgo previos a la ejecución
     try:
         risk_passed, risk_reason = await perform_pre_execution_risk_checks(decision)
     except Exception as e:
-        logger.error(f"Error en chequeo de riesgo: {e}", exc_info=True)
-        structured_logger.info(
-            "risk_check_error",
-            extra={
-                "extra": {
-                    "event": "risk_check_error",
-                    "trade_id": trade_id,
-                    "error": str(e),
-                    "decision": decision
-                }
-            }
-        )
-        log_decision_to_db({
-            "trade_id": trade_id,
-            "symbol": decision.get("symbol"),
-            "type": decision.get("type"),
-            "side": decision.get("side"),
-            "quantity": decision.get("quantity"),
-            "strategy_id": decision.get("strategy_id"),
-            "timestamp_decision": decision.get("timestamp_decision"),
-            "features": features,
-            "score": score,
-            "thresholds": thresholds,
-            "reason": reason,
-            "model_version": model_version,
-            "result": None,
-            "error": str(e)
-        })
+        error_msg = f"Error en chequeo de riesgo: {e}"
+        logger.error("RISK_CHECK_ERROR", error_msg, details={"trade_id": trade_id, "decision": decision}, exc_info=True)
+        db_log_payload["error"] = error_msg
+        log_decision_to_db(db_log_payload)
         return
+
     if not risk_passed:
-        logger.warning(f"Decisión rechazada por riesgo: {risk_reason}. Decisión: {decision}")
-        structured_logger.info(
-            "decision_risk_rejected",
-            extra={
-                "extra": {
-                    "event": "decision_risk_rejected",
-                    "trade_id": trade_id,
-                    "risk_reason": risk_reason,
-                    "decision": decision
-                }
-            }
+        rejection_msg = f"Decisión rechazada por riesgo: {risk_reason}."
+        logger.warning(
+            "DECISION_RISK_REJECTED",
+            rejection_msg,
+            details={"trade_id": trade_id, "risk_reason": risk_reason, "decision": decision}
         )
-        log_decision_to_db({
-            "trade_id": trade_id,
-            "symbol": decision.get("symbol"),
-            "type": decision.get("type"),
-            "side": decision.get("side"),
-            "quantity": decision.get("quantity"),
-            "strategy_id": decision.get("strategy_id"),
-            "timestamp_decision": decision.get("timestamp_decision"),
-            "features": features,
-            "score": score,
-            "thresholds": thresholds,
-            "reason": reason,
-            "model_version": model_version,
-            "result": None,
-            "error": f"risk_rejected: {risk_reason}"
-        })
+        db_log_payload["error"] = f"risk_rejected: {risk_reason}"
+        log_decision_to_db(db_log_payload)
         return
 
     # 3. Ejecución de la orden
@@ -190,7 +107,7 @@ async def process_decision(decision: Dict[str, Any]) -> None:
         resultado_analisis = {
             "symbol": decision["symbol"],
             "decision": decision["side"],
-            "score": score,
+            "score": decision.get("analysis_score"),
             "strategy_name": decision.get("strategy_id", "UnknownStrategy"),
         }
         execution_message = await evaluar_y_ejecutar_operacion(
@@ -200,84 +117,34 @@ async def process_decision(decision: Dict[str, Any]) -> None:
             take_profit=decision.get("take_profit"),
             stop_loss=decision.get("stop_loss")
         )
-        logger.info(f"Resultado de la ejecución de orden: {execution_message}")
-        structured_logger.info(
-            "order_executed",
-            extra={
-                "extra": {
-                    "event": "order_executed",
-                    "trade_id": trade_id,
-                    "symbol": decision["symbol"],
-                    "side": decision["side"],
-                    "quantity": decision["quantity"],
-                    "score": score,
-                    "thresholds": thresholds,
-                    "reason": reason,
-                    "model_version": model_version,
-                    "result": execution_message
-                }
-            }
+        logger.info(
+            "ORDER_EXECUTED",
+            f"Resultado de la ejecución de orden: {execution_message}",
+            details={"trade_id": trade_id, "result": execution_message, **decision}
         )
-        log_decision_to_db({
-            "trade_id": trade_id,
-            "symbol": decision.get("symbol"),
-            "type": decision.get("type"),
-            "side": decision.get("side"),
-            "quantity": decision.get("quantity"),
-            "strategy_id": decision.get("strategy_id"),
-            "timestamp_decision": decision.get("timestamp_decision"),
-            "features": features,
-            "score": score,
-            "thresholds": thresholds,
-            "reason": reason,
-            "model_version": model_version,
-            "result": execution_message,
-            "error": None
-        })
+        db_log_payload["result"] = execution_message
+        log_decision_to_db(db_log_payload)
+
     except Exception as e:
-        logger.error(f"Excepción durante la ejecución de la orden: {e}", exc_info=True)
-        structured_logger.info(
-            "order_execution_error",
-            extra={
-                "extra": {
-                    "event": "order_execution_error",
-                    "trade_id": trade_id,
-                    "error": str(e),
-                    "decision": decision
-                }
-            }
-        )
-        log_decision_to_db({
-            "trade_id": trade_id,
-            "symbol": decision.get("symbol"),
-            "type": decision.get("type"),
-            "side": decision.get("side"),
-            "quantity": decision.get("quantity"),
-            "strategy_id": decision.get("strategy_id"),
-            "timestamp_decision": decision.get("timestamp_decision"),
-            "features": features,
-            "score": score,
-            "thresholds": thresholds,
-            "reason": reason,
-            "model_version": model_version,
-            "result": None,
-            "error": str(e)
-        })
+        error_msg = f"Excepción durante la ejecución de la orden: {e}"
+        logger.error("ORDER_EXECUTION_ERROR", error_msg, details={"trade_id": trade_id, "decision": decision}, exc_info=True)
+        db_log_payload["error"] = error_msg
+        log_decision_to_db(db_log_payload)
 
 
 async def main() -> None:
     """
     Bucle principal del worker de ejecución. Espera y procesa decisiones de la cola de mensajes.
     """
-    logger.info("Worker de ejecución iniciado. Esperando decisiones...")
+    logger.info("WORKER_START", "Worker de ejecución iniciado. Esperando decisiones...")
     
     # Conexión a Redis para Heartbeat
     try:
         redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
         redis_client.ping() # Verificar conexión
-        logger.info("Conexión con Redis para heartbeat del worker establecida.")
+        logger.info("REDIS_CONNECT_SUCCESS", "Conexión con Redis para heartbeat del worker establecida.")
     except redis.exceptions.ConnectionError as e:
-        logger.critical(f"No se pudo conectar a Redis para el heartbeat del worker: {e}")
+        logger.critical("REDIS_CONNECT_ERROR", f"No se pudo conectar a Redis para el heartbeat del worker: {e}", exc_info=True)
         redis_client = None
 
     while True:
@@ -286,7 +153,7 @@ async def main() -> None:
             try:
                 redis_client.set("heartbeat:execution_worker", int(time.time()))
             except redis.exceptions.RedisError as e:
-                logger.error(f"No se pudo enviar el heartbeat del worker a Redis: {e}")
+                logger.error("REDIS_HEARTBEAT_ERROR", f"No se pudo enviar el heartbeat del worker a Redis: {e}", exc_info=True)
 
         try:
             decision = mq.get_decision() # Este es un llamado bloqueante con timeout
@@ -296,7 +163,7 @@ async def main() -> None:
                 # Si get_decision devuelve None (por timeout), el bucle continúa y envía un nuevo heartbeat.
                 pass
         except Exception as e:
-            logger.error(f"Error en el bucle principal del worker: {e}", exc_info=True)
+            logger.error("WORKER_LOOP_ERROR", f"Error en el bucle principal del worker: {e}", exc_info=True)
             await asyncio.sleep(5) # Esperar antes de reintentar en caso de error
 
 def run_worker() -> None:

@@ -23,9 +23,10 @@ from utils.message_queue import mq
 from utils.shield_manager import verificar_condiciones_mercado
 from utils.state_manager import StateManager
 from utils.telegram_handler import send_message, shutdown_bot
+from utils.structured_logger import StructuredLogger
 
 setup_logging()
-logger = logging.getLogger(__name__)
+logger = StructuredLogger(__name__)
 
 active_subprocesses = []
 
@@ -84,19 +85,28 @@ async def flujo_principal_por_activo(bot_instance: Bot, chat_id: int, symbol: st
     """
     Ejecuta el flujo de análisis y decisión para un único activo.
     """
-    logger.info(f"Iniciando flujo principal para el activo: {symbol}.")
+    logger.info("ANALYSIS_FLOW_START", f"Iniciando flujo principal para el activo: {symbol}.", details={'symbol': symbol})
     try:
-        logger.info(f"Cargando Strategy Manager y ejecutando análisis para {symbol}.")
+        logger.info("STRATEGY_MANAGER_LOAD", f"Cargando Strategy Manager y ejecutando análisis para {symbol}.", details={'symbol': symbol})
         strategy_manager = StrategyManager()
         interval = "1h" # TODO: Implement per-asset configuration
         analysis_summary = await strategy_manager.analyze_all_strategies(symbol=symbol, interval=interval, limit=200)
 
         if "error" in analysis_summary:
-            logger.error(f"Error en análisis para {symbol}: {analysis_summary['error']}")
+            logger.error("ANALYSIS_ERROR", f"Error en análisis para {symbol}: {analysis_summary['error']}", details={'symbol': symbol, 'error': analysis_summary['error']})
             await send_message(bot_instance, chat_id, f"❌ Error en análisis para {symbol}: {analysis_summary['error']}")
             return
 
-        logger.info(f"Análisis para {symbol} completado. Mejor: {analysis_summary['best_strategy']} - Decisión: {analysis_summary['best_decision']}")
+        logger.info(
+            "ANALYSIS_COMPLETE",
+            f"Análisis para {symbol} completado. Mejor: {analysis_summary['best_strategy']} - Decisión: {analysis_summary['best_decision']}",
+            details={
+                'symbol': symbol,
+                'best_strategy': analysis_summary.get('best_strategy'),
+                'best_decision': analysis_summary.get('best_decision'),
+                'best_score': analysis_summary.get('best_score')
+            }
+        )
 
         best_decision = analysis_summary.get("best_decision", "Indeciso")
         best_strategy = analysis_summary.get("best_strategy", "UnknownStrategy")
@@ -121,15 +131,15 @@ async def flujo_principal_por_activo(bot_instance: Bot, chat_id: int, symbol: st
             }
             success = mq.publish_decision(decision_data)
             if success:
-                logger.info(f"Decisión de {best_decision} para {symbol} publicada en la cola.")
+                logger.info("DECISION_PUBLISHED", f"Decisión de {best_decision} para {symbol} publicada en la cola.", details=decision_data)
             else:
-                logger.error(f"Fallo al publicar decisión para {symbol}.")
+                logger.error("DECISION_PUBLISH_FAILED", f"Fallo al publicar decisión para {symbol}.", details=decision_data)
                 await send_message(bot_instance, chat_id, f"❌ Error al publicar decisión de {best_decision} para {symbol} en la cola.")
         else:
-            logger.info(f"Decisión de análisis para {symbol}: {best_decision}. No se publicó ninguna orden.")
+            logger.info("DECISION_NO_ACTION", f"Decisión de análisis para {symbol}: {best_decision}. No se publicó ninguna orden.", details={'symbol': symbol, 'decision': best_decision})
 
     except Exception as e:
-        logger.exception(f"Error inesperado en flujo_principal_por_activo para {symbol}: {e}")
+        logger.error("ANALYSIS_FLOW_ERROR", f"Error inesperado en flujo_principal_por_activo para {symbol}: {e}", details={'symbol': symbol}, exc_info=True)
         await send_message(bot_instance, chat_id, f"❌ Error inesperado procesando {symbol}: {e}")
 
 async def main_run_bot() -> None:
@@ -177,28 +187,32 @@ async def main_run_bot() -> None:
             if redis_client:
                 try:
                     redis_client.set("heartbeat:analysis_bot", int(time.time()))
-                    logger.info("Heartbeat de Analysis Bot enviado a Redis.")
                 except redis.exceptions.RedisError as e:
-                    logger.error(f"No se pudo enviar el heartbeat a Redis: {e}")
+                    logger.error("REDIS_HEARTBEAT_ERROR", f"No se pudo enviar el heartbeat a Redis: {e}")
 
-            logger.info(f"--- Iniciando nuevo ciclo de análisis para los activos: {', '.join(settings.TRADING_PAIRS)} ---")
+            # Verificar si el sistema está en pausa
+            if state_manager.get_state("system", "is_paused", False):
+                logger.warning("SYSTEM_PAUSED_SKIP", "Sistema en PAUSA. Saltando ciclo de análisis.")
+                await asyncio.sleep(settings.ANALYSIS_INTERVAL_SECONDS)
+                continue
+
+            logger.info("ANALYSIS_CYCLE_START", f"--- Iniciando nuevo ciclo de análisis para los activos: {', '.join(settings.TRADING_PAIRS)} ---")
             
             escudo_msg_dict = await verificar_condiciones_mercado(bot_instance, chat_id_int)
             if escudo_msg_dict["status"] == "DANGER":
-                logger.warning(f"Escudo de Protección Activado: {escudo_msg_dict['reason']}. Saltando todo el ciclo de análisis.")
+                logger.warning("SHIELD_ACTIVATED", f"Escudo de Protección Activado: {escudo_msg_dict['reason']}. Saltando todo el ciclo de análisis.", details=escudo_msg_dict)
                 await send_message(bot_instance, chat_id_int, f"🛡️ Escudo de Protección Activado 🛡️\nRazón: {escudo_msg_dict['reason']}\nNo se analizarán activos en este ciclo.")
             else:
-                tasks = [flujo_principal_por_activo(bot_instance, chat_id_int, symbol) for symbol in settings.TRADING_PAIRS]
-                print(f"DEBUG: Created tasks: {tasks}") # Debug print
-                logger.info(f"Lanzando análisis concurrente para {len(tasks)} activos.")
+                tasks = [flujo_principal_por_activo(bot_instance, chat_id_int, symbol) for symbol in settings.ASSETS_TO_TRADE]
+                logger.info("CONCURRENT_ANALYSIS_START", f"Lanzando análisis concurrente para {len(tasks)} activos.", details={'asset_count': len(tasks), 'assets': settings.ASSETS_TO_TRADE})
                 results = await asyncio.gather(*tasks, return_exceptions=True)
 
                 for i, result in enumerate(results):
                     if isinstance(result, Exception):
-                        symbol = settings.TRADING_PAIRS[i]
-                        logger.error(f"Ocurrió una excepción durante el análisis concurrente para {symbol}: {result}", exc_info=False)
+                        symbol = settings.ASSETS_TO_TRADE[i]
+                        logger.error("CONCURRENT_ANALYSIS_ERROR", f"Ocurrió una excepción durante el análisis concurrente para {symbol}: {result}", details={'symbol': symbol}, exc_info=False)
 
-            logger.info(f"--- Ciclo de análisis completado. Esperando {settings.ANALYSIS_INTERVAL_SECONDS} segundos ---")
+            logger.info("ANALYSIS_CYCLE_END", f"--- Ciclo de análisis completado. Esperando {settings.ANALYSIS_INTERVAL_SECONDS} segundos ---")
             await asyncio.sleep(settings.ANALYSIS_INTERVAL_SECONDS)
 
     except asyncio.CancelledError:

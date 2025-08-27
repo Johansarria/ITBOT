@@ -95,8 +95,8 @@ def get_system_menu_keyboard() -> InlineKeyboardMarkup:
 def get_emergency_menu_keyboard() -> InlineKeyboardMarkup:
     """Genera el teclado para el menú de Emergencia."""
     keyboard = [
-        [InlineKeyboardButton("🔥 LIQUIDAR TODO 🔥", callback_data="emergency_liquidate")],
-        [InlineKeyboardButton("🛑 PAUSA TOTAL 🛑", callback_data="emergency_full_stop")],
+        [InlineKeyboardButton("🚨 KILL SWITCH 🚨", callback_data="emergency_kill_switch")],
+        [InlineKeyboardButton("✅ REANUDAR SISTEMA ✅", callback_data="emergency_resume_system")],
         [InlineKeyboardButton("↩️ Volver al Menú Principal", callback_data="main_menu")],
     ]
     return InlineKeyboardMarkup(keyboard)
