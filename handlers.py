@@ -90,18 +90,12 @@ async def show_control_operativo(update: Update, context: ContextTypes.DEFAULT_T
     query = update.callback_query
     await query.answer()
     current_mode = await logic_stubs.get_bot_mode()
-    text = f"⚙️ *Control Operativo*\\n\\nModo actual: `{escape_markdown(current_mode)}`\\n\\nSelecciona una acción\\."
+    mode_text = escape_markdown(current_mode)
+    text = f"⚙️ *Control Operativo*\n\nModo actual: `{mode_text}`\n\nSelecciona una acción."
     
-    if current_mode == 'LIVE':
-        keyboard = keyboards.get_control_operativo_live_keyboard()
-    else:
-        keyboard = keyboards.get_control_operativo_keyboard()
+    keyboard = keyboards.get_control_operativo_keyboard(current_mode)
 
-    await query.edit_message_text(
-        text=text,
-        reply_markup=keyboard,
-        parse_mode=ParseMode.MARKDOWN_V2
-    )
+    await query.edit_message_text(text=text, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN_V2)
 
 async def show_gestion_riesgo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
@@ -208,8 +202,6 @@ async def system_health_check(update: Update, context: ContextTypes.DEFAULT_TYPE
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
-# --- Handlers para los botones nuevos ---
-
 async def risk_define_size_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer()
@@ -252,7 +244,6 @@ async def mlops_model_status(update: Update, context: ContextTypes.DEFAULT_TYPE)
     )
 
 async def panel_show_positions(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra un resumen de las posiciones abiertas."""
     query = update.callback_query
     await query.answer("Consultando posiciones abiertas...")
     summary = await logic_stubs.get_open_positions_summary(context.bot)
@@ -263,7 +254,6 @@ async def panel_show_positions(update: Update, context: ContextTypes.DEFAULT_TYP
     )
 
 async def panel_show_shields(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra el estado de los escudos de protección."""
     query = update.callback_query
     await query.answer()
     status_text = logic_stubs.get_shield_status()
@@ -275,7 +265,6 @@ async def panel_show_shields(update: Update, context: ContextTypes.DEFAULT_TYPE)
     )
 
 async def risk_set_auto(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Configura el riesgo en modo automático."""
     query = update.callback_query
     await query.answer("Cambiando a riesgo automático...")
     logic_stubs.set_risk_auto()
@@ -285,63 +274,56 @@ async def risk_set_auto(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
-# --- Conversation and Action Handlers ---
+# --- REFACTORED CONVERSATION AND ACTION HANDLERS ---
 
-async def set_mode_paper(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer("Cambiando a modo PAPER...")
-    await logic_stubs.set_bot_mode("PAPER_TRADING")
-    await show_control_operativo(update, context)
-
-async def change_mode_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def toggle_operative_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    Inicia el proceso de cambio de modo.
+    - Si está en LIVE, cambia a PAPER directamente.
+    - Si está en PAPER, pide confirmación para cambiar a LIVE.
+    """
     query = update.callback_query
     await query.answer()
     current_mode = await logic_stubs.get_bot_mode()
 
     if current_mode == 'LIVE':
-        text = "✅ El bot ya se encuentra en modo `LIVE`\\."
-        keyboard = keyboards.get_control_operativo_live_keyboard()
-    else:
-        text = (
-            f"⚠️ *Confirmación Requerida* ⚠️\\n\\n"
-            f"El bot está actualmente en modo `{escape_markdown(current_mode)}`\\.\\n\\n"
-            f"Para cambiar a modo **LIVE**, por favor, escribe `CONFIRMAR LIVE`\\. \\n\\n"
-            f"Esta acción expondrá capital real al mercado\\."
-        )
-        keyboard = keyboards.get_cancel_keyboard()
-
-    await query.edit_message_text(
-        text=text,
-        reply_markup=keyboard,
-        parse_mode=ParseMode.MARKDOWN_V2
-    )
-    
-    return CONFIRM_LIVE if current_mode != 'LIVE' else ConversationHandler.END
-
-
-async def confirm_live_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    if update.message and update.message.text == "CONFIRMAR LIVE":
-        await update.message.reply_text(
-            text="✅ Confirmado\\. Cambiando a modo LIVE\\.\\.\\.",
+        await logic_stubs.set_bot_mode("PAPER_TRADING")
+        await query.edit_message_text(
+            text="✅ *Modo de Operación Cambiado a `PAPER_TRADING`*\n\nEl bot operará en modo de simulación.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
+        await start(update, context)
+        return ConversationHandler.END
+    else: # paper o cualquier otro estado
+        text = (
+            f"⚠️ *Confirmación Requerida* ⚠️\n\n"
+            f"El bot está actualmente en modo `{escape_markdown(current_mode)}`.\n\n"
+            f"Para cambiar a modo **LIVE**, por favor, escribe `CONFIRMAR LIVE`. \n\n"
+            f"Esta acción expondrá capital real al mercado."
+        )
+        await query.edit_message_text(text=text, reply_markup=keyboards.get_cancel_keyboard(), parse_mode=ParseMode.MARKDOWN_V2)
+        return CONFIRM_LIVE
+
+async def confirm_and_set_live_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Confirma y cambia el modo a LIVE."""
+    if update.message and update.message.text == "CONFIRMAR LIVE":
         await logic_stubs.set_bot_mode("LIVE")
-        
-        # Simular un callback query para volver al menú anterior
+        await update.message.reply_text(
+            text="✅ *Modo de Operación Cambiado a `LIVE`*\n\nEl bot ahora operará con capital real.",
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
         from telegram import CallbackQuery
         fake_query = CallbackQuery(id="fake_query_from_live_confirm", user=update.message.from_user, chat_instance="fake_chat")
         fake_update = Update(update.update_id, callback_query=fake_query)
         fake_update.callback_query.message = await context.bot.send_message(chat_id=update.effective_chat.id, text="Cargando menú...")
-        await show_control_operativo(fake_update, context)
-        
+        await start(fake_update, context)
         return ConversationHandler.END
     else:
         await update.message.reply_text(
-            text="❌ Texto incorrecto\\. Escribe `CONFIRMAR LIVE` o presiona cancelar\\.",
-            reply_markup=keyboards.get_cancel_keyboard(),
+            text="❌ Texto incorrecto. El cambio a modo LIVE ha sido cancelado. Vuelve a intentarlo desde el menú de Control Operativo.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
-        return CONFIRM_LIVE
+        return ConversationHandler.END
 
 async def liquidate_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     query = update.callback_query
@@ -421,7 +403,6 @@ async def cancel_conversation(update: Update, context: ContextTypes.DEFAULT_TYPE
     """Cancela la acción actual y vuelve al menú principal."""
     query = update.callback_query
     await query.answer()
-    # Reutilizamos la función start para mostrar el menú principal
     await start(update, context)
     return ConversationHandler.END
 
@@ -445,7 +426,6 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
     """Valida y establece el valor de riesgo manual."""
     user_input = update.message.text
     try:
-        # Reemplazar comas por puntos para formatos decimales europeos
         risk_value = float(user_input.replace(',', '.'))
         if not (0 < risk_value <= 100):
             raise ValueError("El riesgo debe estar entre 0 y 100.")
@@ -456,12 +436,9 @@ async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAUL
             text=f"✅ *Riesgo manual establecido en {risk_value}%*\\.\n\nTodas las nuevas operaciones usarán este valor.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
-        # Volver al menú de gestión de riesgo
-        # Simular un callback query para la navegación
         from telegram import CallbackQuery
         fake_query = CallbackQuery(id="fake_query_from_risk_confirm", user=update.message.from_user, chat_instance="fake_chat")
         fake_update = Update(update.update_id, callback_query=fake_query)
-        # Es necesario crear un mensaje 'falso' al que responder
         fake_update.callback_query.message = await context.bot.send_message(chat_id=update.effective_chat.id, text="Cargando menú...")
         await show_gestion_riesgo(fake_update, context)
 
@@ -494,7 +471,6 @@ action_handlers = [
     CallbackQueryHandler(risk_define_size_menu, pattern="^risk_define_size$"),
     CallbackQueryHandler(mlops_show_regime, pattern="^mlops_show_regime$"),
     CallbackQueryHandler(mlops_model_status, pattern="^mlops_model_status$"),
-    CallbackQueryHandler(set_mode_paper, pattern="^control_set_paper$"),
     CallbackQueryHandler(panel_show_positions, pattern="^panel_show_positions$"),
     CallbackQueryHandler(panel_show_shields, pattern="^panel_show_shields$"),
     CallbackQueryHandler(risk_set_auto, pattern="^risk_set_auto$"),
@@ -502,14 +478,13 @@ action_handlers = [
 
 conv_handlers = [
     ConversationHandler(
-        entry_points=[CallbackQueryHandler(change_mode_start, pattern="^control_change_mode$")],
+        entry_points=[CallbackQueryHandler(toggle_operative_mode, pattern="^control_toggle_mode$")],
         states={
-            CONFIRM_LIVE: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_live_mode)]
+            CONFIRM_LIVE: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_and_set_live_mode)]
         },
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
-        per_message=True,
     ),
     ConversationHandler(
         entry_points=[CallbackQueryHandler(liquidate_start, pattern="^emergency_liquidate$")],
