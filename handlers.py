@@ -312,11 +312,8 @@ async def confirm_and_set_live_mode(update: Update, context: ContextTypes.DEFAUL
             text="✅ *Modo de Operación Cambiado a `LIVE`*\n\nEl bot ahora operará con capital real.",
             parse_mode=ParseMode.MARKDOWN_V2
         )
-        from telegram import CallbackQuery
-        fake_query = CallbackQuery(id="fake_query_from_live_confirm", user=update.message.from_user, chat_instance="fake_chat")
-        fake_update = Update(update.update_id, callback_query=fake_query)
-        fake_update.callback_query.message = await context.bot.send_message(chat_id=update.effective_chat.id, text="Cargando menú...")
-        await start(fake_update, context)
+        # Simplificado: Llama a start() con el update actual para reenviar el menú.
+        await start(update, context)
         return ConversationHandler.END
     else:
         await update.message.reply_text(
