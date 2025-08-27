@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copiar explícitamente los directorios de código fuente para mayor robustez
+COPY utils/ /app/utils/
+
 # Copiar el resto del código de la aplicación al directorio de trabajo
 COPY . .
 

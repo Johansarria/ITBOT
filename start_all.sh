@@ -33,8 +33,8 @@ source .venv/bin/activate
 # 5. Iniciar los componentes del bot en segundo plano
 echo "[5/5] Iniciando los componentes del Bot en segundo plano..."
 
-echo "  -> Iniciando Listener Bot (Telegram)..."
-python listener_bot.py &
+echo "  -> Iniciando Main Bot (Telegram UI)..."
+python main.py &
 LISTENER_PID=$!
 
 echo "  -> Iniciando Execution Worker..."
@@ -49,7 +49,7 @@ echo "============================================="
 echo "✅ ENTORNO ITBOT INICIADO"
 echo "============================================="
 echo "Procesos iniciados en segundo plano:"
-echo "  - Listener (Telegram): PID $LISTENER_PID"
+echo "  - Main Bot (UI):       PID $LISTENER_PID"
 echo "  - Worker (Ejecución):  PID $WORKER_PID"
 echo "  - Run Bot (Análisis):  PID $RUN_BOT_PID"
 echo ""

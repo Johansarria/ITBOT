@@ -76,6 +76,14 @@ Se ha integrado la formalización y versionado del Feature Store, lo que permite
 *   **Corrección de Errores de Base de Datos:** Se han identificado y corregido errores de conexión con la base de datos de pruebas, que impedían la ejecución de las pruebas de la base de datos.
 *   **Estabilización General de la Suite de Pruebas:** Se ha trabajado en la estabilización general de la suite de pruebas, corrigiendo una gran cantidad de errores que impedían su correcta ejecución.
 
+### Mejoras en la Estabilidad y Pruebas (Agosto 2025)
+
+*   **Corrección de Lógica de Modos**: Se ha corregido un error crítico en `handlers.py` que causaba mensajes contradictorios al intentar cambiar entre los modos `LIVE` y `PAPER_TRADING`. La lógica ahora maneja correctamente las transiciones y notificaciones al usuario.
+*   **Refactorización y Estabilización de Pruebas**:
+    *   Se creó un nuevo módulo de pruebas (`tests/test_handlers.py`) para cubrir específicamente la lógica de la interfaz de usuario en `handlers.py`, mejorando la cobertura y la fiabilidad.
+    *   Se resolvió un `ImportError` en `tests/conftest.py` eliminando una dependencia obsoleta, lo que permite una ejecución de pruebas más limpia y eficiente.
+*   **Gestión de Riesgos (En Curso)**: Se ha identificado que la implementación del menú de gestión de riesgos (`risk_set_auto`, `risk_set_manual`) está incompleta y carece de manejadores. Este es un área de trabajo activa para futuras mejoras.
+
 ## Dependencias Principales
 
 *   **Python >=3.12**

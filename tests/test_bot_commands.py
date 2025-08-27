@@ -15,15 +15,17 @@ async def test_set_bot_commands_success():
     
     # Check that commands list is passed and contains expected commands
     commands = args[0]
-    assert len(commands) == 7
+    assert len(commands) == 9
 
     # Create a dictionary for easy lookup and assertion
     commands_dict = {c.command: c.description for c in commands}
 
     expected_commands = {
+        "/start": "Iniciar el bot y mostrar el menú principal.",
+        "/menu": "Mostrar el menú principal.",
+        "/help": "Mostrar este mensaje de ayuda.",
         "/status": "Verificar si el bot está funcionando.",
         "/posiciones": "Mostrar un resumen de las posiciones abiertas.",
-        "/ayuda": "Mostrar este mensaje de ayuda.",
         "/reportes": "Generar reportes de operaciones.",
         "/riesgo": "Consultar o ajustar el nivel de riesgo.",
         "/analizar": "Realizar un análisis técnico del mercado.",

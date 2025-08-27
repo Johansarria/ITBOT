@@ -3,6 +3,8 @@
 import asyncio
 import logging
 import os
+import time # Importar time
+import redis # Importar redis
 from datetime import datetime
 
 from aiogram import Bot
@@ -13,7 +15,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from config import settings
 from database.database_manager import init_db
 from download_historical_data import download_and_save_klines
-from listener_bot import dp
+# from listener_bot import dp # No longer needed, this bot should not listen.
 from strategies.strategy_manager import StrategyManager
 from utils.binance_client import close_binance_client
 from utils.logger_setup import setup_logging
@@ -64,7 +66,7 @@ async def daily_data_update_task(bot_instance: Bot, chat_id: int):
             )
             await send_message(bot_instance, chat_id, f"✅ Actualización diaria de datos para {symbol} completada.")
         except Exception as e:
-            logger.error(f"Error en la tarea de actualización diaria para {symbol}: {e}", exc_info=True)
+            logger.critical(f"Error en la tarea de actualización diaria para {symbol}: {e}", exc_info=True)
             await send_message(bot_instance, chat_id, f"❌ Error en actualización diaria para {symbol}: {e}")
 
 async def shutdown_all_subprocesses():
@@ -145,13 +147,24 @@ async def main_run_bot() -> None:
     state_manager = StateManager()
     session_mode = state_manager.get_state("session", "mode", settings.MODE)
 
+    # Conexión a Redis para Heartbeat
+    try:
+        redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+        redis_client.ping() # Verificar conexión
+        logger.info("Conexión con Redis para heartbeat establecida.")
+    except redis.exceptions.ConnectionError as e:
+        logger.critical(f"No se pudo conectar a Redis para el heartbeat: {e}")
+        redis_client = None
+
     scheduler = AsyncIOScheduler()
     scheduler.add_job(daily_data_update_task, 'cron', hour=0, minute=0, args=[bot_instance, chat_id_int])
     scheduler.add_job(retrain_ml_model_periodically, 'interval', hours=24, args=[bot_instance, chat_id_int])
     scheduler.start()
     logger.info("Scheduler iniciado con tareas programadas.")
 
-    polling_task = asyncio.create_task(dp.start_polling(bot_instance))
+    # Se elimina el polling de Telegram para este proceso.
+    # La interacción con el usuario se gestionará a través de main.py.
+    # polling_task = asyncio.create_task(dp.start_polling(bot_instance))
 
     try:
         if session_mode == "live":
@@ -160,6 +173,14 @@ async def main_run_bot() -> None:
             await send_message(bot_instance, chat_id_int, "🤖 Bot en modo PAPER (simulación) para múltiples activos!")
 
         while True:
+            # Enviar Heartbeat
+            if redis_client:
+                try:
+                    redis_client.set("heartbeat:analysis_bot", int(time.time()))
+                    logger.info("Heartbeat de Analysis Bot enviado a Redis.")
+                except redis.exceptions.RedisError as e:
+                    logger.error(f"No se pudo enviar el heartbeat a Redis: {e}")
+
             logger.info(f"--- Iniciando nuevo ciclo de análisis para los activos: {', '.join(settings.TRADING_PAIRS)} ---")
             
             escudo_msg_dict = await verificar_condiciones_mercado(bot_instance, chat_id_int)
@@ -186,12 +207,12 @@ async def main_run_bot() -> None:
         logger.info("Iniciando secuencia de apagado del bot...")
         if scheduler.running:
             scheduler.shutdown()
-        if not polling_task.done():
-            polling_task.cancel()
-            try:
-                await polling_task
-            except asyncio.CancelledError:
-                pass
+        # if not polling_task.done():
+        #     polling_task.cancel()
+        #     try:
+        #         await polling_task
+        #     except asyncio.CancelledError:
+        #         pass
         
         await close_binance_client()
         await shutdown_all_subprocesses()
