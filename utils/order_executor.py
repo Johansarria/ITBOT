@@ -227,10 +227,10 @@ async def evaluar_y_ejecutar_operacion(
         session_mode = state_manager.get_state("session", "mode", config.MODE)
         live_mode_unlocked = state_manager.get_state("live_mode", "unlocked", False)
 
-        if session_mode == "live" and not live_mode_unlocked:
+        if session_mode == "LIVE" and not live_mode_unlocked:
             trade_mode_actual = "SIMULATED"
             await safe_send_message(bot_instance, chat_id, "⚠️ El bot está en modo LIVE pero no ha sido desbloqueado. La operación se realizará en modo SIMULADO.")
-        elif session_mode == "live" and live_mode_unlocked:
+        elif session_mode == "LIVE" and live_mode_unlocked:
             trade_mode_actual = "REAL"
         else:
             trade_mode_actual = "SIMULATED"

@@ -76,12 +76,14 @@ class StateManager:
         return self._state.get(module, default_value)
 
     def set_state(self, module: str, key: str, value: Any):
+        self._load_state()  # Cargar el estado más reciente antes de modificar
         if module not in self._state:
             self._state[module] = {}
         self._state[module][key] = value
         self._save_state()
 
     def update_module_state(self, module: str, updates: Dict[str, Any]):
+        self._load_state()  # Cargar el estado más reciente antes de modificar
         if module not in self._state:
             self._state[module] = {}
         self._state[module].update(updates)

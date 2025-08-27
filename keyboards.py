@@ -34,18 +34,18 @@ def get_panel_control_keyboard() -> InlineKeyboardMarkup:
     ]
     return InlineKeyboardMarkup(keyboard)
 
-def get_control_operativo_keyboard() -> InlineKeyboardMarkup:
-    """Genera el teclado para el Control Operativo."""
-    keyboard = [
-        [InlineKeyboardButton("🔄 Cambiar Modo (LIVE/PAPER)", callback_data="control_change_mode")],
-        [InlineKeyboardButton("↩️ Volver al Menú Principal", callback_data="main_menu")],
-    ]
-    return InlineKeyboardMarkup(keyboard)
+def get_control_operativo_keyboard(current_mode: str) -> InlineKeyboardMarkup:
+    """
+    Genera el teclado para el Control Operativo de forma dinámica.
+    El texto y la acción del botón cambian según el modo actual.
+    """
+    if current_mode == 'LIVE':
+        button_text = "✅ Cambiar a Modo PAPER"
+    else:
+        button_text = "🔥 Cambiar a Modo LIVE"
 
-def get_control_operativo_live_keyboard() -> InlineKeyboardMarkup:
-    """Genera el teclado para el Control Operativo cuando el modo es LIVE."""
     keyboard = [
-        [InlineKeyboardButton("✅ Cambiar a Modo PAPER", callback_data="control_set_paper")],
+        [InlineKeyboardButton(button_text, callback_data="control_toggle_mode")],
         [InlineKeyboardButton("↩️ Volver al Menú Principal", callback_data="main_menu")],
     ]
     return InlineKeyboardMarkup(keyboard)
