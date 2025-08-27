@@ -14,6 +14,7 @@ def get_main_menu_keyboard() -> InlineKeyboardMarkup:
     """Genera el teclado del menú principal."""
     keyboard = [
         [InlineKeyboardButton("⚙️ Control Operativo", callback_data="control_operativo")],
+        [InlineKeyboardButton("🕹️ Panel de Control", callback_data="panel_control")],
         [InlineKeyboardButton("⚖️ Gestión de Riesgo", callback_data="gestion_riesgo")],
         [InlineKeyboardButton("📈 Reportes y Análisis", callback_data="reportes_analisis")],
         [InlineKeyboardButton("🧠 Inteligencia y MLOps", callback_data="inteligencia_mlops")],

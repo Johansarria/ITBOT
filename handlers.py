@@ -153,6 +153,17 @@ async def show_emergency_menu(update: Update, context: ContextTypes.DEFAULT_TYPE
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
+async def show_panel_control(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    text = "🕹️ *Panel de Control*\\n\\nMonitoriza el estado del bot en tiempo real\\."
+    await query.edit_message_text(
+        text=text,
+        reply_markup=keyboards.get_panel_control_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+
+
 # --- Handlers de Acciones Específicas ---
 
 async def reports_show_discarded(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -237,6 +248,40 @@ async def mlops_model_status(update: Update, context: ContextTypes.DEFAULT_TYPE)
     await query.edit_message_text(
         text=text,
         reply_markup=keyboards.get_mlops_menu_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+
+async def panel_show_positions(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Muestra un resumen de las posiciones abiertas."""
+    query = update.callback_query
+    await query.answer("Consultando posiciones abiertas...")
+    summary = await logic_stubs.get_open_positions_summary(context.bot)
+    await query.edit_message_text(
+        text=summary,
+        reply_markup=keyboards.get_panel_control_keyboard(),
+        parse_mode=ParseMode.HTML
+    )
+
+async def panel_show_shields(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Muestra el estado de los escudos de protección."""
+    query = update.callback_query
+    await query.answer()
+    status_text = logic_stubs.get_shield_status()
+    text = f"🛡️ *Estado de los Escudos*\n\n{escape_markdown(status_text)}"
+    await query.edit_message_text(
+        text=text,
+        reply_markup=keyboards.get_panel_control_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+
+async def risk_set_auto(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Configura el riesgo en modo automático."""
+    query = update.callback_query
+    await query.answer("Cambiando a riesgo automático...")
+    logic_stubs.set_risk_auto()
+    await query.edit_message_text(
+        text="✅ *Riesgo configurado en modo Automático*\\.\n\nEl sistema ajustará el riesgo según el modelo ML.",
+        reply_markup=keyboards.get_risk_size_menu_keyboard(),
         parse_mode=ParseMode.MARKDOWN_V2
     )
 
@@ -380,11 +425,62 @@ async def cancel_conversation(update: Update, context: ContextTypes.DEFAULT_TYPE
     await start(update, context)
     return ConversationHandler.END
 
+async def risk_set_manual_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia la conversación para establecer un riesgo manual."""
+    query = update.callback_query
+    await query.answer()
+    text = (
+        "✍️ *Configurar Riesgo Manual*\\n\\n"
+        "Por favor, introduce el porcentaje de riesgo fijo que deseas usar por operación (ej. `1.5` para 1.5%)\\.\\n\\n"
+        "Este valor anulará el cálculo automático del modelo ML."
+    )
+    await query.edit_message_text(
+        text=text,
+        reply_markup=keyboards.get_cancel_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+    return CONFIRM_MANUAL_RISK
+
+async def confirm_manual_risk_value(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Valida y establece el valor de riesgo manual."""
+    user_input = update.message.text
+    try:
+        # Reemplazar comas por puntos para formatos decimales europeos
+        risk_value = float(user_input.replace(',', '.'))
+        if not (0 < risk_value <= 100):
+            raise ValueError("El riesgo debe estar entre 0 y 100.")
+
+        logic_stubs.set_risk_manual(risk_value)
+
+        await update.message.reply_text(
+            text=f"✅ *Riesgo manual establecido en {risk_value}%*\\.\n\nTodas las nuevas operaciones usarán este valor.",
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        # Volver al menú de gestión de riesgo
+        # Simular un callback query para la navegación
+        from telegram import CallbackQuery
+        fake_query = CallbackQuery(id="fake_query_from_risk_confirm", user=update.message.from_user, chat_instance="fake_chat")
+        fake_update = Update(update.update_id, callback_query=fake_query)
+        # Es necesario crear un mensaje 'falso' al que responder
+        fake_update.callback_query.message = await context.bot.send_message(chat_id=update.effective_chat.id, text="Cargando menú...")
+        await show_gestion_riesgo(fake_update, context)
+
+        return ConversationHandler.END
+
+    except (ValueError, TypeError):
+        await update.message.reply_text(
+            text="❌ *Valor inválido*\\.\n\nPor favor, introduce un número válido (ej. `1.5` o `2`)\\. Inténtalo de nuevo o cancela la operación.",
+            reply_markup=keyboards.get_cancel_keyboard(),
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+        return CONFIRM_MANUAL_RISK
+
 # --- Agrupación de Handlers para main.py ---
 
 main_menu_handlers = [
     CallbackQueryHandler(start, pattern="^main_menu$"),
     CallbackQueryHandler(show_control_operativo, pattern="^control_operativo$"),
+    CallbackQueryHandler(show_panel_control, pattern="^panel_control$"),
     CallbackQueryHandler(show_gestion_riesgo, pattern="^gestion_riesgo$"),
     CallbackQueryHandler(show_reportes_analisis, pattern="^reportes_analisis$"),
     CallbackQueryHandler(show_mlops_menu, pattern="^inteligencia_mlops$"),
@@ -399,6 +495,9 @@ action_handlers = [
     CallbackQueryHandler(mlops_show_regime, pattern="^mlops_show_regime$"),
     CallbackQueryHandler(mlops_model_status, pattern="^mlops_model_status$"),
     CallbackQueryHandler(set_mode_paper, pattern="^control_set_paper$"),
+    CallbackQueryHandler(panel_show_positions, pattern="^panel_show_positions$"),
+    CallbackQueryHandler(panel_show_shields, pattern="^panel_show_shields$"),
+    CallbackQueryHandler(risk_set_auto, pattern="^risk_set_auto$"),
 ]
 
 conv_handlers = [
@@ -426,6 +525,16 @@ conv_handlers = [
         entry_points=[CallbackQueryHandler(stop_start, pattern="^emergency_full_stop$")],
         states={
             CONFIRM_STOP: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_stop)]
+        },
+        fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
+        per_user=True,
+        per_chat=True,
+        per_message=True,
+    ),
+    ConversationHandler(
+        entry_points=[CallbackQueryHandler(risk_set_manual_start, pattern="^risk_set_manual$")],
+        states={
+            CONFIRM_MANUAL_RISK: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_manual_risk_value)]
         },
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,

@@ -18,13 +18,16 @@ from sqlalchemy import text
 
 # --- Importaciones del núcleo de ITBOT ---
 from utils.state_manager import StateManager
-from utils.position_manager import get_open_positions
+from utils.position_manager import get_open_positions, get_open_positions_summary as get_pos_summary_from_manager
 from database.database_manager import get_db_session, get_klines
 from utils.technical_analysis import RegimeDetector
 from utils.binance_client import get_binance_client, close_binance_client
 from utils.order_executor import evaluar_y_ejecutar_operacion
 from config import settings
 import redis
+from telegram import Bot
+from utils.shield_manager import obtener_estado_escudo
+from utils.risk_manager import restaurar_riesgo_automatico, activar_riesgo_forzado
 
 logger = logging.getLogger(__name__)
 state_manager = StateManager()
@@ -86,6 +89,28 @@ async def get_main_menu_summary() -> Dict[str, Any]:
     }
 
 # --- Implementaciones Anteriores (Conservadas por si son necesarias en otros menús) ---
+
+# --- Funciones para acciones de botones ---
+
+async def get_open_positions_summary(bot: Bot) -> str:
+    """Obtiene un resumen de las posiciones abiertas."""
+    return await get_pos_summary_from_manager(bot)
+
+def get_shield_status() -> str:
+    """Obtiene el estado de los escudos."""
+    _, status_text = obtener_estado_escudo()
+    return status_text
+
+def set_risk_auto() -> None:
+    """Establece el modo de riesgo a automático."""
+    restaurar_riesgo_automatico()
+    logger.info("Risk mode set to AUTO by user.")
+
+def set_risk_manual(percentage: float) -> None:
+    """Establece el modo de riesgo a manual con un porcentaje fijo."""
+    activar_riesgo_forzado(percentage)
+    logger.info(f"Risk mode set to MANUAL with {percentage}%% by user.")
+
 
 async def get_consolidated_status() -> Dict[str, Any]:
     """Obtiene un estado consolidado del bot llamando a los módulos reales."""
