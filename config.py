@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     # --- CONFIGURACIÓN DE API Y TELEGRAM ---
     TELEGRAM_BOT_TOKEN: str
     TELEGRAM_CHAT_ID: int
+    ADMIN_TELEGRAM_ID: int
     BINANCE_API_KEY: str
     BINANCE_SECRET_KEY: str
 

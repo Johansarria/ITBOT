@@ -9,14 +9,16 @@ y llama a los módulos reales para obtener datos y ejecutar acciones.
 """
 
 import asyncio
-import logging
 import time
 from datetime import datetime, time as dt_time
 from typing import Dict, Any, List
 import pandas as pd
 from sqlalchemy import text
+import redis
+from telegram import Bot
 
 # --- Importaciones del núcleo de ITBOT ---
+from utils.structured_logger import StructuredLogger
 from utils.state_manager import StateManager
 from utils.position_manager import get_open_positions, get_open_positions_summary as get_pos_summary_from_manager
 from database.database_manager import get_db_session, get_klines
@@ -24,12 +26,10 @@ from utils.technical_analysis import RegimeDetector
 from utils.binance_client import get_binance_client, close_binance_client
 from utils.order_executor import evaluar_y_ejecutar_operacion
 from config import settings
-import redis
-from telegram import Bot
 from utils.shield_manager import obtener_estado_escudo
 from utils.risk_manager import restaurar_riesgo_automatico, activar_riesgo_forzado
 
-logger = logging.getLogger(__name__)
+logger = StructuredLogger(__name__)
 state_manager = StateManager()
 
 # --- Nuevas funciones para el resumen del menú principal ---
@@ -51,7 +51,7 @@ async def get_daily_operations_count() -> int:
             result = session.execute(query, {"start_of_day": start_of_day}).scalar_one_or_none()
             return result or 0
     except Exception as e:
-        logger.error(f"Error al contar operaciones diarias: {e}", exc_info=True)
+        logger.error("DB_QUERY_ERROR", f"Error al contar operaciones diarias: {e}", exc_info=True)
         return -1 # Devolver un valor que indique error
 
 async def get_last_sync_time() -> str:
@@ -71,7 +71,7 @@ async def get_last_sync_time() -> str:
             return datetime.fromtimestamp(last_sync).strftime('%Y-%m-%d %H:%M:%S')
         return "Nunca"
     except Exception as e:
-        logger.error(f"Error al obtener tiempo de sync: {e}", exc_info=True)
+        logger.error("REDIS_ERROR", f"Error al obtener tiempo de sync de Redis: {e}", exc_info=True)
         return "Error"
 
 async def get_main_menu_summary() -> Dict[str, Any]:
@@ -104,12 +104,12 @@ def get_shield_status() -> str:
 def set_risk_auto() -> None:
     """Establece el modo de riesgo a automático."""
     restaurar_riesgo_automatico()
-    logger.info("Risk mode set to AUTO by user.")
+    logger.info("RISK_MODE_CHANGED", "Risk mode set to AUTO by user.", details={"mode": "auto"})
 
 def set_risk_manual(percentage: float) -> None:
     """Establece el modo de riesgo a manual con un porcentaje fijo."""
     activar_riesgo_forzado(percentage)
-    logger.info(f"Risk mode set to MANUAL with {percentage}%% by user.")
+    logger.info("RISK_MODE_CHANGED", f"Risk mode set to MANUAL with {percentage}% by user.", details={"mode": "manual", "percentage": percentage})
 
 
 async def get_consolidated_status() -> Dict[str, Any]:
@@ -132,7 +132,7 @@ async def get_consolidated_status() -> Dict[str, Any]:
         }
         return status
     except Exception as e:
-        logger.error(f"Error al consolidar estado: {e}", exc_info=True)
+        logger.error("STATUS_ERROR", f"Error al consolidar estado: {e}", exc_info=True)
         return {"error": str(e)}
 
 async def get_open_trades() -> List[Dict[str, Any]]:
@@ -143,7 +143,7 @@ async def get_open_trades() -> List[Dict[str, Any]]:
             return []
         return positions_df.to_dict(orient='records')
     except Exception as e:
-        logger.error(f"Error al obtener trades abiertos: {e}", exc_info=True)
+        logger.error("POSITION_ERROR", f"Error al obtener trades abiertos: {e}", exc_info=True)
         return []
 
 async def get_bot_mode() -> str:
@@ -154,9 +154,9 @@ async def set_bot_mode(mode: str) -> bool:
     """Establece el modo del bot en el state_manager."""
     if mode in ["LIVE", "PAPER_TRADING"]:
         state_manager.set_state("session", "mode", mode)
-        logger.info(f"Modo del bot cambiado a: {mode}")
+        logger.info("BOT_MODE_CHANGED", f"Modo del bot cambiado a: {mode}", details={"mode": mode})
         return True
-    logger.warning(f"Intento de cambiar a modo inválido: {mode}")
+    logger.warning("INVALID_BOT_MODE", f"Intento de cambiar a modo inválido: {mode}", details={"invalid_mode": mode})
     return False
 
 async def get_last_discarded_signals() -> List[Dict[str, str]]:
@@ -167,7 +167,7 @@ async def get_last_discarded_signals() -> List[Dict[str, str]]:
             df = pd.read_sql(query, session.bind)
         return df.to_dict(orient='records')
     except Exception as e:
-        logger.error(f"Error al obtener señales descartadas: {e}", exc_info=True)
+        logger.error("DB_QUERY_ERROR", f"Error al obtener señales descartadas: {e}", exc_info=True)
         return []
 
 async def get_market_regime() -> str:
@@ -181,7 +181,7 @@ async def get_market_regime() -> str:
         detector = RegimeDetector(klines_df)
         return detector.get_market_regime()
     except Exception as e:
-        logger.error(f"Error al detectar régimen de mercado: {e}", exc_info=True)
+        logger.error("ANALYSIS_ERROR", f"Error al detectar régimen de mercado: {e}", exc_info=True)
         return "ERROR"
 
 async def get_ml_model_status() -> Dict[str, Any]:
@@ -236,39 +236,76 @@ async def check_services_health() -> Dict[str, str]:
     
     return health
 
-async def liquidate_all_positions() -> bool:
-    """Liquida todas las posiciones abiertas."""
-    logger.warning("¡¡¡INICIANDO SECUENCIA DE LIQUIDACIÓN TOTAL!!!")
+async def execute_kill_switch() -> Dict[str, Any]:
+    """
+    Liquida todas las posiciones abiertas de forma robusta, con reintentos,
+    y devuelve un resumen de la operación.
+    """
+    logger.warning("KILL_SWITCH_START", "¡¡¡SECUENCIA DE KILL SWITCH INICIADA!!!")
+
+    results = {
+        "success": True,
+        "closed_positions": [],
+        "failed_positions": []
+    }
+
     try:
         open_positions = get_open_positions()
         if open_positions.empty:
-            logger.info("No hay posiciones abiertas para liquidar.")
-            return True
+            logger.info("KILL_SWITCH_SKIP", "No hay posiciones abiertas para liquidar.")
+            return results
         
         client = await get_binance_client()
+
         for _, position in open_positions.iterrows():
             symbol = position['symbol']
             quantity = position['cantidad_token_operada']
             side = position['side']
-            
             close_side = "SELL" if side == "LONG" else "BUY"
             
-            logger.info(f"Cerrando posición para {symbol}: Orden {close_side} de {quantity} tokens.")
+            for attempt in range(2): # Intentar 2 veces (1 original + 1 reintento)
+                try:
+                    logger.info(
+                        "KILL_SWITCH_CLOSE_ATTEMPT",
+                        f"Intento {attempt + 1}: Cerrando {symbol} ({quantity} {close_side})",
+                        details=position.to_dict()
+                    )
+                    await client.create_order(symbol=symbol, side=close_side, type="MARKET", quantity=quantity)
+                    results["closed_positions"].append(position.to_dict())
+                    logger.info("KILL_SWITCH_CLOSE_SUCCESS", f"Posición {symbol} cerrada con éxito.")
+                    break # Salir del bucle de reintentos si tiene éxito
+                except Exception as e:
+                    logger.error(
+                        "KILL_SWITCH_CLOSE_ERROR",
+                        f"Fallo en intento {attempt + 1} al cerrar {symbol}: {e}",
+                        details={"attempt": attempt + 1, **position.to_dict()},
+                        exc_info=True
+                    )
+                    if attempt == 1: # Si es el segundo intento (el reintento) y falla
+                        results["failed_positions"].append(position.to_dict())
+                        results["success"] = False
+                    else:
+                        await asyncio.sleep(1) # Esperar 1 segundo antes de reintentar
+
+        if results["success"]:
+            logger.warning("KILL_SWITCH_COMPLETE", "Kill Switch completado con éxito. Todas las posiciones cerradas.")
+        else:
+            logger.critical("KILL_SWITCH_PARTIAL_FAILURE", "Kill Switch completado con fallos.", details=results)
             
-            await client.create_order(
-                symbol=symbol,
-                side=close_side,
-                type="MARKET",
-                quantity=quantity
-            )
-        logger.warning("¡¡¡LIQUIDACIÓN TOTAL COMPLETADA!!!")
-        return True
     except Exception as e:
-        logger.error(f"Error crítico durante la liquidación total: {e}", exc_info=True)
-        return False
+        logger.critical("KILL_SWITCH_FATAL_ERROR", f"Error crítico durante la ejecución del Kill Switch: {e}", exc_info=True)
+        results["success"] = False
+
+    return results
 
 async def full_system_stop() -> bool:
-    """Detiene la creación de nuevas órdenes en el bot."""
-    logger.warning("¡¡¡PAUSA TOTAL DEL SISTEMA INICIADA!!!")
-    state_manager.set_state("system", "is_running", False)
+    """Pone el bot en estado de pausa, deteniendo la creación de nuevas órdenes."""
+    logger.warning("SYSTEM_PAUSE", "Iniciando pausa del sistema. No se crearán nuevas operaciones.")
+    state_manager.set_state("system", "is_paused", True)
+    return True
+
+async def resume_system() -> bool:
+    """Reanuda la operativa del bot."""
+    logger.warning("SYSTEM_RESUME", "Reanudando la operativa del sistema.")
+    state_manager.set_state("system", "is_paused", False)
     return True
