@@ -15,6 +15,7 @@ from telegram.ext import (
     ContextTypes,
     ConversationHandler,
     CallbackQueryHandler,
+    CommandHandler,
     MessageHandler,
     filters,
 )
@@ -416,6 +417,31 @@ def is_admin(user_id: int) -> bool:
     """Verifica si el ID de usuario corresponde al administrador."""
     return user_id == settings.ADMIN_TELEGRAM_ID
 
+
+async def kill_switch_command_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia la secuencia del Kill Switch desde un comando /kill_switch."""
+    # 1. Verificar si el usuario es administrador
+    if not is_admin(update.message.from_user.id):
+        await update.message.reply_text("🚫 ACCESO DENEGADO. Este comando solo puede ser ejecutado por un administrador.")
+        return ConversationHandler.END
+
+    # 2. Enviar el mensaje de confirmación
+    text = (
+        "🚨🚨🚨 *CONFIRMACIÓN DE KILL SWITCH* 🚨🚨🚨\n\n"
+        "Esta acción liquidará **TODAS** las posiciones abiertas y detendrá **TODA** la operativa del bot.\n\n"
+        "Esta acción es **IRREVERSIBLE**.\n\n"
+        "Para proceder, escribe `CONFIRMAR KILL SWITCH`."
+    )
+    await update.message.reply_text(
+        text=escape_markdown(text),
+        reply_markup=keyboards.get_cancel_keyboard(),
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
+
+    # 3. Entrar en el estado de confirmación
+    return CONFIRM_KILL_SWITCH
+
+
 async def kill_switch_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia la secuencia del Kill Switch, verificando primero la autorización."""
     query = update.callback_query
@@ -440,11 +466,10 @@ async def kill_switch_start(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 async def confirm_kill_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Ejecuta el Kill Switch tras la confirmación del administrador."""
     if update.message and update.message.text == "CONFIRMAR KILL SWITCH":
-        await update.message.reply_text(escape_markdown("🔥 Confirmado. Ejecutando Kill Switch... Liquidando posiciones y pausando el sistema..."), parse_mode=ParseMode.MARKDOWN_V2)
+        await update.message.reply_text(escape_markdown("🔥 Confirmado. Ejecutando Kill Switch Atómico... El sistema se pausará primero y luego se liquidarán las posiciones."), parse_mode=ParseMode.MARKDOWN_V2)
 
-        # Ejecutar lógica de liquidación y pausa
-        results = await logic_stubs.execute_kill_switch()
-        await logic_stubs.full_system_stop()
+        # Ejecutar lógica de liquidación y pausa de forma atómica
+        results = await logic_stubs.atomic_kill_switch()
 
         # Formatear el reporte para el usuario
         closed_count = len(results['closed_positions'])
@@ -599,8 +624,11 @@ conv_handlers = [
         per_message=True,
     ),
     ConversationHandler(
-        # Este es el nuevo handler para el Kill Switch unificado
-        entry_points=[CallbackQueryHandler(kill_switch_start, pattern="^emergency_kill_switch$")],
+        # Este es el nuevo handler para el Kill Switch unificado, accesible por botón y comando.
+        entry_points=[
+            CallbackQueryHandler(kill_switch_start, pattern="^emergency_kill_switch$"),
+            CommandHandler("kill_switch", kill_switch_command_handler)
+        ],
         states={
             CONFIRM_KILL_SWITCH: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_kill_switch)]
         },

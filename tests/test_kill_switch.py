@@ -21,7 +21,7 @@ from config import settings
 def mock_logic_layer():
     with patch('handlers.logic_stubs', new_callable=AsyncMock) as mock_logic:
         # Pre-configure the return values of async functions
-        mock_logic.execute_kill_switch.return_value = {
+        mock_logic.atomic_kill_switch.return_value = {
             "closed_positions": [],
             "failed_positions": []
         }
@@ -98,8 +98,9 @@ async def test_confirm_kill_switch_success(mock_logic_layer, mock_context, admin
 
     result = await confirm_kill_switch(update, mock_context)
 
-    mock_logic_layer.execute_kill_switch.assert_awaited_once()
-    mock_logic_layer.full_system_stop.assert_awaited_once()
+    mock_logic_layer.atomic_kill_switch.assert_awaited_once()
+    mock_logic_layer.execute_kill_switch.assert_not_awaited() # Ensure old func not called
+    mock_logic_layer.full_system_stop.assert_not_awaited() # Ensure old func not called
 
     # Check the final report message
     final_report_text = message.reply_text.call_args_list[1].kwargs['text']
@@ -110,7 +111,7 @@ async def test_confirm_kill_switch_success(mock_logic_layer, mock_context, admin
 @pytest.mark.asyncio
 async def test_confirm_kill_switch_partial_failure(mock_logic_layer, mock_context, admin_user, mock_chat):
     """Test kill switch confirmation when some positions fail to close."""
-    mock_logic_layer.execute_kill_switch.return_value = {
+    mock_logic_layer.atomic_kill_switch.return_value = {
         "closed_positions": [{'symbol': 'BTCUSDT'}],
         "failed_positions": [{'symbol': 'ETHUSDT'}]
     }
@@ -140,7 +141,7 @@ async def test_confirm_kill_switch_wrong_text(mock_logic_layer, mock_context, ad
 
     result = await confirm_kill_switch(update, mock_context)
 
-    mock_logic_layer.execute_kill_switch.assert_not_awaited()
+    mock_logic_layer.atomic_kill_switch.assert_not_awaited()
     message.reply_text.assert_called_once()
     # Check the positional argument instead of keyword argument
     assert "Texto incorrecto" in message.reply_text.call_args.args[0]
