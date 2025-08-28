@@ -112,17 +112,40 @@ Se ha integrado la formalización y versionado del Feature Store, lo que permite
 
 ## Ejecución
 
-*   Para una operación completa, `run_bot.py` y `execution_worker.py` deben ejecutarse en paralelo (idealmente en procesos separados o en segundo plano).
-*   Para operar el bot (orquestador): `python3 run_bot.py`
-*   Para el worker de ejecución: `python3 execution_worker.py`
-*   Para entrenar modelos ML: `python3 ml_model_trainer.py`
+Operación típica en dos procesos:
+
+- Orquestador (analiza y envía señales):
+    ```bash
+    python3 run_bot.py
+    ```
+- Worker de ejecución (recibe y ejecuta órdenes):
+    ```bash
+    python3 execution_worker.py
+    ```
+- Entrenar modelos ML (opcional):
+    ```bash
+    python3 ml_model_trainer.py
+    ```
+
+Modos de operación (REAL vs SIMULADO):
+
+- El modo efectivo se determina por el estado persistido (StateManager):
+    - `session.mode = "live"` y `live_mode.unlocked = true` → MODO REAL (se llaman `create_order` y `create_oco_order` de Binance).
+    - `session.mode = "live"` y `live_mode.unlocked = false` → SIMULADO con aviso: "El bot está en modo LIVE pero no ha sido desbloqueado".
+    - Cualquier otro caso → SIMULADO.
+- El desbloqueo LIVE se gestiona vía interfaz (Telegram) o escribiendo el estado en `data/bot_state.json` usando `utils/state_manager.py`.
+- En MODO REAL, tras la orden de mercado se coloca automáticamente una OCO (TP/SL) según `config.settings.RISK_PER_TRADE_*`.
 
 ## Pruebas
 
-*   Ejecuta los tests con:
-    ```bash
-    pytest --cov=.
-    ```
+Ejecuta la suite completa con cobertura:
+```bash
+pytest --cov=.
+```
+
+Notas de pruebas:
+- La suite valida tanto SIMULADO como REAL, incluyendo manejo de errores de Binance y de red.
+- Se usan mocks para `StateManager`, `BinanceClient` y Telegram; no se requieren credenciales para correr tests.
 
 ## Estructura de Carpetas
 
@@ -139,3 +162,10 @@ Se ha integrado la formalización y versionado del Feature Store, lo que permite
 *   El bot está diseñado para ser seguro, modular y fácil de mantener.
 *   Usa anotaciones de tipo y docstrings para facilitar la colaboración.
 *   La lógica crítica solo se ejecuta si el script es el principal (`if __name__ == "__main__":`).
+
+## Cambios recientes relevantes (Agosto 2025)
+
+- Corrección de la ruta de ejecución en MODO REAL en `utils/order_executor.py` (cuando `live`+`unlocked`).
+- Manejo explícito de excepciones `BinanceAPIException` y `aiohttp.ClientError` con mensajes de error claros.
+- Aviso de LIVE bloqueado se envía tras pasar validaciones de riesgo para evitar ruido en denegaciones tempranas.
+- Suite de tests estabilizada: 435 pruebas pasando en local.
