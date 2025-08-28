@@ -1,6 +1,5 @@
 # utils/risk_manager.py
-import logging
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 import json
 import os
 import pandas as pd
@@ -8,8 +7,10 @@ from utils.state_manager import StateManager
 from config import settings
 from utils.shield_manager import escudo_activo
 from utils.position_manager import get_open_positions
+from utils.structured_logger import StructuredLogger
+from utils.binance_client import get_binance_client
 
-logger = logging.getLogger(__name__)
+logger = StructuredLogger(__name__)
 
 _OPTIMIZED_THRESHOLDS_PATH = "best_risk_thresholds.json" # Ruta por defecto para los umbrales optimizados
 UMBRAL_FILE = _OPTIMIZED_THRESHOLDS_PATH
@@ -19,96 +20,168 @@ OPERATIONS_LOG = "data/operaciones/operaciones.csv"
 # Funciones de verificación de límites de riesgo
 # -----------------------------
 
-def _get_daily_pnl_pct() -> float:
+async def _get_daily_pnl_pct() -> float:
     """
-    Calcula el P&L porcentual acumulado para el día de hoy.
-    Returns:
-        float: P&L porcentual acumulado del día.
+    Calcula el P&L porcentual total del día (realizado + no realizado).
+    El P&L se calcula en USDT y luego se convierte a un porcentaje del capital total.
     """
-    if not os.path.exists(OPERATIONS_LOG):
-        return 0.0
+    realized_pnl_usdt = 0.0
+    unrealized_pnl_usdt = 0.0
+    total_capital_usdt = 0.0
+    state_manager = StateManager() # Instancia local para evitar problemas de concurrencia
 
     try:
-        df = pd.read_csv(OPERATIONS_LOG, parse_dates=['timestamp_open'])
-        today = date.today()
-        # Asegurarse que la columna de timestamp es de tipo datetime
-        df['timestamp_open'] = pd.to_datetime(df['timestamp_open'])
-        todays_ops = df[df['timestamp_open'].dt.date == today]
+        client = await get_binance_client()
 
-        if todays_ops.empty:
+        # 1. Calcular PnL Realizado de operaciones cerradas hoy
+        if os.path.exists(OPERATIONS_LOG):
+            ops_df = pd.read_csv(OPERATIONS_LOG, parse_dates=['timestamp_open', 'timestamp_close'])
+            today = datetime.now(timezone.utc).date()
+
+            closed_today_ops = ops_df[
+                (ops_df['timestamp_close'].notna()) &
+                (pd.to_datetime(ops_df['timestamp_close']).dt.tz_convert('UTC').dt.date == today)
+            ]
+
+            if not closed_today_ops.empty:
+                realized_pnl_usdt = closed_today_ops['pnl_usdt'].sum()
+
+        # 2. Calcular PnL No Realizado de posiciones abiertas
+        open_positions = get_open_positions()
+
+        if not open_positions.empty:
+            all_tickers = await client.get_all_tickers()
+            tickers_map = {ticker['symbol']: float(ticker['price']) for ticker in all_tickers}
+
+            for _, pos in open_positions.iterrows():
+                symbol = pos['symbol']
+                if symbol in tickers_map:
+                    current_price = tickers_map[symbol]
+                    entry_price = pos['entry_price']
+                    quantity = pos['cantidad_token_operada']
+                    side = pos['side']
+
+                    pnl = (current_price - entry_price) * quantity if side == 'LONG' else (entry_price - current_price) * quantity
+                    unrealized_pnl_usdt += pnl
+                else:
+                    logger.warning("PNL_CALC_NO_TICKER", f"No se encontró el ticker para {symbol} al calcular PnL no realizado.")
+
+        # 3. Calcular Capital Total
+        balance_info = await client.get_asset_balance(asset="USDT")
+        usdt_balance = float(balance_info['free']) if balance_info else 0.0
+
+        open_positions_value = open_positions['size_usdt'].sum() if not open_positions.empty else 0.0
+
+        total_capital_usdt = usdt_balance + open_positions_value
+
+        if total_capital_usdt == 0:
             return 0.0
+
+        # 4. Calcular PnL Total y Porcentaje
+        total_pnl_usdt = realized_pnl_usdt + unrealized_pnl_usdt
+        pnl_percentage = (total_pnl_usdt / total_capital_usdt) * 100
         
-        # Usar la columna 'pnl_percent' que ya está calculada
-        daily_pnl = todays_ops['pnl_percent'].sum()
-        return daily_pnl
+        state_manager.update_module_state("risk_metrics", {
+            "daily_realized_pnl_usdt": realized_pnl_usdt,
+            "daily_unrealized_pnl_usdt": unrealized_pnl_usdt,
+            "daily_total_pnl_usdt": total_pnl_usdt,
+            "total_capital_usdt": total_capital_usdt,
+            "daily_pnl_percentage": pnl_percentage
+        })
+
+        return pnl_percentage
+
     except Exception as e:
-        logger.error(f"Error calculando P&L diario: {e}", exc_info=True)
+        logger.error("DAILY_PNL_CALCULATION_ERROR", f"Error crítico calculando P&L diario: {e}", exc_info=True)
         return 0.0
 
-def verificar_permiso_de_operacion() -> tuple[bool, str]:
+
+async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tuple[bool, str]:
     """
     Verifica todas las reglas de riesgo antes de permitir una nueva operación.
-    Returns:
-        tuple[bool, str]: (True, "Permitido") si se puede operar, o (False, "Razón") si no.
+    Requiere el tamaño de la nueva operación para el chequeo de exposición.
     """
-    # 1. Verificar Kill Switch (Escudo Extremo)
-    tipo_escudo = escudo_activo()
-    if tipo_escudo == 'extremo':
-        reason = "Kill Switch (Escudo Extremo) está activado."
-        logger.warning(f"Operación bloqueada: {reason}")
+    state_manager = StateManager()
+
+    # REGLA 0: Verificar si el sistema está en pausa (Kill Switch o pausa por Drawdown)
+    if state_manager.get_state("system", "is_paused", False):
+        reason = "Sistema en pausa global (Kill Switch manual activado)."
+        logger.warning("TRADE_REJECTED", reason, details={"rule": "system_paused"})
         return False, reason
 
-    # 2. Verificar Límite de Pérdida Diaria
-    daily_pnl = _get_daily_pnl_pct()
-    if daily_pnl < -settings.MAX_DAILY_LOSS_PCT:
-        reason = f"Límite de pérdida diaria ({settings.MAX_DAILY_LOSS_PCT}%) alcanzado. P&L de hoy: {daily_pnl:.2f}%."
-        logger.warning(f"Operación bloqueada: {reason}")
-        return False, reason
+    drawdown_pause_until_str = state_manager.get_state("system", "drawdown_pause_until")
+    if drawdown_pause_until_str:
+        drawdown_pause_until = datetime.fromisoformat(drawdown_pause_until_str)
+        if datetime.now(timezone.utc) < drawdown_pause_until:
+            reason = f"Pausa por Drawdown activa hasta {drawdown_pause_until.strftime('%Y-%m-%d %H:%M:%S UTC')}."
+            logger.warning("TRADE_REJECTED", reason, details={"rule": "drawdown_pause", "paused_until": drawdown_pause_until_str})
+            return False, reason
+        else:
+            state_manager.set_state("system", "drawdown_pause_until", None)
+            logger.info("DRAWDOWN_PAUSE_LIFTED", "La pausa por drawdown diario ha expirado y ha sido levantada.")
 
-    # 3. Verificar Límite de Posiciones Concurrentes
+    # REGLA 1: Verificar Límite de Operaciones Concurrentes
     open_positions_df = get_open_positions()
     current_positions = len(open_positions_df)
-    if current_positions >= settings.MAX_CONCURRENT_POSITIONS:
-        reason = f"Límite de posiciones concurrentes ({settings.MAX_CONCURRENT_POSITIONS}) alcanzado. Abiertas: {current_positions}."
-        logger.warning(f"Operación bloqueada: {reason}")
+    if current_positions >= settings.RISK_MAX_CONCURRENT_TRADES:
+        reason = f"Límite de operaciones concurrentes ({settings.RISK_MAX_CONCURRENT_TRADES}) alcanzado."
+        logger.warning("TRADE_REJECTED", reason, details={"rule": "max_concurrent_trades", "limit": settings.RISK_MAX_CONCURRENT_TRADES, "current": current_positions})
         return False, reason
 
-    logger.info("Verificación de permisos de operación superada. Todos los límites de riesgo están dentro de los parámetros.")
+    # REGLA 2: Verificar Límite de Exposición Máxima
+    try:
+        client = await get_binance_client()
+        balance_info = await client.get_asset_balance(asset="USDT")
+        usdt_balance = float(balance_info['free']) if balance_info else 0.0
+
+        open_positions_value = open_positions_df['size_usdt'].sum() if not open_positions_df.empty else 0.0
+        total_capital = usdt_balance + open_positions_value
+
+        if total_capital > 0:
+            current_exposure_pct = (open_positions_value / total_capital) * 100
+            new_trade_exposure_pct = (new_trade_size_usdt / total_capital) * 100
+
+            if current_exposure_pct + new_trade_exposure_pct > settings.RISK_MAX_EXPOSURE_PCT:
+                reason = f"Límite de exposición máxima ({settings.RISK_MAX_EXPOSURE_PCT}%) superado."
+                logger.warning("TRADE_REJECTED", reason, details={"rule": "max_exposure", "limit_pct": settings.RISK_MAX_EXPOSURE_PCT, "current_exposure_pct": current_exposure_pct, "new_trade_exposure_pct": new_trade_exposure_pct})
+                return False, reason
+    except Exception as e:
+        logger.error("MAX_EXPOSURE_CHECK_ERROR", f"Error verificando la exposición máxima: {e}", exc_info=True)
+        return False, "Error en chequeo de exposición"
+
+    # REGLA 3: Verificar Límite de Drawdown Máximo Diario
+    daily_pnl_pct = await _get_daily_pnl_pct()
+    if daily_pnl_pct < -settings.RISK_MAX_DAILY_DRAWDOWN_PCT:
+        end_of_day = datetime.now(timezone.utc).replace(hour=23, minute=59, second=59, microsecond=999999)
+        state_manager.set_state("system", "drawdown_pause_until", end_of_day.isoformat())
+        reason = f"Límite de drawdown diario ({settings.RISK_MAX_DAILY_DRAWDOWN_PCT}%) alcanzado. P&L de hoy: {daily_pnl_pct:.2f}%. Sistema en pausa."
+        logger.critical("MAX_DRAWDOWN_REACHED", reason, details={"rule": "max_daily_drawdown", "limit_pct": settings.RISK_MAX_DAILY_DRAWDOWN_PCT, "current_pnl_pct": daily_pnl_pct})
+        return False, reason
+
+    logger.info("TRADE_PERMISSION_GRANTED", "Verificación de permisos de operación superada.")
     return True, "Permitido"
 
 from typing import Tuple, Dict, Any
 
 async def perform_pre_execution_risk_checks(decision: Dict[str, Any]) -> Tuple[bool, str]:
     """
-    Realiza comprobaciones de riesgo específicas antes de la ejecución de una orden.
-    Esta función es llamada por el worker de ejecución.
-    Args:
-        decision (Dict[str, Any]): Diccionario con los datos de la decisión de trading.
-    Returns:
-        Tuple[bool, str]: (True, "Permitido") si pasa los chequeos, o (False, "Razón") si no.
+    Realiza comprobaciones de riesgo BÁSICAS y de formato antes de la ejecución.
+    Las comprobaciones de riesgo completas (drawdown, exposición, etc.) se realizan
+    dentro de `evaluar_y_ejecutar_operacion` donde se conoce el tamaño final de la orden.
     """
-    logger.info(f"Realizando comprobaciones de riesgo pre-ejecución para decisión: {decision.get('type', 'UNKNOWN')} {decision.get('symbol')}")
+    event_details = {"decision_type": decision.get('type', 'UNKNOWN'), "symbol": decision.get('symbol')}
+    logger.info("PRE_EXECUTION_CHECK_START", "Iniciando comprobaciones de riesgo pre-ejecución básicas.", details=event_details)
 
-    # Re-use existing general permission check
-    permiso_general, razon_general = verificar_permiso_de_operacion()
-    if not permiso_general:
-        return False, razon_general
-
-    # Additional checks based on decision data (e.g., MAX_TRADE_RISK_PCT)
-    # This part would need more sophisticated logic based on the actual trade size
-    # and the bot's current balance, which is not directly available here.
-    # For now, we'll assume the quantity in the decision is already risk-adjusted
-    # or that the order_executor will handle the final risk check.
-
-    # Example: Check if quantity is reasonable (very basic)
-    if decision.get('quantity', 0) <= 0:
-        return False, "Cantidad de operación inválida (cero o negativa)."
-    
-    # Example: Check if symbol is valid (basic)
     if not decision.get('symbol'):
+        logger.warning("PRE_EXECUTION_CHECK_FAIL", "Símbolo no especificado en la decisión.", details=event_details)
         return False, "Símbolo de operación no especificado."
 
-    logger.info("Comprobaciones de riesgo pre-ejecución superadas.")
+    if decision.get('decision') not in ['BUY', 'SELL', 'MANTENER']:
+        reason = f"Decisión inválida: {decision.get('decision')}"
+        logger.warning("PRE_EXECUTION_CHECK_FAIL", reason, details={**event_details, "reason": reason})
+        return False, reason
+
+    logger.info("PRE_EXECUTION_CHECK_SUCCESS", "Comprobaciones de riesgo pre-ejecución básicas superadas.", details=event_details)
     return True, "Permitido"
 
 
@@ -125,14 +198,24 @@ def cargar_umbrales_optimizado():
             with open(UMBRAL_FILE, "r") as f:
                 data = json.load(f)
                 _OPTIMIZED_THRESHOLDS = data # Store in global variable
-                logger.info(f"Umbrales cargados desde {UMBRAL_FILE}: {data}")
+                logger.info("THRESHOLDS_LOADED", f"Umbrales cargados desde {UMBRAL_FILE}", details={"data": data})
                 return data
         except json.JSONDecodeError as e:
-            logger.error(f"Error de formato JSON en {UMBRAL_FILE}: {e}", exc_info=True)
+            logger.error(
+                "OPTIMIZED_THRESHOLDS_JSON_ERROR",
+                f"Error de formato JSON en {UMBRAL_FILE}: {e}",
+                details={"file_path": UMBRAL_FILE},
+                exc_info=True
+            )
         except Exception as e:
-            logger.exception(f"Error inesperado cargando {UMBRAL_FILE}: {e}")
+            logger.error(
+                "OPTIMIZED_THRESHOLDS_LOAD_ERROR",
+                f"Error inesperado cargando {UMBRAL_FILE}: {e}",
+                details={"file_path": UMBRAL_FILE},
+                exc_info=True
+            )
     else:
-        logger.warning(f"No se encontró {UMBRAL_FILE}, usando valores por defecto.")
+        logger.warning("THRESHOLDS_FILE_NOT_FOUND", f"No se encontró {UMBRAL_FILE}, usando valores por defecto.")
     
     # Default values if file not found or error
     default_thresholds = {
@@ -171,7 +254,7 @@ def activar_riesgo_forzado(porcentaje: float):
         "recordatorio_riesgo_forzado_hoy": True
     }
     _update_risk_state(updates)
-    logger.info(f"Riesgo forzado activado al {porcentaje}%.")
+    logger.info("MANUAL_RISK_ACTIVATED", f"Riesgo forzado activado al {porcentaje}%.", details={"percentage": porcentaje})
 
 def restaurar_riesgo_automatico():
     updates = {
@@ -182,7 +265,7 @@ def restaurar_riesgo_automatico():
         "operaciones_riesgo_forzado": []
     }
     _update_risk_state(updates)
-    logger.info("Riesgo restaurado a modo automático.")
+    logger.info("AUTO_RISK_RESTORED", "Riesgo restaurado a modo automático.")
 
 def registrar_resultado_operacion(ganancia_pct: float):
     if riesgo_forzado_activo():
@@ -225,7 +308,7 @@ def recordar_riesgo_forzado() -> bool:
 
 def desactivar_recordatorio_hoy():
     _update_risk_state({"recordatorio_riesgo_forzado_hoy": False})
-    logger.info("Recordatorio de riesgo forzado desactivado para hoy.")
+    logger.info("MANUAL_RISK_REMINDER_OFF", "Recordatorio de riesgo forzado desactivado para hoy.")
 
 def obtener_riesgo_ajustado_por_ml(score: float, riesgo_base: float) -> float:
     # Use the globally loaded optimized thresholds
@@ -285,6 +368,6 @@ def guardar_umbrales_optimizado(umbrales: dict):
     try:
         with open(UMBRAL_FILE, "w") as f:
             json.dump(umbrales, f, indent=4)
-        logger.info(f"Umbrales guardados en {UMBRAL_FILE}: {umbrales}")
+        logger.info("THRESHOLDS_SAVED", f"Umbrales guardados en {UMBRAL_FILE}", details={"umbrales": umbrales})
     except Exception as e:
-        logger.exception(f"No se pudieron guardar los umbrales: {e}")
+        logger.error("THRESHOLDS_SAVE_ERROR", f"No se pudieron guardar los umbrales: {e}", exc_info=True)

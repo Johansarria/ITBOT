@@ -298,6 +298,27 @@ async def execute_kill_switch() -> Dict[str, Any]:
 
     return results
 
+async def atomic_kill_switch() -> Dict[str, Any]:
+    """
+    Activa el kill switch de forma atómica: primero pausa el sistema y LUEGO
+    liquida todas las posiciones para asegurar que no entren nuevas operaciones
+    durante el proceso.
+    """
+    logger.critical("ATOMIC_KILL_SWITCH", "Secuencia de Kill Switch Atómico iniciada por un usuario.")
+
+    # 1. Pausar el sistema para prevenir cualquier nueva operación de forma inmediata.
+    await full_system_stop()
+    logger.info("ATOMIC_KILL_SWITCH_STEP", "Paso 1/2: Sistema pausado. No se crearán nuevas órdenes.")
+
+    # 2. Liquidar todas las posiciones abiertas existentes.
+    logger.info("ATOMIC_KILL_SWITCH_STEP", "Paso 2/2: Iniciando liquidación de todas las posiciones abiertas.")
+    liquidation_results = await execute_kill_switch()
+
+    logger.critical("ATOMIC_KILL_SWITCH_COMPLETE", "Secuencia de Kill Switch Atómico finalizada.", details=liquidation_results)
+
+    return liquidation_results
+
+
 async def full_system_stop() -> bool:
     """Pone el bot en estado de pausa, deteniendo la creación de nuevas órdenes."""
     logger.warning("SYSTEM_PAUSE", "Iniciando pausa del sistema. No se crearán nuevas operaciones.")

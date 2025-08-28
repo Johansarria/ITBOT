@@ -154,7 +154,7 @@ def default_mocks():
     mock_client.get_asset_balance.return_value = {"free": "1000.0"}
     mock_client.get_symbol_ticker.return_value = {"price": "50000.0"}
 
-    with patch('utils.order_executor.verificar_permiso_de_operacion', return_value=(True, "")) as p1, \
+    with patch('utils.order_executor.verificar_permiso_de_operacion', new_callable=AsyncMock, return_value=(True, "")) as p1, \
          patch('utils.order_executor.get_binance_client', new_callable=AsyncMock, return_value=mock_client) as p2, \
          patch('utils.order_executor.state_manager') as p3, \
          patch('utils.order_executor.obtener_riesgo_actual', return_value=0.01) as p4, \
@@ -186,8 +186,9 @@ async def test_evaluar_y_ejecutar_permiso_denegado(mock_bot, default_mocks):
 
     resultado = await evaluar_y_ejecutar_operacion(mock_bot, 123, {})
 
-    assert resultado == "Operación cancelada: Mantenimiento"
-    default_mocks['safe_send'].assert_called_once_with(mock_bot, 123, "❌ Operación cancelada: Mantenimiento")
+    assert resultado == "Operación cancelada por gestor de riesgo: Mantenimiento"
+    # The message is no longer sent from here, the risk_manager logs it.
+    default_mocks['safe_send'].assert_not_called()
 
 @pytest.mark.asyncio
 async def test_evaluar_y_ejecutar_balance_insuficiente(mock_bot, default_mocks):
@@ -244,13 +245,18 @@ async def test_evaluar_y_ejecutar_real_sell(mock_bot, default_mocks):
     """Test a successful REAL SELL order execution."""
     from utils.order_executor import evaluar_y_ejecutar_operacion
 
-    # Setup for REAL mode
-    def state_manager_side_effect(*args, **kwargs):
-        if args[1] == "mode": return "live"
-        if args[1] == "unlocked": return True
+    # Setup for REAL mode with a correct side_effect
+    def state_manager_side_effect(module, key, default=None):
+        if module == "session" and key == "mode":
+            return "live"
+        if module == "live_mode" and key == "unlocked":
+            return True
         return False
     default_mocks['state_manager'].get_state.side_effect = state_manager_side_effect
-    default_mocks['client'].create_order.return_value = {"orderId": "12345", "status": "FILLED"}
+
+    # Mock the entry order and the OCO order
+    default_mocks['client'].create_order.return_value = {"orderId": "12345", "status": "FILLED", "cummulativeQuoteQty": "3000", "executedQty": "1"}
+    default_mocks['client'].create_oco_order = AsyncMock(return_value={"orderListId": 67890})
 
     resultado_analisis = {"decision": "SELL", "symbol": "ETHUSDT", "score": 0.1}
 
@@ -258,8 +264,9 @@ async def test_evaluar_y_ejecutar_real_sell(mock_bot, default_mocks):
 
     assert resultado == "Operación procesada."
 
-    # Check that the real order function was called
+    # Check that the real order functions were called
     default_mocks['client'].create_order.assert_called_once()
+    default_mocks['client'].create_oco_order.assert_called_once()
 
     # Check that registrar_operacion was called with the correct mode
     default_mocks['registrar'].assert_called_once()
@@ -274,7 +281,13 @@ async def test_evaluar_y_ejecutar_live_locked_mode(mock_bot, default_mocks):
     from utils.order_executor import evaluar_y_ejecutar_operacion
 
     # LIVE mode but NOT unlocked
-    default_mocks['state_manager'].get_state.side_effect = lambda key, _, default: "live" if key == "session" else False
+    def state_manager_side_effect(module, key, default=None):
+        if module == "session" and key == "mode":
+            return "live"
+        if module == "live_mode" and key == "unlocked":
+            return False # Locked
+        return False
+    default_mocks['state_manager'].get_state.side_effect = state_manager_side_effect
 
     resultado_analisis = {"decision": "BUY", "symbol": "BTCUSDT", "score": 0.9}
     await evaluar_y_ejecutar_operacion(mock_bot, 123, resultado_analisis)
@@ -293,7 +306,13 @@ async def test_evaluar_y_ejecutar_binance_api_exception(mock_bot, default_mocks)
     from binance.exceptions import BinanceAPIException
 
     # Setup for REAL mode
-    default_mocks['state_manager'].get_state.side_effect = lambda k, _, d: "live" if k == "session" else True
+    def state_manager_side_effect(module, key, default=None):
+        if module == "session" and key == "mode":
+            return "live"
+        if module == "live_mode" and key == "unlocked":
+            return True
+        return False
+    default_mocks['state_manager'].get_state.side_effect = state_manager_side_effect
     # Correctly instantiate the exception
     error = BinanceAPIException(response=MagicMock(), status_code=400, text='{"code": -2015, "msg": "Test error"}')
     default_mocks['client'].create_order.side_effect = error
@@ -413,7 +432,13 @@ async def test_evaluar_y_ejecutar_aiohttp_error(mock_bot, default_mocks):
     from utils.order_executor import evaluar_y_ejecutar_operacion
     import aiohttp
 
-    default_mocks['state_manager'].get_state.side_effect = lambda k, _, d: "live" if k == "session" else True
+    def state_manager_side_effect(module, key, default=None):
+        if module == "session" and key == "mode":
+            return "live"
+        if module == "live_mode" and key == "unlocked":
+            return True
+        return False
+    default_mocks['state_manager'].get_state.side_effect = state_manager_side_effect
     error = aiohttp.ClientError("Connection failed")
     default_mocks['client'].create_order.side_effect = error
 
@@ -422,3 +447,72 @@ async def test_evaluar_y_ejecutar_aiohttp_error(mock_bot, default_mocks):
 
     assert resultado == "Error de conexión."
     default_mocks['safe_send'].assert_any_call(mock_bot, 123, f"❌ Error de conexión: {error}")
+
+@pytest.mark.asyncio
+async def test_evaluar_y_ejecutar_real_mode_oco(mock_bot, default_mocks):
+    """
+    Test que una orden REAL en modo compra (BUY) coloca correctamente una orden OCO de venta (SELL).
+    """
+    from utils.order_executor import evaluar_y_ejecutar_operacion
+
+    # 1. Setup
+    # Configurar para modo REAL
+    def state_manager_side_effect(module, key, default=None):
+        if module == "session" and key == "mode":
+            return "live"
+        if module == "live_mode" and key == "unlocked":
+            return True
+        return False
+    default_mocks['state_manager'].get_state.side_effect = state_manager_side_effect
+
+    # Mockear la respuesta de la orden de entrada
+    entry_order_response = {
+        "orderId": "12345",
+        "status": "FILLED",
+        "cummulativeQuoteQty": "1005.0", # 1005 USDT
+        "executedQty": "0.02" # 0.02 BTC
+    } # Precio de entrada real = 1005.0 / 0.02 = 50250.0
+    default_mocks['client'].create_order.return_value = entry_order_response
+
+    # Mockear la respuesta de la orden OCO
+    default_mocks['client'].create_oco_order = AsyncMock(return_value={"orderListId": 67890})
+
+    # Mockear la info del símbolo para el redondeo de precios
+    default_mocks['symbol_info'].return_value = {
+        "filters": [{"filterType": "PRICE_FILTER", "tickSize": "0.01"}]
+    }
+
+    # Usar los porcentajes de riesgo de la config
+    with patch('utils.order_executor.config.settings.RISK_PER_TRADE_STOP_LOSS_PCT', 2.0), \
+         patch('utils.order_executor.config.settings.RISK_PER_TRADE_TAKE_PROFIT_PCT', 4.0):
+
+        resultado_analisis = {"decision": "BUY", "symbol": "BTCUSDT", "score": 0.8}
+
+        # 2. Ejecución
+        await evaluar_y_ejecutar_operacion(mock_bot, 123, resultado_analisis)
+
+    # 3. Aserciones
+    # Verificar que se llamó a create_order para la entrada
+    default_mocks['client'].create_order.assert_called_once()
+
+    # Verificar que se llamó a create_oco_order
+    default_mocks['client'].create_oco_order.assert_called_once()
+
+    # Verificar los parámetros de la orden OCO
+    oco_args = default_mocks['client'].create_oco_order.call_args.kwargs
+    assert oco_args['side'] == 'SELL' # Debe ser una orden de venta para cerrar la compra
+
+    # Calcular precios esperados
+    # entry_price = 50250.0
+    # sl_pct = 2.0%, tp_pct = 4.0%
+    expected_sl_price = 50250.0 * (1 - 0.02) # 49245.0
+    expected_tp_price = 50250.0 * (1 + 0.04) # 52260.0
+
+    assert oco_args['price'] == pytest.approx(expected_tp_price)
+    assert oco_args['stopPrice'] == pytest.approx(expected_sl_price)
+
+    # Verificar el log final
+    default_mocks['registrar'].assert_called_once()
+    log_args = default_mocks['registrar'].call_args[0][2]
+    assert log_args['order_id_binance'] == "12345"
+    assert log_args['oco_order_list_id'] == 67890

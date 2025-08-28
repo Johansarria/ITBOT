@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import sys
 from freezegun import freeze_time
-from unittest.mock import patch, mock_open
+from unittest.mock import patch, mock_open, AsyncMock
 import json
 
 from config import settings
@@ -38,10 +38,10 @@ def mock_state_manager():
     # Usar un diccionario en memoria para simular el archivo JSON
     state_store = {"risk_manager": mock_state["risk_manager"].copy()}
 
-    def get_state(module, key=None):
+    def get_state(module, key=None, default_value=None):
         if key:
-            return state_store.get(module, {}).get(key)
-        return state_store.get(module)
+            return state_store.get(module, {}).get(key, default_value)
+        return state_store.get(module, default_value)
 
     def update_module_state(module, updates):
         if module not in state_store:
@@ -193,80 +193,208 @@ def test_obtener_riesgo_ajustado():
 
 # --- Tests for Permission Checks ---
 
-def test_verificar_permiso_de_operacion_kill_switch():
-    """Test that permission is denied if the extreme shield is active."""
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_max_exposure():
+    """
+    Test que verifica que la operación se bloquea si se supera la exposición máxima.
+    """
     from utils.risk_manager import verificar_permiso_de_operacion
-    with patch('utils.risk_manager.escudo_activo', return_value='extremo'):
-        allowed, reason = verificar_permiso_de_operacion()
-        assert not allowed
-        assert "Kill Switch" in reason
 
-def test_verificar_permiso_de_operacion_loss_limit():
-    """Test that permission is denied if the daily loss limit is exceeded."""
-    from utils.risk_manager import verificar_permiso_de_operacion
-    with patch('utils.risk_manager._get_daily_pnl_pct', return_value=-11.0), \
-         patch('utils.risk_manager.settings.MAX_DAILY_LOSS_PCT', 10.0):
-        allowed, reason = verificar_permiso_de_operacion()
-        assert not allowed
-        assert "Límite de pérdida diaria" in reason
+    # Mockear el cliente de Binance y sus respuestas
+    mock_client = AsyncMock()
+    mock_client.get_asset_balance.return_value = {"free": "1000.0"} # Balance de 1000 USDT
 
-def test_verificar_permiso_de_operacion_position_limit():
-    """Test that permission is denied if the concurrent position limit is exceeded."""
-    from utils.risk_manager import verificar_permiso_de_operacion
-    with patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame([{}, {}, {}])), \
-         patch('utils.risk_manager.settings.MAX_CONCURRENT_POSITIONS', 3):
-        allowed, reason = verificar_permiso_de_operacion()
-        assert not allowed
-        assert "Límite de posiciones concurrentes" in reason
+    # Hay una posición abierta de 250 USDT. Capital total = 1000 (balance) + 250 (abierta) = 1250
+    # Exposición actual = 250 / 1250 = 20%
+    open_positions = pd.DataFrame([{'symbol': 'BTCUSDT', 'size_usdt': 250.0}])
 
-def test_verificar_permiso_de_operacion_allowed():
-    """Test that permission is granted when no limits are exceeded."""
+    # El límite de exposición es 30%
+    # Si intentamos abrir una nueva operación de 150 USDT:
+    # Nueva exposición total = (250 + 150) / 1250 = 400 / 1250 = 32% > 30% -> Bloqueado
+    new_trade_size_fail = 150.0
+
+    with patch('utils.risk_manager.get_open_positions', return_value=open_positions), \
+         patch('utils.risk_manager.get_binance_client', return_value=mock_client), \
+         patch('utils.risk_manager.settings.RISK_MAX_EXPOSURE_PCT', 30.0), \
+         patch('utils.risk_manager._get_daily_pnl_pct', new_callable=AsyncMock, return_value=0.0):
+
+        allowed, reason = await verificar_permiso_de_operacion(new_trade_size_usdt=new_trade_size_fail)
+        assert not allowed
+        assert "exposición máxima" in reason
+
+    # Caso donde es permitido. Nueva operación de 50 USDT
+    # Nueva exposición total = (250 + 50) / 1250 = 300 / 1250 = 24% < 30% -> Permitido
+    new_trade_size_allowed = 50.0
+    with patch('utils.risk_manager.get_open_positions', return_value=open_positions), \
+         patch('utils.risk_manager.get_binance_client', return_value=mock_client), \
+         patch('utils.risk_manager.settings.RISK_MAX_EXPOSURE_PCT', 30.0), \
+         patch('utils.risk_manager._get_daily_pnl_pct', new_callable=AsyncMock, return_value=0.0), \
+         patch('utils.risk_manager.settings.RISK_MAX_CONCURRENT_TRADES', 5):
+
+        allowed, reason = await verificar_permiso_de_operacion(new_trade_size_usdt=new_trade_size_allowed)
+        assert allowed, f"La razón del fallo fue: {reason}"
+
+
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_system_paused():
+    """Test que la operación se bloquea si el sistema está en pausa global."""
     from utils.risk_manager import verificar_permiso_de_operacion
-    with patch('utils.risk_manager.escudo_activo', return_value='ninguno'), \
-         patch('utils.risk_manager._get_daily_pnl_pct', return_value=-1.0), \
+
+    with patch('utils.risk_manager.StateManager') as mock_sm_class:
+        mock_sm_instance = mock_sm_class.return_value
+        def get_state_side_effect(module, key=None, default_value=None):
+            if module == "system" and key == "is_paused":
+                return True
+            return None
+
+        mock_sm_instance.get_state.side_effect = get_state_side_effect
+
+        allowed, reason = await verificar_permiso_de_operacion()
+        assert not allowed
+        assert "Sistema en pausa global" in reason
+
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_drawdown_limit():
+    """
+    Test que la operación se bloquea si se supera el drawdown diario y que
+    se activa la pausa diaria.
+    """
+    from utils.risk_manager import verificar_permiso_de_operacion
+
+    with patch('utils.risk_manager._get_daily_pnl_pct', new_callable=AsyncMock, return_value=-11.0), \
+         patch('utils.risk_manager.settings.RISK_MAX_DAILY_DRAWDOWN_PCT', 10.0), \
          patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame()), \
-         patch('utils.risk_manager.settings.MAX_DAILY_LOSS_PCT', 10.0), \
-         patch('utils.risk_manager.settings.MAX_CONCURRENT_POSITIONS', 5):
-        allowed, reason = verificar_permiso_de_operacion()
+         patch('utils.risk_manager.get_binance_client', new_callable=AsyncMock): # Mock other checks
+
+        with patch('utils.risk_manager.StateManager') as mock_sm_class:
+            mock_sm_instance = mock_sm_class.return_value
+            mock_sm_instance.get_state.return_value = None # No existing pause
+
+            allowed, reason = await verificar_permiso_de_operacion()
+
+            assert not allowed
+            assert "drawdown diario" in reason
+
+            # Verificar que la pausa diaria fue activada
+            mock_sm_instance.set_state.assert_called_once()
+            args, kwargs = mock_sm_instance.set_state.call_args
+            assert args[0] == "system"
+            assert args[1] == "drawdown_pause_until"
+            assert isinstance(datetime.fromisoformat(args[2]), datetime)
+
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_concurrent_trades_limit():
+    """Test que la operación se bloquea si se supera el límite de trades concurrentes."""
+    from utils.risk_manager import verificar_permiso_de_operacion
+
+    open_positions = pd.DataFrame([{}, {}, {}])
+
+    with patch('utils.risk_manager.get_open_positions', return_value=open_positions), \
+         patch('utils.risk_manager.settings.RISK_MAX_CONCURRENT_TRADES', 3), \
+         patch('utils.risk_manager.StateManager') as mock_sm:
+
+        mock_sm.return_value.get_state.return_value = None # Simula que no hay pausas activas
+
+        allowed, reason = await verificar_permiso_de_operacion()
+
+        assert not allowed
+        assert "operaciones concurrentes" in reason
+
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_all_clear():
+    """Test que la operación es permitida cuando no se incumple ninguna regla."""
+    from utils.risk_manager import verificar_permiso_de_operacion
+
+    mock_client = AsyncMock()
+    mock_client.get_asset_balance.return_value = {"free": "1000.0"}
+
+    with patch('utils.risk_manager.StateManager') as mock_sm, \
+         patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame()), \
+         patch('utils.risk_manager.get_binance_client', return_value=mock_client), \
+         patch('utils.risk_manager._get_daily_pnl_pct', new_callable=AsyncMock, return_value=0.0):
+
+        mock_sm.return_value.get_state.return_value = None # No pauses
+
+        allowed, reason = await verificar_permiso_de_operacion(new_trade_size_usdt=100.0)
+
         assert allowed
         assert reason == "Permitido"
 
 @pytest.mark.asyncio
 async def test_perform_pre_execution_risk_checks():
-    """Test the pre-execution risk checks."""
+    """Test the basic pre-execution risk checks."""
     from utils.risk_manager import perform_pre_execution_risk_checks
 
-    # Test that it calls the general check
-    with patch('utils.risk_manager.verificar_permiso_de_operacion', return_value=(False, "Test block")) as mock_general_check:
-        allowed, reason = await perform_pre_execution_risk_checks({})
-        assert not allowed
-        assert reason == "Test block"
-        mock_general_check.assert_called_once()
+    # Test case with a valid decision
+    valid_decision = {"symbol": "BTCUSDT", "decision": "BUY"}
+    allowed, reason = await perform_pre_execution_risk_checks(valid_decision)
+    assert allowed
+    assert reason == "Permitido"
 
-    # Test invalid quantity
-    with patch('utils.risk_manager.verificar_permiso_de_operacion', return_value=(True, "")):
-        allowed, reason = await perform_pre_execution_risk_checks({'quantity': 0})
-        assert not allowed
-        assert "Cantidad de operación inválida" in reason
+    # Test case with a missing symbol
+    invalid_decision_symbol = {"decision": "BUY"}
+    allowed, reason = await perform_pre_execution_risk_checks(invalid_decision_symbol)
+    assert not allowed
+    assert "Símbolo de operación no especificado" in reason
+
+    # Test case with an invalid decision string
+    invalid_decision_action = {"symbol": "BTCUSDT", "decision": "WAIT"}
+    allowed, reason = await perform_pre_execution_risk_checks(invalid_decision_action)
+    assert not allowed
+    assert "Decisión inválida" in reason
 
 # --- Tests for File I/O Functions ---
 
-def test_get_daily_pnl_pct(mock_file_paths):
-    """Test the _get_daily_pnl_pct function."""
+@pytest.mark.asyncio
+async def test_get_daily_pnl_pct_real_and_unrealized(mock_file_paths):
+    """
+    Test que _get_daily_pnl_pct calcula correctamente el PnL combinado
+    de operaciones cerradas hoy y posiciones abiertas.
+    """
     from utils.risk_manager import _get_daily_pnl_pct
+    from datetime import timezone
 
-    # Test with no file
-    assert _get_daily_pnl_pct() == 0.0
-
-    # Test with file and data for today
-    with freeze_time("2025-08-13"):
-        df = pd.DataFrame([
-            {'timestamp_open': "2025-08-13", 'pnl_percent': 1.5},
-            {'timestamp_open': "2025-08-13", 'pnl_percent': -0.5},
-            {'timestamp_open': "2025-08-12", 'pnl_percent': 5.0}, # Yesterday
+    # 1. Setup: Datos de prueba
+    with freeze_time("2025-08-14 12:00:00 UTC"):
+        # Operaciones cerradas (en CSV)
+        closed_ops_df = pd.DataFrame([
+            # Cerrada hoy, PnL = +10 USDT
+            {'timestamp_open': "2025-08-14T09:00:00Z", 'timestamp_close': "2025-08-14T10:00:00Z", 'pnl_usdt': 10.0},
+            # Cerrada ayer, debe ser ignorada
+            {'timestamp_open': "2025-08-13T09:00:00Z", 'timestamp_close': "2025-08-13T10:00:00Z", 'pnl_usdt': 50.0},
         ])
-        df.to_csv(mock_file_paths["ops"], index=False)
-        assert _get_daily_pnl_pct() == pytest.approx(1.0)
+        closed_ops_df.to_csv(mock_file_paths["ops"], index=False)
+
+        # Posiciones abiertas
+        open_positions = pd.DataFrame([
+            # Abierta, PnL no realizado = (51000 - 50000) * 0.01 = +10 USDT
+            {'symbol': 'BTCUSDT', 'entry_price': 50000.0, 'cantidad_token_operada': 0.01, 'side': 'LONG', 'size_usdt': 500.0},
+            # Abierta, PnL no realizado = (3100 - 3000) * 0.5 = +50 USDT
+            {'symbol': 'ETHUSDT', 'entry_price': 3100.0, 'cantidad_token_operada': 0.5, 'side': 'SHORT', 'size_usdt': 1550.0},
+        ])
+
+        # Mock de Binance
+        mock_client = AsyncMock()
+        mock_client.get_all_tickers.return_value = [
+            {'symbol': 'BTCUSDT', 'price': '51000.0'},
+            {'symbol': 'ETHUSDT', 'price': '3000.0'}
+        ]
+        # Capital: 1000 (balance) + 500 (BTC) + 1550 (ETH) = 3050 USDT
+        mock_client.get_asset_balance.return_value = {'free': '1000.0'}
+
+        # 2. Ejecución
+        with patch('utils.risk_manager.get_open_positions', return_value=open_positions), \
+             patch('utils.risk_manager.get_binance_client', return_value=mock_client):
+
+            pnl_pct = await _get_daily_pnl_pct()
+
+            # 3. Aserción
+            # PnL Realizado = +10 USDT
+            # PnL No Realizado = +10 (BTC) + 50 (ETH) = +60 USDT
+            # PnL Total = 10 + 60 = 70 USDT
+            # Capital Total = 1000 (balance) + 500 (BTC) + 1550 (ETH) = 3050 USDT
+            # Porcentaje esperado = (70 / 3050) * 100 = 2.295%
+            assert pnl_pct == pytest.approx(2.295, abs=1e-3)
 
 def test_cargar_umbrales_optimizado(mock_file_paths):
     """Test loading thresholds from a JSON file."""

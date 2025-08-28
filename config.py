@@ -25,13 +25,16 @@ class Settings(BaseSettings):
     MODE: str = "live"
 
     # --- GESTIÓN DE RIESGO ---
-    DEFAULT_RISK_PERCENTAGE: float = 1.0
-    TAKE_PROFIT_PERCENTAGE: float = 3.0
-    STOP_LOSS_PERCENTAGE: float = 1.5
-    MAX_DAILY_OPERATIONS: int = 10
-    MAX_DAILY_LOSS_PCT: float = 5.0
-    MAX_TRADE_RISK_PCT: float = 1.0
-    MAX_CONCURRENT_POSITIONS: int = 3
+    # Parámetros de riesgo fundamentales para el MVP
+    DEFAULT_RISK_PERCENTAGE: float = 1.0  # Mantenido por compatibilidad con lógica existente de riesgo manual.
+    MAX_DAILY_OPERATIONS: int = 10  # Límite de operaciones por día, no modificado en esta tarea.
+    MAX_TRADE_RISK_PCT: float = 1.0 # Mantenido por si es usado en cálculos de riesgo por operación individuales.
+
+    RISK_PER_TRADE_STOP_LOSS_PCT: float = 2.0
+    RISK_PER_TRADE_TAKE_PROFIT_PCT: float = 4.0
+    RISK_MAX_EXPOSURE_PCT: float = 30.0
+    RISK_MAX_DAILY_DRAWDOWN_PCT: float = 3.0
+    RISK_MAX_CONCURRENT_TRADES: int = 4
 
     # --- MLOPS ---
     ML_MODEL_ID: str = "v2.1.4-beta"
