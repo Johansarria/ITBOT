@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     MAX_DAILY_LOSS_PCT: float = 5.0
     MAX_TRADE_RISK_PCT: float = 1.0
     MAX_CONCURRENT_POSITIONS: int = 3
+    MAX_TOTAL_EXPOSURE_PCT: float = 50.0
 
     # --- MLOPS ---
     ML_MODEL_ID: str = "v2.1.4-beta"

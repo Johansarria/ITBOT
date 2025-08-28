@@ -5,7 +5,7 @@ from typing import Optional, Any
 import os
 from datetime import datetime
 import uuid
-import logging
+from utils.structured_logger import StructuredLogger
 import aiohttp
 import random
 import config
@@ -42,18 +42,20 @@ from typing import Optional, Any
 from aiogram import Bot
 
 # Decorador de reintentos con retroceso exponencial
-def retry(exceptions, tries=4, delay=3, backoff=2, logger=None):
+def retry(exceptions, tries=4, delay=3, backoff=2, logger_instance=None):
     def deco_retry(f):
         @wraps(f)
         async def f_retry(*args, **kwargs):
             mtries, mdelay = tries, delay
+            # Usar el logger interno si se pasa un StructuredLogger
+            actual_logger = logger_instance.logger if hasattr(logger_instance, 'logger') else logger_instance
             while mtries > 1:
                 try:
                     return await f(*args, **kwargs)
                 except exceptions as e:
                     msg = f"{e}, Reintentando en {mdelay} segundos..."
-                    if logger:
-                        logger.warning(msg)
+                    if actual_logger:
+                        actual_logger.warning(msg)
                     await asyncio.sleep(mdelay)
                     mtries -= 1
                     mdelay *= backoff
@@ -61,7 +63,7 @@ def retry(exceptions, tries=4, delay=3, backoff=2, logger=None):
         return f_retry
     return deco_retry
 
-logger = logging.getLogger(__name__)
+logger = StructuredLogger(__name__)
 state_manager = StateManager()
 DATA_DIR = "data/operaciones"
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -131,7 +133,7 @@ async def mostrar_estado_riesgo(bot_instance: Optional["Bot"], chat_id: Optional
         )
         await send_message(bot_instance, chat_id, mensaje)
 
-@retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)
+@retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger_instance=logger)
 async def get_symbol_info(symbol: str) -> dict:
     client = await get_binance_client()
     exchange_info = await asyncio.to_thread(client.get_exchange_info)
@@ -215,12 +217,12 @@ async def evaluar_y_ejecutar_operacion(
         str: Mensaje de resultado de la ejecución.
     """
     try:
-        logger.info(f"Iniciando evaluación y ejecución de orden para: {resultado_analisis.get('symbol', 'N/A')}")
+        logger.info("ORDER_EXECUTION_START", "Iniciando evaluación y ejecución de orden.", details={'symbol': resultado_analisis.get('symbol', 'N/A')})
         client = await get_binance_client()
 
-        permiso, razon = verificar_permiso_de_operacion()
+        permiso, razon = await verificar_permiso_de_operacion()
         if not permiso:
-            logger.warning(f"Operación cancelada. Razón: {razon}")
+            logger.warning("ORDER_CANCELLED", "Operación cancelada.", details={'reason': razon})
             await safe_send_message(bot_instance, chat_id, f"❌ Operación cancelada: {razon}")
             return f"Operación cancelada: {razon}"
 
@@ -237,7 +239,7 @@ async def evaluar_y_ejecutar_operacion(
 
         logger.info(f"Modo de operación efectivo: {trade_mode_actual}")
 
-        balance_info = await retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)(lambda: asyncio.to_thread(client.get_asset_balance, asset="USDT"))()
+        balance_info = await retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger_instance=logger)(lambda: asyncio.to_thread(client.get_asset_balance, asset="USDT"))()
         if balance_info is None or "free" not in balance_info:
             balance = 0.0
         else:

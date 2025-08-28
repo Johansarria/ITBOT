@@ -19,6 +19,7 @@ from telegram.ext import (
     filters,
 )
 from telegram.constants import ParseMode
+from telegram.error import BadRequest
 
 # Importaciones locales
 import keyboards
@@ -595,6 +596,7 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
+        per_message=True,
     ),
     ConversationHandler(
         # Este es el nuevo handler para el Kill Switch unificado
@@ -605,6 +607,7 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
+        per_message=True,
     ),
     ConversationHandler(
         # Nuevo handler para reanudar el sistema
@@ -615,6 +618,7 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
+        per_message=True,
     ),
     ConversationHandler(
         entry_points=[CallbackQueryHandler(risk_set_manual_start, pattern="^risk_set_manual$")],
@@ -624,6 +628,7 @@ conv_handlers = [
         fallbacks=[CallbackQueryHandler(cancel_conversation, pattern="^cancel_conversation$")],
         per_user=True,
         per_chat=True,
+        per_message=True,
     ),
     # Los handlers 'liquidate_start' y 'stop_start' se eliminan en favor del nuevo 'kill_switch_start'
 ]

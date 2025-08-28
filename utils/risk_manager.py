@@ -8,6 +8,7 @@ from utils.state_manager import StateManager
 from config import settings
 from utils.shield_manager import escudo_activo
 from utils.position_manager import get_open_positions
+from utils.binance_client import get_total_balance
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +46,38 @@ def _get_daily_pnl_pct() -> float:
         logger.error(f"Error calculando P&L diario: {e}", exc_info=True)
         return 0.0
 
-def verificar_permiso_de_operacion() -> tuple[bool, str]:
+async def check_max_exposure() -> tuple[bool, str]:
+    """
+    Verifica que la exposición total de las posiciones abiertas no supere el máximo permitido.
+
+    Returns:
+        tuple[bool, str]: (True, "Permitido") si está dentro del límite, (False, "Razón") si no.
+    """
+    try:
+        open_positions = get_open_positions()
+        if open_positions.empty:
+            return True, "Permitido"
+
+        total_exposure = open_positions['current_value'].sum()
+        total_balance = await get_total_balance()
+
+        if total_balance == 0:
+            logger.warning("El balance total es 0, no se puede calcular la exposición.")
+            return False, "No se pudo determinar el balance total."
+
+        exposure_pct = (total_exposure / total_balance) * 100
+        
+        if exposure_pct > settings.MAX_TOTAL_EXPOSURE_PCT:
+            reason = f"Límite de exposición máxima ({settings.MAX_TOTAL_EXPOSURE_PCT}%) superado. Exposición actual: {exposure_pct:.2f}%"
+            logger.warning(f"Operación bloqueada: {reason}")
+            return False, reason
+            
+        return True, "Permitido"
+    except Exception as e:
+        logger.exception(f"Error inesperado al verificar la exposición máxima: {e}")
+        return False, "Error al verificar la exposición máxima."
+
+async def verificar_permiso_de_operacion() -> tuple[bool, str]:
     """
     Verifica todas las reglas de riesgo antes de permitir una nueva operación.
     Returns:
@@ -73,6 +105,11 @@ def verificar_permiso_de_operacion() -> tuple[bool, str]:
         logger.warning(f"Operación bloqueada: {reason}")
         return False, reason
 
+    # 4. Verificar Límite de Exposición Máxima
+    permiso_exposicion, razon_exposicion = await check_max_exposure()
+    if not permiso_exposicion:
+        return False, razon_exposicion
+
     logger.info("Verificación de permisos de operación superada. Todos los límites de riesgo están dentro de los parámetros.")
     return True, "Permitido"
 
@@ -90,7 +127,7 @@ async def perform_pre_execution_risk_checks(decision: Dict[str, Any]) -> Tuple[b
     logger.info(f"Realizando comprobaciones de riesgo pre-ejecución para decisión: {decision.get('type', 'UNKNOWN')} {decision.get('symbol')}")
 
     # Re-use existing general permission check
-    permiso_general, razon_general = verificar_permiso_de_operacion()
+    permiso_general, razon_general = await verificar_permiso_de_operacion()
     if not permiso_general:
         return False, razon_general
 

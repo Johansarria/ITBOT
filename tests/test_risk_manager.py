@@ -193,41 +193,71 @@ def test_obtener_riesgo_ajustado():
 
 # --- Tests for Permission Checks ---
 
-def test_verificar_permiso_de_operacion_kill_switch():
+@pytest.mark.asyncio
+async def test_check_max_exposure():
+    from utils.risk_manager import check_max_exposure
+
+    # 1. No open positions
+    with patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame()):
+        allowed, reason = await check_max_exposure()
+        assert allowed
+        assert reason == "Permitido"
+
+    # 2. Exposure within limit
+    with patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame([{'current_value': 1000}])), \
+         patch('utils.risk_manager.get_total_balance', return_value=10000), \
+         patch.object(settings, 'MAX_TOTAL_EXPOSURE_PCT', 20.0):
+        allowed, reason = await check_max_exposure()
+        assert allowed
+
+    # 3. Exposure exceeds limit
+    with patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame([{'current_value': 3000}])), \
+         patch('utils.risk_manager.get_total_balance', return_value=10000), \
+         patch.object(settings, 'MAX_TOTAL_EXPOSURE_PCT', 20.0):
+        allowed, reason = await check_max_exposure()
+        assert not allowed
+        assert "Límite de exposición máxima" in reason
+
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_kill_switch():
     """Test that permission is denied if the extreme shield is active."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager.escudo_activo', return_value='extremo'):
-        allowed, reason = verificar_permiso_de_operacion()
+        allowed, reason = await verificar_permiso_de_operacion()
         assert not allowed
         assert "Kill Switch" in reason
 
-def test_verificar_permiso_de_operacion_loss_limit():
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_loss_limit():
     """Test that permission is denied if the daily loss limit is exceeded."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager._get_daily_pnl_pct', return_value=-11.0), \
          patch('utils.risk_manager.settings.MAX_DAILY_LOSS_PCT', 10.0):
-        allowed, reason = verificar_permiso_de_operacion()
+        allowed, reason = await verificar_permiso_de_operacion()
         assert not allowed
         assert "Límite de pérdida diaria" in reason
 
-def test_verificar_permiso_de_operacion_position_limit():
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_position_limit():
     """Test that permission is denied if the concurrent position limit is exceeded."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame([{}, {}, {}])), \
          patch('utils.risk_manager.settings.MAX_CONCURRENT_POSITIONS', 3):
-        allowed, reason = verificar_permiso_de_operacion()
+        allowed, reason = await verificar_permiso_de_operacion()
         assert not allowed
         assert "Límite de posiciones concurrentes" in reason
 
-def test_verificar_permiso_de_operacion_allowed():
+@pytest.mark.asyncio
+async def test_verificar_permiso_de_operacion_allowed():
     """Test that permission is granted when no limits are exceeded."""
     from utils.risk_manager import verificar_permiso_de_operacion
     with patch('utils.risk_manager.escudo_activo', return_value='ninguno'), \
          patch('utils.risk_manager._get_daily_pnl_pct', return_value=-1.0), \
          patch('utils.risk_manager.get_open_positions', return_value=pd.DataFrame()), \
+         patch('utils.risk_manager.check_max_exposure', return_value=(True, "Permitido") ), \
          patch('utils.risk_manager.settings.MAX_DAILY_LOSS_PCT', 10.0), \
          patch('utils.risk_manager.settings.MAX_CONCURRENT_POSITIONS', 5):
-        allowed, reason = verificar_permiso_de_operacion()
+        allowed, reason = await verificar_permiso_de_operacion()
         assert allowed
         assert reason == "Permitido"
 

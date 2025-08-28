@@ -22,9 +22,9 @@ services:
     container_name: itbot_postgres_db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD} # Explicitly set password from .env
     volumes:
       - postgres_data:/var/lib/postgresql/data # Persistent data storage
     ports:
@@ -47,12 +47,13 @@ services:
       - db # Add dependency on PostgreSQL
     restart: unless-stopped
     mem_limit: 1g
-    environment: # Pass PostgreSQL connection details to the bot
+    environment: # Pass PostgreSQL and Redis connection details to the bot
       POSTGRES_HOST: db # Service name of the PostgreSQL container
       POSTGRES_PORT: 5432
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis # Explicitly set Redis host for inter-container communication
     networks:
       - bot_network
 
