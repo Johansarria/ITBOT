@@ -246,7 +246,7 @@
         document.getElementById('mlBaseMed').value = base.medium ?? '';
         document.getElementById('mlBaseLow').value = base.low ?? '';
         // Link Auditoría
-        document.getElementById('btnAudit').href = cfgUrl('/api/ml/thresholds/audit&lines=500');
+  document.getElementById('btnAudit').href = cfgUrl('/api/ml/thresholds/audit') + '&lines=500';
       })
       .catch(e => { document.getElementById('mlInfo').innerText = String(e); });
   }
