@@ -1,0 +1,50 @@
+name: Sync itbot_beta from main2
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force update itbot_beta to match main2"
+        required: false
+        default: "true"
+  # Programa opcional (comenta o ajusta el cron si quieres sync automático)
+  # schedule:
+  #   - cron: "0 3 * * *"  # todos los días a las 03:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main2
+        uses: actions/checkout@v4
+        with:
+          ref: main2
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Push main2 to itbot_beta (checkpoint)
+        env:
+          FORCE: ${{ github.event.inputs.force }}
+        run: |
+          git fetch --all --prune
+          # Crea o actualiza la rama itbot_beta para que sea idéntica a main2
+          if [ "${FORCE}" = "true" ]; then
+            git push origin main2:itbot_beta --force-with-lease
+          else
+            # Intento sin forzar (fallará si no es fast-forward)
+            set +e
+            git push origin main2:itbot_beta
+            status=$?
+            set -e
+            if [ $status -ne 0 ]; then
+              echo "Push no fast-forward. Reintenta con 'force: true' o resuelve manualmente."
+              exit 1
+            fi
+          fi

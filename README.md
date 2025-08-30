@@ -126,6 +126,22 @@ Se ha integrado la formalización y versionado del Feature Store, lo que permite
     *   Se resolvió un `ImportError` en `tests/conftest.py` eliminando una dependencia obsoleta, lo que permite una ejecución de pruebas más limpia y eficiente.
 *   **Gestión de Riesgos (En Curso)**: Se ha identificado que la implementación del menú de gestión de riesgos (`risk_set_auto`, `risk_set_manual`) está incompleta y carece de manejadores. Este es un área de trabajo activa para futuras mejoras.
 
+## Flujo de ramas: main2 (trabajo) e itbot_beta (respaldo)
+
+- main2: rama activa de desarrollo/trabajo.
+- itbot_beta: respaldo/checkpoint de main2.
+
+Formas de crear un checkpoint (hacer que itbot_beta == main2):
+
+1) Manual desde GitHub Actions:
+    - Ir a Actions > "Sync itbot_beta from main2" > Run workflow.
+    - Dejar `force: true` para sobrescribir de forma segura (with-lease).
+
+2) Local con script:
+    - Ejecuta `scripts/checkpoint_beta.sh` estando en `main2` y con el árbol limpio.
+
+Ambos métodos usan `--force-with-lease` para evitar sobrescribir cambios remotos no esperados.
+
 ## Dependencias Principales
 
 *   **Python >=3.12**
