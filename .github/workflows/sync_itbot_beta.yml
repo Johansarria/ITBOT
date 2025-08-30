@@ -7,9 +7,6 @@ on:
         description: "Force update itbot_beta to match main2"
         required: false
         default: "true"
-  # Programa opcional (comenta o ajusta el cron si quieres sync automático)
-  # schedule:
-  #   - cron: "0 3 * * *"  # todos los días a las 03:00 UTC
 
 permissions:
   contents: write
