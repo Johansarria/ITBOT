@@ -26,6 +26,7 @@ import time
 from functools import wraps
 from binance.exceptions import BinanceAPIException, BinanceRequestException # Importar excepciones específicas
 
+import mlflow
 import mlflow.pyfunc
 
 # Ruta al modelo de ML entrenado en MLflow

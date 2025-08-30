@@ -37,7 +37,7 @@ class StrategyManager:
                 analyze_sig = inspect.signature(strategy.analyze)
                 kwargs = {}
                 # Pasar solo los parámetros que la estrategia declara (siempre por nombre)
-                df_param_name = next((k for k in ['df', 'data', 'df_klines', 'ohlcv', 'klines', 'candles'] if k in analyze_sig.parameters), None)
+                df_param_name = next((k for k in ['df', 'data', 'df_klines', 'ohlcv', 'klines', 'candles', 'historical_data'] if k in analyze_sig.parameters), None)
                 if df_param_name:
                     kwargs[df_param_name] = historical_data.copy()
                 if 'current_index' in analyze_sig.parameters:
