@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}Configuración - ITBOT{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-3">
+  <div class="col-12 d-flex align-items-center justify-content-between">
+    <h1 class="mb-0">
+      <i class="fas fa-cog text-primary"></i> Configuración Avanzada
+    </h1>
+    <span class="badge bg-secondary">Panel</span>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-lg-6">
+    <div class="card h-100">
+      <div class="card-header">
+        <i class="fas fa-sliders-h"></i> Parámetros de Riesgo (lectura)
+      </div>
+      <div class="card-body">
+        <div id="cfg-list" class="small text-muted">Cargando...</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="card h-100">
+      <div class="card-header">
+        <i class="fas fa-gauge-high"></i> Modo de Riesgo
+      </div>
+      <div class="card-body">
+        <form id="risk-mode-form" class="row g-2">
+          <div class="col-12">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="mode" id="modeAuto" value="auto" checked>
+              <label class="form-check-label" for="modeAuto">Automático</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="mode" id="modeManual" value="manual">
+              <label class="form-check-label" for="modeManual">Manual</label>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Riesgo Manual (%)</label>
+            <input type="number" step="0.1" min="0.1" max="100" class="form-control" id="riskPct" placeholder="1.5">
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Guardar
+            </button>
+            <a class="btn btn-outline-primary" href="{{ url_for('dashboard') }}?token={{ token }}">
+              <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card h-100">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="fas fa-sliders"></i> Parámetros de Riesgo (manual)</span>
+        <span id="custom-badge" class="badge bg-secondary">Por defecto</span>
+      </div>
+      <div class="card-body">
+        <form id="risk-params-form" class="row g-3">
+          <div class="col-6 col-md-4">
+            <label class="form-label">SL por operación (%)</label>
+            <input type="number" step="0.1" min="0.1" max="50" id="pSL" class="form-control" placeholder="2.0">
+          </div>
+          <div class="col-6 col-md-4">
+            <label class="form-label">TP por operación (%)</label>
+            <input type="number" step="0.1" min="0.1" max="200" id="pTP" class="form-control" placeholder="4.0">
+          </div>
+          <div class="col-6 col-md-4">
+            <label class="form-label">Máx. operaciones</label>
+            <input type="number" step="1" min="1" max="50" id="pMAXOPS" class="form-control" placeholder="4">
+          </div>
+          <div class="col-6 col-md-4">
+            <label class="form-label">Exposición Máxima (%)</label>
+            <input type="number" step="0.1" min="1" max="100" id="pEXPO" class="form-control" placeholder="30">
+          </div>
+          <div class="col-6 col-md-4">
+            <label class="form-label">Drawdown Diario Máx. (%)</label>
+            <input type="number" step="0.1" min="1" max="50" id="pDD" class="form-control" placeholder="3">
+          </div>
+          <div class="col-6 col-md-4">
+            <label class="form-label">Riesgo Base (%)</label>
+            <input type="number" step="0.1" min="0.1" max="100" id="pBASE" class="form-control" placeholder="1.0">
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Guardar Parámetros Manuales</button>
+            <button type="button" id="btnResetParams" class="btn btn-outline-light"><i class="fas fa-undo"></i> Volver a valores por defecto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-th"></i> Umbrales Optimizados (ML)
+      </div>
+      <div class="card-body">
+        <form id="thresholds-form" class="row g-3">
+          <div class="col-12 col-md-4">
+            <label class="form-label">Umbral Alto (0-1)</label>
+            <input type="number" step="0.01" min="0" max="1" class="form-control" id="thHigh" required>
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Umbral Medio (0-1)</label>
+            <input type="number" step="0.01" min="0" max="1" class="form-control" id="thMid" required>
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Umbral Bajo (0-1)</label>
+            <input type="number" step="0.01" min="0" max="1" class="form-control" id="thLow" required>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-check"></i> Guardar Umbrales
+            </button>
+          </div>
+        </form>
+        <hr/>
+        <div style="height:260px;">
+          <canvas id="thrChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+  function cfgUrl(path) { return `${path}?token=${token}`; }
+  function renderThrChart(low, mid, high) {
+    const ctx = document.getElementById('thrChart').getContext('2d');
+    const points = Array.from({length: 50}, (_, i) => i);
+    const makeLine = (y, color, label) => ({ label, data: points.map(() => y), borderColor: color, borderWidth: 2, fill: false, pointRadius: 0, borderDash: [6,3] });
+    if (window.thrChart) window.thrChart.destroy();
+    window.thrChart = new Chart(ctx, {
+      type: 'line',
+      data: { labels: points, datasets: [
+        makeLine(low, '#6f42c1', 'Bajo'),
+        makeLine(mid, '#0dcaf0', 'Medio'),
+        makeLine(high, '#d63384', 'Alto'),
+      ]},
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f8f9fa' }}}, scales: { x: { display: false }, y: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } } } }
+    });
+  }
+
+  function fmt(v, suffix='%') { return (v ?? '—') + (v != null && suffix ? suffix : ''); }
+  function loadConfigInfo() {
+    fetch(cfgUrl('/api/config/info'))
+      .then(r => r.json()).then(data => {
+        if (!data.success) { showNotification('Error cargando configuración', 'error'); return; }
+        const cd = data.config_defaults || {}; const ce = data.config_effective || {}; const rk = data.risk || {}; const th = data.thresholds || {};
+        // Lista de settings (en español)
+        const html = `
+          <ul class="mb-0">
+            <li><b>Stop Loss por operación</b>: <code>${fmt(ce.RISK_PER_TRADE_STOP_LOSS_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_PER_TRADE_STOP_LOSS_PCT)})</small></li>
+            <li><b>Take Profit por operación</b>: <code>${fmt(ce.RISK_PER_TRADE_TAKE_PROFIT_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_PER_TRADE_TAKE_PROFIT_PCT)})</small></li>
+            <li><b>Máx. operaciones concurrentes</b>: <code>${ce.RISK_MAX_CONCURRENT_TRADES ?? '—'}</code> <small class="text-muted">(def: ${cd.RISK_MAX_CONCURRENT_TRADES ?? '—'})</small></li>
+            <li><b>Exposición Máxima</b>: <code>${fmt(ce.RISK_MAX_EXPOSURE_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_MAX_EXPOSURE_PCT)})</small></li>
+            <li><b>Drawdown Diario Máximo</b>: <code>${fmt(ce.RISK_MAX_DAILY_DRAWDOWN_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_MAX_DAILY_DRAWDOWN_PCT)})</small></li>
+            <li><b>Riesgo base por operación</b>: <code>${fmt(ce.DEFAULT_RISK_PERCENTAGE)}</code> <small class="text-muted">(def: ${fmt(cd.DEFAULT_RISK_PERCENTAGE)})</small></li>
+            <li><b>Riesgo actual</b>: <code>${rk.current_risk_pct ?? '—'}%</code> (${rk.manual ? 'Manual' : 'Automático'})</li>
+          </ul>`;
+        document.getElementById('cfg-list').innerHTML = html;
+        // Prefill forms
+        document.getElementById('modeAuto').checked = !rk.manual;
+        document.getElementById('modeManual').checked = rk.manual;
+        document.getElementById('riskPct').value = rk.current_risk_pct || '';
+        document.getElementById('thHigh').value = th.umbral_alto ?? 0.9;
+        document.getElementById('thMid').value = th.umbral_medio ?? 0.7;
+        document.getElementById('thLow').value = th.umbral_bajo ?? 0.4;
+        renderThrChart(Number(document.getElementById('thLow').value), Number(document.getElementById('thMid').value), Number(document.getElementById('thHigh').value));
+
+        // Prefill manual params, badge
+        const badge = document.getElementById('custom-badge');
+        if (rk.custom_params_active) {
+          badge.classList.remove('bg-secondary');
+          badge.classList.add('bg-warning');
+          badge.innerText = 'Personalizado';
+        } else {
+          badge.classList.remove('bg-warning');
+          badge.classList.add('bg-secondary');
+          badge.innerText = 'Por defecto';
+        }
+        document.getElementById('pSL').value = ce.RISK_PER_TRADE_STOP_LOSS_PCT ?? '';
+        document.getElementById('pTP').value = ce.RISK_PER_TRADE_TAKE_PROFIT_PCT ?? '';
+        document.getElementById('pMAXOPS').value = ce.RISK_MAX_CONCURRENT_TRADES ?? '';
+        document.getElementById('pEXPO').value = ce.RISK_MAX_EXPOSURE_PCT ?? '';
+        document.getElementById('pDD').value = ce.RISK_MAX_DAILY_DRAWDOWN_PCT ?? '';
+        document.getElementById('pBASE').value = ce.DEFAULT_RISK_PERCENTAGE ?? '';
+      });
+  }
+  // Cargar al iniciar
+  loadConfigInfo();
+
+  // Guardar modo de riesgo
+  document.getElementById('risk-mode-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    const body = { mode };
+    if (mode === 'manual') { body.percentage = parseFloat(document.getElementById('riskPct').value); }
+    fetch(cfgUrl('/api/config/set_risk_mode'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(r => r.json()).then(res => {
+        if (res.success) { showNotification('Modo de riesgo actualizado', 'success'); loadConfigInfo(); }
+        else showNotification(res.error || 'Error', 'error');
+      });
+  });
+
+  // Guardar umbrales
+  document.getElementById('thresholds-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const body = {
+      umbral_alto: parseFloat(document.getElementById('thHigh').value),
+      umbral_medio: parseFloat(document.getElementById('thMid').value),
+      umbral_bajo: parseFloat(document.getElementById('thLow').value),
+    };
+    fetch(cfgUrl('/api/config/set_thresholds'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(r => r.json()).then(res => {
+        if (res.success) {
+          showNotification('Umbrales guardados', 'success');
+          renderThrChart(body.umbral_bajo, body.umbral_medio, body.umbral_alto);
+        } else showNotification(res.error || 'Error', 'error');
+      });
+  });
+
+  // Guardar parámetros de riesgo manuales
+  document.getElementById('risk-params-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const body = {};
+    const add = (key, el) => { const v = Number(document.getElementById(el).value); if (!isNaN(v) && v > 0) body[key] = v; };
+    add('RISK_PER_TRADE_STOP_LOSS_PCT', 'pSL');
+    add('RISK_PER_TRADE_TAKE_PROFIT_PCT', 'pTP');
+    add('RISK_MAX_CONCURRENT_TRADES', 'pMAXOPS');
+    add('RISK_MAX_EXPOSURE_PCT', 'pEXPO');
+    add('RISK_MAX_DAILY_DRAWDOWN_PCT', 'pDD');
+    add('DEFAULT_RISK_PERCENTAGE', 'pBASE');
+    if (Object.keys(body).length === 0) { showNotification('Sin cambios válidos', 'warning'); return; }
+    fetch(cfgUrl('/api/config/set_risk_params'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(r => r.json()).then(res => {
+        if (res.success) { showNotification('Parámetros personalizados guardados', 'success'); loadConfigInfo(); }
+        else showNotification(res.error || 'Error', 'error');
+      });
+  });
+
+  // Reset a defaults
+  document.getElementById('btnResetParams').addEventListener('click', () => {
+    fetch(cfgUrl('/api/config/reset_risk_params'), { method: 'POST', headers: { 'Content-Type': 'application/json' }})
+      .then(r => r.json()).then(res => {
+        if (res.success) {
+          showNotification('Parámetros de riesgo restaurados a valores por defecto', 'success');
+          loadConfigInfo();
+        } else showNotification(res.error || 'Error', 'error');
+      });
+  });
+</script>
+{% endblock %}
+{% endblock %}

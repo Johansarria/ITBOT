@@ -18,15 +18,20 @@ class MLStrategy(BaseStrategy):
         self.umbral_bajo = umbral_bajo
 
     async def analyze(self, historical_data: pd.DataFrame, current_index: int) -> dict:
+        """Contrato de BaseStrategy: recibe el DataFrame y un índice actual.
+        Se pasa el slice hasta current_index a analyze_market para simular paso a paso.
         """
-        Realiza el análisis utilizando la función analyze_market que integra el modelo de ML.
-        """
+        # Asegurar límites de índice
+        if current_index is None or current_index <= 0:
+            current_index = len(historical_data) - 1
+        current_index = min(current_index, len(historical_data))
+
         analysis_result = await analyze_market(
             symbol=self.symbol,
             interval=self.interval,
-            df_klines=historical_data, # Pasar el DataFrame completo
-            current_index=current_index, # Pasar el índice actual
-            export=False, # No exportar resultados durante el backtesting
+            df_klines=historical_data,
+            current_index=current_index,
+            export=False,
             umbral_alto=self.umbral_alto,
             umbral_medio=self.umbral_medio,
             umbral_bajo=self.umbral_bajo
@@ -53,7 +58,7 @@ class MLStrategy(BaseStrategy):
         """
         if "symbol" in parameters: self.symbol = parameters["symbol"]
         if "interval" in parameters: self.interval = parameters["interval"]
-        if "name" in parameters: self.name = parameters["name"]
+    # 'name' es de solo lectura en BaseStrategy, ignorar si viene
         # REMOVED: if "probability_threshold" in parameters: self.probability_threshold = parameters["probability_threshold"]
         if "umbral_alto" in parameters: self.umbral_alto = parameters["umbral_alto"]
         if "umbral_medio" in parameters: self.umbral_medio = parameters["umbral_medio"]

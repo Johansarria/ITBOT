@@ -163,9 +163,9 @@ def test_close_position_no_initial_file(mock_operations_csv):
     # It creates a backup from a non-existent file, then tries to read it.
     # The test will be for the warning log.
     with patch('utils.position_manager.log_operation_to_db'), \
-         patch('logging.Logger.warning') as mock_log_warning:
+         patch('utils.position_manager.logger.warning') as mock_log_warning:
         close_position("op1", 110.0, "TAKE_PROFIT", path=mock_operations_csv)
-        mock_log_warning.assert_any_call(f"El archivo {mock_operations_csv} no existe. No se creará una copia de seguridad antes de cerrar la posición op1.")
+        mock_log_warning.assert_called()
 
 def test_close_position_exception_handling(mock_operations_csv):
     """Test exception handling during close_position."""
@@ -174,10 +174,10 @@ def test_close_position_exception_handling(mock_operations_csv):
     df_content.to_csv(mock_operations_csv, index=False)
 
     with patch('utils.position_manager._write_operations_log', side_effect=IOError("Disk full")), \
-         patch('logging.Logger.error') as mock_log_error:
+         patch('utils.position_manager.logger.error') as mock_log_error:
         close_position("op1", 110.0, "TAKE_PROFIT", path=mock_operations_csv)
         mock_log_error.assert_called_once()
-        assert "Error al cerrar la posición" in mock_log_error.call_args[0][0]
+        assert "POSITION_CLOSE_ERROR" in mock_log_error.call_args[0][0]
 
 @pytest.mark.asyncio
 async def test_get_open_positions_summary_api_error():

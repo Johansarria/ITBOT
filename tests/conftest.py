@@ -3,10 +3,11 @@ import os
 # Set dummy environment variables BEFORE any other imports.
 # This is critical to prevent pydantic ValidationErrors during pytest collection,
 # as other modules might import the application's settings object.
-os.environ['TELEGRAM_BOT_TOKEN'] = '1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11'
-os.environ['TELEGRAM_CHAT_ID'] = '12345'
-os.environ['BINANCE_API_KEY'] = 'dummy_api_key_for_tests'
-os.environ['BINANCE_SECRET_KEY'] = 'dummy_secret_key_for_tests'
+# Use environment variables if provided, otherwise fall back to safe dummy values for tests.
+os.environ['TELEGRAM_BOT_TOKEN'] = os.environ.get('TELEGRAM_BOT_TOKEN', 'TEST_TOKEN_PLACEHOLDER')
+os.environ['TELEGRAM_CHAT_ID'] = os.environ.get('TELEGRAM_CHAT_ID', '12345')
+os.environ['BINANCE_API_KEY'] = os.environ.get('BINANCE_API_KEY', 'dummy_api_key_for_tests')
+os.environ['BINANCE_SECRET_KEY'] = os.environ.get('BINANCE_SECRET_KEY', 'dummy_secret_key_for_tests')
 os.environ['DB_TYPE'] = 'sqlite'  # Default to in-memory sqlite for tests
 
 # Now it is safe to import other modules.
@@ -42,7 +43,7 @@ def test_setup_and_teardown(monkeypatch):
     # --- Patch Config Values ---
     monkeypatch.setattr(settings, 'POSTGRES_HOST', "localhost")
     monkeypatch.setattr(settings, 'REDIS_HOST', "localhost")
-    monkeypatch.setattr(settings, 'TELEGRAM_BOT_TOKEN', "1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11")
+    monkeypatch.setattr(settings, 'TELEGRAM_BOT_TOKEN', os.environ.get('TELEGRAM_BOT_TOKEN', 'TEST_TOKEN_PLACEHOLDER'))
     monkeypatch.setattr(settings, 'TELEGRAM_CHAT_ID', 12345)
 
     yield # The test runs here

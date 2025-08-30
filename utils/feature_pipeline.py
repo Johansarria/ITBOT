@@ -64,7 +64,8 @@ class FeaturePipeline:
         df['ma_50'] = df['close'].rolling(window=50).mean()
         df['volume_sma_20'] = df['volume'].rolling(window=20).mean()
         df['volatility_20'] = df['close'].rolling(window=20).std()
-        df['returns'] = df['close'].pct_change()
+        # Evita FutureWarning sobre fill_method por defecto en futuras versiones de pandas
+        df['returns'] = df['close'].pct_change(fill_method=None)
         df['cum_return'] = (1 + df['returns']).cumprod() - 1
         df['volume_zscore'] = (df['volume'] - df['volume'].rolling(20).mean()) / df['volume'].rolling(20).std()
         df['bullish_cross'] = (df['ma_20'] > df['ma_50']).astype(int)

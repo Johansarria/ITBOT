@@ -1,0 +1,26 @@
+Fecha: 2025-08-28
+Resumen pruebas: 435 passed, 0 failed, 14675 warnings
+Cobertura global: 86%
+
+Top archivos con baja cobertura:
+- telegram_logic_adapter.py: 20%
+- handlers.py: 32%
+- keyboards.py: 44%
+- execution_worker.py: 59%
+- utils/binance_client.py: 57%
+- strategies/backtester.py: 77%
+- utils/technical_analysis.py: 71%
+- utils/kpi_calculator.py: 69%
+- utils/shield_manager.py: 78%
+- build_feature_store.py: 81%
+
+Pruebas deshabilitadas:
+- tests/test_listener_bot.py.disabled
+- tests/test_listener_bot_block.py.disabled
+- tests/test_listener_run_large.py.disabled
+- tests/integration/test_e2e_flow.py.disabled
+
+Notas de advertencias destacadas:
+- SQLAlchemy MovedIn20Warning: usar sqlalchemy.orm.declarative_base
+- PTBUserWarning per_message=True en ConversationHandler
+- FutureWarning pandas/ sklearn varias

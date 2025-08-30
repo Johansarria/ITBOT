@@ -2,6 +2,7 @@
 
 import logging
 import aiohttp
+from typing import Any, Dict, List
 from utils.telegram_handler import send_message
 from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -17,7 +18,12 @@ def es_comando_analisis(mensaje: str) -> bool:
     comandos = ["analizar", "resumen tecnico", "score tecnico", "recomendar accion", "posiciones", "estado"]
     return any(mensaje.lower().startswith(cmd) for cmd in comandos)
 
-async def procesar_comando_analisis(bot_instance: Bot, chat_id: int, mensaje: str, send_telegram_message: bool = True):
+async def procesar_comando_analisis(
+    bot_instance: Bot,
+    chat_id: int,
+    mensaje: str,
+    send_telegram_message: bool = True,
+) -> Dict[str, Any]:
     texto_lower = mensaje.lower().strip()
     logger.info(f"Procesando comando de análisis: {mensaje}")
 
@@ -42,7 +48,9 @@ async def procesar_comando_analisis(bot_instance: Bot, chat_id: int, mensaje: st
             active_strategy = strategy_manager.get_active_strategy()
             
             # Obtener datos históricos para el análisis
-            historical_data = await get_historical_klines(symbol="BTCUSDT", interval="1h", limit=100)
+            symbol = "BTCUSDT"
+            interval = "1h"
+            historical_data = await get_historical_klines(symbol=symbol, interval=interval, limit=100)
             if historical_data.empty:
                 if send_telegram_message:
                     await send_message(bot_instance, chat_id, "⚠️ No se pudieron obtener datos del mercado para el análisis.")
@@ -51,26 +59,50 @@ async def procesar_comando_analisis(bot_instance: Bot, chat_id: int, mensaje: st
             # Detectar si la estrategia requiere symbol/interval y si es síncrona o asíncrona
             import inspect
             analyze_sig = inspect.signature(active_strategy.analyze)
-            params = list(analyze_sig.parameters.keys())
+            param_list = list(analyze_sig.parameters.values())
 
-            # Preparar argumentos
-            args = [historical_data]
-            if len(params) >= 3:
-                args.extend(["BTCUSDT", "1h"])
+            # Construir argumentos en orden, según nombres comunes
+            args: List[Any] = []
+            # Saltar 'self' si existe
+            for p in param_list[1:] if param_list and param_list[0].name == "self" else param_list:
+                name = p.name.lower()
+                if name in ("data", "df", "historical_data", "klines", "candles"):
+                    args.append(historical_data)
+                elif name in ("symbol", "pair", "ticker"):
+                    args.append(symbol)
+                elif name in ("interval", "timeframe", "tf"):
+                    args.append(interval)
+                elif name in ("current_index", "idx", "i"):
+                    # Última vela disponible
+                    args.append(max(len(historical_data) - 1, 0))
+                else:
+                    # Si el parámetro tiene default, lo omitimos; si no, intentamos no romper el llamado
+                    if p.default is inspect._empty:
+                        # Como fallback, pasar el dataframe si no hay tipo definido claro
+                        args.append(historical_data)
 
-            # Ejecutar síncrono o asíncrono
+            # Si no se detectó ningún parámetro específico, al menos pasar el dataframe
+            if not args:
+                args = [historical_data]
+
+            # Ejecutar síncrono o asíncrono y normalizar el resultado
             if inspect.iscoroutinefunction(active_strategy.analyze):
                 resultado = await active_strategy.analyze(*args)
             else:
                 resultado = active_strategy.analyze(*args)
+            if inspect.iscoroutine(resultado):
+                resultado = await resultado
             
+            # Asegurar diccionario
+            if not isinstance(resultado, dict):
+                resultado = {"decision": str(resultado)}
             decision = resultado.get("decision", "Indeciso")
             score = resultado.get("score", "N/A")
-            symbol = resultado.get("symbol", "BTCUSDT")
+            symbol_res = resultado.get("symbol", symbol)
 
             texto = (
                 f"📊 Resultado del Análisis con '{active_strategy.name}':\n\n"
-                f"<b>Símbolo:</b> {symbol}\n"
+                f"<b>Símbolo:</b> {symbol_res}\n"
                 f"<b>Decisión:</b> {decision}\n"
                 f"<b>Score:</b> {score}"
             )

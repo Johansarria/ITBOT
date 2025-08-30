@@ -20,8 +20,7 @@ def plot_equity_curve(start: Optional[str] = None, end: Optional[str] = None, sa
     plt.grid(True)
     if save_path:
         plt.savefig(save_path)
-    else:
-        plt.show()
+    plt.close()  # Evita UserWarning en backend non-interactive
     return df
 
 def plot_pnl_histogram(start: Optional[str] = None, end: Optional[str] = None, save_path: Optional[str] = None):
@@ -38,6 +37,5 @@ def plot_pnl_histogram(start: Optional[str] = None, end: Optional[str] = None, s
     plt.grid(True)
     if save_path:
         plt.savefig(save_path)
-    else:
-        plt.show()
+    plt.close()  # Evita UserWarning en backend non-interactive
     return df

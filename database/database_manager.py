@@ -39,8 +39,34 @@ def get_db_session() -> Session:
     global _SessionLocal
     if _SessionLocal is None:
         engine = get_engine()
-        _SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+        # Estilo SQLAlchemy 2.0: sin autocommit; bind via engine; conservamos autoflush=False
+        _SessionLocal = sessionmaker(bind=engine, autoflush=False, future=True)
     return _SessionLocal()
+
+
+def _is_sqlite() -> bool:
+    """Determina si la BD actual es SQLite (incluye memoria)."""
+    try:
+        url = settings.DATABASE_URL or ""
+        return url.startswith("sqlite")
+    except Exception:
+        return False
+
+
+def _prepare_params(params: Dict[str, Any]) -> Dict[str, Any]:
+    """Convierte datetime -> ISO string cuando usamos SQLite para evitar DeprecationWarning.
+    Mantiene los demás tipos intactos.
+    """
+    if not _is_sqlite() or not params:
+        return params
+    conv: Dict[str, Any] = {}
+    for k, v in params.items():
+        if isinstance(v, datetime):
+            # ISO 8601 compatible con sqlite y legible
+            conv[k] = v.isoformat(sep=" ")
+        else:
+            conv[k] = v
+    return conv
 
 
 def reset_db_connection():
@@ -167,7 +193,7 @@ def add_operation(op_data: Dict[str, Any]):
     """)
     try:
         with get_db_session() as session:
-            session.execute(query, op_data)
+            session.execute(query, _prepare_params(op_data))
             session.commit()
         logger.info(f"Operation {op_data.get('operation_id')} added to the database.")
     except SQLAlchemyError as e:
@@ -182,7 +208,8 @@ def get_open_positions_df() -> pd.DataFrame:
     query = text("SELECT * FROM operations WHERE status = 'OPEN'")
     try:
         with get_db_session() as session:
-            df = pd.read_sql(query, session.bind)
+            con = session.get_bind()
+            df = pd.read_sql(query, con=con)
             return df
     except SQLAlchemyError as e:
         logger.error(f"Error getting open positions from DB: {e}", exc_info=True)
@@ -207,7 +234,7 @@ def update_position_status(operation_id: str, new_status: str, close_price: floa
     }
     try:
         with get_db_session() as session:
-            session.execute(query, params)
+            session.execute(query, _prepare_params(params))
             session.commit()
         logger.info(f"Position {operation_id} updated in DB to {new_status}.")
     except SQLAlchemyError as e:
@@ -243,7 +270,8 @@ def add_klines(klines_df: pd.DataFrame, symbol: str, interval: str):
     try:
         with get_db_session() as session:
             if data_to_insert:
-                session.execute(query, data_to_insert)
+                # Para listas de diccionarios, SQLAlchemy soporta ejecutar con many params
+                session.execute(query, data_to_insert)  # type: ignore[arg-type]
                 session.commit()
         logger.info(f"Processed {len(data_to_insert)} klines for {symbol}-{interval}.")
     except SQLAlchemyError as e:
@@ -257,22 +285,23 @@ def get_klines(symbol: str, interval: str, start_time: Optional[int] = None, end
     Timestamps are handled as Unix milliseconds.
     """
     query_str = "SELECT timestamp, open, high, low, close, volume, close_time FROM klines WHERE symbol = :symbol AND interval = :interval"
-    params = {"symbol": symbol, "interval": interval}
-    if start_time:
+    params: Dict[str, Any] = {"symbol": symbol, "interval": interval}
+    if start_time is not None:
         query_str += " AND timestamp >= :start_time"
-        params["start_time"] = start_time
-    if end_time:
+        params["start_time"] = int(start_time)
+    if end_time is not None:
         query_str += " AND timestamp <= :end_time"
-        params["end_time"] = end_time
+        params["end_time"] = int(end_time)
     query_str += " ORDER BY timestamp DESC"
-    if limit:
+    if limit is not None:
         query_str += " LIMIT :limit"
-        params["limit"] = limit
+        params["limit"] = int(limit)
     
     try:
         with get_db_session() as session:
             # The query is ordered DESC to get the latest klines, but we need to return them in ASC order.
-            df = pd.read_sql(text(query_str), session.bind, params=params)
+            con = session.get_bind()
+            df = pd.read_sql(text(query_str), con=con, params=params)
             if not df.empty:
                 df = df.sort_values(by='timestamp', ascending=True)
                 df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
@@ -306,7 +335,7 @@ def save_discarded_signal(signal: dict):
     }
     try:
         with get_db_session() as session:
-            session.execute(query, params)
+            session.execute(query, _prepare_params(params))
             session.commit()
     except SQLAlchemyError as e:
         logger.error(f"Error saving discarded signal: {e}", exc_info=True)

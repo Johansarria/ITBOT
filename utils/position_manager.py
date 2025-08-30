@@ -2,7 +2,7 @@ from utils.audit_operations_db import log_operation_to_db
 
 import os
 import pandas as pd
-import logging
+from utils.structured_logger import StructuredLogger
 from config import settings
 from utils.telegram_handler import send_message
 import asyncio
@@ -12,7 +12,7 @@ from binance.exceptions import BinanceAPIException, BinanceRequestException
 import aiohttp
 from aiogram import Bot
 
-logger = logging.getLogger(__name__)
+logger = StructuredLogger(__name__)
 
 OPERATIONS_LOG = "data/operaciones/operaciones.csv"
 
@@ -23,10 +23,10 @@ def _read_operations_log(path: str = OPERATIONS_LOG) -> pd.DataFrame:
     try:
         return pd.read_csv(path)
     except FileNotFoundError:
-        logger.info(f"Archivo {path} no encontrado.")
+        logger.info("OPERATIONS_LOG_NOT_FOUND", f"Archivo de operaciones no encontrado en: {path}", details={"path": path})
         return pd.DataFrame()
     except Exception as e:
-        logger.error(f"Error al leer {path}: {e}", exc_info=True)
+        logger.error("OPERATIONS_LOG_READ_ERROR", f"Error al leer el archivo de operaciones en: {path}", details={"path": path}, exc_info=True)
         return pd.DataFrame()
 
 def _write_operations_log(df: pd.DataFrame, path: str = OPERATIONS_LOG) -> None:
@@ -50,7 +50,7 @@ def get_open_positions(path: str = None) -> pd.DataFrame:
     if "timestamp_close" in df.columns:
         return df[df["timestamp_close"].isna()]
     if not df.empty:
-        logger.warning(f"Columna 'timestamp_close' no encontrada en {path}. Retornando DataFrame vacío.")
+        logger.warning("COLUMN_NOT_FOUND", "Columna 'timestamp_close' no encontrada en el log de operaciones.", details={"path": path})
     return pd.DataFrame()
 
     from binance.exceptions import BinanceAPIException, BinanceRequestException # ADDED
@@ -70,9 +70,9 @@ def close_position(operation_id: str, exit_price: float, reason_close: str, path
         if os.path.exists(path):
             df_current = _read_operations_log(path)
             _write_operations_log(df_current, backup_path)
-            logger.info(f"Copia de seguridad de {path} creada en {backup_path}.")
+            logger.info("OPERATIONS_LOG_BACKUP", f"Copia de seguridad de {path} creada en {backup_path}.", details={"original_path": path, "backup_path": backup_path})
         else:
-            logger.warning(f"El archivo {path} no existe. No se creará una copia de seguridad antes de cerrar la posición {operation_id}.")
+            logger.warning("OPERATIONS_LOG_NOT_FOUND_ON_CLOSE", f"El archivo {path} no existe al intentar cerrar la posición.", details={"operation_id": operation_id})
 
         df = _read_operations_log(backup_path)
         position_index = df[df["operation_id"] == operation_id].index
@@ -90,16 +90,31 @@ def close_position(operation_id: str, exit_price: float, reason_close: str, path
             df.loc[position_index, 'market_score_close'] = None
             df.loc[position_index, 'notes'] = "Cierre automático por " + reason_close
             _write_operations_log(df, path)
-            logger.info(f"Posición {operation_id} cerrada a {exit_price} por {reason_close}. P&L: {pnl_percent:.2f}%")
+            logger.info(
+                "POSITION_CLOSED",
+                f"Posición {operation_id} cerrada por {reason_close}.",
+                details={
+                    "operation_id": operation_id,
+                    "exit_price": exit_price,
+                    "reason_close": reason_close,
+                    "pnl_usdt": pnl_usdt,
+                    "pnl_percent": pnl_percent
+                }
+            )
             # Auditoría: registrar cierre en base de datos
             cierre_data = df.loc[position_index].to_dict(orient="records")[0]
             # Asegura que todas las claves sean str para cumplir con el tipado
             cierre_data_str = {str(k): v for k, v in cierre_data.items()}
             log_operation_to_db(cierre_data_str)
         else:
-            logger.warning(f"No se encontró la operación {operation_id} para cerrar.")
+            logger.warning("POSITION_NOT_FOUND_ON_CLOSE", f"No se encontró la operación {operation_id} para cerrar en el log.", details={"operation_id": operation_id})
     except Exception as e:
-        logger.error(f"Error al cerrar la posición {operation_id} en CSV: {e}", exc_info=True)
+        logger.error(
+            "POSITION_CLOSE_ERROR",
+            f"Error al cerrar la posición {operation_id} en CSV: {e}",
+            details={"operation_id": operation_id, "path": path},
+            exc_info=True
+        )
 
 
 async def manage_open_positions(bot: Bot):
@@ -109,11 +124,11 @@ async def manage_open_positions(bot: Bot):
     Args:
         bot (Bot): Instancia del bot de Telegram para enviar mensajes.
     """
-    logger.info("Iniciando gestión de posiciones abiertas...")
+    logger.info("POSITION_MANAGEMENT_START", "Iniciando ciclo de gestión de posiciones abiertas.")
     open_positions = get_open_positions()
 
     if open_positions.empty:
-        logger.info("No hay posiciones abiertas para gestionar.")
+        logger.info("NO_OPEN_POSITIONS", "No hay posiciones abiertas para gestionar.")
         return
 
     client = await get_binance_client() # Get the client instance here
@@ -147,11 +162,26 @@ async def manage_open_positions(bot: Bot):
                 await send_message(bot, settings.TELEGRAM_CHAT_ID, f"📉 STOP LOSS alcanzado para {symbol}. Posición cerrada a {current_price}.")
 
         except (BinanceAPIException, BinanceRequestException) as e:
-            logger.error(f"Error de la API de Binance al gestionar la posición {position['operation_id']}: {e}", exc_info=True)
+            logger.error(
+                "POSITION_MANAGEMENT_BINANCE_ERROR",
+                f"Error de la API de Binance al gestionar la posición {position['operation_id']}: {e}",
+                details={"operation_id": position['operation_id']},
+                exc_info=True
+            )
         except aiohttp.ClientError as e:
-            logger.error(f"Error de conexión al gestionar la posición {position['operation_id']}: {e}", exc_info=True)
+            logger.error(
+                "POSITION_MANAGEMENT_CONNECTION_ERROR",
+                f"Error de conexión al gestionar la posición {position['operation_id']}: {e}",
+                details={"operation_id": position['operation_id']},
+                exc_info=True
+            )
         except Exception as e:
-            logger.exception(f"Error inesperado al gestionar la posición {position['operation_id']}: {e}")
+            logger.error(
+                "POSITION_MANAGEMENT_UNEXPECTED_ERROR",
+                f"Error inesperado al gestionar la posición {position['operation_id']}: {e}",
+                details={"operation_id": position['operation_id']},
+                exc_info=True
+            )
 
 async def get_open_positions_summary(bot: Bot) -> str:
     """Devuelve un resumen formateado de las posiciones abiertas."""
@@ -190,19 +220,19 @@ async def get_open_positions_summary(bot: Bot) -> str:
                 f"  - <b>Abierta desde:</b> {timestamp_open.strftime('%Y-%m-%d %H:%M:%S')}\n"
             )
         except (BinanceAPIException, BinanceRequestException) as e:
-            logger.error(f"Error de la API de Binance al obtener el precio actual para {symbol}: {e}", exc_info=True)
+            logger.error("SUMMARY_BINANCE_ERROR", f"Error de API de Binance al obtener precio para resumen de {symbol}", details={"symbol": symbol}, exc_info=True)
             summary += (
                 f"\n- <b>Símbolo:</b> <code>{symbol}</code>\n"
                 f"  - <b>Estado:</b> ERROR de API al obtener precio\n"
             )
         except aiohttp.ClientError as e:
-            logger.error(f"Error de conexión al obtener el precio actual para {symbol}: {e}", exc_info=True)
+            logger.error("SUMMARY_CONNECTION_ERROR", f"Error de conexión al obtener precio para resumen de {symbol}", details={"symbol": symbol}, exc_info=True)
             summary += (
                 f"\n- <b>Símbolo:</b> <code>{symbol}</code>\n"
                 f"  - <b>Estado:</b> ERROR de conexión al obtener precio\n"
             )
         except Exception as e:
-            logger.exception(f"Error inesperado al obtener el precio actual para {symbol}: {e}")
+            logger.error("SUMMARY_UNEXPECTED_ERROR", f"Error inesperado al obtener precio para resumen de {symbol}", details={"symbol": symbol}, exc_info=True)
             summary += (
                 f"\n- <b>Símbolo:</b> <code>{symbol}</code>\n"
                 f"  - <b>Estado:</b> ERROR inesperado al obtener precio\n"
