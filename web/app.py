@@ -36,6 +36,9 @@ try:
     from strategies.ml_strategy import MLStrategy
     import pandas as pd
     import numpy as np
+    # ML thresholds tooling
+    from utils.dynamic_thresholds import get_dynamic_thresholds
+    from utils.ml_monitor import ml_monitor
     # Generador de equity histórico desde DB
     from tools.generate_equity_history import compute_equity_df
     # Risk manager APIs
@@ -57,6 +60,22 @@ logger = logging.getLogger(__name__)
 # Variables globales para el estado de la aplicación
 active_sessions = {}
 last_update = {}
+
+# --- Auditoría simple a JSONL ---
+THRESHOLD_AUDIT_FILE = os.path.join('logs', 'ml_threshold_audit.jsonl')
+
+def _audit_threshold_event(event: str, payload: dict) -> None:
+    try:
+        os.makedirs(os.path.dirname(THRESHOLD_AUDIT_FILE), exist_ok=True)
+        record = {
+            'timestamp': datetime.now().isoformat(),
+            'event': event,
+            **{k: sanitize_json(v) for k, v in (payload or {}).items()}
+        }
+        with open(THRESHOLD_AUDIT_FILE, 'a') as f:
+            f.write(json.dumps(record) + '\n')
+    except Exception as e:
+        logger.error(f"Error escribiendo auditoría de umbrales: {e}")
 
 # Utilidad global para sanear objetos antes de serializarlos a JSON
 def sanitize_json(v: Any):
@@ -924,6 +943,138 @@ def api_system_resume():
     except Exception as e:
         logger.error(f"Error al reanudar sistema: {e}")
         return jsonify({'error': str(e)}), 500
+
+# ------------------ ML THRESHOLDS (VIEW/CONTROL + AUDITORÍA) ------------------
+
+@app.route('/api/ml/thresholds', methods=['GET'])
+def api_ml_thresholds_info():
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        cfg = config.settings
+        # Base (runtime)
+        base = {
+            'high': getattr(cfg, 'ML_THRESHOLD_HIGH', None),
+            'medium': getattr(cfg, 'ML_THRESHOLD_MEDIUM', None),
+            'low': getattr(cfg, 'ML_THRESHOLD_LOW', None),
+        }
+        dynamic_enabled = bool(getattr(cfg, 'ML_DYNAMIC_THRESHOLDS', False))
+        window_h = int(getattr(cfg, 'ML_DYNAMIC_WINDOW_HOURS', 24))
+        bounds = {
+            'HIGH_MIN': getattr(cfg, 'ML_DYNAMIC_HIGH_MIN', None),
+            'HIGH_MAX': getattr(cfg, 'ML_DYNAMIC_HIGH_MAX', None),
+            'MEDIUM_MIN': getattr(cfg, 'ML_DYNAMIC_MEDIUM_MIN', None),
+            'MEDIUM_MAX': getattr(cfg, 'ML_DYNAMIC_MEDIUM_MAX', None),
+        }
+        # Preview dinámico
+        dyn = get_dynamic_thresholds(cfg)
+        # Stats recientes para contexto
+        stats_24h = ml_monitor.get_recent_stats(hours=24)
+        return jsonify({'success': True, 'dynamic_enabled': dynamic_enabled, 'window_hours': window_h, 'base': base, 'dynamic_preview': dyn, 'bounds': bounds, 'recent_stats_24h': sanitize_json(stats_24h)})
+    except Exception as e:
+        logger.error(f"Error en api_ml_thresholds_info: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/ml/thresholds/toggle', methods=['POST'])
+def api_ml_thresholds_toggle():
+    token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    admin_check = require_admin(token)
+    if admin_check is not None:
+        return admin_check
+    try:
+        data = request.get_json(force=True) if request.is_json else {}
+        enabled = bool(data.get('enabled', True))
+        prev = bool(getattr(config.settings, 'ML_DYNAMIC_THRESHOLDS', False))
+        setattr(config.settings, 'ML_DYNAMIC_THRESHOLDS', enabled)
+        _audit_threshold_event('toggle_dynamic_thresholds', {'user_token': token, 'previous': prev, 'new': enabled})
+        return jsonify({'success': True, 'dynamic_enabled': enabled})
+    except Exception as e:
+        logger.error(f"Error activando/desactivando umbrales dinámicos: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/ml/thresholds/set_base', methods=['POST'])
+def api_ml_thresholds_set_base():
+    token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    admin_check = require_admin(token)
+    if admin_check is not None:
+        return admin_check
+    try:
+        data = request.get_json(force=True)
+        high = float(data.get('high'))
+        med = float(data.get('medium'))
+        low = float(data.get('low'))
+        if not (0.0 <= low <= med <= high <= 1.0):
+            return jsonify({'error': 'Umbrales deben cumplir 0 <= low <= medium <= high <= 1'}), 400
+        prev = {
+            'high': getattr(config.settings, 'ML_THRESHOLD_HIGH', None),
+            'medium': getattr(config.settings, 'ML_THRESHOLD_MEDIUM', None),
+            'low': getattr(config.settings, 'ML_THRESHOLD_LOW', None),
+        }
+        setattr(config.settings, 'ML_THRESHOLD_HIGH', high)
+        setattr(config.settings, 'ML_THRESHOLD_MEDIUM', med)
+        setattr(config.settings, 'ML_THRESHOLD_LOW', low)
+        _audit_threshold_event('set_base_thresholds', {'user_token': token, 'previous': prev, 'new': {'high': high, 'medium': med, 'low': low}})
+        return jsonify({'success': True, 'base': {'high': high, 'medium': med, 'low': low}})
+    except Exception as e:
+        logger.error(f"Error estableciendo umbrales base ML: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/ml/thresholds/recompute_preview', methods=['POST'])
+def api_ml_thresholds_recompute_preview():
+    token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        dyn = get_dynamic_thresholds(config.settings)
+        _audit_threshold_event('recompute_dynamic_preview', {'user_token': token, 'dynamic_preview': dyn})
+        return jsonify({'success': True, 'dynamic_preview': dyn})
+    except Exception as e:
+        logger.error(f"Error recomputando preview dinámico: {e}")
+        return jsonify({'error': str(e)}), 500
+
+# Ver/descargar auditoría de umbrales ML
+@app.route('/api/ml/thresholds/audit')
+def api_ml_thresholds_audit():
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        # Si piden descarga directa del archivo completo
+        download_flag = request.args.get('download') in ('1','true','True','yes')
+        if download_flag and os.path.exists(THRESHOLD_AUDIT_FILE):
+            # Adjuntar archivo
+            fname = f"ml_threshold_audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
+            return send_file(THRESHOLD_AUDIT_FILE, as_attachment=True, download_name=fname)
+        # Si no, devolver últimas N líneas como texto
+        n = int(request.args.get('lines', '300'))
+        if not os.path.exists(THRESHOLD_AUDIT_FILE):
+            return Response('No hay auditoría disponible.', mimetype='text/plain')
+        with open(THRESHOLD_AUDIT_FILE, 'rb') as f:
+            try:
+                f.seek(0, os.SEEK_END)
+                size = f.tell()
+                block = 1024
+                data = b''
+                while size > 0 and data.count(b'\n') <= n:
+                    step = block if size - block > 0 else size
+                    f.seek(-step, os.SEEK_CUR)
+                    data = f.read(step) + data
+                    f.seek(-step, os.SEEK_CUR)
+                    size -= step
+                content = data.splitlines()[-n:]
+                text = b"\n".join(content).decode('utf-8', errors='replace')
+            except Exception:
+                f.seek(0)
+                text = f.read().decode('utf-8', errors='replace')
+        return Response(text, mimetype='text/plain')
+    except Exception as e:
+        logger.error(f"Error leyendo auditoría ML: {e}")
+        return Response(f'Error leyendo auditoría: {e}', mimetype='text/plain', status=500)
 
 # ------------------ DYNAMIC PAIRS ------------------
 

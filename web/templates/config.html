@@ -130,6 +130,40 @@
       </div>
     </div>
   </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="fas fa-robot"></i> Umbrales del Modelo ML (Dinámicos)</span>
+        <a class="btn btn-sm btn-outline-light" id="btnAudit" target="_blank" rel="noopener">Ver Auditoría</a>
+      </div>
+      <div class="card-body">
+        <div class="mb-3 d-flex gap-2 flex-wrap">
+          <button class="btn btn-warning btn-sm" id="btnEnableDyn">Activar dinámicos</button>
+          <button class="btn btn-secondary btn-sm" id="btnDisableDyn">Desactivar dinámicos</button>
+          <button class="btn btn-info btn-sm" id="btnRecompute">Recalcular preview</button>
+        </div>
+        <div class="row g-2 align-items-end mb-3">
+          <div class="col-12 col-md-3">
+            <label class="form-label">Base High</label>
+            <input id="mlBaseHigh" type="number" min="0" max="1" step="0.01" class="form-control"/>
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label">Base Medium</label>
+            <input id="mlBaseMed" type="number" min="0" max="1" step="0.01" class="form-control"/>
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label">Base Low</label>
+            <input id="mlBaseLow" type="number" min="0" max="1" step="0.01" class="form-control"/>
+          </div>
+          <div class="col-12 col-md-3">
+            <button class="btn btn-success w-100" id="btnSaveBase"><i class="fas fa-save"></i> Guardar Base</button>
+          </div>
+        </div>
+        <pre id="mlInfo" class="small" style="background:#0d1117;border:1px solid #30363d;padding:10px;border-radius:6px;max-height:300px;overflow:auto;">Cargando...</pre>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% block extra_js %}
@@ -199,6 +233,60 @@
   }
   // Cargar al iniciar
   loadConfigInfo();
+
+  // ---------- ML Dynamic Thresholds UI ----------
+  function loadMlThresholds() {
+    fetch(cfgUrl('/api/ml/thresholds'))
+      .then(r => r.json())
+      .then(j => {
+        if (!j.success) { document.getElementById('mlInfo').innerText = JSON.stringify(j, null, 2); return; }
+        document.getElementById('mlInfo').innerText = JSON.stringify(j, null, 2);
+        const base = j.base || {};
+        document.getElementById('mlBaseHigh').value = base.high ?? '';
+        document.getElementById('mlBaseMed').value = base.medium ?? '';
+        document.getElementById('mlBaseLow').value = base.low ?? '';
+        // Link Auditoría
+        document.getElementById('btnAudit').href = cfgUrl('/api/ml/thresholds/audit&lines=500');
+      })
+      .catch(e => { document.getElementById('mlInfo').innerText = String(e); });
+  }
+  function setMlBaseThresholds() {
+    const body = {
+      high: parseFloat(document.getElementById('mlBaseHigh').value),
+      medium: parseFloat(document.getElementById('mlBaseMed').value),
+      low: parseFloat(document.getElementById('mlBaseLow').value),
+      token
+    };
+    fetch('/api/ml/thresholds/set_base', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(r => r.json()).then(res => {
+        if (res.success) showNotification('Umbrales base ML guardados', 'success');
+        else showNotification(res.error || 'Error guardando umbrales ML', 'error');
+        loadMlThresholds();
+      });
+  }
+  function toggleMlDynamic(enabled) {
+    fetch('/api/ml/thresholds/toggle', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token, enabled }) })
+      .then(r => r.json()).then(res => {
+        if (res.success) showNotification(`Umbrales dinámicos ${enabled ? 'activados' : 'desactivados'}`, 'success');
+        else showNotification(res.error || 'Error al alternar dinámicos', 'error');
+        loadMlThresholds();
+      });
+  }
+  function recomputeMlPreview() {
+    fetch('/api/ml/thresholds/recompute_preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token }) })
+      .then(r => r.json()).then(res => {
+        if (res.success) showNotification('Preview dinámico recalculado', 'success');
+        else showNotification(res.error || 'Error recalculando preview', 'error');
+        loadMlThresholds();
+      });
+  }
+  // Bind botones ML
+  document.getElementById('btnSaveBase').addEventListener('click', setMlBaseThresholds);
+  document.getElementById('btnEnableDyn').addEventListener('click', () => toggleMlDynamic(true));
+  document.getElementById('btnDisableDyn').addEventListener('click', () => toggleMlDynamic(false));
+  document.getElementById('btnRecompute').addEventListener('click', recomputeMlPreview);
+  // Carga inicial
+  loadMlThresholds();
 
   // Guardar modo de riesgo
   document.getElementById('risk-mode-form').addEventListener('submit', (e) => {
