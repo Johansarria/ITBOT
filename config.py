@@ -81,6 +81,14 @@ class Settings(BaseSettings):
     ML_INSTITUTIONAL_MAX_DRAWDOWN: float = 0.15      # Máximo 15% drawdown institucional
     ML_INSTITUTIONAL_MIN_HIT_RATE: float = 0.52      # 52% hit rate mínimo institucional
 
+    # --- UMBRALES DINÁMICOS (opcional) ---
+    ML_DYNAMIC_THRESHOLDS: bool = False              # Si True, ajusta umbrales con distribución reciente
+    ML_DYNAMIC_WINDOW_HOURS: int = 24                # Ventana de cálculo
+    ML_DYNAMIC_HIGH_MIN: float = 0.80                # Límite inferior para high
+    ML_DYNAMIC_HIGH_MAX: float = 0.90                # Límite superior para high
+    ML_DYNAMIC_MEDIUM_MIN: float = 0.65              # Límite inferior para medium
+    ML_DYNAMIC_MEDIUM_MAX: float = 0.85              # Límite superior para medium
+
     # --- CONFIGURACIÓN DEL RUNNER ---
     AUTONOMOUS_CYCLE_SECONDS: int = 3600
     RETRY_ON_ERROR_SECONDS: int = 300
@@ -135,7 +143,7 @@ class Settings(BaseSettings):
 
 # Create a single, globally-accessible settings instance
 try:
-    settings = Settings()
+    settings = Settings()  # type: ignore[call-arg]
 except Exception as e:
     # Fallback para desarrollo/testing sin .env completo
     import warnings
@@ -149,7 +157,7 @@ def get_settings() -> Settings:
     """
     global settings
     if settings is None:
-        settings = Settings()
+        settings = Settings()  # type: ignore[call-arg]
     return settings
 
 def reload_settings() -> Settings:
@@ -159,7 +167,7 @@ def reload_settings() -> Settings:
     """
     global settings # Declara que vamos a modificar la variable global settings
     try:
-        settings = Settings() # Crea una nueva instancia y la asigna a la global
+        settings = Settings()  # type: ignore[call-arg] # Crea una nueva instancia y la asigna a la global
     except Exception as e:
         import warnings
         warnings.warn(f"Error al recargar settings: {e}")

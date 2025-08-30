@@ -272,9 +272,27 @@ async def analyze_market(symbol: str = "BTCUSDT", interval: str = "1h", limit: i
     
     # Cargar configuración ML desde config
     from config import settings
-    umbral_alto = umbral_alto or settings.ML_THRESHOLD_HIGH
-    umbral_medio = umbral_medio or settings.ML_THRESHOLD_MEDIUM  
-    umbral_bajo = umbral_bajo or settings.ML_THRESHOLD_LOW
+    # Umbrales base desde settings
+    base_high = settings.ML_THRESHOLD_HIGH
+    base_med = settings.ML_THRESHOLD_MEDIUM
+    base_low = settings.ML_THRESHOLD_LOW
+
+    # Umbrales dinámicos opcionales
+    dyn_enabled = getattr(settings, 'ML_DYNAMIC_THRESHOLDS', False)
+    if dyn_enabled:
+        try:
+            from utils.dynamic_thresholds import get_dynamic_thresholds
+            dyn = get_dynamic_thresholds(settings)
+            base_high = dyn.get('high', base_high)
+            base_med = dyn.get('medium', base_med)
+            base_low = dyn.get('low', base_low)
+            logger.info(f"Umbrales dinámicos activos: high={base_high}, medium={base_med}, low={base_low}")
+        except Exception as e:
+            logger.warning(f"Fallo obteniendo umbrales dinámicos. Usando base: {e}")
+
+    umbral_alto = umbral_alto or base_high
+    umbral_medio = umbral_medio or base_med
+    umbral_bajo = umbral_bajo or base_low
     
     logger.info(f"🎯 Umbrales ML configurados: Alto={umbral_alto}, Medio={umbral_medio}, Bajo={umbral_bajo}")
     
