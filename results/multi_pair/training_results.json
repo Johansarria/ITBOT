@@ -1,0 +1,490 @@
+{
+  "training_summary": {
+    "timestamp": "2025-08-28T07:38:23.741040",
+    "successful_trainings": 8,
+    "total_time_minutes": 0.2,
+    "tier_metrics": {
+      "Low Risk": {
+        "pairs_count": 2,
+        "avg_accuracy": 0.5707456296824831,
+        "avg_f1": 0.06967910509583118
+      },
+      "Medium Risk": {
+        "pairs_count": 3,
+        "avg_accuracy": 0.6524487223466388,
+        "avg_f1": 0.022879020885669305
+      },
+      "High Risk": {
+        "pairs_count": 3,
+        "avg_accuracy": 0.7129412795805302,
+        "avg_f1": 0.006009871753852717
+      }
+    }
+  },
+  "individual_results": {
+    "BTCUSDT": {
+      "symbol": "BTCUSDT",
+      "risk_tier": "Low Risk",
+      "metrics": {
+        "accuracy": 0.5838030681412772,
+        "precision": 0.59375,
+        "recall": 0.0032539818462065423,
+        "f1_score": 0.006472491909385114
+      },
+      "training_samples": 56059,
+      "test_samples": 14015,
+      "features_count": 23,
+      "model_file": "models/multi_pair/btcusdt_model.txt",
+      "scaler_file": "models/multi_pair/btcusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "volume_ma",
+          "importance": 85
+        },
+        {
+          "feature": "ma_medium_long",
+          "importance": 74
+        },
+        {
+          "feature": "bb_position",
+          "importance": 51
+        },
+        {
+          "feature": "day_of_week",
+          "importance": 47
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 38
+        },
+        {
+          "feature": "hour",
+          "importance": 37
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 37
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 31
+        },
+        {
+          "feature": "volatility",
+          "importance": 27
+        },
+        {
+          "feature": "bb_upper",
+          "importance": 25
+        }
+      ],
+      "training_time": 1756384693.939502
+    },
+    "ETHUSDT": {
+      "symbol": "ETHUSDT",
+      "risk_tier": "Low Risk",
+      "metrics": {
+        "accuracy": 0.557688191223689,
+        "precision": 0.5331088664421998,
+        "recall": 0.07590284435922019,
+        "f1_score": 0.13288571828227724
+      },
+      "training_samples": 56059,
+      "test_samples": 14015,
+      "features_count": 23,
+      "model_file": "models/multi_pair/ethusdt_model.txt",
+      "scaler_file": "models/multi_pair/ethusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "ma_medium_long",
+          "importance": 113
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 88
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 79
+        },
+        {
+          "feature": "volume_ma",
+          "importance": 76
+        },
+        {
+          "feature": "bb_position",
+          "importance": 75
+        },
+        {
+          "feature": "hour",
+          "importance": 72
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 55
+        },
+        {
+          "feature": "macd_histogram",
+          "importance": 52
+        },
+        {
+          "feature": "day_of_week",
+          "importance": 49
+        },
+        {
+          "feature": "volatility",
+          "importance": 49
+        }
+      ],
+      "training_time": 1756384695.5384924
+    },
+    "BNBUSDT": {
+      "symbol": "BNBUSDT",
+      "risk_tier": "Medium Risk",
+      "metrics": {
+        "accuracy": 0.6751283932501834,
+        "precision": 0.65,
+        "recall": 0.0029318899413622013,
+        "f1_score": 0.0058374494836102376
+      },
+      "training_samples": 54516,
+      "test_samples": 13630,
+      "features_count": 23,
+      "model_file": "models/multi_pair/bnbusdt_model.txt",
+      "scaler_file": "models/multi_pair/bnbusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "volume_ma",
+          "importance": 69
+        },
+        {
+          "feature": "ma_medium_long",
+          "importance": 53
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 44
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 43
+        },
+        {
+          "feature": "volatility",
+          "importance": 41
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 39
+        },
+        {
+          "feature": "ma_100",
+          "importance": 38
+        },
+        {
+          "feature": "ma_20",
+          "importance": 30
+        },
+        {
+          "feature": "hour",
+          "importance": 29
+        },
+        {
+          "feature": "bb_position",
+          "importance": 28
+        }
+      ],
+      "training_time": 1756384696.7691367
+    },
+    "ADAUSDT": {
+      "symbol": "ADAUSDT",
+      "risk_tier": "Medium Risk",
+      "metrics": {
+        "accuracy": 0.6311532778598646,
+        "precision": 0.7321428571428571,
+        "recall": 0.008597190186621933,
+        "f1_score": 0.01699481865284974
+      },
+      "training_samples": 51432,
+      "test_samples": 12859,
+      "features_count": 23,
+      "model_file": "models/multi_pair/adausdt_model.txt",
+      "scaler_file": "models/multi_pair/adausdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "ma_medium_long",
+          "importance": 36
+        },
+        {
+          "feature": "volume_ma",
+          "importance": 34
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 32
+        },
+        {
+          "feature": "ma_100",
+          "importance": 22
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 22
+        },
+        {
+          "feature": "macd",
+          "importance": 20
+        },
+        {
+          "feature": "bb_lower",
+          "importance": 20
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 19
+        },
+        {
+          "feature": "macd_signal",
+          "importance": 16
+        },
+        {
+          "feature": "bb_position",
+          "importance": 16
+        }
+      ],
+      "training_time": 1756384698.0388322
+    },
+    "XRPUSDT": {
+      "symbol": "XRPUSDT",
+      "risk_tier": "Medium Risk",
+      "metrics": {
+        "accuracy": 0.6510644959298685,
+        "precision": 0.5119617224880383,
+        "recall": 0.023974904772574503,
+        "f1_score": 0.04580479452054795
+      },
+      "training_samples": 51103,
+      "test_samples": 12776,
+      "features_count": 23,
+      "model_file": "models/multi_pair/xrpusdt_model.txt",
+      "scaler_file": "models/multi_pair/xrpusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "hour",
+          "importance": 100
+        },
+        {
+          "feature": "volatility",
+          "importance": 98
+        },
+        {
+          "feature": "ma_medium_long",
+          "importance": 90
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 80
+        },
+        {
+          "feature": "volume_ma",
+          "importance": 79
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 63
+        },
+        {
+          "feature": "bb_position",
+          "importance": 58
+        },
+        {
+          "feature": "day_of_week",
+          "importance": 52
+        },
+        {
+          "feature": "ma_100",
+          "importance": 52
+        },
+        {
+          "feature": "ma_50",
+          "importance": 41
+        }
+      ],
+      "training_time": 1756384700.3016586
+    },
+    "SOLUSDT": {
+      "symbol": "SOLUSDT",
+      "risk_tier": "High Risk",
+      "metrics": {
+        "accuracy": 0.7170111287758346,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      },
+      "training_samples": 35223,
+      "test_samples": 8806,
+      "features_count": 23,
+      "model_file": "models/multi_pair/solusdt_model.txt",
+      "scaler_file": "models/multi_pair/solusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "volume_ma",
+          "importance": 45
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 33
+        },
+        {
+          "feature": "volatility",
+          "importance": 32
+        },
+        {
+          "feature": "ma_medium_long",
+          "importance": 31
+        },
+        {
+          "feature": "ma_72",
+          "importance": 30
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 29
+        },
+        {
+          "feature": "bb_lower",
+          "importance": 24
+        },
+        {
+          "feature": "ma_24",
+          "importance": 21
+        },
+        {
+          "feature": "macd_signal",
+          "importance": 21
+        },
+        {
+          "feature": "bb_upper",
+          "importance": 18
+        }
+      ],
+      "training_time": 1756384701.6618135
+    },
+    "DOTUSDT": {
+      "symbol": "DOTUSDT",
+      "risk_tier": "High Risk",
+      "metrics": {
+        "accuracy": 0.7274489679552971,
+        "precision": 0.6774193548387096,
+        "recall": 0.008746355685131196,
+        "f1_score": 0.017269736842105265
+      },
+      "training_samples": 35075,
+      "test_samples": 8769,
+      "features_count": 23,
+      "model_file": "models/multi_pair/dotusdt_model.txt",
+      "scaler_file": "models/multi_pair/dotusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "volume_ma",
+          "importance": 56
+        },
+        {
+          "feature": "ma_medium_long",
+          "importance": 43
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 37
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 29
+        },
+        {
+          "feature": "volatility",
+          "importance": 26
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 26
+        },
+        {
+          "feature": "macd_histogram",
+          "importance": 26
+        },
+        {
+          "feature": "ma_72",
+          "importance": 22
+        },
+        {
+          "feature": "rsi",
+          "importance": 20
+        },
+        {
+          "feature": "macd_signal",
+          "importance": 20
+        }
+      ],
+      "training_time": 1756384702.7036073
+    },
+    "AVAXUSDT": {
+      "symbol": "AVAXUSDT",
+      "risk_tier": "High Risk",
+      "metrics": {
+        "accuracy": 0.694363742010459,
+        "precision": 1.0,
+        "recall": 0.0003800836183960471,
+        "f1_score": 0.0007598784194528875
+      },
+      "training_samples": 34416,
+      "test_samples": 8605,
+      "features_count": 23,
+      "model_file": "models/multi_pair/avaxusdt_model.txt",
+      "scaler_file": "models/multi_pair/avaxusdt_scaler.pkl",
+      "feature_importance": [
+        {
+          "feature": "volatility",
+          "importance": 25
+        },
+        {
+          "feature": "high_low_ratio",
+          "importance": 24
+        },
+        {
+          "feature": "volume_ma",
+          "importance": 22
+        },
+        {
+          "feature": "volatility_ratio",
+          "importance": 17
+        },
+        {
+          "feature": "macd_signal",
+          "importance": 16
+        },
+        {
+          "feature": "day_of_week",
+          "importance": 15
+        },
+        {
+          "feature": "ma_medium_long",
+          "importance": 14
+        },
+        {
+          "feature": "rsi",
+          "importance": 14
+        },
+        {
+          "feature": "ma_72",
+          "importance": 13
+        },
+        {
+          "feature": "ma_short_medium",
+          "importance": 13
+        }
+      ],
+      "training_time": 1756384703.7290754
+    }
+  }
+}

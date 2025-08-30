@@ -1,0 +1,854 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - ITBOT {% endblock %}
+
+{% block content %}
+<div id="notifications"></div>
+
+<div class="row align-items-center mb-3">
+    <div class="col-12 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="ITBOT" style="height:36px;width:36px;margin-right:10px;" />
+            <h1 class="mb-0">
+                <i class="fas fa-tachometer-alt text-primary"></i> Dashboard Principal CRECENDIS
+            </h1>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span id="risk-badge" class="badge bg-warning" style="display:none;">⚠️ Parámetros de riesgo personalizados</span>
+            <span id="paused-badge" class="badge bg-warning text-dark" style="display:none;">⏸️ Sistema en PAUSA</span>
+            <span id="last-update" class="badge bg-secondary">Cargando...</span>
+        </div>
+    </div>
+    
+    <!-- Métricas en una sola fila horizontal debajo del título -->
+    <div class="col-12 mt-3 d-flex flex-wrap gap-3">
+        <div class="card metric-card flex-fill" style="min-width: 200px; max-width: 20%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Estado del Bot
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold" id="bot-status">
+                            <span class="status-indicator status-warning"></span>
+                            Verificando...
+                        </div>
+                        <div style="height:40px"><canvas id="spark-status" height="40"></canvas></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-robot fa-2x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card metric-card flex-fill" style="min-width: 200px; max-width: 20%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            PnL Diario
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold" id="daily-pnl">
+                            <i class="fas fa-spinner fa-spin"></i> --
+                        </div>
+                        <div style="height:40px"><canvas id="spark-daily" height="40"></canvas></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chart-line fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card metric-card flex-fill" style="min-width: 200px; max-width: 20%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Posiciones Activas
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold" id="active-positions">
+                            <i class="fas fa-spinner fa-spin"></i> --
+                        </div>
+                        <div style="height:40px"><canvas id="spark-positions" height="40"></canvas></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-coins fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card metric-card flex-fill" style="min-width: 200px; max-width: 20%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Pares Dinámicos
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold" id="dynamic-pairs">
+                            <i class="fas fa-spinner fa-spin"></i> --
+                        </div>
+                        <div id="dynamic-pairs-list" class="text-muted small mt-1" title=""></div>
+                        <div style="height:40px"><canvas id="spark-pairs" height="40"></canvas></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-sync-alt fa-2x text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card metric-card flex-fill" style="min-width: 200px; max-width: 20%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                            Saldo Binance
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold" id="binance-balance">
+                            <i class="fas fa-spinner fa-spin"></i> --
+                        </div>
+                        <div style="height:40px"><canvas id="spark-balance" height="40"></canvas></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-wallet fa-2x text-secondary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos y estado detallado -->
+<div class="row">
+    <!-- Gráfico de rendimiento -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-chart-area"></i> Rendimiento en Tiempo Real (Equity Resumida)
+                </h6>
+                <div class="dropdown no-arrow">
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-primary" onclick="refreshCharts()">
+                            <i class="fas fa-sync"></i> Actualizar
+                        </button>
+                        <button class="btn btn-sm btn-outline-success" onclick="rebuildEquity()">
+                            <i class="fas fa-hammer"></i> Reconstruir Equity
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Panel de estado del sistema -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-heartbeat"></i> Salud del Sistema
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="progress mb-3" style="height: 20px;">
+                        <div class="progress-bar" id="health-progress" role="progressbar" style="width: 0%">
+                            <span id="health-percentage">0%</span>
+                        </div>
+                    </div>
+                    <h4 id="health-status" class="text-warning">Verificando...</h4>
+                </div>
+                
+                <div id="health-issues">
+                    <!-- Issues will be populated here -->
+                </div>
+                
+                <hr>
+                
+                <div class="row text-center">
+                    <div class="col-6">
+                        <div class="border-end">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Modo</div>
+                            <div id="trading-mode" class="font-weight-bold">--</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Uptime</div>
+                        <div id="system-uptime" class="font-weight-bold">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Acciones rápidas -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-bolt"></i> Acciones Rápidas
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary btn-sm" onclick="forceUpdate()">
+                        <i class="fas fa-sync"></i> Forzar Actualización
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="pauseAll()">
+                        <i class="fas fa-pause-circle"></i> Pausa Total
+                    </button>
+                    <button class="btn btn-outline-warning btn-sm" onclick="toggleMode()">
+                        <i class="fas fa-exchange-alt"></i> Alternar Modo
+                    </button>
+                    <button class="btn btn-outline-success btn-sm" onclick="resumeSystem()">
+                        <i class="fas fa-play-circle"></i> Reanudar Sistema
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" onclick="openLogsModal()">
+                        <i class="fas fa-file-alt"></i> Ver Logs
+                    </button>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportData()">
+                        <i class="fas fa-download"></i> Exportar Equity
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabla de posiciones -->
+<div class="row">
+                    <div class="col-6">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Modo</div>
+                        <div id="trading-mode" class="font-weight-bold">--</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Uptime</div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div id="system-uptime" class="font-weight-bold">--</div>
+                            <span id="mode-badge" class="badge bg-secondary" title=""></span>
+                        </div>
+                    </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped" id="positions-table">
+                        <thead>
+                            <tr>
+                                <th>Par</th>
+                                <th>Lado</th>
+                                <th>Tamaño</th>
+                                <th>Precio Entrada</th>
+                                <th>Precio Actual</th>
+                                <th>PnL</th>
+                                <th>PnL %</th>
+                                <th>Tiempo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <i class="fas fa-spinner fa-spin"></i> Cargando posiciones...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabla de pares dinámicos -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-sync-alt"></i> Pares Dinámicos Activos
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped" id="pairs-table">
+                        <thead>
+                            <tr>
+                                <th>Par</th>
+                                <th>Score</th>
+                                <th>Volatilidad</th>
+                                <th>Volumen 24h</th>
+                                <th>Tendencia</th>
+                                <th>Última Evaluación</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    <i class="fas fa-spinner fa-spin"></i> Cargando pares...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let performanceChart;
+    let sparkDaily, sparkPositions, sparkPairs, sparkStatus, sparkBalance;
+    
+    // Initialize dashboard
+    $(document).ready(function() {
+        initializeCharts();
+        loadInitialData();
+    updateRiskBadge();
+        
+        // Set up periodic updates
+    setInterval(updateData, 30000); // Update every 30 seconds
+    setInterval(updateRiskBadge, 30000);
+    // Actualizaciones adicionales: saldo y uptime
+    updateAuxData();
+    setInterval(updateAuxData, 30000);
+    });
+    
+    function initializeCharts() {
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+                performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Equity (base 100)',
+                    data: [],
+                    borderColor: 'rgba(0, 212, 170, 1)',
+                    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+                    borderWidth: 2,
+                                        fill: true,
+                                        tension: 0.25
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#f8f9fa'
+                        }
+                                        },
+                                        zoom: {
+                                            pan: { enabled: true, mode: 'x', modifierKey: 'shift' },
+                                            zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'x' }
+                                        }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#f8f9fa'
+                        },
+                        grid: {
+                            color: '#30363d'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#f8f9fa',
+                            callback: function(value) { return value; }
+                        },
+                        grid: {
+                            color: '#30363d'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crear función para sparklines
+        function createSpark(id, color) {
+            const el = document.getElementById(id).getContext('2d');
+            return new Chart(el, {
+                type: 'line', data: { labels: [], datasets: [{ data: [], borderColor: color, borderWidth: 1, fill: false, pointRadius: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
+            });
+        }
+        sparkDaily = createSpark('spark-daily', '#28a745');
+        sparkPositions = createSpark('spark-positions', '#0dcaf0');
+        sparkPairs = createSpark('spark-pairs', '#ffc107');
+        sparkStatus = createSpark('spark-status', '#6c757d');
+        sparkBalance = createSpark('spark-balance', '#6c757d');
+    }
+    
+    async function loadInitialData() {
+        updateData();
+        try {
+            await reloadEquityChart(true);
+        } catch (e) { console.warn('Equity API no disponible', e); }
+    }
+
+    async function reloadEquityChart(tryRebuildIfEmpty = false) {
+        let res = await fetch(`/api/equity?token=${token}`);
+        let d = await res.json();
+        if ((!d.success || !d.equity || d.equity.length < 2) && tryRebuildIfEmpty) {
+            await fetch(`/api/equity/rebuild?token=${token}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }});
+            res = await fetch(`/api/equity?token=${token}`);
+            d = await res.json();
+        }
+        if (d.success) {
+            performanceChart.data.labels = d.labels || [];
+            performanceChart.data.datasets[0].data = d.equity || [];
+            performanceChart.update();
+        }
+        return d;
+    }
+    
+    function updateData() {
+        // Update all dashboard data
+        fetch(`/api/status?token=${token}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    handleStatusUpdate(data.data);
+                } else {
+                    showNotification('Error cargando datos: ' + data.error, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Error de conexión', 'error');
+            });
+    }
+
+    // Llama balance y uptime en paralelo
+    function updateAuxData() {
+        updateBinanceBalance();
+        updateUptime();
+    }
+    
+    function handleStatusUpdate(data) {
+        updateLastUpdate();
+        updateMetrics(data);
+        updateHealthStatus(data);
+        updateTables(data);
+        updateChart(data);
+    }
+    
+    function updateLastUpdate() {
+        const now = new Date();
+        $('#last-update').text(`Actualizado: ${now.toLocaleTimeString()}`);
+    }
+    
+    function updateMetrics(data) {
+        const botStatus = data.bot_status || {};
+        const dynamicSystem = data.dynamic_system || {};
+        
+        // Bot status
+        const isRunning = !!botStatus.running;
+        const isPaused = !!botStatus.is_paused;
+        const statusClass = isPaused ? 'status-warning' : (isRunning ? 'status-online' : 'status-offline');
+        const statusText = isPaused ? 'PAUSADO' : (isRunning ? 'ACTIVO' : 'DETENIDO');
+        $('#bot-status').html(`
+            <span class="status-indicator ${statusClass}"></span>
+            ${statusText}
+        `);
+        const pausedBadge = document.getElementById('paused-badge');
+        if (pausedBadge) pausedBadge.style.display = isPaused ? 'inline-block' : 'none';
+        
+        // Daily PnL
+        const dailyPnl = botStatus.daily_pnl_percent || 0;
+        $('#daily-pnl').html(`
+            <span class="text-${dailyPnl >= 0 ? 'success' : 'danger'}">
+                ${formatPercent(dailyPnl)}
+            </span>
+        `);
+        
+        // Active positions
+        const positions = botStatus.positions || [];
+        $('#active-positions').text(positions.length);
+        
+        // Dynamic pairs
+        const systemStatus = dynamicSystem.system_status || {};
+        const currentPairs = systemStatus.current_pairs || [];
+        $('#dynamic-pairs').text(currentPairs.length);
+        try {
+            const symbols = currentPairs.map(p => {
+                if (!p) return null;
+                if (typeof p === 'string') return p;
+                return p.symbol || p.pair || p.name || null;
+            }).filter(Boolean);
+            const maxShow = 8;
+            const shown = symbols.slice(0, maxShow);
+            const extra = symbols.length - shown.length;
+            let summary = shown.join(', ');
+            if (extra > 0) summary += ` +${extra}`;
+            const listEl = document.getElementById('dynamic-pairs-list');
+            if (listEl) {
+                listEl.textContent = summary || '';
+                listEl.title = symbols.join(', ');
+            }
+        } catch (e) {
+            // Ignorar errores de formateo
+        }
+    }
+    
+    function updateHealthStatus(data) {
+        const healthData = data.system_health || {};
+        const percentage = healthData.percentage || 0;
+        const status = healthData.status || 'DESCONOCIDO';
+        const color = healthData.color || 'secondary';
+        const issues = healthData.issues || [];
+        
+        // Update progress bar
+        $('#health-progress')
+            .removeClass('bg-success bg-warning bg-danger bg-secondary')
+            .addClass(`bg-${color}`)
+            .css('width', percentage + '%');
+        $('#health-percentage').text(Math.round(percentage) + '%');
+        $('#health-status')
+            .removeClass('text-success text-warning text-danger text-secondary')
+            .addClass(`text-${color}`)
+            .text(status);
+        
+        // Update issues
+        let issuesHtml = '';
+        if (issues.length > 0) {
+            issuesHtml = '<div class="alert alert-warning"><strong>Observaciones:</strong><ul class="mb-0">';
+            issues.forEach(issue => {
+                issuesHtml += `<li>${issue}</li>`;
+            });
+            issuesHtml += '</ul></div>';
+        }
+        $('#health-issues').html(issuesHtml);
+        
+    // Update mode and uptime
+        const botStatus = data.bot_status || {};
+        $('#trading-mode').text(botStatus.mode || '--');
+    // Uptime se actualiza por updateUptime()
+    }
+    
+    function updateTables(data) {
+        const botStatus = data.bot_status || {};
+        const dynamicSystem = data.dynamic_system || {};
+        const systemStatus = dynamicSystem.system_status || {};
+        
+        // Update positions table
+        updatePositionsTable(botStatus.positions || []);
+        
+    // Update pairs table
+    updatePairsTable(systemStatus.current_pairs || []);
+    }
+    
+    function updatePositionsTable(positions) {
+        const tbody = $('#positions-table tbody');
+        tbody.empty();
+        
+        if (positions.length === 0) {
+            tbody.append(`
+                <tr>
+                    <td colspan="8" class="text-center text-muted">
+                        <i class="fas fa-info-circle"></i> No hay posiciones activas
+                    </td>
+                </tr>
+            `);
+            return;
+        }
+        
+        positions.forEach(position => {
+            const pnlClass = position.pnl >= 0 ? 'text-success' : 'text-danger';
+            const pnlIcon = position.pnl >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+            
+            tbody.append(`
+                <tr>
+                    <td><strong>${position.symbol}</strong></td>
+                    <td><span class="badge bg-${position.side === 'LONG' ? 'success' : 'danger'}">${position.side}</span></td>
+                    <td>${formatNumber(position.size, 4)}</td>
+                    <td>$${formatNumber(position.entry_price, 4)}</td>
+                    <td>$${formatNumber(position.current_price, 4)}</td>
+                    <td class="${pnlClass}">
+                        <i class="fas ${pnlIcon}"></i> $${formatNumber(position.pnl_usd, 2)}
+                    </td>
+                    <td class="${pnlClass}">
+                        <strong>${formatPercent(position.pnl)}</strong>
+                    </td>
+                    <td>${new Date(position.timestamp).toLocaleString()}</td>
+                </tr>
+            `);
+        });
+    }
+    
+    function updatePairsTable(pairs) {
+        const tbody = $('#pairs-table tbody');
+        tbody.empty();
+        
+        if (pairs.length === 0) {
+            tbody.append(`
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        <i class="fas fa-info-circle"></i> No hay pares activos
+                    </td>
+                </tr>
+            `);
+            return;
+        }
+        
+        pairs.forEach(pair => {
+            const isObj = pair && typeof pair === 'object';
+            const symbol = isObj ? (pair.symbol || pair.pair || pair.name || '--') : String(pair);
+            const score = isObj && typeof pair.score === 'number' ? pair.score : null;
+            const volatility = isObj && typeof pair.volatility === 'number' ? pair.volatility : null;
+            const volume24 = isObj && typeof pair.volume_24h === 'number' ? pair.volume_24h : null;
+            const trend = isObj && typeof pair.trend === 'string' ? pair.trend : null;
+            const lastEval = isObj && pair.last_evaluation ? pair.last_evaluation : null;
+
+            const scoreClass = score === null ? 'text-muted' : (score >= 70 ? 'text-success' : score >= 50 ? 'text-warning' : 'text-danger');
+            const scoreCell = score === null ? '-' : `<strong>${formatNumber(score, 1)}</strong>`;
+            const volCell = volatility === null ? '-' : `${formatPercent(volatility)}`;
+            const vol24Cell = volume24 === null ? '-' : `${formatNumber(volume24 / 1000000, 1)}M`;
+            const trendIcon = trend === 'UP' ? 'up text-success' : trend === 'DOWN' ? 'down text-danger' : 'right text-muted';
+            const trendText = trend || '-';
+            const lastEvalCell = lastEval ? new Date(lastEval).toLocaleString() : '-';
+
+            tbody.append(`
+                <tr>
+                    <td><strong>${symbol}</strong></td>
+                    <td class="${scoreClass}">${scoreCell}</td>
+                    <td>${volCell}</td>
+                    <td>${vol24Cell}</td>
+                    <td>
+                        <i class="fas fa-arrow-${trendIcon}"></i>
+                        ${trendText}
+                    </td>
+                    <td>${lastEvalCell}</td>
+                    <td><span class="badge bg-success">ACTIVO</span></td>
+                </tr>
+            `);
+        });
+    }
+    
+    function updateChart(data) {
+        // Si no hay datos previos, no forzamos puntos ficticios; equity viene de /api/equity
+        // Opcionalmente, podríamos añadir el último punto basado en PnL, pero lo omitimos para evitar drift.
+        performanceChart.update();
+
+        // Sparklines (simplemente append con las mismas señales)
+        function pushSpark(chart, value, maxLen=30) {
+            const l = chart.data.labels, d = chart.data.datasets[0].data;
+            if (l.length > maxLen) { l.shift(); d.shift(); }
+            l.push(''); d.push(value);
+            chart.update();
+        }
+        const pnl = (data.bot_status && typeof data.bot_status.daily_pnl_percent !== 'undefined') ? data.bot_status.daily_pnl_percent : 0;
+        pushSpark(sparkDaily, pnl);
+        pushSpark(sparkPositions, (data.bot_status?.positions || []).length);
+        pushSpark(sparkPairs, (data.dynamic_system?.system_status?.current_pairs || []).length);
+        pushSpark(sparkStatus, data.bot_status?.running ? 1 : 0);
+    }
+
+    async function updateUptime() {
+        try {
+            const res = await fetch(`/api/uptime?token=${token}`);
+            const d = await res.json();
+            if (d && d.success) {
+                $('#system-uptime').text(d.uptime_formatted || '--');
+                const badge = document.getElementById('mode-badge');
+                if (badge) {
+                    const live = !!d.live_mode;
+                    badge.classList.remove('bg-secondary','bg-success','bg-warning');
+                    badge.classList.add(live ? 'bg-success' : 'bg-secondary');
+                    badge.textContent = live ? 'LIVE' : 'PAPER';
+                    const stcs = d.start_time_current_session;
+                    if (stcs) {
+                        try {
+                            const dt = new Date(stcs);
+                            badge.title = `Desde: ${dt.toLocaleString()}`;
+                        } catch (_) {
+                            badge.title = `Desde: ${stcs}`;
+                        }
+                    } else {
+                        badge.title = '';
+                    }
+                }
+            }
+        } catch (e) {
+            // Mantener último valor
+        }
+    }
+
+    async function updateBinanceBalance() {
+        try {
+            const res = await fetch(`/api/balance?token=${token}`);
+            const d = await res.json();
+            if (d && d.success) {
+                const total = Number(d.total_usdt_equivalent || 0);
+                $('#binance-balance').html(`$${formatNumber(total, 2)} <small class="text-muted">USDT</small>`);
+                // spark del balance en USDT equivalente
+                const l = sparkBalance.data.labels, s = sparkBalance.data.datasets[0].data;
+                if (l.length > 30) { l.shift(); s.shift(); }
+                l.push(''); s.push(total);
+                sparkBalance.update();
+            }
+        } catch (e) {
+            // Mantener último valor
+        }
+    }
+
+    async function updateRiskBadge() {
+        try {
+            if (!token) return;
+            const res = await fetch(`/api/config/info?token=${token}`);
+            const data = await res.json();
+            if (data && data.success && data.risk) {
+                const active = !!data.risk.custom_params_active;
+                const el = document.getElementById('risk-badge');
+                if (active) {
+                    el.style.display = 'inline-block';
+                } else {
+                    el.style.display = 'none';
+                }
+            }
+        } catch (e) {
+            // No interrumpir el dashboard por este check
+            console.warn('No se pudo actualizar el badge de riesgo personalizado', e);
+        }
+    }
+    
+    // Quick actions
+    function forceUpdate() {
+        showNotification('Forzando actualización...', 'info');
+        updateData();
+    }
+    
+    async function toggleMode() {
+        try {
+            const res = await fetch(`/api/system/toggle_mode?token=${token}`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+            const out = await res.json();
+            if (out.success) {
+                showNotification(`Modo cambiado: ${out.previous_mode} → ${out.new_mode}`, 'success');
+                updateData();
+            } else {
+                showNotification(out.error || 'No se pudo cambiar el modo', 'error');
+            }
+        } catch (e) {
+            showNotification('Error alternando modo: ' + e, 'error');
+        }
+    }
+
+    // --- Logs Modal ---
+    function openLogsModal() {
+        const modal = document.getElementById('logsModal');
+        if (!modal) return;
+        const myModal = new bootstrap.Modal(modal, { keyboard: true, backdrop: true });
+        // Limpiar contenido
+        $('#logsContent').text('Cargando logs...');
+        $('#logsLinesInput').val('500');
+        myModal.show();
+        loadLogs();
+    }
+
+    async function loadLogs() {
+        try {
+            const n = parseInt($('#logsLinesInput').val() || '500', 10);
+            const res = await fetch(`/api/logs/tail?token=${token}&lines=${isNaN(n) ? 500 : n}`);
+            const text = await res.text();
+            $('#logsContent').text(text);
+        } catch (e) {
+            $('#logsContent').text('Error cargando logs: ' + e);
+        }
+    }
+
+    function downloadLogsTxt() {
+        const n = parseInt($('#logsLinesInput').val() || '1000', 10);
+        const url = `/api/logs/tail?token=${token}&lines=${isNaN(n) ? 1000 : n}&download=1`;
+        window.open(url, '_blank');
+    }
+
+    function exportData() {
+        window.open(`/api/export/equity?token=${token}`, '_blank');
+    }
+    
+    function refreshCharts() {
+        updateData();
+        showNotification('Gráficos actualizados', 'success');
+    }
+
+    async function rebuildEquity() {
+        try {
+            showNotification('Reconstruyendo equity desde la base de datos...', 'info');
+            const res = await fetch(`/api/equity/rebuild?token=${token}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }});
+            const out = await res.json();
+            if (out && out.success) {
+                showNotification(`Equity reconstruida (${out.rows} filas)`, 'success');
+                await reloadEquityChart(false);
+            } else {
+                showNotification('No se pudo reconstruir: ' + (out && out.error ? out.error : 'error desconocido'), 'error');
+            }
+        } catch (e) {
+            showNotification('Error al reconstruir equity: ' + e, 'error');
+        }
+    }
+
+    // Pause/Resume with confirmations (admin only)
+    async function pauseAll() {
+        try {
+            if (!confirm('🛑 ¿Confirmas la PAUSA TOTAL?\n\nDetendrá nuevas operaciones. Las posiciones abiertas se mantienen.')) return;
+            const res = await fetch(`/api/system/pause?token=${token}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }});
+            const out = await res.json();
+            if (out && out.success) {
+                showNotification('Sistema pausado correctamente', 'success');
+                updateData();
+            } else {
+                showNotification(out.error || 'No se pudo pausar el sistema (¿requiere admin?)', 'error');
+            }
+        } catch (e) {
+            showNotification('Error al pausar: ' + e, 'error');
+        }
+    }
+
+    async function resumeSystem() {
+        try {
+            if (!confirm('✅ ¿Confirmas REANUDAR el sistema?')) return;
+            const res = await fetch(`/api/system/resume?token=${token}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }});
+            const out = await res.json();
+            if (out && out.success) {
+                showNotification('Sistema reanudado', 'success');
+                updateData();
+            } else {
+                showNotification(out.error || 'No se pudo reanudar el sistema (¿requiere admin?)', 'error');
+            }
+        } catch (e) {
+            showNotification('Error al reanudar: ' + e, 'error');
+        }
+    }
+</script>
+
+<!-- Logs Modal -->
+<div class="modal fade" id="logsModal" tabindex="-1" aria-labelledby="logsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logsModalLabel"><i class="fas fa-file-alt"></i> Logs recientes</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                        <label class="form-label mb-0">Líneas:</label>
+                        <input id="logsLinesInput" type="number" class="form-control form-control-sm" style="width:100px" value="500" min="50" step="50">
+                        <button class="btn btn-sm btn-outline-primary" onclick="loadLogs()"><i class="fas fa-sync"></i> Recargar</button>
+                        <button class="btn btn-sm btn-outline-success" onclick="downloadLogsTxt()"><i class="fas fa-download"></i> Descargar .txt</button>
+                </div>
+                <pre id="logsContent" class="p-2" style="min-height:300px; max-height:60vh; overflow:auto; white-space:pre-wrap;"></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
