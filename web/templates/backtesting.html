@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block title %}Backtesting - ITBOT{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-3">
+  <div class="col-12 d-flex align-items-center justify-content-between">
+    <h1 class="mb-0">
+      <i class="fas fa-chart-line text-primary"></i> Backtesting
+    </h1>
+    <span class="badge bg-secondary">Experimental</span>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-lg-4">
+    <div class="card h-100">
+      <div class="card-header"><i class="fas fa-play"></i> Ejecutar Backtest</div>
+      <div class="card-body">
+        <form id="bt-form" class="row g-2">
+          <div class="col-12">
+            <label class="form-label">Fuente de datos</label>
+            <select id="bt-source" class="form-select">
+              <option value="mock">Datos Mock</option>
+              <option value="file">Archivo CSV</option>
+            </select>
+          </div>
+          <div class="col-12" id="file-path-wrap" style="display:none;">
+            <label class="form-label">Ruta CSV (con columna timestamp)</label>
+            <select id="csv-select" class="form-select mb-2">
+              <option value="">Selecciona un archivo...</option>
+            </select>
+            <input type="text" id="file-path" class="form-control" placeholder="o escribe una ruta manual...">
+            <div id="csv-meta" class="form-text mt-1 text-muted"></div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Capital Inicial</label>
+            <input type="number" step="0.01" id="bt-balance" class="form-control" value="1000">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Comisión</label>
+            <input type="number" step="0.0001" id="bt-commission" class="form-control" value="0.001">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Warmup</label>
+            <input type="number" id="bt-warmup" class="form-control" value="100">
+          </div>
+          <div class="col-6" id="days-wrap">
+            <label class="form-label">Días (mock)</label>
+            <input type="number" id="bt-days" class="form-control" value="500">
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100"><i class="fas fa-bolt"></i> Ejecutar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-8">
+    <div class="card h-100">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <span><i class="fas fa-list"></i> Resultados</span>
+        <div>
+          <button class="btn btn-sm btn-outline-primary" id="btn-clear" type="button"><i class="fas fa-eraser"></i> Limpiar</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div id="bt-results" class="text-muted mb-3">Sin resultados todavía.</div>
+        <div class="row g-3">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header"><i class="fas fa-chart-area"></i> Equity (Base=100)</div>
+              <div class="card-body" style="height:260px;">
+                <canvas id="equityChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header"><i class="fas fa-chart-bar"></i> PnL por Trade</div>
+              <div class="card-body" style="height:220px;">
+                <canvas id="pnlChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="card">
+              <div class="card-header"><i class="fas fa-wave-square"></i> Drawdown (%)</div>
+              <div class="card-body" style="height:220px;">
+                <canvas id="ddChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="card">
+              <div class="card-header"><i class="fas fa-chart-line"></i> PnL Acumulado (USDT aprox)</div>
+              <div class="card-body" style="height:220px;">
+                <canvas id="cumChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="card">
+              <div class="card-header"><i class="fas fa-chart-pie"></i> Histograma PnL (USDT)</div>
+              <div class="card-body" style="height:220px;">
+                <canvas id="histChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="card">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <span><i class="fas fa-table"></i> Últimos Trades</span>
+                <div class="btn-group btn-group-sm">
+                  <button class="btn btn-outline-success" id="btn-export-csv" type="button"><i class="fas fa-file-csv"></i> CSV</button>
+                  <button class="btn btn-outline-info" id="btn-export-json" type="button"><i class="fas fa-file-code"></i> JSON</button>
+                </div>
+              </div>
+              <div class="card-body" style="max-height:220px; overflow:auto;">
+                <table class="table table-dark table-striped table-sm mb-0" id="trades-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Fecha</th>
+                      <th>Precio</th>
+                      <th>PnL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="4" class="text-muted">Sin datos</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+  function btUrl(path){ return `${path}?token=${token}`; }
+  const srcSel = document.getElementById('bt-source');
+  srcSel.addEventListener('change', () => {
+    const isFile = srcSel.value === 'file';
+    document.getElementById('file-path-wrap').style.display = isFile ? '' : 'none';
+    document.getElementById('days-wrap').style.display = isFile ? 'none' : '';
+    if (isFile) loadCsvList();
+  });
+
+  async function loadCsvList() {
+    try {
+      const res = await fetch(`/api/backtest/csv_files?token=${token}`);
+      const data = await res.json();
+      const sel = document.getElementById('csv-select');
+      sel.innerHTML = '<option value="">Selecciona un archivo...</option>';
+      if (data && data.success) {
+        data.csv_files.forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = f.path; opt.textContent = `${f.filename} — ${f.size_mb}MB${f.has_timestamp ? '' : ' (sin timestamp)'}`;
+          opt.dataset.meta = JSON.stringify(f);
+          sel.appendChild(opt);
+        });
+      }
+      sel.onchange = () => {
+        const meta = sel.options[sel.selectedIndex]?.dataset?.meta;
+        const input = document.getElementById('file-path');
+        if (meta) {
+          const f = JSON.parse(meta);
+          input.value = f.path;
+          document.getElementById('csv-meta').textContent = `Modificado: ${new Date(f.modified).toLocaleString()} | Tamaño: ${f.size_mb}MB`;
+        } else {
+          document.getElementById('csv-meta').textContent = '';
+        }
+      };
+    } catch (e) {
+      console.error('No se pudo cargar la lista de CSVs', e);
+    }
+  }
+
+  document.getElementById('bt-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const payload = {
+      source: document.getElementById('bt-source').value,
+      initial_balance: parseFloat(document.getElementById('bt-balance').value),
+      commission: parseFloat(document.getElementById('bt-commission').value),
+      warmup_period: parseInt(document.getElementById('bt-warmup').value),
+    };
+    if (payload.source === 'file') {
+      payload.file_path = document.getElementById('file-path').value.trim();
+      if (!payload.file_path) { showNotification('Selecciona un CSV o escribe la ruta', 'warning'); return; }
+    } else {
+      payload.days = parseInt(document.getElementById('bt-days').value);
+    }
+
+    document.getElementById('bt-results').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Ejecutando...';
+  fetch(btUrl('/api/backtest/run'), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    }).then(r => r.json()).then(res => {
+      if (!res.success) { showNotification(res.error || 'Error en backtest', 'error'); document.getElementById('bt-results').innerText = 'Error'; return; }
+      const m = res.metrics || {};
+      const html = `
+        <div class="row text-center">
+          <div class="col-6 col-md-3"><div class="h5">${(m.total_return_pct ?? 0).toFixed(2)}%</div><div class="text-muted">Retorno</div></div>
+          <div class="col-6 col-md-3"><div class="h5">${m.total_trades ?? 0}</div><div class="text-muted">Operaciones</div></div>
+          <div class="col-6 col-md-3"><div class="h5">${(m.win_rate_pct ?? 0).toFixed(2)}%</div><div class="text-muted">Win Rate</div></div>
+          <div class="col-6 col-md-3"><div class="h5">${(m.max_drawdown_pct ?? 0).toFixed(2)}%</div><div class="text-muted">Max DD</div></div>
+        </div>
+        <hr>
+        <div class="row text-center">
+          <div class="col-6 col-md-3"><div class="h5">$${(m.initial_balance ?? 0).toFixed(2)}</div><div class="text-muted">Inicial</div></div>
+          <div class="col-6 col-md-3"><div class="h5">$${(m.final_balance ?? 0).toFixed(2)}</div><div class="text-muted">Final</div></div>
+          <div class="col-6 col-md-3"><div class="h5">${(m.sharpe_ratio ?? 0).toFixed(2)}</div><div class="text-muted">Sharpe</div></div>
+          <div class="col-6 col-md-3"><div class="h5">${(m.winning_trades ?? 0)}/${(m.losing_trades ?? 0)}</div><div class="text-muted">W/L</div></div>
+        </div>`;
+      document.getElementById('bt-results').innerHTML = html;
+      // Equity chart
+      const eqData = m.equity || [];
+      const eqCtx = document.getElementById('equityChart').getContext('2d');
+      if (window.eqChart) window.eqChart.destroy();
+      window.eqChart = new Chart(eqCtx, {
+        type: 'line',
+        data: { labels: eqData.map((_, i) => i+1), datasets: [{ label: 'Equity', data: eqData, borderColor: '#00d4aa', backgroundColor: 'rgba(0,212,170,0.1)', fill: true, borderWidth: 2 }]},
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f8f9fa' }}}, scales: { x: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } }, y: { ticks: { color: '#f8f9fa' } , grid: { color: '#30363d' } } } }
+      });
+      // PnL chart
+      const trades = m.trades || [];
+      const pnlCtx = document.getElementById('pnlChart').getContext('2d');
+      if (window.pnlChart) window.pnlChart.destroy();
+      window.pnlChart = new Chart(pnlCtx, {
+        type: 'bar',
+        data: { labels: trades.map((t, i) => i+1), datasets: [{ label: 'PnL (USDT)', data: trades.map(t => t.pnl), backgroundColor: trades.map(t => t.pnl >= 0 ? 'rgba(40,167,69,0.6)' : 'rgba(220,53,69,0.6)') }]},
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f8f9fa' }}}, scales: { x: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } }, y: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } } } }
+      });
+
+      // Drawdown from equity (% from peak)
+      const dd = [];
+      let peak = 0;
+      eqData.forEach(v => { peak = Math.max(peak, v); dd.push(peak ? -((peak - v) / peak) * 100 : 0); });
+      const ddCtx = document.getElementById('ddChart').getContext('2d');
+      if (window.ddChart) window.ddChart.destroy();
+      window.ddChart = new Chart(ddCtx, {
+        type: 'line',
+        data: { labels: dd.map((_, i) => i+1), datasets: [{ label: 'Drawdown %', data: dd, borderColor: '#ffc107', backgroundColor: 'rgba(255,193,7,0.1)', fill: true, borderWidth: 2 }]},
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f8f9fa' }}}, scales: { x: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } }, y: { ticks: { color: '#f8f9fa', callback: v => v + '%' }, grid: { color: '#30363d' } } } }
+      });
+
+      // Cumulative PnL (approx from trades)
+      const cum = [];
+      let s = 0;
+      trades.forEach(t => { s += t.pnl || 0; cum.push(s); });
+      const cumCtx = document.getElementById('cumChart').getContext('2d');
+      if (window.cumChart) window.cumChart.destroy();
+      window.cumChart = new Chart(cumCtx, {
+        type: 'line',
+        data: { labels: cum.map((_, i) => i+1), datasets: [{ label: 'PnL Acumulado', data: cum, borderColor: '#0dcaf0', backgroundColor: 'rgba(13,202,240,0.1)', fill: true, borderWidth: 2 }]},
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f8f9fa' }}}, scales: { x: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } }, y: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } } } }
+      });
+
+      // Histogram of trade PnL
+      const values = trades.map(t => t.pnl).filter(v => typeof v === 'number');
+      const bins = 12;
+      const minV = Math.min(0, ...values), maxV = Math.max(0, ...values);
+      const width = (maxV - minV) / (bins || 1) || 1;
+      const edges = Array.from({length: bins+1}, (_, i) => minV + i*width);
+      const counts = Array.from({length: bins}, () => 0);
+      values.forEach(v => { let idx = Math.floor((v - minV)/width); if (idx >= bins) idx = bins-1; if (idx < 0) idx = 0; counts[idx]++; });
+      const labels = counts.map((_, i) => `${edges[i].toFixed(2)}..${edges[i+1].toFixed(2)}`);
+      const histCtx = document.getElementById('histChart').getContext('2d');
+      if (window.histChart) window.histChart.destroy();
+      window.histChart = new Chart(histCtx, {
+        type: 'bar',
+        data: { labels, datasets: [{ label: 'Frecuencia', data: counts, backgroundColor: '#6c757d' }]},
+        options: { indexAxis: 'x', responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f8f9fa' }}}, scales: { x: { ticks: { color: '#f8f9fa', maxRotation: 45, minRotation: 45 }, grid: { color: '#30363d' } }, y: { ticks: { color: '#f8f9fa' }, grid: { color: '#30363d' } } } }
+      });
+
+      // Trades table (últimos 20)
+      const tbody = document.querySelector('#trades-table tbody');
+      tbody.innerHTML = '';
+      if (trades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-muted">Sin trades</td></tr>';
+      } else {
+        const last = trades.slice(-20);
+        last.forEach((t, i) => {
+          const cls = t.pnl >= 0 ? 'text-success' : 'text-danger';
+          const row = `<tr><td>${trades.length - last.length + i + 1}</td><td>${t.timestamp}</td><td>$${Number(t.price).toFixed(4)}</td><td class="${cls}">${Number(t.pnl).toFixed(2)}</td></tr>`;
+          tbody.insertAdjacentHTML('beforeend', row);
+        });
+      }
+
+      // Export helpers
+      window._bt_last_metrics = m;
+      document.getElementById('btn-export-json').onclick = () => {
+        const blob = new Blob([JSON.stringify(window._bt_last_metrics, null, 2)], {type: 'application/json'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'backtest_metrics.json'; a.click();
+      };
+      document.getElementById('btn-export-csv').onclick = () => {
+        const trs = window._bt_last_metrics?.trades || [];
+        const lines = ['index,timestamp,price,pnl'];
+        trs.forEach((t, i) => lines.push([i+1, t.timestamp, t.price, t.pnl].join(',')));
+        const blob = new Blob([lines.join('\n')], {type: 'text/csv'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'backtest_trades.csv'; a.click();
+      };
+      showNotification('Backtest completado', 'success');
+    }).catch(err => {
+      console.error(err); showNotification('Error de conexión', 'error'); document.getElementById('bt-results').innerText = 'Error de conexión';
+    });
+  });
+
+  // Limpiar resultados
+  document.getElementById('btn-clear').addEventListener('click', () => {
+    document.getElementById('bt-results').innerHTML = 'Sin resultados todavía.';
+    if (window.eqChart) { window.eqChart.destroy(); window.eqChart = null; }
+    if (window.pnlChart) { window.pnlChart.destroy(); window.pnlChart = null; }
+  if (window.ddChart) { window.ddChart.destroy(); window.ddChart = null; }
+  if (window.cumChart) { window.cumChart.destroy(); window.cumChart = null; }
+  if (window.histChart) { window.histChart.destroy(); window.histChart = null; }
+  const tbody = document.querySelector('#trades-table tbody'); if (tbody) tbody.innerHTML = '<tr><td colspan="4" class="text-muted">Sin datos</td></tr>';
+  });
+</script>
+{% endblock %}
+{% endblock %}

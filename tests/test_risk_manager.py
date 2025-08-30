@@ -1,3 +1,58 @@
+import pytest
+
+from risk_manager import RiskConfig, AccountState, RiskManager
+
+
+@pytest.fixture
+def base_account():
+    return AccountState(capital=10000.0, peak_balance_today=10000.0)
+
+
+def test_can_open_trade_exposure_limit(base_account):
+    cfg = RiskConfig(max_exposure_pct=0.1)
+    rm = RiskManager(cfg, base_account)
+
+    # can open a trade within exposure
+    assert rm.can_open_trade('BTCUSD', 500.0)
+
+    # opening large trade exceeding exposure
+    assert not rm.can_open_trade('BTCUSD', 2000.0)
+
+
+def test_concurrent_trades_limit(base_account):
+    cfg = RiskConfig(max_concurrent_trades=2)
+    rm = RiskManager(cfg, base_account)
+    rm.register_new_position('A', 100)
+    rm.register_new_position('B', 100)
+    assert not rm.can_open_trade('C', 50)
+
+
+def test_daily_drawdown_limit(base_account):
+    cfg = RiskConfig(max_daily_drawdown=0.01)  # 1%
+    base_account.realized_pnl_today = -200.0
+    base_account.peak_balance_today = 10000.0
+    rm = RiskManager(cfg, base_account)
+    # allowed_drawdown = -100. So -200 < -100 -> should be denied
+    assert not rm.can_open_trade('X', 10)
+
+
+def test_stop_loss_take_profit_evaluation(base_account):
+    cfg = RiskConfig(max_trade_loss=50.0, max_trade_profit=200.0)
+    rm = RiskManager(cfg, base_account)
+    res = rm.evaluate_trade_risk(entry_price=100.0, current_price=49.0, quantity=1)
+    assert res['stop_loss_hit'] is True
+    assert res['take_profit_hit'] is False
+
+
+def test_kill_switch_liquidation(base_account):
+    cfg = RiskConfig()
+    rm = RiskManager(cfg, base_account)
+    rm.register_new_position('A', 100)
+    rm.register_new_position('B', 200)
+    rm.engage_kill_switch()
+    assert not rm.can_open_trade('C', 10)
+    liquidated = rm.liquidate_all()
+    assert 'A' in liquidated and 'B' in liquidated
 # tests/test_risk_manager.py
 
 import pytest

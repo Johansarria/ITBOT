@@ -1,7 +1,7 @@
 import logging
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from logging.handlers import TimedRotatingFileHandler
 
 LOG_DIR = "logs"
@@ -14,16 +14,16 @@ class JsonFormatter(logging.Formatter):
     def format(self, record):
         # Create a base log object from the record
         log_object = {
-            "timestamp_utc": datetime.utcfromtimestamp(record.created).isoformat() + "Z",
+            "timestamp_utc": datetime.fromtimestamp(record.created, tz=timezone.utc).isoformat().replace("+00:00", "Z"),
             "level": record.levelname,
             "name": record.name,
             "message": record.getMessage(),
         }
 
-        # This is the magic part: if the log call includes `extra={'details': ...}`
-        # those details will be on the record object.
-        if hasattr(record, 'details') and isinstance(record.details, dict):
-            log_object.update(record.details)
+        # Soporte para campos extra en el log: extra={"details": {...}}
+        details = getattr(record, 'details', None)
+        if isinstance(details, dict):
+            log_object.update(details)
 
         # Add exception info if it exists
         if record.exc_info:
