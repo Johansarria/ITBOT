@@ -1,6 +1,7 @@
 # utils/binance_client.py
 import logging
 from binance import AsyncClient
+from typing import Any
 from binance.exceptions import BinanceAPIException, BinanceRequestException
 from config import settings  # Import the pydantic settings object
 import asyncio
@@ -48,9 +49,20 @@ async def close_binance_client():
     global _binance_client_instance
     if _binance_client_instance:
         logger.info("Cerrando cliente de Binance asíncrono...")
-        await _binance_client_instance.close()
-        _binance_client_instance = None
-        logger.info("Cliente de Binance cerrado exitosamente.")
+        try:
+            # Preferir close() si está disponible para compatibilidad con tests
+            client_any = _binance_client_instance  # type: ignore[assignment]
+            if hasattr(client_any, 'close') and callable(getattr(client_any, 'close')):
+                await getattr(client_any, 'close')()
+            elif hasattr(_binance_client_instance, 'close_connection') and callable(_binance_client_instance.close_connection):
+                await _binance_client_instance.close_connection()
+            else:
+                logger.warning("Instancia de cliente no tiene métodos de cierre conocidos.")
+        except Exception as e:
+            logger.warning(f"Error al cerrar conexión de Binance (puede ser normal): {e}")
+        finally:
+            _binance_client_instance = None
+            logger.info("Cliente de Binance cerrado exitosamente.")
 
 async def get_total_balance() -> float:
     """
@@ -62,11 +74,11 @@ async def get_total_balance() -> float:
     total_balance_usdt = 0.0
 
     try:
-        account_info = await asyncio.to_thread(client.get_account)
+        account_info = await client.get_account()
         balances = account_info["balances"]
 
         # Obtener todos los precios de los tickers para la conversión
-        prices = await asyncio.to_thread(client.get_all_tickers)
+        prices = await client.get_all_tickers()
         price_map = {p["symbol"]: float(p["price"]) for p in prices}
 
         for balance in balances:

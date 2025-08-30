@@ -123,9 +123,10 @@ async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tu
     # REGLA 1: Verificar Límite de Operaciones Concurrentes
     open_positions_df = get_open_positions()
     current_positions = len(open_positions_df)
-    if current_positions >= settings.RISK_MAX_CONCURRENT_TRADES:
-        reason = f"Límite de operaciones concurrentes ({settings.RISK_MAX_CONCURRENT_TRADES}) alcanzado."
-        logger.warning("TRADE_REJECTED", reason, details={"rule": "max_concurrent_trades", "limit": settings.RISK_MAX_CONCURRENT_TRADES, "current": current_positions})
+    params = get_effective_risk_params()
+    if current_positions >= params["RISK_MAX_CONCURRENT_TRADES"]:
+        reason = f"Límite de operaciones concurrentes ({params['RISK_MAX_CONCURRENT_TRADES']}) alcanzado."
+        logger.warning("TRADE_REJECTED", reason, details={"rule": "max_concurrent_trades", "limit": params['RISK_MAX_CONCURRENT_TRADES'], "current": current_positions})
         return False, reason
 
     # REGLA 2: Verificar Límite de Exposición Máxima
@@ -141,9 +142,9 @@ async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tu
             current_exposure_pct = (open_positions_value / total_capital) * 100
             new_trade_exposure_pct = (new_trade_size_usdt / total_capital) * 100
 
-            if current_exposure_pct + new_trade_exposure_pct > settings.RISK_MAX_EXPOSURE_PCT:
-                reason = f"Límite de exposición máxima ({settings.RISK_MAX_EXPOSURE_PCT}%) superado."
-                logger.warning("TRADE_REJECTED", reason, details={"rule": "max_exposure", "limit_pct": settings.RISK_MAX_EXPOSURE_PCT, "current_exposure_pct": current_exposure_pct, "new_trade_exposure_pct": new_trade_exposure_pct})
+            if current_exposure_pct + new_trade_exposure_pct > params["RISK_MAX_EXPOSURE_PCT"]:
+                reason = f"Límite de exposición máxima ({params['RISK_MAX_EXPOSURE_PCT']}%) superado."
+                logger.warning("TRADE_REJECTED", reason, details={"rule": "max_exposure", "limit_pct": params['RISK_MAX_EXPOSURE_PCT'], "current_exposure_pct": current_exposure_pct, "new_trade_exposure_pct": new_trade_exposure_pct})
                 return False, reason
     except Exception as e:
         logger.error("MAX_EXPOSURE_CHECK_ERROR", f"Error verificando la exposición máxima: {e}", exc_info=True)
@@ -151,11 +152,11 @@ async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tu
 
     # REGLA 3: Verificar Límite de Drawdown Máximo Diario
     daily_pnl_pct = await _get_daily_pnl_pct()
-    if daily_pnl_pct < -settings.RISK_MAX_DAILY_DRAWDOWN_PCT:
+    if daily_pnl_pct < -params["RISK_MAX_DAILY_DRAWDOWN_PCT"]:
         end_of_day = datetime.now(timezone.utc).replace(hour=23, minute=59, second=59, microsecond=999999)
         state_manager.set_state("system", "drawdown_pause_until", end_of_day.isoformat())
-        reason = f"Límite de drawdown diario ({settings.RISK_MAX_DAILY_DRAWDOWN_PCT}%) alcanzado. P&L de hoy: {daily_pnl_pct:.2f}%. Sistema en pausa."
-        logger.critical("MAX_DRAWDOWN_REACHED", reason, details={"rule": "max_daily_drawdown", "limit_pct": settings.RISK_MAX_DAILY_DRAWDOWN_PCT, "current_pnl_pct": daily_pnl_pct})
+        reason = f"Límite de drawdown diario ({params['RISK_MAX_DAILY_DRAWDOWN_PCT']}%) alcanzado. P&L de hoy: {daily_pnl_pct:.2f}%. Sistema en pausa."
+        logger.critical("MAX_DRAWDOWN_REACHED", reason, details={"rule": "max_daily_drawdown", "limit_pct": params['RISK_MAX_DAILY_DRAWDOWN_PCT'], "current_pnl_pct": daily_pnl_pct})
         return False, reason
 
     logger.info("TRADE_PERMISSION_GRANTED", "Verificación de permisos de operación superada.")
@@ -240,8 +241,61 @@ def _update_risk_state(updates: dict):
     sm = StateManager()
     sm.update_module_state("risk_manager", updates)
 
+def _get_custom_params_state() -> dict:
+    state = _get_risk_state()
+    return {
+        "active": state.get("custom_params_active", False),
+        "params": state.get("custom_params", {})
+    }
+
+def custom_risk_params_active() -> bool:
+    return bool(_get_custom_params_state().get("active", False))
+
+def get_effective_risk_params() -> dict:
+    """Devuelve los parámetros efectivos de riesgo (custom si activos, de settings si no)."""
+    custom = _get_custom_params_state()
+    params = {
+        "RISK_PER_TRADE_STOP_LOSS_PCT": float(getattr(settings, "RISK_PER_TRADE_STOP_LOSS_PCT", 2.0)),
+        "RISK_PER_TRADE_TAKE_PROFIT_PCT": float(getattr(settings, "RISK_PER_TRADE_TAKE_PROFIT_PCT", 4.0)),
+        "RISK_MAX_CONCURRENT_TRADES": int(getattr(settings, "RISK_MAX_CONCURRENT_TRADES", 4)),
+        "RISK_MAX_EXPOSURE_PCT": float(getattr(settings, "RISK_MAX_EXPOSURE_PCT", 30.0)),
+        "RISK_MAX_DAILY_DRAWDOWN_PCT": float(getattr(settings, "RISK_MAX_DAILY_DRAWDOWN_PCT", 3.0)),
+        "DEFAULT_RISK_PERCENTAGE": float(getattr(settings, "DEFAULT_RISK_PERCENTAGE", 1.0)),
+    }
+    if custom.get("active") and isinstance(custom.get("params"), dict):
+        params.update({k: v for k, v in custom["params"].items() if k in params and v is not None})
+    return params
+
+def set_custom_risk_params(new_params: dict):
+    """Activa parámetros personalizados y los persiste en el estado."""
+    allowed = {"RISK_PER_TRADE_STOP_LOSS_PCT", "RISK_PER_TRADE_TAKE_PROFIT_PCT", "RISK_MAX_CONCURRENT_TRADES", "RISK_MAX_EXPOSURE_PCT", "RISK_MAX_DAILY_DRAWDOWN_PCT", "DEFAULT_RISK_PERCENTAGE"}
+    clean = {k: new_params[k] for k in new_params.keys() if k in allowed}
+    state = _get_risk_state()
+    state["custom_params_active"] = True
+    state["custom_params"] = {**state.get("custom_params", {}), **clean}
+    _update_risk_state(state)
+    logger.info("CUSTOM_RISK_PARAMS_SET", "Parámetros de riesgo personalizados activados.", details=clean)
+    # Si no estamos en modo manual (riesgo forzado), sincronizar riesgo_actual con el base efectivo
+    try:
+        if not riesgo_forzado_activo():
+            params = get_effective_risk_params()
+            _update_risk_state({
+                "riesgo_actual": params["DEFAULT_RISK_PERCENTAGE"] / 100
+            })
+            logger.info("CURRENT_RISK_SYNCED", "Riesgo actual sincronizado con el base efectivo tras cambio de parámetros personalizados.", details={"riesgo_actual_pct": params["DEFAULT_RISK_PERCENTAGE"]})
+    except Exception as e:
+        logger.warning("CURRENT_RISK_SYNC_FAIL", f"No se pudo sincronizar riesgo_actual: {e}")
+
+def reset_custom_risk_params():
+    state = _get_risk_state()
+    state["custom_params_active"] = False
+    state["custom_params"] = {}
+    _update_risk_state(state)
+    logger.info("CUSTOM_RISK_PARAMS_RESET", "Parámetros de riesgo personalizados desactivados. Volviendo a valores por defecto")
+
 def obtener_riesgo_actual() -> float:
-    return _get_risk_state().get("riesgo_actual", settings.DEFAULT_RISK_PERCENTAGE / 100)
+    params = get_effective_risk_params()
+    return _get_risk_state().get("riesgo_actual", params["DEFAULT_RISK_PERCENTAGE"] / 100)
 
 def riesgo_forzado_activo() -> bool:
     return _get_risk_state().get("riesgo_forzado", False)
@@ -257,8 +311,9 @@ def activar_riesgo_forzado(porcentaje: float):
     logger.info("MANUAL_RISK_ACTIVATED", f"Riesgo forzado activado al {porcentaje}%.", details={"percentage": porcentaje})
 
 def restaurar_riesgo_automatico():
+    params = get_effective_risk_params()
     updates = {
-        "riesgo_actual": settings.DEFAULT_RISK_PERCENTAGE / 100,
+        "riesgo_actual": params["DEFAULT_RISK_PERCENTAGE"] / 100,
         "riesgo_forzado": False,
         "tiempo_riesgo_forzado": None,
         "ganancias_riesgo_forzado": 0.0,

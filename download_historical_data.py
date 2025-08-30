@@ -60,8 +60,8 @@ async def download_and_save_klines(
     logger.info(f"Iniciando descarga de datos históricos para {symbol} - {interval} desde {current_start_str} hasta {end_str if end_str else 'ahora'}.")
 
     try:
-        client_instance = get_binance_client()
-        klines = await asyncio.to_thread(client_instance.get_historical_klines,
+        client_instance = await get_binance_client()
+        klines = await client_instance.get_historical_klines(
                                         symbol=symbol,
                                         interval=interval,
                                         start_str=current_start_str, # Usar el start_str ajustado

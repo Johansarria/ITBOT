@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   redis:
     image: "redis:alpine"
@@ -22,15 +20,20 @@ services:
     container_name: itbot_postgres_db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD} # Explicitly set password from .env
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Explicitly set password from .env
     volumes:
       - postgres_data:/var/lib/postgresql/data # Persistent data storage
     ports:
       - "5432:5432" # Optional: Expose port to host for direct access (e.g., for pgAdmin)
     networks:
       - bot_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   listener:
     container_name: itbot_listener
@@ -42,6 +45,7 @@ services:
       - data-volume:/app/data
       - logs-volume:/app/logs
       - storage-volume:/app/storage
+      - ./assets:/app/assets:ro
     depends_on:
       - redis
       - db # Add dependency on PostgreSQL
@@ -54,6 +58,50 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       REDIS_HOST: redis # Explicitly set Redis host for inter-container communication
+      # Ruta opcional a un banner para mostrar en Telegram (/app/...)
+      BANNER_IMAGE_PATH: "/app/assets/logo.png"
+  # Secrets (store in .env, do NOT commit):
+  # TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+  # TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+  # ADMIN_TELEGRAM_ID: ${ADMIN_TELEGRAM_ID}
+  # BINANCE_API_KEY: ${BINANCE_API_KEY}
+  # BINANCE_SECRET_KEY: ${BINANCE_SECRET_KEY}
+    networks:
+      - bot_network
+
+  bot:
+    container_name: itbot_main
+    build: .
+    command: python run_bot.py
+    env_file:
+      - .env
+    volumes:
+      - data-volume:/app/data
+      - logs-volume:/app/logs
+      - storage-volume:/app/storage
+      - ./data/analisis:/app/data/analisis
+      - ./data/dynamic_system:/app/data/dynamic_system
+    depends_on:
+      - redis
+      - db
+      - listener
+    restart: unless-stopped
+    mem_limit: 2g # Más memoria para el análisis dinámico
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      # Controla modo producción / paper trading desde .env (default: false -> paper)
+      PRODUCTION_MODE: "${PRODUCTION_MODE:-false}"
+      DYNAMIC_PAIR_SELECTION_ENABLED: "true"
+    # Secrets (store in .env, do NOT commit):
+    # TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+    # TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+    # BINANCE_API_KEY: ${BINANCE_API_KEY}
+    # BINANCE_SECRET_KEY: ${BINANCE_SECRET_KEY}
     networks:
       - bot_network
 
@@ -78,6 +126,47 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+  # Secrets (store in .env, do NOT commit):
+  # TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+  # TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+    networks:
+      - bot_network
+
+  web:
+    container_name: itbot_web
+    build: .
+    command: python web/app.py
+    env_file:
+      - .env
+    volumes:
+      - data-volume:/app/data
+      - logs-volume:/app/logs
+      - storage-volume:/app/storage
+      - ./data/analisis:/app/data/analisis
+      - ./data/dynamic_system:/app/data/dynamic_system
+      - ./assets:/app/assets:ro
+    depends_on:
+      - redis
+      - db
+      - listener
+      - bot
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8080}:8080"
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      WEB_HOST: "${WEB_HOST:-0.0.0.0}"
+      WEB_PORT: "${WEB_PORT:-8080}"
+      FLASK_SECRET_KEY: "${FLASK_SECRET_KEY:-itbot-web-secret-2024}"
+      FLASK_DEBUG: "${FLASK_DEBUG:-false}"
+      # Ruta opcional a un banner para mostrar en el panel web (/app/...) 
+      BANNER_IMAGE_PATH: "/app/assets/logo.png"
     networks:
       - bot_network
 

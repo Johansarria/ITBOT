@@ -1,37 +1,11 @@
-# strategies/strategy_manager.py
+    # strategies/strategy_manager.py
 
 import os
 import importlib.util
 import logging
 import asyncio
+import inspect
 from typing import Dict, Any, List, Type, Optional
-
-from strategies.base_strategy import BaseStrategy
-from strategies.backtester import Backtester
-from utils.technical_analysis import get_historical_klines
-from utils.risk_manager import _OPTIMIZED_THRESHOLDS # ADDED: Import optimized thresholds
-
-logger = logging.getLogger(__name__)
-
-import os
-import importlib.util
-import logging
-import asyncio
-from typing import Dict, Any, List, Type
-from datetime import datetime, timedelta
-
-from strategies.base_strategy import BaseStrategy
-from strategies.backtester import Backtester, generate_mock_data
-from utils.technical_analysis import get_historical_klines
-from utils.risk_manager import _OPTIMIZED_THRESHOLDS
-
-logger = logging.getLogger(__name__)
-
-import os
-import importlib.util
-import logging
-import asyncio
-from typing import Dict, Any, List, Type
 from datetime import datetime, timedelta
 
 from strategies.base_strategy import BaseStrategy
@@ -50,30 +24,45 @@ class StrategyManager:
         Devuelve un resumen con la decisión y score de cada estrategia y la recomendación final.
         """
         # Obtener datos históricos una sola vez
-        from utils.technical_analysis import get_historical_klines
         historical_data = await get_historical_klines(symbol, interval, limit)
         if historical_data.empty:
             return {"error": "No se pudieron obtener datos históricos"}
 
-        results = {}
+        results: Dict[str, Any] = {}
         best_score = float('-inf')
-        best_strategy = None
-        best_decision = None
+        best_strategy: Optional[str] = None
+        best_decision: Optional[str] = None
         for name, strategy in self._strategies.items():
             try:
-                # Soporta tanto estrategias async como sync
-                if hasattr(strategy, 'analyze'):
-                    import inspect
-                    if inspect.iscoroutinefunction(strategy.analyze):
-                        result = await strategy.analyze(historical_data.copy())
-                    else:
-                        result = strategy.analyze(historical_data.copy())
-                    results[name] = result
-                    score = result.get("score", 0)
-                    if score > best_score:
-                        best_score = score
-                        best_strategy = name
-                        best_decision = result.get("decision")
+                analyze_sig = inspect.signature(strategy.analyze)
+                kwargs = {}
+                # Pasar solo los parámetros que la estrategia declara (siempre por nombre)
+                df_param_name = next((k for k in ['df', 'data', 'df_klines', 'ohlcv', 'klines', 'candles'] if k in analyze_sig.parameters), None)
+                if df_param_name:
+                    kwargs[df_param_name] = historical_data.copy()
+                if 'current_index' in analyze_sig.parameters:
+                    kwargs['current_index'] = len(historical_data) - 1
+                if 'symbol' in analyze_sig.parameters:
+                    kwargs['symbol'] = symbol
+                if 'interval' in analyze_sig.parameters:
+                    kwargs['interval'] = interval
+
+                call = strategy.analyze(**kwargs)
+                if inspect.iscoroutine(call):
+                    result = await call
+                else:
+                    result = call
+
+                # Asegurar que result sea un dict y no una coroutina
+                if inspect.iscoroutine(result):
+                    result = await result
+
+                results[name] = result
+                score = result.get("score", 0) if isinstance(result, dict) else 0
+                if score > best_score:
+                    best_score = score
+                    best_strategy = name
+                    best_decision = result.get("decision")
             except Exception as e:
                 results[name] = {"error": str(e)}
 
@@ -145,13 +134,16 @@ class StrategyManager:
                                 and attribute is not BaseStrategy
                             ):
                                 try:
-                                    # Instanciar con o sin argumentos según el constructor
+                                    # Preferir instanciación con (name, description) si el constructor lo soporta
                                     try:
-                                        strategy_instance = attribute()
-                                    except TypeError:
                                         strategy_instance = attribute(name=attribute.__name__, description=attribute.__doc__ or "")
-                                    self._strategies[strategy_instance.name] = strategy_instance
-                                    logger.info(f"Estrategia descubierta: {strategy_instance.name}")
+                                    except TypeError:
+                                        # Fallback: instanciar sin argumentos (las estrategias suelen llamar a super().__init__ internamente)
+                                        strategy_instance = attribute()
+                                    # Registrar estrategia si expone 'name'
+                                    name = getattr(strategy_instance, 'name', None) or attribute.__name__
+                                    self._strategies[name] = strategy_instance
+                                    logger.info(f"Estrategia descubierta: {name}")
                                 except Exception as e:
                                     logger.exception(f"Error al instanciar la estrategia {attribute.__name__}: {e}")
                 except Exception as e:
@@ -161,7 +153,7 @@ class StrategyManager:
         """Ejecuta un backtest para cada estrategia y actualiza la caché de rendimiento."""
         logger.info("Iniciando actualización de caché de rendimiento de estrategias...")
         try:
-            historical_data = await asyncio.wait_for(get_historical_klines(symbol, interval, limit), timeout=30.0)
+            historical_data = await get_historical_klines(symbol, interval, limit)
             if historical_data.empty:
                 raise ValueError("Datos históricos vacíos desde la API.")
             logger.info("Datos reales obtenidos para el backtesting.")

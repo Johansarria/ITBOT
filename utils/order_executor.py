@@ -135,8 +135,10 @@ async def mostrar_estado_riesgo(bot_instance: Optional["Bot"], chat_id: Optional
 @retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)
 async def get_symbol_info(symbol: str) -> dict:
     client = await get_binance_client()
+    # Obtener información de intercambio en un hilo para no bloquear el loop
     exchange_info = await asyncio.to_thread(client.get_exchange_info)
-    for s in exchange_info["symbols"]:
+    symbols = exchange_info.get("symbols", []) if isinstance(exchange_info, dict) else []
+    for s in symbols:
         if s["symbol"] == symbol:
             return s
     raise ValueError(f"Símbolo {symbol} no encontrado.")
@@ -229,11 +231,15 @@ async def evaluar_y_ejecutar_operacion(
         StateManagerRef = state_manager_module.StateManager
         sm = StateManagerRef() if isinstance(StateManagerRef, type) else StateManagerRef
 
-        logger.info("ORDER_EVALUATION_START", f"Iniciando evaluación y ejecución para: {resultado_analisis.get('symbol', 'N/A')}", details=resultado_analisis)
+        logger.info(
+            "ORDER_EVALUATION_START",
+            f"Iniciando evaluación y ejecución para: {resultado_analisis.get('symbol', 'N/A')}",
+            details=resultado_analisis,
+        )
         client = await get_binance_client()
 
         # Determinar modo efectivo
-        default_mode = getattr(config, "MODE", "live")
+        default_mode = getattr(getattr(config, 'settings', object()), "MODE", "LIVE")
         session_mode_raw = sm.get_state("session", "mode", default_mode)
         session_mode_val = session_mode_raw if isinstance(session_mode_raw, str) else default_mode
         session_mode_norm = session_mode_val.strip().lower() if session_mode_val else "simulated"
@@ -250,7 +256,11 @@ async def evaluar_y_ejecutar_operacion(
         else:
             trade_mode_actual = "SIMULATED"
 
-        logger.info("EFFECTIVE_TRADE_MODE", f"Modo de operación efectivo: {trade_mode_actual}", details={"mode": trade_mode_actual})
+        logger.info(
+            "EFFECTIVE_TRADE_MODE",
+            f"Modo de operación efectivo: {trade_mode_actual}",
+            details={"mode": trade_mode_actual},
+        )
 
         # Balance
         balance_info = await retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)(
@@ -267,7 +277,11 @@ async def evaluar_y_ejecutar_operacion(
         # Info de símbolo
         symbol_info = await get_symbol_info(symbol)
         if not symbol_info:
-            logger.error("SYMBOL_INFO_FETCH_ERROR", f"No se pudo obtener información del símbolo para {symbol}.", details={"symbol": symbol})
+            logger.error(
+                "SYMBOL_INFO_FETCH_ERROR",
+                f"No se pudo obtener información del símbolo para {symbol}.",
+                details={"symbol": symbol},
+            )
             await safe_send_message(bot_instance, chat_id, f"❌ Error: No se pudo obtener información del símbolo {symbol}.")
             return "Error: Símbolo no encontrado."
 
@@ -280,17 +294,33 @@ async def evaluar_y_ejecutar_operacion(
 
         min_notional = float(next((f for f in symbol_info.get("filters", []) if f.get("filterType") == "NOTIONAL"), {}).get("minNotional", 0.0))
         if cantidad_usdt < min_notional:
-            logger.warning("TRADE_SIZE_ADJUSTED_MIN_NOTIONAL", f"Cantidad en USDT ({cantidad_usdt}) ajustada a minNotional ({min_notional}).", details={"calculated_usdt": cantidad_usdt, "min_notional": min_notional})
+            logger.warning(
+                "TRADE_SIZE_ADJUSTED_MIN_NOTIONAL",
+                f"Cantidad en USDT ({cantidad_usdt}) ajustada a minNotional ({min_notional}).",
+                details={"calculated_usdt": cantidad_usdt, "min_notional": min_notional},
+            )
             cantidad_usdt = min_notional
 
         if cantidad_usdt > balance:
-            logger.warning("INSUFFICIENT_BALANCE", "Balance insuficiente para operar.", details={"required_usdt": cantidad_usdt, "available_usdt": balance})
-            await safe_send_message(bot_instance, chat_id, f"❌ Error: Balance insuficiente para operar. Necesitas al menos {cantidad_usdt:.2f} USDT.")
+            logger.warning(
+                "INSUFFICIENT_BALANCE",
+                "Balance insuficiente para operar.",
+                details={"required_usdt": cantidad_usdt, "available_usdt": balance},
+            )
+            await safe_send_message(
+                bot_instance,
+                chat_id,
+                f"❌ Error: Balance insuficiente para operar. Necesitas al menos {cantidad_usdt:.2f} USDT.",
+            )
             return "Error: Balance insuficiente."
 
         tipo_operacion = "BUY" if decision == "BUY" else ("SELL" if decision == "SELL" else None)
         if not tipo_operacion:
-            logger.info("NO_TRADE_DECISION", f"Decisión del análisis ({decision}) no recomienda operar.", details={"decision": decision})
+            logger.info(
+                "NO_TRADE_DECISION",
+                f"Decisión del análisis ({decision}) no recomienda operar.",
+                details={"decision": decision},
+            )
             if getattr(config, "VERBOSE_NOTIFICATIONS", False):
                 await safe_send_message(bot_instance, chat_id, f"ℹ️ Decisión del análisis ({decision}) no recomienda operar.")
             return "No se ejecutó operación."
@@ -307,7 +337,9 @@ async def evaluar_y_ejecutar_operacion(
 
         # Cantidad filtrada
         cantidad_token_bruta = cantidad_usdt / precio_actual
-        cantidad_token, precio_actual_filtrado, min_notional_val, step_size_val, price_tick_size_val = apply_filters(cantidad_token_bruta, precio_actual, symbol_info)
+        cantidad_token, precio_actual_filtrado, min_notional_val, step_size_val, price_tick_size_val = apply_filters(
+            cantidad_token_bruta, precio_actual, symbol_info
+        )
 
         min_notional_filter = next((f for f in symbol_info.get("filters", []) if f.get("filterType") == "MIN_NOTIONAL"), None)
         if min_notional_filter and cantidad_token * precio_actual_filtrado < float(min_notional_filter.get("minNotional", 0.0)) - 1e-9:
@@ -334,7 +366,7 @@ async def evaluar_y_ejecutar_operacion(
                 "trade_mode": trade_mode_actual,
                 "take_profit_pct": take_profit,
                 "stop_loss_pct": stop_loss,
-            }
+            },
         )
 
         entry_order_id = f"sim_{operation_id}"
@@ -343,13 +375,17 @@ async def evaluar_y_ejecutar_operacion(
         final_entry_price = precio_actual_filtrado
         slippage_pct = 0.0
 
-        # Enviar advertencia si estaba en LIVE bloqueado, pero solo ahora que pasamos los chequeos previos
+        # Enviar advertencia si estaba en LIVE bloqueado
         if warn_live_locked:
-            await safe_send_message(bot_instance, chat_id, "⚠️ El bot está en modo LIVE pero no ha sido desbloqueado. La operación se realizará en modo SIMULADO.")
+            await safe_send_message(
+                bot_instance, chat_id, "⚠️ El bot está en modo LIVE pero no ha sido desbloqueado. La operación se realizará en modo SIMULADO."
+            )
 
         if trade_mode_actual == "REAL":
             logger.warning("EXECUTION_MODE_REAL", "Ejecutando orden en MODO REAL.")
-            await safe_send_message(bot_instance, chat_id, f"⚠️ Ejecutando orden de entrada REAL: {tipo_operacion} {cantidad_token} {symbol}...")
+            await safe_send_message(
+                bot_instance, chat_id, f"⚠️ Ejecutando orden de entrada REAL: {tipo_operacion} {cantidad_token} {symbol}..."
+            )
 
             try:
                 entrada_res = await retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)(
@@ -378,11 +414,15 @@ async def evaluar_y_ejecutar_operacion(
             if 'cummulativeQuoteQty' in orden_entrada and 'executedQty' in orden_entrada and float(orden_entrada['executedQty']) > 0:
                 final_entry_price = float(orden_entrada['cummulativeQuoteQty']) / float(orden_entrada['executedQty'])
             else:
-                logger.warning("REAL_ENTRY_PRICE_FALLBACK", "No se pudo calcular precio de entrada real. Usando precio de ticker.", details=orden_entrada)
+                logger.warning(
+                    "REAL_ENTRY_PRICE_FALLBACK",
+                    "No se pudo calcular precio de entrada real. Usando precio de ticker.",
+                    details=orden_entrada,
+                )
 
             price_tick_size = next((f['tickSize'] for f in symbol_info.get('filters', []) if f.get('filterType') == 'PRICE_FILTER'), '0.0')
 
-            # Leer SL/TP por defecto de la config, con fallback seguro cuando settings sea un mock
+            # SL/TP predeterminados
             if stop_loss is not None:
                 sl_pct = float(stop_loss)
             else:
@@ -407,7 +447,9 @@ async def evaluar_y_ejecutar_operacion(
                 tp_price = _round_to_tick_size(final_entry_price * (1 - tp_pct / 100), price_tick_size)
                 oco_side = 'BUY'
 
-            await safe_send_message(bot_instance, chat_id, f"… colocando orden OCO (SL: {sl_price:.4f}, TP: {tp_price:.4f})...")
+            await safe_send_message(
+                bot_instance, chat_id, f"… colocando orden OCO (SL: {sl_price:.4f}, TP: {tp_price:.4f})..."
+            )
             oco_res = await retry((BinanceAPIException, BinanceRequestException), tries=3, delay=2, logger=logger)(
                 lambda: asyncio.to_thread(
                     client.create_oco_order,
@@ -422,37 +464,61 @@ async def evaluar_y_ejecutar_operacion(
             logger.info("OCO_ORDER_SUCCESS", "Orden OCO (SL/TP) colocada.", details=orden_oco)
             oco_order_list_id = orden_oco.get('orderListId')
 
-            mensaje_ejecucion = f"✅ ORDEN REAL EJECUTADA y PROTEGIDA (OCO):\n- Entrada: {tipo_operacion} {cantidad_token} {symbol} @ ~{final_entry_price:.4f}\n- SL: {sl_price:.4f}\n- TP: {tp_price:.4f}"
-
+            mensaje_ejecucion = (
+                f"✅ ORDEN REAL EJECUTADA y PROTEGIDA (OCO):\n- Entrada: {tipo_operacion} {cantidad_token} {symbol} @ ~{final_entry_price:.4f}\n- SL: {sl_price:.4f}\n- TP: {tp_price:.4f}"
+            )
         else:
             logger.info("SIMULATED_TRADE_EXECUTION", "Ejecutando orden en MODO SIMULADO.")
             slippage_pct = random.uniform(-0.05, 0.05)
             final_entry_price = precio_actual * (1 + slippage_pct / 100)
             fee_pct = 0.1
             fee_usdt = cantidad_usdt * fee_pct / 100
-            mensaje_ejecucion = f"⚙️ ORDEN SIMULADA: {tipo_operacion} {cantidad_token} {symbol} a {final_entry_price:.2f} USDT (slippage {slippage_pct:+.3f}%, fee {fee_usdt:.2f} USDT)."
+            mensaje_ejecucion = (
+                f"⚙️ ORDEN SIMULADA: {tipo_operacion} {cantidad_token} {symbol} a {final_entry_price:.2f} USDT (slippage {slippage_pct:+.3f}%, fee {fee_usdt:.2f} USDT)."
+            )
             ganancia_pct_operacion = random.uniform(-3, 5) - fee_pct
             registrar_resultado_operacion(ganancia_pct_operacion)
 
         log_data = {
-            "operation_id": operation_id, "timestamp_open": timestamp, "timestamp_close": None,
-            "symbol": symbol, "side": tipo_operacion, "entry_price": final_entry_price,
-            "exit_price": None, "take_profit": take_profit, "stop_loss": stop_loss,
-            "size_usdt": cantidad_usdt, "risk_percent": riesgo_pct, "mode": trade_mode_actual,
-            "pnl_usdt": None, "pnl_percent": ganancia_pct_operacion, "reason_open": decision,
-            "reason_close": None, "market_score_open": score_ml, "market_score_close": None,
-            "version_bot": "1.0.0", "notes": f"slippage={slippage_pct:.3f}%", "balance_usdt_al_abrir": balance,
-            "escudo_activo_al_abrir": escudo_activo(), "tipo_escudo_al_abrir": escudo_activo(),
-            "riesgo_forzado_al_abrir": riesgo_forzado_activo(), "cantidad_token_operada": cantidad_token,
-            "min_notional_filter": min_notional_val, "step_size_filter": step_size_val,
-            "price_tick_size_filter": price_tick_size_val, "slippage_apertura_pct": slippage_pct,
-            "order_id_binance": entry_order_id, "order_status_binance": entry_order_status,
-            "oco_order_list_id": oco_order_list_id
+            "operation_id": operation_id,
+            "timestamp_open": timestamp,
+            "timestamp_close": None,
+            "symbol": symbol,
+            "side": tipo_operacion,
+            "entry_price": final_entry_price,
+            "exit_price": None,
+            "take_profit": take_profit,
+            "stop_loss": stop_loss,
+            "size_usdt": cantidad_usdt,
+            "risk_percent": riesgo_pct,
+            "mode": trade_mode_actual,
+            "pnl_usdt": None,
+            "pnl_percent": ganancia_pct_operacion,
+            "reason_open": decision,
+            "reason_close": None,
+            "market_score_open": score_ml,
+            "market_score_close": None,
+            "version_bot": "1.0.0",
+            "notes": f"slippage={slippage_pct:.3f}%",
+            "balance_usdt_al_abrir": balance,
+            "escudo_activo_al_abrir": escudo_activo(),
+            "tipo_escudo_al_abrir": escudo_activo(),
+            "riesgo_forzado_al_abrir": riesgo_forzado_activo(),
+            "cantidad_token_operada": cantidad_token,
+            "min_notional_filter": min_notional_val,
+            "step_size_filter": step_size_val,
+            "price_tick_size_filter": price_tick_size_val,
+            "slippage_apertura_pct": slippage_pct,
+            "order_id_binance": entry_order_id,
+            "order_status_binance": entry_order_status,
+            "oco_order_list_id": oco_order_list_id,
         }
         await registrar_operacion(bot_instance, chat_id, log_data)
 
         if trade_mode_actual == "SIMULATED":
-            await safe_send_message(bot_instance, chat_id, mensaje_ejecucion + f" Resultado simulado: {ganancia_pct_operacion:+.2f}%")
+            await safe_send_message(
+                bot_instance, chat_id, mensaje_ejecucion + f" Resultado simulado: {ganancia_pct_operacion:+.2f}%"
+            )
         else:
             await safe_send_message(bot_instance, chat_id, mensaje_ejecucion)
         await mostrar_estado_riesgo(bot_instance, chat_id)

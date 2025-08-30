@@ -1,7 +1,7 @@
 # database/models.py
 
 from sqlalchemy import Column, String, Numeric, TIMESTAMP, BOOLEAN, BIGINT, text, TEXT, Integer
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 

@@ -156,7 +156,7 @@ def default_mocks():
 
     with patch('utils.order_executor.verificar_permiso_de_operacion', new_callable=AsyncMock, return_value=(True, "")) as p1, \
          patch('utils.order_executor.get_binance_client', new_callable=AsyncMock, return_value=mock_client) as p2, \
-         patch('utils.order_executor.state_manager') as p3, \
+         patch('utils.state_manager.StateManager') as mock_state_manager_instance, \
          patch('utils.order_executor.obtener_riesgo_actual', return_value=0.01) as p4, \
          patch('utils.order_executor.escudo_activo', return_value="ninguno") as p5, \
          patch('utils.order_executor.get_symbol_info', new_callable=AsyncMock, return_value={"filters": []}) as p6, \
@@ -168,11 +168,11 @@ def default_mocks():
          patch('utils.order_executor.config') as mock_config:
 
         # Set default values for the mocked config module
-        mock_config.MODE = "SIMULATED"
+        mock_config.MODE = "LIVE"
         mock_config.VERBOSE_NOTIFICATIONS = False
 
         yield {
-            "verificar_permiso": p1, "get_client": p2, "client": mock_client, "state_manager": p3,
+            "verificar_permiso": p1, "get_client": p2, "client": mock_client, "state_manager": mock_state_manager_instance,
             "riesgo_actual": p4, "escudo": p5, "symbol_info": p6,
             "apply_filters": p7, "registrar": p8, "mostrar_estado": p9,
             "safe_send": p10, "riesgo_ml": p11, "config": mock_config
@@ -339,17 +339,21 @@ async def test_registrar_operacion(tmp_path):
     data = {"operation_id": "1", "symbol": "BTCUSDT"}
 
     with patch('utils.order_executor.OPERATIONS_LOG', str(temp_log_path)), \
-         patch('utils.order_executor.log_operation_to_db') as mock_log_db, \
-         patch('utils.order_executor.state_manager') as mock_sm:
+         patch('utils.order_executor.log_operation_to_db') as mock_log_db:
+
+        # Create a mock state_manager instance for this test
+        mock_sm = MagicMock()
+        mock_sm.get_state.side_effect = lambda *a, **k: 0
+        mock_sm.set_state.return_value = None
 
         # First call, should create the file
-        await registrar_operacion(bot, chat_id, data)
+        await registrar_operacion(bot, chat_id, data, mock_sm)
         assert temp_log_path.exists()
         df = pd.read_csv(temp_log_path)
         assert len(df) == 1
 
         # Second call, should append
-        await registrar_operacion(bot, chat_id, {"operation_id": "2", "symbol": "ETHUSDT"})
+        await registrar_operacion(bot, chat_id, {"operation_id": "2", "symbol": "ETHUSDT"}, mock_sm)
         df = pd.read_csv(temp_log_path)
         assert len(df) == 2
 
@@ -408,9 +412,14 @@ async def test_retry_decorator():
 async def test_registrar_operacion_no_bot():
     """Test registrar_operacion in no-bot mode."""
     from utils.order_executor import registrar_operacion
+    from utils.state_manager import StateManager # Import StateManager
+    mock_state_manager = MagicMock(spec=StateManager) # Create a mock StateManager instance
+    mock_state_manager.get_state.side_effect = lambda *a, **k: 0
+    mock_state_manager.set_state.return_value = None
+
     with patch('utils.order_executor.log_operation_to_db') as mock_log_db, \
          patch('utils.order_executor.send_message') as mock_send:
-        await registrar_operacion(None, None, {})
+        await registrar_operacion(None, None, {}, mock_state_manager) # Pass mock_state_manager
         mock_log_db.assert_called_once()
         mock_send.assert_not_called()
 

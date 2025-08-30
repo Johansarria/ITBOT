@@ -240,6 +240,23 @@ class Backtester:
 
         logger.info(f"Backtest completado. Retorno Total: {total_return:.2f}%")
 
+        # Serie de equity (normalizada a 100 al inicio para gráficos)
+        equity_series = []
+        if self.balance_history:
+            base = self.balance_history[0] if self.balance_history[0] != 0 else 1.0
+            for v in self.balance_history:
+                equity_series.append(round((v / base) * 100, 2))
+
+        # Resumen compacto de trades (para tablas/gráficos)
+        trade_summ = []
+        for t in self.trades:
+            if t["type"].startswith("SELL") and "profit_loss" in t:
+                trade_summ.append({
+                    "timestamp": str(t["timestamp"]),
+                    "pnl": round(float(t["profit_loss"]), 4),
+                    "price": round(float(t["price"]), 6)
+                })
+
         return {
             "total_return_pct": round(total_return, 2),
             "total_trades": total_trades,
@@ -249,7 +266,9 @@ class Backtester:
             "initial_balance": self.initial_balance,
             "final_balance": round(final_balance, 2),
             "max_drawdown_pct": max_drawdown,
-            "sharpe_ratio": sharpe_ratio
+            "sharpe_ratio": sharpe_ratio,
+            "equity": equity_series,
+            "trades": trade_summ
         }
 
 if __name__ == "__main__":

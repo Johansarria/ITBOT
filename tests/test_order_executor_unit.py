@@ -20,20 +20,24 @@ async def test_registrar_operacion_crea_archivo(tmp_path, monkeypatch):
     monkeypatch.setattr(order_executor, "OPERATIONS_LOG", str(tmp_path / "ops.csv"))
     # Mock send_message para no enviar nada real
     monkeypatch.setattr(order_executor, "send_message", AsyncMock())
-    # Mock state_manager para no afectar estado global
-    class DummyStateManager:
-        def get_state(self, *a, **k): return 0
-        def set_state(self, *a, **k): pass
-    monkeypatch.setattr(order_executor, "state_manager", DummyStateManager())
     # Mock log_operation_to_db to prevent actual DB connection
     monkeypatch.setattr("utils.order_executor.log_operation_to_db", MagicMock())
-    data = {"a": 1, "b": 2}
-    await order_executor.registrar_operacion(MagicMock(), 123, data)
-    # Verifica que el archivo se creó y contiene los datos
-    import pandas as pd
-    df = pd.read_csv(tmp_path / "ops.csv")
-    assert df.iloc[0]["a"] == 1
-    assert df.iloc[0]["b"] == 2
+
+    # Correctly patch StateManager class and its instance methods
+    with patch('utils.state_manager.StateManager') as MockStateManagerClass:
+        mock_state_manager_instance = MagicMock()
+        mock_state_manager_instance.get_state.side_effect = lambda *a, **k: 0
+        mock_state_manager_instance.set_state.return_value = None
+        MockStateManagerClass.return_value = mock_state_manager_instance
+
+        data = {"a": 1, "b": 2}
+        await order_executor.registrar_operacion(MagicMock(), 123, data, mock_state_manager_instance)
+
+        # Verifica que el archivo se creó y contiene los datos
+        import pandas as pd
+        df = pd.read_csv(tmp_path / "ops.csv")
+        assert df.iloc[0]["a"] == 1
+        assert df.iloc[0]["b"] == 2
 
 @pytest.mark.asyncio
 async def test_mostrar_estado_riesgo_no_envia(monkeypatch):
