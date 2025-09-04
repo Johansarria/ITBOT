@@ -1,0 +1,130 @@
+{
+  "timestamp": "2025-09-01T03:00:47.329595",
+  "total_tests": 20,
+  "passed": 18,
+  "failed": 2,
+  "success_rate": 90.0,
+  "status": "✅ APROBADO",
+  "test_details": [
+    {
+      "test": "Import config",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Configuración cargada"
+    },
+    {
+      "test": "Import V3 Dynamic System",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Sistema V3 dinámico disponible"
+    },
+    {
+      "test": "Import V3 Handlers",
+      "status": "❌ FAIL",
+      "success": false,
+      "message": "Error: cannot import name 'Config' from 'config' (/home/johan/itbot_linux/config.py)"
+    },
+    {
+      "test": "Telegram Token",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Token configurado"
+    },
+    {
+      "test": "Telegram Chat ID",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Chat ID: 5277296078"
+    },
+    {
+      "test": "Binance API Key",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "API Key configurada"
+    },
+    {
+      "test": "Binance Secret Key",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Secret Key configurada"
+    },
+    {
+      "test": "Create Analyzer",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Analizador creado"
+    },
+    {
+      "test": "V3 Core Functionality",
+      "status": "❌ FAIL",
+      "success": false,
+      "message": "Error: 'coroutine' object has no attribute 'confidence'"
+    },
+    {
+      "test": "Docker Service itbot_redis",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Running"
+    },
+    {
+      "test": "Docker Service itbot_postgres_db",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Running"
+    },
+    {
+      "test": "Docker Service itbot_main",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Running"
+    },
+    {
+      "test": "Docker Service itbot_listener",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Running"
+    },
+    {
+      "test": "Docker Service itbot_worker",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Running"
+    },
+    {
+      "test": "Docker Service itbot_web",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Running"
+    },
+    {
+      "test": "Docker Services Overall",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "6/6 servicios corriendo"
+    },
+    {
+      "test": "Data Integrity",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Sin valores nulos"
+    },
+    {
+      "test": "Volatility Calculation",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Volatilidad: 35.81%"
+    },
+    {
+      "test": "Technical Indicators",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "SMA y RSI calculados correctamente"
+    },
+    {
+      "test": "Telegram Connectivity",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Bot: Bot_Binance"
+    }
+  ]
+}

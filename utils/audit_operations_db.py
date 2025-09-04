@@ -4,16 +4,35 @@ from psycopg2.extras import Json
 from typing import Any, Dict
 from datetime import datetime
 
-DB_CONFIG = {
-    "host": os.getenv("ITBOT_DB_HOST", "localhost"),
-    "port": int(os.getenv("ITBOT_DB_PORT", 5432)),
-    "user": os.getenv("ITBOT_DB_USER", "itbot"),
-    "password": os.getenv("ITBOT_DB_PASSWORD", "itbot"),
-    "dbname": os.getenv("ITBOT_DB_NAME", "itbot_audit")
-}
+
+def _build_db_config() -> Dict[str, Any]:
+    """Construye la configuración de DB a partir de env vars.
+    Prioriza DATABASE_URL y POSTGRES_*, con fallback a ITBOT_DB_*.
+    """
+    database_url = os.getenv("DATABASE_URL")
+    if database_url:
+        return {"dsn": database_url}
+
+    host = os.getenv("POSTGRES_HOST") or os.getenv("ITBOT_DB_HOST") or "localhost"
+    port = int(os.getenv("POSTGRES_PORT") or os.getenv("ITBOT_DB_PORT") or 5432)
+    user = os.getenv("POSTGRES_USER") or os.getenv("ITBOT_DB_USER") or "itbot"
+    password = os.getenv("POSTGRES_PASSWORD") or os.getenv("ITBOT_DB_PASSWORD") or "itbot"
+    dbname = os.getenv("POSTGRES_DB") or os.getenv("ITBOT_DB_NAME") or "itbot_audit"
+
+    return {
+        "host": host,
+        "port": port,
+        "user": user,
+        "password": password,
+        "dbname": dbname,
+    }
+
 
 def get_db_connection():
-    return psycopg2.connect(**DB_CONFIG)
+    cfg = _build_db_config()
+    if "dsn" in cfg:
+        return psycopg2.connect(cfg["dsn"])  # type: ignore[arg-type]
+    return psycopg2.connect(**cfg)
 
 def ensure_operations_table():
     create_table_sql = '''

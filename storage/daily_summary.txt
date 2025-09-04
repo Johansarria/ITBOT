@@ -1,0 +1,2 @@
+[2025-09-03T20:48:41.656657+00:00] daily=-0.09% base=-0.09% eq=6.2840 pos=1 notes=Doble loop detectado y corregido
+[2025-09-03T23:50:02.326260+00:00] daily=-2.42% base=-2.42% eq=6.1372 pos=0 notes=Doble loop detectado y corregido; Cerca del límite de pérdida diaria (revisar exposición)

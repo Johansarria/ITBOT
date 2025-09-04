@@ -127,9 +127,10 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       REDIS_HOST: redis
-  # Secrets (store in .env, do NOT commit):
-  # TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
-  # TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      # URL interna del servicio web (accesible por nombre de servicio en la red de Docker)
+      WEB_API_BASE_URL: "http://web:8080"
+      # Secreto interno para autenticar el bridge de órdenes
+      INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-local-internal-secret}
     networks:
       - bot_network
 
@@ -167,6 +168,8 @@ services:
       FLASK_DEBUG: "${FLASK_DEBUG:-false}"
       # Ruta opcional a un banner para mostrar en el panel web (/app/...) 
       BANNER_IMAGE_PATH: "/app/assets/logo.png"
+      # Secreto compartido para validar llamadas internas (worker->web)
+      INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-local-internal-secret}
     networks:
       - bot_network
 

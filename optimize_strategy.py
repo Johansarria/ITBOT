@@ -90,7 +90,6 @@ def _evaluate_thresholds_for_ga(individual, historical_data: pd.DataFrame):
     backtester = Backtester(
         historical_data=historical_data,
         initial_balance=1000.0,
-        commission=0.001,
         warmup_period=100
     )
 

@@ -1,0 +1,210 @@
+{
+  "timestamp": "2025-09-01T03:34:54.618120",
+  "total_tests": 22,
+  "passed": 19,
+  "failed": 3,
+  "success_rate": 86.36363636363636,
+  "critical_errors": 1,
+  "status": "⚠️ INTEGRACIÓN PARCIAL",
+  "recommendation": "🔧 ACTIVAR CON MONITOREO",
+  "category_results": {
+    "Docker": {
+      "passed": 7,
+      "failed": 0
+    },
+    "Redis": {
+      "passed": 2,
+      "failed": 0
+    },
+    "PostgreSQL": {
+      "passed": 0,
+      "failed": 1
+    },
+    "V3": {
+      "passed": 0,
+      "failed": 2
+    },
+    "Telegram": {
+      "passed": 2,
+      "failed": 0
+    },
+    "Technical": {
+      "passed": 1,
+      "failed": 0
+    },
+    "Market": {
+      "passed": 1,
+      "failed": 0
+    },
+    "Decision": {
+      "passed": 1,
+      "failed": 0
+    },
+    "E2E": {
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "detailed_results": [
+    {
+      "test": "Docker Service itbot_redis",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Redis cache running",
+      "critical": false
+    },
+    {
+      "test": "Docker Service itbot_postgres_db",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Base de datos running",
+      "critical": false
+    },
+    {
+      "test": "Docker Service itbot_main",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Bot principal running",
+      "critical": false
+    },
+    {
+      "test": "Docker Service itbot_listener",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Listener service running",
+      "critical": false
+    },
+    {
+      "test": "Docker Service itbot_worker",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Worker service running",
+      "critical": false
+    },
+    {
+      "test": "Docker Service itbot_web",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Web interface running",
+      "critical": false
+    },
+    {
+      "test": "Redis Health Check",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Redis respondiendo correctamente",
+      "critical": false
+    },
+    {
+      "test": "Redis Read/Write",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Operaciones R/W exitosas",
+      "critical": false
+    },
+    {
+      "test": "PostgreSQL Health Check",
+      "status": "❌ FAIL",
+      "success": false,
+      "message": "PostgreSQL no disponible, usando SQLite fallback",
+      "critical": false
+    },
+    {
+      "test": "Docker Services Integration",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "6/6 servicios operativos",
+      "critical": false
+    },
+    {
+      "test": "V3 System Integration",
+      "status": "❌ FAIL",
+      "success": false,
+      "message": "Error: cannot import name 'Config' from 'config' (/home/johan/itbot_linux/config.py)",
+      "critical": true
+    },
+    {
+      "test": "Telegram Bot Connection",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Bot: Bot_Binance",
+      "critical": false
+    },
+    {
+      "test": "V3 Telegram Handlers",
+      "status": "❌ FAIL",
+      "success": false,
+      "message": "Error handlers: cannot import name 'Config' from 'config' (/home/johan/itbot_linux/config.py)",
+      "critical": false
+    },
+    {
+      "test": "Telegram Command Simulation",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Comandos V3 listos: /v3_start, /v3_status, /v3_performance",
+      "critical": false
+    },
+    {
+      "test": "Technical Indicators Flow",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Indicadores calculados correctamente",
+      "critical": false
+    },
+    {
+      "test": "Market Regime Flow",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Régimen: sideways, Confianza: 40.0%",
+      "critical": false
+    },
+    {
+      "test": "Decision Making Flow",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Decisión de espera con 40.0% confianza",
+      "critical": false
+    },
+    {
+      "test": "E2E Data Acquisition",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Datos obtenidos: 287 períodos",
+      "critical": false
+    },
+    {
+      "test": "E2E Market Analysis",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Análisis completo: consolidation",
+      "critical": false
+    },
+    {
+      "test": "E2E Decision Making",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Decisión: Monitoreo activo",
+      "critical": false
+    },
+    {
+      "test": "E2E Action Simulation",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "3 operaciones simuladas, return esperado: 4.0%",
+      "critical": false
+    },
+    {
+      "test": "E2E Complete Flow",
+      "status": "✅ PASS",
+      "success": true,
+      "message": "Flujo end-to-end completado exitosamente",
+      "critical": false
+    }
+  ],
+  "critical_error_details": [
+    {
+      "test": "V3 System Integration",
+      "error": "Error: cannot import name 'Config' from 'config' (/home/johan/itbot_linux/config.py)"
+    }
+  ]
+}

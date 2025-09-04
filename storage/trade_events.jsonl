@@ -1,0 +1,653 @@
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.81665, "ts": 1756881766.992592}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.81865, "ts": 1756881854.0370665}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7622, "tp": 2.9314, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756881854.5507433}
+{"type": "TRAIL", "symbol": "XRPUSDT", "new_sl": 2.8363, "new_tp": 2.9305, "gain_pct": 1.1676189800191699, "ts": 1756895729.175197}
+{"type": "TRAIL", "symbol": "XRPUSDT", "new_sl": 2.8345, "new_tp": 2.9305, "gain_pct": 1.1037370905348458, "ts": 1756895815.0644236}
+{"type": "TRAIL", "symbol": "XRPUSDT", "new_sl": 2.8349, "new_tp": 2.9305, "gain_pct": 1.1179330659758067, "ts": 1756895901.1270494}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 247.50461748838424, "ts": 1756896704.8153257}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84695, "ts": 1756896875.3160408}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.79, "tp": 2.9609, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756896875.832489}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 252.17594401836396, "ts": 1756896985.0971193}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84685, "ts": 1756897050.3233705}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7899, "tp": 2.9608, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897050.8342278}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 253.597682706515, "ts": 1756897070.3952277}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84635, "ts": 1756897137.728599}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7894, "tp": 2.9603, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897138.23298}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 255.0203961690267, "ts": 1756897155.7580724}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84715, "ts": 1756897227.717797}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7902, "tp": 2.9611, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897228.2283368}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 256.4440203110377, "ts": 1756897241.1946511}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84865, "ts": 1756897317.5358737}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7916, "tp": 2.9626, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897318.0349004}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 257.88788530429207, "ts": 1756897324.1614754}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84825, "ts": 1756897407.0601768}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7912, "tp": 2.9622, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897407.558368}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 259.2495830774307, "ts": 1756897409.5118728}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8518499999999998, "ts": 1756897494.0818248}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7947, "tp": 2.966, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897494.6098394}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 262.09187579949696, "ts": 1756897580.0532596}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8526499999999997, "ts": 1756897669.5083518}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7955, "tp": 2.9668, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897670.0140264}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8526499999999997, "ts": 1756897672.4535706}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7955, "tp": 2.9668, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897672.9559174}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 265.07480322122575, "ts": 1756897759.0255945}
+{"type": "BREAKEVEN", "symbol": "BNBUSDT", "new_sl": 851.01, "new_tp": 885.04, "gain_pct": 0.5017626321974127, "ts": 1756897844.1989076}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85335, "ts": 1756897846.832972}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7962, "tp": 2.9675, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756897848.2521763}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 267.9894775311152, "ts": 1756897933.9070916}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85745, "ts": 1756898022.7279236}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8003, "tp": 2.9718, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898023.686464}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 270.9111646413803, "ts": 1756898109.2105658}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85475, "ts": 1756898198.4755852}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7976, "tp": 2.969, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898197.1787574}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 273.81070180733997, "ts": 1756898283.1814349}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85745, "ts": 1756898372.4904003}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8003, "tp": 2.9718, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898373.4468179}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 276.74029812415444, "ts": 1756898458.9540184}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85465, "ts": 1756898548.877073}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7975, "tp": 2.9689, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898550.3059056}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 279.6897292335828, "ts": 1756898633.2003415}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8531500000000003, "ts": 1756898810.587274}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.796, "tp": 2.9673, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898811.5467377}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8541499999999997, "ts": 1756898830.2995284}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.797, "tp": 2.9683, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898831.7272942}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 284.3764670888583, "ts": 1756898917.1247282}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85625, "ts": 1756898987.8755581}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7991, "tp": 2.9706, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756898988.834334}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 285.79947914679843, "ts": 1756899002.5727906}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85145, "ts": 1756899075.3212092}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7944, "tp": 2.9656, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899076.9919834}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 287.2276395797729, "ts": 1756899088.1950054}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84925, "ts": 1756899165.8949263}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7922, "tp": 2.9633, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899166.8591766}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84985, "ts": 1756899178.0275738}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7928, "tp": 2.9639, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899178.9935305}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 290.11834079027176, "ts": 1756899261.6944766}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8596500000000002, "ts": 1756899350.9001057}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8024, "tp": 2.9741, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899352.328215}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 293.0654874483744, "ts": 1756899438.4739075}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85615, "ts": 1756899527.3104255}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7989, "tp": 2.9704, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899528.2851334}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 295.99063623746235, "ts": 1756899613.9770195}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85595, "ts": 1756899701.1101725}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7988, "tp": 2.9702, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899702.0839663}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 298.88745362758635, "ts": 1756899787.7890522}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8588500000000003, "ts": 1756899876.654049}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8016, "tp": 2.9733, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756899877.157806}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 301.8041685938835, "ts": 1756899962.7963147}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8568499999999997, "ts": 1756900051.9718788}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7997, "tp": 2.9712, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756900052.4748235}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 304.6778872330984, "ts": 1756900135.2164137}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8573500000000003, "ts": 1756900224.6757514}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8002, "tp": 2.9717, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756900225.1870053}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 307.6007297595342, "ts": 1756900310.5840626}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8569500000000003, "ts": 1756900399.884785}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7998, "tp": 2.9713, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756900400.4006476}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 310.52404280900953, "ts": 1756900485.986393}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85785, "ts": 1756900680.8840206}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8006, "tp": 2.9721, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756900681.4044788}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 315.20690629879635, "ts": 1756900766.9563808}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85665, "ts": 1756900855.857305}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7995, "tp": 2.971, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756900856.3647754}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 318.12276612917583, "ts": 1756900941.9355059}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86045, "ts": 1756901030.9658024}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8031, "tp": 2.9749, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756901031.4717789}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 321.04104249080024, "ts": 1756901116.999493}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86085, "ts": 1756901203.4269614}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8036, "tp": 2.9753, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756901203.9267335}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 323.91288821697236, "ts": 1756901289.3069139}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86045, "ts": 1756901378.6765635}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8031, "tp": 2.9749, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756901379.1863015}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 326.83483154376347, "ts": 1756901464.6244378}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 210.915, "ts": 1756901552.865326}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 206.69, "tp": 219.36, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756901553.3706596}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 120.51796990235647, "ts": 1756903935.5844822}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 852.675, "ts": 1756904145.372519}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 835.62, "tp": 886.79, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756904144.070914}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 125.42749523321787, "ts": 1756904229.692304}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 852.555, "ts": 1756904319.1810484}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 835.5, "tp": 886.66, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756904320.6035743}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 128.39249733289083, "ts": 1756904407.5955737}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 852.615, "ts": 1756904499.8392804}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 835.56, "tp": 886.72, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756904500.3140044}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 131.44588911533356, "ts": 1756904590.7344074}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.465, "ts": 1756904685.8280487}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.39, "tp": 887.61, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756904687.5868735}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 134.61654892762502, "ts": 1756904781.0488396}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.155, "ts": 1756904876.4942067}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.09, "tp": 887.29, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756904877.8754103}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 137.7671489159266, "ts": 1756904970.02027}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.825, "ts": 1756905066.1803572}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.74, "tp": 887.98, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756905066.67857}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 140.92211858431497, "ts": 1756905159.3249946}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.175, "ts": 1756905256.344808}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.09, "tp": 888.35, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756905256.8065321}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 144.09938586155573, "ts": 1756905349.994051}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.555, "ts": 1756905446.5696793}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.46, "tp": 888.74, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756905447.0288982}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 147.28108541965486, "ts": 1756905540.7676566}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.105, "ts": 1756905637.232399}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.0, "tp": 889.31, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756905637.6996999}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 150.4483989238739, "ts": 1756905730.8977306}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.145, "ts": 1756905963.4740262}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.04, "tp": 889.36, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756905963.943364}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 155.88997556765875, "ts": 1756906057.394592}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.995, "ts": 1756906155.8742998}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.89, "tp": 889.2, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756906156.3376687}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 159.09582617282868, "ts": 1756906249.7513943}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.215, "ts": 1756906347.1768498}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.11, "tp": 889.43, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756906347.6387677}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 162.29761372407276, "ts": 1756906441.8330283}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.355, "ts": 1756906539.2381694}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.24, "tp": 889.57, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756906539.6946595}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 165.48187777996063, "ts": 1756906632.9075022}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.855, "ts": 1756906730.2687876}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.75, "tp": 889.05, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756906730.739348}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.925, "ts": 1756906928.0572767}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.8, "tp": 890.17, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756906928.513031}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 171.96127901474634, "ts": 1756907021.671485}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.105, "ts": 1756907121.190068}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 839.96, "tp": 891.39, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756907121.6583824}
+{"type": "BREAKEVEN", "symbol": "SOLUSDT", "new_sl": 210.92, "new_tp": 219.36, "gain_pct": 0.6210885643846019, "ts": 1756907214.4144943}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 175.19323285420737, "ts": 1756907215.591195}
+{"type": "TRAIL", "symbol": "SOLUSDT", "new_sl": 211.69, "new_tp": 219.36, "gain_pct": 0.8723686705860059, "ts": 1756907309.2342653}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.615, "ts": 1756907315.596093}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.46, "tp": 891.92, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756907316.0653665}
+{"type": "TRAIL", "symbol": "SOLUSDT", "new_sl": 211.57, "new_tp": 219.36, "gain_pct": 0.8154750616347425, "ts": 1756907408.7687695}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 178.43230238755544, "ts": 1756907409.9349895}
+{"type": "BREAKEVEN", "symbol": "SOLUSDT", "new_sl": 210.92, "new_tp": 219.36, "gain_pct": 0.5689360895126195, "ts": 1756907502.6724553}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 858.395, "ts": 1756907509.5875237}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 841.22, "tp": 892.74, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756907510.0519192}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 181.656016878287, "ts": 1756907603.3709795}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.075, "ts": 1756907834.55573}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 839.93, "tp": 891.36, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756907835.4567602}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 187.08423129717508, "ts": 1756907929.0504963}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86265, "ts": 1756908025.1283913}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8053, "tp": 2.9772, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908025.981114}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86415, "ts": 1756908122.818739}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8068, "tp": 2.9788, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908123.2764575}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 439.36522212823235, "ts": 1756908216.4704652}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86505, "ts": 1756908314.673647}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8077, "tp": 2.9797, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908315.1457603}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 442.58803038199744, "ts": 1756908409.9138968}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86685, "ts": 1756908505.5546436}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8095, "tp": 2.9816, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908506.0491128}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 445.71958652337395, "ts": 1756908597.680373}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86945, "ts": 1756908692.776742}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.812, "tp": 2.9843, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908693.2442334}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 448.83457696437836, "ts": 1756908784.5882847}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86105, "ts": 1756908789.0626485}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8038, "tp": 2.9755, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908789.5268655}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 450.4348398248355, "ts": 1756908880.6051283}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8541499999999997, "ts": 1756908884.4736528}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.797, "tp": 2.9683, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908884.94447}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 452.0179913918177, "ts": 1756908975.5817964}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8550500000000003, "ts": 1756908980.485477}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7979, "tp": 2.9693, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756908980.9791582}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 453.62224942445755, "ts": 1756909071.8391016}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85725, "ts": 1756909076.3707192}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8001, "tp": 2.9716, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909076.863306}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 455.2176183660825, "ts": 1756909167.5661464}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8602499999999997, "ts": 1756909172.1730878}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8029, "tp": 2.9747, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909172.6515074}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 456.81660070021945, "ts": 1756909263.5035422}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86005, "ts": 1756909267.0681167}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8028, "tp": 2.9744, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909267.9705188}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 458.4014096180598, "ts": 1756909358.5946567}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8588500000000003, "ts": 1756909363.8007846}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8016, "tp": 2.9733, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909365.143455}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 460.0186724702517, "ts": 1756909455.6246524}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86205, "ts": 1756909460.760121}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8048, "tp": 2.9766, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909461.668854}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 461.62751342455545, "ts": 1756909552.1543424}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86745, "ts": 1756909680.399429}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8101, "tp": 2.9822, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909680.8736446}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 465.2786600033442, "ts": 1756909771.2248356}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87065, "ts": 1756909776.2462845}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8132, "tp": 2.9855, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909776.7317903}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 466.8849236090978, "ts": 1756909867.6010296}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87135, "ts": 1756909871.9276016}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8139, "tp": 2.9862, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909872.4085855}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 468.47450571457546, "ts": 1756909962.9767556}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87575, "ts": 1756909966.7427611}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8182, "tp": 2.9908, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756909967.215185}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 470.0556917945544, "ts": 1756910057.8576066}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87425, "ts": 1756910062.4378877}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8167, "tp": 2.9893, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910063.7897465}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 471.6604676365852, "ts": 1756910154.1396053}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87315, "ts": 1756910158.7658398}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8156, "tp": 2.9881, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910160.0914278}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 473.26505262056986, "ts": 1756910250.4379492}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87445, "ts": 1756910255.3656645}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8169, "tp": 2.9895, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910256.2644758}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87645, "ts": 1756910348.1562793}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8189, "tp": 2.9916, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910349.0586119}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87995, "ts": 1756910441.9928796}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8223, "tp": 2.9952, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910442.4623897}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8804499999999997, "ts": 1756910535.3872743}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8228, "tp": 2.9957, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910535.8655849}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8842499999999998, "ts": 1756910629.4206927}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8265, "tp": 2.9997, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910629.9278746}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 481.11310100952784, "ts": 1756910721.3387668}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.88255, "ts": 1756910725.3360758}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8248, "tp": 2.9979, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910726.6569297}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 482.70182330608367, "ts": 1756910816.6276808}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87865, "ts": 1756910821.178043}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.821, "tp": 2.9938, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910822.5151927}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 484.2998252749443, "ts": 1756910912.5103855}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87995, "ts": 1756910917.0531003}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8223, "tp": 2.9952, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756910918.393504}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 485.8953104933103, "ts": 1756911008.243432}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.88095, "ts": 1756911012.7614098}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8233, "tp": 2.9962, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911012.8037333}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 487.4575052420298, "ts": 1756911101.9544613}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87875, "ts": 1756911106.54671}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.821, "tp": 2.994, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911107.0316427}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 489.0381624380747, "ts": 1756911196.8039124}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87395, "ts": 1756911201.4152603}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8164, "tp": 2.989, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911201.8886485}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 490.6188509345055, "ts": 1756911291.6520073}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86965, "ts": 1756911296.229386}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8122, "tp": 2.9845, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911296.706546}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 492.197784336408, "ts": 1756911386.3783984}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87355, "ts": 1756911519.2043676}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.816, "tp": 2.9885, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911520.1133723}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 495.93013837734856, "ts": 1756911610.3302479}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87255, "ts": 1756911615.0909765}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8149, "tp": 2.9875, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911615.8012972}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 497.5135048031807, "ts": 1756911705.3364382}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86965, "ts": 1756911708.6903856}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8122, "tp": 2.9845, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911709.17363}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 499.0699198762576, "ts": 1756911798.7065337}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86965, "ts": 1756911803.3628619}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8122, "tp": 2.9845, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911803.8395698}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 500.64753539562224, "ts": 1756911893.3749263}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86935, "ts": 1756911897.7440639}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8119, "tp": 2.9842, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911898.2212682}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 502.2149926145872, "ts": 1756911987.4138765}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87175, "ts": 1756911991.8599737}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8143, "tp": 2.9867, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756911993.444506}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 503.80089119275414, "ts": 1756912082.5612671}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86925, "ts": 1756912086.085845}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8118, "tp": 2.9841, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912087.0278025}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87175, "ts": 1756912179.0188894}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8143, "tp": 2.9867, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912180.827468}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 506.923799431324, "ts": 1756912269.9451175}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87355, "ts": 1756912274.5239317}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.816, "tp": 2.9885, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912276.3069634}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 508.5176324884097, "ts": 1756912365.5676877}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87125, "ts": 1756912370.4568439}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8138, "tp": 2.9861, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912371.8073227}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 510.1088756362597, "ts": 1756912461.0450134}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8667499999999997, "ts": 1756912465.6676326}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8094, "tp": 2.9815, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912467.4857552}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 511.7000469088554, "ts": 1756912556.516692}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86655, "ts": 1756912561.0943072}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8092, "tp": 2.9813, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912561.5784497}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 513.2712368130684, "ts": 1756912650.7901022}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86695, "ts": 1756912655.1179724}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8096, "tp": 2.9817, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912655.60193}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 514.8343213677406, "ts": 1756912744.59064}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86835, "ts": 1756912747.7042494}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8109, "tp": 2.9831, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912748.1846168}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 516.3760314305623, "ts": 1756912837.0712545}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87065, "ts": 1756912841.5697582}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8132, "tp": 2.9855, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912842.0633478}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 517.9400600512822, "ts": 1756912930.9164426}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86745, "ts": 1756912935.484667}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8101, "tp": 2.9822, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756912935.9641216}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 519.5083885192871, "ts": 1756913025.0200276}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86285, "ts": 1756913029.6154573}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8055, "tp": 2.9774, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913030.0961034}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 521.0554892023405, "ts": 1756913117.8458955}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86325, "ts": 1756913123.304884}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8059, "tp": 2.9778, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913124.6757374}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 522.6530160784721, "ts": 1756913213.726632}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8629499999999997, "ts": 1756913344.7275162}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8056, "tp": 2.9775, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913345.2045937}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 526.3067743182182, "ts": 1756913432.9191673}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8653500000000003, "ts": 1756913437.6085198}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.808, "tp": 2.98, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913438.9860613}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 527.8887677272161, "ts": 1756913527.8427613}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86475, "ts": 1756913532.420089}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8074, "tp": 2.9794, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913533.3539114}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 529.4706644296646, "ts": 1756913622.765881}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86395, "ts": 1756913627.34189}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8066, "tp": 2.9786, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913628.287487}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.86785, "ts": 1756913719.414162}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8104, "tp": 2.9826, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913720.336012}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 532.5724358677865, "ts": 1756913808.8709593}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8686499999999997, "ts": 1756913813.6376204}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8111, "tp": 2.9834, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913815.0034716}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 534.1469909151396, "ts": 1756913903.3364563}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87035, "ts": 1756913909.1333039}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8129, "tp": 2.9852, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756913910.5047858}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 535.740074022611, "ts": 1756913998.9287107}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8714500000000003, "ts": 1756914003.2769563}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.814, "tp": 2.9864, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914003.983702}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 537.2986345410347, "ts": 1756914092.4387376}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.165, "ts": 1756914099.6280224}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.94, "tp": 895.62, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914100.987612}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 291.41982688903806, "ts": 1756914189.2211297}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.87315, "ts": 1756914194.0060976}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8156, "tp": 2.9881, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914195.4108965}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 540.4871528665225, "ts": 1756914283.7443452}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8720499999999998, "ts": 1756914289.01396}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.8146, "tp": 2.987, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914288.861227}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 542.046797366937, "ts": 1756914377.3209386}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.425, "ts": 1756914384.9344323}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 844.19, "tp": 895.89, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914385.8487341}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 296.16516476074855, "ts": 1756914473.9285145}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.435, "ts": 1756914481.354632}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 844.2, "tp": 895.9, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914482.516882}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 297.77911982138954, "ts": 1756914570.7645326}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.965, "ts": 1756914574.9944398}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.74, "tp": 895.41, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914575.480486}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 299.3233297586441, "ts": 1756914663.416249}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.195, "ts": 1756914669.3444126}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.97, "tp": 895.65, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914669.8349676}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 300.89504750172296, "ts": 1756914757.7198513}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.965, "ts": 1756914763.338623}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.74, "tp": 895.41, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914763.8233037}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 302.4668457070986, "ts": 1756914852.0534494}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.145, "ts": 1756914857.6341958}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.92, "tp": 895.6, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914856.3689137}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 304.0050270875295, "ts": 1756914944.3171778}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.235, "ts": 1756914951.086668}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.01, "tp": 219.69, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756914951.5913122}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 224.76835352182388, "ts": 1756915039.4554353}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.405, "ts": 1756915170.4209313}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.17, "tp": 219.87, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915170.9005468}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 228.42062299251558, "ts": 1756915258.5802357}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.615, "ts": 1756915265.1358392}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.38, "tp": 220.08, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915265.617666}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 230.0210789879163, "ts": 1756915354.653953}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.385, "ts": 1756915366.7444031}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.15, "tp": 219.85, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915367.2657418}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 231.66459785699845, "ts": 1756915453.2329597}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.175, "ts": 1756915460.9623706}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 206.95, "tp": 219.63, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915462.0887485}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.415, "ts": 1756915557.8583193}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.18, "tp": 219.88, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915558.342878}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 234.89675480524699, "ts": 1756915647.1524932}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.615, "ts": 1756915652.6004145}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.38, "tp": 220.08, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915653.0903084}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 211.625, "ts": 1756915747.6564019}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 207.39, "tp": 220.09, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915748.829873}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 238.05140961408614, "ts": 1756915836.4481664}
+{"type": "ENTRY", "symbol": "ETHUSDT", "side": "BUY", "qty": 0.005, "px": 4464.105, "ts": 1756915845.9721575}
+{"type": "BRACKETS", "symbol": "ETHUSDT", "sl": 4374.81, "tp": 4642.67, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915846.8923078}
+{"type": "ENTRY", "symbol": "DOGEUSDT", "side": "BUY", "qty": 23.0, "px": 0.218495, "ts": 1756915942.977344}
+{"type": "BRACKETS", "symbol": "DOGEUSDT", "sl": 0.21412, "tp": 0.22724, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756915943.4603913}
+{"type": "BREAKEVEN", "symbol": "DOGEUSDT", "new_sl": 0.21851, "new_tp": 0.22724, "gain_pct": 0.5491990846681952, "ts": 1756920818.0208557}
+{"type": "BREAKEVEN", "symbol": "DOGEUSDT", "new_sl": 0.21851, "new_tp": 0.22724, "gain_pct": 0.5308924485125832, "ts": 1756920845.7026265}
+{"type": "BREAKEVEN", "symbol": "DOGEUSDT", "new_sl": 0.21851, "new_tp": 0.22724, "gain_pct": 0.5171624713958773, "ts": 1756921676.7915843}
+{"type": "BREAKEVEN", "symbol": "DOGEUSDT", "new_sl": 0.21851, "new_tp": 0.22724, "gain_pct": 0.5217391304347836, "ts": 1756921761.7369661}
+{"type": "BREAKEVEN", "symbol": "DOGEUSDT", "new_sl": 0.21851, "new_tp": 0.22724, "gain_pct": 0.5583524027459948, "ts": 1756921936.1885061}
+{"type": "BREAKEVEN", "symbol": "DOGEUSDT", "new_sl": 0.21851, "new_tp": 0.22724, "gain_pct": 0.5491990846681952, "ts": 1756922880.989899}
+{"type": "TIME_STOP", "symbol": "ETHUSDT", "age_min": 120.06424303452174, "ts": 1756923050.3248267}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.065, "ts": 1756923266.8413444}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.84, "tp": 895.51, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923267.8087482}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 444.1485789934794, "ts": 1756923352.9493783}
+{"type": "TIME_STOP", "symbol": "DOGEUSDT", "age_min": 123.51253201564153, "ts": 1756923355.1702833}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.845, "ts": 1756923442.5216072}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.62, "tp": 895.28, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923443.9281273}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 447.087589720885, "ts": 1756923529.3041885}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.595, "ts": 1756923536.643526}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.38, "tp": 895.02, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923538.0783942}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 448.65358727375667, "ts": 1756923623.25495}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.505, "ts": 1756923628.8950093}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.29, "tp": 894.93, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923629.8677757}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 450.17993544340135, "ts": 1756923714.8336565}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.585, "ts": 1756923721.5134528}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.37, "tp": 895.01, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923722.476132}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.715, "ts": 1756923813.5162408}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.5, "tp": 895.15, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923814.0193555}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 453.2473626613617, "ts": 1756923898.8796093}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.565, "ts": 1756923903.56043}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.35, "tp": 894.99, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756923904.5196073}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 454.7594973921776, "ts": 1756923989.6219285}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.745, "ts": 1756924000.5522346}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.53, "tp": 895.18, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924001.5338345}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 456.38478903373084, "ts": 1756924087.130206}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.865, "ts": 1756924093.4091365}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.64, "tp": 895.3, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924093.9170551}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 457.8690480192502, "ts": 1756924176.1987915}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.765, "ts": 1756924182.497541}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.54, "tp": 895.2, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924183.0142257}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 459.3993124604225, "ts": 1756924268.0072377}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.415, "ts": 1756924275.510891}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.2, "tp": 894.84, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924276.4833572}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 460.9610995610555, "ts": 1756924361.7128282}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.585, "ts": 1756924365.8517745}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.37, "tp": 895.01, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924366.8141828}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.605, "ts": 1756924455.8776162}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 844.37, "tp": 896.07, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924457.2806935}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 463.96949618260066, "ts": 1756924542.2004921}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 861.345, "ts": 1756924549.8329794}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 844.11, "tp": 895.8, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924550.8144584}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 465.53077909946444, "ts": 1756924635.8843303}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.405, "ts": 1756924640.647406}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.19, "tp": 894.83, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924641.6164582}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 467.0456464409828, "ts": 1756924726.7814553}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.385, "ts": 1756924735.4097347}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.17, "tp": 894.81, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924736.3892524}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 468.6219089110692, "ts": 1756924821.3688698}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.085, "ts": 1756924830.2912474}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 842.88, "tp": 894.49, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924831.2901525}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 470.1553703546524, "ts": 1756924913.3637576}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.415, "ts": 1756924920.79316}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 843.2, "tp": 894.84, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756924921.7465405}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 471.7117965658506, "ts": 1756925006.7612858}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 860.005, "ts": 1756925132.3516603}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 842.8, "tp": 894.41, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925132.8583019}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 475.2365139524142, "ts": 1756925218.2476854}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 859.745, "ts": 1756925226.1569853}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 842.55, "tp": 894.14, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925226.6642137}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 476.79401286840437, "ts": 1756925311.6978862}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 859.745, "ts": 1756925319.2759724}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 842.55, "tp": 894.14, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925320.2663105}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 478.31809000174206, "ts": 1756925403.143126}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84445, "ts": 1756925408.0252585}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7875, "tp": 2.9582, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925409.2621686}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 727.3276511311531, "ts": 1756925494.2033522}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8442499999999997, "ts": 1756925500.073781}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7873, "tp": 2.958, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925501.499471}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 728.8635453263919, "ts": 1756925586.3659441}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84645, "ts": 1756925591.2670815}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7895, "tp": 2.9603, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925592.70693}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 730.3819720784824, "ts": 1756925677.4571536}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84715, "ts": 1756925679.9805622}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7902, "tp": 2.9611, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925680.4949539}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 731.8531425992647, "ts": 1756925765.7252922}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84925, "ts": 1756925771.260489}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7922, "tp": 2.9633, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925772.6942995}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 733.3847493847211, "ts": 1756925857.6218576}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85025, "ts": 1756925862.745446}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7932, "tp": 2.9643, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925864.18406}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 734.915134994189, "ts": 1756925949.442692}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8499499999999998, "ts": 1756925951.8262374}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7928, "tp": 2.964, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756925952.7856865}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 736.3848870635032, "ts": 1756926037.6461606}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8470500000000003, "ts": 1756926043.1332474}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7901, "tp": 2.961, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926043.633972}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 737.9003611087799, "ts": 1756926128.5791662}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84875, "ts": 1756926134.159041}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7917, "tp": 2.9627, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926135.6026323}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 739.4324986815452, "ts": 1756926220.4906425}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8499499999999998, "ts": 1756926222.6156578}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7928, "tp": 2.964, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926224.0494967}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 740.9047030846278, "ts": 1756926308.8210542}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8499499999999998, "ts": 1756926313.700028}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7928, "tp": 2.964, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926315.1404004}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 742.4231950998307, "ts": 1756926399.9358566}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84985, "ts": 1756926404.743918}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7928, "tp": 2.9639, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926406.1885967}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 743.9500600099564, "ts": 1756926491.5453138}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84645, "ts": 1756926493.8376932}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7895, "tp": 2.9603, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926494.8161643}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 745.4201050440471, "ts": 1756926579.740007}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84695, "ts": 1756926584.6556685}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.79, "tp": 2.9609, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926585.6207893}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 746.932150109609, "ts": 1756926670.4601355}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84575, "ts": 1756926676.1082067}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7888, "tp": 2.9596, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926676.6113458}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 748.4516530354817, "ts": 1756926761.640843}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84575, "ts": 1756926766.257923}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7888, "tp": 2.9596, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926767.6997287}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 749.9199729800224, "ts": 1756926849.7458224}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84505, "ts": 1756926976.5743344}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7881, "tp": 2.9589, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756926977.5467334}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 753.463362344106, "ts": 1756927062.340405}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84345, "ts": 1756927067.6770499}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7865, "tp": 2.9572, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927066.3765955}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 754.9434833447139, "ts": 1756927151.1531124}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84635, "ts": 1756927155.7438524}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7894, "tp": 2.9603, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927156.250482}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 756.4440452774365, "ts": 1756927241.1888335}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84595, "ts": 1756927246.713435}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.789, "tp": 2.9598, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927248.155623}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 757.9932786742846, "ts": 1756927334.134151}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84625, "ts": 1756927339.5134208}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7893, "tp": 2.9601, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927340.9493327}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 759.4737652222316, "ts": 1756927422.9691322}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84735, "ts": 1756927427.6565979}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7904, "tp": 2.9613, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927428.644701}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 761.003487642606, "ts": 1756927514.7504508}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84795, "ts": 1756927520.8189638}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7909, "tp": 2.9619, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927521.3704991}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 762.5287809292475, "ts": 1756927606.2689302}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8489500000000003, "ts": 1756927611.8852649}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7919, "tp": 2.963, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927613.322015}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 764.0140321214993, "ts": 1756927695.3848007}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84875, "ts": 1756927700.3162107}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7917, "tp": 2.9627, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927701.7545927}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 765.5533680359523, "ts": 1756927788.0654204}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8480499999999997, "ts": 1756927794.1335256}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7909, "tp": 2.962, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927794.6752}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 767.0949266592662, "ts": 1756927880.2345872}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84985, "ts": 1756927886.5665028}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7928, "tp": 2.9639, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927885.2486212}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 768.5936646620432, "ts": 1756927970.1638446}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84695, "ts": 1756927975.1155949}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.79, "tp": 2.9609, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756927975.6235886}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 770.0989787658056, "ts": 1756928060.4795732}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8512500000000003, "ts": 1756928065.523733}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7942, "tp": 2.9654, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928066.9634616}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 771.6185155630112, "ts": 1756928151.6556678}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84905, "ts": 1756928156.3365228}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.792, "tp": 2.9631, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928157.7538548}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 773.0879829009374, "ts": 1756928239.8212912}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8474500000000003, "ts": 1756928245.2089274}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7905, "tp": 2.9614, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928246.6390464}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 774.6379515091578, "ts": 1756928332.8118827}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.8480499999999997, "ts": 1756928337.9669917}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7909, "tp": 2.962, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928338.924035}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.84915, "ts": 1756928426.7278328}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7921, "tp": 2.9632, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928428.1578205}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 777.643086318175, "ts": 1756928513.1471903}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85055, "ts": 1756928516.371034}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7935, "tp": 2.9646, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928517.8128626}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 779.1347816069921, "ts": 1756928602.6304486}
+{"type": "ENTRY", "symbol": "XRPUSDT", "side": "BUY", "qty": 1.8, "px": 2.85095, "ts": 1756928608.133776}
+{"type": "BRACKETS", "symbol": "XRPUSDT", "sl": 2.7939, "tp": 2.965, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928609.5735495}
+{"type": "TIME_STOP", "symbol": "XRPUSDT", "age_min": 780.6707655072212, "ts": 1756928695.2457838}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 858.685, "ts": 1756928817.5756414}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 841.51, "tp": 893.04, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928818.5369282}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 536.6543334364891, "ts": 1756928903.2990267}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 858.465, "ts": 1756928908.1525614}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 841.29, "tp": 892.81, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756928908.6849182}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 538.1570908665657, "ts": 1756928993.4708288}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 858.165, "ts": 1756928999.115091}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 841.0, "tp": 892.5, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929000.06853}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 539.6859546820323, "ts": 1756929085.2154772}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.935, "ts": 1756929087.3449612}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.77, "tp": 892.26, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929088.2387102}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 858.245, "ts": 1756929176.129808}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 841.08, "tp": 892.58, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929177.5571408}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 542.640771985054, "ts": 1756929262.4913974}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 858.025, "ts": 1756929267.3901153}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.86, "tp": 892.35, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929268.8570237}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 544.1600821892421, "ts": 1756929353.6418877}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.665, "ts": 1756929358.745709}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.51, "tp": 891.98, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929359.2503586}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 545.6213077982267, "ts": 1756929441.323652}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.735, "ts": 1756929447.1145744}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.58, "tp": 892.05, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929448.5411599}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 547.1555335799853, "ts": 1756929533.3700173}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.475, "ts": 1756929538.4205887}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.32, "tp": 891.78, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929539.8678358}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 548.6835618853569, "ts": 1756929625.0550845}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.805, "ts": 1756929629.873313}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.64, "tp": 892.12, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929631.3076763}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 550.1641369899114, "ts": 1756929713.8967917}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.255, "ts": 1756929718.8997447}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.1, "tp": 891.55, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929719.8685708}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.365, "ts": 1756929808.909277}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.21, "tp": 891.66, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929809.8800461}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 553.1799332976341, "ts": 1756929894.8398178}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.325, "ts": 1756929900.2255623}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 840.17, "tp": 891.62, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929901.1964982}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 554.6995452682178, "ts": 1756929986.0181725}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 857.085, "ts": 1756929988.8311677}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 839.94, "tp": 891.37, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756929990.259068}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 556.185799173514, "ts": 1756930075.1985552}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 856.795, "ts": 1756930080.9053926}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 839.65, "tp": 891.07, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930081.8942773}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 557.7131932139397, "ts": 1756930166.8335865}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 856.375, "ts": 1756930172.1393523}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 839.24, "tp": 890.63, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930173.5830543}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 559.2395766496659, "ts": 1756930258.4149492}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 856.125, "ts": 1756930260.9715502}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 839.0, "tp": 890.37, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930261.9724076}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 560.7108446081479, "ts": 1756930346.6944475}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.795, "ts": 1756930351.5087514}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.67, "tp": 890.03, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930352.480327}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.755, "ts": 1756930442.1176355}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 838.63, "tp": 889.99, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930442.650856}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 563.7248592615127, "ts": 1756930527.5531008}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 855.045, "ts": 1756930654.0372014}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.94, "tp": 889.25, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930655.0085182}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 567.2623995780945, "ts": 1756930739.7936685}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.295, "ts": 1756930747.677387}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.2, "tp": 888.47, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930749.120714}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 568.8037202556928, "ts": 1756930832.2615514}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.035, "ts": 1756930837.1375585}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.95, "tp": 888.2, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930837.6388035}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.655, "ts": 1756930926.0543}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.58, "tp": 887.81, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756930927.4860435}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 571.8080104470253, "ts": 1756931012.5247602}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.075, "ts": 1756931017.6523008}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.01, "tp": 887.2, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931019.0987267}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.045, "ts": 1756931103.9650133}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 835.98, "tp": 887.17, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931104.9380918}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.445, "ts": 1756931193.6217008}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.37, "tp": 887.59, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931195.0717356}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.525, "ts": 1756931282.8642824}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.45, "tp": 887.67, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931284.309254}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.785, "ts": 1756931372.744698}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.7, "tp": 887.94, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931373.7100718}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 854.125, "ts": 1756931459.182373}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 837.04, "tp": 888.29, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931459.68088}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 580.6736724297206, "ts": 1756931544.455188}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.915, "ts": 1756931549.855875}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.83, "tp": 888.08, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931551.2748525}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.285, "ts": 1756931639.7374215}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.21, "tp": 887.42, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931641.160938}
+{"type": "TIME_STOP", "symbol": "BNBUSDT", "age_min": 583.7062863469124, "ts": 1756931726.4354224}
+{"type": "ENTRY", "symbol": "BNBUSDT", "side": "BUY", "qty": 0.01, "px": 853.965, "ts": 1756931731.7893474}
+{"type": "BRACKETS", "symbol": "BNBUSDT", "sl": 836.88, "tp": 888.13, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756931730.4985244}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 209.765, "ts": 1756932464.446351}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 205.56, "tp": 218.16, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756932464.9386113}
+{"type": "ENTRY", "symbol": "ETHUSDT", "side": "BUY", "qty": 0.005, "px": 4462.005, "ts": 1756932634.182495}
+{"type": "BRACKETS", "symbol": "ETHUSDT", "sl": 4372.76, "tp": 4640.48, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756932635.6081371}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 210.60500000000002, "ts": 1756944125.34474}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 206.39, "tp": 219.03, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756944125.8562193}
+{"type": "TIME_STOP", "symbol": "SOLUSDT", "age_min": 197.13102693557738, "ts": 1756944292.8138413}
+{"type": "ENTRY", "symbol": "ETHUSDT", "side": "BUY", "qty": 0.005, "px": 4449.555, "ts": 1756944303.1170413}
+{"type": "BRACKETS", "symbol": "ETHUSDT", "sl": 4360.56, "tp": 4627.54, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756944304.1035156}
+{"type": "TIME_STOP", "symbol": "ETHUSDT", "age_min": 197.25232615470887, "ts": 1756944469.8649926}
+{"type": "ENTRY", "symbol": "SOLUSDT", "side": "BUY", "qty": 0.03, "px": 210.79500000000002, "ts": 1756947849.3162372}
+{"type": "BRACKETS", "symbol": "SOLUSDT", "sl": 206.57, "tp": 219.23, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756947849.8221247}
+{"type": "ENTRY", "symbol": "ETHUSDT", "side": "BUY", "qty": 0.005, "px": 4454.735, "ts": 1756948021.2149909}
+{"type": "BRACKETS", "symbol": "ETHUSDT", "sl": 4365.64, "tp": 4632.93, "sl_work": "MARK_PRICE", "tp_work": "CONTRACT_PRICE", "ts": 1756948022.6354735}

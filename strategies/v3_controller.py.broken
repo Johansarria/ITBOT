@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+"""
+CONTROLADOR V3 AUTÓNOMO
+======================
+Módulo de control para integrar el sistema V3 con los handlers del bot de Telegram.
+
+Este módulo proporciona:
+- Comandos de Telegram para controlar el sistema V3
+- Integración con el sistema de estado existente
+- Monitoreo y control de las estrategias V3
+- Dashboard de rendimiento en tiempo real
+"""
+
+import asyncio
+import threading
+from datetime import datetime, timedelta
+from typing import Optional, Dict, Any
+import json
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from strategies.v3_autonomous_integration import v3_autonomous, start_v3_autonomous_system
+from utils.structured_logger import StructuredLogger
+from utils.state_manager import StateManager
+from utils.telegram_handler import send_message
+
+logger = StructuredLogger(__name__)
+
+class V3AutonomousController:
+    """Controlador para el sistema V3 autónomo"""
+    
+    def __init__(self):
+        self.state_manager = StateManager()
+        self.v3_thread: Optional[threading.Thread] = None
+        self.v3_loop: Optional[asyncio.AbstractEventLoop] = None
+        self.is_v3_running = False
+        
+        # Métricas de rendimiento
+        self.performance_metrics = {
+            'total_signals': 0,
+            'successful_trades': 0,
+            'failed_trades': 0,
+            'total_pnl': 0.0,
+            'start_time': None,
+            'last_signal_time': None
+        }
+    
+    def is_v3_system_running(self) -> bool:
+        """Verificar si el sistema V3 está ejecutándose"""
+        return (self.v3_thread is not None 
+                and self.v3_thread.is_alive() 
+                and v3_autonomous.is_running)
+    
+    async def start_v3_system(self) -> tuple[bool, str]:
+        """Iniciar el sistema V3 autónomo"""
+        try:
+            if self.is_v3_system_running():
+                return False, "❌ El sistema V3 ya está ejecutándose"
+            
+            logger.info("V3_CONTROLLER_START", "Iniciando sistema V3 autónomo desde controlador")
+            
+            # Crear y ejecutar thread para el sistema V3
+            self.v3_thread = threading.Thread(
+                target=start_v3_autonomous_system,
+                daemon=True,
+                name="V3_Autonomous_System"
+            )
+            
+            self.v3_thread.start()
+            self.is_v3_running = True
+            self.performance_metrics['start_time'] = datetime.now()
+            
+            # Guardar estado
+            self.state_manager.set_state("v3_system", "is_running", True)
+            self.state_manager.set_state("v3_system", "start_time", self.performance_metrics['start_time'].isoformat())
+            
+            # Esperar un poco para verificar que inició correctamente
+            await asyncio.sleep(2)
+            
+            if self.v3_thread.is_alive():
+                logger.info("V3_CONTROLLER_SUCCESS", "Sistema V3 iniciado exitosamente")
+                return True, "✅ Sistema V3 autónomo iniciado exitosamente\n🎯 Estrategias optimizadas activas:\n• Scalping SOL/USDT 30m (14.15% mensual)\n• Híbrido SOL/USDT 15m (13.47% mensual)\n• Híbrido BTC/USDT 1h (11.23% mensual)"
+            else:
+                self.is_v3_running = False
+                return False, "❌ Error al iniciar el sistema V3"
+            
+        except Exception as e:
+            logger.error("V3_CONTROLLER_START_ERROR", f"Error iniciando sistema V3: {e}", exc_info=True)
+            self.is_v3_running = False
+            return False, f"❌ Error iniciando sistema V3: {e}"
+    
+    async def stop_v3_system(self) -> tuple[bool, str]:
+        """Detener el sistema V3 autónomo"""
+        try:
+            if not self.is_v3_system_running():
+                return False, "❌ El sistema V3 no está ejecutándose"
+            
+            logger.info("V3_CONTROLLER_STOP", "Deteniendo sistema V3 autónomo")
+            
+            # Detener el sistema V3
+            v3_autonomous.stop_autonomous_system()
+            self.is_v3_running = False
+            
+            # Esperar a que termine el thread
+            if self.v3_thread:
+                self.v3_thread.join(timeout=5)
+            
+            # Actualizar estado
+            self.state_manager.set_state("v3_system", "is_running", False)
+            self.state_manager.set_state("v3_system", "stop_time", datetime.now().isoformat())
+            
+            logger.info("V3_CONTROLLER_STOPPED", "Sistema V3 detenido exitosamente")
+            
+            # Generar reporte de sesión
+            session_report = self.generate_session_report()
+            
+            return True, f"✅ Sistema V3 autónomo detenido\n\n{session_report}"
+            
+        except Exception as e:
+            logger.error("V3_CONTROLLER_STOP_ERROR", f"Error deteniendo sistema V3: {e}", exc_info=True)
+            return False, f"❌ Error deteniendo sistema V3: {e}"
+    
+    async def get_v3_status(self) -> str:
+        """Obtener estado actual del sistema V3"""
+        try:
+            is_running = self.is_v3_system_running()
+            
+            if not is_running:
+                return "📴 Sistema V3 Autónomo: **DETENIDO**\n\n💡 Usa /v3_start para iniciar las estrategias optimizadas"
+            
+            # Calcular tiempo de ejecución
+            start_time = self.performance_metrics.get('start_time')
+            if start_time:
+                runtime = datetime.now() - start_time
+                runtime_str = f"{runtime.total_seconds()/3600:.1f} horas"
+            else:
+                runtime_str = "Desconocido"
+            
+            # Obtener métricas
+            total_signals = self.performance_metrics.get('total_signals', 0)
+            successful_trades = self.performance_metrics.get('successful_trades', 0)
+            failed_trades = self.performance_metrics.get('failed_trades', 0)
+            
+            status_msg = f"""🟢 **Sistema V3 Autónomo: ACTIVO**
+
+⏱️ **Tiempo de ejecución:** {runtime_str}
+📊 **Métricas de rendimiento:**
+  • Señales generadas: {total_signals}
+  • Trades exitosos: {successful_trades}
+  • Trades fallidos: {failed_trades}
+
+🎯 **Estrategias activas:**
+  • ✅ Scalping SOL/USDT 30m (14.15% mensual)
+  • ✅ Híbrido SOL/USDT 15m (13.47% mensual)
+  • ✅ Híbrido BTC/USDT 1h (11.23% mensual)
+
+📈 **Configuración optimizada:** Basada en 540 pruebas
+🔄 **Estado:** Analizando mercados continuamente
+
+💡 Comandos disponibles:
+/v3_stop - Detener sistema
+/v3_performance - Ver rendimiento detallado"""
+            
+            return status_msg
+            
+        except Exception as e:
+            logger.error("V3_STATUS_ERROR", f"Error obteniendo estado V3: {e}", exc_info=True)
+            return f"❌ Error obteniendo estado del sistema V3: {e}"\n    \n    async def get_v3_performance(self) -> str:\n        \"\"\"Obtener reporte detallado de rendimiento\"\"\"\n        try:\n            if not self.is_v3_system_running():\n                return \"📴 Sistema V3 no está ejecutándose. No hay datos de rendimiento disponibles.\"\n            \n            # Obtener datos de rendimiento del state manager\n            start_time_str = self.state_manager.get_state("v3_system", "start_time")\n            \n            performance_data = {\n                'session_start': start_time_str,\n                'current_time': datetime.now().isoformat(),\n                'strategies': {\n                    'scalping_sol_30m': {\n                        'name': 'Scalping SOL/USDT 30m',\n                        'expected_monthly_return': '14.15%',\n                        'risk_per_trade': '2%',\n                        'priority': 1\n                    },\n                    'hybrid_sol_15m': {\n                        'name': 'Híbrido SOL/USDT 15m',\n                        'expected_monthly_return': '13.47%',\n                        'risk_per_trade': '3%',\n                        'priority': 2\n                    },\n                    'hybrid_btc_1h': {\n                        'name': 'Híbrido BTC/USDT 1h',\n                        'expected_monthly_return': '11.23%',\n                        'risk_per_trade': '2.5%',\n                        'priority': 3\n                    }\n                }\n            }\n            \n            performance_msg = f\"\"\"📊 **REPORTE DE RENDIMIENTO V3**\n{'='*50}\n\n⏰ **Sesión actual:**\n  • Inicio: {start_time_str}\n  • Duración: {self.calculate_session_duration()}\n\n🎯 **Estrategias optimizadas ejecutándose:**\n\n**1️⃣ SCALPING SOL/USDT 30m** (Prioridad 1)\n  • 🏆 Rendimiento probado: **14.15% mensual**\n  • 💰 Riesgo por trade: 2%\n  • ⚡ Análisis cada 30 minutos\n\n**2️⃣ HÍBRIDO SOL/USDT 15m** (Prioridad 2)\n  • 🏆 Rendimiento probado: **13.47% mensual**\n  • 💰 Riesgo por trade: 3%\n  • ⚡ Análisis cada 15 minutos\n\n**3️⃣ HÍBRIDO BTC/USDT 1h** (Prioridad 3)\n  • 🏆 Rendimiento probado: **11.23% mensual**\n  • 💰 Riesgo por trade: 2.5%\n  • ⚡ Análisis cada 1 hora\n\n🔬 **Base de optimización:**\n  • ✅ 540 pruebas comprehensivas realizadas\n  • ✅ Validación con datos reales de Binance\n  • ✅ Análisis de robustez completado\n  • ✅ Cross-validación temporal exitosa\n\n📈 **Rendimiento esperado combinado:**\n  • 💡 Potencial mensual: 12-16%\n  • 🎯 Win Rate esperado: 65-75%\n  • ⚖️ Risk/Reward optimizado: 1:2.5\n\n💡 **Nota:** Los resultados son proyecciones basadas en backtesting.\n    El rendimiento real puede variar según condiciones de mercado.\"\"\"\n            \n            return performance_msg\n            \n        except Exception as e:\n            logger.error("V3_PERFORMANCE_ERROR", f"Error obteniendo rendimiento V3: {e}", exc_info=True)\n            return f"❌ Error obteniendo reporte de rendimiento: {e}"\n    \n    def calculate_session_duration(self) -> str:\n        \"\"\"Calcular duración de la sesión actual\"\"\"\n        start_time_str = self.state_manager.get_state("v3_system", "start_time")\n        if not start_time_str:\n            return "Desconocido"\n        \n        try:\n            start_time = datetime.fromisoformat(start_time_str)\n            duration = datetime.now() - start_time\n            \n            days = duration.days\n            hours = duration.seconds // 3600\n            minutes = (duration.seconds % 3600) // 60\n            \n            if days > 0:\n                return f"{days}d {hours}h {minutes}m"\n            elif hours > 0:\n                return f"{hours}h {minutes}m"\n            else:\n                return f"{minutes}m"\n                \n        except Exception:\n            return "Desconocido"\n    \n    def generate_session_report(self) -> str:\n        \"\"\"Generar reporte de sesión\"\"\"\n        try:\n            duration = self.calculate_session_duration()\n            total_signals = self.performance_metrics.get('total_signals', 0)\n            \n            return f\"\"\"📊 **REPORTE DE SESIÓN V3**\n⏱️ Duración: {duration}\n📡 Señales generadas: {total_signals}\n🎯 Estrategias ejecutadas: 3/3\n✅ Sesión completada exitosamente\"\"\"\n            \n        except Exception as e:\n            return f\"Error generando reporte: {e}\"\n    \n    async def handle_v3_emergency_stop(self) -> tuple[bool, str]:\n        \"\"\"Manejar parada de emergencia del sistema V3\"\"\"\n        try:\n            logger.warning(\"V3_EMERGENCY_STOP\", \"Ejecutando parada de emergencia del sistema V3\")\n            \n            # Forzar detención\n            v3_autonomous.stop_autonomous_system()\n            self.is_v3_running = False\n            \n            if self.v3_thread:\n                # No esperar, terminar inmediatamente\n                pass\n            \n            self.state_manager.set_state("v3_system", "is_running", False)\n            self.state_manager.set_state("v3_system", "emergency_stop", datetime.now().isoformat())\n            \n            return True, \"🚨 PARADA DE EMERGENCIA V3 EJECUTADA\\n\\n⚠️ Sistema V3 detenido inmediatamente\\n✅ Estado guardado\\n💡 Usa /v3_start para reiniciar cuando sea seguro\"\n            \n        except Exception as e:\n            logger.error(\"V3_EMERGENCY_STOP_ERROR\", f\"Error en parada de emergencia: {e}\", exc_info=True)\n            return False, f\"❌ Error en parada de emergencia: {e}\"\n\n\n# Instancia global del controlador\nv3_controller = V3AutonomousController()\n\n\n# Funciones de integración con handlers de Telegram\n\nasync def handle_v3_start_command(bot_instance, chat_id: int) -> None:\n    \"\"\"Manejar comando /v3_start\"\"\"\n    try:\n        success, message = await v3_controller.start_v3_system()\n        await send_message(bot_instance, chat_id, message)\n        \n        if success:\n            logger.info(\n                \"V3_START_COMMAND_SUCCESS\",\n                \"Comando /v3_start ejecutado exitosamente\",\n                details={\"chat_id\": chat_id}\n            )\n        else:\n            logger.warning(\n                \"V3_START_COMMAND_FAILED\",\n                \"Comando /v3_start falló\",\n                details={\"chat_id\": chat_id, \"message\": message}\n            )\n            \n    except Exception as e:\n        error_msg = f\"❌ Error ejecutando comando /v3_start: {e}\"\n        logger.error(\"V3_START_COMMAND_ERROR\", error_msg, exc_info=True)\n        await send_message(bot_instance, chat_id, error_msg)\n\n\nasync def handle_v3_stop_command(bot_instance, chat_id: int) -> None:\n    \"\"\"Manejar comando /v3_stop\"\"\"\n    try:\n        success, message = await v3_controller.stop_v3_system()\n        await send_message(bot_instance, chat_id, message)\n        \n        if success:\n            logger.info(\n                \"V3_STOP_COMMAND_SUCCESS\",\n                \"Comando /v3_stop ejecutado exitosamente\",\n                details={\"chat_id\": chat_id}\n            )\n        else:\n            logger.warning(\n                \"V3_STOP_COMMAND_FAILED\",\n                \"Comando /v3_stop falló\",\n                details={\"chat_id\": chat_id, \"message\": message}\n            )\n            \n    except Exception as e:\n        error_msg = f\"❌ Error ejecutando comando /v3_stop: {e}\"\n        logger.error(\"V3_STOP_COMMAND_ERROR\", error_msg, exc_info=True)\n        await send_message(bot_instance, chat_id, error_msg)\n\n\nasync def handle_v3_status_command(bot_instance, chat_id: int) -> None:\n    \"\"\"Manejar comando /v3_status\"\"\"\n    try:\n        status_message = await v3_controller.get_v3_status()\n        await send_message(bot_instance, chat_id, status_message)\n        \n        logger.info(\n            \"V3_STATUS_COMMAND\",\n            \"Comando /v3_status ejecutado\",\n            details={\"chat_id\": chat_id}\n        )\n        \n    except Exception as e:\n        error_msg = f\"❌ Error ejecutando comando /v3_status: {e}\"\n        logger.error(\"V3_STATUS_COMMAND_ERROR\", error_msg, exc_info=True)\n        await send_message(bot_instance, chat_id, error_msg)\n\n\nasync def handle_v3_performance_command(bot_instance, chat_id: int) -> None:\n    \"\"\"Manejar comando /v3_performance\"\"\"\n    try:\n        performance_message = await v3_controller.get_v3_performance()\n        await send_message(bot_instance, chat_id, performance_message)\n        \n        logger.info(\n            \"V3_PERFORMANCE_COMMAND\",\n            \"Comando /v3_performance ejecutado\",\n            details={\"chat_id\": chat_id}\n        )\n        \n    except Exception as e:\n        error_msg = f\"❌ Error ejecutando comando /v3_performance: {e}\"\n        logger.error(\"V3_PERFORMANCE_COMMAND_ERROR\", error_msg, exc_info=True)\n        await send_message(bot_instance, chat_id, error_msg)\n\n\nasync def handle_v3_emergency_stop_command(bot_instance, chat_id: int) -> None:\n    \"\"\"Manejar comando /v3_emergency_stop\"\"\"\n    try:\n        success, message = await v3_controller.handle_v3_emergency_stop()\n        await send_message(bot_instance, chat_id, message)\n        \n        logger.warning(\n            \"V3_EMERGENCY_STOP_COMMAND\",\n            \"Comando /v3_emergency_stop ejecutado\",\n            details={\"chat_id\": chat_id, \"success\": success}\n        )\n        \n    except Exception as e:\n        error_msg = f\"❌ Error ejecutando parada de emergencia: {e}\"\n        logger.error(\"V3_EMERGENCY_STOP_COMMAND_ERROR\", error_msg, exc_info=True)\n        await send_message(bot_instance, chat_id, error_msg)\n\n\nif __name__ == \"__main__\":\n    print(\"🎮 CONTROLADOR V3 AUTÓNOMO\")\n    print(\"=\" * 40)\n    print(\"Módulo de control para sistema V3 autónomo.\")\n    print(\"Este módulo se integra con los handlers de Telegram.\")\n    print(\"\\nComandos disponibles:\")\n    print(\"• /v3_start - Iniciar sistema V3\")\n    print(\"• /v3_stop - Detener sistema V3\")\n    print(\"• /v3_status - Ver estado actual\")\n    print(\"• /v3_performance - Ver rendimiento\")\n    print(\"• /v3_emergency_stop - Parada de emergencia\")\n

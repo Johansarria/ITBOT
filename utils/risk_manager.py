@@ -3,6 +3,7 @@ from datetime import datetime, date, timezone
 import json
 import os
 import pandas as pd
+import os
 from utils.state_manager import StateManager
 from config import settings
 from utils.shield_manager import escudo_activo
@@ -35,13 +36,15 @@ async def _get_daily_pnl_pct() -> float:
 
         # 1. Calcular PnL Realizado de operaciones cerradas hoy
         if os.path.exists(OPERATIONS_LOG):
-            ops_df = pd.read_csv(OPERATIONS_LOG, parse_dates=['timestamp_open', 'timestamp_close'])
+            # Leer CSV y normalizar timestamps a UTC de forma robusta
+            ops_df = pd.read_csv(OPERATIONS_LOG)
             today = datetime.now(timezone.utc).date()
 
-            closed_today_ops = ops_df[
-                (ops_df['timestamp_close'].notna()) &
-                (pd.to_datetime(ops_df['timestamp_close']).dt.tz_convert('UTC').dt.date == today)
-            ]
+            if 'timestamp_close' in ops_df.columns:
+                ts_close = pd.to_datetime(ops_df['timestamp_close'], utc=True, errors='coerce')
+                closed_today_ops = ops_df[(ts_close.notna()) & (ts_close.dt.date == today)]
+            else:
+                closed_today_ops = pd.DataFrame()
 
             if not closed_today_ops.empty:
                 realized_pnl_usdt = closed_today_ops['pnl_usdt'].sum()
@@ -54,25 +57,51 @@ async def _get_daily_pnl_pct() -> float:
             tickers_map = {ticker['symbol']: float(ticker['price']) for ticker in all_tickers}
 
             for _, pos in open_positions.iterrows():
-                symbol = pos['symbol']
+                symbol = pos.get('symbol')
                 if symbol in tickers_map:
                     current_price = tickers_map[symbol]
-                    entry_price = pos['entry_price']
-                    quantity = pos['cantidad_token_operada']
-                    side = pos['side']
+                    entry_price = float(pos.get('entry_price', 0.0) or 0.0)
+                    # Fallback de cantidad: usar cantidad_token_operada si existe, si no, size_usdt / entry_price
+                    qty = pos.get('cantidad_token_operada')
+                    if qty is None or (isinstance(qty, float) and pd.isna(qty)):
+                        size_usdt = float(pos.get('size_usdt', 0.0) or 0.0)
+                        qty = (size_usdt / entry_price) if entry_price > 0 else 0.0
+                    quantity = float(qty or 0.0)
+                    side_val = str(pos.get('side', '')).upper()
+                    # Mapear BUY/SELL a LONG/SHORT
+                    is_long = side_val in ('LONG', 'BUY', 'COMPRA')
 
-                    pnl = (current_price - entry_price) * quantity if side == 'LONG' else (entry_price - current_price) * quantity
+                    pnl = (current_price - entry_price) * quantity if is_long else (entry_price - current_price) * quantity
                     unrealized_pnl_usdt += pnl
                 else:
                     logger.warning("PNL_CALC_NO_TICKER", f"No se encontró el ticker para {symbol} al calcular PnL no realizado.")
 
         # 3. Calcular Capital Total
-        balance_info = await client.get_asset_balance(asset="USDT")
-        usdt_balance = float(balance_info['free']) if balance_info else 0.0
+        # Considerar equity de cTrader SOLO si el objetivo de ejecución es CTRADER
+        total_capital_usdt = 0.0
+        try:
+            from config import settings as _settings
+            use_ctrader_equity = str(getattr(_settings, 'EXECUTION_TARGET', 'BINANCE')).upper() == 'CTRADER'
+        except Exception:
+            use_ctrader_equity = False
 
-        open_positions_value = open_positions['size_usdt'].sum() if not open_positions.empty else 0.0
+        if use_ctrader_equity:
+            ctrader_account_path = os.path.join('data', 'ctrader', 'account.json')
+            if os.path.exists(ctrader_account_path):
+                try:
+                    with open(ctrader_account_path, 'r') as f:
+                        acc = json.load(f)
+                        eq = acc.get('equity')
+                        if eq is not None:
+                            total_capital_usdt = float(eq)
+                except Exception:
+                    total_capital_usdt = 0.0
 
-        total_capital_usdt = usdt_balance + open_positions_value
+        if total_capital_usdt <= 0:
+            balance_info = await client.get_asset_balance(asset="USDT")
+            usdt_balance = float(balance_info['free']) if balance_info else 0.0
+            open_positions_value = open_positions['size_usdt'].sum() if not open_positions.empty else 0.0
+            total_capital_usdt = usdt_balance + open_positions_value
 
         if total_capital_usdt == 0:
             return 0.0
@@ -96,7 +125,7 @@ async def _get_daily_pnl_pct() -> float:
         return 0.0
 
 
-async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tuple[bool, str]:
+async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0, symbol: str | None = None) -> tuple[bool, str]:
     """
     Verifica todas las reglas de riesgo antes de permitir una nueva operación.
     Requiere el tamaño de la nueva operación para el chequeo de exposición.
@@ -129,6 +158,18 @@ async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tu
         logger.warning("TRADE_REJECTED", reason, details={"rule": "max_concurrent_trades", "limit": params['RISK_MAX_CONCURRENT_TRADES'], "current": current_positions})
         return False, reason
 
+    # REGLA 1b (opcional): Limitar trades por símbolo si está configurado
+    max_trades_per_symbol = params.get("RISK_MAX_PER_SYMBOL_TRADES")
+    if symbol and isinstance(max_trades_per_symbol, int) and max_trades_per_symbol > 0:
+        try:
+            per_symbol = len(open_positions_df[open_positions_df.get('symbol') == symbol])
+        except Exception:
+            per_symbol = 0
+        if per_symbol >= max_trades_per_symbol:
+            reason = f"Límite de operaciones por símbolo ({max_trades_per_symbol}) alcanzado para {symbol}."
+            logger.warning("TRADE_REJECTED", reason, details={"rule": "max_trades_per_symbol", "symbol": symbol, "limit": max_trades_per_symbol, "current": per_symbol})
+            return False, reason
+
     # REGLA 2: Verificar Límite de Exposición Máxima
     try:
         client = await get_binance_client()
@@ -136,7 +177,28 @@ async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tu
         usdt_balance = float(balance_info['free']) if balance_info else 0.0
 
         open_positions_value = open_positions_df['size_usdt'].sum() if not open_positions_df.empty else 0.0
-        total_capital = usdt_balance + open_positions_value
+        # Considerar equity de cTrader SOLO si el objetivo de ejecución es CTRADER
+        try:
+            from config import settings as _settings
+            use_ctrader_equity = str(getattr(_settings, 'EXECUTION_TARGET', 'BINANCE')).upper() == 'CTRADER'
+        except Exception:
+            use_ctrader_equity = False
+
+        total_capital = 0.0
+        if use_ctrader_equity:
+            ctrader_account_path = os.path.join('data', 'ctrader', 'account.json')
+            if os.path.exists(ctrader_account_path):
+                try:
+                    with open(ctrader_account_path, 'r') as f:
+                        acc = json.load(f)
+                        eq = acc.get('equity')
+                        if eq is not None:
+                            total_capital = float(eq)
+                except Exception:
+                    total_capital = 0.0
+
+        if total_capital <= 0:
+            total_capital = usdt_balance + open_positions_value
 
         if total_capital > 0:
             current_exposure_pct = (open_positions_value / total_capital) * 100
@@ -146,6 +208,23 @@ async def verificar_permiso_de_operacion(new_trade_size_usdt: float = 0.0) -> tu
                 reason = f"Límite de exposición máxima ({params['RISK_MAX_EXPOSURE_PCT']}%) superado."
                 logger.warning("TRADE_REJECTED", reason, details={"rule": "max_exposure", "limit_pct": params['RISK_MAX_EXPOSURE_PCT'], "current_exposure_pct": current_exposure_pct, "new_trade_exposure_pct": new_trade_exposure_pct})
                 return False, reason
+            # REGLA 2b (opcional): Límite de exposición por símbolo
+            per_symbol_exposure_limit = params.get("RISK_MAX_PER_SYMBOL_EXPOSURE_PCT")
+            if symbol and isinstance(per_symbol_exposure_limit, (int, float)) and per_symbol_exposure_limit > 0:
+                try:
+                    sym_usdt = float(open_positions_df.loc[open_positions_df.get('symbol') == symbol, 'size_usdt'].sum())
+                except Exception:
+                    sym_usdt = 0.0
+                sym_exposure_pct_after = ((sym_usdt + new_trade_size_usdt) / total_capital) * 100
+                if sym_exposure_pct_after > float(per_symbol_exposure_limit):
+                    reason = (
+                        f"Límite de exposición por símbolo ({per_symbol_exposure_limit}%) superado para {symbol}."
+                    )
+                    logger.warning("TRADE_REJECTED", reason, details={
+                        "rule": "max_symbol_exposure", "symbol": symbol, "limit_pct": per_symbol_exposure_limit,
+                        "sym_exposure_pct_after": sym_exposure_pct_after
+                    })
+                    return False, reason
     except Exception as e:
         logger.error("MAX_EXPOSURE_CHECK_ERROR", f"Error verificando la exposición máxima: {e}", exc_info=True)
         return False, "Error en chequeo de exposición"
@@ -177,8 +256,10 @@ async def perform_pre_execution_risk_checks(decision: Dict[str, Any]) -> Tuple[b
         logger.warning("PRE_EXECUTION_CHECK_FAIL", "Símbolo no especificado en la decisión.", details=event_details)
         return False, "Símbolo de operación no especificado."
 
-    if decision.get('decision') not in ['BUY', 'SELL', 'MANTENER']:
-        reason = f"Decisión inválida: {decision.get('decision')}"
+    # Aceptar 'side' como alias de 'decision'
+    decision_value = decision.get('decision') or decision.get('side')
+    if decision_value not in ['BUY', 'SELL', 'MANTENER']:
+        reason = f"Decisión inválida: {decision_value}"
         logger.warning("PRE_EXECUTION_CHECK_FAIL", reason, details={**event_details, "reason": reason})
         return False, reason
 
@@ -235,14 +316,15 @@ cargar_umbrales_optimizado()
 # -----------------------------
 def _get_risk_state():
     sm = StateManager()
-    return sm.get_state("risk_manager")
+    state = sm.get_state("risk_manager")
+    return state or {}
 
 def _update_risk_state(updates: dict):
     sm = StateManager()
     sm.update_module_state("risk_manager", updates)
 
 def _get_custom_params_state() -> dict:
-    state = _get_risk_state()
+    state = _get_risk_state() or {}
     return {
         "active": state.get("custom_params_active", False),
         "params": state.get("custom_params", {})
@@ -261,14 +343,28 @@ def get_effective_risk_params() -> dict:
         "RISK_MAX_EXPOSURE_PCT": float(getattr(settings, "RISK_MAX_EXPOSURE_PCT", 30.0)),
         "RISK_MAX_DAILY_DRAWDOWN_PCT": float(getattr(settings, "RISK_MAX_DAILY_DRAWDOWN_PCT", 3.0)),
         "DEFAULT_RISK_PERCENTAGE": float(getattr(settings, "DEFAULT_RISK_PERCENTAGE", 1.0)),
+        # Claves opcionales por símbolo (None por defecto, aplican solo si se configuran)
+        "RISK_MAX_PER_SYMBOL_TRADES": getattr(settings, "RISK_MAX_PER_SYMBOL_TRADES", None),
+        "RISK_MAX_PER_SYMBOL_EXPOSURE_PCT": getattr(settings, "RISK_MAX_PER_SYMBOL_EXPOSURE_PCT", None),
     }
     if custom.get("active") and isinstance(custom.get("params"), dict):
+        # Solo actualiza claves conocidas y con valores no nulos
         params.update({k: v for k, v in custom["params"].items() if k in params and v is not None})
     return params
 
 def set_custom_risk_params(new_params: dict):
     """Activa parámetros personalizados y los persiste en el estado."""
-    allowed = {"RISK_PER_TRADE_STOP_LOSS_PCT", "RISK_PER_TRADE_TAKE_PROFIT_PCT", "RISK_MAX_CONCURRENT_TRADES", "RISK_MAX_EXPOSURE_PCT", "RISK_MAX_DAILY_DRAWDOWN_PCT", "DEFAULT_RISK_PERCENTAGE"}
+    allowed = {
+        "RISK_PER_TRADE_STOP_LOSS_PCT",
+        "RISK_PER_TRADE_TAKE_PROFIT_PCT",
+        "RISK_MAX_CONCURRENT_TRADES",
+        "RISK_MAX_EXPOSURE_PCT",
+        "RISK_MAX_DAILY_DRAWDOWN_PCT",
+        "DEFAULT_RISK_PERCENTAGE",
+        # Nuevas claves opcionales por símbolo
+        "RISK_MAX_PER_SYMBOL_TRADES",
+        "RISK_MAX_PER_SYMBOL_EXPOSURE_PCT",
+    }
     clean = {k: new_params[k] for k in new_params.keys() if k in allowed}
     state = _get_risk_state()
     state["custom_params_active"] = True

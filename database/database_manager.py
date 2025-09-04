@@ -152,6 +152,33 @@ def create_tables():
                 score NUMERIC,
                 features TEXT
             )
+        """,
+        # Nuevas tablas para el controlador V3 dinámico
+        "market_analysis": """
+            CREATE TABLE market_analysis (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL,
+                market_regime VARCHAR(64) NOT NULL,
+                confidence NUMERIC NOT NULL,
+                volatility_percentile NUMERIC,
+                trend_strength NUMERIC,
+                volume_ratio NUMERIC,
+                momentum_score NUMERIC,
+                active_strategies TEXT,
+                recommendations TEXT
+            )
+        """,
+        "strategy_performance": """
+            CREATE TABLE strategy_performance (
+                id SERIAL PRIMARY KEY,
+                strategy_name VARCHAR(255) NOT NULL,
+                activation_time TIMESTAMP NOT NULL,
+                deactivation_time TIMESTAMP,
+                deactivation_reason VARCHAR(255),
+                market_regime VARCHAR(64),
+                initial_confidence NUMERIC,
+                final_performance TEXT
+            )
         """
     }
 
@@ -339,4 +366,23 @@ def save_discarded_signal(signal: dict):
             session.commit()
     except SQLAlchemyError as e:
         logger.error(f"Error saving discarded signal: {e}", exc_info=True)
+        raise
+
+
+def insert_record(table_name: str, record: Dict[str, Any]) -> None:
+    """Inserta un registro genérico en la tabla indicada usando SQL parametrizado.
+    Evita dependencias de ORM y se adapta a diccionarios dinámicos.
+    """
+    if not record:
+        return
+    columns = ", ".join(record.keys())
+    placeholders = ", ".join([f":{k}" for k in record.keys()])
+    query = text(f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})")
+    try:
+        with get_db_session() as session:
+            session.execute(query, _prepare_params(record))
+            session.commit()
+        logger.info(f"Record inserted into '{table_name}'.")
+    except SQLAlchemyError as e:
+        logger.error(f"Error inserting record into {table_name}: {e}", exc_info=True)
         raise

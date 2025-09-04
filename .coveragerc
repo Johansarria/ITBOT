@@ -1,0 +1,39 @@
+[run]
+branch = True
+source =
+    utils
+    strategies
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.: 
+omit =
+    */tests/*
+    */archive/*
+    */ai_module/*
+    */mlruns/*
+    */web/*
+    */data/*
+    */storage/*
+    */logs/*
+    # Órdenes y adaptadores legacy fuera de alcance de pruebas unitarias
+    telegram_logic_adapter.py
+    handlers.py
+    listener_bot.py
+    # Scripts CLI y analíticos
+    *_analysis_*.py
+    analyze_*.py
+    *executive*.py
+    *summary*.py
+    download_*.py
+    demo_*.py
+    run_*.py
+    main*.py
+    reset_*.py
+    ver_descartadas.py
+    train_*.py
+    optimize_*.py
+    performance_*.py
+    implement_*.py
+    setup_*_configuration.py

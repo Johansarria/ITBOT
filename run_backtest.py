@@ -19,11 +19,21 @@ from typing import Optional
 # Cargar variables de entorno desde .env
 load_dotenv()
 
-# Añadir el directorio raíz al path para poder importar los módulos del bot
+# --- Pre-configuración para Backtesting ---
+# Añadir el directorio raíz al path ANTES de cualquier otra importación del proyecto
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+# Si las variables de entorno de Postgres no están completas,
+# forzamos el uso de SQLite para que Pydantic no falle al cargar settings.
+# Esto permite que el backtester se ejecute de forma independiente sin una DB live.
+if os.getenv("DB_TYPE") == "postgresql" and not all(os.getenv(k) for k in ["POSTGRES_HOST", "POSTGRES_DB", "POSTGRES_USER", "POSTGRES_PASSWORD"]):
+    print("Advertencia: Faltan variables de entorno para PostgreSQL. Forzando DB_TYPE=sqlite para el backtest.")
+    os.environ["DB_TYPE"] = "sqlite"
+
+# Importar módulos del proyecto DESPUÉS de la pre-configuración
 from strategies.backtester import Backtester
 from strategies.ml_strategy import MLStrategy
+from strategies.ma_cross_strategy import MACrossStrategy # Import for testing
 from utils.technical_analysis import get_historical_klines
 from config import settings, reload_settings
 
@@ -51,7 +61,6 @@ async def _load_klines_with_fallback(symbol: str, interval: str, limit: int) -> 
                     df = df.dropna(subset=['timestamp'])
                     df = df.sort_values('timestamp')
                     df.set_index('timestamp', inplace=True)
-                # Asegurar columnas numéricas
                 for col in ['open','high','low','close','volume']:
                     if col in df.columns:
                         df[col] = pd.to_numeric(df[col], errors='coerce')
@@ -66,17 +75,17 @@ async def _load_klines_with_fallback(symbol: str, interval: str, limit: int) -> 
     return pd.DataFrame()
 
 
-async def run_single_backtest(symbol: str, days: int, initial_balance: float, commission: float, report_last_days: Optional[int] = None) -> Optional[dict]:
+async def run_single_backtest(symbol: str, days: int, initial_balance: float, report_last_days: Optional[int] = None) -> Optional[dict]:
     """
     Ejecuta un backtest para un único símbolo y devuelve las métricas.
     """
-    print(f"\n--- Iniciando Backtest para {symbol} ---")
+    interval = "1h"
+    print(f"\n--- Iniciando Backtest para {symbol} en intervalo {interval} ---")
     
-    # 1. Cargar datos históricos
     end_date = datetime.now()
     start_date = end_date - timedelta(days=days)
     
-    historical_data_df = await _load_klines_with_fallback(symbol=symbol, interval='1h', limit=days * 24)
+    historical_data_df = await _load_klines_with_fallback(symbol=symbol, interval=interval, limit=days * 24)
 
     if historical_data_df is None or historical_data_df.empty:
         print(f"No se encontraron datos históricos para {symbol}. Omitiendo.")
@@ -84,20 +93,35 @@ async def run_single_backtest(symbol: str, days: int, initial_balance: float, co
 
     print(f"Datos cargados para {symbol}: {len(historical_data_df)} velas de 1h.")
 
-    # 2. Ejecutar simulación
-    strategy = MLStrategy()
-    # Establecer símbolo/intervalo correctos para este backtest
-    strategy.set_parameters({"symbol": symbol, "interval": "1h"})
-    warmup = getattr(settings, 'ML_MIN_DATA_POINTS', 200)
+    # --- SELECCIÓN DE ESTRATEGIA PARA EL TEST ---
+    # strategy = MLStrategy()
+    strategy = MACrossStrategy() # Import for testing
+    # -------------------------------------------
+
+    strategy.set_parameters({"symbol": symbol, "interval": interval})
+    
+    # El warmup debe ser adecuado para la estrategia
+    if isinstance(strategy, MLStrategy):
+        warmup = getattr(settings, 'ML_MIN_DATA_POINTS', 2000)
+    else:
+        warmup = 50 # Warmup genérico para estrategias técnicas
+
     bt = Backtester(
         historical_data=historical_data_df,
         initial_balance=initial_balance,
-        commission=commission,
-        warmup_period=warmup
+        warmup_period=warmup,
+        symbol=symbol,
+        interval=interval
     )
     metrics = await bt.run(strategy)
 
-    # Métrica de operaciones cerradas últimos N días (si se solicita)
+    # Guardar historial de predicciones si es MLStrategy
+    if isinstance(strategy, MLStrategy) and metrics and "prediction_history" in metrics:
+        pred_df = pd.DataFrame(metrics["prediction_history"])
+        output_path = f"backtest_predictions_{symbol}.csv"
+        pred_df.to_csv(output_path, index=False)
+        print(f"  - Historial de predicciones guardado en: {output_path}")
+
     if report_last_days and report_last_days > 0:
         try:
             trades_summ = metrics.get('trades', []) or []
@@ -118,10 +142,9 @@ async def run_single_backtest(symbol: str, days: int, initial_balance: float, co
         except Exception:
             pass
     
-    # Imprimir métricas individuales
     total_trades = metrics.get('total_trades', 0)
     trades_per_day = (total_trades / days) if total_trades > 0 else 0
-    print(f"Resultados para {symbol}:")
+    print(f"Resultados para {strategy.name} en {symbol}:")
     print(f"  - Operaciones Totales: {total_trades} ({trades_per_day:.2f}/día)")
     print(f"  - Rendimiento: {metrics.get('total_return_pct', 0):.2f}%")
     print(f"  - Tasa de Acierto: {metrics.get('win_rate_pct', 0):.2f}%")
@@ -130,7 +153,7 @@ async def run_single_backtest(symbol: str, days: int, initial_balance: float, co
     
     return metrics
 
-async def main(symbols: list, days: int, initial_balance: float, commission: float, report_last_days: Optional[int] = None):
+async def main(symbols: list, days: int, initial_balance: float, report_last_days: Optional[int] = None):
     """
     Función principal para ejecutar el backtest sobre una lista de símbolos.
     """
@@ -142,16 +165,14 @@ async def main(symbols: list, days: int, initial_balance: float, commission: flo
 
     all_metrics = []
     for symbol in symbols:
-        # Evitar excluir pares válidos. Solo omitimos si el par es estrictamente stablecoin<>stablecoin
         stable_exclusions = {"USDCUSDT", "FDUSDUSDT"}
         if symbol in stable_exclusions:
             print(f"\n--- Omitiendo Stablecoin {symbol} ---")
             continue
-        metrics = await run_single_backtest(symbol, days, initial_balance, commission, report_last_days)
+        metrics = await run_single_backtest(symbol, days, initial_balance, report_last_days)
         if metrics:
             all_metrics.append(metrics)
 
-    # 3. Consolidar y mostrar resultados finales
     if not all_metrics:
         print("\nNo se pudo completar el backtest para ningún activo.")
         return
@@ -159,18 +180,19 @@ async def main(symbols: list, days: int, initial_balance: float, commission: flo
     print("\n\n--- Resultados Consolidados del Portafolio Dinámico ---")
     
     total_trades_portfolio = sum(m.get('total_trades', 0) for m in all_metrics)
-    total_days_portfolio = days * len(all_metrics) # Días por número de activos analizados
     
     if total_trades_portfolio > 0:
-        # El promedio de operaciones se calcula sobre el total de operaciones del portafolio
-        # dividido por el número de días del período.
         avg_trades_per_day_portfolio = total_trades_portfolio / days
     else:
         avg_trades_per_day_portfolio = 0
 
-    # Calcular rendimiento promedio ponderado (simple por ahora)
-    avg_return_pct = sum(m.get('total_return_pct', 0) for m in all_metrics) / len(all_metrics)
-    avg_win_rate_pct = sum(m.get('win_rate_pct', 0) for m in all_metrics) / len(all_metrics)
+    # Evitar división por cero si no hay métricas
+    if all_metrics:
+        avg_return_pct = sum(m.get('total_return_pct', 0) for m in all_metrics) / len(all_metrics)
+        avg_win_rate_pct = sum(m.get('win_rate_pct', 0) for m in all_metrics) / len(all_metrics)
+    else:
+        avg_return_pct = 0
+        avg_win_rate_pct = 0
 
     print(f"Período Analizado:             {days} días")
     print(f"Activos Analizados con Éxito:  {len(all_metrics)}")
@@ -190,22 +212,19 @@ async def main(symbols: list, days: int, initial_balance: float, commission: flo
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ejecutar backtest histórico para ITBOT.")
     
-    # Lista de los 8 pares dinámicos como default
     DEFAULT_SYMBOLS = "USDCUSDT,FDUSDUSDT,BTCUSDT,TRXUSDT,BNBUSDT,ADAUSDT,ETHUSDT,SOLUSDT"
     
     parser.add_argument("--symbols", type=str, default=DEFAULT_SYMBOLS, help=f"Lista de símbolos separados por comas. Default: {DEFAULT_SYMBOLS}")
     parser.add_argument("--days", type=int, default=365, help="Número de días hacia atrás para el backtest.")
     parser.add_argument("--balance", type=float, default=10000.0, help="Balance inicial para la simulación por símbolo.")
-    parser.add_argument("--commission", type=float, default=0.001, help="Comisión por operación (ej. 0.001 para 0.1%).")
     parser.add_argument("--report_last_days", type=int, default=None, help="Reportar métricas de los últimos N días dentro del período cargado.")
     
     args = parser.parse_args()
     
     symbol_list = [s.strip().upper() for s in args.symbols.split(',')]
 
-    # Usar asyncio.run() para ejecutar la función async main
     try:
-        asyncio.run(main(symbol_list, args.days, args.balance, args.commission, args.report_last_days))
+        asyncio.run(main(symbol_list, args.days, args.balance, args.report_last_days))
     except KeyboardInterrupt:
         print("\nBacktest interrumpido por el usuario.")
     except Exception as e:

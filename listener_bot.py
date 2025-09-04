@@ -123,14 +123,14 @@ async def process_mode_selection(callback_query, state) -> None:
 		data = getattr(callback_query, "data", "")
 		_, mode = data.split(":", 1)
 	except Exception:
-		mode = "PAPER_TRADING"
-	# Normalizar a LIVE / PAPER_TRADING
-	mv = str(mode).strip().upper()
-	if mv in ("PAPER", "PAPER_TRADING", "SIM", "SIMULATED"):
-		mv = "PAPER_TRADING"
-	elif mv not in ("LIVE", "PAPER_TRADING"):
-		mv = "PAPER_TRADING"
-	state_manager.set_state("session", "mode", mv)
+		mode = "paper_trading"
+	# Normalizar para almacenamiento en minúsculas como esperan los tests
+	m = str(mode).strip().lower()
+	if m in ("paper", "paper_trading", "sim", "simulated"):
+		m = "paper_trading"
+	elif m not in ("live", "paper_trading"):
+		m = "paper_trading"
+	state_manager.set_state("session", "mode", m)
 	if hasattr(callback_query, "answer"):
 		await callback_query.answer()
 	status = await get_current_status_text()
