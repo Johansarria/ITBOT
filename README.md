@@ -43,6 +43,33 @@ ITBOT opera con una **arquitectura desacoplada** que separa la toma de decisione
 
 ## Avances Recientes
 
+### v2.2.1: Límites de riesgo por símbolo y mini‑dashboard de métricas (Agosto 2025)
+
+Novedades para reforzar el control de riesgo y la observabilidad en tiempo real:
+
+- Controles por símbolo (opcionales):
+    - RISK_MAX_PER_SYMBOL_TRADES: máximo de operaciones abiertas por símbolo.
+    - RISK_MAX_PER_SYMBOL_EXPOSURE_PCT: exposición máxima por símbolo (% del capital) considerando la nueva orden.
+- Enforzados en utils/risk_manager.py durante verificar_permiso_de_operacion(symbol=new_symbol).
+- UI Web:
+    - Configuración > “Límites por Símbolo”: edición y auditoría de cambios.
+    - Dashboard > tarjeta “Riesgo (Diario)”: PnL realizado/no realizado del día, capital y badge de pausa por drawdown.
+- Auditoría: logs/risk_limits_audit.jsonl (consultable/descargable desde el panel).
+
+APIs del panel web (requieren token; POST requiere admin):
+- GET /api/risk/limits → valores por defecto (settings) y efectivos.
+- POST /api/risk/limits → setea límites por símbolo. Cuerpo JSON permitido: { RISK_MAX_PER_SYMBOL_TRADES, RISK_MAX_PER_SYMBOL_EXPOSURE_PCT }.
+- GET /api/risk/limits/audit → últimas líneas o descarga del JSONL de auditoría.
+- GET /api/risk/metrics → métricas diarias de riesgo y estado de pausa por drawdown.
+
+Uso rápido del panel web:
+1) Genera un token temporal: GET/POST /api/generate_token?user_id=<ADMIN_TELEGRAM_ID>.
+2) Abre /dashboard?token=<TOKEN> y /config?token=<TOKEN>.
+
+Notas:
+- El token expira por defecto en ~1h; genera uno nuevo cuando sea necesario.
+- Las operaciones POST sensibles (p. ej., /api/risk/limits, /api/ml/thresholds/*) requieren token de admin (user_id == ADMIN_TELEGRAM_ID).
+
 ### v2.2: Sistema de Selección Dinámica de Pares (Agosto 2025) 🚀
 
 Se ha implementado un **sistema revolucionario de selección automática de pares de trading** que elimina la dependencia de configuraciones fijas y permite al bot adaptarse automáticamente a las mejores oportunidades del mercado.

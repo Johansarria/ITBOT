@@ -18,6 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from utils.binance_client import get_binance_client
 from utils.logger_setup import setup_logging
+from utils.symbols import normalize_symbol
 
 setup_logging()
 logger = logging.getLogger(__name__)
@@ -41,6 +42,11 @@ class DynamicPairSelector:
         self.candidate_pairs = []
         self.pair_metrics = {}
         self.selected_pairs = []
+        # Pares no soportados o con problemas frecuentes de datos
+        self.excluded_pairs = set([
+            # Ejemplos: tokens con anclajes raros, migraciones, o inestables
+            "USD1USDT", "USDCUSDT", "BUSDUSDT",  # sin sentido operativo
+        ])
         
     async def discover_all_usdt_pairs(self) -> List[str]:
         """Descubrir todos los pares USDT disponibles en Binance"""
@@ -58,7 +64,9 @@ class DynamicPairSelector:
                 
                 # Solo pares USDT activos
                 if quote_asset == 'USDT' and status == 'TRADING':
-                    usdt_pairs.append(symbol)
+                    symn = normalize_symbol(symbol)
+                    if symn not in self.excluded_pairs:
+                        usdt_pairs.append(symn)
             
             logger.info(f"📊 Descubiertos {len(usdt_pairs)} pares USDT activos")
             return sorted(usdt_pairs)
@@ -66,11 +74,12 @@ class DynamicPairSelector:
         except Exception as e:
             logger.error(f"❌ Error descubriendo pares: {e}")
             # Fallback a lista conocida
-            return [
+            fallback = [
                 "BTCUSDT", "ETHUSDT", "BNBUSDT", "ADAUSDT", "XRPUSDT",
                 "SOLUSDT", "DOTUSDT", "AVAXUSDT", "MATICUSDT", "LINKUSDT",
                 "LTCUSDT", "UNIUSDT", "ATOMUSDT", "FILUSDT", "TRXUSDT"
             ]
+            return [s for s in fallback if s not in self.excluded_pairs]
     
     async def analyze_pair_performance(self, symbol: str) -> Optional[Dict]:
         """Analizar performance de un par específico"""
@@ -207,42 +216,42 @@ class DynamicPairSelector:
         """Evaluar todos los pares candidatos"""
         logger.info("🔍 INICIANDO EVALUACIÓN DINÁMICA DE PARES")
         logger.info("=" * 60)
-        
+
         # Descubrir pares disponibles
         self.candidate_pairs = await self.discover_all_usdt_pairs()
         logger.info(f"📊 Analizando {len(self.candidate_pairs)} pares USDT")
-        
+
         # Evaluar pares en lotes para evitar rate limits
-        results = {}
+        results: Dict[str, Dict] = {}
         batch_size = max_concurrent
         total_batches = (len(self.candidate_pairs) + batch_size - 1) // batch_size
-        
+
         for batch_idx in range(0, len(self.candidate_pairs), batch_size):
             batch = self.candidate_pairs[batch_idx:batch_idx + batch_size]
             batch_num = (batch_idx // batch_size) + 1
-            
+
             logger.info(f"📥 Procesando lote {batch_num}/{total_batches}: {len(batch)} pares")
-            
+
             # Procesar batch concurrentemente
-            tasks = [self.analyze_pair_performance(symbol) for symbol in batch]
+            tasks = [self.analyze_pair_performance(symbol) for symbol in batch if symbol not in self.excluded_pairs]
             batch_results = await asyncio.gather(*tasks, return_exceptions=True)
-            
+
             # Procesar resultados del batch
             for symbol, result in zip(batch, batch_results):
                 if isinstance(result, Exception):
                     logger.debug(f"⚠️ Error en {symbol}: {result}")
                     continue
-                
-                if result is not None:
+
+                if isinstance(result, dict):
                     results[symbol] = result
-                    logger.debug(f"✅ {symbol}: Score {result['composite_score']:.1f}")
-            
+                    logger.debug(f"✅ {symbol}: Score {result.get('composite_score', 0):.1f}")
+
             # Pausa entre batches
             if batch_num < total_batches:
                 await asyncio.sleep(2)
-        
+
         logger.info(f"✅ Evaluación completada: {len(results)}/{len(self.candidate_pairs)} pares analizados")
-        
+
         self.pair_metrics = results
         return results
     

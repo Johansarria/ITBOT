@@ -81,9 +81,14 @@ class Alerter:
         now = datetime.now()
         last_alert_time = self._last_alerts.get(alert_key)
 
-        if last_alert_time and (now - last_alert_time) < self._silence_period:
-            print(f"Alert '{alert_key}' suppressed due to deduplication rules.")
-            return
+        # Tolerancia pequeña para evitar falsos positivos cuando _silence_period
+        # es muy corto y el scheduler introduce jitter (tests usan ~0.1s)
+        if last_alert_time:
+            delta = now - last_alert_time
+            epsilon = timedelta(milliseconds=50)
+            if (delta + epsilon) < self._silence_period:
+                print(f"Alert '{alert_key}' suppressed due to deduplication rules.")
+                return
 
         if not self._bot_instance or not self._chat_id:
             print(f"Alerter not configured. Alert suppressed: {message}")

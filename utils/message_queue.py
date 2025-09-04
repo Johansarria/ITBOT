@@ -2,6 +2,7 @@ import redis
 import json
 import logging
 import time # ADDED for retry mechanism
+from typing import Optional
 from config import settings # Assuming config has REDIS_HOST, REDIS_PORT, REDIS_DB
 
 logger = logging.getLogger(__name__)
@@ -12,6 +13,8 @@ RETRY_DELAY_SECONDS = 5
 
 class MessageQueue:
     _instance = None
+    # Hint for type checkers
+    redis_client: Optional[redis.StrictRedis]
 
     def __new__(cls):
         if cls._instance is None:
@@ -28,7 +31,7 @@ class MessageQueue:
                     cls._instance.redis_client.ping() # Test connection
                     logger.info("Conexión a Redis establecida exitosamente.")
                     break # Connection successful, exit loop
-                except redis.exceptions.ConnectionError as e:
+                except redis.ConnectionError as e:
                     logger.error(f"Intento {i+1}/{MAX_RETRIES}: Error al conectar a Redis: {e}")
                     if i < MAX_RETRIES - 1:
                         logger.info(f"Reintentando en {RETRY_DELAY_SECONDS} segundos...")
@@ -38,8 +41,16 @@ class MessageQueue:
                         cls._instance.redis_client = None # Ensure client is None on final failure
         return cls._instance
 
+    def __init__(self):
+        # Ensure attribute exists for type checkers/runtimes
+        if not hasattr(self, 'redis_client'):
+            self.redis_client = None
+
+    def send_decision(self, decision_data: dict):
+        """Enviar decisión a la cola (alias para publish_decision)"""
+        return self.publish_decision(decision_data)
+    
     def publish_decision(self, decision_data: dict):
-        print(f"DEBUG: In publish_decision, redis_client is: {self.redis_client}")
         if not self.redis_client:
             logger.error("No se pudo publicar la decisión: Conexión a Redis no establecida.")
             return False
@@ -69,7 +80,7 @@ class MessageQueue:
         try:
             # BRPOP blocks until an element is available or timeout occurs
             # Returns a tuple: (queue_name, message)
-            result = self.redis_client.brpop(settings.REDIS_DECISION_QUEUE_NAME, timeout=timeout)
+            result = self.redis_client.brpop([settings.REDIS_DECISION_QUEUE_NAME], timeout=timeout)
             if result: # Check if result is not None
                 _, message = result # Now it's safe to unpack
                 return json.loads(message)

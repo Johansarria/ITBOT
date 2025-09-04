@@ -1,0 +1,9 @@
+{
+  "system_version": "V3_FINAL",
+  "backtest_days": 30,
+  "monthly_return": -0.09381660262814447,
+  "win_rate": 40.0,
+  "max_drawdown": -0.07284101042141934,
+  "total_trades": 5,
+  "strategy_performance": {
+    

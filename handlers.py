@@ -1034,22 +1034,32 @@ async def kill_switch_command_handler(update: Update, context: ContextTypes.DEFA
         await update.message.reply_text("🚫 ACCESO DENEGADO. Este comando solo puede ser ejecutado por un administrador.")
         return ConversationHandler.END
 
-    # 2. Solicitar contraseña adicional (mismo flujo que por botón)
-    # Guardar retorno al menú de emergencia en caso de cancelación
+    # 2. Según configuración, requerir contraseña o ir directo a confirmación
     context.user_data.setdefault('return_to', 'emergencia')
-    text = (
-        "🚨 <b>KILL SWITCH - VERIFICACIÓN ADICIONAL</b> 🚨\n\n"
-        "⚠️ Se requiere contraseña adicional de seguridad.\n\n"
-        "🔐 Escribe la contraseña para continuar:"
-    )
-    await update.message.reply_text(
-        text=text,
-        reply_markup=keyboards.get_cancel_keyboard(),
-        parse_mode=ParseMode.HTML
-    )
-
-    # 3. Entrar en el estado de verificación de contraseña
-    return CONFIRM_KILL_PASSWORD
+    if getattr(settings, 'KILL_SWITCH_REQUIRE_PASSWORD', False):
+        text = (
+            "🚨 <b>KILL SWITCH - VERIFICACIÓN ADICIONAL</b> 🚨\n\n"
+            "⚠️ Se requiere contraseña adicional de seguridad.\n\n"
+            "🔐 Escribe la contraseña para continuar:"
+        )
+        await update.message.reply_text(
+            text=text,
+            reply_markup=keyboards.get_cancel_keyboard(),
+            parse_mode=ParseMode.HTML
+        )
+        return CONFIRM_KILL_PASSWORD
+    else:
+        text = (
+            "🚨🚨🚨 CONFIRMACIÓN DE KILL SWITCH 🚨🚨🚨\n\n"
+            "Esta acción liquidará TODAS las posiciones abiertas y detendrá TODA la operativa del bot.\n\n"
+            "Esta acción es IRREVERSIBLE.\n\n"
+            "Para proceder, escribe CONFIRMAR KILL SWITCH"
+        )
+        await update.message.reply_text(
+            text=text,
+            reply_markup=keyboards.get_cancel_keyboard()
+        )
+        return CONFIRM_KILL_SWITCH
 
 
 async def kill_switch_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -1058,56 +1068,76 @@ async def kill_switch_start(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     user_id = query.from_user.id
     
     if not is_admin(user_id):
-        await query.answer("🚫 Solo administradores", show_alert=True)
-        text = f"""🚫 <b>ACCESO DENEGADO</b>
-
-🔐 Solo el administrador puede usar el Kill Switch
-
-👤 <b>Tu ID</b>: <code>{user_id}</code>
-⚙️ <b>Configurado</b>: <code>{settings.ADMIN_TELEGRAM_ID}</code>
-
-💡 <b>¿Eres el admin?</b> 
-• Verifica tu ID de Telegram
-• Actualiza ADMIN_TELEGRAM_ID en .env
-• Reinicia el bot
-
-🛑 <b>Alternativa segura</b>: Usa "PAUSA TOTAL" """
-
-        await query.edit_message_text(
-            text=text,
-            reply_markup=keyboards.get_admin_verification_keyboard(),
-            parse_mode=ParseMode.HTML
-        )
+        # Construir el texto con el emoji por código para evitar problemas de codificación
+        denied = f"{chr(0x1F6AB)} ACCESO DENEGADO {chr(0x1F6AB)}"
+        await query.answer(denied, show_alert=True)
         return ConversationHandler.END
 
     await query.answer("❗ ACCIÓN DE EMERGENCIA ❗", show_alert=True)
     # Guardar retorno al menú de emergencia en caso de cancelación
     context.user_data.setdefault('return_to', 'emergencia')
-    text = (
-        "🚨 <b>KILL SWITCH - VERIFICACIÓN ADICIONAL</b> 🚨\n\n"
-        "⚠️ Se requiere contraseña adicional de seguridad.\n\n"
-        "🔐 Escribe la contraseña para continuar:"
-    )
-    await query.edit_message_text(
-        text=text,
-        reply_markup=keyboards.get_cancel_keyboard(),
-        parse_mode=ParseMode.HTML
-    )
-    return CONFIRM_KILL_PASSWORD
+    if getattr(settings, 'KILL_SWITCH_REQUIRE_PASSWORD', False):
+        text = (
+            "🚨 <b>KILL SWITCH - VERIFICACIÓN ADICIONAL</b> 🚨\n\n"
+            "⚠️ Se requiere contraseña adicional de seguridad.\n\n"
+            "🔐 Escribe la contraseña para continuar:"
+        )
+        await query.edit_message_text(
+            text=text,
+            reply_markup=keyboards.get_cancel_keyboard(),
+            parse_mode=ParseMode.HTML
+        )
+        return CONFIRM_KILL_PASSWORD
+    else:
+        text = (
+            "🚨🚨🚨 CONFIRMACIÓN DE KILL SWITCH 🚨🚨🚨\n\n"
+            "Esta acción liquidará TODAS las posiciones abiertas y detendrá TODA la operativa del bot.\n\n"
+            "Esta acción es IRREVERSIBLE.\n\n"
+            "Para proceder, escribe CONFIRMAR KILL SWITCH"
+        )
+        await query.edit_message_text(
+            text=text,
+            reply_markup=keyboards.get_cancel_keyboard()
+        )
+        return CONFIRM_KILL_SWITCH
 
 async def confirm_kill_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Solicita confirmación final después de verificar la contraseña."""
-    text = (
-        "🚨🚨🚨 CONFIRMACIÓN FINAL DE KILL SWITCH 🚨🚨🚨\n\n"
-        "Esta acción liquidará TODAS las posiciones abiertas y detendrá TODA la operativa del bot.\n\n"
-        "Esta acción es IRREVERSIBLE.\n\n"
-        "Para proceder, escribe CONFIRMAR KILL SWITCH"
-    )
-    await update.message.reply_text(
-        text=text,
-        reply_markup=keyboards.get_cancel_keyboard()
-    )
-    return CONFIRM_KILL_SWITCH
+    """Confirma y ejecuta el Kill Switch cuando se recibe el texto correcto."""
+    # Si el flujo requiere password, esta función es llamada tras verify_kill_switch_password_handler
+    # En ambos casos esperamos el texto "CONFIRMAR KILL SWITCH" para ejecutar
+    msg = (update.message.text or "").strip() if update.message else ""
+    if msg == "CONFIRMAR KILL SWITCH":
+        # Mensaje previo
+        await update.message.reply_text(
+            "🔥 Confirmado. Ejecutando Kill Switch Atómico... El sistema se pausará primero y luego se liquidarán las posiciones."
+        )
+        # Ejecutar lógica atómica
+        results = await logic_stubs.atomic_kill_switch()
+        closed_count = len(results.get('closed_positions', []))
+        failed = results.get('failed_positions', []) or []
+        failed_count = len(failed)
+        report_parts = [f"✅ <b>Liquidación completada</b>: {closed_count} posiciones cerradas."]
+        if failed_count:
+            report_parts.append(f"❌ <b>ATENCIÓN</b>: {failed_count} posiciones NO pudieron cerrarse y requieren intervención manual.")
+            for pos in failed:
+                try:
+                    sym = pos.get('symbol') if isinstance(pos, dict) else str(pos)
+                except Exception:
+                    sym = str(pos)
+                report_parts.append(f"  • <code>{sym}</code>")
+        report_parts.append("\n🛑 <b>Sistema en Pausa</b>. El bot no realizará nuevas operaciones.")
+        await update.message.reply_text(
+            text="\n".join(report_parts),
+            reply_markup=keyboards.get_emergency_menu_keyboard(),
+            parse_mode=ParseMode.HTML
+        )
+        return ConversationHandler.END
+    else:
+        await update.message.reply_text(
+            "❌ Texto incorrecto. El Kill Switch ha sido cancelado.",
+            reply_markup=keyboards.get_cancel_keyboard()
+        )
+        return CONFIRM_KILL_SWITCH
 
 async def execute_kill_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Ejecuta el Kill Switch tras la confirmación final del administrador."""
@@ -1403,4 +1433,11 @@ conv_handlers = [
         per_message=True,
     ),
     # Los handlers 'liquidate_start' y 'stop_start' se eliminan en favor del nuevo 'kill_switch_start'
+]
+
+# --- Exportar todas las funciones necesarias para main.py ---
+__all__ = [
+    'start', 'main_menu_handlers', 'action_handlers', 'conv_handlers', 'get_my_id',
+    'show_control_operativo', 'show_gestion_riesgo', 'show_reportes_analisis', 
+    'show_mlops_menu', 'show_system_menu', 'show_emergency_menu', 'show_panel_control'
 ]

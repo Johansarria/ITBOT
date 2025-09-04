@@ -45,8 +45,20 @@ async def process_decision(decision: Dict[str, Any]) -> None:
         details={"trade_id": trade_id, **decision}
     )
 
-    # 1. Validación de estructura mínima
-    required_keys = {"type", "symbol", "side", "quantity", "strategy_id", "timestamp_decision"}
+    # 1. Validación de estructura mínima, dependiente del tipo
+    decision_type = str(decision.get("type", "")).upper()
+    trade_types = {"AUTOMATED_TRADE", "MANUAL_TRADE", "TRADE"}
+    if decision_type not in trade_types:
+        # Tipos no ejecutables por este worker: registramos y salimos sin error
+        logger.info(
+            "DECISION_SKIPPED",
+            f"Tipo de decisión no ejecutable por el worker: {decision_type}",
+            details={"trade_id": trade_id, **decision}
+        )
+        return
+
+    # Para decisiones de trade, exigimos campos mínimos y completamos defaults si faltan
+    required_keys = {"type", "symbol", "side", "quantity"}
     missing_keys = required_keys - decision.keys()
 
     # Log a base de datos (Postgres/Timescale)
@@ -81,6 +93,13 @@ async def process_decision(decision: Dict[str, Any]) -> None:
         log_decision_to_db(db_log_payload)
         return
 
+    # Defaults opcionales para mayor robustez
+    if not decision.get("timestamp_decision"):
+        from datetime import datetime
+        decision["timestamp_decision"] = datetime.utcnow().isoformat()
+    if not decision.get("strategy_id"):
+        decision["strategy_id"] = "unknown"
+
     # 2. Chequeos de riesgo previos a la ejecución
     try:
         risk_passed, risk_reason = await perform_pre_execution_risk_checks(decision)
@@ -106,7 +125,7 @@ async def process_decision(decision: Dict[str, Any]) -> None:
     try:
         resultado_analisis = {
             "symbol": decision["symbol"],
-            "decision": decision["side"],
+            "decision": decision.get("decision") or decision["side"],
             "score": decision.get("analysis_score"),
             "strategy_name": decision.get("strategy_id", "UnknownStrategy"),
         }
@@ -143,7 +162,7 @@ async def main() -> None:
         redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
         redis_client.ping() # Verificar conexión
         logger.info("REDIS_CONNECT_SUCCESS", "Conexión con Redis para heartbeat del worker establecida.")
-    except redis.exceptions.ConnectionError as e:
+    except redis.ConnectionError as e:
         logger.critical("REDIS_CONNECT_ERROR", f"No se pudo conectar a Redis para el heartbeat del worker: {e}", exc_info=True)
         redis_client = None
 
@@ -152,7 +171,7 @@ async def main() -> None:
         if redis_client:
             try:
                 redis_client.set("heartbeat:execution_worker", int(time.time()))
-            except redis.exceptions.RedisError as e:
+            except redis.RedisError as e:
                 logger.error("REDIS_HEARTBEAT_ERROR", f"No se pudo enviar el heartbeat del worker a Redis: {e}", exc_info=True)
 
         try:

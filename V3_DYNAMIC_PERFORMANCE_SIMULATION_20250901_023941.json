@@ -1,0 +1,167 @@
+{
+  "timestamp": "2025-09-01T02:39:41.010658",
+  "objective": "13% monthly minimum",
+  "weighted_expected_return": 0.12250000000000001,
+  "annual_projection": 3.0016232352380126,
+  "simulation_results": {
+    "total_return": 4.507319472075428,
+    "avg_monthly_return": 0.3756099560062857,
+    "months_above_objective": 7,
+    "objective_achieved": true,
+    "final_capital": 5507.319472075428
+  },
+  "monthly_details": [
+    {
+      "month": 1,
+      "scenario": "📉 Tendencia Bajista",
+      "return_pct": 9.998615787515543,
+      "capital_start": 1000,
+      "capital_end": 1099.9861578751554,
+      "profit": 99.98615787515541,
+      "trades": 15
+    },
+    {
+      "month": 2,
+      "scenario": "🚀 Tendencia Alcista",
+      "return_pct": 14.669694587847706,
+      "capital_start": 1099.9861578751554,
+      "capital_end": 1261.350767744041,
+      "profit": 161.3646098688855,
+      "trades": 22
+    },
+    {
+      "month": 3,
+      "scenario": "💥 Breakouts",
+      "return_pct": 20.0831021577224,
+      "capital_start": 1261.350767744041,
+      "capital_end": 1514.6691309972925,
+      "profit": 253.31836325325162,
+      "trades": 13
+    },
+    {
+      "month": 4,
+      "scenario": "📉 Tendencia Bajista",
+      "return_pct": 11.054694347079334,
+      "capital_start": 1514.6691309972925,
+      "capital_end": 1682.111173798606,
+      "profit": 167.4420428013134,
+      "trades": 18
+    },
+    {
+      "month": 5,
+      "scenario": "📉 Tendencia Bajista",
+      "return_pct": 13.46960114571239,
+      "capital_start": 1682.111173798606,
+      "capital_end": 1908.684839736739,
+      "profit": 226.573665938133,
+      "trades": 15
+    },
+    {
+      "month": 6,
+      "scenario": "📉 Tendencia Bajista",
+      "return_pct": 9.257023204291452,
+      "capital_start": 1908.684839736739,
+      "capital_end": 2085.372238247962,
+      "profit": 176.6873985112229,
+      "trades": 17
+    },
+    {
+      "month": 7,
+      "scenario": "⚡ Alta Volatilidad",
+      "return_pct": 16.30041760550452,
+      "capital_start": 2085.372238247962,
+      "capital_end": 2425.296621711636,
+      "profit": 339.9243834636741,
+      "trades": 45
+    },
+    {
+      "month": 8,
+      "scenario": "⚡ Alta Volatilidad",
+      "return_pct": 19.61384526066404,
+      "capital_start": 2425.296621711636,
+      "capital_end": 2900.9905482062686,
+      "profit": 475.6939264946327,
+      "trades": 36
+    },
+    {
+      "month": 9,
+      "scenario": "💥 Breakouts",
+      "return_pct": 20.019162294650492,
+      "capital_start": 2900.9905482062686,
+      "capital_end": 3481.7445542041523,
+      "profit": 580.7540059978837,
+      "trades": 12
+    },
+    {
+      "month": 10,
+      "scenario": "💥 Breakouts",
+      "return_pct": 25.126551409453906,
+      "capital_start": 3481.7445542041523,
+      "capital_end": 4356.586889562121,
+      "profit": 874.8423353579683,
+      "trades": 14
+    },
+    {
+      "month": 11,
+      "scenario": "🚀 Tendencia Alcista",
+      "return_pct": 12.87933751193078,
+      "capital_start": 4356.586889562121,
+      "capital_end": 4917.686419069353,
+      "profit": 561.0995295072325,
+      "trades": 23
+    },
+    {
+      "month": 12,
+      "scenario": "📉 Tendencia Bajista",
+      "return_pct": 11.990049847823773,
+      "capital_start": 4917.686419069353,
+      "capital_end": 5507.319472075428,
+      "profit": 589.633053006075,
+      "trades": 19
+    }
+  ],
+  "market_scenarios": {
+    "🚀 Tendencia Alcista": {
+      "probability": 0.25,
+      "monthly_return": 0.14,
+      "trades_per_month": 20,
+      "win_rate": 0.65
+    },
+    "📉 Tendencia Bajista": {
+      "probability": 0.2,
+      "monthly_return": 0.12,
+      "trades_per_month": 18,
+      "win_rate": 0.6
+    },
+    "⚡ Alta Volatilidad": {
+      "probability": 0.15,
+      "monthly_return": 0.18,
+      "trades_per_month": 45,
+      "win_rate": 0.55
+    },
+    "💥 Breakouts": {
+      "probability": 0.1,
+      "monthly_return": 0.22,
+      "trades_per_month": 15,
+      "win_rate": 0.7
+    },
+    "📊 Consolidación": {
+      "probability": 0.15,
+      "monthly_return": 0.08,
+      "trades_per_month": 10,
+      "win_rate": 0.75
+    },
+    "🏪 Mercado Lateral": {
+      "probability": 0.1,
+      "monthly_return": 0.01,
+      "trades_per_month": 2,
+      "win_rate": 0.5
+    },
+    "💤 Baja Volatilidad": {
+      "probability": 0.05,
+      "monthly_return": 0.03,
+      "trades_per_month": 5,
+      "win_rate": 0.8
+    }
+  }
+}

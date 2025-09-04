@@ -16,7 +16,8 @@ numpy==2.3.2
 pandas==2.3.1
 propcache==0.3.2
 pycryptodome==3.23.0
-python-binance
+python-binance==1.0.19
+python-binance==1.0.19
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.1
 python-telegram-bot==22.3
@@ -36,6 +37,7 @@ pytest==7.4.2
 matplotlib
 ta
 aiogram
+ccxt
 openpyxl
 apscheduler
 psycopg2-binary

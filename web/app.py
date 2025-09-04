@@ -21,9 +21,16 @@ import math
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 import glob
+from sqlalchemy import text as _sa_text
 
-# Agregar el directorio raíz al path para importar módulos
+# Agregar el directorio raíz al path para importar módulos (antes de imports locales)
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# DB access
+try:
+    from database.database_manager import get_db_session
+except Exception:
+    get_db_session = None
 
 # Importar módulos del bot
 try:
@@ -63,6 +70,48 @@ last_update = {}
 
 # --- Auditoría simple a JSONL ---
 THRESHOLD_AUDIT_FILE = os.path.join('logs', 'ml_threshold_audit.jsonl')
+RISK_LIMITS_AUDIT_FILE = os.path.join('logs', 'risk_limits_audit.jsonl')
+
+# --- cTrader snapshot storage (simple file persistence) ---
+CTRADER_DIR = os.path.join('data', 'ctrader')
+CTRADER_ACCOUNT_FILE = os.path.join(CTRADER_DIR, 'account.json')
+CTRADER_POSITIONS_FILE = os.path.join(CTRADER_DIR, 'positions.json')
+CTRADER_ORDERS_QUEUE_FILE = os.path.join(CTRADER_DIR, 'orders_queue.json')
+CTRADER_ORDERS_RESULTS_FILE = os.path.join(CTRADER_DIR, 'orders_results.json')
+
+def _ensure_ctrader_dir():
+    try:
+        os.makedirs(CTRADER_DIR, exist_ok=True)
+    except Exception:
+        pass
+
+def _read_json_file(path: str, default):
+    try:
+        if os.path.exists(path):
+            with open(path, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        logger.warning(f"No se pudo leer {path}: {e}")
+    return default
+
+def _write_json_file(path: str, data: dict | list):
+    try:
+        _ensure_ctrader_dir()
+        with open(path, 'w') as f:
+            json.dump(data, f)
+        return True
+    except Exception as e:
+        logger.error(f"No se pudo escribir {path}: {e}")
+        return False
+
+def _append_jsonl_file(path: str, record: dict) -> bool:
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'a') as f:
+            f.write(json.dumps(record) + '\n')
+        return True
+    except Exception:
+        return False
 
 def _audit_threshold_event(event: str, payload: dict) -> None:
     try:
@@ -76,6 +125,35 @@ def _audit_threshold_event(event: str, payload: dict) -> None:
             f.write(json.dumps(record) + '\n')
     except Exception as e:
         logger.error(f"Error escribiendo auditoría de umbrales: {e}")
+
+def _sanitize_mapping(m: dict) -> dict:
+    out = {}
+    try:
+        for k, v in (m or {}).items():
+            out[str(k)] = sanitize_json(v)
+    except Exception:
+        pass
+    return out
+
+def _sanitize_sequence(seq: list) -> list:
+    try:
+        return [sanitize_json(x) for x in (seq or [])]
+    except Exception:
+        return []
+
+def _audit_risk_event(event: str, payload: dict) -> None:
+    """Audita eventos de configuración de riesgo (incluye límites por símbolo)."""
+    try:
+        os.makedirs(os.path.dirname(RISK_LIMITS_AUDIT_FILE), exist_ok=True)
+        record = {
+            'timestamp': datetime.now().isoformat(),
+            'event': event,
+            **{k: sanitize_json(v) for k, v in (payload or {}).items()}
+        }
+        with open(RISK_LIMITS_AUDIT_FILE, 'a') as f:
+            f.write(json.dumps(record) + '\n')
+    except Exception as e:
+        logger.error(f"Error escribiendo auditoría de riesgo: {e}")
 
 # Utilidad global para sanear objetos antes de serializarlos a JSON
 def sanitize_json(v: Any):
@@ -329,6 +407,8 @@ def api_config_info():
             'RISK_MAX_EXPOSURE_PCT': getattr(config.settings, 'RISK_MAX_EXPOSURE_PCT', None),
             'RISK_MAX_DAILY_DRAWDOWN_PCT': getattr(config.settings, 'RISK_MAX_DAILY_DRAWDOWN_PCT', None),
             'DEFAULT_RISK_PERCENTAGE': getattr(config.settings, 'DEFAULT_RISK_PERCENTAGE', None),
+            'RISK_MAX_PER_SYMBOL_TRADES': getattr(config.settings, 'RISK_MAX_PER_SYMBOL_TRADES', None),
+            'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT': getattr(config.settings, 'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT', None),
         }
         cfg_effective = risk.get_effective_risk_params()
 
@@ -393,11 +473,15 @@ def api_set_risk_params():
     try:
         data = request.get_json(force=True)
         # Aceptamos subset de claves permitidas
-        allowed = {'RISK_PER_TRADE_STOP_LOSS_PCT','RISK_PER_TRADE_TAKE_PROFIT_PCT','RISK_MAX_CONCURRENT_TRADES','RISK_MAX_EXPOSURE_PCT','RISK_MAX_DAILY_DRAWDOWN_PCT','DEFAULT_RISK_PERCENTAGE'}
+        allowed = {'RISK_PER_TRADE_STOP_LOSS_PCT','RISK_PER_TRADE_TAKE_PROFIT_PCT','RISK_MAX_CONCURRENT_TRADES','RISK_MAX_EXPOSURE_PCT','RISK_MAX_DAILY_DRAWDOWN_PCT','DEFAULT_RISK_PERCENTAGE','RISK_MAX_PER_SYMBOL_TRADES','RISK_MAX_PER_SYMBOL_EXPOSURE_PCT'}
         clean = {k: data[k] for k in data.keys() if k in allowed}
         if not clean:
             return jsonify({'error': 'Sin parámetros válidos'}), 400
         risk.set_custom_risk_params(clean)
+        try:
+            _audit_risk_event('set_risk_params', {'user_token': request.args.get('token') or (request.json.get('token') if request.is_json else None), 'applied': clean})
+        except Exception:
+            pass
         return jsonify({'success': True})
     except Exception as e:
         logger.error(f"Error set_risk_params: {e}")
@@ -480,6 +564,309 @@ def api_status():
 def api_test():
     """API de prueba simple"""
     return jsonify({'message': 'API Test OK', 'timestamp': datetime.now().isoformat()})
+
+# ------------------ cTrader PUSH/GET APIs ------------------
+
+@app.route('/api/ctrader/push', methods=['POST'])
+def api_ctrader_push():
+    """Recibe snapshot de cuenta y posiciones desde cTrader (cBot) y lo persiste.
+
+    Body JSON esperado: { account: {...}, positions: [...] }
+    Token por query o body.
+    """
+    token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        payload = request.get_json(force=True) if request.is_json else {}
+        account = payload.get('account') or {}
+        positions = payload.get('positions') or []
+
+        # Saneado mínimo
+        account['updated_at'] = datetime.now().isoformat()
+        for p in positions:
+            p.setdefault('updated_at', account['updated_at'])
+
+        acc_clean = _sanitize_mapping(account) if isinstance(account, dict) else {}
+        pos_clean = _sanitize_sequence(positions) if isinstance(positions, list) else []
+
+        ok_acc = _write_json_file(CTRADER_ACCOUNT_FILE, acc_clean)
+        ok_pos = _write_json_file(CTRADER_POSITIONS_FILE, pos_clean)
+        return jsonify({'success': bool(ok_acc and ok_pos), 'stored': {'account': ok_acc, 'positions': ok_pos}})
+    except Exception as e:
+        logger.error(f"Error en api_ctrader_push: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/ctrader/account')
+def api_ctrader_account():
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        acc = _read_json_file(CTRADER_ACCOUNT_FILE, default={})
+        return jsonify({'success': True, 'account': acc})
+    except Exception as e:
+        logger.error(f"Error en api_ctrader_account: {e}")
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/ctrader/positions')
+def api_ctrader_positions():
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        pos = _read_json_file(CTRADER_POSITIONS_FILE, default=[])
+        # Enriquecer con PnL y precio actual si faltan
+        if isinstance(pos, list) and pos:
+            # 1) Construir mapa de precios actual desde Binance para minimizar llamadas
+            price_map: dict[str, float] = {}
+            try:
+                import asyncio as _asyncio
+                from utils.binance_client import get_binance_client as _get_cli
+                _loop = _asyncio.new_event_loop()
+                _asyncio.set_event_loop(_loop)
+                _client = _loop.run_until_complete(_get_cli())
+                _tickers = _loop.run_until_complete(_client.get_all_tickers())
+                if isinstance(_tickers, list):
+                    for _t in _tickers:
+                        try:
+                            sym = _t.get('symbol')
+                            pr = _t.get('price')
+                            if sym and pr is not None:
+                                price_map[str(sym).upper()] = float(pr)
+                        except Exception:
+                            continue
+            except Exception:
+                price_map = {}
+
+            def _norm_side(v: Any) -> str:
+                try:
+                    s = str(v).upper()
+                    if s.startswith('S') or s == 'SHORT':
+                        return 'SELL'
+                    return 'BUY'
+                except Exception:
+                    return 'BUY'
+
+            def _to_float(x: Any) -> Optional[float]:
+                try:
+                    return float(x)
+                except Exception:
+                    return None
+
+            def _map_to_binance(sym: Optional[str]) -> Optional[str]:
+                if not sym:
+                    return None
+                s = sym.upper().replace(' ', '')
+                # casos directos
+                if s in price_map:
+                    return s
+                # USD -> USDT
+                if s.endswith('USD') and not s.endswith('USDT'):
+                    s2 = s[:-3] + 'USDT'
+                    if s2 in price_map:
+                        return s2
+                # Si ya termina en USDT pero no existe, no insistir
+                return None
+
+            for p in pos:
+                try:
+                    sym = p.get('symbol') or p.get('Symbol') or p.get('pair')
+                    side = _norm_side(p.get('side') or p.get('Side') or p.get('direction'))
+                    size = _to_float(p.get('size') or p.get('volume') or p.get('qty')) or 0.0
+                    entry = (
+                        _to_float(p.get('entry_price'))
+                        or _to_float(p.get('entryPrice'))
+                        or _to_float(p.get('price'))
+                    )
+                    current = (
+                        _to_float(p.get('current_price'))
+                        or _to_float(p.get('currentPrice'))
+                        or _to_float(p.get('lastPrice'))
+                    )
+                    # Completar precio actual desde Binance si falta
+                    if current is None:
+                        bsym = _map_to_binance(sym)
+                        if bsym and bsym in price_map:
+                            current = price_map.get(bsym)
+                            if current is not None:
+                                p['current_price'] = current
+                    # Calcular PnL si es posible y si no viene provisto
+                    if p.get('pnl_usd') is None and entry is not None and current is not None and size:
+                        pnl_usd = (current - entry) * size if side == 'BUY' else (entry - current) * size
+                        p['pnl_usd'] = float(pnl_usd)
+                    if p.get('pnl_pct') is None and entry is not None and current is not None and entry != 0:
+                        base_pct = ((current - entry) / entry * 100.0)
+                        p['pnl_pct'] = float(base_pct if side == 'BUY' else -base_pct)
+                    # Normalizar campos clave
+                    if sym:
+                        p['symbol'] = str(sym).upper()
+                    p['side'] = side
+                except Exception:
+                    continue
+        return jsonify({'success': True, 'positions': pos, 'count': len(pos) if isinstance(pos, list) else 0})
+    except Exception as e:
+        logger.error(f"Error en api_ctrader_positions: {e}")
+        return jsonify({'success': False, 'error': str(e)})
+
+# ------------------ cTrader ORDER EXECUTION BRIDGE ------------------
+
+from flask import make_response
+
+def _require_internal_secret(req) -> Optional[Response]:
+    """Valida el secreto interno para APIs internas.
+
+    Devuelve None si está permitido continuar; de lo contrario, un Response 403.
+    Si no hay secreto configurado, no bloquea (retorna None).
+    """
+    # Obtener secreto configurado
+    try:
+        sec = os.getenv('INTERNAL_API_SECRET') or getattr(config.settings, 'INTERNAL_API_SECRET', None)
+    except Exception:
+        sec = os.getenv('INTERNAL_API_SECRET')
+
+    # Extraer secreto proporcionado en headers, query o body
+    provided = None
+    try:
+        provided = req.headers.get('X-Internal-Secret') or req.args.get('secret')
+        if not provided and getattr(req, 'is_json', False):
+            body = req.get_json(silent=True) or {}
+            if isinstance(body, dict):
+                provided = body.get('secret')
+    except Exception:
+        provided = None
+
+    # Si no hay secreto configurado, permitir (modo laxo)
+    if not sec:
+        return None
+    # Validar coincidencia
+    if provided and str(provided) == str(sec):
+        return None
+    return make_response(jsonify({'error': 'Forbidden'}), 403)
+
+@app.route('/api/ctrader/orders/queue', methods=['POST'])
+def api_ctrader_orders_queue():
+    """Encola una orden para ejecución en cTrader.
+
+    Seguridad: requiere token de usuario válido y/o secreto interno.
+
+    Body JSON: {
+      symbol, side (BUY/SELL), type (MARKET/LIMIT), quantity, price?, sl?, tp?, client_order_id?, account_id?
+    }
+    """
+    token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+    if token and not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    secret_check = _require_internal_secret(request)
+    if isinstance(secret_check, Response):
+        return secret_check
+    try:
+        data = request.get_json(force=True) if request.is_json else {}
+        required = ['symbol', 'side', 'type', 'quantity']
+        for k in required:
+            if data.get(k) is None:
+                return jsonify({'error': f'Falta campo requerido: {k}'}), 400
+        order = {
+            'id': data.get('client_order_id') or f"srv_{int(datetime.now().timestamp()*1000)}",
+            'account_id': data.get('account_id') or getattr(config.settings, 'CTRADER_ACCOUNT_ID', None),
+            'symbol': str(data['symbol']).upper(),
+            'side': str(data['side']).upper(),
+            'type': str(data['type']).upper(),
+            'quantity': float(data['quantity']),
+            'price': (float(data['price']) if data.get('price') is not None else None),
+            'sl': (float(data['sl']) if data.get('sl') is not None else None),
+            'tp': (float(data['tp']) if data.get('tp') is not None else None),
+            'ts': datetime.now().isoformat(),
+            'status': 'QUEUED'
+        }
+        # Cargar cola actual
+        q = _read_json_file(CTRADER_ORDERS_QUEUE_FILE, default=[])
+        if not isinstance(q, list):
+            q = []
+        q.append(order)
+        ok = _write_json_file(CTRADER_ORDERS_QUEUE_FILE, q)
+        if ok:
+            _append_jsonl_file(os.path.join('logs', 'ctrader_orders_queue.jsonl'), order)
+        return jsonify({'success': bool(ok), 'order': order})
+    except Exception as e:
+        logger.error(f"Error en orders_queue: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/ctrader/orders/pull', methods=['POST', 'GET'])
+def api_ctrader_orders_pull():
+    """Consumido por el cBot: obtiene y limpia la cola de órdenes pendientes.
+    Seguridad: usar secreto interno o token admin.
+    """
+    # Permitir con secreto o token admin
+    secret_check = _require_internal_secret(request)
+    if isinstance(secret_check, Response):
+        # Si hay token admin, también vale
+        token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+        if not token or not auth_manager.is_admin(token):
+            return secret_check
+    try:
+        q = _read_json_file(CTRADER_ORDERS_QUEUE_FILE, default=[])
+        if not isinstance(q, list):
+            q = []
+        # Vaciar cola
+        _write_json_file(CTRADER_ORDERS_QUEUE_FILE, [])
+        return jsonify({'success': True, 'orders': q, 'count': len(q)})
+    except Exception as e:
+        logger.error(f"Error en orders_pull: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/ctrader/orders/ack', methods=['POST'])
+def api_ctrader_orders_ack():
+    """El cBot confirma resultado de ejecución de una orden.
+    Body: { id, status, executed_price?, executed_qty?, error? }
+    Seguridad: secreto interno o token admin.
+    """
+    secret_check = _require_internal_secret(request)
+    if isinstance(secret_check, Response):
+        token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+        if not token or not auth_manager.is_admin(token):
+            return secret_check
+    try:
+        data = request.get_json(force=True) if request.is_json else {}
+        oid = data.get('id')
+        status = data.get('status')
+        if not oid or not status:
+            return jsonify({'error': 'id y status son requeridos'}), 400
+        result = {
+            'id': oid,
+            'status': status,
+            'executed_price': (float(data['executed_price']) if data.get('executed_price') is not None else None),
+            'executed_qty': (float(data['executed_qty']) if data.get('executed_qty') is not None else None),
+            'error': data.get('error'),
+            'ts': datetime.now().isoformat()
+        }
+        # Persistir en resultados (lista)
+        arr = _read_json_file(CTRADER_ORDERS_RESULTS_FILE, default=[])
+        if not isinstance(arr, list):
+            arr = []
+        arr.append(result)
+        ok = _write_json_file(CTRADER_ORDERS_RESULTS_FILE, arr)
+        if ok:
+            _append_jsonl_file(os.path.join('logs', 'ctrader_orders_results.jsonl'), result)
+        return jsonify({'success': bool(ok), 'result': result})
+    except Exception as e:
+        logger.error(f"Error en orders_ack: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/ctrader/orders/results/last')
+def api_ctrader_orders_results_last():
+    """Devuelve el último resultado de ack (para dashboard). Requiere token válido."""
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        arr = _read_json_file(CTRADER_ORDERS_RESULTS_FILE, default=[])
+        if isinstance(arr, list) and arr:
+            return jsonify({'success': True, 'result': arr[-1]})
+        return jsonify({'success': True, 'result': None})
+    except Exception as e:
+        logger.error(f"Error leyendo último ack: {e}")
+        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/balance')
 def api_balance():
@@ -847,6 +1234,421 @@ def api_export_equity():
     except Exception as e:
         logger.error(f"Error exportando equity: {e}")
         return jsonify({'error': str(e)}), 500
+
+# ------------------ cTrader INTEGRATION (READ-ONLY SNAPSHOT) ------------------
+
+@app.route('/api/ctrader/snapshot')
+def api_ctrader_snapshot():
+    """Devuelve un snapshot ligero para el dashboard/cTrader con fallbacks.
+
+    Query params:
+      - token: auth token (requerido)
+      - symbol: símbolo base (ej. BTCUSDT). Si falta, usa el primero de pares actuales.
+      - limit: cantidad de operaciones recientes (default 20)
+    """
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    if get_db_session is None:
+        return jsonify({'error': 'DB unavailable'}), 500
+
+    try:
+        symbol = (request.args.get('symbol') or '').strip().upper()
+        try:
+            limit = int(request.args.get('limit', '20'))
+        except Exception:
+            limit = 20
+
+        # Metadatos para mostrar el origen de cada dato en el dashboard
+        data_sources: dict[str, Optional[str]] = {
+            'symbol': None,
+            'price': None,
+            'position': None,
+            'regime': None
+        }
+
+        # Helper seguro para convertir a float sin romper tipado/ejecución
+        def _safe_float(x) -> Optional[float]:
+            try:
+                return float(x) if x is not None else None
+            except Exception:
+                return None
+
+        # 1) Régimen desde DB
+        regime = {'name': None, 'confidence': None, 'timestamp': None}
+        with get_db_session() as s:
+            q = _sa_text(
+                """
+                SELECT market_regime, confidence, timestamp
+                FROM market_analysis
+                ORDER BY timestamp DESC
+                LIMIT 1
+                """
+            )
+            r = s.execute(q).fetchone()
+            if r:
+                regime = {
+                    'name': r[0],
+                    'confidence': float(r[1]) if r[1] is not None else None,
+                    'timestamp': (r[2].isoformat() if hasattr(r[2], 'isoformat') else str(r[2]))
+                }
+                data_sources['regime'] = 'DB'
+
+        # 2) Pares actuales y símbolo por defecto
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        dyn = loop.run_until_complete(dynamic_pair_manager.get_status_report())
+        system_status = dyn.get('system_status', {}) or {}
+        cp = system_status.get('current_pairs', []) or []
+        def to_symbol(x: Any) -> Optional[str]:
+            if not x:
+                return None
+            if isinstance(x, str):
+                return x
+            if isinstance(x, dict):
+                return x.get('symbol') or x.get('pair') or x.get('name')
+            return None
+        current_pairs = [s for s in (to_symbol(x) for x in cp) if s]
+        if not symbol:
+            symbol = (current_pairs[0] if current_pairs else 'BTCUSDT')
+            data_sources['symbol'] = 'CURRENT_PAIRS'
+        else:
+            data_sources['symbol'] = 'PARAM'
+
+        # 3) Posición abierta y trades recientes
+        open_position = None
+        recent_trades: list[dict] = []
+        current_price: Optional[float] = None
+        ctrader_positions: list[dict] = []
+        with get_db_session() as s:
+            q_open = _sa_text(
+                """
+                SELECT operation_id, timestamp, side, price, quantity, decision
+                FROM operations
+                WHERE symbol = :symbol AND status = 'OPEN'
+                ORDER BY timestamp DESC
+                LIMIT 1
+                """
+            )
+            ro = s.execute(q_open, {'symbol': symbol}).fetchone()
+            if ro:
+                open_position = {
+                    'operation_id': ro[0],
+                    'timestamp': (ro[1].isoformat() if hasattr(ro[1], 'isoformat') else str(ro[1])),
+                    'side': ro[2],
+                    'price': float(ro[3]),
+                    'quantity': float(ro[4]),
+                    'decision': ro[5]
+                }
+                data_sources['position'] = 'DB'
+            q_hist = _sa_text(
+                """
+                SELECT operation_id, timestamp, side, price, quantity, status, decision, close_price, close_timestamp, close_reason
+                FROM operations
+                WHERE symbol = :symbol
+                ORDER BY timestamp DESC
+                LIMIT :limit
+                """
+            )
+            rh = s.execute(q_hist, {'symbol': symbol, 'limit': int(limit)}).fetchall()
+            for r in rh:
+                recent_trades.append({
+                    'operation_id': r[0],
+                    'timestamp': (r[1].isoformat() if hasattr(r[1], 'isoformat') else str(r[1])),
+                    'side': r[2],
+                    'price': float(r[3]),
+                    'quantity': float(r[4]),
+                    'status': r[5],
+                    'decision': r[6],
+                    'close_price': (float(r[7]) if r[7] is not None else None),
+                    'close_timestamp': (r[8].isoformat() if r[8] and hasattr(r[8], 'isoformat') else (str(r[8]) if r[8] else None)),
+                    'close_reason': r[9]
+                })
+
+        # Posiciones cTrader para fallbacks
+        try:
+            ctrader_positions = _read_json_file(CTRADER_POSITIONS_FILE, default=[])
+            if not isinstance(ctrader_positions, list):
+                ctrader_positions = []
+        except Exception:
+            ctrader_positions = []
+
+        # 3.1) Precio actual desde cTrader
+        if ctrader_positions:
+            try:
+                cand = None
+                for p in ctrader_positions:
+                    psym = (p.get('symbol') or p.get('Symbol') or p.get('pair') or '').upper()
+                    if psym == symbol:
+                        cand = p
+                        break
+                if cand:
+                    for k in ('current_price','currentPrice','lastPrice','mark_price','markPrice','price'):
+                        if cand.get(k) is not None:
+                            val = _safe_float(cand.get(k))
+                            if val is not None:
+                                current_price = val
+                                data_sources['price'] = 'CTRADER_POSITIONS'
+                                break
+            except Exception:
+                pass
+
+        # 3.1.b) Precio actual vía Binance si falta
+        if current_price is None:
+            try:
+                from utils.binance_client import get_binance_client
+                client = loop.run_until_complete(asyncio.wait_for(get_binance_client(), timeout=2.5))
+                try:
+                    tkr = loop.run_until_complete(asyncio.wait_for(client.get_ticker(symbol=symbol), timeout=2.5))
+                    if isinstance(tkr, dict):
+                        p = tkr.get('lastPrice') or tkr.get('price') or tkr.get('last')
+                        val = _safe_float(p)
+                        if val is not None:
+                            current_price = val
+                            data_sources['price'] = 'BINANCE_TICKER'
+                except Exception:
+                    try:
+                        arr = loop.run_until_complete(asyncio.wait_for(client.get_all_tickers(), timeout=2.5))
+                        if isinstance(arr, list):
+                            for item in arr:
+                                if item.get('symbol') == symbol:
+                                    try:
+                                        valp = item.get('price')
+                                        valf = _safe_float(valp)
+                                        if valf is not None:
+                                            current_price = valf
+                                            data_sources['price'] = 'BINANCE_TICKERS'
+                                    except Exception:
+                                        pass
+                                    break
+                    except Exception:
+                        current_price = None
+            except Exception:
+                current_price = None
+
+        # 3.2) PnL estimado para posición abierta
+        if open_position and current_price is not None:
+            try:
+                entry = float(open_position['price'])
+                qty = float(open_position['quantity'])
+                side = str(open_position['side']).upper()
+                pnl = ((current_price - entry) * qty) if side == 'BUY' else ((entry - current_price) * qty)
+                open_position['pnl_estimated'] = float(pnl)
+            except Exception:
+                pass
+
+        # 3.2.b) Fallback de posición desde cTrader
+        if open_position is None and ctrader_positions:
+            try:
+                cand = None
+                for p in ctrader_positions:
+                    psym = (p.get('symbol') or p.get('Symbol') or p.get('pair') or '').upper()
+                    if psym:
+                        if psym == symbol:
+                            cand = p
+                            break
+                        if not cand:
+                            cand = p
+                if cand:
+                    psym = (cand.get('symbol') or cand.get('Symbol') or cand.get('pair') or '').upper()
+                    if psym:
+                        symbol = psym
+                        data_sources['symbol'] = 'CTRADER'
+                    side = (cand.get('side') or cand.get('Side') or cand.get('direction') or '').upper()
+                    qty = _safe_float(cand.get('size') or cand.get('volume') or cand.get('qty')) or 0.0
+                    entry = _safe_float(cand.get('entry_price') or cand.get('entryPrice') or cand.get('price')) or 0.0
+                    ts = cand.get('timestamp') or cand.get('open_time') or cand.get('openTime') or None
+                    if current_price is None:
+                        for k in ('current_price','currentPrice','lastPrice','mark_price','markPrice','price'):
+                            if cand.get(k) is not None:
+                                val = _safe_float(cand.get(k))
+                                if val is not None:
+                                    current_price = val
+                                    if not data_sources['price']:
+                                        data_sources['price'] = 'CTRADER_POSITIONS'
+                                    break
+                    open_position = {
+                        'operation_id': cand.get('id') or cand.get('position_id') or cand.get('ticket'),
+                        'timestamp': (ts.isoformat() if hasattr(ts, 'isoformat') else str(ts)) if ts else None,
+                        'side': side,
+                        'price': entry,
+                        'quantity': qty,
+                        'decision': cand.get('source') or 'CTRADER'
+                    }
+                    if not data_sources['position']:
+                        data_sources['position'] = 'CTRADER'
+                    pnlv = cand.get('pnl_usd') or cand.get('pnl') or cand.get('unrealizedPnL')
+                    try:
+                        if pnlv is not None:
+                            open_position['pnl_estimated'] = float(pnlv)
+                        elif current_price is not None and entry and qty:
+                            pnl = ((current_price - entry) * qty) if side == 'BUY' else ((entry - current_price) * qty)
+                            open_position['pnl_estimated'] = float(pnl)
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+
+        # 3.3) Fallback con último ACK
+        try:
+            _orders_results = _read_json_file(CTRADER_ORDERS_RESULTS_FILE, default=[])
+            if isinstance(_orders_results, list) and _orders_results:
+                last_res = _orders_results[-1]
+                try:
+                    if not symbol:
+                        sym_last = last_res.get('symbol') or last_res.get('pair')
+                        if sym_last:
+                            symbol = str(sym_last).upper()
+                            if not data_sources['symbol']:
+                                data_sources['symbol'] = 'ACK'
+                except Exception:
+                    pass
+                try:
+                    if last_res.get('executed_price') is not None and (current_price is None):
+                        current_price = float(last_res.get('executed_price'))
+                        if not data_sources['price']:
+                            data_sources['price'] = 'ACK'
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        # 3.4) Forzar desde ACK si aún falta todo
+        try:
+            if (current_price is None or not symbol):
+                _orders_results = _read_json_file(CTRADER_ORDERS_RESULTS_FILE, default=[])
+                if isinstance(_orders_results, list) and _orders_results:
+                    last_res = _orders_results[-1]
+                    if not symbol:
+                        sym_last = last_res.get('symbol') or last_res.get('pair') or 'USDCUSDT'
+                        symbol = str(sym_last).upper()
+                        if not data_sources['symbol']:
+                            data_sources['symbol'] = 'ACK'
+                    if current_price is None and last_res.get('executed_price') is not None:
+                        val = _safe_float(last_res.get('executed_price'))
+                        if val is not None:
+                            current_price = val
+                        if not data_sources['price']:
+                            data_sources['price'] = 'ACK'
+                    if open_position is None:
+                        open_position = {
+                            'operation_id': last_res.get('id'),
+                            'timestamp': last_res.get('ts'),
+                            'side': 'BUY',
+                            'price': (_safe_float(last_res.get('executed_price')) or 0.0),
+                            'quantity': (_safe_float(last_res.get('executed_qty')) or 0.0),
+                            'decision': 'ACK',
+                            'pnl_estimated': 0.0
+                        }
+                        if not data_sources['position']:
+                            data_sources['position'] = 'ACK'
+        except Exception:
+            pass
+
+        # 3.5) Si aún falta precio, adoptar primera posición cTrader
+        if current_price is None and ctrader_positions:
+            try:
+                cand = ctrader_positions[0]
+                psym = (cand.get('symbol') or cand.get('Symbol') or cand.get('pair') or '').upper()
+                if psym:
+                    symbol = psym
+                    if not data_sources['symbol']:
+                        data_sources['symbol'] = 'CTRADER'
+                for k in ('current_price','currentPrice','lastPrice','mark_price','markPrice','price','entry_price','entryPrice'):
+                    if cand.get(k) is not None:
+                        val = _safe_float(cand.get(k))
+                        if val is not None:
+                            current_price = val
+                            if not data_sources['price']:
+                                data_sources['price'] = 'CTRADER_POSITIONS'
+                            break
+                if open_position is None:
+                    side = (cand.get('side') or cand.get('Side') or cand.get('direction') or '').upper()
+                    qty = _safe_float(cand.get('size') or cand.get('volume') or cand.get('qty')) or 0.0
+                    entry = _safe_float(cand.get('entry_price') or cand.get('entryPrice') or cand.get('price')) or 0.0
+                    ts = cand.get('timestamp') or cand.get('open_time') or cand.get('openTime') or None
+                    open_position = {
+                        'operation_id': cand.get('id') or cand.get('position_id') or cand.get('ticket'),
+                        'timestamp': (ts.isoformat() if hasattr(ts, 'isoformat') else str(ts)) if ts else None,
+                        'side': side,
+                        'price': entry,
+                        'quantity': qty,
+                        'decision': cand.get('source') or 'CTRADER'
+                    }
+                    if not data_sources['position']:
+                        data_sources['position'] = 'CTRADER'
+                    pnlv = cand.get('pnl_usd') or cand.get('pnl') or cand.get('unrealizedPnL')
+                    try:
+                        if pnlv is not None:
+                            open_position['pnl_estimated'] = float(pnlv)
+                        elif current_price is not None and entry and qty:
+                            pnl = ((current_price - entry) * qty) if side == 'BUY' else ((entry - current_price) * qty)
+                            open_position['pnl_estimated'] = float(pnl)
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+
+        # 4) Resumen de estrategias activas
+        active_strategies = 0
+        try:
+            with get_db_session() as s:
+                q2 = _sa_text("SELECT active_strategies FROM market_analysis ORDER BY timestamp DESC LIMIT 1")
+                r2 = s.execute(q2).fetchone()
+                if r2 and r2[0]:
+                    import json as _json
+                    val = r2[0]
+                    try:
+                        parsed = _json.loads(val) if isinstance(val, str) else val
+                        if isinstance(parsed, list):
+                            active_strategies = len(parsed)
+                        elif isinstance(parsed, dict):
+                            active_strategies = len(parsed.keys())
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+        regime_name = regime.get('name') if isinstance(regime, dict) else regime
+        if not regime_name:
+            regime_name = system_status.get('market_regime') or system_status.get('regime') or '--'
+            if not data_sources['regime']:
+                data_sources['regime'] = 'SYSTEM_STATUS' if regime_name and regime_name != '--' else 'FALLBACK'
+
+        orders_queue_count = 0
+        try:
+            _q = _read_json_file(CTRADER_ORDERS_QUEUE_FILE, default=[])
+            if isinstance(_q, list):
+                orders_queue_count = len(_q)
+        except Exception:
+            orders_queue_count = 0
+
+        logger.warning(
+            "snapshot: symbol=%s price=%s regime=%s open_op=%s qcount=%s ctrader_pos=%s",
+            symbol,
+            (None if current_price is None else round(float(current_price), 6)),
+            regime_name,
+            (open_position or {}).get('operation_id') if isinstance(open_position, dict) else None,
+            orders_queue_count,
+            (len(ctrader_positions) if isinstance(ctrader_positions, list) else 'n/a')
+        )
+        return jsonify({
+            'success': True,
+            'server_time': datetime.now().isoformat(),
+            'symbol': symbol,
+            'current_pairs': current_pairs,
+            'regime': regime_name,
+            'regime_details': regime,
+            'active_strategies_count': active_strategies,
+            'open_position': open_position,
+            'current_price': current_price,
+            'recent_trades': recent_trades,
+            'orders_queue_count': orders_queue_count,
+            'data_sources': data_sources
+        })
+    except Exception as e:
+        logger.error(f"Error en api_ctrader_snapshot: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
 @app.route('/api/backtest/csv_files')
 def api_backtest_csv_files():
     """API para listar archivos CSV disponibles para backtesting"""
@@ -1075,6 +1877,127 @@ def api_ml_thresholds_audit():
     except Exception as e:
         logger.error(f"Error leyendo auditoría ML: {e}")
         return Response(f'Error leyendo auditoría: {e}', mimetype='text/plain', status=500)
+
+# ------------------ RISK LIMITS (READ/WRITE + AUDITORÍA) ------------------
+
+@app.route('/api/risk/limits', methods=['GET', 'POST'])
+def api_risk_limits():
+    token = request.args.get('token') or (request.json.get('token') if request.is_json else None)
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        if request.method == 'GET':
+            defaults = {
+                'RISK_MAX_PER_SYMBOL_TRADES': getattr(config.settings, 'RISK_MAX_PER_SYMBOL_TRADES', None),
+                'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT': getattr(config.settings, 'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT', None),
+            }
+            effective = risk.get_effective_risk_params()
+            return jsonify({'success': True, 'defaults': defaults, 'effective': {
+                'RISK_MAX_PER_SYMBOL_TRADES': effective.get('RISK_MAX_PER_SYMBOL_TRADES'),
+                'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT': effective.get('RISK_MAX_PER_SYMBOL_EXPOSURE_PCT')
+            }})
+        # POST (set) requiere admin
+        admin_check = require_admin(token)
+        if admin_check is not None:
+            return admin_check
+        data = request.get_json(force=True)
+        out: dict[str, Any] = {}
+        # Validaciones simples
+        if 'RISK_MAX_PER_SYMBOL_TRADES' in data and data['RISK_MAX_PER_SYMBOL_TRADES'] is not None:
+            try:
+                v = int(data['RISK_MAX_PER_SYMBOL_TRADES'])
+                if v < 1:
+                    return jsonify({'error': 'RISK_MAX_PER_SYMBOL_TRADES debe ser >= 1'}), 400
+                out['RISK_MAX_PER_SYMBOL_TRADES'] = v
+            except Exception:
+                return jsonify({'error': 'RISK_MAX_PER_SYMBOL_TRADES inválido'}), 400
+        if 'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT' in data and data['RISK_MAX_PER_SYMBOL_EXPOSURE_PCT'] is not None:
+            try:
+                v = float(data['RISK_MAX_PER_SYMBOL_EXPOSURE_PCT'])
+                if not (0 < v <= 100):
+                    return jsonify({'error': 'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT debe estar en (0, 100]'}), 400
+                out['RISK_MAX_PER_SYMBOL_EXPOSURE_PCT'] = v
+            except Exception:
+                return jsonify({'error': 'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT inválido'}), 400
+        if not out:
+            return jsonify({'error': 'Sin cambios válidos'}), 400
+        risk.set_custom_risk_params(out)
+        _audit_risk_event('set_symbol_limits', {'user_token': token, 'applied': out})
+        eff = risk.get_effective_risk_params()
+        return jsonify({'success': True, 'effective': {
+            'RISK_MAX_PER_SYMBOL_TRADES': eff.get('RISK_MAX_PER_SYMBOL_TRADES'),
+            'RISK_MAX_PER_SYMBOL_EXPOSURE_PCT': eff.get('RISK_MAX_PER_SYMBOL_EXPOSURE_PCT')
+        }})
+    except Exception as e:
+        logger.error(f"Error en api_risk_limits: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/risk/limits/audit')
+def api_risk_limits_audit():
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        download_flag = request.args.get('download') in ('1','true','True','yes')
+        if download_flag and os.path.exists(RISK_LIMITS_AUDIT_FILE):
+            fname = f"risk_limits_audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
+            return send_file(RISK_LIMITS_AUDIT_FILE, as_attachment=True, download_name=fname)
+        n = int(request.args.get('lines', '300'))
+        if not os.path.exists(RISK_LIMITS_AUDIT_FILE):
+            return Response('No hay auditoría disponible.', mimetype='text/plain')
+        with open(RISK_LIMITS_AUDIT_FILE, 'rb') as f:
+            try:
+                f.seek(0, os.SEEK_END)
+                size = f.tell()
+                block = 1024
+                data = b''
+                while size > 0 and data.count(b'\n') <= n:
+                    step = block if size - block > 0 else size
+                    f.seek(-step, os.SEEK_CUR)
+                    data = f.read(step) + data
+                    f.seek(-step, os.SEEK_CUR)
+                    size -= step
+                content = data.splitlines()[-n:]
+                text = b"\n".join(content).decode('utf-8', errors='replace')
+            except Exception:
+                f.seek(0)
+                text = f.read().decode('utf-8', errors='replace')
+        return Response(text, mimetype='text/plain')
+    except Exception as e:
+        logger.error(f"Error leyendo auditoría de límites: {e}")
+        return Response(f'Error leyendo auditoría: {e}', mimetype='text/plain', status=500)
+
+# ------------------ RISK METRICS (DAILY) ------------------
+
+@app.route('/api/risk/metrics')
+def api_risk_metrics():
+    token = request.args.get('token')
+    if not token or not auth_manager.validate_token(token):
+        return jsonify({'error': 'Unauthorized'}), 401
+    try:
+        # Intentar obtener métricas actuales del estado; si faltan, recalcular
+        from utils.state_manager import StateManager
+        sm = StateManager()
+        metrics = sm.get_state('risk_metrics') or {}
+        if not metrics or 'daily_pnl_percentage' not in metrics:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(risk._get_daily_pnl_pct())
+            metrics = sm.get_state('risk_metrics') or {}
+        # Pausa por drawdown
+        paused_until = sm.get_state('system', 'drawdown_pause_until')
+        paused_by_drawdown = False
+        if paused_until:
+            try:
+                from datetime import timezone as _tz
+                dt = datetime.fromisoformat(paused_until)
+                paused_by_drawdown = datetime.now(_tz.utc) < (dt if dt.tzinfo else dt.replace(tzinfo=_tz.utc))
+            except Exception:
+                paused_by_drawdown = True
+        return jsonify({'success': True, 'metrics': sanitize_json(metrics), 'paused_by_drawdown': paused_by_drawdown, 'pause_until': paused_until})
+    except Exception as e:
+        logger.error(f"Error en api_risk_metrics: {e}")
+        return jsonify({'error': str(e)}), 500
 
 # ------------------ DYNAMIC PAIRS ------------------
 

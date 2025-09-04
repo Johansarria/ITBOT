@@ -28,6 +28,14 @@ from utils.state_manager import StateManager
 from utils.telegram_handler import send_message, shutdown_bot
 from utils.notification_manager import notify_error, notify_trade, notify_shield, notify_system_event, send_silent
 from utils.structured_logger import StructuredLogger
+from config import settings
+
+# V3 dinámico (opcional)
+try:
+    from strategies.v3_dynamic_controller import V3DynamicController
+    _V3_DYNAMIC_AVAILABLE = True
+except Exception:
+    _V3_DYNAMIC_AVAILABLE = False
 
 setup_logging()
 logger = StructuredLogger(__name__)
@@ -260,6 +268,26 @@ async def main_run_bot() -> None:
     scheduler.start()
     logger.info("SCHEDULER_STARTED", "Scheduler iniciado con tareas programadas incluyendo sistema dinámico.")
 
+    # Iniciar controlador V3 Dinámico en background (opcional por settings)
+    if getattr(settings, 'ENABLE_V3_DYNAMIC_CONTROLLER', False):
+        try:
+            from strategies.v3_dynamic_controller import V3DynamicController
+            v3_controller = V3DynamicController()
+            asyncio.create_task(v3_controller.start_dynamic_operations())
+            logger.info("V3_DYNAMIC_CONTROLLER_STARTED", "Controlador V3 Dinámico iniciado en background.")
+        except Exception as e:
+            logger.error("V3_DYNAMIC_CONTROLLER_ERROR", f"No se pudo iniciar el controlador V3 Dinámico: {e}", exc_info=True)
+
+    # Lanzar controlador V3 dinámico en background si está habilitado
+    v3_dynamic_task = None
+    if getattr(settings, 'ENABLE_V3_DYNAMIC_CONTROLLER', False) and _V3_DYNAMIC_AVAILABLE:
+        try:
+            v3_controller = V3DynamicController()
+            v3_dynamic_task = asyncio.create_task(v3_controller.start_dynamic_operations())
+            logger.info("V3_DYNAMIC_CONTROLLER", "Controlador V3 dinámico iniciado en background")
+        except Exception as e:
+            logger.error("V3_DYNAMIC_START_ERROR", f"No se pudo iniciar el controlador V3 dinámico: {e}")
+
     # Se elimina el polling de Telegram para este proceso.
     # La interacción con el usuario se gestionará a través de main.py.
     # polling_task = asyncio.create_task(dp.start_polling(bot_instance))
@@ -332,6 +360,13 @@ async def main_run_bot() -> None:
         logger.info("SHUTDOWN_START", "Iniciando secuencia de apagado del bot...")
         if scheduler.running:
             scheduler.shutdown()
+        # Cancelar task V3 dinámico si existe
+        if v3_dynamic_task and not v3_dynamic_task.done():
+            v3_dynamic_task.cancel()
+            try:
+                await v3_dynamic_task
+            except Exception:
+                pass
         # if not polling_task.done():
         #     polling_task.cancel()
         #     try:

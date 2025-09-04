@@ -100,6 +100,30 @@
 
   <div class="col-12">
     <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="fas fa-layer-group"></i> Límites por Símbolo</span>
+        <a class="btn btn-sm btn-outline-light" id="btnLimitsAudit" target="_blank" rel="noopener">Ver Auditoría</a>
+      </div>
+      <div class="card-body">
+        <form id="symbol-limits-form" class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label">Máx. operaciones por símbolo</label>
+            <input id="perSymTrades" type="number" min="1" step="1" class="form-control" placeholder="p.ej. 2" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Exposición Máxima por símbolo (%)</label>
+            <input id="perSymExpo" type="number" min="1" max="100" step="0.1" class="form-control" placeholder="p.ej. 20" />
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar límites</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card">
       <div class="card-header">
         <i class="fas fa-th"></i> Umbrales Optimizados (ML)
       </div>
@@ -200,6 +224,8 @@
             <li><b>Exposición Máxima</b>: <code>${fmt(ce.RISK_MAX_EXPOSURE_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_MAX_EXPOSURE_PCT)})</small></li>
             <li><b>Drawdown Diario Máximo</b>: <code>${fmt(ce.RISK_MAX_DAILY_DRAWDOWN_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_MAX_DAILY_DRAWDOWN_PCT)})</small></li>
             <li><b>Riesgo base por operación</b>: <code>${fmt(ce.DEFAULT_RISK_PERCENTAGE)}</code> <small class="text-muted">(def: ${fmt(cd.DEFAULT_RISK_PERCENTAGE)})</small></li>
+            <li><b>Máx. operaciones por símbolo</b>: <code>${ce.RISK_MAX_PER_SYMBOL_TRADES ?? '—'}</code> <small class="text-muted">(def: ${cd.RISK_MAX_PER_SYMBOL_TRADES ?? '—'})</small></li>
+            <li><b>Exposición Máxima por símbolo</b>: <code>${fmt(ce.RISK_MAX_PER_SYMBOL_EXPOSURE_PCT)}</code> <small class="text-muted">(def: ${fmt(cd.RISK_MAX_PER_SYMBOL_EXPOSURE_PCT)})</small></li>
             <li><b>Riesgo actual</b>: <code>${rk.current_risk_pct ?? '—'}%</code> (${rk.manual ? 'Manual' : 'Automático'})</li>
           </ul>`;
         document.getElementById('cfg-list').innerHTML = html;
@@ -233,6 +259,47 @@
   }
   // Cargar al iniciar
   loadConfigInfo();
+  loadSymbolLimits();
+
+  // ---------- Límites por Símbolo ----------
+  function loadSymbolLimits() {
+    fetch(cfgUrl('/api/risk/limits'))
+      .then(r => r.json())
+      .then(j => {
+        if (!j.success) { showNotification(j.error || 'Error cargando límites por símbolo', 'error'); return; }
+        const eff = j.effective || {};
+        document.getElementById('perSymTrades').value = eff.RISK_MAX_PER_SYMBOL_TRADES ?? '';
+        document.getElementById('perSymExpo').value = eff.RISK_MAX_PER_SYMBOL_EXPOSURE_PCT ?? '';
+        // Link auditoría límites
+        const a = document.getElementById('btnLimitsAudit');
+        if (a) a.href = cfgUrl('/api/risk/limits/audit') + '&lines=500';
+      })
+      .catch(e => showNotification(String(e), 'error'));
+  }
+  function saveSymbolLimits(e) {
+    e.preventDefault();
+    const body = { token };
+    const t = document.getElementById('perSymTrades').value;
+    const x = document.getElementById('perSymExpo').value;
+    if (t) body.RISK_MAX_PER_SYMBOL_TRADES = parseInt(t, 10);
+    if (x) body.RISK_MAX_PER_SYMBOL_EXPOSURE_PCT = parseFloat(x);
+    if (!('RISK_MAX_PER_SYMBOL_TRADES' in body) && !('RISK_MAX_PER_SYMBOL_EXPOSURE_PCT' in body)) {
+      showNotification('Sin cambios válidos', 'warning');
+      return;
+    }
+    fetch('/api/risk/limits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(r => r.json())
+      .then(res => {
+        if (res.success) {
+          showNotification('Límites por símbolo guardados', 'success');
+          loadConfigInfo();
+          loadSymbolLimits();
+        } else {
+          showNotification(res.error || 'Error guardando límites', 'error');
+        }
+      })
+      .catch(e => showNotification(String(e), 'error'));
+  }
 
   // ---------- ML Dynamic Thresholds UI ----------
   function loadMlThresholds() {
@@ -347,6 +414,9 @@
         } else showNotification(res.error || 'Error', 'error');
       });
   });
+
+  // Guardar límites por símbolo
+  document.getElementById('symbol-limits-form').addEventListener('submit', saveSymbolLimits);
 </script>
 {% endblock %}
 {% endblock %}

@@ -1,0 +1,233 @@
+{
+  "timestamp": "20250831_065738",
+  "optimal_config": {
+    "pair": "ETH/USDT",
+    "timeframe": "1h",
+    "strategy_type": "conservative",
+    "rsi_oversold": 25,
+    "rsi_overbought": 75,
+    "bb_std": 2.5,
+    "volume_threshold": 1.3,
+    "risk_per_trade": 0.015,
+    "max_trades": 30
+  },
+  "cross_validation": {
+    "periods": {
+      "Per\u00edodo_1": {
+        "trades": 4,
+        "pnl_percent": -9.07,
+        "monthly_return": -18.15,
+        "win_rate": 25.0,
+        "profit_factor": 0.24,
+        "period_days": 15,
+        "avg_trade": -2.27,
+        "best_trade": 2.85,
+        "worst_trade": -7.49
+      }
+    },
+    "all_trades": [
+      {
+        "entry_time": "2025-07-04 16:00:00",
+        "exit_time": "2025-07-06 13:00:00",
+        "type": "long",
+        "entry_price": 2487.51,
+        "exit_price": 2558.32,
+        "pnl_points": 70.80999999999995,
+        "pnl_percent": 2.8466217221237278,
+        "exit_reason": "trend_reversal",
+        "conditions_met": "5",
+        "atr_at_entry": 10.639953031998592
+      },
+      {
+        "entry_time": "2025-07-06 14:00:00",
+        "exit_time": "2025-07-08 17:00:00",
+        "type": "short",
+        "entry_price": 2559.4,
+        "exit_price": 2616.65,
+        "pnl_points": -57.25,
+        "pnl_percent": -2.2368523872782684,
+        "exit_reason": "stop_loss",
+        "conditions_met": "5",
+        "atr_at_entry": 17.97507368251675
+      },
+      {
+        "entry_time": "2025-07-09 12:00:00",
+        "exit_time": "2025-07-09 18:00:00",
+        "type": "short",
+        "entry_price": 2660.01,
+        "exit_price": 2718.33,
+        "pnl_points": -58.31999999999971,
+        "pnl_percent": -2.1924729606279567,
+        "exit_reason": "stop_loss",
+        "conditions_met": "5",
+        "atr_at_entry": 19.989860120510855
+      },
+      {
+        "entry_time": "2025-07-09 19:00:00",
+        "exit_time": "2025-07-10 21:00:00",
+        "type": "short",
+        "entry_price": 2765.01,
+        "exit_price": 2972.17,
+        "pnl_points": -207.15999999999985,
+        "pnl_percent": -7.4921971349108984,
+        "exit_reason": "stop_loss",
+        "conditions_met": "6",
+        "atr_at_entry": 23.90378981198404
+      }
+    ]
+  },
+  "sensitivity_analysis": {
+    "rsi": [
+      {
+        "levels": "20/80",
+        "trades": 24,
+        "pnl": 8.41,
+        "win_rate": 45.8
+      },
+      {
+        "levels": "25/75",
+        "trades": 26,
+        "pnl": -13.72,
+        "win_rate": 34.6
+      },
+      {
+        "levels": "30/70",
+        "trades": 27,
+        "pnl": -11.56,
+        "win_rate": 33.3
+      },
+      {
+        "levels": "35/65",
+        "trades": 29,
+        "pnl": -11.6,
+        "win_rate": 34.5
+      }
+    ],
+    "bollinger_bands": [
+      {
+        "std_dev": 1.5,
+        "trades": 24,
+        "pnl": 7.61,
+        "win_rate": 41.7
+      },
+      {
+        "std_dev": 2.0,
+        "trades": 25,
+        "pnl": 16.08,
+        "win_rate": 48.0
+      },
+      {
+        "std_dev": 2.5,
+        "trades": 26,
+        "pnl": -13.72,
+        "win_rate": 34.6
+      },
+      {
+        "std_dev": 3.0,
+        "trades": 27,
+        "pnl": -8.82,
+        "win_rate": 33.3
+      }
+    ],
+    "volume": [
+      {
+        "threshold": 1.0,
+        "trades": 25,
+        "pnl": 15.64,
+        "win_rate": 48.0
+      },
+      {
+        "threshold": 1.2,
+        "trades": 26,
+        "pnl": -7.42,
+        "win_rate": 38.5
+      },
+      {
+        "threshold": 1.3,
+        "trades": 26,
+        "pnl": -13.72,
+        "win_rate": 34.6
+      },
+      {
+        "threshold": 1.5,
+        "trades": 25,
+        "pnl": 4.38,
+        "win_rate": 44.0
+      },
+      {
+        "threshold": 1.8,
+        "trades": 25,
+        "pnl": 12.74,
+        "win_rate": 48.0
+      }
+    ]
+  },
+  "stress_test": [
+    {
+      "period": "Ultra_Corto",
+      "days": 7,
+      "trades": 2,
+      "pnl_percent": 1.68,
+      "monthly_return": 7.22,
+      "win_rate": 50.0,
+      "volatility": 0.77,
+      "market_condition": "Bajo_Volatilidad",
+      "status": "Positivo"
+    },
+    {
+      "period": "Corto",
+      "days": 14,
+      "trades": 5,
+      "pnl_percent": 8.65,
+      "monthly_return": 18.53,
+      "win_rate": 60.0,
+      "volatility": 0.84,
+      "market_condition": "Bajo_Volatilidad",
+      "status": "Positivo"
+    },
+    {
+      "period": "Medio",
+      "days": 21,
+      "trades": 10,
+      "pnl_percent": -0.47,
+      "monthly_return": -0.67,
+      "win_rate": 40.0,
+      "volatility": 0.81,
+      "market_condition": "Bajo_Volatilidad",
+      "status": "Negativo"
+    },
+    {
+      "period": "Est\u00e1ndar",
+      "days": 30,
+      "trades": 18,
+      "pnl_percent": -19.76,
+      "monthly_return": -19.76,
+      "win_rate": 27.8,
+      "volatility": 0.77,
+      "market_condition": "Bajo_Volatilidad",
+      "status": "Negativo"
+    },
+    {
+      "period": "Extendido",
+      "days": 45,
+      "trades": 26,
+      "pnl_percent": -13.72,
+      "monthly_return": -9.14,
+      "win_rate": 34.6,
+      "volatility": 0.74,
+      "market_condition": "Bajo_Volatilidad",
+      "status": "Negativo"
+    },
+    {
+      "period": "Largo_Plazo",
+      "days": 60,
+      "trades": 25,
+      "pnl_percent": -34.47,
+      "monthly_return": -17.24,
+      "win_rate": 28.0,
+      "volatility": 0.67,
+      "market_condition": "Bajo_Volatilidad",
+      "status": "Negativo"
+    }
+  ]
+}

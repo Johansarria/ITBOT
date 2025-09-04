@@ -16,12 +16,34 @@
         <div class="d-flex align-items-center gap-2">
             <span id="risk-badge" class="badge bg-warning" style="display:none;">⚠️ Parámetros de riesgo personalizados</span>
             <span id="paused-badge" class="badge bg-warning text-dark" style="display:none;">⏸️ Sistema en PAUSA</span>
+            <span id="ctrader-badge" class="badge bg-info text-dark" style="display:none;">Saldo demo cTrader</span>
             <span id="last-update" class="badge bg-secondary">Cargando...</span>
         </div>
     </div>
     
     <!-- Métricas en una sola fila horizontal debajo del título -->
     <div class="col-12 mt-3 d-flex flex-wrap gap-3">
+        <div class="card metric-card flex-fill" style="min-width: 240px; max-width: 24%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Mercado en Vivo (cTrader)
+                        </div>
+                        <div class="small text-muted" id="ctrader-symbol">--</div>
+                        <div class="small text-muted" id="ctrader-source" title="Origen de datos del snapshot">Fuente: --</div>
+                        <div class="h6 mb-1" id="ctrader-regime">Régimen: <span class="text-muted">--</span></div>
+                        <div class="small mb-1">Precio: <span id="ctrader-price" class="fw-bold">--</span></div>
+                        <div class="small">PnL: <span id="ctrader-pnl" class="fw-bold">--</span></div>
+                        <div class="small text-muted">Cola: <span id="ctrader-queue-count">0</span></div>
+                        <div class="small" id="ctrader-last-ack" title="Último estado reportado por cTrader">Último ack: --</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-eye fa-2x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card metric-card flex-fill" style="min-width: 200px; max-width: 20%;">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -56,6 +78,24 @@
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-chart-line fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card metric-card flex-fill" style="min-width: 220px; max-width: 22%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Riesgo (Diario)</div>
+                            <span id="dd-badge" class="badge bg-warning text-dark" style="display:none;">Drawdown activo</span>
+                        </div>
+                        <div class="small text-muted" id="risk-mini">Real: -- | No real: --</div>
+                        <div class="small text-muted" id="risk-mini-2">Total: -- | Capital: --</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shield-alt fa-2x text-info"></i>
                     </div>
                 </div>
             </div>
@@ -110,10 +150,37 @@
                         <div class="h5 mb-0 font-weight-bold" id="binance-balance">
                             <i class="fas fa-spinner fa-spin"></i> --
                         </div>
+                        <div class="small text-muted" id="balance-source">Fuente: Binance</div>
+                        <div class="small" id="ctrader-equity-line" style="display:none;"></div>
                         <div style="height:40px"><canvas id="spark-balance" height="40"></canvas></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-wallet fa-2x text-secondary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cuenta cTrader Detalle (mini) -->
+    <div class="card metric-card flex-fill" id="ctrader-account-card" style="min-width: 260px; max-width: 26%;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Cuenta cTrader (demo)
+                        </div>
+                        <div class="small">Equity: <strong id="ctrader-acc-equity">--</strong></div>
+                        <div class="small">Balance: <span id="ctrader-acc-balance">--</span></div>
+                        <div class="small">Margen usado: <span id="ctrader-acc-margin-used">--</span></div>
+                        <div class="small">Margen libre: <span id="ctrader-acc-free-margin">--</span></div>
+                        <div class="small">Apalancamiento: <span id="ctrader-acc-leverage">--</span></div>
+                        <div class="small">PnL no realizado: <span id="ctrader-acc-unreal-pnl">--</span></div>
+                        <div class="small">Posiciones: <span id="ctrader-acc-positions-count">0</span></div>
+            <div class="small text-muted" id="ctrader-acc-meta">Esperando datos del cBot cTrader...</div>
+            <div class="mt-2" style="height:40px"><canvas id="spark-ctrader-equity" height="40"></canvas></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chart-pie fa-2x text-info"></i>
                     </div>
                 </div>
             </div>
@@ -199,6 +266,9 @@
                 <div class="d-grid gap-2">
                     <button class="btn btn-outline-primary btn-sm" onclick="forceUpdate()">
                         <i class="fas fa-sync"></i> Forzar Actualización
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" onclick="refreshCtraderNow()">
+                        <i class="fas fa-bolt"></i> Refrescar cTrader
                     </button>
                     <button class="btn btn-outline-danger btn-sm" onclick="pauseAll()">
                         <i class="fas fa-pause-circle"></i> Pausa Total
@@ -298,25 +368,81 @@
         </div>
     </div>
 </div>
+
+<!-- Tabla de posiciones cTrader -->
+<div class="row" id="ctrader-positions-section" style="display:none;">
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-clipboard-list"></i> Posiciones cTrader (demo)
+                </h6>
+                <span class="badge bg-info" id="ctrader-positions-count">0</span>
+            </div>
+            <div class="card-body">
+                <!-- Resumen rápido de posiciones: símbolo → PnL -->
+                <div class="mb-2 small" id="ctrader-positions-mini" style="display:none;">
+                    <strong>Resumen rápido:</strong>
+                    <span id="ctrader-positions-mini-content" class="ms-2"></span>
+                </div>
+                <!-- Top ganadoras / perdedoras -->
+                <div class="d-flex flex-wrap gap-4 mb-3 small" id="ctrader-positions-top" style="display:none;">
+                    <div><strong>Top ganadoras:</strong> <span id="ctrader-top-winners" class="ms-2"></span></div>
+                    <div><strong>Top perdedoras:</strong> <span id="ctrader-top-losers" class="ms-2"></span></div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped" id="ctrader-positions-table">
+                        <thead>
+                            <tr>
+                                <th>Par</th>
+                                <th>Lado</th>
+                                <th>Tamaño</th>
+                                <th>Precio Entrada</th>
+                                <th>Precio Actual</th>
+                                <th>PnL</th>
+                                <th>PnL %</th>
+                                <th>SL</th>
+                                <th>TP</th>
+                                <th>Tiempo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <i class="fas fa-spinner fa-spin"></i> Cargando posiciones cTrader...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
     let performanceChart;
-    let sparkDaily, sparkPositions, sparkPairs, sparkStatus, sparkBalance;
+    let sparkDaily, sparkPositions, sparkPairs, sparkStatus, sparkBalance, sparkCtrader;
     
     // Initialize dashboard
     $(document).ready(function() {
         initializeCharts();
         loadInitialData();
     updateRiskBadge();
+    // Snapshot cTrader
+    refreshCtraderSnapshot();
+    setInterval(refreshCtraderSnapshot, 8000);
         
         // Set up periodic updates
     setInterval(updateData, 30000); // Update every 30 seconds
     setInterval(updateRiskBadge, 30000);
+    setInterval(updateRiskMetrics, 30000);
     // Actualizaciones adicionales: saldo y uptime
     updateAuxData();
     setInterval(updateAuxData, 30000);
+    updateRiskMetrics();
     });
     
     function initializeCharts() {
@@ -384,6 +510,85 @@
         sparkPairs = createSpark('spark-pairs', '#ffc107');
         sparkStatus = createSpark('spark-status', '#6c757d');
         sparkBalance = createSpark('spark-balance', '#6c757d');
+        // Sparkline de equity demo cTrader
+        const sc = document.getElementById('spark-ctrader-equity');
+        if (sc) {
+            sparkCtrader = new Chart(sc.getContext('2d'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#0dcaf0', borderWidth: 1, fill: false, pointRadius: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
+            });
+        }
+    }
+
+    async function refreshCtraderSnapshot(symbol = null) {
+        try {
+            // Si no se especifica símbolo, deja que el backend elija el primero activo
+            const url = `/api/ctrader/snapshot?token=${token}` + (symbol ? `&symbol=${encodeURIComponent(symbol)}` : '');
+            const res = await fetch(url);
+            const d = await res.json();
+            if (!d || d.error || d.success === false) return;
+            // Campos compatibles
+            const sym = d.symbol || (Array.isArray(d.current_pairs) && d.current_pairs[0]) || 'BTCUSDT';
+            const regime = typeof d.regime === 'string' ? d.regime : (d.regime && d.regime.name) || '--';
+            const px = d.current_price != null ? Number(d.current_price) : null;
+            const op = d.open_position || null;
+            const pnl = op && typeof op.pnl_estimated !== 'undefined' ? Number(op.pnl_estimated) : null;
+            document.getElementById('ctrader-symbol').textContent = sym;
+            document.getElementById('ctrader-regime').innerHTML = `Régimen: <span class="${regimeTagClass(regime)}">${regime}</span>`;
+            document.getElementById('ctrader-price').textContent = px != null ? `$${formatNumber(px, 4)}` : '--';
+            const pnlEl = document.getElementById('ctrader-pnl');
+            if (pnl != null) {
+                pnlEl.innerHTML = `<span class="${pnl >= 0 ? 'text-success' : 'text-danger'}">$${formatNumber(pnl, 2)}</span>`;
+            } else {
+                pnlEl.textContent = '--';
+            }
+            // Mostrar origen
+            try {
+                const ds = d.data_sources || {};
+                const parts = [];
+                if (ds.symbol) parts.push(`sym:${ds.symbol}`);
+                if (ds.price) parts.push(`px:${ds.price}`);
+                if (ds.position) parts.push(`pos:${ds.position}`);
+                if (ds.regime) parts.push(`reg:${ds.regime}`);
+                const srcEl = document.getElementById('ctrader-source');
+                if (srcEl) srcEl.textContent = 'Fuente: ' + (parts.join(' · ') || '--');
+            } catch (_) {}
+            // Contador de cola
+            const qc = Number(d.orders_queue_count || 0);
+            const qcEl = document.getElementById('ctrader-queue-count');
+            if (qcEl) qcEl.textContent = String(qc);
+            // Último ack
+            try {
+                const ares = await fetch(`/api/ctrader/orders/results/last?token=${token}`);
+                const aj = await ares.json();
+                if (aj && aj.success) {
+                    const r = aj.result;
+                    const el = document.getElementById('ctrader-last-ack');
+                    if (el) {
+                        if (r) {
+                            const st = String(r.status || '--').toUpperCase();
+                            const cls = st === 'FILLED' ? 'text-success' : (st === 'REJECTED' || st === 'ERROR' ? 'text-danger' : 'text-muted');
+                            const px = (r.executed_price != null) ? ` @ $${formatNumber(Number(r.executed_price), 4)}` : '';
+                            el.innerHTML = `Último ack: <span class="${cls}">${st}</span>${px}`;
+                            if (r.ts) { try { el.title = new Date(r.ts).toLocaleString(); } catch (_) { el.title = r.ts; } }
+                        } else {
+                            el.textContent = 'Último ack: --';
+                        }
+                    }
+                }
+            } catch (_) { /* silent */ }
+        } catch (e) {
+            // Silencioso
+        }
+    }
+
+    function regimeTagClass(name) {
+        const n = (name || '').toString().toLowerCase();
+        if (n.includes('bull')) return 'text-success';
+        if (n.includes('bear')) return 'text-danger';
+        if (n.includes('breakout') || n.includes('high')) return 'text-warning';
+        return 'text-muted';
     }
     
     async function loadInitialData() {
@@ -430,6 +635,9 @@
     function updateAuxData() {
         updateBinanceBalance();
         updateUptime();
+    // Datos de cTrader (si están siendo enviados por el cBot)
+    updateCtraderAccount();
+    updateCtraderPositions();
     }
     
     function handleStatusUpdate(data) {
@@ -438,6 +646,29 @@
         updateHealthStatus(data);
         updateTables(data);
         updateChart(data);
+    }
+
+    async function updateRiskMetrics() {
+        try {
+            const res = await fetch(`/api/risk/metrics?token=${token}`);
+            const j = await res.json();
+            if (!j || !j.success) return;
+            const m = j.metrics || {};
+            const realized = Number(m.daily_realized_pnl_usdt || 0);
+            const unreal = Number(m.daily_unrealized_pnl_usdt || 0);
+            const total = Number(m.daily_total_pnl_usdt || 0);
+            const capital = Number(m.total_capital_usdt || 0);
+            $('#risk-mini').text(`Real: $${formatNumber(realized, 2)} | No real: $${formatNumber(unreal, 2)}`);
+            $('#risk-mini-2').text(`Total: $${formatNumber(total, 2)} | Capital: $${formatNumber(capital, 2)}`);
+            const badge = document.getElementById('dd-badge');
+            if (badge) {
+                badge.style.display = j.paused_by_drawdown ? 'inline-block' : 'none';
+                if (j.paused_by_drawdown && j.pause_until) badge.title = `Hasta: ${new Date(j.pause_until).toLocaleString()}`;
+                else badge.title = '';
+            }
+        } catch (e) {
+            // silencioso
+        }
     }
     
     function updateLastUpdate() {
@@ -697,6 +928,213 @@
         } catch (e) {
             // Mantener último valor
         }
+    }
+
+    async function updateCtraderAccount() {
+        try {
+            const res = await fetch(`/api/ctrader/account?token=${token}`);
+            const d = await res.json();
+            if (!d || !d.success || !d.account) return;
+            const acc = d.account;
+            // Mostrar equity como tooltip en el badge de saldo binance para contexto
+            const el = document.getElementById('binance-balance');
+            if (el && typeof acc.equity !== 'undefined' && acc.equity !== null) {
+                const equity = Number(acc.equity || 0);
+                const cur = acc.currency || '';
+                el.title = `cTrader Equity: ${equity.toFixed(2)} ${cur}`;
+                // Badge ON
+                const badge = document.getElementById('ctrader-badge');
+                if (badge) badge.style.display = 'inline-block';
+                // Mostrar línea de equity demo
+                const line = document.getElementById('ctrader-equity-line');
+                if (line) {
+                    line.style.display = 'block';
+                    line.innerHTML = `<span class="text-info">Equity demo:</span> $${formatNumber(equity, 2)} <span class="text-muted">${cur}</span>`;
+                }
+                // Indicar fuente
+                const src = document.getElementById('balance-source');
+                if (src) src.textContent = 'Fuente: cTrader (demo)';
+
+                // Card de detalles
+                const card = document.getElementById('ctrader-account-card');
+                if (card) card.style.display = 'block';
+                const fmtMoney = (v) => {
+                    const n = Number(v || 0);
+                    return isFinite(n) ? `$${formatNumber(n, 2)}` : '--';
+                };
+                document.getElementById('ctrader-acc-equity').textContent = fmtMoney(acc.equity);
+                document.getElementById('ctrader-acc-balance').textContent = fmtMoney(acc.balance ?? acc.cash ?? acc.balance_usd);
+                document.getElementById('ctrader-acc-margin-used').textContent = fmtMoney(acc.marginUsed ?? acc.margin_used);
+                document.getElementById('ctrader-acc-free-margin').textContent = fmtMoney(acc.freeMargin ?? acc.free_margin);
+                document.getElementById('ctrader-acc-leverage').textContent = String(acc.leverage ?? acc.maxLeverage ?? '--');
+                document.getElementById('ctrader-acc-unreal-pnl').innerHTML = (() => {
+                    const upnl = Number(acc.unrealizedPnL ?? acc.unrealized_pnl ?? 0);
+                    const cls = upnl >= 0 ? 'text-success' : 'text-danger';
+                    return `<span class="${cls}">${fmtMoney(upnl)}</span>`;
+                })();
+                // Contador de posiciones (si ya lo tenemos en /positions, se actualizará abajo)
+                if (typeof acc.positionsCount !== 'undefined') {
+                    document.getElementById('ctrader-acc-positions-count').textContent = String(acc.positionsCount);
+                }
+                const meta = [];
+                if (acc.broker || acc.brokerName) meta.push(acc.broker || acc.brokerName);
+                if (acc.accountId || acc.account_id) meta.push(`#${acc.accountId || acc.account_id}`);
+                if (cur) meta.push(cur);
+                document.getElementById('ctrader-acc-meta').textContent = meta.join(' · ');
+
+                // Actualizar sparkline de equity
+                if (sparkCtrader) {
+                    const l = sparkCtrader.data.labels;
+                    const s = sparkCtrader.data.datasets[0].data;
+                    if (l.length > 60) { l.shift(); s.shift(); }
+                    l.push(''); s.push(equity);
+                    sparkCtrader.update();
+                }
+            } else {
+                // Si no llega equity demo, ocultar badge/linea
+                const badge = document.getElementById('ctrader-badge');
+                if (badge) badge.style.display = 'none';
+                const line = document.getElementById('ctrader-equity-line');
+                if (line) line.style.display = 'none';
+                const src = document.getElementById('balance-source');
+                if (src) src.textContent = 'Fuente: Binance';
+                const card = document.getElementById('ctrader-account-card');
+                if (card) {
+                    card.style.display = 'block';
+                    // Placeholders
+                    document.getElementById('ctrader-acc-equity').textContent = '--';
+                    document.getElementById('ctrader-acc-balance').textContent = '--';
+                    document.getElementById('ctrader-acc-margin-used').textContent = '--';
+                    document.getElementById('ctrader-acc-free-margin').textContent = '--';
+                    document.getElementById('ctrader-acc-leverage').textContent = '--';
+                    document.getElementById('ctrader-acc-unreal-pnl').textContent = '--';
+                    document.getElementById('ctrader-acc-positions-count').textContent = '0';
+                    document.getElementById('ctrader-acc-meta').textContent = 'Esperando datos del cBot cTrader...';
+                }
+            }
+        } catch (e) { /* silent */ }
+    }
+
+    async function updateCtraderPositions() {
+        try {
+            const res = await fetch(`/api/ctrader/positions?token=${token}`);
+            const d = await res.json();
+            if (!d || !d.success) return;
+            const count = Number(d.count||0);
+            // Mostrar sección de posiciones cTrader
+            const sect = document.getElementById('ctrader-positions-section');
+            const badge = document.getElementById('ctrader-positions-count');
+            if (sect) sect.style.display = count > 0 ? 'block' : 'none';
+            if (badge) badge.textContent = String(count);
+            // Actualizar contador en la tarjeta de cuenta cTrader
+            const accCountEl = document.getElementById('ctrader-acc-positions-count');
+            if (accCountEl) accCountEl.textContent = String(count);
+
+            // Resumen rápido arriba de la tabla
+            const mini = document.getElementById('ctrader-positions-mini');
+            const miniContent = document.getElementById('ctrader-positions-mini-content');
+            if (mini && miniContent) {
+                if (count === 0) {
+                    mini.style.display = 'none';
+                    miniContent.textContent = '';
+                } else {
+                    const listRaw = Array.isArray(d.positions) ? d.positions : [];
+                    // Construir items: SYM: $PnL (Pct)
+                    const items = listRaw.map(p => {
+                        const sym = (p.symbol || p.Symbol || p.pair || '--').toString().toUpperCase();
+                        const pnlUsd = Number(p.pnl_usd ?? p.pnl ?? 0);
+                        const pnlPct = Number(p.pnl_pct ?? p.pnlPercent ?? 0);
+                        const cls = pnlUsd >= 0 ? 'text-success' : 'text-danger';
+                        return `<span><strong>${sym}</strong>: <span class="${cls}">$${formatNumber(pnlUsd,2)} (${formatPercent(pnlPct)})</span></span>`;
+                    });
+                    // Limitar a 8 elementos y unir con separador
+                    const maxItems = 8;
+                    const shown = items.slice(0, maxItems);
+                    const extra = items.length - shown.length;
+                    miniContent.innerHTML = shown.join(' · ') + (extra > 0 ? ` · +${extra}` : '');
+                    mini.style.display = 'block';
+                }
+            }
+            // Top ganadoras / perdedoras
+            const topWrap = document.getElementById('ctrader-positions-top');
+            const topWinnersEl = document.getElementById('ctrader-top-winners');
+            const topLosersEl = document.getElementById('ctrader-top-losers');
+
+            // Tabla
+            const tbody = document.querySelector('#ctrader-positions-table tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            if (count === 0) {
+                tbody.innerHTML = `<tr><td colspan="10" class="text-center text-muted"><i class=\"fas fa-info-circle\"></i> No hay posiciones cTrader</td></tr>`;
+                if (topWrap) topWrap.style.display = 'none';
+                return;
+            }
+            const list = Array.isArray(d.positions) ? d.positions : [];
+
+            // Calcular Top 3 ganadoras y Top 3 perdedoras por PnL USD
+            try {
+                const sorted = [...list].map(p => ({
+                    sym: (p.symbol || p.Symbol || p.pair || '--').toString().toUpperCase(),
+                    pnlUsd: Number(p.pnl_usd ?? p.pnl ?? 0),
+                    pnlPct: Number(p.pnl_pct ?? p.pnlPercent ?? 0)
+                }));
+                // Ganadoras: mayor a menor
+                const winners = [...sorted].sort((a,b) => b.pnlUsd - a.pnlUsd).slice(0, 3);
+                // Perdedoras: menor a mayor
+                const losers = [...sorted].sort((a,b) => a.pnlUsd - b.pnlUsd).slice(0, 3);
+                if (topWrap && topWinnersEl && topLosersEl) {
+                    const wHtml = winners.map(w => {
+                        const cls = w.pnlUsd >= 0 ? 'text-success' : 'text-danger';
+                        return `<span><strong>${w.sym}</strong>: <span class="${cls}">$${formatNumber(w.pnlUsd,2)} (${formatPercent(w.pnlPct)})</span></span>`;
+                    }).join(' · ');
+                    const lHtml = losers.map(l => {
+                        const cls = l.pnlUsd >= 0 ? 'text-success' : 'text-danger';
+                        return `<span><strong>${l.sym}</strong>: <span class="${cls}">$${formatNumber(l.pnlUsd,2)} (${formatPercent(l.pnlPct)})</span></span>`;
+                    }).join(' · ');
+                    topWinnersEl.innerHTML = wHtml || '-';
+                    topLosersEl.innerHTML = lHtml || '-';
+                    topWrap.style.display = (winners.length || losers.length) ? 'flex' : 'none';
+                }
+            } catch (_) {
+                if (topWrap) topWrap.style.display = 'none';
+            }
+
+            list.forEach(p => {
+                const sym = p.symbol || p.Symbol || p.pair || '--';
+                const side = (p.side || p.Side || p.direction || '').toString().toUpperCase();
+                const size = Number(p.size || p.volume || p.qty || 0);
+                const entry = Number(p.entry_price || p.entryPrice || p.price || 0);
+                const current = Number(p.current_price || p.currentPrice || p.lastPrice || entry);
+                const pnlUsd = Number(p.pnl_usd || p.pnl || p.unrealizedPnL || 0);
+                const pnlPct = Number(p.pnl_pct || p.pnlPercent || (entry ? ((current-entry)/entry*100*(side==='SELL'?-1:1)) : 0));
+                const sl = p.stop_loss || p.stopLoss || p.sl || null;
+                const tp = p.take_profit || p.takeProfit || p.tp || null;
+                const ts = p.timestamp || p.open_time || p.openTime || p.updated_at || null;
+                const pnlCls = pnlUsd >= 0 ? 'text-success' : 'text-danger';
+                const sideBadge = side.startsWith('B') || side === 'LONG' ? 'success' : 'danger';
+                tbody.insertAdjacentHTML('beforeend', `
+                    <tr>
+                        <td><strong>${sym}</strong></td>
+                        <td><span class="badge bg-${sideBadge}">${side || '-'}</span></td>
+                        <td>${formatNumber(size, 4)}</td>
+                        <td>$${formatNumber(entry, 4)}</td>
+                        <td>$${formatNumber(current, 4)}</td>
+                        <td class="${pnlCls}">$${formatNumber(pnlUsd, 2)}</td>
+                        <td class="${pnlCls}">${formatPercent(pnlPct)}</td>
+                        <td>${sl ? `$${formatNumber(Number(sl),4)}` : '-'}</td>
+                        <td>${tp ? `$${formatNumber(Number(tp),4)}` : '-'}</td>
+                        <td>${ts ? new Date(ts).toLocaleString() : '-'}</td>
+                    </tr>
+                `);
+            });
+        } catch (e) { /* silent */ }
+    }
+
+    function refreshCtraderNow() {
+        showNotification('Refrescando datos de cTrader...', 'info');
+        refreshCtraderSnapshot();
+        updateCtraderAccount();
+        updateCtraderPositions();
     }
 
     async function updateRiskBadge() {

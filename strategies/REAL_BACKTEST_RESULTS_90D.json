@@ -1,0 +1,13 @@
+{
+  "backtest_period": "90_days_real_binance_data",
+  "initial_capital": 10000,
+  "final_capital": 10259.750173235192,
+  "total_pnl": 259.7501732351916,
+  "total_return_pct": 2.597501732351916,
+  "monthly_return_pct": 0.8658339107839719,
+  "total_trades": 28066,
+  "win_rate_pct": 46.03434760920687,
+  "profit_factor": 1.0026448242248145,
+  "max_drawdown_pct": -37.57550511868652,
+  "strategy_breakdown": {
+    
