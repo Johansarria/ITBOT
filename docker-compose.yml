@@ -9,9 +9,10 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 1s
-      timeout: 3s
-      retries: 5
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       - bot_network
 
@@ -31,9 +32,10 @@ services:
       - bot_network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   listener:
     container_name: itbot_listener
@@ -50,7 +52,8 @@ services:
       - redis
       - db # Add dependency on PostgreSQL
     restart: unless-stopped
-    mem_limit: 1g
+    mem_limit: 2g
+    mem_reservation: 1g
     environment: # Pass PostgreSQL and Redis connection details to the bot
       POSTGRES_HOST: db # Service name of the PostgreSQL container
       POSTGRES_PORT: 5432
@@ -86,7 +89,8 @@ services:
       - db
       - listener
     restart: unless-stopped
-    mem_limit: 2g # Más memoria para el análisis dinámico
+    mem_limit: 4g # Aumentado de 2g a 4g para mayor estabilidad
+    mem_reservation: 2g
     environment:
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432

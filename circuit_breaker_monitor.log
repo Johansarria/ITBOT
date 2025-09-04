@@ -1,0 +1,43 @@
+2025-09-04 00:08:54,604 - __main__ - INFO - 📋 Estado inicial de Circuit Breakers:
+2025-09-04 00:08:54,604 - __main__ - INFO - {
+  "monitoring_status": "STOPPED",
+  "monitoring_duration": null,
+  "total_alerts": 0,
+  "recent_alerts": [],
+  "circuit_breakers": {
+    "database": {
+      "name": "database_analysis",
+      "state": "CLOSED",
+      "failure_threshold": 3,
+      "recovery_timeout": 60,
+      "stats": {
+        "failure_count": 0,
+        "success_count": 0,
+        "consecutive_failures": 0,
+        "consecutive_successes": 0,
+        "last_failure_time": null,
+        "last_success_time": null
+      }
+    },
+    "connectivity": {
+      "name": "general_connectivity",
+      "state": "CLOSED",
+      "failure_threshold": 5,
+      "recovery_timeout": 30,
+      "stats": {
+        "failure_count": 0,
+        "success_count": 0,
+        "consecutive_failures": 0,
+        "consecutive_successes": 0,
+        "last_failure_time": null,
+        "last_success_time": null
+      }
+    }
+  }
+}
+2025-09-04 00:08:54,605 - __main__ - INFO - 🔍 Iniciando monitoreo de Circuit Breakers (intervalo: 30s)
+2025-09-04 00:08:54,605 - database.database_manager - INFO - Creating new database engine for: sqlite
+2025-09-04 00:08:54,618 - database.database_manager - INFO - Engine creado exitosamente con pool_pre_ping=False
+2025-09-04 00:10:24,669 - __main__ - INFO - ✅ Circuit Breakers OK - DB: CLOSED, Conn: CLOSED
+2025-09-04 00:15:24,428 - __main__ - INFO - ✅ Circuit Breakers OK - DB: CLOSED, Conn: CLOSED
+2025-09-04 00:20:24,293 - __main__ - INFO - ✅ Circuit Breakers OK - DB: CLOSED, Conn: CLOSED

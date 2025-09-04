@@ -20,6 +20,7 @@ def get_engine():
     """
     Returns the SQLAlchemy engine, creating it only if it doesn't exist (singleton pattern).
     This prevents reloading the configuration and ensures the engine is created only once.
+    Enhanced with robust connection pooling for PostgreSQL.
     """
     global _engine
     if _engine is None:
@@ -28,7 +29,33 @@ def get_engine():
             raise ValueError("DATABASE_URL is not set. Check your configuration.")
 
         logger.info(f"Creating new database engine for: {settings.DB_TYPE}")
-        _engine = create_engine(settings.DATABASE_URL)
+        
+        # Configuración robusta de pool de conexiones para PostgreSQL
+        if settings.DB_TYPE == "postgresql":
+            engine_kwargs = {
+                'pool_size': 10,
+                'max_overflow': 20,
+                'pool_timeout': 30,
+                'pool_recycle': 3600,  # Reciclar conexiones cada hora
+                'pool_pre_ping': True,  # Validar conexiones antes de usar
+                'pool_reset_on_return': 'commit',
+                'echo': False,
+                'connect_args': {
+                    'connect_timeout': 10,
+                    'application_name': 'ITBot_Trading_System'
+                }
+            }
+            logger.info("Configurando pool de conexiones PostgreSQL optimizado para estabilidad")
+        else:
+            # Para SQLite, configuración más simple
+            engine_kwargs = {
+                'pool_timeout': 20,
+                'pool_recycle': -1,
+                'echo': False
+            }
+            
+        _engine = create_engine(settings.DATABASE_URL, **engine_kwargs)
+        logger.info(f"Engine creado exitosamente con pool_pre_ping={engine_kwargs.get('pool_pre_ping', False)}")
     return _engine
 
 
