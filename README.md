@@ -222,6 +222,31 @@ docker compose up -d --build
 docker logs --tail=50 itbot_listener
 ```
 
+## 🚀 Despliegue en VPS
+
+Para desplegar ITBOT en un VPS (Virtual Private Server) de manera automatizada:
+
+### Instalación automática (recomendado)
+
+```bash
+# Conectarse al VPS
+ssh root@tu-vps-ip
+
+# Descargar y ejecutar el script de instalación
+curl -fsSL https://raw.githubusercontent.com/Johansarria/ITBOT/main/setup_vps.sh -o setup_vps.sh
+chmod +x setup_vps.sh
+./setup_vps.sh
+```
+
+### Documentación completa
+
+Para instrucciones detalladas de despliegue en VPS, consulta:
+- **[DEPLOY_VPS.md](DEPLOY_VPS.md)** - Guía completa de despliegue en VPS
+- Incluye instalación manual paso a paso
+- Configuración de seguridad y firewall  
+- Monitoreo y mantenimiento
+- Resolución de problemas comunes
+
 Notas:
 - No dejes credenciales en el `docker-compose.yml`. Usa `.env` y no lo subas a repositorios públicos.
 - Si necesitas exponer Postgres para desarrollo local, está el puerto 5432 publicado; en producción evita exponerlo.
