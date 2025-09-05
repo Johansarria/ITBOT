@@ -240,8 +240,9 @@ chmod +x setup_vps.sh
 
 ### Documentación completa
 
-Para instrucciones detalladas de despliegue en VPS, consulta:
-- **[DEPLOY_VPS.md](DEPLOY_VPS.md)** - Guía completa de despliegue en VPS
+Para instrucciones de despliegue en VPS:
+- **[QUICK_START_VPS.md](QUICK_START_VPS.md)** - Guía rápida de 5 minutos (⚡ Start aquí)
+- **[DEPLOY_VPS.md](DEPLOY_VPS.md)** - Guía completa y detallada
 - Incluye instalación manual paso a paso
 - Configuración de seguridad y firewall  
 - Monitoreo y mantenimiento
