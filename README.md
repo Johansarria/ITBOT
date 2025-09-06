@@ -43,6 +43,38 @@ ITBOT opera con una **arquitectura desacoplada** que separa la toma de decisione
 
 ## Avances Recientes
 
+### v2.3: Refactorización Arquitectónica y Autonomía Avanzada (Septiembre 2025)
+
+Se ha llevado a cabo una refactorización arquitectónica masiva para modernizar la base del código, mejorar la mantenibilidad y escalar las capacidades del bot.
+
+#### **✅ Principales Mejoras**
+
+*   **Nueva Estructura de Proyecto (`src` layout):**
+    *   El código fuente ha sido reorganizado bajo el directorio `src/`, adoptando el estándar de `src-layout` de Python.
+    *   La lógica principal del bot ahora reside en el paquete `src.itbot`, mejorando la modularidad y el aislamiento.
+    *   Se han mantenido *shims* de compatibilidad en la raíz del proyecto (`run_bot.py`, `listener_bot.py`) para no romper los scripts de ejecución y las pruebas existentes.
+
+*   **Configuración Centralizada con Pydantic:**
+    *   Se ha reemplazado el sistema de configuración anterior por un modelo basado en **Pydantic**.
+    *   Todas las configuraciones de la aplicación están ahora centralizadas en `config.py` a través de la clase `Settings`.
+    *   Esto proporciona validación de tipos, autocompletado, y carga automática desde variables de entorno o archivos `.env`, eliminando la dispersión de parámetros y mejorando la robustez.
+
+*   **Modularización y Desacoplamiento:**
+    *   La lógica de negocio, los manejadores de Telegram y los componentes del núcleo han sido migrados a módulos cohesivos dentro de `src/itbot`.
+    *   Se han eliminado los antiguos módulos de `handlers` y se ha refactorizado la interacción con la UI de Telegram.
+
+*   **Autonomía y Resiliencia Mejoradas:**
+    *   La nueva configuración y estructura sientan las bases para una mayor autonomía en la selección de estrategias y la gestión de activos.
+    *   Las mejoras recientes en resiliencia, como el `Circuit Breaker`, se integran de forma nativa en esta nueva arquitectura.
+
+#### **💡 Impacto**
+
+*   **Mantenibilidad:** Un código más limpio, modular y fácil de entender.
+*   **Escalabilidad:** La nueva estructura permite añadir más fácilmente nuevas estrategias, activos y funcionalidades.
+*   **Robustez:** La configuración tipada y centralizada reduce drásticamente los errores de configuración.
+*   **Developer Experience:** Un entorno de desarrollo más moderno y alineado con las mejores prácticas de la industria.
+
+
 ### v2.2.1: Límites de riesgo por símbolo y mini‑dashboard de métricas (Agosto 2025)
 
 Novedades para reforzar el control de riesgo y la observabilidad en tiempo real:

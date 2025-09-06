@@ -7,6 +7,7 @@ best_risk_thresholds.json
 .venv/
 venv/
 env/
+.venv_itbot/
 
 # Archivos generados por Python
 __pycache__/
@@ -32,3 +33,18 @@ mlruns/
 
 # Archivos de estado del bot
 data/bot_state.json.gemini/
+
+# Archivos de almacenamiento y reportes
+storage/
+reports/
+*.log
+*.csv
+*.json
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de IDE
+.idea/
+.vscode/
