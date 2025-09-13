@@ -1,376 +1,76 @@
-# ITBOT
+# ITBOT v3.0: Sistema de Trading Algorítmico Autónomo
 
-Bot de trading algorítmico avanzado para criptomonedas, diseñado con una arquitectura modular y robusta, que integra Machine Learning, gestión de riesgo multi-capa y control interactivo vía Telegram.
+ITBOT v3.0 es un sistema de trading algorítmico avanzado para criptomonedas, diseñado con una arquitectura modular y robusta que integra Machine Learning, gestión de riesgo multi-capa, y una capacidad de adaptación autónoma al mercado.
 
-## Descripción General
+## Arquitectura y Estado Actual (v3.0)
 
-ITBOT automatiza la toma de decisiones y ejecución de operaciones en mercados de criptomonedas, combinando estrategias técnicas, modelos de ML y control de riesgo. Permite operar en modo simulado o real, con protección ante condiciones adversas y reportes automáticos.
+La versión 3.0 representa la consolidación de múltiples sistemas avanzados en un único bot cohesivo, capaz de operar con un alto grado de autonomía y eficiencia.
 
-## Arquitectura y Flujo de Datos Principal
+### 1. Arquitectura de Decisión Multi-Capa (El "Sistema V3")
 
-ITBOT opera con una **arquitectura desacoplada** que separa la toma de decisiones de la ejecución de órdenes, garantizando resiliencia, seguridad y escalabilidad.
+El núcleo de ITBOT no es una única estrategia, sino un ecosistema dinámico que opera en varias capas para maximizar la adaptabilidad y el rendimiento:
 
-1.  **`run_bot.py` (Orquestador/Cerebro):** Orquesta el ciclo principal. Analiza el mercado usando la estrategia activa y publica decisiones en una cola interna.
-2.  **`utils/message_queue.py` (Cola de Mensajes):** Gestiona la **cola de mensajes (Redis)**, actuando como el backbone de comunicación asíncrona entre los módulos de decisión y ejecución.
-3.  **`execution_worker.py` (Ejecutor/Manos):** Escucha la cola y ejecuta las órdenes, incorporando **chequeos de riesgo pre-ejecución** para una capa adicional de seguridad.
-4.  **`utils/order_executor.py`:** Lógica de ejecución de órdenes y comunicación con Binance.
-5.  **`modules/analisis_bot.py`, `strategies/`:** Implementan las estrategias de análisis técnico y ML.
-6.  **`utils/risk_manager.py`:** Controla el riesgo, escudos y modos de operación.
-7.  **`utils/logger_setup.py`, `logs/`:** Logging centralizado y rotativo.
-8.  **Telegram:** Interfaz de usuario y control.
+- **Nivel 1: Estrategias Fundamentales:** Un conjunto de estrategias base (`MACD`, `Cruce de Medias Móviles`, etc.) que sirven como bloques de construcción.
+- **Nivel 2: Estrategias de Alto Rendimiento:** Estrategias optimizadas para objetivos de rentabilidad agresivos y que se adaptan a condiciones específicas del mercado (`DynamicRegimeStrategy`).
+- **Nivel 3: Gestor de Estrategias (`StrategyManager`):** Un "meta-cerebro" que puede ejecutar backtests de todas las estrategias disponibles y **seleccionar y activar autónomamente la de mejor rendimiento**, permitiendo que el bot se adapte a largo plazo.
+- **Nivel 4: Controlador Dinámico V3:** La cúspide de la autonomía. Este sistema **analiza y clasifica el régimen de mercado en tiempo real** (ej. `TENDENCIA_ALCISTA`, `ALTA_VOLATILIDAD`) y, basándose en esto, **modifica los parámetros de las estrategias sobre la marcha** (ej. ajusta el riesgo, amplía take profits) para optimizar la operativa a las condiciones exactas del momento.
 
-## Características Principales
+### 2. Selección Dinámica y Autónoma de Activos
 
-*   **Gestión de Estrategias Avanzada:**
-    *   **Análisis Multiestrategia:** El bot no se limita a una sola estrategia; evalúa simultáneamente múltiples enfoques (técnicos, ML) y selecciona la decisión óptima en cada ciclo.
-    *   **Adaptación Dinámica (Modo Auto):** Capacidad de auto-seleccionar la estrategia con mejor rendimiento histórico mediante backtesting periódico, permitiendo al bot adaptarse a las condiciones cambiantes del mercado.
-*   **Machine Learning Integrado:**
-    *   **Decisiones Nuanceadas con ML:** Utiliza modelos LightGBM para predecir probabilidades de movimiento de precios, traduciéndolas en decisiones de trading con diferentes niveles de confianza (ej. COMPRAR, COMPRAR_MODERADO) basadas en umbrales dinámicos.
-    *   **Re-entrenamiento Automático:** Mantiene el modelo de ML actualizado mediante re-entrenamientos periódicos y diarios.
-    *   **Sistema de Fallback Robusto:** Carga automática desde archivos PKL cuando MLflow no está disponible, garantizando operación continua.
-    *   **Monitoreo ML en Tiempo Real:** Tracking automático de predicciones, confianza y rendimiento del modelo.
-    *   **Optimización Automática de Umbrales:** Scripts para encontrar los umbrales óptimos de decisión basados en datos históricos.
-*   **Seguridad y Gestión de Riesgos Multi-capa:**
-    *   **Escudos de Mercado:** Protección automática contra condiciones de mercado adversas (ej. alta volatilidad, errores de API) que pueden pausar la operativa.
-    *   **Riesgo Dinámico:** Ajusta el riesgo por operación basándose en la confianza del modelo de ML y otros factores de mercado.
-    *   **Kill Switch:** Un mecanismo de seguridad de emergencia para detener toda la operativa de forma inmediata.
-*   **Control Interactivo vía Telegram:**
-    *   **Panel de Control Completo:** Más allá de las notificaciones, el bot de Telegram actúa como una interfaz interactiva para monitorear el estado del bot, activar/desactivar funciones de seguridad, cambiar configuraciones clave y hasta ejecutar operaciones manuales.
-    *   **Modo de Sesión (LIVE/PAPER):** Control explícito del usuario para operar en modo real o simulación en cada sesión.
-*   **Auditoría y Mejora Continua:**
-    *   **Registro Detallado de Decisiones:** Almacena cada decisión de trading (ejecutada o no) con sus características y scores asociados, permitiendo un análisis post-mortem exhaustivo.
-    *   **Señales Descartadas:** Registra las señales generadas por estrategias que no fueron ejecutadas, proporcionando datos valiosos para la optimización y re-entrenamiento futuro.
+ITBOT ha superado la dependencia de pares de trading fijos. El sistema ahora es capaz de:
 
-## Avances Recientes
+- **Analizar más de 400 pares de trading** en Binance en tiempo real.
+- **Aplicar un algoritmo de scoring** que pondera liquidez, estabilidad, spread y tendencia.
+- **Seleccionar y diversificar automáticamente** la cartera de activos con las mejores oportunidades.
+- **Re-evaluar la selección periódicamente** sin intervención manual, asegurando una adaptación constante a las oportunidades emergentes.
 
-### v2.3: Refactorización Arquitectónica y Autonomía Avanzada (Septiembre 2025)
+### 3. Gestión de Riesgo Avanzada y Multi-Capa
 
-Se ha llevado a cabo una refactorización arquitectónica masiva para modernizar la base del código, mejorar la mantenibilidad y escalar las capacidades del bot.
+La seguridad y la preservación del capital son fundamentales. ITBOT implementa múltiples capas de protección:
 
-#### **✅ Principales Mejoras**
+- **Límites de Riesgo Globales:** Control sobre la exposición total, operaciones concurrentes y drawdown diario máximo.
+- **Límites de Riesgo por Símbolo:** Capacidad de definir un máximo de operaciones y exposición para un activo específico.
+- **Escudos de Mercado (`ShieldManager`):** Protección automática que pausa la operativa ante condiciones anómalas (alta volatilidad, caídas bruscas, problemas de API).
+- **Circuit Breaker:** Un mecanismo de seguridad de emergencia para detener toda la operativa de forma inmediata.
 
-*   **Nueva Estructura de Proyecto (`src` layout):**
-    *   El código fuente ha sido reorganizado bajo el directorio `src/`, adoptando el estándar de `src-layout` de Python.
-    *   La lógica principal del bot ahora reside en el paquete `src.itbot`, mejorando la modularidad y el aislamiento.
-    *   Se han mantenido *shims* de compatibilidad en la raíz del proyecto (`run_bot.py`, `listener_bot.py`) para no romper los scripts de ejecución y las pruebas existentes.
+### 4. Infraestructura Profesional y MLOps
 
-*   **Configuración Centralizada con Pydantic:**
-    *   Se ha reemplazado el sistema de configuración anterior por un modelo basado en **Pydantic**.
-    *   Todas las configuraciones de la aplicación están ahora centralizadas en `config.py` a través de la clase `Settings`.
-    *   Esto proporciona validación de tipos, autocompletado, y carga automática desde variables de entorno o archivos `.env`, eliminando la dispersión de parámetros y mejorando la robustez.
+La v3.0 se sustenta en prácticas de ingeniería de software y MLOps robustas:
 
-*   **Modularización y Desacoplamiento:**
-    *   La lógica de negocio, los manejadores de Telegram y los componentes del núcleo han sido migrados a módulos cohesivos dentro de `src/itbot`.
-    *   Se han eliminado los antiguos módulos de `handlers` y se ha refactorizado la interacción con la UI de Telegram.
+- **Contenerización Completa con Docker:** Toda la aplicación y sus dependencias (Redis, Postgres) se gestionan a través de Docker y Docker Compose, garantizando portabilidad, aislamiento y despliegue simplificado.
+- **Migraciones de Base de Datos con Alembic:** Se utiliza Alembic para gestionar la evolución del esquema de la base de datos (SQLAlchemy) de forma versionada y segura.
+- **Feature Store Formalizado y Versionado:** Gestión reproducible de las características de ML, con esquemas definidos y lógica de actualización incremental.
+- **Integración con MLflow:** Seguimiento de experimentos, versionado de modelos y gestión centralizada del ciclo de vida de los modelos de Machine Learning.
 
-*   **Autonomía y Resiliencia Mejoradas:**
-    *   La nueva configuración y estructura sientan las bases para una mayor autonomía en la selección de estrategias y la gestión de activos.
-    *   Las mejoras recientes en resiliencia, como el `Circuit Breaker`, se integran de forma nativa en esta nueva arquitectura.
+### 5. Control y Observabilidad
 
-#### **💡 Impacto**
+- **Interfaz de Control por Telegram:** Un bot de Telegram interactivo permite monitorear el estado, gestionar los modos de operación (LIVE/PAPER), ajustar configuraciones de riesgo y recibir notificaciones en tiempo real.
+- **Dashboard Web (Experimental):** Una interfaz web para visualizar métricas de riesgo y configurar límites en tiempo real.
 
-*   **Mantenibilidad:** Un código más limpio, modular y fácil de entender.
-*   **Escalabilidad:** La nueva estructura permite añadir más fácilmente nuevas estrategias, activos y funcionalidades.
-*   **Robustez:** La configuración tipada y centralizada reduce drásticamente los errores de configuración.
-*   **Developer Experience:** Un entorno de desarrollo más moderno y alineado con las mejores prácticas de la industria.
+## Ejecución (Docker)
 
-
-### v2.2.1: Límites de riesgo por símbolo y mini‑dashboard de métricas (Agosto 2025)
-
-Novedades para reforzar el control de riesgo y la observabilidad en tiempo real:
-
-- Controles por símbolo (opcionales):
-    - RISK_MAX_PER_SYMBOL_TRADES: máximo de operaciones abiertas por símbolo.
-    - RISK_MAX_PER_SYMBOL_EXPOSURE_PCT: exposición máxima por símbolo (% del capital) considerando la nueva orden.
-- Enforzados en utils/risk_manager.py durante verificar_permiso_de_operacion(symbol=new_symbol).
-- UI Web:
-    - Configuración > “Límites por Símbolo”: edición y auditoría de cambios.
-    - Dashboard > tarjeta “Riesgo (Diario)”: PnL realizado/no realizado del día, capital y badge de pausa por drawdown.
-- Auditoría: logs/risk_limits_audit.jsonl (consultable/descargable desde el panel).
-
-APIs del panel web (requieren token; POST requiere admin):
-- GET /api/risk/limits → valores por defecto (settings) y efectivos.
-- POST /api/risk/limits → setea límites por símbolo. Cuerpo JSON permitido: { RISK_MAX_PER_SYMBOL_TRADES, RISK_MAX_PER_SYMBOL_EXPOSURE_PCT }.
-- GET /api/risk/limits/audit → últimas líneas o descarga del JSONL de auditoría.
-- GET /api/risk/metrics → métricas diarias de riesgo y estado de pausa por drawdown.
-
-Uso rápido del panel web:
-1) Genera un token temporal: GET/POST /api/generate_token?user_id=<ADMIN_TELEGRAM_ID>.
-2) Abre /dashboard?token=<TOKEN> y /config?token=<TOKEN>.
-
-Notas:
-- El token expira por defecto en ~1h; genera uno nuevo cuando sea necesario.
-- Las operaciones POST sensibles (p. ej., /api/risk/limits, /api/ml/thresholds/*) requieren token de admin (user_id == ADMIN_TELEGRAM_ID).
-
-### v2.2: Sistema de Selección Dinámica de Pares (Agosto 2025) 🚀
-
-Se ha implementado un **sistema revolucionario de selección automática de pares de trading** que elimina la dependencia de configuraciones fijas y permite al bot adaptarse automáticamente a las mejores oportunidades del mercado.
-
-#### **✅ Características Principales**
-- **Análisis Automático de 411 Pares USDT**: Evaluación en tiempo real de todos los pares disponibles en Binance
-- **Selección Inteligente**: Algoritmo de scoring compuesto que considera:
-  - Liquidez (35%): Volumen 24h, depth del order book
-  - Estabilidad (25%): Consistencia de precio, volatilidad controlada  
-  - Spread (20%): Costos de transacción optimizados
-  - Tendencia (20%): Momentum y análisis técnico
-- **Diversificación Sectorial**: Selección automática balanceada entre sectores crypto
-- **Re-evaluación Autónoma**: Análisis periódico cada 24h sin intervención manual
-- **Sistema de Fallback**: Configuración estática como respaldo ante errores
-
-#### **🔧 Integración Autónoma**
-- **Sin dependencia de Cron**: Todo integrado directamente en `run_bot.py`
-- **Scheduler Interno**: Verificaciones cada 2 horas, re-evaluación completa cada 24h
-- **Estado Persistente**: Mantiene selección entre reinicios del bot
-- **Notificaciones Telegram**: Alertas automáticas cuando cambian los pares
-
-#### **📊 Performance y Robustez**
-- **Tiempo de Análisis**: ~2 minutos para evaluar 411 pares
-- **Gestión de Rate Limits**: Procesamiento en lotes con pausas automáticas
-- **Logging Estructurado**: Trazabilidad completa de decisiones
-- **Historial de Cambios**: Registro de todas las re-evaluaciones
-
-#### **💡 Impacto Esperado**
-- **+25-40% Performance**: Por selección óptima automática
-- **-60% Riesgo Concentración**: Diversificación inteligente
-- **100% Aprovechamiento**: De oportunidades emergentes
-- **Operación Autónoma**: Sin intervención manual requerida
-
-#### **🎯 Comandos Telegram Disponibles**
-- `/dynamic_status`: Estado actual del sistema dinámico
-- `/dynamic_pairs`: Lista de pares actualmente seleccionados  
-- `/dynamic_force_update`: Forzar re-evaluación inmediata
-- `/dynamic_history`: Historial de cambios y evaluaciones
-
-### v2.1: Refactorización E2E y Arquitectura Multi-Activo
-
-Se ha actualizado el README.md con una nueva sección 'Avances Recientes' que detalla la dockerización completa de la aplicación y la integración de MLflow, incluyendo sus beneficios en portabilidad, aislamiento, despliegue simplificado, seguimiento de experimentos, reproducibilidad y gestión centralizada de modelos.
-
-- **Integración de Alembic para Migraciones de Base de Datos:**
-    - Se ha incorporado Alembic para gestionar la evolución del esquema de la base de datos de forma robusta y versionada.
-    - Se han definido los modelos de SQLAlchemy para las tablas principales del sistema.
-- **Evolución y Estabilización de la Suite de Pruebas:**
-    - Se ha realizado un esfuerzo continuo para corregir y estabilizar las pruebas unitarias y de integración.
-    - Algunas pruebas complejas (E2E, Listener) han sido desactivadas temporalmente para permitir una estabilización progresiva del núcleo del sistema.
-
-### Formalización y Versionado del Feature Store
-
-Se ha integrado la formalización y versionado del Feature Store, lo que permite una gestión más robusta y reproducible de las características utilizadas por los modelos de Machine Learning. Esto incluye:
-
-*   **Esquema y Alias:** Carga de datos robusta con manejo de esquemas y alias para mayor flexibilidad.
-*   **Actualización Incremental:** Lógica de actualización incremental para la carga de datos históricos, optimizando el rendimiento.
-*   **Manejo de Datetime:** Corrección en el manejo de `datetime` con `zoneinfo` para asegurar la consistencia temporal.
-
-### Infraestructura y MLOps
-
-*   **Dockerización Completa:** La aplicación ha sido completamente dockerizada, lo que garantiza portabilidad, aislamiento y un despliegue simplificado.
-*   **Integración de MLflow:** Se ha integrado MLflow para una gestión robusta de los experimentos de Machine Learning, permitiendo el seguimiento de experimentos, la reproducibilidad y la gestión centralizada de modelos.
-
-*   **Depuración y Estabilización (Agosto 2025):**
-    *   Se solucionó un error crítico de red en la configuración de Docker (`docker-compose.yml`) que impedía la comunicación entre el bot y la base de datos en Redis.
-    *   Se corrigieron múltiples bugs en el bot de Telegram (`listener_bot.py`), incluyendo un `NameError` que impedía mostrar menús y un error de cálculo en la visualización del riesgo forzado.
-    *   Estos cambios restauran la funcionalidad completa del bot y mejoran significativamente su estabilidad en el entorno dockerizado.
-
-### Depuración y Estabilización de Pruebas (Agosto 2025)
-
-*   **Corrección de Errores de Importación:** Se han solucionado una serie de errores de importación en las pruebas del `listener_bot` que impedían la ejecución de la suite de pruebas.
-*   **Corrección de Errores de Configuración:** Se han corregido errores de configuración en las pruebas que impedían el acceso a los atributos de configuración correctos.
-*   **Corrección de Errores de Base de Datos:** Se han identificado y corregido errores de conexión con la base de datos de pruebas, que impedían la ejecución de las pruebas de la base de datos.
-*   **Estabilización General de la Suite de Pruebas:** Se ha trabajado en la estabilización general de la suite de pruebas, corrigiendo una gran cantidad de errores que impedían su correcta ejecución.
-
-### Mejoras en la Estabilidad y Pruebas (Agosto 2025)
-
-*   **Corrección de Lógica de Modos**: Se ha corregido un error crítico en `handlers.py` que causaba mensajes contradictorios al intentar cambiar entre los modos `LIVE` y `PAPER_TRADING`. La lógica ahora maneja correctamente las transiciones y notificaciones al usuario.
-*   **Refactorización y Estabilización de Pruebas**:
-    *   Se creó un nuevo módulo de pruebas (`tests/test_handlers.py`) para cubrir específicamente la lógica de la interfaz de usuario en `handlers.py`, mejorando la cobertura y la fiabilidad.
-    *   Se resolvió un `ImportError` en `tests/conftest.py` eliminando una dependencia obsoleta, lo que permite una ejecución de pruebas más limpia y eficiente.
-*   **Gestión de Riesgos (En Curso)**: Se ha identificado que la implementación del menú de gestión de riesgos (`risk_set_auto`, `risk_set_manual`) está incompleta y carece de manejadores. Este es un área de trabajo activa para futuras mejoras.
-
-## Flujo de ramas: main2 (trabajo) e itbot_beta (respaldo)
-
-- main2: rama activa de desarrollo/trabajo.
-- itbot_beta: respaldo/checkpoint de main2.
-
-Formas de crear un checkpoint (hacer que itbot_beta == main2):
-
-1) Manual desde GitHub Actions:
-    - Ir a Actions > "Sync itbot_beta from main2" > Run workflow.
-    - Dejar `force: true` para sobrescribir de forma segura (with-lease).
-
-2) Local con script:
-    - Ejecuta `scripts/checkpoint_beta.sh` estando en `main2` y con el árbol limpio.
-
-Ambos métodos usan `--force-with-lease` para evitar sobrescribir cambios remotos no esperados.
-
-## Dependencias Principales
-
-*   **Python >=3.12**
-*   **`aiogram`:** Framework para el bot de Telegram.
-*   **`python-binance`:** Cliente para la API de Binance.
-*   **`pandas`, `numpy`:** Manipulación y análisis de datos.
-*   **`scikit-learn`, `lightgbm`, `joblib`:** Machine Learning (entrenamiento, modelo, serialización).
-*   **`ta`:** Librería para cálculo de indicadores técnicos.
-*   **`matplotlib`:** Generación de gráficos para reportes.
-*   **`redis`:** Cliente para la cola de mensajes.
-*   **`python-dotenv`:** Gestión de variables de entorno.
-*   **`freezegun`:** Para pruebas de funciones dependientes del tiempo.
-
-## Instalación y Entorno
-
-1.  Crea un entorno virtual:
+1.  **Configurar variables de entorno:**
     ```bash
-    python3 -m venv .venv
-    source .venv/bin/activate
+    cp .env.example .env
+    # Editar .env y añadir tus tokens/credenciales de Binance y Telegram
     ```
-2.  Instala dependencias:
+2.  **Levantar los servicios:**
     ```bash
-    pip install -r requirements.txt
+    docker compose up -d --build
     ```
-3.  Configura el archivo `.env` con tus credenciales.
-
-## Ejecución
-
-Operación típica en dos procesos:
-
-- Orquestador (analiza y envía señales):
+3.  **Monitorear logs:**
     ```bash
-    python3 run_bot.py
+    docker compose logs -f itbot_listener
+    docker compose logs -f itbot_app
+    docker compose logs -f itbot_worker
     ```
-- Worker de ejecución (recibe y ejecuta órdenes):
-    ```bash
-    python3 execution_worker.py
-    ```
-- Entrenar modelos ML (opcional):
-    ```bash
-    python3 ml_model_trainer.py
-    ```
-
-Modos de operación (REAL vs SIMULADO):
-
-- El modo efectivo se determina por el estado persistido (StateManager):
-    - `session.mode = "live"` y `live_mode.unlocked = true` → MODO REAL (se llaman `create_order` y `create_oco_order` de Binance).
-    - `session.mode = "live"` y `live_mode.unlocked = false` → SIMULADO con aviso: "El bot está en modo LIVE pero no ha sido desbloqueado".
-    - Cualquier otro caso → SIMULADO.
-- El desbloqueo LIVE se gestiona vía interfaz (Telegram) o escribiendo el estado en `data/bot_state.json` usando `utils/state_manager.py`.
-- En MODO REAL, tras la orden de mercado se coloca automáticamente una OCO (TP/SL) según `config.settings.RISK_PER_TRADE_*`.
 
 ## Pruebas
 
-Ejecuta la suite completa con cobertura:
+Ejecuta la suite completa de pruebas (más de 270 tests) para validar la integridad del sistema:
 ```bash
-pytest --cov=.
+pytest
 ```
 
-## Docker / Despliegue (rápido)
-
-1. Copia el archivo de ejemplo de variables de entorno y complétalo:
-
-```bash
-cp .env.example .env
-# Edita .env y añade tus tokens/credenciales
-```
-
-2. Levanta los servicios con Compose:
-
-```bash
-docker compose up -d --build
-```
-
-3. Verifica logs del listener para confirmar que el bot inició correctamente:
-
-```bash
-docker logs --tail=50 itbot_listener
-```
-
-Notas:
-- No dejes credenciales en el `docker-compose.yml`. Usa `.env` y no lo subas a repositorios públicos.
-- Si necesitas exponer Postgres para desarrollo local, está el puerto 5432 publicado; en producción evita exponerlo.
-
-Notas de pruebas:
-- La suite valida tanto SIMULADO como REAL, incluyendo manejo de errores de Binance y de red.
-- Se usan mocks para `StateManager`, `BinanceClient` y Telegram; no se requieren credenciales para correr tests.
-
-## Estructura de Carpetas
-
-*   `strategies/`: Estrategias de trading
-*   `modules/`: Lógica de análisis y riesgo
-*   `utils/`: Utilidades, ejecución, riesgo, Telegram
-*   `database/`: Gestión de base de datos
-*   `logs/`: Archivos de log
-*   `tests/`: Pruebas unitarias
-*   `data/`: Datos históricos y modelos ML
-
-## Notas
-
-*   El bot está diseñado para ser seguro, modular y fácil de mantener.
-*   Usa anotaciones de tipo y docstrings para facilitar la colaboración.
-*   La lógica crítica solo se ejecuta si el script es el principal (`if __name__ == "__main__":`).
-
-## Recomendaciones de Parámetros de Riesgo (MVP)
-
-Los siguientes parámetros están pre-configurados acorde a buenas prácticas para un MVP y pueden ajustarse vía variables de entorno (.env):
-
-- `RISK_PER_TRADE_STOP_LOSS_PCT`: 2.0
-    - Stop loss recomendado para dar espacio a la volatilidad sin ser excesivo.
-- `RISK_PER_TRADE_TAKE_PROFIT_PCT`: 4.0–5.0
-    - Mantener un ratio Riesgo/Beneficio ≥ 2:1 (p. ej., 4% si SL=2%).
-- `RISK_MAX_CONCURRENT_TRADES`: 4
-    - Limita correlación y exposición simultánea; recomendado 3–5.
-- `RISK_MAX_EXPOSURE_PCT`: 30.0
-    - Límite de exposición total del capital; recomendado 25–40%.
-- `RISK_MAX_DAILY_DRAWDOWN_PCT`: 3.0
-    - Disyuntor diario; recomendado 3–5% (MVP: 3%).
-
-Cómo ajustar por .env:
-
-```
-RISK_PER_TRADE_STOP_LOSS_PCT=2.0
-RISK_PER_TRADE_TAKE_PROFIT_PCT=4.0
-RISK_MAX_CONCURRENT_TRADES=4
-RISK_MAX_EXPOSURE_PCT=30.0
-RISK_MAX_DAILY_DRAWDOWN_PCT=3.0
-```
-
-Aplicación en el sistema:
-- SL/TP se aplican automáticamente en MODO REAL al colocar una OCO (`utils/order_executor.py`).
-- Límite de operaciones concurrentes, exposición total y drawdown diario se validan en `utils/risk_manager.py` antes de permitir nuevas operaciones.
-
-## Cambios recientes relevantes (Agosto 2025)
-
-### 🤖 **Mejoras del Sistema ML (v2.1.5)**
-
-Se ha implementado un conjunto completo de mejoras al sistema de Machine Learning:
-
-#### **✅ Robustez y Confiabilidad**
-- **Sistema de Fallback**: Carga automática desde PKL cuando MLflow falla
-- **Validación de Datos**: Verificación de mínimos puntos de datos requeridos
-- **Logging Mejorado**: Información detallada de predicciones y confianza
-
-#### **📊 Transparencia y Monitoreo** 
-- **Predicciones ML en Resultados**: Incluye `ml_buy_probability`, `ml_sell_probability`, `ml_status`
-- **Monitor ML Automático** (`utils/ml_monitor.py`): Tracking de todas las predicciones
-- **Logging Estructurado**: Registro JSON de predicciones para análisis posterior
-
-#### **⚙️ Configuración Dinámica**
-- **Umbrales Configurables**: `ML_THRESHOLD_HIGH`, `ML_THRESHOLD_MEDIUM`, `ML_THRESHOLD_LOW` en `config.py`
-- **Parámetros por Defecto**: Alto=0.85, Medio=0.70, Bajo=0.55
-- **Configuración Mínima de Datos**: `ML_MIN_DATA_POINTS=50`
-
-#### **🔧 Scripts de Mantenimiento**
-- **`retrain_ml_model.py`**: Reentrenamiento automático con verificación de rendimiento
-- **`optimize_ml_thresholds.py`**: Optimización de umbrales basada en datos históricos
-- **Backup Automático**: Respaldo de modelos antes de reentrenamiento
-
-#### **📈 Métricas y Análisis**
-- **Estadísticas en Tiempo Real**: Confianza promedio, distribución de decisiones
-- **Análisis de Rendimiento**: Detección automática de degradación del modelo
-- **Recomendaciones Automáticas**: Sugerencias de optimización basadas en datos
-
-#### **🎯 Impacto en Trading**
-- **Decisiones Más Informadas**: Múltiples niveles de confianza (COMPRAR, COMPRAR_BAJO, etc.)
-- **Mejor Gestión de Riesgo**: Score basado en probabilidades ML
-- **Operación Continua**: Fallback garantiza funcionamiento sin MLflow
-
-- Corrección de la ruta de ejecución en MODO REAL en `utils/order_executor.py` (cuando `live`+`unlocked`).
-- Manejo explícito de excepciones `BinanceAPIException` y `aiohttp.ClientError` con mensajes de error claros.
-- Aviso de LIVE bloqueado se envía tras pasar validaciones de riesgo para evitar ruido en denegaciones tempranas.
-- Suite de tests estabilizada: 435 pruebas pasando en local.
+---
+*Este README refleja el estado consolidado del proyecto en la versión 3.0. Para un historial detallado de cambios, consulte el log de commits de Git.*
