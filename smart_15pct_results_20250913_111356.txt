@@ -1,0 +1,20 @@
+RESULTADOS ESTRATEGIA INTELIGENTE 15% MENSUAL
+==================================================
+
+Balance inicial: $100,000.00
+Balance final: $100,000.00
+Retorno total: 0.00%
+Retorno mensual promedio: 0.00%
+Objetivo 15% mensual: NO ALCANZADO
+
+Total de operaciones: 0
+Win Rate: 0.00%
+Máximo Drawdown: 0.00%
+
+CARACTERÍSTICAS DE LA ESTRATEGIA:
+-----------------------------------
+- Machine Learning con Random Forest/Gradient Boosting
+- Gestión de riesgo adaptativa
+- Filtros de calidad estrictos
+- Múltiples indicadores técnicos
+- Re-entrenamiento automático del modelo

@@ -1,0 +1,25 @@
+{
+  "simulation_summary": {
+    "symbol": "BNBUSDT",
+    "terminal_id": 1,
+    "start_time": "2025-09-13T23:53:45.087751",
+    "end_time": "2025-09-13T23:58:46.519219",
+    "duration_hours": 0.08373096333333334,
+    "initial_capital": 1000.0,
+    "final_capital": 1000.0073727130778,
+    "total_return_pct": 0.0007372713077756998,
+    "total_pnl": 0.0073727130777205396
+  },
+  "trading_stats": {
+    "total_trades": 1,
+    "winning_trades": 1,
+    "losing_trades": 0,
+    "win_rate_pct": 100.0,
+    "avg_trade_size": 16.71367185789966
+  },
+  "performance_metrics": {
+    "best_trade": 0.0073727130777205396,
+    "worst_trade": 0.0073727130777205396,
+    "avg_return_per_trade": 0.04411186925532376
+  }
+}

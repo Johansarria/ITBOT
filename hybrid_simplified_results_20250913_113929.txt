@@ -1,0 +1,27 @@
+RESULTADOS ESTRATEGIA HÍBRIDA SIMPLIFICADA
+==================================================
+
+Balance inicial: $100,000.00
+Balance final: $69,571.20
+Retorno total: -30.43%
+Retorno mensual estimado: -10.14%
+Objetivo 15% mensual: NO ALCANZADO
+
+ESTADÍSTICAS:
+---------------
+Total de operaciones: 975
+Win Rate: 14.46%
+Profit Factor: 0.19
+Ganancia bruta: $49641.94
+Pérdida bruta: $254985.56
+Máximo Drawdown: 53.69%
+Score promedio: 4.2
+
+CONFIGURACIÓN SIMPLIFICADA:
+-------------------------
+- Solo 3 indicadores principales (RSI, EMA, BB)
+- Gestión de riesgo fija (3% por trade)
+- Stop loss y take profit fijos
+- Toma de ganancias parciales automática
+- Trailing stop simple
+- Filtros mínimos para más operaciones

@@ -1,0 +1,33 @@
+RESULTADOS ESTRATEGIA DEFINITIVA 15% MENSUAL
+=======================================================
+
+Balance inicial: $100,000.00
+Balance final: $90,102.09
+Retorno total: -9.90%
+Retorno mensual: -2.47%
+Objetivo 15% mensual: NO ALCANZADO
+
+ESTADÍSTICAS DEFINITIVAS:
+------------------------------
+Total de operaciones: 95
+Win Rate: 64.21%
+Profit Factor: 4.95
+Ganancia bruta: $46265.31
+Pérdida bruta: $9349.15
+Máximo Drawdown: 14.90%
+Períodos en Drawdown: 10652
+Score promedio señales: 9.3
+Confirmaciones promedio: 4.0
+Tasa ganancias parciales: 64.2%
+
+CARACTERÍSTICAS DEFINITIVAS:
+-----------------------------------
+- Filtros ultra-estrictos (8+ puntos)
+- 4 confirmaciones obligatorias
+- Gestión de riesgo ultra-conservadora
+- Ratio reward/risk 4:1
+- Máximo 4 operaciones diarias
+- Stop en breakeven automático
+- Ganancias parciales al 1.5%
+- Detección de divergencias
+- Análisis multi-timeframe

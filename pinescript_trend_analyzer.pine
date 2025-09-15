@@ -1,0 +1,89 @@
+//@version=6
+// Analizador de Tendencias - Replica la estrategia de las simulaciones reales
+// Basado en medias móviles de 5 y 20 períodos con umbral de 0.1%
+indicator("ITBOT Trend Analyzer", shorttitle="ITBOT-TA", overlay=true)
+
+// === PARÁMETROS DE ENTRADA ===
+fast_length = input.int(5, title="Fast MA Length", minval=1, maxval=50)
+slow_length = input.int(20, title="Slow MA Length", minval=1, maxval=100)
+threshold = input.float(0.1, title="Trend Threshold %", minval=0.01, maxval=1.0, step=0.01)
+show_signals = input.bool(true, title="Show Entry Signals")
+show_trend_bg = input.bool(true, title="Show Trend Background")
+
+// === CÁLCULOS DE MEDIAS MÓVILES ===
+fast_ma = ta.sma(close, fast_length)
+slow_ma = ta.sma(close, slow_length)
+
+// === ANÁLISIS DE TENDENCIA (Replica lógica de simulacion_real_binance.py) ===
+// Cálculo del porcentaje de diferencia entre medias móviles
+ma_diff_percent = ((fast_ma - slow_ma) / slow_ma) * 100
+
+// Determinación de tendencia con umbral
+trend_bullish = ma_diff_percent > threshold
+trend_bearish = ma_diff_percent < -threshold
+trend_neutral = math.abs(ma_diff_percent) <= threshold
+
+// === SEÑALES DE ENTRADA ===
+// Señal alcista: cambio de neutral/bajista a alcista
+buy_signal = trend_bullish and not trend_bullish[1]
+// Señal bajista: cambio de neutral/alcista a bajista
+sell_signal = trend_bearish and not trend_bearish[1]
+// Señal neutral: entrada en zona neutral
+neutral_signal = trend_neutral and not trend_neutral[1]
+
+// === VISUALIZACIÓN ===
+// Ploteo de medias móviles
+plot(fast_ma, color=color.new(color.blue, 0), linewidth=2, title="Fast MA (5)")
+plot(slow_ma, color=color.new(color.red, 0), linewidth=2, title="Slow MA (20)")
+
+// Colores de tendencia
+trend_color = trend_bullish ? color.new(color.green, 80) : 
+             trend_bearish ? color.new(color.red, 80) : 
+             color.new(color.yellow, 80)
+
+// Fondo de tendencia
+bgcolor(show_trend_bg ? trend_color : na, title="Trend Background")
+
+// Señales visuales
+plotshape(show_signals and buy_signal, title="Buy Signal", 
+          location=location.belowbar, color=color.green, 
+          style=shape.triangleup, size=size.normal, text="BUY")
+          
+plotshape(show_signals and sell_signal, title="Sell Signal", 
+          location=location.abovebar, color=color.red, 
+          style=shape.triangledown, size=size.normal, text="SELL")
+          
+plotshape(show_signals and neutral_signal, title="Neutral Signal", 
+          location=location.absolute, color=color.yellow, 
+          style=shape.circle, size=size.small, text="N")
+
+// === TABLA DE INFORMACIÓN ===
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 4, 
+                                     bgcolor=color.white, border_width=1)
+    
+    // Encabezados
+    table.cell(info_table, 0, 0, "Metric", text_color=color.black, bgcolor=color.gray)
+    table.cell(info_table, 1, 0, "Value", text_color=color.black, bgcolor=color.gray)
+    
+    // Datos actuales
+    current_trend = trend_bullish ? "BULLISH" : trend_bearish ? "BEARISH" : "NEUTRAL"
+    table.cell(info_table, 0, 1, "Trend", text_color=color.black)
+    table.cell(info_table, 1, 1, current_trend, 
+               text_color=trend_bullish ? color.green : trend_bearish ? color.red : color.orange)
+    
+    table.cell(info_table, 0, 2, "MA Diff %", text_color=color.black)
+    table.cell(info_table, 1, 2, str.tostring(ma_diff_percent, "#.###") + "%", text_color=color.black)
+    
+    table.cell(info_table, 0, 3, "Threshold", text_color=color.black)
+    table.cell(info_table, 1, 3, str.tostring(threshold, "#.###") + "%", text_color=color.black)
+
+// === ALERTAS ===
+alertcondition(buy_signal, title="ITBOT Buy Alert", 
+               message="ITBOT Trend Analyzer: BUY signal detected. Fast MA crossed above Slow MA with {{ticker}} at {{close}}")
+               
+alertcondition(sell_signal, title="ITBOT Sell Alert", 
+               message="ITBOT Trend Analyzer: SELL signal detected. Fast MA crossed below Slow MA with {{ticker}} at {{close}}")
+               
+alertcondition(neutral_signal, title="ITBOT Neutral Alert", 
+               message="ITBOT Trend Analyzer: NEUTRAL signal detected. Trend within threshold range with {{ticker}} at {{close}}")

@@ -1,0 +1,24 @@
+RESULTADOS - Estrategia de Probabilidad Dinámica Realista
+============================================================
+
+Capital inicial: $1,000.00
+Capital final: $819.51
+Retorno total: -18.05%
+Retorno mensual estimado: -18.05%
+Total trades: 3
+Win rate: 33.33%
+Máximo drawdown: 18.13%
+
+Distribución por tipo de señal:
+Tipo A: 3 trades | 33.3% win rate | -60.16% avg PnL
+
+Objetivo 10% mensual: NO ALCANZADO
+Objetivo 15% mensual: NO ALCANZADO
+Superación del objetivo: 0.0x
+
+============================================================
+DETALLE DE TRADES:
+============================================================
+  1. BTC-USD | Tipo A | Entry: $44243.32 | Exit: $2752.92 | PnL: -93.78% | Razón: SL
+  2. ETH-USD | Tipo A | Entry: $2752.92 | Exit: $344.11 | PnL: -87.50% | Razón: SL
+  3. BNB-USD | Tipo A | Entry: $344.11 | Exit: $346.84 | PnL: 0.79% | Razón: END

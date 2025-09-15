@@ -1,0 +1,24 @@
+RESULTADOS ESTRATEGIA AGRESIVA 15% MENSUAL
+==================================================
+
+Balance inicial: $100,000.00
+Balance final: $19,092.97
+Retorno total: -80.91%
+Retorno mensual promedio: -0.28%
+Objetivo 15% mensual: NO ALCANZADO
+
+Total de operaciones: 1633
+Win Rate: 43.85%
+Máximo Drawdown: 87.02%
+
+CONFIGURACIÓN DE LA ESTRATEGIA:
+------------------------------
+name: Aggressive 15% Monthly Strategy
+target_monthly_return: 0.15
+risk_per_trade: 0.08
+max_daily_trades: 15
+profit_target_ratio: 2.5
+indicators_used: ['RSI', 'MACD', 'Bollinger Bands', 'EMA', 'ATR', 'Momentum', 'Support/Resistance', 'Volatility Squeeze']
+trading_style: Aggressive Scalping/Swing Hybrid
+daily_pnl: 0.0
+daily_trades: 0

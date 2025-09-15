@@ -1,0 +1,53 @@
+RENTABILIDAD MENSUAL POR SIMBOLO PROBADO - REPORTE CONSOLIDADO
+Fecha: 2025-09-13 13:40:47
+==========================================================================================
+
+RESUMEN EJECUTIVO:
+Total simbolos analizados: 2
+Simbolos rentables: 2/2 (100.0%)
+PnL mensual total estimado: $13.28
+Rentabilidad mensual promedio: 0.66%
+Total trades analizados: 4
+
+RANKING COMPLETO DE RENTABILIDAD MENSUAL:
+======================================================================
+
+ 1. BTCUSDT
+    Rentabilidad Mensual:   +0.79% ($   +7.87)
+    Total Trades:   3
+    Win Rate: 100.0%
+    Estrategias Probadas: 1
+    Fuentes: Independent Backtest 90d
+    Clasificacion: POSITIVO
+
+ 2. LTCUSDT
+    Rentabilidad Mensual:   +0.54% ($   +5.42)
+    Total Trades:   1
+    Win Rate: 100.0%
+    Estrategias Probadas: 1
+    Fuentes: Independent Backtest 90d
+    Clasificacion: POSITIVO
+
+ANALISIS POR CATEGORIAS DE RENDIMIENTO:
+============================================================
+
+EXCELENTES (>20% mensual): 0 simbolos
+
+MUY BUENOS (10-20% mensual): 0 simbolos
+
+BUENOS (5-10% mensual): 0 simbolos
+
+POSITIVOS (0-5% mensual): 2 simbolos
+  - BTCUSDT: 0.79%
+  - LTCUSDT: 0.54%
+
+NEGATIVOS (<0% mensual): 0 simbolos
+
+RECOMENDACIONES FINALES:
+========================================
+
+3. EVITAR: 0 simbolos con rendimiento negativo
+
+4. MEJOR SIMBOLO GENERAL: BTCUSDT (0.79% mensual)
+
+5. SIMBOLOS CON ALTA PRECISION: 2 simbolos con >80% win rate

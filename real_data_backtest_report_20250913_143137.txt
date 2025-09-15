@@ -1,0 +1,41 @@
+=== REPORTE DE BACKTESTING CON DATOS REALES ===
+Fecha: 2025-09-13 14:31:37
+Capital inicial: $1,000.00
+
+
+=== AUDCAD ===
+Puntos de datos: 721
+Retorno total: 45.30%
+Tasa de acierto: 75.00%
+Retorno promedio: 4.91%
+Drawdown máximo: 6.00%
+Ratio de Sharpe: 13.86
+Número de operaciones: 8
+
+=== NAS100 ===
+Puntos de datos: 720
+Retorno total: -7.76%
+Tasa de acierto: 21.74%
+Retorno promedio: -0.35%
+Drawdown máximo: 8.66%
+Ratio de Sharpe: -11.33
+Número de operaciones: 23
+
+=== XAUUSD ===
+Puntos de datos: 720
+Retorno total: -2.65%
+Tasa de acierto: 0.00%
+Retorno promedio: -1.33%
+Drawdown máximo: 4.53%
+Ratio de Sharpe: -29.37
+Número de operaciones: 2
+
+=== RESUMEN CONSOLIDADO ===
+Retorno promedio del portafolio: 11.63%
+Total de operaciones: 33
+Capital final estimado: $1,116.30
+
+=== FUENTE DE DATOS ===
+Datos obtenidos de: Binance API
+Período analizado: Últimos 30 días
+Intervalo: 1 hora

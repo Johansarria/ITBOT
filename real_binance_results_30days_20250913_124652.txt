@@ -1,0 +1,27 @@
+RESULTADOS ESTRATEGIA PROBABILIDAD DINÁMICA - DATOS REALES BINANCE
+Período: 30 días
+Fecha: 2025-09-13 12:46:52
+============================================================
+
+MÉTRICAS PRINCIPALES:
+Capital inicial: $1,000.00
+Capital final: $1,061.04
+Retorno total: 6.10%
+Tasa de acierto: 100.00%
+Total de trades: 2
+Máximo drawdown: 0.00%
+
+DETALLE DE TRADES:
+================================================================================
+Trade 1: BNBUSDT
+  Entrada: 2025-08-17 00:00:00 @ $847.1500
+  Salida: 2025-09-13 17:00:00 @ $929.8600
+  PnL: 9.76% ($17.57)
+  Razón: Final | Tipo: Breakout Volumen
+  ----------------------------------------
+Trade 2: SOLUSDT
+  Entrada: 2025-08-17 02:00:00 @ $191.5400
+  Salida: 2025-09-13 17:00:00 @ $237.7900
+  PnL: 24.15% ($43.46)
+  Razón: Final | Tipo: Breakout Volumen
+  ----------------------------------------

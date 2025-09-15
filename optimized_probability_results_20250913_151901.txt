@@ -1,0 +1,83 @@
+RESULTADOS - Estrategia de Probabilidad Dinámica Optimizada
+============================================================
+
+Capital inicial: $1,000.00
+Capital final: $995,122,391,463,016,536,517,882,271,389,188,096.00
+Retorno total: 99512239146301661030485856622739456.00%
+Retorno mensual estimado: 99512239146301661030485856622739456.00%
+Total trades: 60
+Win rate: 38.33%
+Máximo drawdown: 36.52%
+
+Distribución por tipo de señal:
+Tipo D: 16 trades | 31.2% win rate | 7178.63% avg PnL
+Tipo B: 24 trades | 41.7% win rate | 10656.22% avg PnL
+Tipo A: 20 trades | 40.0% win rate | 10209.00% avg PnL
+
+Objetivo 10% mensual: ALCANZADO
+Objetivo 15% mensual: ALCANZADO
+Superación del objetivo: 9951223914630166564217187505012736.0x
+
+============================================================
+DETALLE DE TRADES:
+============================================================
+  1. BTC-USD | Tipo D | Entry: $43546.80 | Exit: $2709.58 | PnL: -93.78% | Razón: SL
+  2. ETH-USD | Tipo D | Entry: $2709.58 | Exit: $338.70 | PnL: -87.50% | Razón: SL
+  3. ADA-USD | Tipo D | Entry: $0.82 | Exit: $116.12 | PnL: 14017.65% | Razón: TP
+  4. BTC-USD | Tipo B | Entry: $42829.45 | Exit: $2664.94 | PnL: -93.78% | Razón: SL
+  5. ETH-USD | Tipo B | Entry: $2664.94 | Exit: $333.12 | PnL: -87.50% | Razón: SL
+  6. ADA-USD | Tipo B | Entry: $0.81 | Exit: $114.21 | PnL: 14017.65% | Razón: TP
+  7. SOL-USD | Tipo B | Entry: $114.21 | Exit: $42506.52 | PnL: 37117.25% | Razón: TP
+  8. BTC-USD | Tipo B | Entry: $42506.52 | Exit: $2644.85 | PnL: -93.78% | Razón: SL
+  9. ETH-USD | Tipo B | Entry: $2644.85 | Exit: $330.61 | PnL: -87.50% | Razón: SL
+ 10. BNB-USD | Tipo B | Entry: $330.61 | Exit: $0.80 | PnL: -99.76% | Razón: SL
+ 11. ADA-USD | Tipo B | Entry: $0.80 | Exit: $113.35 | PnL: 14017.65% | Razón: TP
+ 12. SOL-USD | Tipo B | Entry: $113.35 | Exit: $42568.23 | PnL: 37454.45% | Razón: TP
+ 13. BTC-USD | Tipo B | Entry: $41937.41 | Exit: $2609.44 | PnL: -93.78% | Razón: SL
+ 14. ETH-USD | Tipo B | Entry: $2609.44 | Exit: $326.18 | PnL: -87.50% | Razón: SL
+ 15. BNB-USD | Tipo B | Entry: $326.18 | Exit: $0.79 | PnL: -99.76% | Razón: SL
+ 16. ADA-USD | Tipo B | Entry: $0.79 | Exit: $111.83 | PnL: 14017.65% | Razón: TP
+ 17. SOL-USD | Tipo B | Entry: $111.83 | Exit: $41798.15 | PnL: 37275.48% | Razón: TP
+ 18. BTC-USD | Tipo A | Entry: $42465.38 | Exit: $2642.29 | PnL: -93.78% | Razón: SL
+ 19. ETH-USD | Tipo A | Entry: $2642.29 | Exit: $330.29 | PnL: -87.50% | Razón: SL
+ 20. BNB-USD | Tipo A | Entry: $330.29 | Exit: $0.80 | PnL: -99.76% | Razón: SL
+ 21. ADA-USD | Tipo A | Entry: $0.80 | Exit: $113.24 | PnL: 14017.65% | Razón: TP
+ 22. SOL-USD | Tipo A | Entry: $113.24 | Exit: $41918.43 | PnL: 36917.01% | Razón: TP
+ 23. BTC-USD | Tipo D | Entry: $42000.01 | Exit: $2613.33 | PnL: -93.78% | Razón: SL
+ 24. ETH-USD | Tipo D | Entry: $2613.33 | Exit: $326.67 | PnL: -87.50% | Razón: SL
+ 25. BNB-USD | Tipo D | Entry: $326.67 | Exit: $0.79 | PnL: -99.76% | Razón: SL
+ 26. ADA-USD | Tipo D | Entry: $0.79 | Exit: $112.00 | PnL: 14017.65% | Razón: TP
+ 27. SOL-USD | Tipo D | Entry: $112.00 | Exit: $41060.10 | PnL: 36560.80% | Razón: TP
+ 28. BTC-USD | Tipo A | Entry: $41020.29 | Exit: $2552.37 | PnL: -93.78% | Razón: SL
+ 29. ETH-USD | Tipo A | Entry: $2552.37 | Exit: $319.05 | PnL: -87.50% | Razón: SL
+ 30. BNB-USD | Tipo A | Entry: $319.05 | Exit: $0.77 | PnL: -99.76% | Razón: SL
+ 31. ADA-USD | Tipo A | Entry: $0.77 | Exit: $109.39 | PnL: 14017.65% | Razón: TP
+ 32. SOL-USD | Tipo A | Entry: $109.39 | Exit: $41017.10 | PnL: 37397.08% | Razón: TP
+ 33. BTC-USD | Tipo B | Entry: $39847.02 | Exit: $2479.37 | PnL: -93.78% | Razón: SL
+ 34. ETH-USD | Tipo B | Entry: $2479.37 | Exit: $309.92 | PnL: -87.50% | Razón: SL
+ 35. BNB-USD | Tipo B | Entry: $309.92 | Exit: $0.75 | PnL: -99.76% | Razón: SL
+ 36. ADA-USD | Tipo B | Entry: $0.75 | Exit: $106.26 | PnL: 14017.65% | Razón: TP
+ 37. SOL-USD | Tipo B | Entry: $106.26 | Exit: $39646.74 | PnL: 37211.51% | Razón: TP
+ 38. BTC-USD | Tipo B | Entry: $39646.74 | Exit: $2466.91 | PnL: -93.78% | Razón: SL
+ 39. ETH-USD | Tipo B | Entry: $2466.91 | Exit: $308.36 | PnL: -87.50% | Razón: SL
+ 40. BNB-USD | Tipo B | Entry: $308.36 | Exit: $0.75 | PnL: -99.76% | Razón: SL
+ 41. ADA-USD | Tipo B | Entry: $0.75 | Exit: $105.72 | PnL: 14017.65% | Razón: TP
+ 42. SOL-USD | Tipo B | Entry: $105.72 | Exit: $40183.65 | PnL: 37907.84% | Razón: TP
+ 43. BTC-USD | Tipo A | Entry: $40183.65 | Exit: $2500.32 | PnL: -93.78% | Razón: SL
+ 44. ETH-USD | Tipo A | Entry: $2500.32 | Exit: $312.54 | PnL: -87.50% | Razón: SL
+ 45. BNB-USD | Tipo A | Entry: $312.54 | Exit: $0.76 | PnL: -99.76% | Razón: SL
+ 46. ADA-USD | Tipo A | Entry: $0.76 | Exit: $107.16 | PnL: 14017.65% | Razón: TP
+ 47. SOL-USD | Tipo A | Entry: $107.16 | Exit: $40452.16 | PnL: 37650.59% | Razón: TP
+ 48. BTC-USD | Tipo D | Entry: $40513.45 | Exit: $2520.84 | PnL: -93.78% | Razón: SL
+ 49. ETH-USD | Tipo D | Entry: $2520.84 | Exit: $315.10 | PnL: -87.50% | Razón: SL
+ 50. BNB-USD | Tipo D | Entry: $315.10 | Exit: $0.77 | PnL: -99.76% | Razón: SL
+ 51. ADA-USD | Tipo D | Entry: $0.77 | Exit: $108.04 | PnL: 14017.65% | Razón: TP
+ 52. SOL-USD | Tipo D | Entry: $108.04 | Exit: $40371.63 | PnL: 37268.73% | Razón: TP
+ 53. BTC-USD | Tipo A | Entry: $41107.46 | Exit: $2557.80 | PnL: -93.78% | Razón: SL
+ 54. ETH-USD | Tipo A | Entry: $2557.80 | Exit: $319.72 | PnL: -87.50% | Razón: SL
+ 55. BNB-USD | Tipo A | Entry: $319.72 | Exit: $0.78 | PnL: -99.76% | Razón: SL
+ 56. ADA-USD | Tipo A | Entry: $0.78 | Exit: $109.62 | PnL: 14017.65% | Razón: TP
+ 57. SOL-USD | Tipo A | Entry: $109.62 | Exit: $40963.81 | PnL: 37268.96% | Razón: TP
+ 58. BTC-USD | Tipo D | Entry: $40894.74 | Exit: $2544.56 | PnL: -93.78% | Razón: SL
+ 59. ETH-USD | Tipo D | Entry: $2544.56 | Exit: $318.07 | PnL: -87.50% | Razón: SL
+ 60. BNB-USD | Tipo D | Entry: $318.07 | Exit: $0.77 | PnL: -99.76% | Razón: SL

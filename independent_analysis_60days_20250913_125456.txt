@@ -1,0 +1,38 @@
+ANÁLISIS DE SÍMBOLOS INDEPENDIENTES
+Período: 60 días
+Fecha: 2025-09-13 12:54:56
+================================================================================
+
+RESUMEN EJECUTIVO:
+Símbolos analizados: 9/10
+Total señales detectadas: 8
+Señales de alta calidad: 2
+Tasa de calidad: 25.0%
+
+RANKING DE SÍMBOLOS INDEPENDIENTES:
+==================================================
+ 1. ADAUSDT    - 1 señales (Score máx: 0.85)
+ 2. LTCUSDT    - 1 señales (Score máx: 0.85)
+
+DETALLE POR SÍMBOLO:
+================================================================================
+
+ADAUSDT:
+  Señales totales: 2
+  Señales alta calidad: 1
+  Señales media calidad: 1
+  
+  MEJORES SEÑALES:
+    1. 2025-09-09 06:00:00 - Score: 0.85
+       Factores: Volume Spike, Volatility Breakout, MACD Bullish Cross, BB Squeeze Break
+       Precio: $0.8825 | TP: 8.0% | SL: 3.0%
+
+LTCUSDT:
+  Señales totales: 1
+  Señales alta calidad: 1
+  Señales media calidad: 0
+  
+  MEJORES SEÑALES:
+    1. 2025-08-05 09:00:00 - Score: 0.85
+       Factores: Volume Spike, Volatility Breakout, MACD Bullish Cross, BB Squeeze Break
+       Precio: $127.2800 | TP: 8.0% | SL: 3.0%

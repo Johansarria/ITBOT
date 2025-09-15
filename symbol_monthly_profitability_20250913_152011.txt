@@ -1,0 +1,71 @@
+RENTABILIDAD MENSUAL POR SIMBOLO PROBADO
+Fecha: 2025-09-13 15:20:12
+================================================================================
+
+RESUMEN EJECUTIVO:
+Simbolos analizados: 5
+Simbolos rentables: 5/5 (100.0%)
+PnL mensual total estimado: $467.85
+Total trades analizados: 20
+
+RANKING DE RENTABILIDAD MENSUAL:
+============================================================
+
+ 1. SOLUSDT
+    Rentabilidad Mensual: +73.45% ($+132.19)
+    Total Trades: 3
+    Win Rate: 100.0%
+    Estrategias Probadas: 3
+    Periodo Promedio: 30 dias
+
+ 2. BNBUSDT
+    Rentabilidad Mensual: +65.97% ($+118.74)
+    Total Trades: 5
+    Win Rate: 100.0%
+    Estrategias Probadas: 5
+    Periodo Promedio: 54 dias
+
+ 3. ADAUSDT
+    Rentabilidad Mensual: +63.89% ($+115.00)
+    Total Trades: 5
+    Win Rate: 100.0%
+    Estrategias Probadas: 5
+    Periodo Promedio: 72 dias
+
+ 4. ETHUSDT
+    Rentabilidad Mensual: +50.57% ($+91.03)
+    Total Trades: 3
+    Win Rate: 100.0%
+    Estrategias Probadas: 3
+    Periodo Promedio: 60 dias
+
+ 5. BTCUSDT
+    Rentabilidad Mensual: +6.05% ($+10.89)
+    Total Trades: 4
+    Win Rate: 50.0%
+    Estrategias Probadas: 4
+    Periodo Promedio: 75 dias
+
+TOP 5 SIMBOLOS MAS RENTABLES (MENSUAL):
+==================================================
+1. SOLUSDT: +73.45% mensual
+2. BNBUSDT: +65.97% mensual
+3. ADAUSDT: +63.89% mensual
+4. ETHUSDT: +50.57% mensual
+5. BTCUSDT: +6.05% mensual
+
+SIMBOLOS MENOS RENTABLES:
+========================================
+1. SOLUSDT: +73.45% mensual
+2. BNBUSDT: +65.97% mensual
+3. ADAUSDT: +63.89% mensual
+4. ETHUSDT: +50.57% mensual
+5. BTCUSDT: +6.05% mensual
+
+CONCLUSIONES Y RECOMENDACIONES:
+==================================================
+1. Simbolo mas rentable: SOLUSDT (+73.45% mensual)
+2. Simbolo menos rentable: BTCUSDT (+6.05% mensual)
+3. Rango de rentabilidad: 6.05% a 73.45%
+4. Rentabilidad mensual promedio: 51.99%
+5. Simbolos con >5% mensual: 5 simbolos

@@ -4,41 +4,18 @@ import os
 import importlib.util
 import logging
 import asyncio
+import inspect
 from typing import Dict, Any, List, Type, Optional
-
-from strategies.base_strategy import BaseStrategy
-from strategies.backtester import Backtester
-from utils.technical_analysis import get_historical_klines
-from utils.risk_manager import _OPTIMIZED_THRESHOLDS # ADDED: Import optimized thresholds
-
-logger = logging.getLogger(__name__)
-
-import os
-import importlib.util
-import logging
-import asyncio
-from typing import Dict, Any, List, Type
 from datetime import datetime, timedelta
 
 from strategies.base_strategy import BaseStrategy
+from strategies.ml_strategy import MLStrategy
 from strategies.backtester import Backtester, generate_mock_data
 from utils.technical_analysis import get_historical_klines
-from utils.risk_manager import _OPTIMIZED_THRESHOLDS
-
-logger = logging.getLogger(__name__)
-
-import os
-import importlib.util
-import logging
-import asyncio
-from typing import Dict, Any, List, Type
-from datetime import datetime, timedelta
-
-from strategies.base_strategy import BaseStrategy
-from strategies.backtester import Backtester, generate_mock_data
-from utils.technical_analysis import get_historical_klines
+from utils.symbols import normalize_symbol, suggest_fetch_symbols
 from utils.risk_manager import _OPTIMIZED_THRESHOLDS
 from utils.state_manager import StateManager
+from config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -49,31 +26,53 @@ class StrategyManager:
         Ejecuta el análisis de todas las estrategias activas con los datos más recientes y selecciona la mejor decisión para la siguiente operación.
         Devuelve un resumen con la decisión y score de cada estrategia y la recomendación final.
         """
-        # Obtener datos históricos una sola vez
-        from utils.technical_analysis import get_historical_klines
-        historical_data = await get_historical_klines(symbol, interval, limit)
+        sym_norm = normalize_symbol(symbol)
+        historical_data = await get_historical_klines(sym_norm, interval, limit)
+        if historical_data.empty:
+            # Probar alias automáticamente
+            for cand in suggest_fetch_symbols(symbol):
+                if cand == sym_norm:
+                    continue
+                historical_data = await get_historical_klines(cand, interval, limit)
+                if not historical_data.empty:
+                    symbol = cand
+                    break
         if historical_data.empty:
             return {"error": "No se pudieron obtener datos históricos"}
 
-        results = {}
+        results: Dict[str, Any] = {}
         best_score = float('-inf')
-        best_strategy = None
-        best_decision = None
+        best_strategy: Optional[str] = None
+        best_decision: Optional[str] = None
         for name, strategy in self._strategies.items():
             try:
-                # Soporta tanto estrategias async como sync
-                if hasattr(strategy, 'analyze'):
-                    import inspect
-                    if inspect.iscoroutinefunction(strategy.analyze):
-                        result = await strategy.analyze(historical_data.copy())
-                    else:
-                        result = strategy.analyze(historical_data.copy())
-                    results[name] = result
-                    score = result.get("score", 0)
-                    if score > best_score:
-                        best_score = score
-                        best_strategy = name
-                        best_decision = result.get("decision")
+                analyze_sig = inspect.signature(strategy.analyze)
+                kwargs = {}
+                df_param_name = next((k for k in ['df', 'data', 'df_klines', 'ohlcv', 'klines', 'candles', 'historical_data'] if k in analyze_sig.parameters), None)
+                if df_param_name:
+                    kwargs[df_param_name] = historical_data.copy()
+                if 'current_index' in analyze_sig.parameters:
+                    kwargs['current_index'] = len(historical_data) - 1
+                if 'symbol' in analyze_sig.parameters:
+                    kwargs['symbol'] = symbol
+                if 'interval' in analyze_sig.parameters:
+                    kwargs['interval'] = interval
+
+                call = strategy.analyze(**kwargs)
+                if inspect.iscoroutine(call):
+                    result = await call
+                else:
+                    result = call
+
+                if inspect.iscoroutine(result):
+                    result = await result
+
+                results[name] = result
+                score = result.get("score", 0) if isinstance(result, dict) else 0
+                if score > best_score:
+                    best_score = score
+                    best_strategy = name
+                    best_decision = result.get("decision")
             except Exception as e:
                 results[name] = {"error": str(e)}
 
@@ -138,20 +137,23 @@ class StrategyManager:
                         spec.loader.exec_module(module)
                         for attribute_name in dir(module):
                             attribute = getattr(module, attribute_name)
-                            # Solo instanciar clases concretas que hereden de BaseStrategy (no la abstracta)
                             if (
                                 isinstance(attribute, type)
                                 and issubclass(attribute, BaseStrategy)
                                 and attribute is not BaseStrategy
                             ):
                                 try:
-                                    # Instanciar con o sin argumentos según el constructor
+                                    # Intentar con distintos constructores posibles
                                     try:
-                                        strategy_instance = attribute()
-                                    except TypeError:
                                         strategy_instance = attribute(name=attribute.__name__, description=attribute.__doc__ or "")
-                                    self._strategies[strategy_instance.name] = strategy_instance
-                                    logger.info(f"Estrategia descubierta: {strategy_instance.name}")
+                                    except TypeError:
+                                        try:
+                                            strategy_instance = attribute(attribute.__name__, attribute.__doc__ or "")
+                                        except TypeError:
+                                            strategy_instance = attribute()  # type: ignore[call-arg]
+                                    name = getattr(strategy_instance, 'name', None) or attribute.__name__
+                                    self._strategies[name] = strategy_instance
+                                    logger.info(f"Estrategia descubierta: {name}")
                                 except Exception as e:
                                     logger.exception(f"Error al instanciar la estrategia {attribute.__name__}: {e}")
                 except Exception as e:
@@ -161,7 +163,7 @@ class StrategyManager:
         """Ejecuta un backtest para cada estrategia y actualiza la caché de rendimiento."""
         logger.info("Iniciando actualización de caché de rendimiento de estrategias...")
         try:
-            historical_data = await asyncio.wait_for(get_historical_klines(symbol, interval, limit), timeout=30.0)
+            historical_data = await get_historical_klines(symbol, interval, limit)
             if historical_data.empty:
                 raise ValueError("Datos históricos vacíos desde la API.")
             logger.info("Datos reales obtenidos para el backtesting.")
@@ -176,7 +178,16 @@ class StrategyManager:
 
         results = []
         for name, strategy in self._strategies.items():
-            backtester = Backtester(historical_data.copy())
+            warmup = 50
+            if isinstance(strategy, MLStrategy):
+                warmup = getattr(settings, 'ML_MIN_DATA_POINTS', 2000)
+            
+            backtester = Backtester(
+                historical_data=historical_data.copy(),
+                symbol=symbol,
+                interval=interval,
+                warmup_period=warmup
+            )
             metrics = await backtester.run(strategy)
             results.append({
                 "name": name,
@@ -224,7 +235,6 @@ class StrategyManager:
             logger.warning("No hay resultados de rendimiento para seleccionar la mejor estrategia.")
             return None
 
-        # Ordenar por Sharpe Ratio (primario) y retorno (secundario) para desempate
         sorted_results = sorted(
             performance_results, 
             key=lambda x: (
@@ -238,14 +248,14 @@ class StrategyManager:
         best_strategy_name = best_strategy_info.get("name")
         
         if best_strategy_name:
-            current_active_strategy = self.get_active_strategy().name
-            if current_active_strategy != best_strategy_name:
+            current_active_strategy_name = self.get_active_strategy().name if self.get_active_strategy() else None
+            if current_active_strategy_name != best_strategy_name:
                 self.set_active_strategy(best_strategy_name)
                 logger.info(f"Nueva mejor estrategia seleccionada automáticamente: {best_strategy_name}")
                 return best_strategy_name
             else:
                 logger.info(f"La mejor estrategia ({best_strategy_name}) ya está activa. No se realizan cambios.")
-                return None # Retorna None si no hay cambio
+                return None
         
         logger.error("No se pudo determinar la mejor estrategia del ranking.")
         return None

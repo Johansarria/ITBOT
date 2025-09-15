@@ -1,0 +1,55 @@
+ANALISIS INDEPENDIENTE + BACKTESTING
+Periodo: 90 dias
+Fecha: 2025-09-13 13:02:40
+================================================================================
+
+RESUMEN EJECUTIVO:
+Simbolos analizados: 9/10
+Senales detectadas: 26
+Trades ejecutados: 25
+PnL total: $-35.87
+Simbolos rentables: 2
+
+RANKING SIMBOLOS RENTABLES:
+============================================================
+ 1. BTCUSDT    - PnL: $   23.60 | Win Rate: 100.0% | Trades: 3
+ 2. LTCUSDT    - PnL: $   16.25 | Win Rate: 100.0% | Trades: 1
+
+DETALLE SIMBOLOS RENTABLES:
+================================================================================
+
+BTCUSDT:
+  Senales detectadas: 3
+  Trades ejecutados: 3
+  Win Rate: 100.0%
+  PnL Total: $23.60
+  Mejor trade: 5.4%
+  Peor trade: 1.7%
+  
+  MEJORES TRADES:
+    1. 2025-07-10 16:00:00 -> 2025-07-13 17:00:00
+       Entry: $112643.4800 | Exit: $118699.6000
+       PnL: 5.4% ($10.75) | Time Limit
+       Score: 0.95 | Duracion: 73.0h
+    2. 2025-07-09 19:00:00 -> 2025-07-12 20:00:00
+       Entry: $111750.0000 | Exit: $117023.3600
+       PnL: 4.7% ($9.44) | Time Limit
+       Score: 0.90 | Duracion: 73.0h
+    3. 2025-08-07 10:00:00 -> 2025-08-10 11:00:00
+       Entry: $116347.2200 | Exit: $118330.5800
+       PnL: 1.7% ($3.41) | Time Limit
+       Score: 0.95 | Duracion: 73.0h
+
+LTCUSDT:
+  Senales detectadas: 1
+  Trades ejecutados: 1
+  Win Rate: 100.0%
+  PnL Total: $16.25
+  Mejor trade: 8.1%
+  Peor trade: 8.1%
+  
+  MEJORES TRADES:
+    1. 2025-07-19 19:00:00 -> 2025-07-21 07:00:00
+       Entry: $112.6300 | Exit: $121.7819
+       PnL: 8.1% ($16.25) | Take Profit
+       Score: 0.95 | Duracion: 36.0h

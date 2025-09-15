@@ -1,0 +1,30 @@
+RESULTADOS ESTRATEGIA FINAL 15% MENSUAL
+=============================================
+
+Balance inicial: $100,000.00
+Balance final: $100,000.00
+Retorno total: 0.00%
+Retorno mensual promedio: 0.00%
+Objetivo 15% mensual: NO ALCANZADO
+
+ESTADÍSTICAS FINALES:
+-------------------------
+Total de operaciones: 0
+Win Rate: 0.00%
+Profit Factor: inf
+Ganancia bruta: $0.00
+Pérdida bruta: $0.00
+Máximo Drawdown: 0.00%
+Operaciones con scale out: 0
+Scale outs promedio: 0.0
+
+CARACTERÍSTICAS FINALES:
+-------------------------
+- Gestión de riesgo dinámica y adaptativa
+- Múltiples indicadores técnicos balanceados
+- Sistema de scale out en 2 niveles
+- Trailing stop automático
+- Confirmación de tendencia
+- Filtros de volatilidad y volumen
+- Detección de breakouts
+- Stop loss en breakeven después del primer scale out

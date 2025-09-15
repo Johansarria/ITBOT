@@ -1,0 +1,98 @@
+{
+    "initial_capital": 10000,
+    "symbols": [
+        "BTCUSDT", "ETHUSDT", "BNBUSDT", "ADAUSDT", "SOLUSDT",
+        "XRPUSDT", "DOTUSDT", "LINKUSDT", "LTCUSDT", "MATICUSDT"
+    ],
+    "binance": {
+        "api_key": "your_api_key_here",
+        "api_secret": "your_api_secret_here",
+        "testnet": true
+    },
+    "strategies": {
+        "rsi_strategy": {
+            "enabled": true,
+            "weight": 0.3,
+            "rsi_period": 14,
+            "rsi_oversold": 30,
+            "rsi_overbought": 70
+        },
+        "macd_strategy": {
+            "enabled": true,
+            "weight": 0.25,
+            "fast_period": 12,
+            "slow_period": 26,
+            "signal_period": 9
+        },
+        "bollinger_strategy": {
+            "enabled": true,
+            "weight": 0.2,
+            "period": 20,
+            "std_dev": 2
+        },
+        "ema_crossover_strategy": {
+            "enabled": true,
+            "weight": 0.15,
+            "fast_period": 9,
+            "slow_period": 21
+        },
+        "volume_strategy": {
+            "enabled": true,
+            "weight": 0.1,
+            "volume_threshold": 1.5
+        }
+    },
+    "risk_management": {
+        "max_position_size": 0.1,
+        "stop_loss_pct": 2.0,
+        "take_profit_pct": 4.0,
+        "max_daily_loss_pct": 5.0,
+        "max_open_positions": 5
+    },
+    "diversification": {
+        "max_allocation_per_symbol": 0.2,
+        "min_allocation_per_symbol": 0.05,
+        "rebalance_threshold": 0.1,
+        "correlation_threshold": 0.7
+    },
+    "technical_analysis": {
+        "timeframes": ["1m", "5m", "15m", "1h"],
+        "indicators": {
+            "rsi": {"period": 14},
+            "macd": {"fast": 12, "slow": 26, "signal": 9},
+            "bollinger": {"period": 20, "std": 2},
+            "ema": {"periods": [9, 21, 50]},
+            "sma": {"periods": [20, 50, 200]},
+            "volume": {"period": 20}
+        }
+    },
+    "monitoring": {
+        "update_interval": 5,
+        "display_mode": "detailed",
+        "show_colors": true,
+        "log_level": "INFO"
+    },
+    "logging": {
+        "log_directory": "logs",
+        "max_log_file_size_mb": 100,
+        "log_backup_count": 10,
+        "json_logging_enabled": true,
+        "console_logging_enabled": true,
+        "log_rotation_enabled": true
+    },
+    "resilience": {
+        "max_restarts": 10,
+        "restart_cooldown_seconds": 60,
+        "max_consecutive_errors": 5,
+        "error_backoff_multiplier": 2,
+        "max_error_backoff_seconds": 30,
+        "health_check_interval": 30
+    },
+    "system": {
+        "loop_interval": 5,
+        "startup_delay": 3,
+        "shutdown_timeout": 30,
+        "enable_projections": true,
+        "auto_backup_interval_hours": 6
+    }
+}

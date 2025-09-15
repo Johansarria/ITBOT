@@ -1,0 +1,166 @@
+REPORTE DE RENTABILIDAD MENSUAL POR SIMBOLO
+Fecha: 2025-09-13 13:37:52
+================================================================================
+
+RESUMEN EJECUTIVO:
+Archivos analizados: 27
+Simbolos encontrados: 0
+Estrategias analizadas: 23
+
+
+DETALLE POR ESTRATEGIA:
+========================================
+
+.\aggressive_15pct:
+  Archivo: .\aggressive_15pct_results_20250913_105418.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: -80.91%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+.\conservative_15pct:
+  Archivo: .\conservative_15pct_results_20250913_112037.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 0.00%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+.\dynamic_probability:
+  Archivo: .\dynamic_probability_results_20250913_115037.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 321540849292684319027540092698891435430864884744489065639010943960367625568271919048460995630043770887401265979988412933886192343170607931927719972015571860044055391053545472.00%
+  Total Trades: 294
+  Win Rate: 40.1%
+
+.\dynamic_probability:
+  Archivo: .\dynamic_probability_results_20250913_115105.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 477910.10%
+  Total Trades: 294
+  Win Rate: 40.1%
+
+.\final_15pct:
+  Archivo: .\final_15pct_results_20250913_112351.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 0.00%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+.\final_probability:
+  Archivo: .\final_probability_results_20250913_115734.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 169003.99%
+  Total Trades: 95
+  Win Rate: 39.0%
+
+.\hybrid_simplified:
+  Archivo: .\hybrid_simplified_results_20250913_113929.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: -30.43%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+Independent Backtest:
+  Archivo: .\independent_backtest_60days_20250913_130221.txt
+  Periodo: 90 dias
+
+Independent Backtest:
+  Archivo: .\independent_backtest_90days_20250913_130240.txt
+  Periodo: 90 dias
+
+.\nas100:
+  Archivo: .\nas100_results_20250913_102344.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 11.91%
+  Total Trades: 19
+  Win Rate: 47.4%
+
+.\optimized_15pct:
+  Archivo: .\optimized_15pct_results_20250913_111726.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: -34.07%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+.\optimized_probability:
+  Archivo: .\optimized_probability_results_20250913_115527.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 99512239146301661030485856622739456.00%
+  Total Trades: 60
+  Win Rate: 38.3%
+
+.\optimized_probability:
+  Archivo: .\optimized_probability_results_20250913_115535.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 99512239146301661030485856622739456.00%
+  Total Trades: 60
+  Win Rate: 38.3%
+
+Unknown:
+  Archivo: .\real_binance_results_30days_20250913_124638.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 6.10%
+  Total Trades: 0
+
+Unknown:
+  Archivo: .\real_binance_results_30days_20250913_124652.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 6.10%
+  Total Trades: 0
+
+Unknown:
+  Archivo: .\real_binance_results_60days_20250913_124643.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 7.67%
+  Total Trades: 0
+
+Unknown:
+  Archivo: .\real_binance_results_60days_20250913_124656.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 7.68%
+  Total Trades: 0
+
+Unknown:
+  Archivo: .\real_binance_results_90days_20250913_124703.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 20.26%
+  Total Trades: 0
+
+.\realistic_probability:
+  Archivo: .\realistic_probability_results_20250913_115333.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: -18.05%
+  Total Trades: 3
+  Win Rate: 33.3%
+
+.\realistic_trading:
+  Archivo: .\realistic_trading_results_20250913_115925.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 5627243818.48%
+  Total Trades: 14
+  Win Rate: 35.7%
+
+.\simple_probability:
+  Archivo: .\simple_probability_results_20250913_120118.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 2474.76%
+  Total Trades: 4
+  Win Rate: 25.0%
+
+.\smart_15pct:
+  Archivo: .\smart_15pct_results_20250913_111356.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: 0.00%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+.\ultimate_15pct:
+  Archivo: .\ultimate_15pct_results_20250913_114249.txt
+  Periodo: 30 dias
+  Rentabilidad Mensual: -9.90%
+  Total Trades: 0
+  Win Rate: 0.0%
+
+CONCLUSIONES:
+==============================
+No se encontraron datos suficientes para calcular rentabilidad mensual.

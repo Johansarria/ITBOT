@@ -1,0 +1,25 @@
+{
+  "simulation_summary": {
+    "symbol": "ADAUSDT",
+    "terminal_id": 2,
+    "start_time": "2025-09-13T23:55:25.454933",
+    "end_time": "2025-09-14T00:05:28.595238",
+    "duration_hours": 0.1675389736111111,
+    "initial_capital": 1000.0,
+    "final_capital": 1000.7878306735264,
+    "total_return_pct": 0.07878306735264004,
+    "total_pnl": 0.7878306735264299
+  },
+  "trading_stats": {
+    "total_trades": 2,
+    "winning_trades": 2,
+    "losing_trades": 0,
+    "win_rate_pct": 100.0,
+    "avg_trade_size": 21.102482502102482
+  },
+  "performance_metrics": {
+    "best_trade": 0.6266726113422958,
+    "worst_trade": 0.16115806218413412,
+    "avg_return_per_trade": 1.835337096204851
+  }
+}

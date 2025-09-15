@@ -1,0 +1,2 @@
+Pruebas de conexión completadas
+Ver output en terminal para detalles

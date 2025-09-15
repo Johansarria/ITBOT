@@ -1,0 +1,12 @@
+{
+  "timestamp": "20250913_103610",
+  "config_name": "BALANCED",
+  "parameters": {
+    "momentum_period_short": 5,
+    "momentum_period_long": 20,
+    "momentum_threshold": 0.015,
+    "breakout_threshold": 0.02,
+    "session_multiplier": 1.5,
+    "volatility_multiplier": 1.3
+  }
+}

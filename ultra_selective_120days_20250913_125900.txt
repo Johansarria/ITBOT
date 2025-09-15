@@ -1,0 +1,32 @@
+ANÁLISIS ULTRA SELECTIVO DE SÍMBOLOS INDEPENDIENTES
+Período: 120 días | Criterio: ≥90% confluencia
+Fecha: 2025-09-13 12:59:00
+================================================================================
+
+RESUMEN ULTRA SELECTIVO:
+Símbolos analizados: 13/15
+Señales detectadas: 3
+Señales PERFECTAS (≥95%): 0
+Señales EXCELENTES (90-95%): 3
+Símbolos ELITE: 1
+
+RANKING SÍMBOLOS ELITE:
+==================================================
+ 1. ETHUSDT    - Perfect: 0, Excellent: 2 (Max: 0.900)
+
+DETALLE SÍMBOLOS ELITE:
+================================================================================
+
+ETHUSDT:
+  Señales perfectas: 0
+  Señales excelentes: 2
+  
+  TOP SEÑALES:
+    1. 2025-07-10 21:00:00 - Score: 0.900
+       Factores: Volume Explosion, Volatility Surge, MACD Double Confirmation, EMA Perfect Alignment
+       Precio: $2972.1700 | TP: 11.9% | SL: 4.5%
+       Vol: 5.7x | RSI: 81.4 | Mom: 5.4%
+    2. 2025-08-22 14:00:00 - Score: 0.900
+       Factores: Volume Explosion, Volatility Surge, MACD Double Confirmation, EMA Perfect Alignment
+       Precio: $4613.9300 | TP: 14.5% | SL: 6.2%
+       Vol: 8.4x | RSI: 82.9 | Mom: 7.5%

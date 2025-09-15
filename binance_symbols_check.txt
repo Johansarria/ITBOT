@@ -1,0 +1,42 @@
+=== SÍMBOLOS DISPONIBLES EN BINANCE ===
+
+Símbolos con AUD (3):
+  - AUDIOBTC
+  - AUDIOTRY
+  - AUDIOUSDT
+
+Símbolos con CAD (0):
+
+Símbolos con BTC/USDT (2):
+  - BTCUSDT
+  - WBTCUSDT
+
+Símbolos relacionados con ORO (11):
+  - AGLDBTC
+  - AGLDUSDT
+  - EGLDBNB
+  - EGLDBTC
+  - EGLDETH
+  - EGLDEUR
+  - EGLDFDUSD
+  - EGLDRON
+  - EGLDTRY
+  - EGLDUSDC
+  - EGLDUSDT
+
+=== VERIFICACIÓN DE SÍMBOLOS OBJETIVO ===
+  AUDUSDT: ❌ NO DISPONIBLE
+  AUDCAD: ❌ NO DISPONIBLE
+  CADUSD: ❌ NO DISPONIBLE
+  CADUSDT: ❌ NO DISPONIBLE
+  BTCUSDT: ✓ DISPONIBLE
+  XAUUSDT: ❌ NO DISPONIBLE
+
+=== PRUEBA DE DESCARGA DE DATOS ===
+
+✓ AUDUSDT: 0 registros obtenidos
+
+✓ BTCUSDT: 100 registros obtenidos
+  Primer precio: 110201.00000000 | Último precio: 113885.70000000
+
+❌ XAUUSDT: Error 400

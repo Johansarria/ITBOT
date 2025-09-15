@@ -1,0 +1,47 @@
+ANALISIS INDEPENDIENTE + BACKTESTING
+Periodo: 60 dias
+Fecha: 2025-09-13 13:02:21
+================================================================================
+
+RESUMEN EJECUTIVO:
+Simbolos analizados: 7/10
+Senales detectadas: 13
+Trades ejecutados: 12
+PnL total: $-39.44
+Simbolos rentables: 2
+
+RANKING SIMBOLOS RENTABLES:
+============================================================
+ 1. SOLUSDT    - PnL: $   16.00 | Win Rate: 100.0% | Trades: 1
+ 2. BTCUSDT    - PnL: $    3.41 | Win Rate: 100.0% | Trades: 1
+
+DETALLE SIMBOLOS RENTABLES:
+================================================================================
+
+SOLUSDT:
+  Senales detectadas: 1
+  Trades ejecutados: 1
+  Win Rate: 100.0%
+  PnL Total: $16.00
+  Mejor trade: 8.0%
+  Peor trade: 8.0%
+  
+  MEJORES TRADES:
+    1. 2025-08-22 14:00:00 -> 2025-08-23 05:00:00
+       Entry: $191.7000 | Exit: $207.0360
+       PnL: 8.0% ($16.00) | Take Profit
+       Score: 0.95 | Duracion: 15.0h
+
+BTCUSDT:
+  Senales detectadas: 1
+  Trades ejecutados: 1
+  Win Rate: 100.0%
+  PnL Total: $3.41
+  Mejor trade: 1.7%
+  Peor trade: 1.7%
+  
+  MEJORES TRADES:
+    1. 2025-08-07 10:00:00 -> 2025-08-10 11:00:00
+       Entry: $116347.2200 | Exit: $118330.5800
+       PnL: 1.7% ($3.41) | Time Limit
+       Score: 0.95 | Duracion: 73.0h

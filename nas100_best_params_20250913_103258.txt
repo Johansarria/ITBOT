@@ -1,0 +1,14 @@
+MEJORES PARÁMETROS ESTRATEGIA NAS100
+========================================
+
+momentum_period_short = 10
+momentum_period_long = 20
+momentum_threshold = 0.01
+breakout_period = 10
+breakout_threshold = 0.03
+session_multiplier = 1.5
+volatility_multiplier = 1.8
+
+Fitness Score: 0.9709
+Retorno: 53.42%
+Win Rate: 76.38%

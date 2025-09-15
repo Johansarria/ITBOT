@@ -1,0 +1,9 @@
+RESULTADOS BACKTEST ESTRATEGIA NAS100
+========================================
+
+Balance inicial: $100,000.00
+Balance final: $111,914.64
+Retorno total: 11.91%
+Total trades: 19
+Win rate: 47.37%
+Max drawdown: 2.20%

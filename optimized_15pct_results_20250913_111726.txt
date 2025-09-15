@@ -1,0 +1,28 @@
+RESULTADOS ESTRATEGIA OPTIMIZADA 15% MENSUAL
+==================================================
+
+Balance inicial: $100,000.00
+Balance final: $65,925.53
+Retorno total: -34.07%
+Retorno mensual promedio: -8.52%
+Objetivo 15% mensual: NO ALCANZADO
+
+ESTADÍSTICAS DETALLADAS:
+-------------------------
+Total de operaciones: 82
+Win Rate: 75.61%
+Profit Factor: 1.77
+Ganancia bruta: $133738.08
+Pérdida bruta: $75717.95
+Ganancia promedio: $2157.07
+Pérdida promedio: $3785.90
+Máximo Drawdown: 39.24%
+
+CARACTERÍSTICAS OPTIMIZADAS:
+------------------------------
+- Gestión de riesgo dinámica
+- Múltiples indicadores técnicos
+- Filtros de calidad ajustados
+- Trailing stop automático
+- Detección de breakouts
+- Análisis de patrones de velas

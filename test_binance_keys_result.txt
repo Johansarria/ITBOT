@@ -1,0 +1,7 @@
+============================================================
+🔑 VERIFICACIÓN DE NUEVAS CLAVES API DE BINANCE
+============================================================
+❌ Módulo python-binance no está instalado
+   Ejecuta: pip install python-binance
+
+❌ RESULTADO: Hay problemas con las nuevas claves API

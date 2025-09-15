@@ -1,0 +1,26 @@
+RESULTADOS FINALES - Estrategia de Probabilidad Dinámica Simplificada
+============================================================
+
+Capital inicial: $1,000.00
+Capital final: $25,747.64
+Retorno total: 2474.76%
+Retorno mensual estimado: 2474.76%
+Total trades: 4
+Win rate: 25.00%
+Máximo drawdown: 1.86%
+
+Distribución por tipo de señal:
+Entrada Aleatoria Ponderada: 2 trades | 50.0% win rate | 6965.30% avg PnL
+Momentum Positivo: 2 trades | 0.0% win rate | -90.96% avg PnL
+
+Objetivo 10% mensual: ALCANZADO
+Objetivo 15% mensual: ALCANZADO
+Superación del objetivo: 247.5x
+
+============================================================
+DETALLE DE TRADES:
+============================================================
+  1. ADA-USD | D | Entry: $0.75 | Exit: $105.87 | PnL: 14019.11% ($25234.41) | Razón: TP
+  2. ETH-USD | A | Entry: $2802.93 | Exit: $314.59 | PnL: -88.78% ($-159.80) | Razón: SL
+  3. BTC-USD | A | Entry: $40256.56 | Exit: $2761.22 | PnL: -93.14% ($-167.65) | Razón: SL
+  4. ETH-USD | D | Entry: $2771.20 | Exit: $318.50 | PnL: -88.51% ($-159.31) | Razón: SL

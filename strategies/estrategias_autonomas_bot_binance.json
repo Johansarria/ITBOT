@@ -1,0 +1,425 @@
+{
+  "metadata": {
+    "fecha_creacion": "2025-08-31T05:00:28.950534",
+    "dependencias": [
+      "Bot propio",
+      "Binance API"
+    ],
+    "terceros_requeridos": 0,
+    "nivel_autonomia": "100%"
+  },
+  "resumen_ejecutivo": {
+    "capital_inicial": 10000,
+    "retorno_mensual_esperado": 0.16975,
+    "estrategias_implementadas": 5,
+    "nivel_automatizacion": "95%"
+  },
+  "estrategias_autonomas": {
+    "scalping_automatizado": {
+      "nombre": "Crypto Scalping Automatizado",
+      "capital_asignado": 3500.0,
+      "dependencias": [
+        "Bot propio",
+        "Binance API"
+      ],
+      "timeframes": [
+        "1m",
+        "3m",
+        "5m"
+      ],
+      "pares_objetivo": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT"
+      ],
+      "algoritmo_entrada": {
+        "indicadores_principales": {
+          "rsi_14": {
+            "overbought": 75,
+            "oversold": 25
+          },
+          "bollinger_bands": {
+            "period": 20,
+            "std_dev": 2
+          },
+          "ema_cross": {
+            "fast": 9,
+            "slow": 21
+          },
+          "volumen_spike": {
+            "threshold": 1.5
+          }
+        },
+        "condiciones_long": [
+          "RSI < 25 (oversold extreme)",
+          "Precio toca Bollinger Band inferior",
+          "Volumen > 150% promedio últimas 20 velas",
+          "EMA9 se acerca a EMA21 desde abajo"
+        ],
+        "condiciones_short": [
+          "RSI > 75 (overbought extreme)",
+          "Precio toca Bollinger Band superior",
+          "Volumen > 150% promedio últimas 20 velas",
+          "EMA9 se acerca a EMA21 desde arriba"
+        ]
+      },
+      "gestion_posicion_automatica": {
+        "size_calculation": "kelly_criterion_modificado",
+        "capital_por_trade": 0.02,
+        "stop_loss_atr": 1.5,
+        "take_profit_levels": [
+          0.008,
+          0.012,
+          0.018
+        ],
+        "trailing_stop": 0.005,
+        "max_trades_simultaneos": 3
+      },
+      "optimizaciones_autonomas": {
+        "backtesting_continuo": true,
+        "auto_parameter_adjustment": true,
+        "market_condition_detection": true,
+        "risk_scaling_volatility": true
+      },
+      "retorno_esperado": {
+        "daily": "0.5-1.2%",
+        "monthly": "15-25%",
+        "win_rate_objetivo": 0.55
+      }
+    },
+    "mean_reversion": {
+      "nombre": "Mean Reversion Crypto",
+      "capital_asignado": 2500.0,
+      "dependencias": [
+        "Bot propio",
+        "Datos históricos Binance"
+      ],
+      "timeframes": [
+        "15m",
+        "30m",
+        "1h"
+      ],
+      "pares_objetivo": [
+        "Todos los major pairs con volumen >$10M"
+      ],
+      "logica_mean_reversion": {
+        "deteccion_desviacion": {
+          "zscore_threshold": 2.0,
+          "periodo_calculo": 100,
+          "rsi_confirmation": 30,
+          "bollinger_position": 0.1
+        },
+        "entrada_long": [
+          "Precio < Media_100 - (2 * std_dev)",
+          "RSI_14 < 30",
+          "Volumen > promedio_20_periodos",
+          "Sin noticias negativas últimas 4h"
+        ],
+        "entrada_short": [
+          "Precio > Media_100 + (2 * std_dev)",
+          "RSI_14 > 70",
+          "Volumen > promedio_20_periodos",
+          "Sin noticias positivas últimas 4h"
+        ]
+      },
+      "gestion_conservadora": {
+        "capital_por_trade": 0.03,
+        "stop_loss_fixed": 0.025,
+        "take_profit_media": true,
+        "holding_time_max": 48,
+        "partial_profits": [
+          0.01,
+          0.015
+        ]
+      },
+      "retorno_esperado": {
+        "daily": "0.3-0.8%",
+        "monthly": "10-18%",
+        "win_rate_objetivo": 0.65
+      }
+    },
+    "breakout_momentum": {
+      "nombre": "Breakout Momentum",
+      "capital_asignado": 2000.0,
+      "dependencias": [
+        "Bot propio",
+        "Binance WebSocket"
+      ],
+      "timeframes": [
+        "5m",
+        "15m",
+        "30m"
+      ],
+      "focus": "Capturas de grandes movimientos",
+      "deteccion_breakout": {
+        "consolidation_detection": {
+          "min_periods": 20,
+          "max_range_pct": 0.03,
+          "volume_decline": 0.8
+        },
+        "breakout_confirmation": {
+          "price_movement": 0.015,
+          "volume_spike": 2.0,
+          "candle_strength": true,
+          "no_immediate_rejection": true
+        }
+      },
+      "momentum_filter": {
+        "rsi_momentum": {
+          "min": 55,
+          "max": 80
+        },
+        "macd_confirmation": true,
+        "ema_alignment": true,
+        "market_cap_min": 100000000
+      },
+      "position_management": {
+        "entry_method": "scaled_entry",
+        "initial_position": 0.01,
+        "add_on_confirmation": 0.015,
+        "stop_loss_break_even": true,
+        "profit_target_atr": 3.0
+      },
+      "retorno_esperado": {
+        "daily": "0.4-1.5%",
+        "monthly": "12-30%",
+        "win_rate_objetivo": 0.45
+      }
+    },
+    "arbitraje_temporal": {
+      "nombre": "Arbitraje Temporal",
+      "capital_asignado": 1500.0,
+      "dependencias": [
+        "Bot propio",
+        "Binance API",
+        "Datos históricos"
+      ],
+      "timeframes": [
+        "1m",
+        "3m"
+      ],
+      "tipo": "Statistical Arbitrage",
+      "oportunidades_identificadas": {
+        "funding_rate_arbitrage": {
+          "descripcion": "Arbitraje entre spot y futuros por funding rates",
+          "trigger": "Funding rate > 0.1% o < -0.1%",
+          "execution": "Long spot + Short futures (o viceversa)",
+          "profit_source": "Convergencia + funding payments"
+        },
+        "cross_pair_arbitrage": {
+          "descripcion": "Arbitraje triangular entre pares",
+          "ejemplo": "BTC/USDT -> ETH/BTC -> ETH/USDT",
+          "trigger": "Desviación > 0.05% en precio implícito",
+          "execution_time": "<10 segundos"
+        },
+        "time_zone_arbitrage": {
+          "descripcion": "Diferencias de volumen/precio entre zonas horarias",
+          "peak_times": [
+            "Asia open",
+            "London open",
+            "NY open"
+          ],
+          "opportunity_window": "30-60 minutos"
+        }
+      },
+      "execution_parameters": {
+        "latency_requirement": "<100ms",
+        "min_profit_threshold": 0.002,
+        "max_holding_time": 600,
+        "capital_per_opportunity": 0.05,
+        "daily_opportunities": "10-20"
+      },
+      "retorno_esperado": {
+        "daily": "0.2-0.6%",
+        "monthly": "6-15%",
+        "win_rate_objetivo": 0.8
+      }
+    },
+    "volatilidad_intraday": {
+      "nombre": "Volatilidad Intraday",
+      "capital_asignado": 500.0,
+      "dependencias": [
+        "Bot propio",
+        "Cálculos de volatilidad"
+      ],
+      "timeframes": [
+        "1m",
+        "5m"
+      ],
+      "especialidad": "High-frequency volatility trading",
+      "volatility_measurements": {
+        "realized_volatility": {
+          "calculation": "Standard deviation of returns",
+          "period": 20,
+          "frequency": "minute by minute"
+        },
+        "implied_volatility_proxy": {
+          "vix_equivalent": "BTC/ETH volatility index",
+          "calculation_method": "Options pricing model adaptation"
+        }
+      },
+      "trading_scenarios": {
+        "volatility_expansion": {
+          "trigger": "RV aumenta >50% vs promedio 24h",
+          "strategy": "Straddle positions (long both directions)",
+          "profit_mechanism": "Gran movimiento en cualquier dirección"
+        },
+        "volatility_contraction": {
+          "trigger": "RV disminuye <50% vs promedio 24h",
+          "strategy": "Range trading con tight stops",
+          "profit_mechanism": "Múltiples trades pequeños"
+        },
+        "volatility_mean_reversion": {
+          "trigger": "RV en extremos (>95% o <5% percentil)",
+          "strategy": "Bet on volatility normalization",
+          "holding_time": "2-6 horas"
+        }
+      },
+      "risk_controls": {
+        "max_exposure": 0.01,
+        "volatility_stop": true,
+        "correlation_check": true,
+        "liquidity_minimum": 1000000
+      },
+      "retorno_esperado": {
+        "daily": "0.3-0.9%",
+        "monthly": "8-20%",
+        "win_rate_objetivo": 0.6
+      }
+    }
+  },
+  "sistema_monitoreo": {
+    "componentes_principales": {
+      "market_scanner": {
+        "function": "Escanear 100+ pares cada minuto",
+        "filters": [
+          "Volumen",
+          "Volatilidad",
+          "Patterns"
+        ],
+        "output": "Lista de oportunidades rankeadas"
+      },
+      "risk_monitor": {
+        "function": "Monitoreo continuo de exposición",
+        "alerts": [
+          "Drawdown >5%",
+          "Correlación alta",
+          "Liquidez baja"
+        ],
+        "actions": [
+          "Reducir posiciones",
+          "Alertas automáticas"
+        ]
+      },
+      "performance_tracker": {
+        "metrics": [
+          "P&L real-time",
+          "Sharpe ratio",
+          "Win rate"
+        ],
+        "reporting": "Reportes automáticos cada 4 horas",
+        "optimization": "Auto-ajuste de parámetros"
+      }
+    },
+    "alertas_automaticas": {
+      "telegram_bot": "Notificaciones instantáneas",
+      "email_reports": "Resúmenes diarios/semanales",
+      "dashboard_web": "Acceso desde cualquier dispositivo"
+    }
+  },
+  "expectativas_matematicas": {
+    "estrategias_detalle": {
+      "crypto_scalping_automatizado": {
+        "weight": 0.35,
+        "monthly_return": 0.2,
+        "capital_assigned": 3500.0,
+        "monthly_contribution": 700.0
+      },
+      "mean_reversion_crypto": {
+        "weight": 0.25,
+        "monthly_return": 0.14,
+        "capital_assigned": 2500.0,
+        "monthly_contribution": 350.00000000000006
+      },
+      "breakout_momentum": {
+        "weight": 0.2,
+        "monthly_return": 0.21,
+        "capital_assigned": 2000.0,
+        "monthly_contribution": 420.0
+      },
+      "arbitraje_temporal": {
+        "weight": 0.15,
+        "monthly_return": 0.105,
+        "capital_assigned": 1500.0,
+        "monthly_contribution": 157.5
+      },
+      "volatilidad_intraday": {
+        "weight": 0.05,
+        "monthly_return": 0.14,
+        "capital_assigned": 500.0,
+        "monthly_contribution": 70.0
+      }
+    },
+    "retorno_mensual_total": 1697.5,
+    "retorno_porcentual_mensual": 0.16975,
+    "ventajas_autonomas": [
+      "Sin dependencias externas",
+      "Control total del sistema",
+      "Costos mínimos de operación",
+      "Escalabilidad ilimitada",
+      "Adaptación en tiempo real"
+    ]
+  },
+  "plan_implementacion": {
+    "fase_1_development": {
+      "duracion": "1-2 semanas",
+      "objetivos": [
+        "Desarrollar módulos de cada estrategia",
+        "Integrar con Binance API completamente",
+        "Implementar sistema de monitoreo 24/7",
+        "Backtesting exhaustivo de cada componente"
+      ],
+      "entregables": [
+        "Bot principal con 5 estrategias integradas",
+        "Dashboard de monitoreo en tiempo real",
+        "Sistema de alertas automatizado",
+        "Reportes de backtesting validados"
+      ]
+    },
+    "fase_2_testing": {
+      "duracion": "2-3 semanas",
+      "capital_testing": 500,
+      "objetivos": [
+        "Testing con dinero real mínimo",
+        "Calibración de parámetros",
+        "Validación de latencias y ejecución",
+        "Optimización de performance"
+      ],
+      "metricas_objetivo": {
+        "uptime": ">99%",
+        "latencia_ejecucion": "<500ms",
+        "win_rate_promedio": ">50%",
+        "drawdown_maximo": "<8%"
+      }
+    },
+    "fase_3_deployment": {
+      "duracion": "1 semana",
+      "capital_full": 10000,
+      "actividades": [
+        "Deployment completo con capital total",
+        "Monitoreo intensivo primeros días",
+        "Ajustes finales basados en performance",
+        "Documentación completa del sistema"
+      ]
+    }
+  },
+  "ventajas_clave": [
+    "Control total - sin dependencias externas",
+    "Costos operativos mínimos",
+    "Escalabilidad ilimitada",
+    "Personalización completa",
+    "Sin limitaciones de terceros"
+  ]
+}

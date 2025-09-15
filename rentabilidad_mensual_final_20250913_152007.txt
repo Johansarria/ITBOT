@@ -1,0 +1,123 @@
+RENTABILIDAD MENSUAL POR SIMBOLO PROBADO
+Fecha: 2025-09-13 15:20:07
+================================================================================
+
+RESUMEN EJECUTIVO:
+Total simbolos analizados: 10
+Simbolos rentables: 6/10 (60.0%)
+Rentabilidad mensual promedio: 9.67%
+Total trades analizados: 18
+
+RANKING COMPLETO DE RENTABILIDAD MENSUAL:
+======================================================================
+
+ 1. BNBUSDT   
+    Rentabilidad Mensual:  +27.22%
+    Total Trades:   3
+    Win Rate: 100.0%
+    Fuente: Real Binance Multi-period
+    Clasificacion: EXCELENTE
+
+ 2. ADAUSDT   
+    Rentabilidad Mensual:  +27.17%
+    Total Trades:   3
+    Win Rate: 100.0%
+    Fuente: Real Binance Multi-period
+    Clasificacion: EXCELENTE
+
+ 3. SOLUSDT   
+    Rentabilidad Mensual:  +24.15%
+    Total Trades:   2
+    Win Rate: 100.0%
+    Fuente: Real Binance 30d
+    Clasificacion: EXCELENTE
+
+ 4. ETHUSDT   
+    Rentabilidad Mensual:  +16.79%
+    Total Trades:   2
+    Win Rate: 100.0%
+    Fuente: Real Binance 60d
+    Clasificacion: MUY BUENO
+
+ 5. LTCUSDT   
+    Rentabilidad Mensual:   +5.42%
+    Total Trades:   1
+    Win Rate: 100.0%
+    Fuente: Independent Backtest 90d
+    Clasificacion: BUENO
+
+ 6. BTCUSDT   
+    Rentabilidad Mensual:   +1.23%
+    Total Trades:   3
+    Win Rate:  33.3%
+    Fuente: Real Binance Multi-period
+    Clasificacion: POSITIVO
+
+ 7. MATICUSDT 
+    Rentabilidad Mensual:   -0.80%
+    Total Trades:   1
+    Win Rate:   0.0%
+    Fuente: Independent Backtest (No Profitable)
+    Clasificacion: NEGATIVO
+
+ 8. XRPUSDT   
+    Rentabilidad Mensual:   -1.00%
+    Total Trades:   1
+    Win Rate:   0.0%
+    Fuente: Independent Backtest (No Profitable)
+    Clasificacion: NEGATIVO
+
+ 9. LINKUSDT  
+    Rentabilidad Mensual:   -1.50%
+    Total Trades:   1
+    Win Rate:   0.0%
+    Fuente: Independent Backtest (No Profitable)
+    Clasificacion: NEGATIVO
+
+10. DOTUSDT   
+    Rentabilidad Mensual:   -2.00%
+    Total Trades:   1
+    Win Rate:   0.0%
+    Fuente: Independent Backtest (No Profitable)
+    Clasificacion: NEGATIVO
+
+TOP 5 SIMBOLOS MAS RENTABLES:
+==================================================
+1. BNBUSDT: +27.22% mensual
+2. ADAUSDT: +27.17% mensual
+3. SOLUSDT: +24.15% mensual
+4. ETHUSDT: +16.79% mensual
+5. LTCUSDT: +5.42% mensual
+
+ANALISIS POR CATEGORIAS:
+========================================
+
+EXCELENTES (>20% mensual): 3 simbolos
+  - SOLUSDT: 24.15%
+  - BNBUSDT: 27.22%
+  - ADAUSDT: 27.17%
+
+MUY BUENOS (10-20% mensual): 1 simbolos
+  - ETHUSDT: 16.79%
+
+BUENOS (5-10% mensual): 1 simbolos
+  - LTCUSDT: 5.42%
+
+POSITIVOS (0-5% mensual): 1 simbolos
+  - BTCUSDT: 1.23%
+
+NEGATIVOS (<0% mensual): 4 simbolos
+  - DOTUSDT: -2.00%
+  - LINKUSDT: -1.50%
+  - XRPUSDT: -1.00%
+  - MATICUSDT: -0.80%
+
+RECOMENDACIONES FINALES:
+========================================
+1. MEJOR SIMBOLO: BNBUSDT (27.22% mensual)
+2. FOCO PRINCIPAL: 3 simbolos excelentes
+   - SOLUSDT (24.15%)
+   - BNBUSDT (27.22%)
+   - ADAUSDT (27.17%)
+3. EVITAR: 4 simbolos con rendimiento negativo
+4. ALTA PRECISION: 5 simbolos con >80% win rate

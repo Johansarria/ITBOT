@@ -1,0 +1,34 @@
+RESULTADOS FINALES - Estrategia de Trading Realista
+============================================================
+
+Capital inicial: $1,000.00
+Capital final: $56,272,439,184.80
+Retorno total: 5627243818.48%
+Retorno mensual: 5627243818.48%
+Total trades: 14
+Win rate: 35.71%
+Máximo drawdown: 62.51%
+Sharpe ratio: 0.60
+Retorno promedio por trade: 8955.99%
+Riesgo máximo usado: 0.00%
+
+Objetivo 10% mensual: ALCANZADO
+Objetivo 15% mensual: ALCANZADO
+
+============================================================
+DETALLE DE TRADES:
+============================================================
+  1. BTC-USD | Entry: $41533.39 | Exit: $2537.90 | Size: $300.00 | PnL: -93.89% | Razón: SL
+  2. ADA-USD | Entry: $0.75 | Exit: $106.84 | Size: $215.50 | PnL: 14212.64% | Razón: TP
+  3. BNB-USD | Entry: $323.23 | Exit: $0.75 | Size: $9403.95 | PnL: -99.77% | Razón: SL
+  4. SOL-USD | Entry: $104.56 | Exit: $41593.06 | Size: $6589.28 | PnL: 39678.58% | Razón: TP
+  5. BNB-USD | Entry: $310.23 | Exit: $0.76 | Size: $790948.87 | PnL: -99.75% | Razón: SL
+  6. ETH-USD | Entry: $2469.96 | Exit: $290.84 | Size: $554248.44 | PnL: -88.22% | Razón: SL
+  7. ADA-USD | Entry: $0.78 | Exit: $107.24 | Size: $407552.98 | PnL: 13731.09% | Razón: TP
+  8. BTC-USD | Entry: $42630.28 | Exit: $2582.97 | Size: $17195992.92 | PnL: -93.94% | Razón: SL
+  9. BNB-USD | Entry: $285.91 | Exit: $0.81 | Size: $12349767.36 | PnL: -99.72% | Razón: SL
+ 10. SOL-USD | Entry: $99.55 | Exit: $46535.24 | Size: $8655297.49 | PnL: 46644.75% | Razón: TP
+ 11. ADA-USD | Entry: $0.82 | Exit: $99.23 | Size: $1219827987.24 | PnL: 11971.03% | Razón: TP
+ 12. BTC-USD | Entry: $45637.79 | Exit: $2500.53 | Size: $45027615204.71 | PnL: -94.52% | Razón: SL
+ 13. ETH-USD | Entry: $2577.09 | Exit: $264.62 | Size: $32259460664.76 | PnL: -89.73% | Razón: SL
+ 14. BTC-USD | Entry: $47123.47 | Exit: $2525.16 | Size: $23575342122.53 | PnL: -94.64% | Razón: SL

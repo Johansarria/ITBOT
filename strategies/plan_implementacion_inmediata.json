@@ -1,0 +1,322 @@
+{
+  "metadata": {
+    "fecha_creacion": "2025-08-31T04:54:49.173045",
+    "version": "1.0",
+    "autor": "Sistema Análisis Literatura Trading"
+  },
+  "checklist_preparacion": {
+    "setup_tecnico": {
+      "descripcion": "Configuración de plataformas y herramientas",
+      "tareas": [
+        {
+          "tarea": "Descargar e instalar MetaTrader 4/5",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Crear cuenta demo MT4/5 con broker regulado",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Configurar TradingView Pro con alertas",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Abrir cuenta en Binance/Bybit (verificada)",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Instalar Python 3.8+ con librerías trading",
+          "completado": false,
+          "prioridad": "Media"
+        },
+        {
+          "tarea": "Configurar Interactive Brokers (si >$10k)",
+          "completado": false,
+          "prioridad": "Media"
+        },
+        {
+          "tarea": "Setup de VPS para sistemas 24/7",
+          "completado": false,
+          "prioridad": "Baja"
+        }
+      ]
+    },
+    "educacion_inicial": {
+      "descripcion": "Conocimientos mínimos requeridos",
+      "tareas": [
+        {
+          "tarea": "Leer 'DAY TRADING EN UNA SEMANA'",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Estudiar patrones de velas japonesas",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Practicar identificación de gaps",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Configurar indicadores MACD y RSI",
+          "completado": false,
+          "prioridad": "Alta"
+        },
+        {
+          "tarea": "Entender gestión de riesgo básica",
+          "completado": false,
+          "prioridad": "Crítica"
+        }
+      ]
+    },
+    "demo_trading": {
+      "descripcion": "Práctica obligatoria antes de dinero real",
+      "tareas": [
+        {
+          "tarea": "100 trades scalping demo",
+          "completado": false,
+          "objetivo": "Win rate >45%"
+        },
+        {
+          "tarea": "20 trades gap trading demo",
+          "completado": false,
+          "objetivo": "Win rate >60%"
+        },
+        {
+          "tarea": "30 días sistema automático demo",
+          "completado": false,
+          "objetivo": "Retorno >3%"
+        },
+        {
+          "tarea": "50 trades forex tendencias demo",
+          "completado": false,
+          "objetivo": "Win rate >50%"
+        },
+        {
+          "tarea": "10 trades volatilidad crypto demo",
+          "completado": false,
+          "objetivo": "RR >1:2"
+        }
+      ]
+    }
+  },
+  "calendario_implementacion": {
+    "semana_1": {
+      "fecha": "2025-08-31",
+      "fase": "Preparación",
+      "objetivos": [
+        "Configurar todas las plataformas necesarias",
+        "Completar educación básica obligatoria",
+        "Comenzar práctica en demo"
+      ],
+      "tareas_diarias": {
+        "lunes": "Setup MT4/5 + primera sesión demo scalping",
+        "martes": "TradingView setup + demo gap trading",
+        "miercoles": "Binance setup + demo crypto",
+        "jueves": "Sistema automático programación/configuración",
+        "viernes": "Forex demo + revisión semanal",
+        "sabado": "Análisis de mercados y preparación siguiente semana",
+        "domingo": "Descanso + lectura literatura"
+      }
+    },
+    "semana_2": {
+      "fecha": "2025-09-07",
+      "fase": "Preparación",
+      "objetivos": [
+        "Configurar todas las plataformas necesarias",
+        "Completar educación básica obligatoria",
+        "Comenzar práctica en demo"
+      ],
+      "tareas_diarias": {
+        "lunes": "Setup MT4/5 + primera sesión demo scalping",
+        "martes": "TradingView setup + demo gap trading",
+        "miercoles": "Binance setup + demo crypto",
+        "jueves": "Sistema automático programación/configuración",
+        "viernes": "Forex demo + revisión semanal",
+        "sabado": "Análisis de mercados y preparación siguiente semana",
+        "domingo": "Descanso + lectura literatura"
+      }
+    },
+    "semana_3": {
+      "fecha": "2025-09-14",
+      "fase": "Demo Intensivo",
+      "objetivos": [
+        "Completar mínimo trades demo requeridos",
+        "Alcanzar win rates objetivos",
+        "Refinar parámetros de cada estrategia"
+      ],
+      "capital_demo": "$10,000 simulado",
+      "metricas_objetivo": {
+        "scalping_win_rate": ">45%",
+        "gap_trading_win_rate": ">60%",
+        "forex_win_rate": ">50%",
+        "drawdown_maximo": "<10%"
+      }
+    },
+    "semana_4": {
+      "fecha": "2025-09-21",
+      "fase": "Demo Intensivo",
+      "objetivos": [
+        "Completar mínimo trades demo requeridos",
+        "Alcanzar win rates objetivos",
+        "Refinar parámetros de cada estrategia"
+      ],
+      "capital_demo": "$10,000 simulado",
+      "metricas_objetivo": {
+        "scalping_win_rate": ">45%",
+        "gap_trading_win_rate": ">60%",
+        "forex_win_rate": ">50%",
+        "drawdown_maximo": "<10%"
+      }
+    },
+    "semana_5": {
+      "fecha": "2025-09-28",
+      "fase": "Dinero Real - Fase 1",
+      "capital_real": "$2,000 (20% del total)",
+      "estrategias_activas": [
+        "Sistemas automáticos ($600)",
+        "Gap trading ($500)",
+        "Forex tendencias ($200)"
+      ],
+      "objetivo_semanal": "0.5-1% retorno con <2% drawdown"
+    },
+    "semana_6": {
+      "fecha": "2025-10-05",
+      "fase": "Dinero Real - Fase 1",
+      "capital_real": "$2,000 (20% del total)",
+      "estrategias_activas": [
+        "Sistemas automáticos ($600)",
+        "Gap trading ($500)",
+        "Forex tendencias ($200)"
+      ],
+      "objetivo_semanal": "0.5-1% retorno con <2% drawdown"
+    },
+    "semana_7": {
+      "fecha": "2025-10-12",
+      "fase": "Dinero Real - Fase 2",
+      "capital_real": "$3,000",
+      "nuevas_estrategias": [
+        "Scalping crypto controlado ($500)"
+      ],
+      "objetivo_semanal": "1-2% retorno con <3% drawdown"
+    },
+    "semana_8": {
+      "fecha": "2025-10-19",
+      "fase": "Dinero Real - Fase 2",
+      "capital_real": "$3,000",
+      "nuevas_estrategias": [
+        "Scalping crypto controlado ($500)"
+      ],
+      "objetivo_semanal": "1-2% retorno con <3% drawdown"
+    }
+  },
+  "sistema_seguimiento": {
+    "daily_tracking": {
+      "campos_obligatorios": [
+        "fecha",
+        "estrategia_utilizada",
+        "par_symbol",
+        "tipo_operacion",
+        "precio_entrada",
+        "precio_salida",
+        "resultado_pips_porcentaje",
+        "resultado_usd",
+        "razon_entrada",
+        "razon_salida",
+        "emociones_durante_trade"
+      ]
+    },
+    "weekly_review": {
+      "kpis": [
+        "retorno_semanal_porcentaje",
+        "win_rate_por_estrategia",
+        "average_win_vs_average_loss",
+        "sharpe_ratio",
+        "maximum_drawdown",
+        "profit_factor",
+        "numero_trades_total"
+      ]
+    },
+    "monthly_analysis": {
+      "objetivos": [
+        "retorno_mensual_vs_objetivo_15pct",
+        "consistencia_semanal",
+        "estrategia_mas_rentable",
+        "estrategia_menos_rentable",
+        "ajustes_necesarios_siguiente_mes"
+      ]
+    }
+  },
+  "configuracion_alertas": {
+    "tradingview_alerts": {
+      "scalping_crypto": [
+        "RSI(14) crosses above 70 on BTC/USDT 5m",
+        "RSI(14) crosses below 30 on BTC/USDT 5m",
+        "Volume > 150% average on ETH/USDT 1m",
+        "Price breaks previous 4H high/low"
+      ],
+      "gap_trading": [
+        "Gap > 1% at market open",
+        "Gap < -1% at market open",
+        "Volume confirmation gap fill"
+      ],
+      "forex_trends": [
+        "EMA 20/50 cross on EUR/USD 4H",
+        "Price retrace to 0.618 Fibonacci",
+        "ADX > 25 trend confirmation"
+      ]
+    },
+    "risk_management_alerts": [
+      "Daily loss exceeds 2%",
+      "Weekly loss exceeds 5%",
+      "Monthly drawdown exceeds 10%",
+      "Win rate below 40% for 5 consecutive trades"
+    ],
+    "market_condition_alerts": [
+      "VIX above 30 (high volatility)",
+      "Major news events (NFP, FOMC, ECB)",
+      "Crypto market cap drops >10% daily",
+      "Major exchange outages"
+    ]
+  },
+  "scripts_automatizacion": {
+    "daily_pnl_calculator": "\nimport pandas as pd\nfrom datetime import datetime\n\ndef calculate_daily_pnl(trades_df):\n    today = datetime.now().date()\n    today_trades = trades_df[trades_df['date'].dt.date == today]\n    \n    daily_pnl = today_trades['result_usd'].sum()\n    daily_pct = (daily_pnl / capital_inicial) * 100\n    \n    return daily_pnl, daily_pct\n            ",
+    "risk_checker": "\ndef check_position_size(capital, risk_pct, stop_loss_pips, pip_value):\n    max_risk_amount = capital * (risk_pct / 100)\n    max_position_size = max_risk_amount / (stop_loss_pips * pip_value)\n    return max_position_size\n            ",
+    "alert_sender": "\nimport requests\n\ndef send_telegram_alert(message):\n    bot_token = \"YOUR_BOT_TOKEN\"\n    chat_id = \"YOUR_CHAT_ID\"\n    url = f\"https://api.telegram.org/bot{bot_token}/sendMessage\"\n    data = {\"chat_id\": chat_id, \"text\": message}\n    requests.post(url, data=data)\n            "
+  },
+  "recursos_adicionales": {
+    "brokers_recomendados": {
+      "forex": [
+        "IC Markets",
+        "Pepperstone",
+        "FTMO"
+      ],
+      "crypto": [
+        "Binance",
+        "Bybit",
+        "Kraken"
+      ],
+      "acciones": [
+        "Interactive Brokers",
+        "TD Ameritrade"
+      ]
+    },
+    "herramientas_gratuitas": [
+      "TradingView (versión básica)",
+      "MetaTrader 4/5",
+      "Telegram para alertas",
+      "Google Sheets para tracking"
+    ],
+    "libros_prioritarios": [
+      "DAY TRADING EN UNA SEMANA - BORJA MUÑOZ",
+      "5 Pasos para Realizar Scalping Criptomonedas",
+      "Manual Avanzado de Trading"
+    ]
+  }
+}

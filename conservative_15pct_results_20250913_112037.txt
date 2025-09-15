@@ -1,0 +1,30 @@
+RESULTADOS ESTRATEGIA CONSERVADORA 15% MENSUAL
+==================================================
+
+Balance inicial: $100,000.00
+Balance final: $100,000.00
+Retorno total: 0.00%
+Retorno mensual promedio: 0.00%
+Objetivo 15% mensual: NO ALCANZADO
+
+ESTADÍSTICAS CONSERVADORAS:
+------------------------------
+Total de operaciones: 0
+Win Rate: 0.00%
+Profit Factor: inf
+Ganancia bruta: $0.00
+Pérdida bruta: $0.00
+Máximo Drawdown: 0.00%
+Períodos en Drawdown: 14401
+Calidad promedio de señales: 0.0
+
+CARACTERÍSTICAS CONSERVADORAS:
+-----------------------------------
+- Gestión de riesgo ultra-conservadora
+- Filtros de calidad estrictos (score ≥ 7)
+- Confirmación multi-timeframe obligatoria
+- Toma de ganancias parciales automática
+- Máximo 6 operaciones por día
+- Stop loss en breakeven después de ganancia parcial
+- Análisis de divergencias
+- Confirmación de volumen requerida

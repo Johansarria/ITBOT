@@ -1,0 +1,186 @@
+//@version=6
+// Dashboard Multi-Símbolo - Replica el monitor de simulaciones reales
+// Monitorea múltiples activos con métricas de trading en tiempo real
+indicator("ITBOT Multi-Asset Dashboard", shorttitle="ITBOT-DASH", overlay=false, max_labels_count=500, max_boxes_count=500)
+
+// === CONFIGURACIÓN DE SÍMBOLOS ===
+symbol1 = input.symbol("CAPITALCOM:NAS100", title="NAS100 (Índices)")
+symbol2 = input.symbol("OANDA:AUDCAD", title="AUDCAD (Forex)")
+symbol3 = input.symbol("OANDA:XAUUSD", title="XAUUSD (Metales)")
+symbol4 = input.symbol("BINANCE:BTCUSDT", title="BTC (Crypto)")
+symbol5 = input.symbol("BINANCE:ETHUSDT", title="ETH (Crypto)")
+
+// === PARÁMETROS DE ANÁLISIS ===
+fast_ma_len = input.int(5, title="Fast MA Length", minval=1)
+slow_ma_len = input.int(20, title="Slow MA Length", minval=1)
+trend_threshold = input.float(0.1, title="Trend Threshold %", minval=0.01)
+update_frequency = input.int(5, title="Update Frequency (seconds)", minval=1, maxval=60)
+show_prices = input.bool(true, title="Show Current Prices")
+show_changes = input.bool(true, title="Show Price Changes")
+show_volumes = input.bool(true, title="Show Volume Data")
+
+// === FUNCIÓN PARA OBTENER DATOS DE SÍMBOLO ===
+get_symbol_data(symbol_name) =>
+    sym_close = request.security(symbol_name, timeframe.period, close)
+    sym_open = request.security(symbol_name, timeframe.period, open)
+    sym_high = request.security(symbol_name, timeframe.period, high)
+    sym_low = request.security(symbol_name, timeframe.period, low)
+    sym_volume = request.security(symbol_name, timeframe.period, volume)
+    
+    // Cálculo de medias móviles
+    sym_fast_ma = request.security(symbol_name, timeframe.period, ta.sma(close, fast_ma_len))
+    sym_slow_ma = request.security(symbol_name, timeframe.period, ta.sma(close, slow_ma_len))
+    
+    // Análisis de tendencia
+    ma_diff = ((sym_fast_ma - sym_slow_ma) / sym_slow_ma) * 100
+    trend_status = ma_diff > trend_threshold ? "BULLISH" : 
+                   ma_diff < -trend_threshold ? "BEARISH" : "NEUTRAL"
+    
+    // Cambio de precio
+    price_change = ((sym_close - sym_open) / sym_open) * 100
+    
+    // Retorno de datos
+    [sym_close, sym_open, sym_high, sym_low, sym_volume, sym_fast_ma, sym_slow_ma, ma_diff, trend_status, price_change]
+
+// === OBTENCIÓN DE DATOS PARA TODOS LOS SÍMBOLOS ===
+[close1, open1, high1, low1, vol1, fma1, sma1, diff1, trend1, change1] = get_symbol_data(symbol1)
+[close2, open2, high2, low2, vol2, fma2, sma2, diff2, trend2, change2] = get_symbol_data(symbol2)
+[close3, open3, high3, low3, vol3, fma3, sma3, diff3, trend3, change3] = get_symbol_data(symbol3)
+[close4, open4, high4, low4, vol4, fma4, sma4, diff4, trend4, change4] = get_symbol_data(symbol4)
+[close5, open5, high5, low5, vol5, fma5, sma5, diff5, trend5, change5] = get_symbol_data(symbol5)
+
+// === CÁLCULOS AGREGADOS ===
+total_symbols = 5
+bullish_count = (trend1 == "BULLISH" ? 1 : 0) + (trend2 == "BULLISH" ? 1 : 0) + (trend3 == "BULLISH" ? 1 : 0) + (trend4 == "BULLISH" ? 1 : 0) + (trend5 == "BULLISH" ? 1 : 0)
+                
+bearish_count = (trend1 == "BEARISH" ? 1 : 0) + (trend2 == "BEARISH" ? 1 : 0) + (trend3 == "BEARISH" ? 1 : 0) + (trend4 == "BEARISH" ? 1 : 0) + (trend5 == "BEARISH" ? 1 : 0)
+                
+neutral_count = total_symbols - bullish_count - bearish_count
+
+average_change = (change1 + change2 + change3 + change4 + change5) / total_symbols
+market_sentiment = bullish_count > bearish_count ? "BULLISH" : 
+                   bearish_count > bullish_count ? "BEARISH" : "NEUTRAL"
+
+// === VISUALIZACIÓN PRINCIPAL ===
+// Gráfico de barras para distribución de tendencias
+plot(bullish_count, title="Bullish Count", color=color.green, style=plot.style_histogram, linewidth=3)
+plot(-bearish_count, title="Bearish Count", color=color.red, style=plot.style_histogram, linewidth=3)
+plot(neutral_count * 0.5, title="Neutral Count", color=color.yellow, style=plot.style_histogram, linewidth=2)
+
+// Líneas de referencia
+hline(0, "Zero Line", color=color.gray, linestyle=hline.style_solid)
+hline(total_symbols, "Max Bullish", color=color.green, linestyle=hline.style_dashed)
+hline(-total_symbols, "Max Bearish", color=color.red, linestyle=hline.style_dashed)
+
+// === FUNCIONES AUXILIARES ===
+// Función para obtener color de tendencia
+get_trend_color(trend_str) =>
+    trend_str == "BULLISH" ? color.green : trend_str == "BEARISH" ? color.red : color.orange
+
+// Función para obtener emoji de estado
+get_status_emoji(trend_str) =>
+    trend_str == "BULLISH" ? "🟢" : trend_str == "BEARISH" ? "🔴" : "🟡"
+
+// === DASHBOARD PRINCIPAL ===
+if barstate.islast
+    var table main_dashboard = table.new(position.top_left, 6, 7, 
+                                         bgcolor=color.white, border_width=2)
+    
+    // Encabezados
+    table.cell(main_dashboard, 0, 0, "Symbol", text_color=color.white, bgcolor=color.black, text_size=size.normal)
+    table.cell(main_dashboard, 1, 0, "Price", text_color=color.white, bgcolor=color.black, text_size=size.normal)
+    table.cell(main_dashboard, 2, 0, "Change %", text_color=color.white, bgcolor=color.black, text_size=size.normal)
+    table.cell(main_dashboard, 3, 0, "Trend", text_color=color.white, bgcolor=color.black, text_size=size.normal)
+    table.cell(main_dashboard, 4, 0, "MA Diff %", text_color=color.white, bgcolor=color.black, text_size=size.normal)
+    table.cell(main_dashboard, 5, 0, "Status", text_color=color.white, bgcolor=color.black, text_size=size.normal)
+    
+    // Datos del Symbol 1
+    table.cell(main_dashboard, 0, 1, str.replace(symbol1, "BINANCE:", ""), text_color=color.black)
+    table.cell(main_dashboard, 1, 1, str.tostring(close1, "#.####"), text_color=color.black)
+    table.cell(main_dashboard, 2, 1, str.tostring(change1, "#.##") + "%", 
+               text_color=change1 > 0 ? color.green : change1 < 0 ? color.red : color.black)
+    table.cell(main_dashboard, 3, 1, trend1, text_color=get_trend_color(trend1))
+    table.cell(main_dashboard, 4, 1, str.tostring(diff1, "#.###"), text_color=color.black)
+    table.cell(main_dashboard, 5, 1, get_status_emoji(trend1), text_color=color.black)
+    
+    // Datos del Symbol 2
+    table.cell(main_dashboard, 0, 2, str.replace(symbol2, "BINANCE:", ""), text_color=color.black)
+    table.cell(main_dashboard, 1, 2, str.tostring(close2, "#.####"), text_color=color.black)
+    table.cell(main_dashboard, 2, 2, str.tostring(change2, "#.##") + "%", 
+               text_color=change2 > 0 ? color.green : change2 < 0 ? color.red : color.black)
+    table.cell(main_dashboard, 3, 2, trend2, text_color=get_trend_color(trend2))
+    table.cell(main_dashboard, 4, 2, str.tostring(diff2, "#.###"), text_color=color.black)
+    table.cell(main_dashboard, 5, 2, get_status_emoji(trend2), text_color=color.black)
+    
+    // Datos del Symbol 3
+    table.cell(main_dashboard, 0, 3, str.replace(symbol3, "BINANCE:", ""), text_color=color.black)
+    table.cell(main_dashboard, 1, 3, str.tostring(close3, "#.####"), text_color=color.black)
+    table.cell(main_dashboard, 2, 3, str.tostring(change3, "#.##") + "%", 
+               text_color=change3 > 0 ? color.green : change3 < 0 ? color.red : color.black)
+    table.cell(main_dashboard, 3, 3, trend3, text_color=get_trend_color(trend3))
+    table.cell(main_dashboard, 4, 3, str.tostring(diff3, "#.###"), text_color=color.black)
+    table.cell(main_dashboard, 5, 3, get_status_emoji(trend3), text_color=color.black)
+    
+    // Datos del Symbol 4
+    table.cell(main_dashboard, 0, 4, str.replace(symbol4, "BINANCE:", ""), text_color=color.black)
+    table.cell(main_dashboard, 1, 4, str.tostring(close4, "#.####"), text_color=color.black)
+    table.cell(main_dashboard, 2, 4, str.tostring(change4, "#.##") + "%", 
+               text_color=change4 > 0 ? color.green : change4 < 0 ? color.red : color.black)
+    table.cell(main_dashboard, 3, 4, trend4, text_color=get_trend_color(trend4))
+    table.cell(main_dashboard, 4, 4, str.tostring(diff4, "#.###"), text_color=color.black)
+    table.cell(main_dashboard, 5, 4, get_status_emoji(trend4), text_color=color.black)
+    
+    // Datos del Symbol 5
+    table.cell(main_dashboard, 0, 5, str.replace(symbol5, "BINANCE:", ""), text_color=color.black)
+    table.cell(main_dashboard, 1, 5, str.tostring(close5, "#.####"), text_color=color.black)
+    table.cell(main_dashboard, 2, 5, str.tostring(change5, "#.##") + "%", 
+               text_color=change5 > 0 ? color.green : change5 < 0 ? color.red : color.black)
+    table.cell(main_dashboard, 3, 5, trend5, text_color=get_trend_color(trend5))
+    table.cell(main_dashboard, 4, 5, str.tostring(diff5, "#.###"), text_color=color.black)
+    table.cell(main_dashboard, 5, 5, get_status_emoji(trend5), text_color=color.black)
+    
+    // Resumen general
+    table.cell(main_dashboard, 0, 6, "MARKET", text_color=color.white, bgcolor=color.navy)
+    table.cell(main_dashboard, 1, 6, "SUMMARY", text_color=color.white, bgcolor=color.navy)
+    table.cell(main_dashboard, 2, 6, str.tostring(average_change, "#.##") + "%", 
+               text_color=average_change > 0 ? color.green : average_change < 0 ? color.red : color.white, bgcolor=color.navy)
+    table.cell(main_dashboard, 3, 6, market_sentiment, 
+               text_color=get_trend_color(market_sentiment), bgcolor=color.navy)
+    table.cell(main_dashboard, 4, 6, "🟢" + str.tostring(bullish_count) + " 🔴" + str.tostring(bearish_count), 
+               text_color=color.white, bgcolor=color.navy)
+    table.cell(main_dashboard, 5, 6, "📊", text_color=color.white, bgcolor=color.navy)
+
+// === PANEL DE ESTADÍSTICAS ===
+if barstate.islast
+    var table stats_panel = table.new(position.bottom_left, 2, 5, 
+                                      bgcolor=color.white, border_width=1)
+    
+    table.cell(stats_panel, 0, 0, "Metric", text_color=color.white, bgcolor=color.gray)
+    table.cell(stats_panel, 1, 0, "Value", text_color=color.white, bgcolor=color.gray)
+    
+    table.cell(stats_panel, 0, 1, "Total Symbols", text_color=color.black)
+    table.cell(stats_panel, 1, 1, str.tostring(total_symbols), text_color=color.black)
+    
+    table.cell(stats_panel, 0, 2, "Bullish Count", text_color=color.black)
+    table.cell(stats_panel, 1, 2, str.tostring(bullish_count), text_color=color.green)
+    
+    table.cell(stats_panel, 0, 3, "Bearish Count", text_color=color.black)
+    table.cell(stats_panel, 1, 3, str.tostring(bearish_count), text_color=color.red)
+    
+    table.cell(stats_panel, 0, 4, "Avg Change %", text_color=color.black)
+    table.cell(stats_panel, 1, 4, str.tostring(average_change, "#.##") + "%", 
+               text_color=average_change > 0 ? color.green : color.red)
+
+// === ALERTAS GLOBALES ===
+alertcondition(bullish_count >= 4, title="ITBOT Market Bullish", message="ITBOT Dashboard: STRONG BULLISH MARKET - " + str.tostring(bullish_count) + "/5 symbols bullish")
+               
+alertcondition(bearish_count >= 4, title="ITBOT Market Bearish", message="ITBOT Dashboard: STRONG BEARISH MARKET - " + str.tostring(bearish_count) + "/5 symbols bearish")
+               
+alertcondition(math.abs(average_change) > 3.0, title="ITBOT High Volatility", message="ITBOT Dashboard: HIGH VOLATILITY detected - Average change: " + str.tostring(average_change, "#.##") + "%")
+
+// === LÍNEA DE SENTIMIENTO DE MERCADO ===
+market_score = bullish_count - bearish_count
+plot(market_score, title="Market Sentiment Score", color=color.blue, linewidth=3)
+
+// Fondo dinámico basado en sentimiento
+bgcolor(market_score > 2 ? color.new(color.green, 95) : market_score < -2 ? color.new(color.red, 95) : color.new(color.orange, 95))

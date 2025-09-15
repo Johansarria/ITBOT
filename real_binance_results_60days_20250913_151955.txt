@@ -1,0 +1,27 @@
+RESULTADOS ESTRATEGIA PROBABILIDAD DINÁMICA - DATOS REALES BINANCE
+Período: 60 días
+Fecha: 2025-09-13 15:19:55
+============================================================
+
+MÉTRICAS PRINCIPALES:
+Capital inicial: $1,000.00
+Capital final: $1,085.03
+Retorno total: 8.50%
+Tasa de acierto: 100.00%
+Total de trades: 2
+Máximo drawdown: 0.00%
+
+DETALLE DE TRADES:
+================================================================================
+Trade 1: ETHUSDT
+  Entrada: 2025-07-17 23:00:00 @ $3476.8700
+  Salida: 2025-09-13 20:00:00 @ $4657.6300
+  PnL: 33.96% ($61.13)
+  Razón: Final | Tipo: Momentum Positivo
+  ----------------------------------------
+Trade 2: ADAUSDT
+  Entrada: 2025-07-17 23:00:00 @ $0.8216
+  Salida: 2025-09-13 20:00:00 @ $0.9307
+  PnL: 13.28% ($23.90)
+  Razón: Final | Tipo: Momentum Positivo
+  ----------------------------------------

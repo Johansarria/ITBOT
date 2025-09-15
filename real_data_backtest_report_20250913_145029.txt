@@ -1,0 +1,32 @@
+=== REPORTE DE BACKTESTING CON DATOS REALES ===
+Fecha: 2025-09-13 14:50:29
+Capital inicial: $1,000.00
+
+
+=== NAS100 ===
+Puntos de datos: 720
+Retorno total: -7.76%
+Tasa de acierto: 21.74%
+Retorno promedio: -0.35%
+Drawdown máximo: 8.66%
+Ratio de Sharpe: -11.33
+Número de operaciones: 23
+
+=== XAUUSD ===
+Puntos de datos: 720
+Retorno total: -2.65%
+Tasa de acierto: 0.00%
+Retorno promedio: -1.33%
+Drawdown máximo: 4.53%
+Ratio de Sharpe: -29.37
+Número de operaciones: 2
+
+=== RESUMEN CONSOLIDADO ===
+Retorno promedio del portafolio: -5.20%
+Total de operaciones: 25
+Capital final estimado: $947.96
+
+=== FUENTE DE DATOS ===
+Datos obtenidos de: Binance API
+Período analizado: Últimos 30 días
+Intervalo: 1 hora

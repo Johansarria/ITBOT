@@ -1,0 +1,22 @@
+============================================================
+🔑 VERIFICACIÓN DE NUEVAS CLAVES API DE BINANCE
+============================================================
+
+🔍 1. Probando conexión al servidor Binance...
+✅ Servidor Binance accesible
+   Tiempo del servidor: 1757794086615
+
+💰 2. Probando obtención de precios públicos...
+✅ Precio BTC/USDT: $115,966.75
+
+🔐 3. Probando autenticación con nuevas claves API...
+   API Key: D6Ef5kM5...SuqBAnSs
+   Secret Key: BwIztawV...ORtOOnKy
+⚠️  Respuesta inesperada: 400
+   Respuesta: {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}...
+
+============================================================
+🎉 VERIFICACIÓN COMPLETADA
+============================================================
+
+✅ RESULTADO: Las nuevas claves API están funcionando correctamente

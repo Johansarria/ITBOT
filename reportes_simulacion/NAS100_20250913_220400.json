@@ -1,0 +1,25 @@
+{
+  "simulation_summary": {
+    "symbol": "BTCUSDT",
+    "terminal_id": 4,
+    "start_time": "2025-09-13T22:04:00.477384",
+    "end_time": "2025-09-13T23:09:20.470903",
+    "duration_hours": 1.088887088611111,
+    "initial_capital": 1000.0,
+    "final_capital": 1004.41237566473,
+    "total_return_pct": 0.44123756647300066,
+    "total_pnl": 4.412375664729943
+  },
+  "trading_stats": {
+    "total_trades": 13,
+    "winning_trades": 8,
+    "losing_trades": 5,
+    "win_rate_pct": 61.53846153846154,
+    "avg_trade_size": 19.619845758591513
+  },
+  "performance_metrics": {
+    "best_trade": 2.665106546141911,
+    "worst_trade": -0.6931465525489522,
+    "avg_return_per_trade": 1.3109128920034012
+  }
+}

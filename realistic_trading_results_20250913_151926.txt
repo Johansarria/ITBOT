@@ -1,0 +1,23 @@
+RESULTADOS FINALES - Estrategia de Trading Realista
+============================================================
+
+Capital inicial: $1,000.00
+Capital final: $361.59
+Retorno total: -63.84%
+Retorno mensual: -63.84%
+Total trades: 3
+Win rate: 0.00%
+Máximo drawdown: 63.84%
+Sharpe ratio: -17.00
+Retorno promedio por trade: -95.79%
+Riesgo máximo usado: 0.00%
+
+Objetivo 10% mensual: NO ALCANZADO
+Objetivo 15% mensual: NO ALCANZADO
+
+============================================================
+DETALLE DE TRADES:
+============================================================
+  1. ETH-USD | Entry: $2735.19 | Exit: $333.07 | Size: $300.00 | PnL: -87.82% | Razón: SL
+  2. BNB-USD | Entry: $341.57 | Exit: $0.74 | Size: $220.96 | PnL: -99.78% | Razón: SL
+  3. BNB-USD | Entry: $340.91 | Exit: $0.78 | Size: $154.82 | PnL: -99.77% | Razón: SL

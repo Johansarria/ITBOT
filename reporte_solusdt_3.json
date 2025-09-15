@@ -1,0 +1,25 @@
+{
+  "simulation_summary": {
+    "symbol": "SOLUSDT",
+    "terminal_id": 3,
+    "start_time": "2025-09-13T23:53:24.849537",
+    "end_time": "2025-09-13T23:58:26.347174",
+    "duration_hours": 0.08374934361111111,
+    "initial_capital": 1000.0,
+    "final_capital": 999.6812754564646,
+    "total_return_pct": -0.03187245435353816,
+    "total_pnl": -0.3187245435353632
+  },
+  "trading_stats": {
+    "total_trades": 1,
+    "winning_trades": 0,
+    "losing_trades": 1,
+    "win_rate_pct": 0.0,
+    "avg_trade_size": 24.923247650969433
+  },
+  "performance_metrics": {
+    "best_trade": -0.3187245435353632,
+    "worst_trade": -0.3187245435353632,
+    "avg_return_per_trade": -1.2788242848558538
+  }
+}
