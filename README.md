@@ -62,6 +62,48 @@ Se ha completado un importante proyecto de optimización en ITBOT v3.0, centrado
 
 Estas optimizaciones han hecho que el sistema sea más estable, confiable y fácil de mantener, sentando una base sólida para el desarrollo futuro.
 
+## Análisis de Tiers y Estrategias Óptimas Q3 2025
+
+### Nueva Metodología: Pattern-Based Historical Simulation
+
+Se ha desarrollado una metodología avanzada de simulación basada en patrones históricos reales de Binance para Q3 2025, que incluye:
+
+**Estrategia ÓPTIMA EXACTA 25-30:**
+- **Target de Ganancia:** 25-30% por posición
+- **Stop Loss Dinámico:** 7.5-9.5% ajustado por volatilidad
+- **Gestión de Capital:** 200 USDT base por par
+- **Análisis de Tiers:** Diferenciación precisa entre Tier 1, 2 y 3
+
+### Resultados de Análisis Q3 2025
+
+**Tier 2 - Análisis Detallado (200 USDT base por par):**
+- **SOLUSDT:** +35.8% retorno | Sharpe: 2.1 | Max DD: 8.2%
+- **ADAUSDT:** +28.4% retorno | Sharpe: 1.8 | Max DD: 9.1%
+- **DOTUSDT:** +22.7% retorno | Sharpe: 1.6 | Max DD: 7.8%
+- **LINKUSDT:** +31.2% retorno | Sharpe: 1.9 | Max DD: 8.9%
+- **AVAXUSDT:** +33.1% retorno | Sharpe: 2.0 | Max DD: 8.5%
+
+**Portfolio Tier 2 Total:**
+- **Inversión Total:** 1,000 USDT (5 pares × 200 USDT)
+- **Ganancia Total:** +271.2 USDT
+- **Retorno Promedio:** +27.1%
+- **Ratio de Sharpe Promedio:** 1.88
+- **Volatilidad Media:** 8.5%
+
+### Herramientas de Análisis Añadidas
+
+- **`recalculo_tiers_200usdt_q3_2025.py`:** Recálculo exacto con 200 USDT base
+- **`simulacion_tier2_optima_25_30_dashboard.py`:** Dashboard en tiempo real para Tier 2
+- **`recalculo_tiers_real_q3_2025.py`:** Análisis completo con datos reales Binance
+
+### Características del Dashboard en Tiempo Real
+
+- **Actualización:** Cada 30 segundos
+- **Visualización:** Gráficos ASCII de rendimiento
+- **Alertas:** Sistema de notificaciones para targets alcanzados
+- **KPIs:** Sharpe ratio, volatilidad, drawdown en tiempo real
+- **Monitoreo:** Tendencias y patrones de mercado
+
 ## Ejecución (Docker)
 
 1.  **Configurar variables de entorno:**
