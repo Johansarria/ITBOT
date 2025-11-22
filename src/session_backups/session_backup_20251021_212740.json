@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-10-17T04:02:05.088547",
+  "initial_capital": 250.0,
+  "current_capital": 250.0,
+  "positions": [],
+  "total_trades": 0,
+  "auto_trading": true,
+  "session_active": false,
+  "current_session": null,
+  "last_sync": "2025-10-17T20:48:11.285697",
+  "test_field": "test_value",
+  "auto_trading_changed_at": "2025-10-17T04:02:08.116029",
+  "auto_trading_reason": "Prueba de integraci\u00c3\u00b3n",
+  "capital_updated_at": "2025-10-17T04:02:08.127211",
+  "last_trade": {
+    "symbol": "ETHUSDT",
+    "side": "BUY",
+    "quantity": 0.2,
+    "price": 2175.25,
+    "value": 435.05,
+    "order_id": "INTEGRATION_TEST_001"
+  },
+  "last_trade_at": "2025-10-17T04:02:08.134271"
+}

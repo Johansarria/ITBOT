@@ -1,0 +1,321 @@
+{
+  "timestamp": "2025-10-18T01:41:53.931701",
+  "demo_type": "FASE 1 - Mejoras Inmediatas",
+  "components_tested": [
+    "CPCV (Combinatorial Purged Cross-Validation)",
+    "Función de recompensa optimizada con Sharpe Ratio",
+    "Detección de no-estacionariedad extrema"
+  ],
+  "summary": {
+    "symbols_analyzed": 3,
+    "extreme_nonstationarity_detected": 0,
+    "average_sharpe_ratio": -0.028415231253755946,
+    "cpcv_validation_passed": false,
+    "cpcv_robustness_score": 0,
+    "overall_success": "False"
+  },
+  "detailed_results": {
+    "nonstationarity_analysis": {
+      "BTCUSDT": {
+        "timestamp": "2025-10-18T01:41:47.091422",
+        "extremity_score": 0.21024096385542168,
+        "is_extreme": "False",
+        "stationarity_tests": {
+          "adf_test": {
+            "statistic": -22.135465157459247,
+            "pvalue": 0.0,
+            "critical_values": {
+              "1%": -3.4435761493506294,
+              "5%": -2.867372960189225,
+              "10%": -2.5698767442886696
+            },
+            "is_stationary": true
+          },
+          "kpss_test": {
+            "statistic": 0.04862181270529745,
+            "pvalue": 0.1,
+            "critical_values": {
+              "10%": 0.347,
+              "5%": 0.463,
+              "2.5%": 0.574,
+              "1%": 0.739
+            },
+            "is_stationary": "True"
+          }
+        },
+        "structural_changes": {
+          "mean_changes": [],
+          "variance_changes": [],
+          "total_changes": 0,
+          "change_intensity": 0.0,
+          "has_structural_changes": false
+        },
+        "volatility_analysis": {
+          "current_volatility": 0.020313189069302396,
+          "volatility_spikes": "0",
+          "spike_intensity": 0.0,
+          "volatility_clustering": -0.02985430677165152,
+          "volatility_persistence": 8.0,
+          "is_extreme_volatility": "False"
+        },
+        "distribution_tests": {
+          "jarque_bera": {
+            "statistic": 391.93491439299936,
+            "pvalue": 7.805751244149661e-86,
+            "is_normal": "False"
+          },
+          "dagostino": {
+            "statistic": 66.44925876513658,
+            "pvalue": 3.7215751732899145e-15,
+            "is_normal": "False"
+          },
+          "kolmogorov_smirnov": {
+            "statistic": 0.06494067884712085,
+            "pvalue": 0.028647628091337807,
+            "is_normal": "False"
+          },
+          "skewness": -0.3744112888029828,
+          "kurtosis": 4.281085651627252,
+          "heavy_tails": "True",
+          "is_non_normal": "True"
+        },
+        "extreme_regimes": {
+          "crashes_detected": "5",
+          "bubbles_detected": "5",
+          "panic_periods": "21",
+          "stagnation_persistence": 3.769230769230769,
+          "extreme_events_ratio": 0.020080321285140562,
+          "has_extreme_regimes": "False"
+        },
+        "autocorrelation_analysis": {
+          "returns_autocorr": 0.003111625363846128,
+          "volatility_autocorr": -0.024655719144966542,
+          "ljung_box_stat": 12.150971070847154,
+          "ljung_box_pvalue": 0.27507966078904544,
+          "has_serial_correlation": "False",
+          "volatility_clustering": "False"
+        },
+        "recommendations": [
+          "Condiciones de mercado relativamente estables",
+          "Mantener estrategia normal con monitoreo",
+          "Aprovechar oportunidades de trading"
+        ]
+      },
+      "ETHUSDT": {
+        "timestamp": "2025-10-18T01:41:47.495392",
+        "extremity_score": 0.3182730923694779,
+        "is_extreme": "False",
+        "stationarity_tests": {
+          "adf_test": {
+            "statistic": -8.394487935635638,
+            "pvalue": 2.318777734513374e-13,
+            "critical_values": {
+              "1%": -3.4436840273842058,
+              "5%": -2.8674204319994674,
+              "10%": -2.5699020441557052
+            },
+            "is_stationary": "True"
+          },
+          "kpss_test": {
+            "statistic": 0.5501660144890284,
+            "pvalue": 0.030368014754723338,
+            "critical_values": {
+              "10%": 0.347,
+              "5%": 0.463,
+              "2.5%": 0.574,
+              "1%": 0.739
+            },
+            "is_stationary": "False"
+          }
+        },
+        "structural_changes": {
+          "mean_changes": [],
+          "variance_changes": [],
+          "total_changes": 0,
+          "change_intensity": 0.0,
+          "has_structural_changes": false
+        },
+        "volatility_analysis": {
+          "current_volatility": 0.01809317739227931,
+          "volatility_spikes": "2",
+          "spike_intensity": 0.004016064257028112,
+          "volatility_clustering": 0.09494721046476662,
+          "volatility_persistence": 8.0,
+          "is_extreme_volatility": "False"
+        },
+        "distribution_tests": {
+          "jarque_bera": {
+            "statistic": 291.59383723298856,
+            "pvalue": 4.799574821443846e-64,
+            "is_normal": "False"
+          },
+          "dagostino": {
+            "statistic": 50.60187258775404,
+            "pvalue": 1.0278813366104598e-11,
+            "is_normal": "False"
+          },
+          "kolmogorov_smirnov": {
+            "statistic": 0.07133253643052395,
+            "pvalue": 0.011963092431284912,
+            "is_normal": "False"
+          },
+          "skewness": -0.12790622367600984,
+          "kurtosis": 3.7399565557841328,
+          "heavy_tails": "True",
+          "is_non_normal": "True"
+        },
+        "extreme_regimes": {
+          "crashes_detected": "5",
+          "bubbles_detected": "5",
+          "panic_periods": "29",
+          "stagnation_persistence": 3.2666666666666666,
+          "extreme_events_ratio": 0.020080321285140562,
+          "has_extreme_regimes": "False"
+        },
+        "autocorrelation_analysis": {
+          "returns_autocorr": -0.05058916140804602,
+          "volatility_autocorr": 0.02797053478299591,
+          "ljung_box_stat": 15.242415154432717,
+          "ljung_box_pvalue": 0.12347060751791639,
+          "has_serial_correlation": "False",
+          "volatility_clustering": "False"
+        },
+        "recommendations": [
+          "Condiciones de mercado relativamente estables",
+          "Mantener estrategia normal con monitoreo",
+          "Aprovechar oportunidades de trading"
+        ]
+      },
+      "ADAUSDT": {
+        "timestamp": "2025-10-18T01:41:47.880739",
+        "extremity_score": 0.21024096385542168,
+        "is_extreme": "False",
+        "stationarity_tests": {
+          "adf_test": {
+            "statistic": -22.739514224096453,
+            "pvalue": 0.0,
+            "critical_values": {
+              "1%": -3.4435761493506294,
+              "5%": -2.867372960189225,
+              "10%": -2.5698767442886696
+            },
+            "is_stationary": true
+          },
+          "kpss_test": {
+            "statistic": 0.18160862634833286,
+            "pvalue": 0.1,
+            "critical_values": {
+              "10%": 0.347,
+              "5%": 0.463,
+              "2.5%": 0.574,
+              "1%": 0.739
+            },
+            "is_stationary": "True"
+          }
+        },
+        "structural_changes": {
+          "mean_changes": [],
+          "variance_changes": [],
+          "total_changes": 0,
+          "change_intensity": 0.0,
+          "has_structural_changes": false
+        },
+        "volatility_analysis": {
+          "current_volatility": 0.03726527876319538,
+          "volatility_spikes": "0",
+          "spike_intensity": 0.0,
+          "volatility_clustering": -0.019741288111150664,
+          "volatility_persistence": 9.6,
+          "is_extreme_volatility": "False"
+        },
+        "distribution_tests": {
+          "jarque_bera": {
+            "statistic": 593.4423329359457,
+            "pvalue": 1.3665789885423141e-129,
+            "is_normal": "False"
+          },
+          "dagostino": {
+            "statistic": 89.58856281914373,
+            "pvalue": 3.516339206590647e-20,
+            "is_normal": "False"
+          },
+          "kolmogorov_smirnov": {
+            "statistic": 0.07854732498128658,
+            "pvalue": 0.004046056041621989,
+            "is_normal": "False"
+          },
+          "skewness": 0.5795454007850066,
+          "kurtosis": 5.2207412324930385,
+          "heavy_tails": "True",
+          "is_non_normal": "True"
+        },
+        "extreme_regimes": {
+          "crashes_detected": "5",
+          "bubbles_detected": "5",
+          "panic_periods": "25",
+          "stagnation_persistence": 2.5789473684210527,
+          "extreme_events_ratio": 0.020080321285140562,
+          "has_extreme_regimes": "False"
+        },
+        "autocorrelation_analysis": {
+          "returns_autocorr": -0.021450901321892018,
+          "volatility_autocorr": -0.02737932814399955,
+          "ljung_box_stat": 9.164631672267069,
+          "ljung_box_pvalue": 0.5165540665397438,
+          "has_serial_correlation": "False",
+          "volatility_clustering": "False"
+        },
+        "recommendations": [
+          "Condiciones de mercado relativamente estables",
+          "Mantener estrategia normal con monitoreo",
+          "Aprovechar oportunidades de trading"
+        ]
+      }
+    },
+    "regime_classification": {
+      "error": "'RegimeClassifier' object has no attribute 'train_regime_classifier'"
+    },
+    "qlearning_optimization": {
+      "BTCUSDT": {
+        "total_trades": 439,
+        "total_pnl": 21283.904530441287,
+        "final_capital": 31283.904530441272,
+        "return_pct": 212.8390453044127,
+        "sharpe_ratio": 0.08294992175071435,
+        "avg_position_size": 0.41685649202733494,
+        "win_rate": 0.5763097949886105
+      },
+      "ETHUSDT": {
+        "total_trades": 439,
+        "total_pnl": -5648.430197482951,
+        "final_capital": 4351.5698025170295,
+        "return_pct": -56.48430197482971,
+        "sharpe_ratio": -0.03174120907158689,
+        "avg_position_size": 0.3161731207289294,
+        "win_rate": 0.5170842824601367
+      },
+      "ADAUSDT": {
+        "total_trades": 439,
+        "total_pnl": -8569.845327087229,
+        "final_capital": 1430.154672912785,
+        "return_pct": -85.69845327087215,
+        "sharpe_ratio": -0.1364544064403953,
+        "avg_position_size": 0.4004555808656037,
+        "win_rate": 0.43735763097949887
+      }
+    },
+    "cpcv_validation": {
+      "mean_return": 0.0,
+      "std_return": 0.0,
+      "mean_sharpe": 0.0,
+      "std_sharpe": 0.0,
+      "robustness_score": 0,
+      "successful_folds": 8,
+      "total_folds": 8,
+      "confidence_interval": [
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

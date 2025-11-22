@@ -1,0 +1,103 @@
+{
+  "timestamp": "2025-10-18T12:19:45.748747",
+  "current_performance": {
+    "roi": 0.0058,
+    "win_rate": 0.417,
+    "symbol_performance": {
+      "BTCUSDT": {
+        "trades": 10,
+        "win_rate": 0.2,
+        "pnl": 1.6370529323833591,
+        "avg_pnl": 0.1637052932383359
+      },
+      "DOTUSDT": {
+        "trades": 4,
+        "win_rate": 0.25,
+        "pnl": 1.7701029394295498,
+        "avg_pnl": 0.44252573485738744
+      },
+      "ETHUSDT": {
+        "trades": 4,
+        "win_rate": 0.0,
+        "pnl": -3.1669794246484515,
+        "avg_pnl": -0.7917448561621129
+      },
+      "ADAUSDT": {
+        "trades": 6,
+        "win_rate": 0.3333333333333333,
+        "pnl": 2.664910092942072,
+        "avg_pnl": 0.444151682157012
+      }
+    }
+  },
+  "optimization_targets": {
+    "target_win_rate": 0.75,
+    "target_avg_pnl": 2.0905172413793105,
+    "target_trades_per_day": 1.724137931034483,
+    "improvement_factor": 8.620689655172415
+  },
+  "risk_reward_analysis": {
+    "current_rr": 1.7577548279092026,
+    "target_rr": 2.0,
+    "avg_win": 2.8547091432472826,
+    "avg_loss": -1.6240655965899833
+  },
+  "strategies": [
+    {
+      "name": "Filtros de Se\u00f1al Mejorados",
+      "impact": "Win Rate: 41.7% \u2192 60%",
+      "roi_contribution": "+2.1%",
+      "implementation": "RSI + MACD + Volume confirmaci\u00f3n"
+    },
+    {
+      "name": "Gesti\u00f3n Din\u00e1mica de Posiciones",
+      "impact": "PnL promedio: +40%",
+      "roi_contribution": "+1.2%",
+      "implementation": "Tama\u00f1o basado en volatilidad y confianza"
+    },
+    {
+      "name": "Stop-Loss/Take-Profit Optimizado",
+      "impact": "Risk/Reward: 1.0 \u2192 2.0",
+      "roi_contribution": "+1.0%",
+      "implementation": "ATR-based con trailing stops"
+    },
+    {
+      "name": "Activaci\u00f3n DRL",
+      "impact": "Trades inteligentes: +30%",
+      "roi_contribution": "+0.7%",
+      "implementation": "Q-Learning para timing \u00f3ptimo"
+    }
+  ],
+  "roadmap": [
+    {
+      "days": "1-5",
+      "task": "Optimizar filtros de se\u00f1ales",
+      "target": "50% WR"
+    },
+    {
+      "days": "6-10",
+      "task": "Implementar gesti\u00f3n din\u00e1mica posiciones",
+      "target": "2% ROI"
+    },
+    {
+      "days": "11-15",
+      "task": "Ajustar stop-loss/take-profit",
+      "target": "3% ROI"
+    },
+    {
+      "days": "16-20",
+      "task": "Activar y entrenar DRL",
+      "target": "4% ROI"
+    },
+    {
+      "days": "21-25",
+      "task": "Backtesting y validaci\u00f3n",
+      "target": "5% ROI"
+    },
+    {
+      "days": "26-30",
+      "task": "Ajustes finales y monitoreo",
+      "target": "5%+ ROI"
+    }
+  ]
+}

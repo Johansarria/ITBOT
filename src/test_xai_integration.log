@@ -1,0 +1,328 @@
+2025-10-22 16:58:59,223 | INFO | Cliente Grok xAI inicializado exitosamente
+2025-10-22 16:58:59,226 | WARNING | Modelo es_core_news_sm no encontrado.
+2025-10-22 16:58:59,487 | WARNING | Usando modelo básico de spaCy sin entidades
+2025-10-22 16:58:59,494 | INFO | Detector de No-Estacionariedad Extrema inicializado
+2025-10-22 16:58:59,567 | INFO | Generando reporte cognitivo dinámico...
+2025-10-22 16:58:59,572 | INFO | Iniciando clasificación de regímenes...
+2025-10-22 16:58:59,575 | INFO | Calculando características de mercado...
+2025-10-22 16:58:59,579 | INFO | Tipos de datos originales: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:58:59,580 | INFO | Tipo de índice: <class 'pandas.core.indexes.range.RangeIndex'>
+2025-10-22 16:58:59,587 | INFO | Tipos después de normalizar: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:58:59,592 | INFO | Columnas disponibles: ['timestamp', 'open', 'high', 'low', 'close', 'volume']
+2025-10-22 16:58:59,596 | INFO | Datos disponibles: 50, Ventanas: 5, 20, 49
+2025-10-22 16:58:59,602 | INFO | Calculando volatilidad...
+2025-10-22 16:58:59,610 | INFO | Calculando momentum...
+2025-10-22 16:58:59,620 | INFO | Calculando tendencia...
+2025-10-22 16:58:59,620 | INFO | Calculando SMA 20...
+2025-10-22 16:58:59,622 | INFO | SMA 20 calculada exitosamente
+2025-10-22 16:58:59,622 | INFO | Tipo close: float64
+2025-10-22 16:58:59,623 | INFO | Tipo sma_20: <class 'pandas.core.series.Series'>
+2025-10-22 16:58:59,630 | INFO | Primeros valores close: 50    45214.647230
+51    46176.122201
+52    45437.726359
+53    45541.782525
+54    45316.974921
+Name: close, dtype: float64
+2025-10-22 16:58:59,631 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:58:59,634 | INFO | Trend strength calculada exitosamente
+2025-10-22 16:58:59,634 | INFO | Calculando SMA 49...
+2025-10-22 16:58:59,641 | INFO | SMA 50 calculada exitosamente
+2025-10-22 16:58:59,641 | INFO | Calculando dirección de tendencia...
+2025-10-22 16:58:59,642 | INFO | Tipo sma_20: float64
+2025-10-22 16:58:59,643 | INFO | Tipo sma_50: float64
+2025-10-22 16:58:59,654 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:58:59,658 | INFO | Primeros valores sma_50: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_50, dtype: float64
+2025-10-22 16:58:59,671 | INFO | Calculando volumen...
+2025-10-22 16:58:59,674 | INFO | Calculando rango de precios...
+2025-10-22 16:58:59,701 | INFO | Calculando gaps...
+2025-10-22 16:58:59,733 | INFO | Calculando patrones de velas...
+2025-10-22 16:58:59,745 | INFO | Calculando momentum avanzado...
+2025-10-22 16:58:59,764 | INFO | Calculando Bollinger Bands...
+2025-10-22 16:58:59,791 | INFO | Calculando correlación precio-volumen...
+2025-10-22 16:58:59,798 | INFO | Calculando características de estacionalidad...
+2025-10-22 16:58:59,811 | INFO | Seleccionando características finales...
+2025-10-22 16:58:59,826 | INFO | Eliminando valores NaN...
+2025-10-22 16:58:59,828 | INFO | Características calculadas: 22 features, 1 muestras
+2025-10-22 16:58:59,844 | INFO | Análisis de clusters - Codo: 4, Silhouette: 4, Elegido: 4
+2025-10-22 16:58:59,855 | ERROR | Error en clasificación de regímenes: n_samples=1 should be >= n_clusters=4.
+2025-10-22 16:58:59,856 | INFO | Analizando factores causales con Grok xAI...
+2025-10-22 16:59:02,349 | INFO | HTTP Request: POST https://api.x.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-10-22 16:59:02,350 | ERROR | Error analizando narrativa con Grok: Error code: 400 - {'code': 'Client specified an invalid argument', 'error': 'Incorrect API key provided: tu***ui. You can obtain an API key from https://console.x.ai.'}
+2025-10-22 16:59:02,355 | ERROR | Error construyendo grafo causal: name 'texts_corpus' is not defined
+2025-10-22 16:59:02,359 | INFO | Usando análisis tradicional como fuente principal
+2025-10-22 16:59:02,360 | INFO | Análisis causal completado - Sentimiento: 0.00, Confianza: 0.10
+2025-10-22 16:59:02,362 | ERROR | Error generando reporte dinámico: 'Close'
+2025-10-22 16:59:02,364 | INFO | Generando reporte cognitivo...
+2025-10-22 16:59:03,286 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-10-22 16:59:03,288 | ERROR | Error con OpenAI API: Error code: 401 - {'error': {'message': 'Incorrect API key provided: tu_clave***********aqui. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-10-22 16:59:03,289 | INFO | Reporte cognitivo generado localmente
+2025-10-22 16:59:04,582 | INFO | Generando reporte cognitivo dinámico...
+2025-10-22 16:59:04,582 | INFO | Iniciando clasificación de regímenes...
+2025-10-22 16:59:04,583 | INFO | Calculando características de mercado...
+2025-10-22 16:59:04,585 | INFO | Tipos de datos originales: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:59:04,586 | INFO | Tipo de índice: <class 'pandas.core.indexes.range.RangeIndex'>
+2025-10-22 16:59:04,587 | INFO | Tipos después de normalizar: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:59:04,588 | INFO | Columnas disponibles: ['timestamp', 'open', 'high', 'low', 'close', 'volume']
+2025-10-22 16:59:04,588 | INFO | Datos disponibles: 50, Ventanas: 5, 20, 49
+2025-10-22 16:59:04,588 | INFO | Calculando volatilidad...
+2025-10-22 16:59:04,591 | INFO | Calculando momentum...
+2025-10-22 16:59:04,595 | INFO | Calculando tendencia...
+2025-10-22 16:59:04,595 | INFO | Calculando SMA 20...
+2025-10-22 16:59:04,596 | INFO | SMA 20 calculada exitosamente
+2025-10-22 16:59:04,597 | INFO | Tipo close: float64
+2025-10-22 16:59:04,597 | INFO | Tipo sma_20: <class 'pandas.core.series.Series'>
+2025-10-22 16:59:04,598 | INFO | Primeros valores close: 50    46993.845601
+51    46116.730686
+52    45108.075536
+53    46827.059937
+54    45681.618529
+Name: close, dtype: float64
+2025-10-22 16:59:04,598 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:59:04,601 | INFO | Trend strength calculada exitosamente
+2025-10-22 16:59:04,601 | INFO | Calculando SMA 49...
+2025-10-22 16:59:04,603 | INFO | SMA 50 calculada exitosamente
+2025-10-22 16:59:04,603 | INFO | Calculando dirección de tendencia...
+2025-10-22 16:59:04,604 | INFO | Tipo sma_20: float64
+2025-10-22 16:59:04,604 | INFO | Tipo sma_50: float64
+2025-10-22 16:59:04,605 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:59:04,606 | INFO | Primeros valores sma_50: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_50, dtype: float64
+2025-10-22 16:59:04,607 | INFO | Calculando volumen...
+2025-10-22 16:59:04,609 | INFO | Calculando rango de precios...
+2025-10-22 16:59:04,612 | INFO | Calculando gaps...
+2025-10-22 16:59:04,613 | INFO | Calculando patrones de velas...
+2025-10-22 16:59:04,620 | INFO | Calculando momentum avanzado...
+2025-10-22 16:59:04,623 | INFO | Calculando Bollinger Bands...
+2025-10-22 16:59:04,625 | INFO | Calculando correlación precio-volumen...
+2025-10-22 16:59:04,626 | INFO | Calculando características de estacionalidad...
+2025-10-22 16:59:04,628 | INFO | Seleccionando características finales...
+2025-10-22 16:59:04,630 | INFO | Eliminando valores NaN...
+2025-10-22 16:59:04,631 | INFO | Características calculadas: 22 features, 1 muestras
+2025-10-22 16:59:04,637 | INFO | Análisis de clusters - Codo: 4, Silhouette: 4, Elegido: 4
+2025-10-22 16:59:04,639 | ERROR | Error en clasificación de regímenes: n_samples=1 should be >= n_clusters=4.
+2025-10-22 16:59:04,639 | INFO | Analizando factores causales con Grok xAI...
+2025-10-22 16:59:04,760 | INFO | HTTP Request: POST https://api.x.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-10-22 16:59:04,761 | ERROR | Error analizando narrativa con Grok: Error code: 400 - {'code': 'Client specified an invalid argument', 'error': 'Incorrect API key provided: tu***ui. You can obtain an API key from https://console.x.ai.'}
+2025-10-22 16:59:04,763 | ERROR | Error construyendo grafo causal: name 'texts_corpus' is not defined
+2025-10-22 16:59:04,764 | INFO | Usando análisis tradicional como fuente principal
+2025-10-22 16:59:04,765 | INFO | Análisis causal completado - Sentimiento: 0.00, Confianza: 0.10
+2025-10-22 16:59:04,765 | ERROR | Error generando reporte dinámico: 'Close'
+2025-10-22 16:59:04,765 | INFO | Generando reporte cognitivo...
+2025-10-22 16:59:05,545 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-10-22 16:59:05,545 | ERROR | Error con OpenAI API: Error code: 401 - {'error': {'message': 'Incorrect API key provided: tu_clave***********aqui. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-10-22 16:59:05,545 | INFO | Reporte cognitivo generado localmente
+2025-10-22 16:59:18,296 | INFO | Generando reporte cognitivo dinámico...
+2025-10-22 16:59:18,296 | INFO | Iniciando clasificación de regímenes...
+2025-10-22 16:59:18,296 | INFO | Calculando características de mercado...
+2025-10-22 16:59:18,296 | INFO | Tipos de datos originales: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:59:18,296 | INFO | Tipo de índice: <class 'pandas.core.indexes.range.RangeIndex'>
+2025-10-22 16:59:18,302 | INFO | Tipos después de normalizar: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:59:18,302 | INFO | Columnas disponibles: ['timestamp', 'open', 'high', 'low', 'close', 'volume']
+2025-10-22 16:59:18,303 | INFO | Datos disponibles: 50, Ventanas: 5, 20, 49
+2025-10-22 16:59:18,303 | INFO | Calculando volatilidad...
+2025-10-22 16:59:18,306 | INFO | Calculando momentum...
+2025-10-22 16:59:18,310 | INFO | Calculando tendencia...
+2025-10-22 16:59:18,310 | INFO | Calculando SMA 20...
+2025-10-22 16:59:18,311 | INFO | SMA 20 calculada exitosamente
+2025-10-22 16:59:18,312 | INFO | Tipo close: float64
+2025-10-22 16:59:18,312 | INFO | Tipo sma_20: <class 'pandas.core.series.Series'>
+2025-10-22 16:59:18,313 | INFO | Primeros valores close: 50    46170.399260
+51    46507.809316
+52    45792.496620
+53    46669.493635
+54    46267.651677
+Name: close, dtype: float64
+2025-10-22 16:59:18,314 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:59:18,315 | INFO | Trend strength calculada exitosamente
+2025-10-22 16:59:18,316 | INFO | Calculando SMA 49...
+2025-10-22 16:59:18,317 | INFO | SMA 50 calculada exitosamente
+2025-10-22 16:59:18,317 | INFO | Calculando dirección de tendencia...
+2025-10-22 16:59:18,317 | INFO | Tipo sma_20: float64
+2025-10-22 16:59:18,318 | INFO | Tipo sma_50: float64
+2025-10-22 16:59:18,319 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:59:18,320 | INFO | Primeros valores sma_50: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_50, dtype: float64
+2025-10-22 16:59:18,321 | INFO | Calculando volumen...
+2025-10-22 16:59:18,324 | INFO | Calculando rango de precios...
+2025-10-22 16:59:18,328 | INFO | Calculando gaps...
+2025-10-22 16:59:18,329 | INFO | Calculando patrones de velas...
+2025-10-22 16:59:18,332 | INFO | Calculando momentum avanzado...
+2025-10-22 16:59:18,337 | INFO | Calculando Bollinger Bands...
+2025-10-22 16:59:18,339 | INFO | Calculando correlación precio-volumen...
+2025-10-22 16:59:18,341 | INFO | Calculando características de estacionalidad...
+2025-10-22 16:59:18,342 | INFO | Seleccionando características finales...
+2025-10-22 16:59:18,346 | INFO | Eliminando valores NaN...
+2025-10-22 16:59:18,348 | INFO | Características calculadas: 22 features, 1 muestras
+2025-10-22 16:59:18,352 | INFO | Análisis de clusters - Codo: 4, Silhouette: 4, Elegido: 4
+2025-10-22 16:59:18,355 | ERROR | Error en clasificación de regímenes: n_samples=1 should be >= n_clusters=4.
+2025-10-22 16:59:18,356 | INFO | Analizando factores causales con Grok xAI...
+2025-10-22 16:59:18,512 | INFO | HTTP Request: POST https://api.x.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-10-22 16:59:18,512 | ERROR | Error analizando narrativa con Grok: Error code: 400 - {'code': 'Client specified an invalid argument', 'error': 'Incorrect API key provided: tu***ui. You can obtain an API key from https://console.x.ai.'}
+2025-10-22 16:59:18,512 | ERROR | Error construyendo grafo causal: name 'texts_corpus' is not defined
+2025-10-22 16:59:18,512 | INFO | Usando análisis tradicional como fuente principal
+2025-10-22 16:59:18,512 | INFO | Análisis causal completado - Sentimiento: 0.00, Confianza: 0.10
+2025-10-22 16:59:18,512 | ERROR | Error generando reporte dinámico: 'Close'
+2025-10-22 16:59:18,512 | INFO | Generando reporte cognitivo...
+2025-10-22 16:59:19,181 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-10-22 16:59:19,187 | ERROR | Error con OpenAI API: Error code: 401 - {'error': {'message': 'Incorrect API key provided: tu_clave***********aqui. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-10-22 16:59:19,188 | INFO | Reporte cognitivo generado localmente
+2025-10-22 16:59:34,197 | INFO | Generando reporte cognitivo dinámico...
+2025-10-22 16:59:34,197 | INFO | Iniciando clasificación de regímenes...
+2025-10-22 16:59:34,197 | INFO | Calculando características de mercado...
+2025-10-22 16:59:34,197 | INFO | Tipos de datos originales: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:59:34,197 | INFO | Tipo de índice: <class 'pandas.core.indexes.range.RangeIndex'>
+2025-10-22 16:59:34,202 | INFO | Tipos después de normalizar: timestamp    datetime64[ns]
+open                float64
+high                float64
+low                 float64
+close               float64
+volume              float64
+dtype: object
+2025-10-22 16:59:34,202 | INFO | Columnas disponibles: ['timestamp', 'open', 'high', 'low', 'close', 'volume']
+2025-10-22 16:59:34,202 | INFO | Datos disponibles: 50, Ventanas: 5, 20, 49
+2025-10-22 16:59:34,202 | INFO | Calculando volatilidad...
+2025-10-22 16:59:34,204 | INFO | Calculando momentum...
+2025-10-22 16:59:34,209 | INFO | Calculando tendencia...
+2025-10-22 16:59:34,209 | INFO | Calculando SMA 20...
+2025-10-22 16:59:34,210 | INFO | SMA 20 calculada exitosamente
+2025-10-22 16:59:34,211 | INFO | Tipo close: float64
+2025-10-22 16:59:34,211 | INFO | Tipo sma_20: <class 'pandas.core.series.Series'>
+2025-10-22 16:59:34,213 | INFO | Primeros valores close: 50    45960.492849
+51    46538.764492
+52    46052.745689
+53    45676.293438
+54    46859.491772
+Name: close, dtype: float64
+2025-10-22 16:59:34,214 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:59:34,215 | INFO | Trend strength calculada exitosamente
+2025-10-22 16:59:34,215 | INFO | Calculando SMA 49...
+2025-10-22 16:59:34,216 | INFO | SMA 50 calculada exitosamente
+2025-10-22 16:59:34,217 | INFO | Calculando dirección de tendencia...
+2025-10-22 16:59:34,217 | INFO | Tipo sma_20: float64
+2025-10-22 16:59:34,217 | INFO | Tipo sma_50: float64
+2025-10-22 16:59:34,218 | INFO | Primeros valores sma_20: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_20, dtype: float64
+2025-10-22 16:59:34,219 | INFO | Primeros valores sma_50: 50   NaN
+51   NaN
+52   NaN
+53   NaN
+54   NaN
+Name: sma_50, dtype: float64
+2025-10-22 16:59:34,220 | INFO | Calculando volumen...
+2025-10-22 16:59:34,223 | INFO | Calculando rango de precios...
+2025-10-22 16:59:34,226 | INFO | Calculando gaps...
+2025-10-22 16:59:34,227 | INFO | Calculando patrones de velas...
+2025-10-22 16:59:34,231 | INFO | Calculando momentum avanzado...
+2025-10-22 16:59:34,234 | INFO | Calculando Bollinger Bands...
+2025-10-22 16:59:34,236 | INFO | Calculando correlación precio-volumen...
+2025-10-22 16:59:34,237 | INFO | Calculando características de estacionalidad...
+2025-10-22 16:59:34,238 | INFO | Seleccionando características finales...
+2025-10-22 16:59:34,242 | INFO | Eliminando valores NaN...
+2025-10-22 16:59:34,243 | INFO | Características calculadas: 22 features, 1 muestras
+2025-10-22 16:59:34,247 | INFO | Análisis de clusters - Codo: 4, Silhouette: 4, Elegido: 4
+2025-10-22 16:59:34,247 | ERROR | Error en clasificación de regímenes: n_samples=1 should be >= n_clusters=4.
+2025-10-22 16:59:34,249 | INFO | Analizando factores causales con Grok xAI...
+2025-10-22 16:59:34,407 | INFO | HTTP Request: POST https://api.x.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-10-22 16:59:34,413 | ERROR | Error analizando narrativa con Grok: Error code: 400 - {'code': 'Client specified an invalid argument', 'error': 'Incorrect API key provided: tu***ui. You can obtain an API key from https://console.x.ai.'}
+2025-10-22 16:59:34,416 | ERROR | Error construyendo grafo causal: name 'texts_corpus' is not defined
+2025-10-22 16:59:34,419 | INFO | Usando análisis tradicional como fuente principal
+2025-10-22 16:59:34,420 | INFO | Análisis causal completado - Sentimiento: 0.00, Confianza: 0.10
+2025-10-22 16:59:34,421 | ERROR | Error generando reporte dinámico: 'Close'
+2025-10-22 16:59:34,422 | INFO | Generando reporte cognitivo...
+2025-10-22 16:59:35,150 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-10-22 16:59:35,150 | ERROR | Error con OpenAI API: Error code: 401 - {'error': {'message': 'Incorrect API key provided: tu_clave***********aqui. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-10-22 16:59:35,151 | INFO | Reporte cognitivo generado localmente

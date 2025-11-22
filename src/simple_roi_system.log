@@ -1,0 +1,98 @@
+2025-10-18 01:31:36,743 - INFO - Iniciando Sistema Simple ROI 15%
+2025-10-18 01:31:36,743 - INFO - Iniciando backtest simple para ROI 15% mensual
+2025-10-18 01:31:36,879 - INFO - Obteniendo datos historicos...
+2025-10-18 01:31:36,879 - INFO - 🔄 Obteniendo datos para BTCUSDT (4h) - 500 velas
+2025-10-18 01:31:36,880 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:31:37,635 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:31:37,669 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\BTCUSDT_4h_cache.csv
+2025-10-18 01:31:37,670 - INFO - 🔄 Obteniendo datos para ETHUSDT (4h) - 500 velas
+2025-10-18 01:31:37,670 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:31:38,551 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:31:38,568 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ETHUSDT_4h_cache.csv
+2025-10-18 01:31:38,570 - INFO - Datos BTC: 500 registros
+2025-10-18 01:31:38,570 - INFO - Datos ETH: 500 registros
+2025-10-18 01:31:38,585 - INFO - Procesando 500 periodos de datos
+2025-10-18 01:31:38,586 - INFO - BTCUSDT LONG @ $118182.83 - Size: $100.00 - Signal: 0.50 - Confidence: 0.50
+2025-10-18 01:31:38,587 - INFO - Periodo 0/500 - Valor: $500.00 - Operaciones: 1
+2025-10-18 01:31:38,589 - INFO - ETHUSDT LONG @ $3768.01 - Size: $80.00 - Signal: 0.50 - Confidence: 0.50
+2025-10-18 01:31:38,596 - INFO - ETHUSDT Stop Loss @ $3616.10 - Loss: -4.03%
+2025-10-18 01:31:38,597 - INFO - ETHUSDT LONG @ $3616.10 - Size: $79.35 - Signal: 0.50 - Confidence: 0.50
+2025-10-18 01:31:38,598 - INFO - BTCUSDT Stop Loss @ $113328.68 - Loss: -4.11%
+2025-10-18 01:31:38,598 - INFO - BTCUSDT LONG @ $113328.68 - Size: $82.66 - Signal: 0.50 - Confidence: 0.50
+2025-10-18 01:31:38,600 - INFO - ETHUSDT Stop Loss @ $3459.33 - Loss: -4.34%
+2025-10-18 01:31:38,600 - INFO - ETHUSDT LONG @ $3459.33 - Size: $81.31 - Signal: 0.50 - Confidence: 0.50
+2025-10-18 01:31:38,607 - INFO - Periodo 50/500 - Valor: $489.23 - Operaciones: 5
+2025-10-18 01:31:38,621 - INFO - ETHUSDT Take Profit @ $3837.01 - Profit: 10.92%
+2025-10-18 01:31:38,621 - INFO - ETHUSDT LONG @ $3837.01 - Size: $83.09 - Signal: 0.40 - Confidence: 1.00
+2025-10-18 01:31:38,631 - INFO - ETHUSDT Take Profit @ $4170.64 - Profit: 8.70%
+2025-10-18 01:31:38,632 - INFO - ETHUSDT LONG @ $4170.64 - Size: $84.53 - Signal: 0.40 - Confidence: 1.00
+2025-10-18 01:31:38,641 - INFO - Periodo 100/500 - Valor: $505.33 - Operaciones: 7
+2025-10-18 01:31:38,642 - INFO - ETHUSDT Take Profit @ $4590.52 - Profit: 10.07%
+2025-10-18 01:31:38,643 - INFO - ETHUSDT LONG @ $4590.52 - Size: $86.24 - Signal: 0.40 - Confidence: 1.00
+2025-10-18 01:31:38,645 - INFO - BTCUSDT Take Profit @ $122744.21 - Profit: 8.31%
+2025-10-18 01:31:38,646 - INFO - BTCUSDT LONG @ $122744.21 - Size: $86.89 - Signal: 0.40 - Confidence: 1.00
+2025-10-18 01:31:38,653 - INFO - BTCUSDT Stop Loss @ $116936.27 - Loss: -4.73%
+2025-10-18 01:31:38,653 - INFO - BTCUSDT LONG @ $116936.27 - Size: $86.07 - Signal: 0.20 - Confidence: 0.70
+2025-10-18 01:31:38,656 - INFO - ETHUSDT Stop Loss @ $4400.42 - Loss: -4.14%
+2025-10-18 01:31:38,656 - INFO - ETHUSDT LONG @ $4400.42 - Size: $85.39 - Signal: 0.30 - Confidence: 0.50
+2025-10-18 01:31:38,665 - INFO - ETHUSDT Stop Loss @ $4192.14 - Loss: -4.73%
+2025-10-18 01:31:38,665 - INFO - ETHUSDT LONG @ $4192.14 - Size: $84.58 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,672 - INFO - Periodo 150/500 - Valor: $508.98 - Operaciones: 12
+2025-10-18 01:31:38,675 - INFO - BTCUSDT Stop Loss @ $112193.71 - Loss: -4.06%
+2025-10-18 01:31:38,675 - INFO - BTCUSDT LONG @ $112193.71 - Size: $84.18 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,678 - INFO - ETHUSDT Take Profit @ $4616.08 - Profit: 10.11%
+2025-10-18 01:31:38,679 - INFO - ETHUSDT LONG @ $4616.08 - Size: $85.97 - Signal: 0.30 - Confidence: 0.90
+2025-10-18 01:31:38,691 - INFO - ETHUSDT Stop Loss @ $4376.18 - Loss: -5.20%
+2025-10-18 01:31:38,692 - INFO - ETHUSDT LONG @ $4376.18 - Size: $85.08 - Signal: 0.20 - Confidence: 0.70
+2025-10-18 01:31:38,705 - INFO - Periodo 200/500 - Valor: $509.58 - Operaciones: 15
+2025-10-18 01:31:38,713 - INFO - BTCUSDT Stop Loss @ $107660.01 - Loss: -4.04%
+2025-10-18 01:31:38,713 - INFO - BTCUSDT LONG @ $107660.01 - Size: $84.22 - Signal: 0.30 - Confidence: 0.40
+2025-10-18 01:31:38,736 - INFO - Periodo 250/500 - Valor: $506.18 - Operaciones: 16
+2025-10-18 01:31:38,753 - INFO - BTCUSDT Take Profit @ $116632.51 - Profit: 8.33%
+2025-10-18 01:31:38,753 - INFO - BTCUSDT LONG @ $116632.51 - Size: $85.62 - Signal: 0.20 - Confidence: 0.80
+2025-10-18 01:31:38,762 - INFO - Periodo 300/500 - Valor: $513.19 - Operaciones: 17
+2025-10-18 01:31:38,782 - INFO - ETHUSDT Stop Loss @ $4193.38 - Loss: -4.18%
+2025-10-18 01:31:38,784 - INFO - ETHUSDT LONG @ $4193.38 - Size: $84.80 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,789 - INFO - Periodo 350/500 - Valor: $509.64 - Operaciones: 18
+2025-10-18 01:31:38,790 - INFO - BTCUSDT Stop Loss @ $111655.29 - Loss: -4.27%
+2025-10-18 01:31:38,791 - INFO - BTCUSDT LONG @ $111655.29 - Size: $84.24 - Signal: 0.20 - Confidence: 0.40
+2025-10-18 01:31:38,795 - INFO - ETHUSDT Stop Loss @ $4009.18 - Loss: -4.39%
+2025-10-18 01:31:38,796 - INFO - ETHUSDT LONG @ $4009.18 - Size: $83.61 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,813 - INFO - Periodo 400/500 - Valor: $502.26 - Operaciones: 20
+2025-10-18 01:31:38,814 - INFO - ETHUSDT Take Profit @ $4348.03 - Profit: 8.45%
+2025-10-18 01:31:38,814 - INFO - ETHUSDT LONG @ $4348.03 - Size: $85.02 - Signal: 0.40 - Confidence: 1.00
+2025-10-18 01:31:38,816 - INFO - BTCUSDT Take Profit @ $120836.49 - Profit: 8.22%
+2025-10-18 01:31:38,818 - INFO - BTCUSDT LONG @ $120836.49 - Size: $86.25 - Signal: 0.40 - Confidence: 1.00
+2025-10-18 01:31:38,835 - INFO - Periodo 450/500 - Valor: $516.25 - Operaciones: 22
+2025-10-18 01:31:38,835 - INFO - ETHUSDT Stop Loss @ $4103.11 - Loss: -5.63%
+2025-10-18 01:31:38,835 - INFO - ETHUSDT LONG @ $4103.11 - Size: $85.04 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,840 - INFO - ETHUSDT Stop Loss @ $3829.72 - Loss: -6.66%
+2025-10-18 01:31:38,840 - INFO - ETHUSDT LONG @ $3829.72 - Size: $83.91 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,840 - INFO - BTCUSDT Stop Loss @ $112300.01 - Loss: -7.06%
+2025-10-18 01:31:38,842 - INFO - BTCUSDT LONG @ $112300.01 - Size: $83.16 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,846 - INFO - ETHUSDT Take Profit @ $4152.29 - Profit: 8.42%
+2025-10-18 01:31:38,846 - INFO - ETHUSDT LONG @ $4152.29 - Size: $84.72 - Signal: 0.70 - Confidence: 0.80
+2025-10-18 01:31:38,851 - INFO - ETHUSDT Stop Loss @ $3981.19 - Loss: -4.12%
+2025-10-18 01:31:38,852 - INFO - ETHUSDT LONG @ $4085.40 - Size: $84.02 - Signal: 0.20 - Confidence: 0.90
+2025-10-18 01:31:38,859 - INFO - ETHUSDT Stop Loss @ $3907.18 - Loss: -4.36%
+2025-10-18 01:31:38,860 - INFO - ETHUSDT LONG @ $3894.51 - Size: $83.29 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,862 - INFO - BTCUSDT Stop Loss @ $105683.72 - Loss: -5.89%
+2025-10-18 01:31:38,863 - INFO - BTCUSDT LONG @ $105683.72 - Size: $82.29 - Signal: 0.20 - Confidence: 0.60
+2025-10-18 01:31:38,878 - INFO - ======================================================================
+2025-10-18 01:31:38,878 - INFO - RESUMEN FINAL - SISTEMA SIMPLE ROI
+2025-10-18 01:31:38,878 - INFO - ======================================================================
+2025-10-18 01:31:38,878 - INFO - Capital inicial: $500.00
+2025-10-18 01:31:38,878 - INFO - Valor final: $494.72
+2025-10-18 01:31:38,878 - INFO - PnL bruto: $0.00
+2025-10-18 01:31:38,884 - INFO - Fees totales: $2.46
+2025-10-18 01:31:38,884 - INFO - PnL neto: $-2.46
+2025-10-18 01:31:38,884 - INFO - Retorno neto: -0.49%
+2025-10-18 01:31:38,886 - INFO - ROI mensual: -0.57%
+2025-10-18 01:31:38,886 - INFO - Total operaciones: 29
+2025-10-18 01:31:38,886 - INFO - Operaciones ganadoras: 9
+2025-10-18 01:31:38,886 - INFO - Operaciones perdedoras: 18
+2025-10-18 01:31:38,886 - INFO - Win rate: 31.0%
+2025-10-18 01:31:38,886 - INFO - Max perdidas consecutivas: 4
+2025-10-18 01:31:38,888 - INFO - Objetivo no alcanzado. Gap: 15.57% para llegar al 15%
+2025-10-18 01:31:38,888 - INFO - SUGERENCIA: Mejorar filtros de calidad de señales
+2025-10-18 01:31:38,888 - INFO - SUGERENCIA: Ajustar stop-loss y take-profit

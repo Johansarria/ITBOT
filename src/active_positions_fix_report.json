@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-10-22T04:53:29.280447",
+  "initial_state": {
+    "timestamp": "2025-10-22T04:53:28.685672",
+    "databases_checked": [
+      {
+        "database": "auto_trading_alerts.db",
+        "status": {
+          "table": "executed_trades",
+          "columns": [
+            "id",
+            "signal_id",
+            "symbol",
+            "side",
+            "quantity",
+            "entry_price",
+            "stop_loss",
+            "take_profit",
+            "timestamp",
+            "status",
+            "exit_price",
+            "exit_timestamp",
+            "pnl",
+            "close_reason"
+          ],
+          "total_records": 2,
+          "active_positions": 0,
+          "closed_positions": 2
+        }
+      },
+      {
+        "database": "forex_metals_trading.db",
+        "status": {
+          "table": "forex_metals_signals",
+          "columns": [
+            "id",
+            "timestamp",
+            "symbol",
+            "signal_type",
+            "confidence",
+            "risk_level",
+            "price",
+            "volume",
+            "market_session",
+            "volatility",
+            "spread"
+          ],
+          "total_records": 483,
+          "active_positions": 0,
+          "closed_positions": 0
+        }
+      }
+    ],
+    "total_active_positions": 0,
+    "issues_found": []
+  },
+  "final_state": {
+    "timestamp": "2025-10-22T04:53:29.272379",
+    "databases_checked": [
+      {
+        "database": "auto_trading_alerts.db",
+        "status": {
+          "table": "executed_trades",
+          "columns": [
+            "id",
+            "signal_id",
+            "symbol",
+            "side",
+            "quantity",
+            "entry_price",
+            "stop_loss",
+            "take_profit",
+            "timestamp",
+            "status",
+            "exit_price",
+            "exit_timestamp",
+            "pnl",
+            "close_reason"
+          ],
+          "total_records": 2,
+          "active_positions": 0,
+          "closed_positions": 2
+        }
+      },
+      {
+        "database": "forex_metals_trading.db",
+        "status": {
+          "table": "forex_metals_signals",
+          "columns": [
+            "id",
+            "timestamp",
+            "symbol",
+            "signal_type",
+            "confidence",
+            "risk_level",
+            "price",
+            "volume",
+            "market_session",
+            "volatility",
+            "spread"
+          ],
+          "total_records": 483,
+          "active_positions": 0,
+          "closed_positions": 0
+        }
+      }
+    ],
+    "total_active_positions": 0,
+    "issues_found": []
+  },
+  "stopped_systems": [
+    "forex_metals_trading_system.py (PID: 11480)",
+    "alerta_auto_trading_integrada.py (PID: 25400)"
+  ],
+  "memory_cleared": false,
+  "success": true,
+  "recommendations": [
+    "Problema resuelto - sistemas listos para usar",
+    "Usar 'python start_trading_system.py' para iniciar"
+  ]
+}

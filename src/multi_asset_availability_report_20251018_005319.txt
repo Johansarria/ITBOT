@@ -1,0 +1,140 @@
+
+REPORTE DE DISPONIBILIDAD MULTI-ASSET - SICAR
+============================================
+Fecha: 2025-10-18 00:53:19
+
+RESUMEN EJECUTIVO:
+- Total instrumentos evaluados: 24
+- Instrumentos disponibles: 0
+- Tasa de éxito: 0.0%
+
+ÍNDICES DISPONIBLES:
+
+ÍNDICES:
+-------:
+  NAS100 (NAS100): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  SPX500 (SPX500): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  GER40 (GER40): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  UK100 (UK100): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  JPN225 (JPN225): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  AUS200 (AUS200): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  FRA40 (FRA40): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  ESP35 (ESP35): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+
+FOREX MAJORS:
+------------:
+  EURUSD (EURUSD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  GBPUSD (GBPUSD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  USDJPY (USDJPY): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  AUDUSD (AUDUSD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  USDCAD (USDCAD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  USDCHF (USDCHF): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  NZDUSD (NZDUSD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  EURGBP (EURGBP): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+
+COMMODITIES:
+-----------:
+  XAUUSD (XAUUSD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  XAGUSD (XAGUSD): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  USOIL (USOIL): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  UKOIL (UKOIL): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  NATGAS (NATGAS): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  COPPER (COPPER): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  WHEAT (WHEAT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+
+  CORN (CORN): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'
+

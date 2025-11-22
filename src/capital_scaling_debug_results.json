@@ -1,0 +1,221 @@
+{
+  "position_debug": {
+    "position_sizes": {
+      "200": {
+        "BTCUSDT": {
+          "position_size_usd": 4.0,
+          "position_pct": 2.0,
+          "quantity": 8e-05,
+          "test_price": 50000
+        },
+        "ETHUSDT": {
+          "position_size_usd": 4.0,
+          "position_pct": 2.0,
+          "quantity": 0.0013333333333333333,
+          "test_price": 3000
+        }
+      },
+      "500": {
+        "BTCUSDT": {
+          "position_size_usd": 10.0,
+          "position_pct": 2.0,
+          "quantity": 0.0002,
+          "test_price": 50000
+        },
+        "ETHUSDT": {
+          "position_size_usd": 10.0,
+          "position_pct": 2.0,
+          "quantity": 0.0033333333333333335,
+          "test_price": 3000
+        }
+      },
+      "1000": {
+        "BTCUSDT": {
+          "position_size_usd": 20.0,
+          "position_pct": 2.0,
+          "quantity": 0.0004,
+          "test_price": 50000
+        },
+        "ETHUSDT": {
+          "position_size_usd": 20.0,
+          "position_pct": 2.0,
+          "quantity": 0.006666666666666667,
+          "test_price": 3000
+        }
+      }
+    },
+    "capital_usage": {
+      "200": {
+        "initial_capital": 200,
+        "current_capital": 200,
+        "total_position_value": 8.0,
+        "capital_utilization_pct": 4.0
+      },
+      "500": {
+        "initial_capital": 500,
+        "current_capital": 500,
+        "total_position_value": 20.0,
+        "capital_utilization_pct": 4.0
+      },
+      "1000": {
+        "initial_capital": 1000,
+        "current_capital": 1000,
+        "total_position_value": 40.0,
+        "capital_utilization_pct": 4.0
+      }
+    },
+    "trade_details": {}
+  },
+  "backtest_debug": {
+    "trade_histories": {
+      "200": {
+        "total_trades": 2,
+        "trade_details": [
+          {
+            "symbol": "BTCUSDT",
+            "side": "short",
+            "quantity": 7.250748441874791e-06,
+            "entry_price": 101719.4,
+            "position_size": 0.7375417810584386,
+            "position_size_pct": 0.3687708905292193,
+            "signal_strength": 0.23970107884399255
+          },
+          {
+            "symbol": "ETHUSDT",
+            "side": "short",
+            "quantity": 0.00031142384538903847,
+            "entry_price": 2424.8,
+            "position_size": 0.7551405402993405,
+            "position_size_pct": 0.37757027014967026,
+            "signal_strength": 0.24632906548570965
+          }
+        ],
+        "position_sizes": [
+          0.7375417810584386,
+          0.7551405402993405
+        ],
+        "quantities": [
+          7.250748441874791e-06,
+          0.00031142384538903847
+        ],
+        "entry_prices": [
+          101719.4,
+          2424.8
+        ],
+        "avg_position_size": 0.7463411606788896,
+        "avg_position_pct": 0.3731705803394448,
+        "total_position_value": 1.4926823213577791
+      },
+      "500": {
+        "total_trades": 2,
+        "trade_details": [
+          {
+            "symbol": "BTCUSDT",
+            "side": "short",
+            "quantity": 1.812687110468698e-05,
+            "entry_price": 101719.4,
+            "position_size": 1.8438544526460965,
+            "position_size_pct": 0.3687708905292193,
+            "signal_strength": 0.23970107884399255
+          },
+          {
+            "symbol": "ETHUSDT",
+            "side": "short",
+            "quantity": 0.0007785596134725962,
+            "entry_price": 2424.8,
+            "position_size": 1.8878513507483514,
+            "position_size_pct": 0.37757027014967026,
+            "signal_strength": 0.24632906548570965
+          }
+        ],
+        "position_sizes": [
+          1.8438544526460965,
+          1.8878513507483514
+        ],
+        "quantities": [
+          1.812687110468698e-05,
+          0.0007785596134725962
+        ],
+        "entry_prices": [
+          101719.4,
+          2424.8
+        ],
+        "avg_position_size": 1.8658529016972238,
+        "avg_position_pct": 0.3731705803394448,
+        "total_position_value": 3.7317058033944477
+      },
+      "1000": {
+        "total_trades": 2,
+        "trade_details": [
+          {
+            "symbol": "BTCUSDT",
+            "side": "short",
+            "quantity": 3.625374220937396e-05,
+            "entry_price": 101719.4,
+            "position_size": 3.687708905292193,
+            "position_size_pct": 0.3687708905292193,
+            "signal_strength": 0.23970107884399255
+          },
+          {
+            "symbol": "ETHUSDT",
+            "side": "short",
+            "quantity": 0.0015571192269451925,
+            "entry_price": 2424.8,
+            "position_size": 3.775702701496703,
+            "position_size_pct": 0.37757027014967026,
+            "signal_strength": 0.24632906548570965
+          }
+        ],
+        "position_sizes": [
+          3.687708905292193,
+          3.775702701496703
+        ],
+        "quantities": [
+          3.625374220937396e-05,
+          0.0015571192269451925
+        ],
+        "entry_prices": [
+          101719.4,
+          2424.8
+        ],
+        "avg_position_size": 3.7317058033944477,
+        "avg_position_pct": 0.3731705803394448,
+        "total_position_value": 7.463411606788895
+      }
+    },
+    "signal_analysis": {},
+    "performance_comparison": {
+      "200": {
+        "initial_capital": 200,
+        "final_capital": 199.51157231597682,
+        "total_return": -0.48842768402317915,
+        "total_return_pct": -0.24421384201158955,
+        "total_trades": 2,
+        "win_rate": 0.0
+      },
+      "500": {
+        "initial_capital": 500,
+        "final_capital": 498.7789383942695,
+        "total_return": -1.2210616057304833,
+        "total_return_pct": -0.24421232114609664,
+        "total_trades": 2,
+        "win_rate": 0.0
+      },
+      "1000": {
+        "initial_capital": 1000,
+        "final_capital": 997.5572850832327,
+        "total_return": -2.4427149167672724,
+        "total_return_pct": -0.24427149167672724,
+        "total_trades": 2,
+        "win_rate": 0.0
+      }
+    }
+  },
+  "scaling_analysis": {
+    "position_size_scaling": {},
+    "return_consistency": {},
+    "scaling_issues": [],
+    "conclusion": "✅ El escalado funciona correctamente - resultados idénticos son esperados"
+  },
+  "timestamp": "2025-10-18T01:15:50.992412"
+}

@@ -1,0 +1,314 @@
+//@version=6
+// ITBOT NAS100 & Indices Optimizer v2.0 - Versión Avanzada con Todos los Filtros Activados
+strategy("ITBOT NAS100 Optimizer v2.0", shorttitle="ITBOT-NAS2", overlay=true, 
+         default_qty_type=strategy.percent_of_equity, default_qty_value=10, 
+         commission_type=strategy.commission.percent, commission_value=0.1)
+
+// === PARÁMETROS OPTIMIZADOS PARA ÍNDICES ===
+fast_length = input.int(5, title="Fast EMA Length", minval=1, maxval=50, group="📈 Trend Parameters")
+slow_length = input.int(20, title="Slow EMA Length", minval=1, maxval=100, group="📈 Trend Parameters")
+threshold = input.float(0.08, title="Trend Threshold % (Optimized for Indices)", minval=0.01, maxval=1.0, step=0.01, group="📈 Trend Parameters")
+
+// === FILTROS TÉCNICOS AVANZADOS ===
+rsi_length = input.int(14, title="RSI Length", minval=5, maxval=50, group="🔍 Technical Filters")
+rsi_overbought = input.float(75, title="RSI Overbought Level", minval=60, maxval=90, group="🔍 Technical Filters")
+rsi_oversold = input.float(25, title="RSI Oversold Level", minval=10, maxval=40, group="🔍 Technical Filters")
+momentum_length = input.int(8, title="Momentum Length", minval=5, maxval=20, group="🔍 Technical Filters")
+
+// === FILTROS DE VOLUMEN ===
+vol_sma_length = input.int(20, title="Volume SMA Length", minval=5, maxval=100, group="📊 Volume Filters")
+volume_multiplier = input.float(1.8, title="Volume Confirmation Multiplier", minval=1.0, maxval=3.0, step=0.1, group="📊 Volume Filters")
+
+// === GESTIÓN DE RIESGO ===
+use_stop_loss = input.bool(true, title="Enable Stop Loss", group="⚠️ Risk Management")
+stop_loss_pct = input.float(2.0, title="Stop Loss %", minval=0.5, maxval=10.0, step=0.1, group="⚠️ Risk Management")
+use_take_profit = input.bool(true, title="Enable Take Profit", group="⚠️ Risk Management")
+take_profit_pct = input.float(4.0, title="Take Profit %", minval=1.0, maxval=20.0, step=0.1, group="⚠️ Risk Management")
+risk_reward_ratio = input.float(2.0, title="Risk/Reward Ratio", minval=1.0, maxval=5.0, step=0.1, group="⚠️ Risk Management")
+
+// === FILTROS ESPECÍFICOS PARA ÍNDICES ===
+session_filter = input.bool(true, title="Enable Session Filter", group="🕐 Session & Spread")
+spread_filter = input.bool(true, title="Enable Spread Filter", group="🕐 Session & Spread")
+max_spread_pips = input.float(2.0, title="Max Spread (Points)", minval=0.5, maxval=10.0, step=0.1, group="🕐 Session & Spread")
+
+// === CONFIGURACIÓN DE VISUALIZACIÓN ===
+show_signals = input.bool(true, title="Show Entry Signals", group="🎨 Display Options")
+show_trend_bg = input.bool(true, title="Show Trend Background", group="🎨 Display Options")
+show_info_table = input.bool(true, title="Show Info Table", group="🎨 Display Options")
+show_risk_levels = input.bool(true, title="Show Risk Levels", group="🎨 Display Options")
+
+// === FILTROS AVANZADOS ACTIVADOS ===
+use_advanced_filters = input.bool(true, title="🚀 Use ALL Advanced Filters", group="🔥 Advanced Settings")
+
+// === HORARIOS DE SESIÓN PARA ÍNDICES ===
+// Sesión de Nueva York (NAS100 principal)
+ny_session = input.session("0930-1600", title="NY Session", group="🕐 Session & Spread")
+is_ny_session = not na(time(timeframe.period, ny_session))
+
+// Sesión extendida para mayor flexibilidad
+extended_session = input.session("0800-1700", title="Extended Session", group="🕐 Session & Spread")
+is_extended_session = not na(time(timeframe.period, extended_session))
+
+// === CÁLCULOS DE EMAs CON VALIDACIÓN ROBUSTA ===
+fast_ma = ta.ema(close, fast_length)
+slow_ma = ta.ema(close, slow_length)
+
+// Validación de datos
+is_valid_data = not na(close) and close > 0 and not na(high) and not na(low) and not na(fast_ma) and not na(slow_ma)
+
+// Cálculo de tendencia
+ma_diff_percent = math.abs(slow_ma) > 0 and is_valid_data ? ((fast_ma - slow_ma) / slow_ma) * 100 : 0
+trend_bullish = ma_diff_percent > threshold
+trend_bearish = ma_diff_percent < -threshold
+trend_neutral = math.abs(ma_diff_percent) <= threshold
+
+// === INDICADORES TÉCNICOS ===
+rsi = ta.rsi(close, rsi_length)
+momentum = ta.mom(close, momentum_length)
+vol_sma = ta.sma(volume, vol_sma_length)
+atr = ta.atr(14)
+
+// === SEÑALES BÁSICAS ===
+basic_buy_signal = ta.crossover(fast_ma, slow_ma)
+basic_sell_signal = ta.crossunder(fast_ma, slow_ma)
+
+// === FILTROS TÉCNICOS AVANZADOS ===
+// Filtro de volumen
+volume_confirmation = volume > (vol_sma * volume_multiplier)
+
+// Filtros de RSI
+rsi_bullish_filter = rsi < rsi_oversold or not use_advanced_filters
+rsi_bearish_filter = rsi > rsi_overbought or not use_advanced_filters
+
+// Filtros de momentum
+momentum_bullish = momentum > 0 or not use_advanced_filters
+momentum_bearish = momentum < 0 or not use_advanced_filters
+
+// Filtros de confirmación de precio
+price_confirmation_buy = close > open or not use_advanced_filters
+price_confirmation_sell = close < open or not use_advanced_filters
+
+// Filtro de volatilidad mínima
+min_volatility = atr > (ta.sma(atr, 20) * 0.8) or not use_advanced_filters
+
+// Filtro de spread
+current_spread = high - low
+spread_ok = not spread_filter or current_spread <= max_spread_pips
+
+// Filtro de sesión
+session_ok = not session_filter or is_extended_session
+
+// === SEÑALES FINALES CON TODOS LOS FILTROS ACTIVADOS ===
+// Señales de compra con filtros completos
+buy_signal_filtered = basic_buy_signal and 
+                     volume_confirmation and 
+                     rsi_bullish_filter and 
+                     momentum_bullish and 
+                     price_confirmation_buy and 
+                     min_volatility and 
+                     spread_ok and 
+                     session_ok and 
+                     is_valid_data
+
+// Señales de venta con filtros completos
+sell_signal_filtered = basic_sell_signal and 
+                      volume_confirmation and 
+                      rsi_bearish_filter and 
+                      momentum_bearish and 
+                      price_confirmation_sell and 
+                      min_volatility and 
+                      spread_ok and 
+                      session_ok and 
+                      is_valid_data
+
+// === GESTIÓN DE POSICIONES Y RIESGO ===
+// Variables para tracking de posiciones
+var float entry_price = na
+var float stop_loss_price = na
+var float take_profit_price = na
+var bool in_long_position = false
+var bool in_short_position = false
+
+// Entrada en posiciones largas
+if buy_signal_filtered and not in_long_position and not in_short_position
+    strategy.entry("Long", strategy.long)
+    entry_price := close
+    in_long_position := true
+    in_short_position := false
+    
+    // Calcular niveles de riesgo
+    if use_stop_loss
+        stop_loss_price := entry_price * (1 - stop_loss_pct / 100)
+    if use_take_profit
+        take_profit_price := entry_price * (1 + (stop_loss_pct * risk_reward_ratio) / 100)
+
+// Entrada en posiciones cortas
+if sell_signal_filtered and not in_short_position and not in_long_position
+    strategy.entry("Short", strategy.short)
+    entry_price := close
+    in_short_position := true
+    in_long_position := false
+    
+    // Calcular niveles de riesgo
+    if use_stop_loss
+        stop_loss_price := entry_price * (1 + stop_loss_pct / 100)
+    if use_take_profit
+        take_profit_price := entry_price * (1 - (stop_loss_pct * risk_reward_ratio) / 100)
+
+// Salidas por stop loss y take profit
+if in_long_position
+    if use_stop_loss and not na(stop_loss_price)
+        strategy.exit("Long SL", "Long", stop=stop_loss_price)
+    if use_take_profit and not na(take_profit_price)
+        strategy.exit("Long TP", "Long", limit=take_profit_price)
+
+if in_short_position
+    if use_stop_loss and not na(stop_loss_price)
+        strategy.exit("Short SL", "Short", stop=stop_loss_price)
+    if use_take_profit and not na(take_profit_price)
+        strategy.exit("Short TP", "Short", limit=take_profit_price)
+
+// Reset de variables cuando se cierra la posición
+if strategy.position_size == 0
+    in_long_position := false
+    in_short_position := false
+    entry_price := na
+    stop_loss_price := na
+    take_profit_price := na
+
+// === VISUALIZACIÓN AVANZADA ===
+// Fondo de tendencia
+trend_color = trend_bullish ? color.new(color.green, 90) : 
+             trend_bearish ? color.new(color.red, 90) : 
+             color.new(color.yellow, 95)
+bgcolor(show_trend_bg ? trend_color : na, title="Trend Background")
+
+// Señales de entrada optimizadas
+plotshape(show_signals and buy_signal_filtered, title="🚀 Advanced Buy Signal", 
+          location=location.belowbar, color=color.new(color.lime, 0), 
+          style=shape.triangleup, size=size.normal, text="BUY v2.0")
+
+plotshape(show_signals and sell_signal_filtered, title="🔻 Advanced Sell Signal", 
+          location=location.abovebar, color=color.new(color.red, 0), 
+          style=shape.triangledown, size=size.normal, text="SELL v2.0")
+
+// Señales básicas para comparación
+plotshape(show_signals and basic_buy_signal and not buy_signal_filtered, title="Basic Buy (Filtered Out)", 
+          location=location.belowbar, color=color.new(color.gray, 70), 
+          style=shape.triangleup, size=size.small, text="buy")
+
+plotshape(show_signals and basic_sell_signal and not sell_signal_filtered, title="Basic Sell (Filtered Out)", 
+          location=location.abovebar, color=color.new(color.gray, 70), 
+          style=shape.triangledown, size=size.small, text="sell")
+
+// === NIVELES DE RIESGO ===
+// Plotear niveles de stop loss y take profit
+plot(show_risk_levels and not na(stop_loss_price) ? stop_loss_price : na, 
+     color=color.red, linewidth=2, style=plot.style_linebr, title="Stop Loss")
+plot(show_risk_levels and not na(take_profit_price) ? take_profit_price : na, 
+     color=color.green, linewidth=2, style=plot.style_linebr, title="Take Profit")
+
+// === EMAs ===
+plot(fast_ma, color=color.blue, linewidth=2, title="Fast EMA (5)")
+plot(slow_ma, color=color.red, linewidth=2, title="Slow EMA (20)")
+
+// === VOLUMEN EN PANEL SEPARADO ===
+vol_color = volume > vol_sma ? color.new(color.green, 60) : color.new(color.red, 60)
+plot(volume, title="Volume", style=plot.style_columns, color=vol_color, display=display.pane)
+plot(vol_sma, title="Volume SMA", color=color.blue, linewidth=2, display=display.pane)
+
+// === TABLA DE INFORMACIÓN AVANZADA ===
+if show_info_table
+    var table info_table = table.new(position.top_right, 2, 12, bgcolor=color.white, border_width=1)
+    
+    if barstate.islast
+        // Header
+        table.cell(info_table, 0, 0, "ITBOT NAS100 v2.0", text_color=color.white, bgcolor=color.blue, text_size=size.normal)
+        table.cell(info_table, 1, 0, "Status", text_color=color.white, bgcolor=color.blue, text_size=size.normal)
+        
+        // Información de posición
+        position_text = strategy.position_size > 0 ? "LONG" : strategy.position_size < 0 ? "SHORT" : "FLAT"
+        position_color = strategy.position_size > 0 ? color.green : strategy.position_size < 0 ? color.red : color.gray
+        table.cell(info_table, 0, 1, "Position", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 1, position_text, text_color=color.white, bgcolor=position_color)
+        
+        // PnL
+        pnl_text = str.tostring(strategy.netprofit, "#.##")
+        pnl_color = strategy.netprofit > 0 ? color.green : strategy.netprofit < 0 ? color.red : color.gray
+        table.cell(info_table, 0, 2, "PnL", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 2, pnl_text, text_color=color.white, bgcolor=pnl_color)
+        
+        // Tendencia
+        trend_text = trend_bullish ? "BULLISH" : trend_bearish ? "BEARISH" : "NEUTRAL"
+        trend_color_cell = trend_bullish ? color.green : trend_bearish ? color.red : color.yellow
+        table.cell(info_table, 0, 3, "Trend", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 3, trend_text, text_color=color.white, bgcolor=trend_color_cell)
+        
+        // RSI
+        rsi_text = str.tostring(rsi, "#.#")
+        rsi_color_cell = rsi > rsi_overbought ? color.red : rsi < rsi_oversold ? color.green : color.gray
+        table.cell(info_table, 0, 4, "RSI", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 4, rsi_text, text_color=color.white, bgcolor=rsi_color_cell)
+        
+        // Volumen
+        vol_status = volume > vol_sma ? "HIGH" : "LOW"
+        vol_color_cell = volume > vol_sma ? color.green : color.red
+        table.cell(info_table, 0, 5, "Volume", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 5, vol_status, text_color=color.white, bgcolor=vol_color_cell)
+        
+        // Sesión
+        session_text = is_ny_session ? "NY ACTIVE" : is_extended_session ? "EXTENDED" : "CLOSED"
+        session_color_cell = is_ny_session ? color.green : is_extended_session ? color.orange : color.red
+        table.cell(info_table, 0, 6, "Session", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 6, session_text, text_color=color.white, bgcolor=session_color_cell)
+        
+        // Spread
+        spread_text = str.tostring(current_spread, "#.##")
+        spread_color_cell = current_spread <= max_spread_pips ? color.green : color.red
+        table.cell(info_table, 0, 7, "Spread", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 7, spread_text, text_color=color.white, bgcolor=spread_color_cell)
+        
+        // Filtros activos
+        filters_text = use_advanced_filters ? "ALL ON" : "BASIC"
+        filters_color = use_advanced_filters ? color.green : color.orange
+        table.cell(info_table, 0, 8, "Filters", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 8, filters_text, text_color=color.white, bgcolor=filters_color)
+        
+        // Entry Price
+        entry_text = not na(entry_price) ? str.tostring(entry_price, "#.##") : "N/A"
+        table.cell(info_table, 0, 9, "Entry", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 9, entry_text, text_color=color.black, bgcolor=color.white)
+        
+        // Stop Loss
+        sl_text = not na(stop_loss_price) ? str.tostring(stop_loss_price, "#.##") : "N/A"
+        table.cell(info_table, 0, 10, "Stop Loss", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 10, sl_text, text_color=color.white, bgcolor=color.red)
+        
+        // Take Profit
+        tp_text = not na(take_profit_price) ? str.tostring(take_profit_price, "#.##") : "N/A"
+        table.cell(info_table, 0, 11, "Take Profit", text_color=color.black, bgcolor=color.white)
+        table.cell(info_table, 1, 11, tp_text, text_color=color.white, bgcolor=color.green)
+
+// === ALERTAS AVANZADAS ===
+// Variables para mensajes de alerta
+rsi_str = str.tostring(rsi, "#.#")
+vol_ratio_str = str.tostring(volume/vol_sma, "#.##")
+
+alertcondition(buy_signal_filtered, title="🚀 NAS100 v2.0 Buy Alert", 
+               message="🟢 ITBOT NAS100 v2.0 ADVANCED BUY signal on {{ticker}} at {{close}}")
+
+alertcondition(sell_signal_filtered, title="🔻 NAS100 v2.0 Sell Alert", 
+               message="🔴 ITBOT NAS100 v2.0 ADVANCED SELL signal on {{ticker}} at {{close}}")
+
+// Alertas de gestión de riesgo
+alertcondition(strategy.position_size > 0 and close <= stop_loss_price, title="⚠️ Long Stop Loss Hit", 
+               message="🛑 STOP LOSS activated for LONG position on {{ticker}} at {{close}}")
+
+alertcondition(strategy.position_size < 0 and close >= stop_loss_price, title="⚠️ Short Stop Loss Hit", 
+               message="🛑 STOP LOSS activated for SHORT position on {{ticker}} at {{close}}")
+
+alertcondition(strategy.position_size > 0 and close >= take_profit_price, title="🎯 Long Take Profit Hit", 
+               message="🎯 TAKE PROFIT reached for LONG position on {{ticker}} at {{close}}")
+
+alertcondition(strategy.position_size < 0 and close <= take_profit_price, title="🎯 Short Take Profit Hit", 
+               message="🎯 TAKE PROFIT reached for SHORT position on {{ticker}} at {{close}}")

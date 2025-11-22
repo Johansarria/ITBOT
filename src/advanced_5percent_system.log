@@ -1,0 +1,205 @@
+2025-10-18 18:35:25,949 - ERROR - Error generando datos para BTCUSDT: All arrays must be of the same length
+2025-10-18 18:35:25,953 - ERROR - Error analizando timeframe 1m para BTCUSDT: 'close'
+2025-10-18 18:35:25,956 - ERROR - Error analizando multi-timeframe para BTCUSDT: 'signal_strength'
+2025-10-18 18:35:25,958 - ERROR - Error generando datos para BTCUSDT: All arrays must be of the same length
+2025-10-18 18:35:25,959 - ERROR - Error detectando volatilidad para BTCUSDT: 'close'
+2025-10-18 18:35:25,967 - ERROR - Error generando datos para ETHUSDT: All arrays must be of the same length
+2025-10-18 18:35:25,969 - ERROR - Error analizando timeframe 1m para ETHUSDT: 'close'
+2025-10-18 18:35:25,972 - ERROR - Error analizando multi-timeframe para ETHUSDT: 'signal_strength'
+2025-10-18 18:35:25,974 - ERROR - Error generando datos para ETHUSDT: All arrays must be of the same length
+2025-10-18 18:35:25,975 - ERROR - Error detectando volatilidad para ETHUSDT: 'close'
+2025-10-18 18:35:25,983 - ERROR - Error generando datos para BNBUSDT: All arrays must be of the same length
+2025-10-18 18:35:25,987 - ERROR - Error analizando timeframe 1m para BNBUSDT: 'close'
+2025-10-18 18:35:25,989 - ERROR - Error analizando multi-timeframe para BNBUSDT: 'signal_strength'
+2025-10-18 18:35:25,992 - ERROR - Error generando datos para BNBUSDT: All arrays must be of the same length
+2025-10-18 18:35:25,993 - ERROR - Error detectando volatilidad para BNBUSDT: 'close'
+2025-10-18 18:35:25,998 - ERROR - Error generando datos para SOLUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,002 - ERROR - Error analizando timeframe 1m para SOLUSDT: 'close'
+2025-10-18 18:35:26,003 - ERROR - Error analizando multi-timeframe para SOLUSDT: 'signal_strength'
+2025-10-18 18:35:26,007 - ERROR - Error generando datos para SOLUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,009 - ERROR - Error detectando volatilidad para SOLUSDT: 'close'
+2025-10-18 18:35:26,015 - ERROR - Error generando datos para ADAUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,020 - ERROR - Error analizando timeframe 1m para ADAUSDT: 'close'
+2025-10-18 18:35:26,021 - ERROR - Error analizando multi-timeframe para ADAUSDT: 'signal_strength'
+2025-10-18 18:35:26,024 - ERROR - Error generando datos para ADAUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,027 - ERROR - Error detectando volatilidad para ADAUSDT: 'close'
+2025-10-18 18:35:26,046 - ERROR - Error generando datos para XRPUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,047 - ERROR - Error analizando timeframe 1m para XRPUSDT: 'close'
+2025-10-18 18:35:26,051 - ERROR - Error analizando multi-timeframe para XRPUSDT: 'signal_strength'
+2025-10-18 18:35:26,054 - ERROR - Error generando datos para XRPUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,056 - ERROR - Error detectando volatilidad para XRPUSDT: 'close'
+2025-10-18 18:35:26,062 - ERROR - Error generando datos para DOTUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,065 - ERROR - Error analizando timeframe 1m para DOTUSDT: 'close'
+2025-10-18 18:35:26,065 - ERROR - Error analizando multi-timeframe para DOTUSDT: 'signal_strength'
+2025-10-18 18:35:26,069 - ERROR - Error generando datos para DOTUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,070 - ERROR - Error detectando volatilidad para DOTUSDT: 'close'
+2025-10-18 18:35:26,078 - ERROR - Error generando datos para LINKUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,081 - ERROR - Error analizando timeframe 1m para LINKUSDT: 'close'
+2025-10-18 18:35:26,081 - ERROR - Error analizando multi-timeframe para LINKUSDT: 'signal_strength'
+2025-10-18 18:35:26,085 - ERROR - Error generando datos para LINKUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,086 - ERROR - Error detectando volatilidad para LINKUSDT: 'close'
+2025-10-18 18:35:26,094 - ERROR - Error generando datos para AVAXUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,095 - ERROR - Error analizando timeframe 1m para AVAXUSDT: 'close'
+2025-10-18 18:35:26,096 - ERROR - Error analizando multi-timeframe para AVAXUSDT: 'signal_strength'
+2025-10-18 18:35:26,098 - ERROR - Error generando datos para AVAXUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,099 - ERROR - Error detectando volatilidad para AVAXUSDT: 'close'
+2025-10-18 18:35:26,106 - ERROR - Error generando datos para MATICUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,108 - ERROR - Error analizando timeframe 1m para MATICUSDT: 'close'
+2025-10-18 18:35:26,108 - ERROR - Error analizando multi-timeframe para MATICUSDT: 'signal_strength'
+2025-10-18 18:35:26,110 - ERROR - Error generando datos para MATICUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,112 - ERROR - Error detectando volatilidad para MATICUSDT: 'close'
+2025-10-18 18:35:26,124 - ERROR - Error generando datos para ATOMUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,125 - ERROR - Error analizando timeframe 1m para ATOMUSDT: 'close'
+2025-10-18 18:35:26,126 - ERROR - Error analizando multi-timeframe para ATOMUSDT: 'signal_strength'
+2025-10-18 18:35:26,128 - ERROR - Error generando datos para ATOMUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,130 - ERROR - Error detectando volatilidad para ATOMUSDT: 'close'
+2025-10-18 18:35:26,138 - ERROR - Error generando datos para NEARUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,141 - ERROR - Error analizando timeframe 1m para NEARUSDT: 'close'
+2025-10-18 18:35:26,142 - ERROR - Error analizando multi-timeframe para NEARUSDT: 'signal_strength'
+2025-10-18 18:35:26,144 - ERROR - Error generando datos para NEARUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,144 - ERROR - Error detectando volatilidad para NEARUSDT: 'close'
+2025-10-18 18:35:26,157 - ERROR - Error generando datos para FTMUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,159 - ERROR - Error analizando timeframe 1m para FTMUSDT: 'close'
+2025-10-18 18:35:26,160 - ERROR - Error analizando multi-timeframe para FTMUSDT: 'signal_strength'
+2025-10-18 18:35:26,163 - ERROR - Error generando datos para FTMUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,164 - ERROR - Error detectando volatilidad para FTMUSDT: 'close'
+2025-10-18 18:35:26,168 - ERROR - Error generando datos para SANDUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,170 - ERROR - Error analizando timeframe 1m para SANDUSDT: 'close'
+2025-10-18 18:35:26,170 - ERROR - Error analizando multi-timeframe para SANDUSDT: 'signal_strength'
+2025-10-18 18:35:26,172 - ERROR - Error generando datos para SANDUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,173 - ERROR - Error detectando volatilidad para SANDUSDT: 'close'
+2025-10-18 18:35:26,179 - ERROR - Error generando datos para MANAUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,191 - ERROR - Error analizando timeframe 1m para MANAUSDT: 'close'
+2025-10-18 18:35:26,191 - ERROR - Error analizando multi-timeframe para MANAUSDT: 'signal_strength'
+2025-10-18 18:35:26,193 - ERROR - Error generando datos para MANAUSDT: All arrays must be of the same length
+2025-10-18 18:35:26,194 - ERROR - Error detectando volatilidad para MANAUSDT: 'close'
+2025-10-18 18:35:26,209 - ERROR - Error en an�lisis avanzado: 'num_positions'
+2025-10-18 18:36:02,477 - INFO - 🚀 ADVANCED 5% MONTHLY SYSTEM INICIALIZADO
+2025-10-18 18:36:02,479 - INFO - 💰 Capital inicial: $1000
+2025-10-18 18:36:02,479 - INFO - 🎯 Objetivo: 5.0% mensual
+2025-10-18 18:36:02,480 - INFO - 📊 Timeframes: ['1m', '5m', '15m', '1h']
+2025-10-18 18:36:02,481 - INFO - 🔄 Compounding: daily
+2025-10-18 18:36:02,482 - INFO - 🔍 INICIANDO ANÁLISIS AVANZADO PARA 5% MENSUAL
+2025-10-18 18:36:02,482 - INFO - 📊 Analizando BTCUSDT...
+2025-10-18 18:36:02,485 - ERROR - Error generando datos para BTCUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,487 - ERROR - Error analizando timeframe 1m para BTCUSDT: 'close'
+2025-10-18 18:36:02,488 - ERROR - Error analizando multi-timeframe para BTCUSDT: 'signal_strength'
+2025-10-18 18:36:02,490 - ERROR - Error generando datos para BTCUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,491 - ERROR - Error detectando volatilidad para BTCUSDT: 'close'
+2025-10-18 18:36:02,491 - INFO - 📊 Analizando ETHUSDT...
+2025-10-18 18:36:02,496 - ERROR - Error generando datos para ETHUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,497 - ERROR - Error analizando timeframe 1m para ETHUSDT: 'close'
+2025-10-18 18:36:02,498 - ERROR - Error analizando multi-timeframe para ETHUSDT: 'signal_strength'
+2025-10-18 18:36:02,500 - ERROR - Error generando datos para ETHUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,502 - ERROR - Error detectando volatilidad para ETHUSDT: 'close'
+2025-10-18 18:36:02,502 - INFO - 📊 Analizando BNBUSDT...
+2025-10-18 18:36:02,506 - ERROR - Error generando datos para BNBUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,510 - ERROR - Error analizando timeframe 1m para BNBUSDT: 'close'
+2025-10-18 18:36:02,511 - ERROR - Error analizando multi-timeframe para BNBUSDT: 'signal_strength'
+2025-10-18 18:36:02,513 - ERROR - Error generando datos para BNBUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,514 - ERROR - Error detectando volatilidad para BNBUSDT: 'close'
+2025-10-18 18:36:02,515 - INFO - 📊 Analizando SOLUSDT...
+2025-10-18 18:36:02,517 - ERROR - Error generando datos para SOLUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,521 - ERROR - Error analizando timeframe 1m para SOLUSDT: 'close'
+2025-10-18 18:36:02,522 - ERROR - Error analizando multi-timeframe para SOLUSDT: 'signal_strength'
+2025-10-18 18:36:02,525 - ERROR - Error generando datos para SOLUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,528 - ERROR - Error detectando volatilidad para SOLUSDT: 'close'
+2025-10-18 18:36:02,529 - INFO - 📊 Analizando ADAUSDT...
+2025-10-18 18:36:02,532 - ERROR - Error generando datos para ADAUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,534 - ERROR - Error analizando timeframe 1m para ADAUSDT: 'close'
+2025-10-18 18:36:02,535 - ERROR - Error analizando multi-timeframe para ADAUSDT: 'signal_strength'
+2025-10-18 18:36:02,537 - ERROR - Error generando datos para ADAUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,538 - ERROR - Error detectando volatilidad para ADAUSDT: 'close'
+2025-10-18 18:36:02,539 - INFO - 📊 Analizando XRPUSDT...
+2025-10-18 18:36:02,542 - ERROR - Error generando datos para XRPUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,543 - ERROR - Error analizando timeframe 1m para XRPUSDT: 'close'
+2025-10-18 18:36:02,544 - ERROR - Error analizando multi-timeframe para XRPUSDT: 'signal_strength'
+2025-10-18 18:36:02,546 - ERROR - Error generando datos para XRPUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,547 - ERROR - Error detectando volatilidad para XRPUSDT: 'close'
+2025-10-18 18:36:02,547 - INFO - 📊 Analizando DOTUSDT...
+2025-10-18 18:36:02,549 - ERROR - Error generando datos para DOTUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,563 - ERROR - Error analizando timeframe 1m para DOTUSDT: 'close'
+2025-10-18 18:36:02,564 - ERROR - Error analizando multi-timeframe para DOTUSDT: 'signal_strength'
+2025-10-18 18:36:02,565 - ERROR - Error generando datos para DOTUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,566 - ERROR - Error detectando volatilidad para DOTUSDT: 'close'
+2025-10-18 18:36:02,567 - INFO - 📊 Analizando LINKUSDT...
+2025-10-18 18:36:02,569 - ERROR - Error generando datos para LINKUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,569 - ERROR - Error analizando timeframe 1m para LINKUSDT: 'close'
+2025-10-18 18:36:02,570 - ERROR - Error analizando multi-timeframe para LINKUSDT: 'signal_strength'
+2025-10-18 18:36:02,571 - ERROR - Error generando datos para LINKUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,573 - ERROR - Error detectando volatilidad para LINKUSDT: 'close'
+2025-10-18 18:36:02,573 - INFO - 📊 Analizando AVAXUSDT...
+2025-10-18 18:36:02,576 - ERROR - Error generando datos para AVAXUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,579 - ERROR - Error analizando timeframe 1m para AVAXUSDT: 'close'
+2025-10-18 18:36:02,580 - ERROR - Error analizando multi-timeframe para AVAXUSDT: 'signal_strength'
+2025-10-18 18:36:02,582 - ERROR - Error generando datos para AVAXUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,582 - ERROR - Error detectando volatilidad para AVAXUSDT: 'close'
+2025-10-18 18:36:02,584 - INFO - 📊 Analizando MATICUSDT...
+2025-10-18 18:36:02,587 - ERROR - Error generando datos para MATICUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,590 - ERROR - Error analizando timeframe 1m para MATICUSDT: 'close'
+2025-10-18 18:36:02,591 - ERROR - Error analizando multi-timeframe para MATICUSDT: 'signal_strength'
+2025-10-18 18:36:02,594 - ERROR - Error generando datos para MATICUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,597 - ERROR - Error detectando volatilidad para MATICUSDT: 'close'
+2025-10-18 18:36:02,598 - INFO - 📊 Analizando ATOMUSDT...
+2025-10-18 18:36:02,601 - ERROR - Error generando datos para ATOMUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,602 - ERROR - Error analizando timeframe 1m para ATOMUSDT: 'close'
+2025-10-18 18:36:02,603 - ERROR - Error analizando multi-timeframe para ATOMUSDT: 'signal_strength'
+2025-10-18 18:36:02,605 - ERROR - Error generando datos para ATOMUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,606 - ERROR - Error detectando volatilidad para ATOMUSDT: 'close'
+2025-10-18 18:36:02,609 - INFO - 📊 Analizando NEARUSDT...
+2025-10-18 18:36:02,612 - ERROR - Error generando datos para NEARUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,614 - ERROR - Error analizando timeframe 1m para NEARUSDT: 'close'
+2025-10-18 18:36:02,615 - ERROR - Error analizando multi-timeframe para NEARUSDT: 'signal_strength'
+2025-10-18 18:36:02,617 - ERROR - Error generando datos para NEARUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,618 - ERROR - Error detectando volatilidad para NEARUSDT: 'close'
+2025-10-18 18:36:02,619 - INFO - 📊 Analizando FTMUSDT...
+2025-10-18 18:36:02,623 - ERROR - Error generando datos para FTMUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,624 - ERROR - Error analizando timeframe 1m para FTMUSDT: 'close'
+2025-10-18 18:36:02,625 - ERROR - Error analizando multi-timeframe para FTMUSDT: 'signal_strength'
+2025-10-18 18:36:02,627 - ERROR - Error generando datos para FTMUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,629 - ERROR - Error detectando volatilidad para FTMUSDT: 'close'
+2025-10-18 18:36:02,629 - INFO - 📊 Analizando SANDUSDT...
+2025-10-18 18:36:02,631 - ERROR - Error generando datos para SANDUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,632 - ERROR - Error analizando timeframe 1m para SANDUSDT: 'close'
+2025-10-18 18:36:02,634 - ERROR - Error analizando multi-timeframe para SANDUSDT: 'signal_strength'
+2025-10-18 18:36:02,636 - ERROR - Error generando datos para SANDUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,637 - ERROR - Error detectando volatilidad para SANDUSDT: 'close'
+2025-10-18 18:36:02,637 - INFO - 📊 Analizando MANAUSDT...
+2025-10-18 18:36:02,639 - ERROR - Error generando datos para MANAUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,641 - ERROR - Error analizando timeframe 1m para MANAUSDT: 'close'
+2025-10-18 18:36:02,641 - ERROR - Error analizando multi-timeframe para MANAUSDT: 'signal_strength'
+2025-10-18 18:36:02,642 - ERROR - Error generando datos para MANAUSDT: All arrays must be of the same length
+2025-10-18 18:36:02,645 - ERROR - Error detectando volatilidad para MANAUSDT: 'close'
+2025-10-18 18:36:02,646 - INFO - ✅ ANÁLISIS COMPLETADO
+2025-10-18 18:36:02,646 - INFO - 🎯 Retorno proyectado mensual: 3.04%
+2025-10-18 18:36:02,647 - INFO - 📈 Retorno diario requerido: 0.100%
+2025-10-18 18:36:02,648 - INFO - 🏆 Cumple objetivo: NO
+2025-10-18 18:36:02,648 - INFO - 💼 Posiciones recomendadas: 0
+2025-10-18 18:36:02,649 - INFO - 🔥 Señales fuertes: 0
+2025-10-18 18:36:31,007 - INFO - 🚀 ADVANCED 5% MONTHLY SYSTEM INICIALIZADO
+2025-10-18 18:36:31,007 - INFO - 💰 Capital inicial: $1000
+2025-10-18 18:36:31,009 - INFO - 🎯 Objetivo: 5.0% mensual
+2025-10-18 18:36:31,010 - INFO - 📊 Timeframes: ['1m', '5m', '15m', '1h']
+2025-10-18 18:36:31,011 - INFO - 🔄 Compounding: daily
+2025-10-18 18:36:31,011 - INFO - 🔍 INICIANDO ANÁLISIS AVANZADO PARA 5% MENSUAL
+2025-10-18 18:36:31,012 - INFO - 📊 Analizando BTCUSDT...
+2025-10-18 18:36:31,061 - INFO - 📊 Analizando ETHUSDT...
+2025-10-18 18:36:31,090 - INFO - 📊 Analizando BNBUSDT...
+2025-10-18 18:36:31,124 - INFO - 📊 Analizando SOLUSDT...
+2025-10-18 18:36:31,160 - INFO - 📊 Analizando ADAUSDT...
+2025-10-18 18:36:31,192 - INFO - 📊 Analizando XRPUSDT...
+2025-10-18 18:36:31,225 - INFO - 📊 Analizando DOTUSDT...
+2025-10-18 18:36:31,257 - INFO - 📊 Analizando LINKUSDT...
+2025-10-18 18:36:31,287 - INFO - 📊 Analizando AVAXUSDT...
+2025-10-18 18:36:31,321 - INFO - 📊 Analizando MATICUSDT...
+2025-10-18 18:36:31,354 - INFO - 📊 Analizando ATOMUSDT...
+2025-10-18 18:36:31,388 - INFO - 📊 Analizando NEARUSDT...
+2025-10-18 18:36:31,423 - INFO - 📊 Analizando FTMUSDT...
+2025-10-18 18:36:31,454 - INFO - 📊 Analizando SANDUSDT...
+2025-10-18 18:36:31,494 - INFO - 📊 Analizando MANAUSDT...
+2025-10-18 18:36:31,525 - INFO - ✅ ANÁLISIS COMPLETADO
+2025-10-18 18:36:31,526 - INFO - 🎯 Retorno proyectado mensual: 7.53%
+2025-10-18 18:36:31,527 - INFO - 📈 Retorno diario requerido: 0.242%
+2025-10-18 18:36:31,527 - INFO - 🏆 Cumple objetivo: SÍ
+2025-10-18 18:36:31,529 - INFO - 💼 Posiciones recomendadas: 4
+2025-10-18 18:36:31,530 - INFO - 🔥 Señales fuertes: 4

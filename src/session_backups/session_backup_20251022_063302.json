@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-10-21T21:27:40.844671",
+  "initial_capital": 250.0,
+  "current_capital": 249.95000249999998,
+  "positions": [],
+  "total_trades": 2,
+  "auto_trading": true,
+  "session_active": true,
+  "current_session": "session_20251021_212740",
+  "last_sync": "2025-10-21T22:23:40.389916",
+  "restart_reason": "Capital adjustment to $250 USDT + Advanced improvements",
+  "restart_timestamp": "2025-10-21T21:27:40.844671",
+  "advanced_features": {
+    "ia_filters_enabled": true,
+    "smart_alerts_enabled": true,
+    "enhanced_logging": true,
+    "market_preparation_mode": true
+  }
+}

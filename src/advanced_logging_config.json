@@ -1,0 +1,83 @@
+{
+  "buffer_size": 100,
+  "flush_interval_seconds": 30,
+  "max_log_file_size_mb": 100,
+  "max_log_files": 10,
+  "enable_performance_logging": true,
+  "enable_decision_logging": true,
+  "enable_market_logging": true,
+  "log_levels": [
+    "info",
+    "warning", 
+    "error",
+    "critical",
+    "performance",
+    "decision",
+    "market",
+    "execution"
+  ],
+  "retention_days": 30,
+  "compression_enabled": true,
+  "real_time_analysis": true,
+  "export_formats": [
+    "json",
+    "csv",
+    "parquet"
+  ],
+  "analysis_intervals": {
+    "performance_summary": 3600,
+    "decision_analysis": 1800,
+    "market_analysis": 900,
+    "health_check": 300
+  },
+  "specialized_logging": {
+    "performance": {
+      "enabled": true,
+      "file": "performance_metrics.log",
+      "max_size_mb": 50,
+      "retention_days": 7
+    },
+    "decisions": {
+      "enabled": true,
+      "file": "decision_analysis.log",
+      "max_size_mb": 50,
+      "retention_days": 14
+    },
+    "market": {
+      "enabled": true,
+      "file": "market_conditions.log",
+      "max_size_mb": 100,
+      "retention_days": 7
+    },
+    "errors": {
+      "enabled": true,
+      "file": "system_errors.log",
+      "max_size_mb": 25,
+      "retention_days": 30
+    },
+    "execution": {
+      "enabled": true,
+      "file": "trade_execution.log",
+      "max_size_mb": 50,
+      "retention_days": 30
+    }
+  },
+  "database": {
+    "path": "advanced_logging.db",
+    "backup_interval_hours": 6,
+    "vacuum_interval_days": 7,
+    "max_size_mb": 500
+  },
+  "alerts": {
+    "error_threshold": 5,
+    "performance_degradation_threshold": 50,
+    "memory_usage_threshold": 85,
+    "cpu_usage_threshold": 90
+  },
+  "optimization": {
+    "batch_insert_size": 50,
+    "index_maintenance": true,
+    "compression_level": 6,
+    "async_processing": true
+  }
+}

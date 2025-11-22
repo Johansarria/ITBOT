@@ -1,0 +1,81 @@
+=== REPORTE DE OPTIMIZACIÓN SICAR ===
+Fecha: 2025-10-14 05:56:23
+Objetivo: 15.0% ROI mensual
+
+📊 MEJORES CONFIGURACIONES:
+==================================================
+
+1. Score: 107.29
+   ROI Mensual: 106.76%
+   Total Trades: 28
+   Win Rate: 71.4%
+   Profit Factor: 2.60
+   Max Drawdown: 107.6%
+   Objetivo Alcanzado: ✅
+   Configuración:
+     risk_per_trade: 0.1
+     stop_loss_pct: 0.1
+     take_profit_pct: 0.15
+     position_size_pct: 0.7
+     confidence_threshold: 0.55
+     max_positions: 3
+
+2. Score: 78.61
+   ROI Mensual: 81.43%
+   Total Trades: 44
+   Win Rate: 25.0%
+   Profit Factor: 1.86
+   Max Drawdown: 96.9%
+   Objetivo Alcanzado: ✅
+   Configuración:
+     risk_per_trade: 0.05
+     stop_loss_pct: 0.03
+     take_profit_pct: 0.25
+     position_size_pct: 0.7
+     confidence_threshold: 0.65
+     max_positions: 2
+
+3. Score: 78.43
+   ROI Mensual: 88.12%
+   Total Trades: 24
+   Win Rate: 54.2%
+   Profit Factor: 2.08
+   Max Drawdown: 106.6%
+   Objetivo Alcanzado: ✅
+   Configuración:
+     risk_per_trade: 0.1
+     stop_loss_pct: 0.1
+     take_profit_pct: 0.25
+     position_size_pct: 0.7
+     confidence_threshold: 0.75
+     max_positions: 3
+
+4. Score: 76.72
+   ROI Mensual: 80.88%
+   Total Trades: 26
+   Win Rate: 53.8%
+   Profit Factor: 2.08
+   Max Drawdown: 97.4%
+   Objetivo Alcanzado: ✅
+   Configuración:
+     risk_per_trade: 0.02
+     stop_loss_pct: 0.1
+     take_profit_pct: 0.25
+     position_size_pct: 0.5
+     confidence_threshold: 0.55
+     max_positions: 3
+
+5. Score: 74.81
+   ROI Mensual: 77.46%
+   Total Trades: 42
+   Win Rate: 28.6%
+   Profit Factor: 1.83
+   Max Drawdown: 95.4%
+   Objetivo Alcanzado: ✅
+   Configuración:
+     risk_per_trade: 0.1
+     stop_loss_pct: 0.03
+     take_profit_pct: 0.2
+     position_size_pct: 0.7
+     confidence_threshold: 0.55
+     max_positions: 2

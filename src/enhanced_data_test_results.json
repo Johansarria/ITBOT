@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-10-14T01:54:22.607677",
+  "test_results": {
+    "BTC-USD": {
+      "current_price_available": true,
+      "historical_data_available": true,
+      "data_quality_score": 1.0,
+      "records_count": 168,
+      "test_passed": true
+    },
+    "ETH-USD": {
+      "current_price_available": true,
+      "historical_data_available": true,
+      "data_quality_score": 1.0,
+      "records_count": 168,
+      "test_passed": true
+    },
+    "ADA-USD": {
+      "current_price_available": true,
+      "historical_data_available": true,
+      "data_quality_score": 1.0,
+      "records_count": 168,
+      "test_passed": true
+    }
+  },
+  "summary": {
+    "working_apis": [
+      "coingecko",
+      "binance",
+      "coinbase"
+    ],
+    "failed_apis": [
+      "yfinance"
+    ],
+    "data_quality_avg": 0,
+    "success_rate": 1.0
+  },
+  "performance_stats": {
+    "total_requests": 6,
+    "successful_fetches": 6,
+    "cache_hits": 5,
+    "cache_hit_rate": 0.45454545454545453,
+    "api_failures": {},
+    "success_rate": 1.0
+  }
+}

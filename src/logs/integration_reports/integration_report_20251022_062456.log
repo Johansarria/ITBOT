@@ -1,0 +1,21 @@
+REPORTE DE INTEGRACIÓN SICAR
+==================================================
+Timestamp: 2025-10-22T06:24:56.453216
+Report ID: integration_1761132296
+
+RESUMEN EJECUTIVO:
+  status: 🟢 Sistema activo y operando
+  activity: 📊 Sin actividad de trading reciente
+  health: ⚠️ Advertencias detectadas
+
+ESTADO DE SESIÓN:
+  active: True
+  auto_trading: True
+  initial_capital: 250.0
+  current_capital: 249.95000249999998
+  total_trades: 0
+  last_restart: Capital adjustment to $250 USDT + Advanced improvements
+
+SALUD DEL SISTEMA:
+  Estado: warning
+  ❌ Log de trades detallado no encontrado: logs/trades_detailed.log

@@ -1,0 +1,78 @@
+{
+  "timestamp": "2025-10-21T21:23:41.133123",
+  "analisis_mercado": {
+    "timestamp": "2025-10-21T21:23:41.128341",
+    "score_mercado": 30,
+    "estado_mercado": "🟠 MODERADO",
+    "factores_positivos": [
+      "Alta actividad de análisis",
+      "RSI en rango neutral"
+    ],
+    "analisis_detallado": {
+      "rompimientos": {
+        "total_analisis": 1764,
+        "rupturas_alcistas": 0,
+        "rupturas_bajistas": 0,
+        "neutrales": 1764,
+        "confianza_promedio": 0.0,
+        "rsi_promedio": 46.539705215419495,
+        "volumen_ratio_promedio": 0.38583900226757367,
+        "simbolos_activos": 9,
+        "recomendaciones": {
+          "MANTENER": 1764
+        }
+      },
+      "rupturas_velas": {
+        "status": "sin_detecciones_recientes"
+      },
+      "ia_continua": {
+        "anomalias_detectadas": 0,
+        "patrones_detectados": 0,
+        "simbolos_con_anomalias": 0,
+        "simbolos_con_patrones": 0
+      },
+      "monitoreo_proactivo": {
+        "tablas_disponibles": [
+          "system_metrics",
+          "sqlite_sequence",
+          "alerts",
+          "symbol_metrics",
+          "system_events"
+        ]
+      }
+    }
+  },
+  "evaluacion_paper_trading": {
+    "session_data": {},
+    "portfolio_summary": {
+      "initial_capital": 250.0,
+      "current_capital": 250.0,
+      "total_position_value": 0,
+      "total_portfolio_value": 250.0,
+      "total_pnl": 0.0,
+      "unrealized_pnl": 0,
+      "total_return_pct": 0.0,
+      "total_trades": 0,
+      "winning_trades": 0,
+      "win_rate": 0,
+      "max_drawdown": 0.0,
+      "open_positions": 0,
+      "pending_orders": 0
+    },
+    "engine_status": "activo"
+  },
+  "propuestas_mejora": [
+    "🛡️ TRADING CONSERVADOR: Reducir riesgos en condiciones moderadas",
+    "⏰ AUMENTAR TIMEOUTS: Esperar mejores confirmaciones",
+    "🔍 ENFOCARSE EN 1-2 SÍMBOLOS: Concentrar esfuerzos",
+    "🔧 AJUSTAR FILTROS DE CONFIANZA: Señales muy débiles",
+    "📉 ESPERAR MAYOR VOLUMEN: Mercado poco activo",
+    "⏳ MERCADO LATERAL: Considerar estrategias de rango",
+    "🤖 INTEGRAR IA CONTINUA: Usar detecciones de anomalías para filtrar trades",
+    "📊 DASHBOARD EN TIEMPO REAL: Crear interfaz de monitoreo avanzada",
+    "🔄 BACKTESTING AUTOMÁTICO: Validar estrategias continuamente",
+    "📱 SISTEMA DE ALERTAS: Notificaciones para oportunidades importantes"
+  ],
+  "score_mercado": 30,
+  "recomendacion_inmediata": "observar"
+}

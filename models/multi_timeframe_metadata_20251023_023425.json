@@ -1,0 +1,27 @@
+{
+  "training_timestamp": "20251023_023425",
+  "models_trained": [
+    "random_forest",
+    "gradient_boosting",
+    "logistic_regression"
+  ],
+  "best_model": "gradient_boosting",
+  "accuracies": {
+    "random_forest": 0.6015151515151516,
+    "gradient_boosting": 0.6134559884559885,
+    "logistic_regression": 0.5943542568542568
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "ADAUSDT",
+    "DOTUSDT",
+    "LINKUSDT"
+  ],
+  "timeframes": [
+    "1m",
+    "5m",
+    "15m",
+    "1h"
+  ]
+}

@@ -1,0 +1,29 @@
+2025-10-18 18:56:39,134 - INFO - 🔄 Configuración actualizada para capital $200.00
+2025-10-18 18:56:39,134 - INFO - 📊 Max trades diarios: 3
+2025-10-18 18:56:39,134 - INFO - 🎯 Win rate objetivo: 64.0%
+2025-10-18 18:56:39,134 - INFO - 🛡️ Riesgo por trade: 2.4%
+2025-10-18 18:56:39,134 - INFO - 💰 VARIABLE CAPITAL 5% SYSTEM INICIALIZADO
+2025-10-18 18:56:39,134 - INFO - 💵 Capital inicial: $200.00 USDT
+2025-10-18 18:56:39,134 - INFO - 📊 Rango capital: $200-$500 USDT
+2025-10-18 18:56:39,134 - INFO - 🎯 Objetivo: 5.0% mensual
+2025-10-18 18:56:39,134 - INFO - 📈 Escalamiento automático activado
+2025-10-18 18:56:39,134 - INFO - 💰 INICIANDO SISTEMA CON CAPITAL VARIABLE 200-500 USDT
+2025-10-18 18:56:39,134 - INFO - 📊 Analizando ADAUSDT con capital $200.00...
+2025-10-18 18:56:39,461 - INFO - 📊 Analizando DOTUSDT con capital $198.23...
+2025-10-18 18:56:39,765 - INFO - 📊 Analizando LINKUSDT con capital $195.88...
+2025-10-18 18:56:40,141 - INFO - 📊 Analizando MATICUSDT con capital $190.10...
+2025-10-18 18:56:40,395 - INFO - 📊 Analizando ATOMUSDT con capital $182.13...
+2025-10-18 18:56:40,669 - INFO - 📊 Analizando FTMUSDT con capital $178.22...
+2025-10-18 18:56:40,961 - INFO - 📊 Analizando SANDUSDT con capital $176.92...
+2025-10-18 18:56:41,238 - INFO - 📊 Analizando MANAUSDT con capital $172.74...
+2025-10-18 18:56:41,504 - INFO - 💰 SISTEMA CAPITAL VARIABLE COMPLETADO
+2025-10-18 18:56:41,504 - INFO - 💵 Capital inicial: $200.00 USDT
+2025-10-18 18:56:41,504 - INFO - 💵 Capital final: $167.85 USDT
+2025-10-18 18:56:41,506 - INFO - 💵 Capital actual: $167.85 USDT
+2025-10-18 18:56:41,506 - INFO - 📈 Retorno total: -16.07%
+2025-10-18 18:56:41,506 - INFO - 🎯 Retorno mensual: -3.58%
+2025-10-18 18:56:41,506 - INFO - 🏆 Cumple objetivo: ❌ NO
+2025-10-18 18:56:41,506 - INFO - 📊 Total trades: 96
+2025-10-18 18:56:41,506 - INFO - 🎲 Win rate: 35.4%
+2025-10-18 18:56:41,506 - INFO - 📉 Max drawdown: -16.25%
+2025-10-18 18:56:41,506 - INFO - 🚀 Escalamientos: 0

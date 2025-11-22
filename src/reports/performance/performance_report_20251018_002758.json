@@ -1,0 +1,75 @@
+{
+  "timestamp": "2025-10-18T00:27:58.851639",
+  "analysis_period_hours": 24,
+  "symbols_analyzed": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "ADAUSDT",
+    "BNBUSDT",
+    "SOLUSDT"
+  ],
+  "market_data": {
+    "symbols": {
+      "BTCUSDT": {
+        "error": "object NoneType can't be used in 'await' expression"
+      },
+      "ETHUSDT": {
+        "error": "object NoneType can't be used in 'await' expression"
+      },
+      "ADAUSDT": {
+        "error": "object NoneType can't be used in 'await' expression"
+      },
+      "BNBUSDT": {
+        "error": "object NoneType can't be used in 'await' expression"
+      },
+      "SOLUSDT": {
+        "error": "object NoneType can't be used in 'await' expression"
+      }
+    },
+    "market_summary": {},
+    "volatility_analysis": {},
+    "volume_analysis": {}
+  },
+  "breakout_performance": {
+    "total_breakouts_detected": 0,
+    "breakouts_by_symbol": {},
+    "breakout_accuracy": {},
+    "signal_strength_distribution": {},
+    "timeframe_effectiveness": {}
+  },
+  "scalping_performance": {
+    "total_opportunities": 0,
+    "executed_trades": 0,
+    "success_rate": 0,
+    "avg_profit_per_trade": 0,
+    "risk_reward_ratio": 0,
+    "scalping_by_symbol": {}
+  },
+  "paper_trading_performance": {
+    "initial_capital": 200.0,
+    "current_capital": 200.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "total_pnl": 0.0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "max_drawdown": 0.0,
+    "sharpe_ratio": 0,
+    "trade_history": 0,
+    "roi_percentage": 0.0
+  },
+  "risk_metrics": {
+    "portfolio_volatility": 0,
+    "value_at_risk_95": 0,
+    "maximum_drawdown": 0,
+    "risk_adjusted_return": 0,
+    "correlation_risk": {},
+    "concentration_risk": {}
+  },
+  "correlation_analysis": {
+    "correlation_matrix": {},
+    "high_correlations": [],
+    "diversification_score": 0
+  },
+  "overall_score": 50.0
+}

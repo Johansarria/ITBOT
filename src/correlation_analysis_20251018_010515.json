@@ -1,0 +1,153 @@
+{
+  "timestamp": "2025-10-18T01:05:15.023459",
+  "analysis_summary": {
+    "total_assets": 5,
+    "data_periods": 89,
+    "asset_classes": 1
+  },
+  "correlation_matrices": {
+    "short_term_pearson": {
+      "BTCUSDT": {
+        "BTCUSDT": 1.0,
+        "ETHUSDT": 0.9392135535291571,
+        "BNBUSDT": 0.7252389764997457,
+        "ADAUSDT": 0.9057051564083899,
+        "SOLUSDT": 0.9143771622570287
+      },
+      "ETHUSDT": {
+        "BTCUSDT": 0.9392135535291571,
+        "ETHUSDT": 1.0,
+        "BNBUSDT": 0.7573581524803354,
+        "ADAUSDT": 0.9411939772639486,
+        "SOLUSDT": 0.9633616944955984
+      },
+      "BNBUSDT": {
+        "BTCUSDT": 0.7252389764997457,
+        "ETHUSDT": 0.7573581524803354,
+        "BNBUSDT": 1.0,
+        "ADAUSDT": 0.7206104438485045,
+        "SOLUSDT": 0.6739763505710982
+      },
+      "ADAUSDT": {
+        "BTCUSDT": 0.9057051564083899,
+        "ETHUSDT": 0.9411939772639486,
+        "BNBUSDT": 0.7206104438485045,
+        "ADAUSDT": 1.0,
+        "SOLUSDT": 0.9138821968000412
+      },
+      "SOLUSDT": {
+        "BTCUSDT": 0.9143771622570287,
+        "ETHUSDT": 0.9633616944955984,
+        "BNBUSDT": 0.6739763505710982,
+        "ADAUSDT": 0.9138821968000412,
+        "SOLUSDT": 1.0
+      }
+    },
+    "medium_term_pearson": {
+      "BTCUSDT": {
+        "BTCUSDT": 1.0,
+        "ETHUSDT": 0.8142147364538335,
+        "BNBUSDT": 0.7047613294021219,
+        "ADAUSDT": 0.8022358880091224,
+        "SOLUSDT": 0.8382903872166408
+      },
+      "ETHUSDT": {
+        "BTCUSDT": 0.8142147364538335,
+        "ETHUSDT": 1.0,
+        "BNBUSDT": 0.7256380463337133,
+        "ADAUSDT": 0.8515700684609521,
+        "SOLUSDT": 0.8800567736030237
+      },
+      "BNBUSDT": {
+        "BTCUSDT": 0.7047613294021219,
+        "ETHUSDT": 0.7256380463337133,
+        "BNBUSDT": 1.0,
+        "ADAUSDT": 0.7121636011648781,
+        "SOLUSDT": 0.6864823450424297
+      },
+      "ADAUSDT": {
+        "BTCUSDT": 0.8022358880091224,
+        "ETHUSDT": 0.8515700684609521,
+        "BNBUSDT": 0.7121636011648781,
+        "ADAUSDT": 1.0,
+        "SOLUSDT": 0.8733644361950107
+      },
+      "SOLUSDT": {
+        "BTCUSDT": 0.8382903872166408,
+        "ETHUSDT": 0.8800567736030237,
+        "BNBUSDT": 0.6864823450424297,
+        "ADAUSDT": 0.8733644361950107,
+        "SOLUSDT": 1.0
+      }
+    },
+    "long_term_pearson": {
+      "BTCUSDT": {
+        "BTCUSDT": 1.0,
+        "ETHUSDT": 0.8142147364538335,
+        "BNBUSDT": 0.7047613294021219,
+        "ADAUSDT": 0.8022358880091224,
+        "SOLUSDT": 0.8382903872166408
+      },
+      "ETHUSDT": {
+        "BTCUSDT": 0.8142147364538335,
+        "ETHUSDT": 1.0,
+        "BNBUSDT": 0.7256380463337133,
+        "ADAUSDT": 0.8515700684609521,
+        "SOLUSDT": 0.8800567736030237
+      },
+      "BNBUSDT": {
+        "BTCUSDT": 0.7047613294021219,
+        "ETHUSDT": 0.7256380463337133,
+        "BNBUSDT": 1.0,
+        "ADAUSDT": 0.7121636011648781,
+        "SOLUSDT": 0.6864823450424297
+      },
+      "ADAUSDT": {
+        "BTCUSDT": 0.8022358880091224,
+        "ETHUSDT": 0.8515700684609521,
+        "BNBUSDT": 0.7121636011648781,
+        "ADAUSDT": 1.0,
+        "SOLUSDT": 0.8733644361950107
+      },
+      "SOLUSDT": {
+        "BTCUSDT": 0.8382903872166408,
+        "ETHUSDT": 0.8800567736030237,
+        "BNBUSDT": 0.6864823450424297,
+        "ADAUSDT": 0.8733644361950107,
+        "SOLUSDT": 1.0
+      }
+    }
+  },
+  "asset_class_analysis": {
+    "cryptocurrencies": {
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT"
+      ],
+      "count": 5,
+      "avg_correlation": 0.7888777611881725,
+      "max_correlation": 0.8800567736030237,
+      "min_correlation": 0.6864823450424297
+    }
+  },
+  "diversification_opportunities": [],
+  "portfolio_suggestions": {
+    "selected_assets": [
+      "BNBUSDT",
+      "SOLUSDT",
+      "BTCUSDT",
+      "ADAUSDT",
+      "ETHUSDT"
+    ],
+    "asset_count": 5,
+    "avg_correlation": 0.7888777611881727,
+    "max_correlation": 0.8800567736030237,
+    "asset_class_distribution": {
+      "cryptocurrencies": 5
+    },
+    "diversification_score": 0.21112223881182735
+  }
+}

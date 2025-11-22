@@ -1,0 +1,22 @@
+REPORTE COGNITIVO DINÁMICO SICAR
+Generado: 2025-10-21 10:22:12
+Decisión: SELL
+Estrategia: momentum
+Confianza: 0.85
+==================================================
+
+**Reporte Cognitivo de Decisión de Trading – SICAR**
+
+**DECISIÓN PRINCIPAL:** El sistema SICAR ha decidido vender activos. Esta acción se basa en la estrategia de momentum, que busca aprovechar tendencias de precios en el mercado. A pesar de que el régimen de mercado es desconocido, la decisión de venta sugiere que se anticipa una posible caída en los precios.
+
+**TRADUCCIÓN DE MÉTRICAS:** La confianza en esta decisión es alta (84.8%), lo que indica que el sistema tiene un buen nivel de certeza sobre la dirección del mercado. Sin embargo, la falta de datos dinámicos limita la evaluación completa de la situación actual. La tendencia de momentum no se ha especificado, pero se puede inferir que es suficientemente fuerte para justificar la acción de venta.
+
+**CONTEXTO DE MERCADO:** Aunque el régimen de mercado es incierto, el sistema ha identificado señales que sugieren que el precio de los activos podría estar en un punto de inflexión. Esta incertidumbre puede estar relacionada con factores económicos globales o eventos inesperados que afectan la confianza del inversor.
+
+**FACTORES DETERMINANTES:** Los dos factores más importantes que influyeron en esta decisión son:
+1. La alta confianza en la señal de venta, lo que indica que el sistema percibe un riesgo significativo de caída en los precios.
+2. La falta de datos dinámicos, que aunque limita la evaluación, no impidió que el sistema actuara en función de la información disponible.
+
+**NIVEL DE CERTEZA:** Con una confianza alta, el nivel de riesgo se considera moderado, lo que significa que, aunque hay un buen fundamento para la venta, la situación del mercado sigue siendo volátil.
+
+**IMPLICACIONES PRÁCTICAS:** Esta decisión de venta puede ayudar a proteger el portafolio de pérdidas potenciales, permitiendo al sistema posicionarse mejor para futuras oportunidades de compra cuando las condiciones del mercado sean más favorables.

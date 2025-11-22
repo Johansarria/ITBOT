@@ -1,0 +1,194 @@
+═══════════════════════════════════════════════════════════════════════════════════════
+🎯 ITBOT CRT METHODOLOGY - SMART MONEY LIQUIDITY SWEEP
+═══════════════════════════════════════════════════════════════════════════════════════
+
+📋 DESCRIPCIÓN GENERAL
+═══════════════════════════════════════════════════════════════════════════════════════
+
+La "Metodología CRT" (Concepto de Manipulación de Liquidez) es una estrategia avanzada 
+de trading que se basa en los principios de Smart Money y la manipulación institucional 
+de liquidez. Esta estrategia identifica y aprovecha los movimientos de "liquidity sweep" 
+o "stop hunt" que ocurren en horarios específicos del día.
+
+🔍 CONCEPTO CENTRAL
+═══════════════════════════════════════════════════════════════════════════════════════
+
+La estrategia se fundamenta en la premisa de que las instituciones financieras manipulan 
+deliberadamente los niveles de soporte y resistencia para activar stop losses de traders 
+minoristas, creando liquidez antes de impulsar el precio en la dirección opuesta.
+
+⏰ HORARIO OPERATIVO CLAVE
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• SESIÓN PRINCIPAL: 8:00 - 9:00 AM (configurable)
+• JUSTIFICACIÓN: Coincide con la apertura de mercados europeos
+• ALTA LIQUIDEZ: Momento de mayor actividad institucional
+• MANIPULACIÓN FRECUENTE: Horario típico para stop hunts
+
+📊 TEMPORALIDADES UTILIZADAS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• TIMEFRAME PRINCIPAL: 1 Hora (1H) - Para identificar rango y dirección
+• TIMEFRAME EJECUCIÓN: 15 Minutos (15M) - Para timing preciso de entrada
+• RATIO TEMPORAL: 4:1 (técnicamente apropiado)
+
+🎯 LÓGICA DE OPERACIÓN (PASO A PASO)
+═══════════════════════════════════════════════════════════════════════════════════════
+
+1. IDENTIFICACIÓN DEL RANGO (8:00-9:00 AM)
+   ✅ Marcar máximo y mínimo de la vela de 1H
+   ✅ Establecer zona operativa para el resto de la sesión
+   ✅ Activar monitoreo de manipulación
+
+2. DETECCIÓN DE MANIPULACIÓN
+   ✅ Esperar breakout de uno de los extremos del rango
+   ✅ Verificar que el precio NO cierre fuera del nivel
+   ✅ Confirmar retorno dentro del rango (manipulación confirmada)
+
+3. CONFIRMACIÓN DE SEÑAL
+   ✅ Buscar el mismo patrón en timeframe de 15M
+   ✅ Esperar confirmación de momentum en dirección opuesta
+   ✅ Validar con velas de confirmación configurables
+
+4. EJECUCIÓN DE ENTRADA
+   ✅ Entrada inmediata tras confirmación completa
+   ✅ Dirección opuesta a la manipulación detectada
+   ✅ Cálculo automático de tamaño de posición
+
+🛡️ GESTIÓN DE RIESGO INTEGRADA
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• STOP LOSS: Basado en estructura (extremo manipulado + buffer)
+• TAKE PROFIT: Extremo opuesto del rango + extensión por ratio R:R
+• RATIO R:R: Configurable (por defecto 1:2)
+• RIESGO MÁXIMO: Configurable por operación (por defecto 1%)
+• TRAILING STOP: Opcional para maximizar ganancias
+
+🔔 SISTEMA DE ALERTAS COMPLETO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• 🟢 NUEVA SESIÓN: Inicio de monitoreo de rango
+• 🔴 MANIPULACIÓN DETECTADA: Breakout y retorno confirmado
+• 🚀 ENTRADA ALCISTA: Señal de compra ejecutada
+• 🔻 ENTRADA BAJISTA: Señal de venta ejecutada
+• 🚪 SALIDA: Cierre de posición (ganancia/pérdida)
+• 🏁 FIN DE SESIÓN: Resumen de rango detectado
+
+📈 CARACTERÍSTICAS TÉCNICAS AVANZADAS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+✅ FILTROS DE CALIDAD:
+   • Mínimo breakout en pips (configurable)
+   • Máximo retroceso permitido (%)
+   • Velas de confirmación requeridas
+   • Validación de momentum direccional
+
+✅ VISUALIZACIÓN PROFESIONAL:
+   • Rango de sesión clave marcado
+   • Puntos de manipulación identificados
+   • Niveles de entrada, SL y TP
+   • Tabla de información en tiempo real
+   • Códigos de color intuitivos
+
+✅ GESTIÓN AUTOMÁTICA:
+   • Cálculo de posición basado en riesgo
+   • Ejecución automática de órdenes
+   • Trailing stops opcionales
+   • Monitoreo continuo de condiciones
+
+🎛️ PARÁMETROS CONFIGURABLES
+═══════════════════════════════════════════════════════════════════════════════════════
+
+⏰ CONFIGURACIÓN DE HORARIOS:
+   • Hora de inicio de sesión clave (0-23)
+   • Hora de fin de sesión clave (0-23)
+   • Zona horaria (UTC, NY, London, Tokyo)
+
+✅ CONFIGURACIÓN DE CONFIRMACIÓN:
+   • Mínimo breakout en pips (1.0-50.0)
+   • Máximo retroceso permitido (10-100%)
+   • Velas de confirmación requeridas (1-5)
+
+⚠️ GESTIÓN DE RIESGO:
+   • Ratio Riesgo:Beneficio (0.5-5.0)
+   • Riesgo máximo por operación (0.1-5.0%)
+   • Activar/desactivar trailing stop
+   • Porcentaje de trailing stop (0.1-3.0%)
+
+🔔 CONFIGURACIÓN DE ALERTAS:
+   • Activar/desactivar alertas generales
+   • Alerta de manipulación detectada
+   • Alerta de entrada de posición
+   • Alerta de salida de posición
+
+📊 MÉTRICAS ESPERADAS DE RENDIMIENTO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• WIN RATE ESTIMADO: 45-65%
+• RATIO R:R PROMEDIO: 1:1.5 a 1:3
+• FRECUENCIA DE SEÑALES: 1-3 por semana
+• DRAWDOWN MÁXIMO: <5% (con gestión adecuada)
+• TIEMPO DE DEDICACIÓN: 2-3 horas diarias
+
+🎯 MERCADOS RECOMENDADOS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+✅ FOREX MAYORES: EUR/USD, GBP/USD, USD/JPY, AUD/USD
+✅ ÍNDICES: SPX500, NAS100, GER40, UK100
+✅ COMMODITIES: GOLD, SILVER, OIL
+✅ CRYPTO: BTC/USD, ETH/USD (con ajustes de volatilidad)
+
+⚠️ CONSIDERACIONES IMPORTANTES
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• REQUIERE EXPERIENCIA: No apta para traders principiantes
+• ANÁLISIS DE CONTEXTO: Considerar noticias y eventos importantes
+• GESTIÓN EMOCIONAL: Disciplina estricta en la ejecución
+• BACKTESTING: Probar en demo antes de capital real
+• ADAPTACIÓN: Ajustar parámetros según volatilidad del mercado
+
+🔧 INSTRUCCIONES DE USO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+1. CONFIGURACIÓN INICIAL:
+   ✅ Ajustar horarios según zona horaria local
+   ✅ Configurar parámetros de riesgo apropiados
+   ✅ Activar alertas deseadas
+   ✅ Seleccionar timeframe de 15M o 1H
+
+2. MONITOREO DIARIO:
+   ✅ Observar formación del rango 8:00-9:00 AM
+   ✅ Esperar alertas de manipulación
+   ✅ Confirmar señales antes de ejecutar
+   ✅ Seguir plan de gestión de riesgo
+
+3. OPTIMIZACIÓN CONTINUA:
+   ✅ Revisar resultados semanalmente
+   ✅ Ajustar parámetros según rendimiento
+   ✅ Adaptar a condiciones de mercado
+   ✅ Mantener disciplina operativa
+
+🏆 VENTAJAS COMPETITIVAS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• BASADA EN SMART MONEY: Aprovecha movimientos institucionales reales
+• HORARIO ESPECÍFICO: Reduce tiempo de monitoreo
+• FILTROS ROBUSTOS: Minimiza señales falsas
+• GESTIÓN AUTOMÁTICA: Reduce errores humanos
+• ALTAMENTE CONFIGURABLE: Adaptable a diferentes estilos
+• ALERTAS COMPLETAS: No requiere monitoreo constante
+
+═══════════════════════════════════════════════════════════════════════════════════════
+📝 NOTAS TÉCNICAS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+• Versión Pine Script: v6
+• Tipo: Strategy (con ejecución automática)
+• Overlay: Sí (se superpone al gráfico de precios)
+• Comisiones: Configurables (por defecto 0.1%)
+• Slippage: Configurado (por defecto 2 pips)
+• Capital inicial: Configurable (por defecto $10,000)
+
+═══════════════════════════════════════════════════════════════════════════════════════
+⚡ DESARROLLADO POR ITBOT - SMART TRADING SOLUTIONS
+═══════════════════════════════════════════════════════════════════════════════════════

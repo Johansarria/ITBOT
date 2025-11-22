@@ -1,0 +1,18 @@
+2025-10-18 19:05:34,858 - INFO - === INICIANDO SISTEMA FINAL DE PRIMERA VELA - 5% MENSUAL ===
+2025-10-18 19:05:34,858 - INFO - Capital inicial: $250.00
+2025-10-18 19:05:34,858 - INFO - Objetivo: 5.0% mensual
+2025-10-18 19:05:34,866 - INFO - Win rate objetivo: 65.0%
+2025-10-18 19:05:34,866 - INFO - Generando datos de mercado calibrados para 5% mensual...
+2025-10-18 19:05:34,924 - INFO - Calculando indicadores inteligentes...
+2025-10-18 19:05:34,948 - INFO - Generando señales ultra-selectivas...
+2025-10-18 19:05:35,096 - INFO - Simulando trading calibrado para 5% mensual...
+2025-10-18 19:05:35,279 - INFO - === RESULTADOS DEL SISTEMA FINAL ===
+2025-10-18 19:05:35,279 - INFO - Retorno total: 0.00%
+2025-10-18 19:05:35,279 - INFO - Retorno mensual: 0.00%
+2025-10-18 19:05:35,279 - INFO - Logro del objetivo: 0.0%
+2025-10-18 19:05:35,279 - INFO - Total de trades: 0
+2025-10-18 19:05:35,279 - INFO - Tasa de aciertos: 0.0%
+2025-10-18 19:05:35,279 - INFO - Factor de ganancia: 0.00
+2025-10-18 19:05:35,281 - INFO - Maximo drawdown: 0.00%
+2025-10-18 19:05:35,281 - INFO - Capital final: $250.00
+2025-10-18 19:05:35,281 - INFO - Cumple objetivo 5% mensual: NO

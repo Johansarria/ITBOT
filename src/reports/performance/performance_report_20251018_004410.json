@@ -1,0 +1,222 @@
+{
+  "timestamp": "2025-10-18T00:44:10.827756",
+  "analysis_period_hours": 24,
+  "symbols_analyzed": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "ADAUSDT",
+    "BNBUSDT",
+    "SOLUSDT"
+  ],
+  "market_data": {
+    "symbols": {
+      "BTCUSDT": {
+        "price_change_24h": -5.22,
+        "volatility": 0.4226,
+        "avg_volume": 939.34,
+        "current_price": 106719.06,
+        "high_24h": 126199.63,
+        "low_24h": 102000.0,
+        "data_points": 576
+      },
+      "ETHUSDT": {
+        "price_change_24h": -7.59,
+        "volatility": 0.7471,
+        "avg_volume": 24302.52,
+        "current_price": 3863.9,
+        "high_24h": 4755.0,
+        "low_24h": 3435.0,
+        "data_points": 576
+      },
+      "ADAUSDT": {
+        "price_change_24h": -22.97,
+        "volatility": 1.0653,
+        "avg_volume": 7704997.53,
+        "current_price": 0.6282,
+        "high_24h": 0.8924,
+        "low_24h": 0.2737,
+        "data_points": 576
+      },
+      "BNBUSDT": {
+        "price_change_24h": 6.53,
+        "volatility": 0.9811,
+        "avg_volume": 29877.64,
+        "current_price": 1084.29,
+        "high_24h": 1375.11,
+        "low_24h": 860.11,
+        "data_points": 576
+      },
+      "SOLUSDT": {
+        "price_change_24h": -12.65,
+        "volatility": 0.901,
+        "avg_volume": 193300.75,
+        "current_price": 184.28,
+        "high_24h": 237.79,
+        "low_24h": 168.79,
+        "data_points": 576
+      }
+    },
+    "market_summary": {
+      "avg_price_change": -8.379999999999999,
+      "avg_volatility": 0.8234199999999999,
+      "total_symbols_analyzed": 5,
+      "market_trend": "bearish"
+    },
+    "volatility_analysis": {},
+    "volume_analysis": {},
+    "data_quality": {
+      "total_symbols": 5,
+      "successful_symbols": 5,
+      "success_rate": 100.0,
+      "data_source": "APIs reales (Binance, CoinGecko, Coinbase)"
+    }
+  },
+  "breakout_performance": {
+    "total_breakouts_detected": 24,
+    "breakouts_by_symbol": {
+      "BTCUSDT": {
+        "total_detected": 1,
+        "successful": 0,
+        "accuracy_percentage": 0.0
+      },
+      "ETHUSDT": {
+        "total_detected": 4,
+        "successful": 0,
+        "accuracy_percentage": 0.0
+      },
+      "ADAUSDT": {
+        "total_detected": 6,
+        "successful": 0,
+        "accuracy_percentage": 0.0
+      },
+      "BNBUSDT": {
+        "total_detected": 7,
+        "successful": 2,
+        "accuracy_percentage": 28.57
+      },
+      "SOLUSDT": {
+        "total_detected": 6,
+        "successful": 1,
+        "accuracy_percentage": 16.67
+      }
+    },
+    "breakout_accuracy": {},
+    "signal_strength_distribution": {},
+    "timeframe_effectiveness": {}
+  },
+  "scalping_performance": {
+    "total_opportunities": 0,
+    "executed_trades": 0,
+    "success_rate": 0,
+    "avg_profit_per_trade": 0,
+    "risk_reward_ratio": 0,
+    "scalping_by_symbol": {}
+  },
+  "paper_trading_performance": {
+    "initial_capital": 200.0,
+    "current_capital": 200.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "total_pnl": 0.0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "max_drawdown": 0.0,
+    "sharpe_ratio": 0,
+    "trade_history": 0,
+    "roi_percentage": 0.0
+  },
+  "risk_metrics": {
+    "portfolio_volatility": 0.7292,
+    "value_at_risk_95": -1.0914,
+    "maximum_drawdown": 0,
+    "risk_adjusted_return": 0,
+    "correlation_risk": {},
+    "concentration_risk": {}
+  },
+  "correlation_analysis": {
+    "correlation_matrix": {
+      "BTCUSDT": {
+        "ETHUSDT": 0.943,
+        "ADAUSDT": 0.742,
+        "BNBUSDT": 0.564,
+        "SOLUSDT": 0.895
+      },
+      "ETHUSDT": {
+        "BTCUSDT": 0.943,
+        "ADAUSDT": 0.84,
+        "BNBUSDT": 0.429,
+        "SOLUSDT": 0.963
+      },
+      "ADAUSDT": {
+        "BTCUSDT": 0.742,
+        "ETHUSDT": 0.84,
+        "BNBUSDT": -0.05,
+        "SOLUSDT": 0.925
+      },
+      "BNBUSDT": {
+        "BTCUSDT": 0.564,
+        "ETHUSDT": 0.429,
+        "ADAUSDT": -0.05,
+        "SOLUSDT": 0.24
+      },
+      "SOLUSDT": {
+        "BTCUSDT": 0.895,
+        "ETHUSDT": 0.963,
+        "ADAUSDT": 0.925,
+        "BNBUSDT": 0.24
+      }
+    },
+    "high_correlations": [
+      {
+        "pair": "BTCUSDT-ETHUSDT",
+        "correlation": 0.943
+      },
+      {
+        "pair": "BTCUSDT-ADAUSDT",
+        "correlation": 0.742
+      },
+      {
+        "pair": "BTCUSDT-SOLUSDT",
+        "correlation": 0.895
+      },
+      {
+        "pair": "ETHUSDT-BTCUSDT",
+        "correlation": 0.943
+      },
+      {
+        "pair": "ETHUSDT-ADAUSDT",
+        "correlation": 0.84
+      },
+      {
+        "pair": "ETHUSDT-SOLUSDT",
+        "correlation": 0.963
+      },
+      {
+        "pair": "ADAUSDT-BTCUSDT",
+        "correlation": 0.742
+      },
+      {
+        "pair": "ADAUSDT-ETHUSDT",
+        "correlation": 0.84
+      },
+      {
+        "pair": "ADAUSDT-SOLUSDT",
+        "correlation": 0.925
+      },
+      {
+        "pair": "SOLUSDT-BTCUSDT",
+        "correlation": 0.895
+      },
+      {
+        "pair": "SOLUSDT-ETHUSDT",
+        "correlation": 0.963
+      },
+      {
+        "pair": "SOLUSDT-ADAUSDT",
+        "correlation": 0.925
+      }
+    ],
+    "diversification_score": 0
+  },
+  "overall_score": 50.0
+}

@@ -1,0 +1,33 @@
+2025-10-21 23:48:06,919 | INFO | [DB] Base de datos mejorada inicializada
+2025-10-21 23:48:06,920 | INFO | [INIT] Sistema de Trading Mejorado inicializado
+2025-10-21 23:48:06,923 | INFO | [CONFIG] Confianza mínima: 75.0%
+2025-10-21 23:48:06,925 | INFO | [CONFIG] Stop loss base: 3.0%
+2025-10-21 23:48:06,925 | INFO | [CONFIG] Máximo posiciones: 2
+2025-10-21 23:48:06,928 | INFO | Iniciando pruebas con casos históricos que fallaron
+2025-10-21 23:48:06,929 | INFO | Probando caso histórico: ADAUSDT
+2025-10-21 23:48:06,930 | INFO | Iniciando análisis completo de ADAUSDT
+2025-10-21 23:48:13,741 | INFO | ADAUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:13,785 | INFO | Probando caso histórico: AVAXUSDT
+2025-10-21 23:48:13,803 | INFO | Iniciando análisis completo de AVAXUSDT
+2025-10-21 23:48:19,911 | INFO | AVAXUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:19,919 | INFO | Resultados de pruebas: 2/2 fallas prevenidas (100.0%)
+2025-10-21 23:48:19,923 | INFO | Probando sistema con condiciones actuales del mercado
+2025-10-21 23:48:19,926 | INFO | Analizando condiciones actuales de BTCUSDT
+2025-10-21 23:48:19,929 | INFO | Iniciando análisis completo de BTCUSDT
+2025-10-21 23:48:25,387 | INFO | BTCUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:25,387 | INFO | Analizando condiciones actuales de ETHUSDT
+2025-10-21 23:48:25,387 | INFO | Iniciando análisis completo de ETHUSDT
+2025-10-21 23:48:30,424 | INFO | ETHUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:30,428 | INFO | Analizando condiciones actuales de ADAUSDT
+2025-10-21 23:48:30,428 | INFO | Iniciando análisis completo de ADAUSDT
+2025-10-21 23:48:35,373 | INFO | ADAUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:35,373 | INFO | Analizando condiciones actuales de AVAXUSDT
+2025-10-21 23:48:35,373 | INFO | Iniciando análisis completo de AVAXUSDT
+2025-10-21 23:48:41,101 | INFO | AVAXUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:41,106 | INFO | Analizando condiciones actuales de LINKUSDT
+2025-10-21 23:48:41,106 | INFO | Iniciando análisis completo de LINKUSDT
+2025-10-21 23:48:46,504 | INFO | LINKUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:46,510 | INFO | Analizando condiciones actuales de DOTUSDT
+2025-10-21 23:48:46,512 | INFO | Iniciando análisis completo de DOTUSDT
+2025-10-21 23:48:51,690 | INFO | DOTUSDT: Rechazado por filtro BTC/ETH
+2025-10-21 23:48:51,690 | INFO | Resultados del mercado actual: 0/0 señales aprobadas

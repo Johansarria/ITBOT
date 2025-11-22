@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "created_at": "2025-10-18 00:59:38",
+    "version": "1.0",
+    "description": "Configuración multi-asset basada en investigación 2025",
+    "data_sources": [
+      "Binance",
+      "CoinGecko",
+      "Coinbase"
+    ],
+    "excluded_sources": [
+      "yfinance"
+    ]
+  },
+  "asset_classes": {
+    "cryptocurrencies": {
+      "description": "Top 10 criptomonedas validadas para backtesting",
+      "market_hours": "24/7",
+      "base_currency": "USDT",
+      "symbols": [
+        {
+          "symbol": "BTCUSDT",
+          "name": "Bitcoin",
+          "category": "Major Crypto",
+          "priority": "high",
+          "validated": true
+        },
+        {
+          "symbol": "ETHUSDT",
+          "name": "Ethereum",
+          "category": "Major Crypto",
+          "priority": "high",
+          "validated": true
+        },
+        {
+          "symbol": "BNBUSDT",
+          "name": "Binance Coin",
+          "category": "Exchange Token",
+          "priority": "high",
+          "validated": true
+        },
+        {
+          "symbol": "ADAUSDT",
+          "name": "Cardano",
+          "category": "Layer 1",
+          "priority": "medium",
+          "validated": true
+        },
+        {
+          "symbol": "SOLUSDT",
+          "name": "Solana",
+          "category": "Layer 1",
+          "priority": "high",
+          "validated": true
+        },
+        {
+          "symbol": "XRPUSDT",
+          "name": "XRP",
+          "category": "Payment",
+          "priority": "medium",
+          "validated": true
+        },
+        {
+          "symbol": "DOTUSDT",
+          "name": "Polkadot",
+          "category": "Layer 0",
+          "priority": "medium",
+          "validated": true
+        },
+        {
+          "symbol": "DOGEUSDT",
+          "name": "Dogecoin",
+          "category": "Meme",
+          "priority": "low",
+          "validated": true
+        },
+        {
+          "symbol": "AVAXUSDT",
+          "name": "Avalanche",
+          "category": "Layer 1",
+          "priority": "medium",
+          "validated": true
+        },
+        {
+          "symbol": "MATICUSDT",
+          "name": "Polygon",
+          "category": "Layer 2",
+          "priority": "medium",
+          "validated": true
+        }
+      ]
+    },
+    "forex": {
+      "description": "Pares de forex principales con alta liquidez y volatilidad",
+      "market_hours": "24/5 (Lunes-Viernes)",
+      "session_overlap": "Londres-Nueva York (mayor liquidez)",
+      "symbols": [
+        {
+          "symbol": "EURUSD",
+          "name": "Euro/US Dollar",
+          "category": "Major Pair",
+          "priority": "high",
+          "daily_volume": "Highest",
+          "spread": "Lowest",
+          "validated": false,
+          "notes": "Par más líquido del mundo"
+        },
+        {
+          "symbol": "GBPUSD",
+          "name": "British Pound/US Dollar",
+          "category": "Major Pair",
+          "priority": "high",
+          "daily_volume": "High",
+          "spread": "Low",
+          "validated": false,
+          "notes": "Alta volatilidad, bueno para swing trading"
+        },
+        {
+          "symbol": "USDJPY",
+          "name": "US Dollar/Japanese Yen",
+          "category": "Major Pair",
+          "priority": "high",
+          "daily_volume": "High",
+          "spread": "Low",
+          "validated": false,
+          "notes": "Sensible a políticas del Banco de Japón"
+        },
+        {
+          "symbol": "AUDUSD",
+          "name": "Australian Dollar/US Dollar",
+          "category": "Major Pair",
+          "priority": "medium",
+          "daily_volume": "Medium",
+          "spread": "Medium",
+          "validated": false,
+          "notes": "Correlacionado con commodities"
+        },
+        {
+          "symbol": "USDCAD",
+          "name": "US Dollar/Canadian Dollar",
+          "category": "Major Pair",
+          "priority": "medium",
+          "daily_volume": "Medium",
+          "spread": "Medium",
+          "validated": false,
+          "notes": "Influenciado por precios del petróleo"
+        },
+        {
+          "symbol": "USDCHF",
+          "name": "US Dollar/Swiss Franc",
+          "category": "Major Pair",
+          "priority": "medium",
+          "daily_volume": "Medium",
+          "spread": "Medium",
+          "validated": false,
+          "notes": "Refugio seguro en tiempos de incertidumbre"
+        }
+      ]
+    },
+    "indices": {
+      "description": "Índices principales con alta volatilidad y liquidez",
+      "market_hours": "Varía según región",
+      "trading_method": "CFDs, ETFs, Futuros",
+      "symbols": [
+        {
+          "symbol": "SPX500",
+          "name": "S&P 500",
+          "category": "US Index",
+          "priority": "high",
+          "market": "Estados Unidos",
+          "trading_hours": "09:30-16:00 EST",
+          "validated": false,
+          "notes": "Índice más seguido globalmente"
+        },
+        {
+          "symbol": "NAS100",
+          "name": "Nasdaq 100",
+          "category": "US Tech Index",
+          "priority": "high",
+          "market": "Estados Unidos",
+          "trading_hours": "09:30-16:00 EST",
+          "validated": false,
+          "notes": "Alta volatilidad, enfoque tecnológico"
+        },
+        {
+          "symbol": "DAX",
+          "name": "DAX 40",
+          "category": "European Index",
+          "priority": "high",
+          "market": "Alemania",
+          "trading_hours": "09:00-17:30 CET",
+          "validated": false,
+          "notes": "Índice alemán más volátil"
+        },
+        {
+          "symbol": "UK100",
+          "name": "FTSE 100",
+          "category": "European Index",
+          "priority": "medium",
+          "market": "Reino Unido",
+          "trading_hours": "08:00-16:30 GMT",
+          "validated": false,
+          "notes": "Índice británico principal"
+        },
+        {
+          "symbol": "JPN225",
+          "name": "Nikkei 225",
+          "category": "Asian Index",
+          "priority": "medium",
+          "market": "Japón",
+          "trading_hours": "09:00-15:00 JST",
+          "validated": false,
+          "notes": "Principal índice asiático"
+        },
+        {
+          "symbol": "AUS200",
+          "name": "ASX 200",
+          "category": "Pacific Index",
+          "priority": "low",
+          "market": "Australia",
+          "trading_hours": "10:00-16:00 AEST",
+          "validated": false,
+          "notes": "Correlacionado con commodities"
+        }
+      ]
+    },
+    "commodities": {
+      "description": "Commodities principales: metales preciosos y energía",
+      "market_hours": "24/5 para la mayoría",
+      "trading_method": "CFDs, Futuros, ETFs",
+      "symbols": [
+        {
+          "symbol": "XAUUSD",
+          "name": "Gold/US Dollar",
+          "category": "Precious Metal",
+          "priority": "high",
+          "market": "Global",
+          "validated": false,
+          "notes": "Refugio seguro, hedge contra inflación"
+        },
+        {
+          "symbol": "XAGUSD",
+          "name": "Silver/US Dollar",
+          "category": "Precious Metal",
+          "priority": "medium",
+          "market": "Global",
+          "validated": false,
+          "notes": "Más volátil que el oro, uso industrial"
+        },
+        {
+          "symbol": "USOIL",
+          "name": "Crude Oil WTI",
+          "category": "Energy",
+          "priority": "high",
+          "market": "Global",
+          "validated": false,
+          "notes": "Benchmark estadounidense del petróleo"
+        },
+        {
+          "symbol": "UKOIL",
+          "name": "Brent Crude Oil",
+          "category": "Energy",
+          "priority": "high",
+          "market": "Global",
+          "validated": false,
+          "notes": "Benchmark europeo del petróleo"
+        },
+        {
+          "symbol": "NATGAS",
+          "name": "Natural Gas",
+          "category": "Energy",
+          "priority": "medium",
+          "market": "Global",
+          "validated": false,
+          "notes": "Alta volatilidad estacional"
+        },
+        {
+          "symbol": "COPPER",
+          "name": "Copper",
+          "category": "Industrial Metal",
+          "priority": "medium",
+          "market": "Global",
+          "validated": false,
+          "notes": "Indicador económico global"
+        }
+      ]
+    }
+  },
+  "trading_sessions": {
+    "description": "Horarios de trading por región y clase de activo",
+    "timezone_reference": "UTC",
+    "sessions": {
+      "crypto": {
+        "hours": "24/7",
+        "peak_volume": "14:00-22:00 UTC (overlap US-Europe)"
+      },
+      "forex": {
+        "sydney": "22:00-07:00 UTC",
+        "tokyo": "00:00-09:00 UTC",
+        "london": "08:00-17:00 UTC",
+        "new_york": "13:00-22:00 UTC",
+        "overlap_london_ny": "13:00-17:00 UTC (highest liquidity)"
+      },
+      "indices": {
+        "us_indices": "14:30-21:00 UTC",
+        "european_indices": "08:00-16:30 UTC",
+        "asian_indices": "00:00-06:00 UTC"
+      },
+      "commodities": {
+        "metals": "24/5",
+        "energy": "24/5",
+        "peak_hours": "13:00-17:00 UTC"
+      }
+    }
+  },
+  "risk_management": {
+    "description": "Parámetros de riesgo específicos por clase de activo",
+    "parameters": {
+      "cryptocurrencies": {
+        "max_position_size": 0.02,
+        "max_daily_risk": 0.05,
+        "volatility_multiplier": 1.5,
+        "correlation_limit": 0.7
+      },
+      "forex": {
+        "max_position_size": 0.03,
+        "max_daily_risk": 0.04,
+        "volatility_multiplier": 1.0,
+        "correlation_limit": 0.6
+      },
+      "indices": {
+        "max_position_size": 0.025,
+        "max_daily_risk": 0.045,
+        "volatility_multiplier": 1.2,
+        "correlation_limit": 0.65
+      },
+      "commodities": {
+        "max_position_size": 0.025,
+        "max_daily_risk": 0.04,
+        "volatility_multiplier": 1.3,
+        "correlation_limit": 0.6
+      }
+    }
+  },
+  "statistics": {
+    "total_instruments": 28,
+    "by_asset_class": {
+      "cryptocurrencies": 10,
+      "forex": 6,
+      "indices": 6,
+      "commodities": 6
+    },
+    "validated_instruments": 10,
+    "priority_distribution": {
+      "high": 13,
+      "medium": 13,
+      "low": 2
+    }
+  }
+}

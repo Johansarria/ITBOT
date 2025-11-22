@@ -1,0 +1,208 @@
+2025-10-17 04:03:40,885 - INFO - Tester de conectividad inicializado
+2025-10-17 04:03:40,893 - INFO - === Probando conectividad de red ===
+2025-10-17 04:03:42,982 - INFO - === Probando yfinance básico ===
+2025-10-17 04:03:42,982 - INFO - Probando con AAPL...
+2025-10-17 04:03:43,961 - ERROR - Error en test básico yfinance: 429 Client Error: Too Many Requests for url: https://query2.finance.yahoo.com/v6/finance/quoteSummary/AAPL?modules=financialData&modules=quoteType&modules=defaultKeyStatistics&modules=assetProfile&modules=summaryDetail&ssl=true
+2025-10-17 04:03:43,962 - INFO - === Probando yfinance con criptomonedas ===
+2025-10-17 04:03:43,963 - INFO - Probando BTC-USD...
+2025-10-17 04:03:45,381 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:46,253 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:03:46,258 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:47,124 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:03:47,128 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:48,007 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:03:48,511 - INFO - Probando ETH-USD...
+2025-10-17 04:03:49,493 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:50,597 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:03:50,605 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:51,493 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:03:51,497 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:52,413 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:03:52,919 - INFO - Probando ADA-USD...
+2025-10-17 04:03:53,839 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:54,749 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:03:54,756 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:55,645 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:03:55,651 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:56,520 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:03:57,026 - INFO - Probando SOL-USD...
+2025-10-17 04:03:57,970 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:58,924 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:03:58,930 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:03:59,836 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:03:59,844 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:00,712 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:04:01,220 - INFO - Probando XRP-USD...
+2025-10-17 04:04:02,172 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:03,155 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:04:03,162 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:04,182 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:04:04,191 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:05,109 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:04:05,615 - INFO - === Probando APIs alternativas ===
+2025-10-17 04:04:05,615 - INFO - Probando CoinGecko API...
+2025-10-17 04:04:06,511 - INFO - Probando Coinbase API...
+2025-10-17 04:04:07,215 - INFO - Probando Binance Public API...
+2025-10-17 04:04:08,275 - INFO - === Probando calidad de datos ===
+2025-10-17 04:04:09,245 - ERROR - Failed to get ticker 'AAPL' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:10,259 - ERROR - AAPL: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:04:11,174 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:12,481 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:04:13,362 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:04:14,243 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:28,525 - INFO - Tester de conectividad inicializado
+2025-10-17 04:05:28,531 - INFO - === Probando conectividad de red ===
+2025-10-17 04:05:30,535 - INFO - === Probando yfinance básico ===
+2025-10-17 04:05:30,536 - INFO - Probando con AAPL...
+2025-10-17 04:05:31,545 - ERROR - Error en test básico yfinance: 429 Client Error: Too Many Requests for url: https://query2.finance.yahoo.com/v6/finance/quoteSummary/AAPL?modules=financialData&modules=quoteType&modules=defaultKeyStatistics&modules=assetProfile&modules=summaryDetail&ssl=true
+2025-10-17 04:05:31,550 - INFO - === Probando yfinance con criptomonedas ===
+2025-10-17 04:05:31,551 - INFO - Probando BTC-USD...
+2025-10-17 04:05:32,364 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:33,176 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:05:33,182 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:34,006 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:05:34,020 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:34,870 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:35,376 - INFO - Probando ETH-USD...
+2025-10-17 04:05:36,202 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:37,009 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:05:37,013 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:37,800 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:05:37,807 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:38,618 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:39,125 - INFO - Probando ADA-USD...
+2025-10-17 04:05:39,953 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:40,752 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:05:40,758 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:41,563 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:05:41,567 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:42,387 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:42,893 - INFO - Probando SOL-USD...
+2025-10-17 04:05:43,704 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:44,525 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:05:44,532 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:45,393 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:05:45,398 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:46,225 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:46,731 - INFO - Probando XRP-USD...
+2025-10-17 04:05:47,532 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:48,347 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-17 04:05:48,356 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:49,187 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-17 04:05:49,204 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:50,029 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:50,536 - INFO - === Probando APIs alternativas ===
+2025-10-17 04:05:50,536 - INFO - Probando CoinGecko API...
+2025-10-17 04:05:51,322 - INFO - Probando Coinbase API...
+2025-10-17 04:05:52,048 - INFO - Probando Binance Public API...
+2025-10-17 04:05:53,039 - INFO - === Probando calidad de datos ===
+2025-10-17 04:05:53,881 - ERROR - Failed to get ticker 'AAPL' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:54,715 - ERROR - AAPL: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:55,567 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:56,349 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-17 04:05:57,125 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-17 04:05:57,916 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:37:53,315 - INFO - Tester de conectividad inicializado
+2025-10-18 00:37:53,330 - INFO - === Probando conectividad de red ===
+2025-10-18 00:37:57,712 - INFO - === Probando yfinance básico ===
+2025-10-18 00:37:57,712 - INFO - Probando con AAPL...
+2025-10-18 00:37:58,630 - ERROR - Error en test básico yfinance: 429 Client Error: Too Many Requests for url: https://query2.finance.yahoo.com/v6/finance/quoteSummary/AAPL?modules=financialData&modules=quoteType&modules=defaultKeyStatistics&modules=assetProfile&modules=summaryDetail&ssl=true
+2025-10-18 00:37:58,643 - INFO - === Probando yfinance con criptomonedas ===
+2025-10-18 00:37:58,644 - INFO - Probando BTC-USD...
+2025-10-18 00:37:59,649 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:00,512 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:38:00,517 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:01,368 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:38:01,373 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:02,274 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:02,781 - INFO - Probando ETH-USD...
+2025-10-18 00:38:03,748 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:04,677 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:38:04,690 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:05,647 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:38:05,647 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:06,648 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:07,158 - INFO - Probando ADA-USD...
+2025-10-18 00:38:08,105 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:09,024 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:38:09,038 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:10,065 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:38:10,074 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:10,995 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:11,513 - INFO - Probando SOL-USD...
+2025-10-18 00:38:12,451 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:13,457 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:38:13,462 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:14,420 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:38:14,420 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:15,353 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:15,858 - INFO - Probando XRP-USD...
+2025-10-18 00:38:16,888 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:17,833 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:38:17,840 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:18,800 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:38:18,821 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:19,751 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:20,264 - INFO - === Probando APIs alternativas ===
+2025-10-18 00:38:20,264 - INFO - Probando CoinGecko API...
+2025-10-18 00:38:20,998 - INFO - Probando Coinbase API...
+2025-10-18 00:38:21,635 - INFO - Probando Binance Public API...
+2025-10-18 00:38:22,476 - INFO - === Probando calidad de datos ===
+2025-10-18 00:38:23,466 - ERROR - Failed to get ticker 'AAPL' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:24,494 - ERROR - AAPL: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:25,345 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:26,285 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:38:27,397 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:38:28,414 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:46:51,917 - INFO - Tester de conectividad inicializado
+2025-10-18 00:46:51,922 - INFO - === Probando conectividad de red ===
+2025-10-18 00:46:53,835 - INFO - === Probando yfinance básico ===
+2025-10-18 00:46:53,835 - INFO - Probando con AAPL...
+2025-10-18 00:46:54,789 - ERROR - Error en test básico yfinance: 429 Client Error: Too Many Requests for url: https://query2.finance.yahoo.com/v6/finance/quoteSummary/AAPL?modules=financialData&modules=quoteType&modules=defaultKeyStatistics&modules=assetProfile&modules=summaryDetail&ssl=true
+2025-10-18 00:46:54,791 - INFO - === Probando yfinance con criptomonedas ===
+2025-10-18 00:46:54,793 - INFO - Probando BTC-USD...
+2025-10-18 00:46:55,498 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:46:56,331 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:46:56,337 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:46:57,157 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:46:57,163 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:46:57,975 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:46:58,481 - INFO - Probando ETH-USD...
+2025-10-18 00:46:59,280 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:00,043 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:47:00,046 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:00,862 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:47:00,871 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:01,663 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:47:02,172 - INFO - Probando ADA-USD...
+2025-10-18 00:47:02,951 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:03,771 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:47:03,777 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:04,605 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:47:04,611 - ERROR - Failed to get ticker 'ADA-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:05,389 - ERROR - ADA-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:47:05,897 - INFO - Probando SOL-USD...
+2025-10-18 00:47:06,700 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:07,476 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:47:07,490 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:08,279 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:47:08,283 - ERROR - Failed to get ticker 'SOL-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:09,109 - ERROR - SOL-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:47:09,618 - INFO - Probando XRP-USD...
+2025-10-18 00:47:10,355 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:11,163 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1d)
+2025-10-18 00:47:11,167 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:12,009 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=5d)
+2025-10-18 00:47:12,014 - ERROR - Failed to get ticker 'XRP-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:12,793 - ERROR - XRP-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:47:13,308 - INFO - === Probando APIs alternativas ===
+2025-10-18 00:47:13,308 - INFO - Probando CoinGecko API...
+2025-10-18 00:47:14,123 - INFO - Probando Coinbase API...
+2025-10-18 00:47:14,780 - INFO - Probando Binance Public API...
+2025-10-18 00:47:15,470 - INFO - === Probando calidad de datos ===
+2025-10-18 00:47:16,272 - ERROR - Failed to get ticker 'AAPL' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:17,065 - ERROR - AAPL: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:47:17,857 - ERROR - Failed to get ticker 'BTC-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:18,567 - ERROR - BTC-USD: No price data found, symbol may be delisted (period=1mo)
+2025-10-18 00:47:19,431 - ERROR - Failed to get ticker 'ETH-USD' reason: Expecting value: line 1 column 1 (char 0)
+2025-10-18 00:47:20,227 - ERROR - ETH-USD: No price data found, symbol may be delisted (period=1mo)

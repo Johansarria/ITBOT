@@ -1,0 +1,32 @@
+{
+  "capital_summary": {
+    "initial_capital": 200.0,
+    "current_capital": 200.0,
+    "base_capital": 200.0,
+    "available_capital": 200.0,
+    "total_roi_percentage": 0.0,
+    "total_reinvested": 0.0,
+    "capital_growth": 0.0
+  },
+  "trading_performance": {
+    "total_trades": 0,
+    "winning_trades": 0,
+    "win_rate_percentage": 0,
+    "total_pnl": 0.0,
+    "average_pnl_per_trade": 0,
+    "active_positions": 0
+  },
+  "risk_metrics": {
+    "max_position_size_percentage": 25.0,
+    "current_positions_count": 0,
+    "max_positions_allowed": 3,
+    "capital_utilization": 0.0
+  },
+  "reinvestment_status": {
+    "next_reinvestment_threshold": 5.0,
+    "current_cycle_roi": 0.0,
+    "amount_to_next_reinvestment": 10.0
+  },
+  "recent_trades": [],
+  "active_positions_detail": {}
+}

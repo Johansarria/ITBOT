@@ -1,0 +1,240 @@
+{
+  "report_info": {
+    "timestamp": "2025-10-21T12:40:00.000000+00:00",
+    "report_type": "market_evolution_comparative_analysis",
+    "analysis_period": "8_hours_evolution",
+    "previous_analysis": "2025-10-21T04:59:59 (20:15-20:39 UTC Oct 20)",
+    "current_analysis": "2025-10-21T12:37:10 (12:35 UTC Oct 21)",
+    "time_difference": "7 horas 37 minutos"
+  },
+  "market_condition_evolution": {
+    "previous_condition": "bullish_momentum_building",
+    "current_condition": "mixed_signals",
+    "evolution_type": "consolidation_phase",
+    "significance": "El mercado ha pasado de un momentum alcista a señales mixtas, indicando una fase de consolidación"
+  },
+  "symbol_by_symbol_comparison": {
+    "BTCUSDT": {
+      "price_evolution": {
+        "previous_price": 110161.8,
+        "current_price": 109012.74,
+        "change_pct": -1.043,
+        "direction": "bearish"
+      },
+      "breakout_potential_evolution": {
+        "previous_potential": 90,
+        "current_potential": 20,
+        "change": -70,
+        "significance": "Reducción drástica del potencial de breakout"
+      },
+      "trend_evolution": {
+        "previous_trend": "bullish_weak",
+        "current_trend": "neutral",
+        "change": "weakening"
+      },
+      "volume_evolution": {
+        "previous_volume_score": 7,
+        "current_volume_ratio": 1.73,
+        "status": "volume_maintained_elevated"
+      },
+      "key_changes": [
+        "Precio bajó 1.04% desde el análisis anterior",
+        "Potencial de breakout se redujo de 90% a 20%",
+        "Tendencia cambió de alcista débil a neutral",
+        "Volumen se mantiene elevado pero sin generar breakout"
+      ]
+    },
+    "ETHUSDT": {
+      "price_evolution": {
+        "previous_price": 3959.87,
+        "current_price": 3902.22,
+        "change_pct": -1.455,
+        "direction": "bearish"
+      },
+      "breakout_potential_evolution": {
+        "previous_potential": 60,
+        "current_potential": 20,
+        "change": -40,
+        "significance": "Reducción significativa del potencial de breakout"
+      },
+      "trend_evolution": {
+        "previous_trend": "bullish_weak",
+        "current_trend": "neutral",
+        "change": "weakening"
+      },
+      "volume_evolution": {
+        "previous_volume_score": 6,
+        "current_volume_ratio": 1.67,
+        "status": "volume_maintained_elevated"
+      },
+      "key_changes": [
+        "Precio bajó 1.46% desde el análisis anterior",
+        "Potencial de breakout se redujo de 60% a 20%",
+        "Tendencia cambió de alcista débil a neutral",
+        "Volumen elevado pero sin momentum direccional"
+      ]
+    },
+    "ADAUSDT": {
+      "price_evolution": {
+        "previous_price": 0.6612,
+        "current_price": 0.6492,
+        "change_pct": -1.815,
+        "direction": "bearish"
+      },
+      "breakout_potential_evolution": {
+        "previous_potential": 70,
+        "current_potential": 20,
+        "change": -50,
+        "significance": "Reducción considerable del potencial de breakout"
+      },
+      "trend_evolution": {
+        "previous_trend": "bullish_strong",
+        "current_trend": "neutral",
+        "change": "significant_weakening"
+      },
+      "volume_evolution": {
+        "previous_volume_status": "exceptional",
+        "current_volume_ratio": 1.53,
+        "status": "volume_normalized_but_elevated"
+      },
+      "key_changes": [
+        "Precio bajó 1.82% desde el análisis anterior",
+        "Potencial de breakout se redujo de 70% a 20%",
+        "Tendencia cambió de alcista fuerte a neutral",
+        "Volumen excepcional se normalizó pero sigue elevado"
+      ]
+    },
+    "DOTUSDT": {
+      "price_evolution": {
+        "previous_price": 3.068,
+        "current_price": 3.018,
+        "change_pct": -1.630,
+        "direction": "bearish"
+      },
+      "breakout_potential_evolution": {
+        "previous_potential": 50,
+        "current_potential": 20,
+        "change": -30,
+        "significance": "Reducción moderada del potencial de breakout"
+      },
+      "trend_evolution": {
+        "previous_trend": "bullish_weak",
+        "current_trend": "neutral",
+        "change": "weakening"
+      },
+      "volume_evolution": {
+        "previous_volume_score": 5,
+        "current_volume_ratio": 1.59,
+        "status": "volume_maintained_elevated"
+      },
+      "key_changes": [
+        "Precio bajó 1.63% desde el análisis anterior",
+        "Potencial de breakout se redujo de 50% a 20%",
+        "Tendencia cambió de alcista débil a neutral",
+        "Volumen se mantiene en niveles elevados"
+      ]
+    },
+    "LINKUSDT": {
+      "price_evolution": {
+        "previous_price": 18.78,
+        "current_price": 18.12,
+        "change_pct": -3.515,
+        "direction": "bearish"
+      },
+      "breakout_potential_evolution": {
+        "previous_potential": 50,
+        "current_potential": 20,
+        "change": -30,
+        "significance": "Reducción moderada del potencial de breakout"
+      },
+      "trend_evolution": {
+        "previous_trend": "bearish_weak",
+        "current_trend": "neutral",
+        "change": "slight_improvement"
+      },
+      "volume_evolution": {
+        "previous_volume_score": 4,
+        "current_volume_ratio": 1.66,
+        "status": "volume_increased"
+      },
+      "key_changes": [
+        "Precio bajó 3.52% desde el análisis anterior (mayor caída)",
+        "Potencial de breakout se redujo de 50% a 20%",
+        "Tendencia mejoró ligeramente de bajista débil a neutral",
+        "Volumen aumentó significativamente"
+      ]
+    }
+  },
+  "market_wide_patterns": {
+    "general_price_movement": {
+      "direction": "bearish",
+      "average_decline": -1.89,
+      "range": "-3.52% a -1.04%",
+      "uniformity": "All symbols declined uniformly"
+    },
+    "breakout_potential_trend": {
+      "previous_average": 64,
+      "current_average": 20,
+      "change": -44,
+      "interpretation": "Reducción generalizada del potencial de breakout en todos los símbolos"
+    },
+    "volume_patterns": {
+      "status": "elevated_across_board",
+      "interpretation": "Volumen elevado en todos los símbolos pero sin generar momentum direccional",
+      "significance": "Posible acumulación o distribución en curso"
+    },
+    "trend_convergence": {
+      "previous_trends": "Mixed (mostly bullish weak)",
+      "current_trends": "Neutral across all symbols",
+      "significance": "Convergencia hacia neutralidad sugiere consolidación del mercado"
+    }
+  },
+  "risk_assessment_evolution": {
+    "previous_risk_level": "medium",
+    "current_risk_level": "low",
+    "risk_change": "decreased",
+    "volatility_evolution": {
+      "status": "normalized",
+      "interpretation": "La volatilidad se ha normalizado, reduciendo el riesgo inmediato"
+    }
+  },
+  "trading_implications": {
+    "immediate_opportunities": {
+      "previous_count": 1,
+      "current_count": 0,
+      "change": "No immediate breakout opportunities identified"
+    },
+    "market_phase": {
+      "current_phase": "consolidation",
+      "expected_duration": "short_to_medium_term",
+      "next_catalyst": "Volume surge or external market event needed"
+    },
+    "strategy_recommendations": [
+      "Esperar confirmación de dirección antes de nuevas posiciones",
+      "Monitorear niveles de soporte clave en caso de continuación bajista",
+      "Prepararse para posibles oportunidades cuando termine la consolidación",
+      "Mantener gestión de riesgo conservadora durante la fase neutral"
+    ]
+  },
+  "simulation_status": {
+    "data_capture": "continuous_and_operational",
+    "monitoring_systems": "all_active",
+    "next_analysis": "scheduled_automatically",
+    "data_integrity": "confirmed"
+  },
+  "key_insights": [
+    "El mercado ha transitado de momentum alcista a consolidación neutral en 8 horas",
+    "Todos los símbolos muestran declives uniformes entre 1-3.5%",
+    "El potencial de breakout se redujo drásticamente en todos los activos",
+    "Volumen elevado persiste pero sin generar momentum direccional",
+    "La convergencia hacia neutralidad sugiere una fase de consolidación",
+    "No hay oportunidades inmediatas de breakout identificadas",
+    "El riesgo de mercado ha disminuido debido a la normalización de la volatilidad"
+  ],
+  "conclusion": {
+    "market_state": "healthy_consolidation",
+    "outlook": "neutral_short_term",
+    "confidence": "high",
+    "next_action": "continue_monitoring_for_directional_catalyst"
+  }
+}

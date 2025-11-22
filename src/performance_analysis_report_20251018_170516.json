@@ -1,0 +1,469 @@
+{
+  "report_timestamp": "2025-10-18T17:05:16.465096",
+  "analysis_type": "Comprehensive Performance Analysis",
+  "initial_capital": 1000.0,
+  "total_opportunities_detected": 260993,
+  "total_simulated_trades": 60,
+  "overall_win_rate": 1.0,
+  "total_roi_pct": 13.670008496321318,
+  "total_net_pnl": 136.7000849632132,
+  "final_capital": 1136.7000849632132,
+  "period_analyses": [
+    {
+      "period_name": "Última Semana Flexible",
+      "analysis_date": "2025-10-18T17:05:16.463090",
+      "total_opportunities": 46992,
+      "simulated_trades": 20,
+      "win_rate": 1.0,
+      "total_pnl": 40.61826279403013,
+      "total_fees": 3.986466375319109,
+      "net_pnl": 40.61826279403013,
+      "roi_pct": 4.061826279403013,
+      "avg_win": 2.0309131397015063,
+      "avg_loss": 0,
+      "profit_factor": Infinity,
+      "winning_trades": 20,
+      "losing_trades": 0,
+      "session_metrics": {
+        "Asian": {
+          "trades": 20,
+          "win_rate": 1.0,
+          "pnl": 40.61826279403013,
+          "expected_win_rate": 0.78
+        }
+      },
+      "symbol_metrics": {
+        "BTCUSDT": {
+          "trades": 20,
+          "win_rate": 1.0,
+          "pnl": 40.61826279403013
+        }
+      },
+      "capital_growth": 1040.6182627940302,
+      "trades_sample": [
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110521.72,
+          "exit_price": 106503.68338125745,
+          "pnl_pct": 3.635517632862168,
+          "net_pnl": 3.4391531504950303,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110436.52,
+          "exit_price": 107676.83493255555,
+          "pnl_pct": 2.498888110060384,
+          "net_pnl": 2.3013869981704445,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110375.01,
+          "exit_price": 107239.97482147682,
+          "pnl_pct": 2.840348715278192,
+          "net_pnl": 2.64318906399347,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 110507.59,
+          "exit_price": 112387.7526602943,
+          "pnl_pct": 1.701387805393548,
+          "net_pnl": 1.4996864175881546,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110436.07,
+          "exit_price": 108372.02320846755,
+          "pnl_pct": 1.8689969604427747,
+          "net_pnl": 1.6708659574032176,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110320.2,
+          "exit_price": 109126.08431439813,
+          "pnl_pct": 1.0824089202175706,
+          "net_pnl": 0.8834913291377882,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 110579.92,
+          "exit_price": 114808.27801225409,
+          "pnl_pct": 3.823802741269923,
+          "net_pnl": 3.619978938528653,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110320.0,
+          "exit_price": 108285.42087547366,
+          "pnl_pct": 1.8442522883668773,
+          "net_pnl": 1.6460965406552441,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 110333.13,
+          "exit_price": 108180.1699768598,
+          "pnl_pct": 1.9513268799137662,
+          "net_pnl": 1.7532782067936803,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 110452.81,
+          "exit_price": 114199.51378657631,
+          "pnl_pct": 3.3921307991859257,
+          "net_pnl": 3.1887386683867396,
+          "outcome": "win",
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "period_name": "2 Semanas Flexibles",
+      "analysis_date": "2025-10-18T17:05:16.464094",
+      "total_opportunities": 82388,
+      "simulated_trades": 20,
+      "win_rate": 1.0,
+      "total_pnl": 46.780585391905745,
+      "total_fees": 4.020374631342149,
+      "net_pnl": 46.780585391905745,
+      "roi_pct": 4.678058539190574,
+      "avg_win": 2.339029269595288,
+      "avg_loss": 0,
+      "profit_factor": Infinity,
+      "winning_trades": 20,
+      "losing_trades": 0,
+      "session_metrics": {
+        "Asian": {
+          "trades": 8,
+          "win_rate": 1.0,
+          "pnl": 19.71090358774546,
+          "expected_win_rate": 0.78
+        },
+        "European": {
+          "trades": 12,
+          "win_rate": 1.0,
+          "pnl": 27.069681804160293,
+          "expected_win_rate": 0.955
+        }
+      },
+      "symbol_metrics": {
+        "BTCUSDT": {
+          "trades": 20,
+          "win_rate": 1.0,
+          "pnl": 46.780585391905745
+        }
+      },
+      "capital_growth": 1046.7805853919058,
+      "trades_sample": [
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 122142.21,
+          "exit_price": 126912.48081360353,
+          "pnl_pct": 3.9055055689622127,
+          "net_pnl": 3.701600063393251,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 122236.66,
+          "exit_price": 119339.97234694479,
+          "pnl_pct": 2.3697372400842847,
+          "net_pnl": 2.172106977324369,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 122335.0,
+          "exit_price": 125880.32292878999,
+          "pnl_pct": 2.8980446550782593,
+          "net_pnl": 2.695146610423181,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 122365.14,
+          "exit_price": 125312.78951949623,
+          "pnl_pct": 2.408896454902298,
+          "net_pnl": 2.2064875584473955,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 122288.0,
+          "exit_price": 120339.49413462989,
+          "pnl_pct": 1.5933745464559994,
+          "net_pnl": 1.3949679210024555,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 122212.79,
+          "exit_price": 119853.11061352874,
+          "pnl_pct": 1.930795775525011,
+          "net_pnl": 1.732726571300536,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 122277.6,
+          "exit_price": 126483.42152439682,
+          "pnl_pct": 3.4395682646672943,
+          "net_pnl": 3.236128696402627,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 122159.28,
+          "exit_price": 118776.72591677126,
+          "pnl_pct": 2.768970219232413,
+          "net_pnl": 2.5717391894516455,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "European",
+          "signal_type": "bullish_breakout",
+          "entry_price": 122142.21,
+          "exit_price": 124215.60886506575,
+          "pnl_pct": 1.6975285325734164,
+          "net_pnl": 1.4958310040408431,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "European",
+          "signal_type": "bullish_breakout",
+          "entry_price": 122365.14,
+          "exit_price": 124050.624592085,
+          "pnl_pct": 1.377422190735863,
+          "net_pnl": 1.1760447685451272,
+          "outcome": "win",
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "period_name": "Último Mes Flexible",
+      "analysis_date": "2025-10-18T17:05:16.465096",
+      "total_opportunities": 131613,
+      "simulated_trades": 20,
+      "win_rate": 1.0,
+      "total_pnl": 49.3012367772773,
+      "total_fees": 3.993619403242401,
+      "net_pnl": 49.3012367772773,
+      "roi_pct": 4.93012367772773,
+      "avg_win": 2.4650618388638654,
+      "avg_loss": 0,
+      "profit_factor": Infinity,
+      "winning_trades": 20,
+      "losing_trades": 0,
+      "session_metrics": {
+        "Asian": {
+          "trades": 12,
+          "win_rate": 1.0,
+          "pnl": 25.62000232456099,
+          "expected_win_rate": 0.78
+        },
+        "European": {
+          "trades": 8,
+          "win_rate": 1.0,
+          "pnl": 23.68123445271631,
+          "expected_win_rate": 0.955
+        }
+      },
+      "symbol_metrics": {
+        "BTCUSDT": {
+          "trades": 20,
+          "win_rate": 1.0,
+          "pnl": 49.3012367772773
+        }
+      },
+      "capital_growth": 1049.3012367772774,
+      "trades_sample": [
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 117629.47,
+          "exit_price": 121218.62963980349,
+          "pnl_pct": 3.0512418697487025,
+          "net_pnl": 2.848190627878954,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 117418.16,
+          "exit_price": 114066.91508663351,
+          "pnl_pct": 2.854111249372748,
+          "net_pnl": 2.6569653606221206,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 117096.01,
+          "exit_price": 114172.66516034422,
+          "pnl_pct": 2.496536679307672,
+          "net_pnl": 2.29903321598698,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 117027.34,
+          "exit_price": 112727.12307658882,
+          "pnl_pct": 3.674540430818285,
+          "net_pnl": 3.4782149712491033,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 116732.81,
+          "exit_price": 115146.67205726501,
+          "pnl_pct": 1.358776459450423,
+          "net_pnl": 1.1601352359098733,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bearish_breakout",
+          "entry_price": 116612.03,
+          "exit_price": 115068.68524643191,
+          "pnl_pct": 1.3234867393767948,
+          "net_pnl": 1.1248102261161717,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 117137.47,
+          "exit_price": 120552.16794896037,
+          "pnl_pct": 2.915120113965556,
+          "net_pnl": 2.7122049938515906,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 117151.26,
+          "exit_price": 118527.58935485523,
+          "pnl_pct": 1.1748310302895864,
+          "net_pnl": 0.9736561992592967,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 117151.14,
+          "exit_price": 121645.71948331065,
+          "pnl_pct": 3.8365648710807667,
+          "net_pnl": 3.632728306209686,
+          "outcome": "win",
+          "confidence": 1.0
+        },
+        {
+          "symbol": "BTCUSDT",
+          "session": "Asian",
+          "signal_type": "bullish_breakout",
+          "entry_price": 117316.66,
+          "exit_price": 118876.69382351695,
+          "pnl_pct": 1.3297632437856204,
+          "net_pnl": 1.1284334805418348,
+          "outcome": "win",
+          "confidence": 1.0
+        }
+      ]
+    }
+  ],
+  "key_insights": {
+    "most_profitable_period": "Último Mes Flexible",
+    "best_win_rate_period": "Última Semana Flexible",
+    "opportunities_conversion_rate": 0.02298912231362527,
+    "average_trade_size": 100.0,
+    "trading_frequency": "High"
+  },
+  "recommendations": [
+    "✅ Sesión Asian: Excelente performance (100.0% vs 78.0% esperado)",
+    "✅ Sesión European: Excelente performance (100.0% vs 95.5% esperado)",
+    "⚖️ ROI positivo: La estrategia es viable pero necesita optimización"
+  ]
+}

@@ -1,0 +1,91 @@
+================================================================================
+REPORTE DE TESTING - ADAPTACIÓN CORE SICAR
+================================================================================
+Fecha: 2025-10-27 19:43:18
+Status General: EXCELLENT
+
+RESUMEN:
+  Tests Ejecutados: 7
+  Tests Exitosos: 7
+  Tests Fallidos: 0
+  Tasa de Éxito: 100.0%
+
+MÓDULOS TESTADOS:
+  ✓ indices_config: PASSED
+  ✓ data_adapter: PASSED
+  ✓ parameters_calibrator: PASSED
+  ✓ market_filters: PASSED
+  ✓ data_validator: PASSED
+  ✓ config_migration: PASSED
+  ✓ integration: PASSED
+
+DETALLES POR MÓDULO:
+--------------------------------------------------
+
+INDICES_CONFIG:
+  Status: PASSED
+  Mensaje: Módulo indices_config funcionando correctamente
+  Detalles:
+    - import_successful: True
+    - config_creation: True
+    - spy_config_available: True
+    - config_type: IndexSpecificConfig
+
+DATA_ADAPTER:
+  Status: PASSED
+  Mensaje: Adaptador de datos funcionando correctamente
+  Detalles:
+    - adapter_creation: True
+    - symbol_mapping: True
+    - data_adaptation: True
+    - required_columns: True
+
+PARAMETERS_CALIBRATOR:
+  Status: PASSED
+  Mensaje: Calibrador de parámetros funcionando correctamente
+  Detalles:
+    - calibrator_creation: True
+    - calibration_successful: True
+    - has_timeframe_params: True
+    - has_volatility_params: True
+
+MARKET_FILTERS:
+  Status: PASSED
+  Mensaje: Filtros de mercado funcionando correctamente
+  Detalles:
+    - filters_creation: True
+    - session_detection: True
+    - data_filtering: True
+    - session_type: closed
+
+DATA_VALIDATOR:
+  Status: PASSED
+  Mensaje: Validador de datos funcionando correctamente
+  Detalles:
+    - validator_creation: True
+    - validation_successful: True
+    - has_quality_score: True
+    - quality_level: good
+
+CONFIG_MIGRATION:
+  Status: PASSED
+  Mensaje: Adaptador de configuración funcionando correctamente
+  Detalles:
+    - adapter_creation: True
+    - migration_successful: True
+    - has_symbol_mapping: False
+    - has_adapted_params: True
+
+INTEGRATION:
+  Status: PASSED
+  Mensaje: Integración entre módulos funcionando correctamente
+  Detalles:
+    - modules_integration: True
+    - data_flow: True
+    - config_compatibility: True
+    - end_to_end: True
+
+RECOMENDACIONES:
+  • Sistema listo para producción
+
+================================================================================

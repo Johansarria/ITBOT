@@ -1,0 +1,203 @@
+//@version=6
+// ITBOT Trend Analyzer + Volumen Fondo Proporcional (versión mejorada con filtros)
+indicator("ITBOT Trend Analyzer + Volumen Fondo MEJORADO", shorttitle="ITBOT-PRO", overlay=true)
+
+// === PARÁMETROS OPTIMIZADOS ===
+fast_length = input.int(5, title="Fast MA Length", minval=1, maxval=50)
+slow_length = input.int(20, title="Slow MA Length", minval=1, maxval=100)
+vol_sma_length = input.int(20, title="Volume SMA Length", minval=5, maxval=100)
+vol_lookback = input.int(100, title="Volume Lookback", minval=20, maxval=500)
+height_factor = input.float(0.12, title="Volume Height Factor", minval=0.05, maxval=0.3, step=0.01)
+volume_multiplier = input.float(1.3, title="Volume Filter Multiplier", minval=1.0, maxval=3.0, step=0.1)
+show_signals = input.bool(true, title="Show Entry Signals")
+show_trend_bg = input.bool(false, title="Show Trend Background")
+use_volume_filter = input.bool(false, title="Use Volume Filter")
+
+// === PARÁMETROS PARA SEÑALES TEMPRANAS ===
+rsi_length = input.int(14, title="RSI Length", minval=5, maxval=50)
+rsi_overbought = input.float(70, title="RSI Overbought", minval=60, maxval=90)
+rsi_oversold = input.float(30, title="RSI Oversold", minval=10, maxval=40)
+momentum_length = input.int(10, title="Momentum Length", minval=5, maxval=20)
+use_early_signals = input.bool(true, title="Use Early Exit Signals")
+stop_loss_pct = input.float(2.0, title="Stop Loss %", minval=0.5, maxval=5.0, step=0.1)
+
+// === CÁLCULOS DE TENDENCIA SIMPLIFICADOS ===
+fast_ma = ta.sma(close, fast_length)
+slow_ma = ta.sma(close, slow_length)
+trend_bullish = fast_ma > slow_ma
+trend_bearish = fast_ma < slow_ma
+
+// === CÁLCULOS PARA SEÑALES TEMPRANAS ===
+rsi = ta.rsi(close, rsi_length)
+momentum = ta.mom(close, momentum_length)
+price_change = ta.change(close)
+
+// === CÁLCULOS SIMPLIFICADOS ===
+vol_sma = ta.sma(volume, vol_sma_length)
+
+// === VARIABLES PARA STOP LOSS DINÁMICO ===
+var float entry_price = na
+var bool in_long_position = false
+
+// === SEÑALES OPTIMIZADAS CON SALIDAS TEMPRANAS ===
+// Señales básicas de entrada (cruces de medias móviles)
+basic_buy_signal = ta.crossover(fast_ma, slow_ma)
+basic_sell_signal = ta.crossunder(fast_ma, slow_ma)
+
+// === SEÑALES DE VENTA TEMPRANAS MEJORADAS (MÁS REACTIVAS) ===
+// 1. RSI sobrecomprado + confirmación de debilidad
+rsi_sell_signal = rsi > rsi_overbought and rsi[1] <= rsi_overbought and close < close[1]
+
+// 2. Momentum negativo + medias móviles convergiendo
+ma_distance = math.abs(fast_ma - slow_ma)
+ma_converging = ma_distance < ma_distance[1]
+momentum_sell_signal = momentum < 0 and momentum[1] >= 0 and trend_bullish and ma_converging
+
+// 3. Divergencia bajista + confirmación de precio
+price_higher = close > close[3]
+momentum_lower = momentum < momentum[3]
+price_weakness = close < high[1] // Precio no logra hacer nuevo máximo
+divergence_sell = price_higher and momentum_lower and trend_bullish and price_weakness
+
+// 4. Stop Loss dinámico (solo cuando estamos en posición)
+stop_loss_signal = false
+if in_long_position and not na(entry_price)
+    stop_loss_price = entry_price * (1 - stop_loss_pct / 100)
+    stop_loss_signal := close <= stop_loss_price
+
+// 5. Señal de pre-cruce (cuando las medias están muy cerca de cruzarse)
+ma_gap_pct = (fast_ma - slow_ma) / slow_ma * 100
+pre_cross_signal = trend_bullish and ma_gap_pct < 0.1 and ma_gap_pct > 0 and momentum < 0
+
+// 6. SEÑAL INMEDIATA DE PICO - Detectar reversión EN EL MOMENTO EXACTO
+
+// Detección simple de pico: precio hace nuevo máximo pero cierra por debajo del máximo
+peak_reversal = trend_bullish and high > high[1] and close < high
+
+// Señal de debilidad inmediata: precio no puede sostener el nivel alto
+immediate_weakness = trend_bullish and close < close[1] and high >= ta.highest(high, 2)
+
+// Rechazo instantáneo: vela con mecha superior significativa
+upper_wick = high - math.max(open, close)
+body_size = math.abs(close - open)
+instant_rejection = trend_bullish and upper_wick > body_size * 0.5 and close < open
+
+// Pérdida de momentum en máximo
+momentum_loss_at_high = trend_bullish and high >= ta.highest(high, 2) and momentum < 0
+
+// SEÑAL INMEDIATA COMBINADA - MÁS SIMPLE Y DIRECTA
+ultra_early_sell = peak_reversal or immediate_weakness or instant_rejection or momentum_loss_at_high
+
+// === GESTIÓN DE POSICIONES ===
+// Actualizar estado de posición
+if basic_buy_signal
+    entry_price := close
+    in_long_position := true
+
+if basic_sell_signal or (use_early_signals and (rsi_sell_signal or momentum_sell_signal or divergence_sell or stop_loss_signal or pre_cross_signal or ultra_early_sell))
+    entry_price := na
+    in_long_position := false
+
+// Filtro de volumen simplificado
+volume_filter = volume > vol_sma * volume_multiplier
+
+// === SEÑALES FINALES OPTIMIZADAS ===
+buy_signal = use_volume_filter ? (basic_buy_signal and volume_filter) : basic_buy_signal
+
+// Señal de venta con condiciones ultra-tempranas y precisas
+early_sell_conditions = use_early_signals ? (rsi_sell_signal or momentum_sell_signal or divergence_sell or stop_loss_signal or pre_cross_signal or ultra_early_sell) : false
+
+// Solo activar señales tempranas si estamos en posición LONG
+valid_early_signals = early_sell_conditions and in_long_position
+
+sell_signal = use_volume_filter ? 
+              ((basic_sell_signal or valid_early_signals) and volume_filter) : 
+              (basic_sell_signal or valid_early_signals)
+
+// === VOLUMEN EN PANEL SEPARADO (SOLUCIÓN NAS100) ===
+// Eliminar cálculos complejos de posicionamiento
+// El volumen irá en panel separado como en NAS100
+
+// === COLORES OPTIMIZADOS PARA VOLUMEN ===
+vol_color = volume > vol_sma ? color.new(color.lime, 30) : color.new(color.red, 30)
+vol_sma_color = color.new(color.orange, 0)
+
+// === VISUALIZACIÓN ===
+// Tendencia y señales con parámetros optimizados para evitar problemas de scroll
+plot(fast_ma, color=color.new(color.blue, 0), linewidth=2, title="Fast MA (5)", 
+     trackprice=false, histbase=0, join=true, editable=true, 
+     show_last=500, force_overlay=true)
+plot(slow_ma, color=color.new(color.red, 0), linewidth=2, title="Slow MA (20)", 
+     trackprice=false, histbase=0, join=true, editable=true, 
+     show_last=500, force_overlay=true)
+
+trend_color = trend_bullish ? color.new(color.green, 85) : 
+             trend_bearish ? color.new(color.red, 85) : 
+             color.new(color.yellow, 90)
+bgcolor(show_trend_bg ? trend_color : na, title="Trend Background")
+
+// Señales optimizadas y claras con parámetros de renderizado específicos
+plotshape(show_signals and buy_signal, title="BUY Signal", 
+          location=location.belowbar, color=color.new(color.green, 0), 
+          style=shape.triangleup, size=size.normal, text="BUY",
+          force_overlay=true, editable=true, show_last=500)
+
+plotshape(show_signals and sell_signal, title="SELL Signal", 
+          location=location.abovebar, color=color.new(color.red, 0), 
+          style=shape.triangledown, size=size.normal, text="SELL",
+          force_overlay=true, editable=true, show_last=500)
+
+// === VOLUMEN EN PANEL SEPARADO (PARTE INFERIOR) ===
+plot(volume, title="📊 Volumen", style=plot.style_columns, color=vol_color, 
+     display=display.pane, linewidth=1, histbase=0)
+plot(vol_sma, title="📈 Volumen SMA", color=vol_sma_color, linewidth=3, 
+     display=display.pane, style=plot.style_line)
+
+// === INFORMACIÓN AVANZADA ===
+// Tabla de información esencial con datos de señales tempranas
+var table info_table = table.new(position.top_right, 2, 6, bgcolor=color.white, border_width=1)
+if barstate.islast
+    table.cell(info_table, 0, 0, "RSI", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 0, str.tostring(rsi, "#.#"), 
+               text_color=rsi > rsi_overbought ? color.red : rsi < rsi_oversold ? color.green : color.black, 
+               text_size=size.small)
+    
+    table.cell(info_table, 0, 1, "Momentum", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 1, str.tostring(momentum, "#.##"), 
+               text_color=momentum > 0 ? color.green : color.red, text_size=size.small)
+    
+    table.cell(info_table, 0, 2, "MA Gap %", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 2, str.tostring(ma_gap_pct, "#.##"), 
+               text_color=ma_gap_pct < 0.2 ? color.orange : color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 3, "Exhaustion", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 3, ultra_early_sell ? "⚠️ PEAK" : "Normal", 
+               text_color=ultra_early_sell ? color.red : color.green, text_size=size.small)
+    
+    table.cell(info_table, 0, 4, "Position", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 4, in_long_position ? "LONG" : "FLAT", 
+               text_color=in_long_position ? color.green : color.gray, text_size=size.small)
+    
+    table.cell(info_table, 0, 5, "Early Signals", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 5, use_early_signals ? "ON" : "OFF", 
+               text_color=use_early_signals ? color.green : color.red, text_size=size.small)
+
+// === ALERTAS OPTIMIZADAS Y TEMPRANAS ===
+alertcondition(buy_signal, title="ITBOT Buy Alert", 
+               message="🟢 BUY signal on {{ticker}} at {{close}}")
+alertcondition(sell_signal, title="ITBOT Sell Alert", 
+               message="🔴 SELL signal on {{ticker}} at {{close}}")
+
+// Alertas específicas para señales tempranas
+alertcondition(rsi_sell_signal, title="ITBOT RSI Overbought Alert", 
+               message="⚠️ RSI Overbought on {{ticker}} - Consider early exit at {{close}}")
+alertcondition(momentum_sell_signal, title="ITBOT Momentum Loss Alert", 
+               message="📉 Momentum turning negative on {{ticker}} - Early exit signal at {{close}}")
+alertcondition(stop_loss_signal, title="ITBOT Stop Loss Alert", 
+               message="🛑 Stop Loss triggered on {{ticker}} at {{close}} - Exit immediately!")
+alertcondition(divergence_sell, title="ITBOT Divergence Alert", 
+               message="🔄 Bearish divergence detected on {{ticker}} - Weakness signal at {{close}}")
+alertcondition(pre_cross_signal, title="ITBOT Pre-Cross Alert", 
+               message="🎯 MAs about to cross on {{ticker}} - Prepare for exit at {{close}}")
+alertcondition(ultra_early_sell, title="ITBOT Ultra-Early Sell Alert", 
+               message="🚨 EXHAUSTION DETECTED on {{ticker}} - Exit at peak {{close}} before major drop!")

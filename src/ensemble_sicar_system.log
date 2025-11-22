@@ -1,0 +1,260 @@
+2025-10-18 01:27:39,202 - INFO - 🚀 Sistema Ensemble SICAR iniciado
+2025-10-18 01:27:39,202 - INFO - 💰 Capital inicial: $500
+2025-10-18 01:27:39,204 - INFO - ⚡ Apalancamiento: 10.0x
+2025-10-18 01:27:39,204 - INFO - 🎯 Estrategias: ['market_making', 'momentum', 'multi_pair', 'arbitrage', 'ml_signals']
+2025-10-18 01:27:39,204 - INFO - 📊 Pesos: {'market_making': 0.35, 'momentum': 0.25, 'multi_pair': 0.2, 'arbitrage': 0.15, 'ml_signals': 0.05}
+2025-10-18 01:27:39,204 - INFO - 🔄 Iniciando backtest Ensemble para 4 símbolos
+2025-10-18 01:27:39,206 - INFO - 🔄 Obteniendo datos para BTCUSDT (15m) - 5760 velas
+2025-10-18 01:27:39,208 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:27:40,170 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:27:40,227 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\BTCUSDT_15m_cache.csv
+2025-10-18 01:27:40,255 - INFO - 📊 BTCUSDT: 1000 velas obtenidas
+2025-10-18 01:27:40,255 - INFO - 🔄 Obteniendo datos para ETHUSDT (15m) - 5760 velas
+2025-10-18 01:27:40,255 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:27:40,721 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:27:40,764 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ETHUSDT_15m_cache.csv
+2025-10-18 01:27:40,774 - INFO - 📊 ETHUSDT: 1000 velas obtenidas
+2025-10-18 01:27:40,780 - INFO - 🔄 Obteniendo datos para ADAUSDT (15m) - 5760 velas
+2025-10-18 01:27:40,780 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:27:41,030 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:27:41,068 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ADAUSDT_15m_cache.csv
+2025-10-18 01:27:41,091 - INFO - 📊 ADAUSDT: 1000 velas obtenidas
+2025-10-18 01:27:41,091 - INFO - 🔄 Obteniendo datos para DOTUSDT (15m) - 5760 velas
+2025-10-18 01:27:41,091 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:27:41,343 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:27:41,383 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\DOTUSDT_15m_cache.csv
+2025-10-18 01:27:41,386 - INFO - 📊 DOTUSDT: 1000 velas obtenidas
+2025-10-18 01:27:41,882 - INFO - 🧠 Modelo ML entrenado exitosamente
+2025-10-18 01:27:41,882 - INFO - 🔄 Iniciando backtest ensemble...
+2025-10-18 01:27:41,919 - INFO - 📊 ENSEMBLE SELL: ADAUSDT $57.22 @ $0.82 | Strategy: ensemble | Conf: 0.381
+2025-10-18 01:27:42,152 - INFO - 📊 ENSEMBLE SELL: BTCUSDT $53.90 @ $122934.60 | Strategy: ensemble | Conf: 0.406
+2025-10-18 01:27:49,746 - INFO - 🔚 CLOSE SELL: ADAUSDT PnL $3.42 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:27:49,804 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $51.90 @ $0.77 | Strategy: ensemble | Conf: 0.385
+2025-10-18 01:27:49,938 - INFO - 🔚 CLOSE SELL: BTCUSDT PnL $3.75 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:27:49,938 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $-3.62 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:49,941 - INFO - 📊 ENSEMBLE BUY: BTCUSDT $50.01 @ $112209.36 | Strategy: ensemble | Conf: 0.331
+2025-10-18 01:27:49,973 - INFO - 📊 ENSEMBLE BUY: DOTUSDT $50.90 @ $3.43 | Strategy: ensemble | Conf: 0.374
+2025-10-18 01:27:50,001 - INFO - 🔚 CLOSE BUY: BTCUSDT PnL $-1.73 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:50,002 - INFO - 🔚 CLOSE BUY: DOTUSDT PnL $-19.66 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:50,024 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $57.97 @ $0.60 | Strategy: ensemble | Conf: 0.401
+2025-10-18 01:27:50,061 - INFO - 📊 ENSEMBLE BUY: DOTUSDT $53.55 @ $2.89 | Strategy: ensemble | Conf: 0.421
+2025-10-18 01:27:50,124 - INFO - 🔚 CLOSE BUY: DOTUSDT PnL $-3.58 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:50,175 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $53.27 @ $0.62 | Strategy: ensemble | Conf: 0.422
+2025-10-18 01:27:50,244 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $4.69 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:27:50,572 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $3.98 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:27:50,642 - INFO - 📊 ENSEMBLE BUY: ETHUSDT $50.41 @ $3790.79 | Strategy: ensemble | Conf: 0.345
+2025-10-18 01:27:50,816 - INFO - 📊 ENSEMBLE SELL: DOTUSDT $55.31 @ $3.14 | Strategy: ensemble | Conf: 0.422
+2025-10-18 01:27:51,249 - INFO - 🔚 CLOSE SELL: DOTUSDT PnL $-1.87 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:51,992 - INFO - 📊 ENSEMBLE SELL: ETHUSDT $50.32 @ $3842.94 | Strategy: ensemble | Conf: 0.386
+2025-10-18 01:27:52,713 - INFO - 🔚 CLOSE BUY: ETHUSDT PnL $-1.63 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:52,743 - INFO - 📊 ENSEMBLE BUY: DOTUSDT $53.53 @ $2.98 | Strategy: ensemble | Conf: 0.412
+2025-10-18 01:27:54,746 - INFO - 📊 ENSEMBLE BUY: BTCUSDT $52.28 @ $111399.68 | Strategy: ensemble | Conf: 0.459
+2025-10-18 01:27:54,801 - INFO - 🔚 CLOSE SELL: ETHUSDT PnL $-1.78 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:54,842 - INFO - 🔚 CLOSE BUY: DOTUSDT PnL $3.37 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:27:54,931 - INFO - 📊 ENSEMBLE SELL: ADAUSDT $53.16 @ $0.68 | Strategy: ensemble | Conf: 0.410
+2025-10-18 01:27:55,480 - INFO - 🔚 CLOSE SELL: ADAUSDT PnL $-1.77 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:56,192 - INFO - 📊 ENSEMBLE SELL: ADAUSDT $50.65 @ $0.70 | Strategy: ensemble | Conf: 0.392
+2025-10-18 01:27:57,008 - INFO - 🔚 CLOSE SELL: ADAUSDT PnL $-1.67 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:27:57,534 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $51.30 @ $0.71 | Strategy: ensemble | Conf: 0.399
+2025-10-18 01:27:59,498 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $-1.82 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:28:00,367 - INFO - 📊 ENSEMBLE SELL: BTCUSDT $54.12 @ $111818.85 | Strategy: ensemble | Conf: 0.422
+2025-10-18 01:28:05,829 - INFO - 🔚 CLOSE BUY: BTCUSDT PnL $-1.69 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:28:06,050 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $52.66 @ $0.64 | Strategy: ensemble | Conf: 0.415
+2025-10-18 01:28:07,118 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $-2.16 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:28:07,175 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $52.43 @ $0.61 | Strategy: ensemble | Conf: 0.415
+2025-10-18 01:28:07,273 - INFO - 🔚 CLOSE SELL: BTCUSDT PnL $3.21 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:28:07,452 - INFO - 📊 ENSEMBLE BUY: BTCUSDT $53.10 @ $104410.43 | Strategy: ensemble | Conf: 0.415
+2025-10-18 01:28:09,574 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $1.52 | Strategy: ensemble | Reason: backtest_end
+2025-10-18 01:28:09,574 - INFO - 🔚 CLOSE BUY: BTCUSDT PnL $1.20 | Strategy: ensemble | Reason: backtest_end
+2025-10-18 01:28:09,575 - INFO - ================================================================================
+2025-10-18 01:28:09,575 - INFO - RESULTADOS SISTEMA ENSEMBLE SICAR
+2025-10-18 01:28:09,575 - INFO - ================================================================================
+2025-10-18 01:28:09,575 - INFO - 💰 Capital inicial: $500.00
+2025-10-18 01:28:09,576 - INFO - 💰 Capital final: $481.11
+2025-10-18 01:28:09,576 - INFO - 💸 Fees totales: $2.09
+2025-10-18 01:28:09,576 - INFO - 💵 PnL neto: $-18.89
+2025-10-18 01:28:09,576 - INFO - 📊 Retorno neto: -3.78%
+2025-10-18 01:28:09,576 - INFO - 🎯 ROI mensual: -1.94%
+2025-10-18 01:28:09,576 - INFO - 🔄 Total operaciones: 40
+2025-10-18 01:28:09,576 - INFO - 📈 Operaciones de compra: 26
+2025-10-18 01:28:09,577 - INFO - 📉 Operaciones de venta: 14
+2025-10-18 01:28:09,577 - INFO - 🔚 Operaciones cerradas: 20
+2025-10-18 01:28:09,577 - INFO - 🏆 Win rate: 40.0%
+2025-10-18 01:28:09,577 - INFO - 📅 Duración: 60 días (2.0 meses)
+2025-10-18 01:28:09,577 - INFO - ⚡ Apalancamiento: 10.0x
+2025-10-18 01:28:09,577 - INFO - ⚡ Gap al objetivo: 16.94% (Objetivo: 15.0%)
+2025-10-18 01:28:09,577 - INFO - 
+📊 PERFORMANCE POR ESTRATEGIA:
+2025-10-18 01:28:09,578 - INFO -   ensemble: 20 trades, PnL total: $-17.83, PnL promedio: $-0.89
+2025-10-18 01:28:09,578 - INFO - ================================================================================
+2025-10-18 01:28:09,581 - INFO - 💾 Resultados guardados en ensemble_sicar_results.csv
+2025-10-18 01:29:57,925 - INFO - 🚀 Sistema Ensemble SICAR iniciado
+2025-10-18 01:29:57,925 - INFO - 💰 Capital inicial: $500
+2025-10-18 01:29:57,925 - INFO - ⚡ Apalancamiento: 10.0x
+2025-10-18 01:29:57,925 - INFO - 🎯 Estrategias: ['market_making', 'momentum', 'multi_pair', 'arbitrage', 'ml_signals']
+2025-10-18 01:29:57,925 - INFO - 📊 Pesos: {'market_making': 0.35, 'momentum': 0.25, 'multi_pair': 0.2, 'arbitrage': 0.15, 'ml_signals': 0.05}
+2025-10-18 01:29:57,939 - INFO - 🔄 Iniciando backtest Ensemble para 4 símbolos
+2025-10-18 01:29:57,939 - INFO - 🔄 Obteniendo datos para BTCUSDT (15m) - 5760 velas
+2025-10-18 01:29:57,939 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:29:59,595 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:29:59,632 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\BTCUSDT_15m_cache.csv
+2025-10-18 01:29:59,658 - INFO - 📊 BTCUSDT: 1000 velas obtenidas
+2025-10-18 01:29:59,659 - INFO - 🔄 Obteniendo datos para ETHUSDT (15m) - 5760 velas
+2025-10-18 01:29:59,660 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:29:59,923 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:29:59,946 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ETHUSDT_15m_cache.csv
+2025-10-18 01:29:59,975 - INFO - 📊 ETHUSDT: 1000 velas obtenidas
+2025-10-18 01:29:59,975 - INFO - 🔄 Obteniendo datos para ADAUSDT (15m) - 5760 velas
+2025-10-18 01:29:59,977 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:30:00,242 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:30:00,273 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ADAUSDT_15m_cache.csv
+2025-10-18 01:30:00,280 - INFO - 📊 ADAUSDT: 1000 velas obtenidas
+2025-10-18 01:30:00,280 - INFO - 🔄 Obteniendo datos para DOTUSDT (15m) - 5760 velas
+2025-10-18 01:30:00,280 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:30:00,994 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:30:01,046 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\DOTUSDT_15m_cache.csv
+2025-10-18 01:30:01,103 - INFO - 📊 DOTUSDT: 1000 velas obtenidas
+2025-10-18 01:30:01,682 - INFO - 🧠 Modelo ML entrenado exitosamente
+2025-10-18 01:30:01,686 - INFO - 🔄 Iniciando backtest ensemble...
+2025-10-18 01:30:01,710 - INFO - 📊 ENSEMBLE SELL: BTCUSDT $56.01 @ $122561.77 | Strategy: ensemble | Conf: 0.373
+2025-10-18 01:30:01,820 - INFO - 📊 ENSEMBLE SELL: BTCUSDT $53.26 @ $122463.72 | Strategy: ensemble | Conf: 0.400
+2025-10-18 01:30:08,634 - INFO - 🔚 CLOSE SELL: BTCUSDT PnL $3.74 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:30:08,634 - INFO - 🔚 CLOSE SELL: BTCUSDT PnL $3.51 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:30:08,648 - INFO - 📊 ENSEMBLE BUY: BTCUSDT $53.91 @ $112209.36 | Strategy: ensemble | Conf: 0.354
+2025-10-18 01:30:08,704 - INFO - 🔚 CLOSE BUY: BTCUSDT PnL $-1.87 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:30:08,799 - INFO - 📊 ENSEMBLE BUY: DOTUSDT $51.98 @ $2.70 | Strategy: ensemble | Conf: 0.343
+2025-10-18 01:30:08,836 - INFO - 🔚 CLOSE BUY: DOTUSDT PnL $3.45 | Strategy: ensemble | Reason: take_profit
+2025-10-18 01:30:09,097 - INFO - 📊 ENSEMBLE BUY: BTCUSDT $66.79 @ $111260.89 | Strategy: ensemble | Conf: 0.438
+2025-10-18 01:30:09,120 - INFO - 📊 ENSEMBLE BUY: BTCUSDT $53.62 @ $111245.34 | Strategy: ensemble | Conf: 0.405
+2025-10-18 01:30:24,130 - INFO - 🔚 CLOSE BUY: BTCUSDT PnL $-2.08 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:30:24,130 - INFO - 🔚 CLOSE BUY: BTCUSDT PnL $-1.67 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:30:24,249 - INFO - 📊 ENSEMBLE BUY: ETHUSDT $50.98 @ $3874.57 | Strategy: ensemble | Conf: 0.337
+2025-10-18 01:30:24,351 - INFO - 📊 ENSEMBLE BUY: ETHUSDT $50.46 @ $3846.91 | Strategy: ensemble | Conf: 0.371
+2025-10-18 01:30:24,550 - INFO - 📊 ENSEMBLE BUY: DOTUSDT $51.07 @ $3.00 | Strategy: ensemble | Conf: 0.422
+2025-10-18 01:30:25,357 - INFO - 🔚 CLOSE BUY: DOTUSDT PnL $-1.68 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:30:25,438 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $50.89 @ $0.61 | Strategy: ensemble | Conf: 0.422
+2025-10-18 01:30:25,471 - INFO - 🔚 CLOSE BUY: ETHUSDT PnL $-1.60 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:30:25,550 - INFO - 🔚 CLOSE BUY: ETHUSDT PnL $-1.56 | Strategy: ensemble | Reason: stop_loss
+2025-10-18 01:30:25,632 - INFO - 📊 ENSEMBLE BUY: ADAUSDT $54.00 @ $0.60 | Strategy: ensemble | Conf: 0.401
+2025-10-18 01:30:26,111 - INFO - 📊 ENSEMBLE SELL: ADAUSDT $50.04 @ $0.62 | Strategy: ensemble | Conf: 0.422
+2025-10-18 01:30:27,797 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $1.43 | Strategy: ensemble | Reason: backtest_end
+2025-10-18 01:30:27,797 - INFO - 🔚 CLOSE BUY: ADAUSDT PnL $2.13 | Strategy: ensemble | Reason: backtest_end
+2025-10-18 01:30:27,797 - INFO - 🔚 CLOSE SELL: ADAUSDT PnL $-0.90 | Strategy: ensemble | Reason: backtest_end
+2025-10-18 01:30:27,797 - INFO - ================================================================================
+2025-10-18 01:30:27,797 - INFO - RESULTADOS SISTEMA ENSEMBLE SICAR
+2025-10-18 01:30:27,808 - INFO - ================================================================================
+2025-10-18 01:30:27,808 - INFO - 💰 Capital inicial: $500.00
+2025-10-18 01:30:27,808 - INFO - 💰 Capital final: $502.26
+2025-10-18 01:30:27,808 - INFO - 💸 Fees totales: $1.28
+2025-10-18 01:30:27,808 - INFO - 💵 PnL neto: $2.26
+2025-10-18 01:30:27,808 - INFO - 📊 Retorno neto: 0.45%
+2025-10-18 01:30:27,808 - INFO - 🎯 ROI mensual: 0.23%
+2025-10-18 01:30:27,808 - INFO - 🔄 Total operaciones: 24
+2025-10-18 01:30:27,808 - INFO - 📈 Operaciones de compra: 18
+2025-10-18 01:30:27,808 - INFO - 📉 Operaciones de venta: 6
+2025-10-18 01:30:27,808 - INFO - 🔚 Operaciones cerradas: 12
+2025-10-18 01:30:27,808 - INFO - 🏆 Win rate: 41.7%
+2025-10-18 01:30:27,808 - INFO - 📅 Duración: 60 días (2.0 meses)
+2025-10-18 01:30:27,808 - INFO - ⚡ Apalancamiento: 10.0x
+2025-10-18 01:30:27,808 - INFO - ⚡ Gap al objetivo: 14.77% (Objetivo: 15.0%)
+2025-10-18 01:30:27,808 - INFO - 
+📊 PERFORMANCE POR ESTRATEGIA:
+2025-10-18 01:30:27,808 - INFO -   ensemble: 12 trades, PnL total: $2.91, PnL promedio: $0.24
+2025-10-18 01:30:27,808 - INFO - ================================================================================
+2025-10-18 01:30:27,821 - INFO - 💾 Resultados guardados en ensemble_sicar_results.csv
+2025-10-18 01:30:49,424 - INFO - 🚀 Sistema Ensemble SICAR iniciado
+2025-10-18 01:30:49,424 - INFO - 💰 Capital inicial: $500
+2025-10-18 01:30:49,424 - INFO - ⚡ Apalancamiento: 1.0x
+2025-10-18 01:30:49,432 - INFO - 🎯 Estrategias: ['market_making', 'momentum', 'multi_pair', 'arbitrage', 'ml_signals']
+2025-10-18 01:30:49,432 - INFO - 📊 Pesos: {'market_making': 0.35, 'momentum': 0.25, 'multi_pair': 0.2, 'arbitrage': 0.15, 'ml_signals': 0.05}
+2025-10-18 01:30:49,432 - INFO - 🔄 Iniciando backtest Ensemble para 4 símbolos
+2025-10-18 01:30:49,432 - INFO - 🔄 Obteniendo datos para BTCUSDT (15m) - 5760 velas
+2025-10-18 01:30:49,432 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:30:50,771 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:30:50,808 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\BTCUSDT_15m_cache.csv
+2025-10-18 01:30:50,828 - INFO - 📊 BTCUSDT: 1000 velas obtenidas
+2025-10-18 01:30:50,829 - INFO - 🔄 Obteniendo datos para ETHUSDT (15m) - 5760 velas
+2025-10-18 01:30:50,830 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:30:52,104 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:30:52,138 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ETHUSDT_15m_cache.csv
+2025-10-18 01:30:52,164 - INFO - 📊 ETHUSDT: 1000 velas obtenidas
+2025-10-18 01:30:52,165 - INFO - 🔄 Obteniendo datos para ADAUSDT (15m) - 5760 velas
+2025-10-18 01:30:52,165 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:30:53,236 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:30:53,270 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ADAUSDT_15m_cache.csv
+2025-10-18 01:30:53,279 - INFO - 📊 ADAUSDT: 1000 velas obtenidas
+2025-10-18 01:30:53,279 - INFO - 🔄 Obteniendo datos para DOTUSDT (15m) - 5760 velas
+2025-10-18 01:30:53,279 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:30:53,960 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:30:53,985 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\DOTUSDT_15m_cache.csv
+2025-10-18 01:30:54,012 - INFO - 📊 DOTUSDT: 1000 velas obtenidas
+2025-10-18 01:30:54,280 - INFO - 🧠 Modelo ML entrenado exitosamente
+2025-10-18 01:30:54,282 - INFO - 🔄 Iniciando backtest ensemble...
+2025-10-18 01:31:20,726 - WARNING - ⚠️ No se generaron operaciones ensemble
+2025-10-18 12:43:50,423 - INFO - 🚀 Sistema Ensemble SICAR iniciado
+2025-10-18 12:43:50,426 - INFO - 💰 Capital inicial: $500
+2025-10-18 12:43:50,426 - INFO - ⚡ Apalancamiento: 1.0x
+2025-10-18 12:43:50,429 - INFO - 🎯 Estrategias: ['market_making', 'momentum', 'multi_pair', 'arbitrage', 'ml_signals']
+2025-10-18 12:43:50,432 - INFO - 📊 Pesos: {'market_making': 0.35, 'momentum': 0.25, 'multi_pair': 0.2, 'arbitrage': 0.15, 'ml_signals': 0.05}
+2025-10-18 12:43:51,298 - INFO - Cliente de Binance inicializado correctamente
+2025-10-18 12:43:51,298 - INFO - No state file found at sicar_variable_capital_state.json, starting fresh
+2025-10-18 12:43:51,298 - INFO - Starting trading cycle...
+2025-10-18 12:43:51,298 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:51,320 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:51,322 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:51,323 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:51,326 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:51,328 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:51,328 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:51,331 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:51,333 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:51,337 - INFO - State saved to sicar_variable_capital_state.json
+2025-10-18 12:43:51,338 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:52,340 - INFO - Starting trading cycle...
+2025-10-18 12:43:52,340 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:52,342 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:52,344 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:52,346 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:52,348 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:52,350 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:52,350 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:52,352 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:52,354 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:52,354 - INFO - State saved to sicar_variable_capital_state.json
+2025-10-18 12:43:52,356 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:53,357 - INFO - Starting trading cycle...
+2025-10-18 12:43:53,357 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:53,359 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:53,370 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:53,370 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:53,377 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:53,381 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:53,384 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:53,389 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:53,390 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:53,399 - INFO - State saved to sicar_variable_capital_state.json
+2025-10-18 12:43:53,401 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:54,406 - INFO - Starting trading cycle...
+2025-10-18 12:43:54,407 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:54,409 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:54,409 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:54,411 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:54,416 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:54,419 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:54,420 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:54,424 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:54,425 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:54,427 - INFO - State saved to sicar_variable_capital_state.json
+2025-10-18 12:43:54,433 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:55,436 - INFO - Starting trading cycle...
+2025-10-18 12:43:55,436 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:55,439 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:55,439 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:55,439 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:55,439 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:55,439 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:55,439 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:55,446 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:55,448 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:55,450 - INFO - State saved to sicar_variable_capital_state.json
+2025-10-18 12:43:55,452 - INFO - Cycle completed: 0 trades, Capital: $200.00

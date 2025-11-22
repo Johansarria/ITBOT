@@ -1,0 +1,40 @@
+{
+  "session_summary": {
+    "duration_cycles": 5750,
+    "duration_hours": 479.1666666666667,
+    "signals_generated": 0,
+    "trades_executed": 0,
+    "positions_open": 0,
+    "daily_trades_count": 0
+  },
+  "capital_management": {
+    "initial_capital": 200.0,
+    "final_capital": 200.0,
+    "base_capital": 200.0,
+    "total_reinvested": 0.0
+  },
+  "performance": {
+    "total_roi": 0.0,
+    "total_pnl_net": 0.0,
+    "avg_pnl_per_trade": 0.0,
+    "win_rate": 0.0,
+    "monthly_projection": 0,
+    "total_fees_paid": 0.0,
+    "avg_trade_duration_minutes": 0.0
+  },
+  "trading_metrics": {
+    "trades_per_hour": 0.0,
+    "max_daily_trades": 8,
+    "max_simultaneous_positions": 2,
+    "min_confidence_threshold": 0.75,
+    "trading_fee_rate": 0.001,
+    "slippage_rate": 0.0005
+  },
+  "trades": [],
+  "recommendations": [
+    "📊 Aumentar umbral de confianza para mejorar win rate",
+    "💰 Optimizar gestión de riesgo para mayor PnL promedio",
+    "🔄 Considerar reducir umbral de confianza para más oportunidades",
+    "🎯 Ajustar parámetros para alcanzar 5% ROI mensual objetivo"
+  ]
+}

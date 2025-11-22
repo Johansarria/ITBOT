@@ -1,0 +1,327 @@
+{
+  "evaluation_timestamp": "2025-10-18T00:53:16.920593",
+  "indices": {
+    "NAS100": {
+      "symbol": "NAS100",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "SPX500": {
+      "symbol": "SPX500",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "GER40": {
+      "symbol": "GER40",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "UK100": {
+      "symbol": "UK100",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "JPN225": {
+      "symbol": "JPN225",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "AUS200": {
+      "symbol": "AUS200",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "FRA40": {
+      "symbol": "FRA40",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "ESP35": {
+      "symbol": "ESP35",
+      "category": "indices",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    }
+  },
+  "forex_majors": {
+    "EURUSD": {
+      "symbol": "EURUSD",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "GBPUSD": {
+      "symbol": "GBPUSD",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "USDJPY": {
+      "symbol": "USDJPY",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "AUDUSD": {
+      "symbol": "AUDUSD",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "USDCAD": {
+      "symbol": "USDCAD",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "USDCHF": {
+      "symbol": "USDCHF",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "NZDUSD": {
+      "symbol": "NZDUSD",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "EURGBP": {
+      "symbol": "EURGBP",
+      "category": "forex_majors",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    }
+  },
+  "commodities": {
+    "XAUUSD": {
+      "symbol": "XAUUSD",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "XAGUSD": {
+      "symbol": "XAGUSD",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "USOIL": {
+      "symbol": "USOIL",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "UKOIL": {
+      "symbol": "UKOIL",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "NATGAS": {
+      "symbol": "NATGAS",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "COPPER": {
+      "symbol": "COPPER",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "WHEAT": {
+      "symbol": "WHEAT",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    },
+    "CORN": {
+      "symbol": "CORN",
+      "category": "commodities",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "Error datos históricos: RealDataSystem.get_historical_data() got an unexpected keyword argument 'start_date'"
+      ]
+    }
+  },
+  "summary": {
+    "total_tested": 24,
+    "available": 0,
+    "unavailable": 24,
+    "success_rate": 0.0
+  }
+}

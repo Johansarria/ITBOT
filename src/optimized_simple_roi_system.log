@@ -1,0 +1,44 @@
+2025-10-18 01:31:59,544 - INFO - Iniciando Sistema Optimizado Simple ROI 15%
+2025-10-18 01:31:59,544 - INFO - Iniciando backtest optimizado para ROI 15% mensual
+2025-10-18 01:31:59,715 - INFO - Obteniendo datos historicos...
+2025-10-18 01:31:59,716 - INFO - 🔄 Obteniendo datos para BTCUSDT (4h) - 500 velas
+2025-10-18 01:31:59,716 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:32:00,507 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:32:00,526 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\BTCUSDT_4h_cache.csv
+2025-10-18 01:32:00,527 - INFO - 🔄 Obteniendo datos para ETHUSDT (4h) - 500 velas
+2025-10-18 01:32:00,527 - INFO - Intento 1: https://api.binance.com
+2025-10-18 01:32:00,784 - INFO - ✅ Datos obtenidos de Binance API
+2025-10-18 01:32:00,799 - INFO - Datos guardados en cache: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\..\data\cache\ETHUSDT_4h_cache.csv
+2025-10-18 01:32:00,801 - INFO - Datos BTC: 500 registros
+2025-10-18 01:32:00,803 - INFO - Datos ETH: 500 registros
+2025-10-18 01:32:00,843 - INFO - Procesando 500 periodos de datos
+2025-10-18 01:32:00,845 - INFO - Periodo 0/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:00,883 - INFO - Periodo 50/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:00,944 - INFO - Periodo 100/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,003 - INFO - Periodo 150/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,062 - INFO - Periodo 200/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,118 - INFO - Periodo 250/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,174 - INFO - Periodo 300/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,226 - INFO - Periodo 350/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,279 - INFO - Periodo 400/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,328 - INFO - Periodo 450/500 - Valor: $500.00 - Operaciones: 0 - Win Rate: 0.0%
+2025-10-18 01:32:01,386 - INFO - ======================================================================
+2025-10-18 01:32:01,386 - INFO - RESUMEN FINAL - SISTEMA OPTIMIZADO SIMPLE ROI
+2025-10-18 01:32:01,387 - INFO - ======================================================================
+2025-10-18 01:32:01,387 - INFO - Capital inicial: $500.00
+2025-10-18 01:32:01,388 - INFO - Valor final: $500.00
+2025-10-18 01:32:01,388 - INFO - PnL bruto: $0.00
+2025-10-18 01:32:01,388 - INFO - Fees totales: $0.00
+2025-10-18 01:32:01,388 - INFO - PnL neto: $0.00
+2025-10-18 01:32:01,388 - INFO - Retorno neto: 0.00%
+2025-10-18 01:32:01,388 - INFO - ROI mensual: 0.00%
+2025-10-18 01:32:01,388 - INFO - Total operaciones: 0
+2025-10-18 01:32:01,388 - INFO - Operaciones ganadoras: 0
+2025-10-18 01:32:01,389 - INFO - Operaciones perdedoras: 0
+2025-10-18 01:32:01,390 - INFO - Win rate: 0.0%
+2025-10-18 01:32:01,390 - INFO - Profit factor: 0.00
+2025-10-18 01:32:01,390 - INFO - Max perdidas consecutivas: 0
+2025-10-18 01:32:01,391 - INFO - Objetivo no alcanzado. Gap: 15.00% para llegar al 15%
+2025-10-18 01:32:01,391 - INFO - ANALISIS: Win rate bajo - necesita mejores filtros de entrada
+2025-10-18 01:32:01,391 - INFO - ANALISIS: Profit factor bajo - ajustar ratio riesgo/beneficio
+2025-10-18 01:32:01,391 - INFO - ANALISIS: Pocas operaciones - reducir filtros

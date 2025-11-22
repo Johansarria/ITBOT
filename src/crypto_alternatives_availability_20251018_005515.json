@@ -1,0 +1,559 @@
+{
+  "evaluation_timestamp": "2025-10-18T00:54:41.860983",
+  "major_cryptos": {
+    "Bitcoin": {
+      "symbol": "BTCUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 24,
+      "last_update": "2025-10-18T05:00:00",
+      "data_sources": [],
+      "errors": [
+        "Error precio actual: '>' not supported between instances of 'dict' and 'int'",
+        "Error datos históricos: 'close'"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Ethereum": {
+      "symbol": "ETHUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 24,
+      "last_update": "2025-10-18T05:00:00",
+      "data_sources": [],
+      "errors": [
+        "Error precio actual: '>' not supported between instances of 'dict' and 'int'",
+        "Error datos históricos: 'close'"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "BNB": {
+      "symbol": "BNBUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 24,
+      "last_update": "2025-10-18T05:00:00",
+      "data_sources": [],
+      "errors": [
+        "Error precio actual: '>' not supported between instances of 'dict' and 'int'",
+        "Error datos históricos: 'close'"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "XRP": {
+      "symbol": "XRPUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Cardano": {
+      "symbol": "ADAUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 24,
+      "last_update": "2025-10-18T05:00:00",
+      "data_sources": [],
+      "errors": [
+        "Error precio actual: '>' not supported between instances of 'dict' and 'int'",
+        "Error datos históricos: 'close'"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Solana": {
+      "symbol": "SOLUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 24,
+      "last_update": "2025-10-18T05:00:00",
+      "data_sources": [],
+      "errors": [
+        "Error precio actual: '>' not supported between instances of 'dict' and 'int'",
+        "Error datos históricos: 'close'"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Dogecoin": {
+      "symbol": "DOGEUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Polygon": {
+      "symbol": "MATICUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Litecoin": {
+      "symbol": "LTCUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Bitcoin_Cash": {
+      "symbol": "BCHUSDT",
+      "category": "major_cryptos",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    }
+  },
+  "defi_tokens": {
+    "Uniswap": {
+      "symbol": "UNIUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Chainlink": {
+      "symbol": "LINKUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Aave": {
+      "symbol": "AAVEUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Compound": {
+      "symbol": "COMPUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "SushiSwap": {
+      "symbol": "SUSHIUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "PancakeSwap": {
+      "symbol": "CAKEUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Curve": {
+      "symbol": "CRVUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Yearn_Finance": {
+      "symbol": "YFIUSDT",
+      "category": "defi_tokens",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    }
+  },
+  "layer1_blockchains": {
+    "Avalanche": {
+      "symbol": "AVAXUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Polkadot": {
+      "symbol": "DOTUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Cosmos": {
+      "symbol": "ATOMUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Algorand": {
+      "symbol": "ALGOUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Tezos": {
+      "symbol": "XTZUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Near_Protocol": {
+      "symbol": "NEARUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Fantom": {
+      "symbol": "FTMUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Harmony": {
+      "symbol": "ONEUSDT",
+      "category": "layer1_blockchains",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    }
+  },
+  "stablecoins": {
+    "USDC": {
+      "symbol": "USDCUSDT",
+      "category": "stablecoins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Binance_USD": {
+      "symbol": "BUSDUSDT",
+      "category": "stablecoins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "DAI": {
+      "symbol": "DAIUSDT",
+      "category": "stablecoins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "TrueUSD": {
+      "symbol": "TUSDUSDT",
+      "category": "stablecoins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Pax_Dollar": {
+      "symbol": "USDPUSDT",
+      "category": "stablecoins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    }
+  },
+  "meme_coins": {
+    "Dogecoin": {
+      "symbol": "DOGEUSDT",
+      "category": "meme_coins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Shiba_Inu": {
+      "symbol": "SHIBUSDT",
+      "category": "meme_coins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Floki": {
+      "symbol": "FLOKIUSDT",
+      "category": "meme_coins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "SafeMoon": {
+      "symbol": "SAFEMOONUSDT",
+      "category": "meme_coins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    },
+    "Baby_Doge": {
+      "symbol": "BABYDOGEUSDT",
+      "category": "meme_coins",
+      "available": false,
+      "current_price": null,
+      "historical_data_points": 0,
+      "last_update": null,
+      "data_sources": [],
+      "errors": [
+        "No se pudo obtener precio actual",
+        "No se pudieron obtener datos históricos"
+      ],
+      "volume_24h": null,
+      "price_change_24h": null
+    }
+  },
+  "summary": {
+    "total_tested": 36,
+    "available": 0,
+    "unavailable": 36,
+    "success_rate": 0.0
+  }
+}

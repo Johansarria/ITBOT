@@ -1,0 +1,81 @@
+2025-10-18 18:12:31,110 - INFO - Optimizador ULTRA-FLEXIBLE inicializado
+2025-10-18 18:12:31,111 - INFO - Criterios MINIMOS: 10 trades, 15% validacion
+2025-10-18 18:12:31,111 - INFO - Periodo de datos: 180 dias
+2025-10-18 18:12:31,112 - INFO - Descargando 6 MESES de datos historicos REALES...
+2025-10-18 18:12:31,112 - INFO - Obteniendo datos REALES de Binance para BTCUSDT
+2025-10-18 18:12:32,388 - INFO - Obtenidos 1000 registros REALES para BTCUSDT
+2025-10-18 18:12:32,388 - INFO - Obteniendo datos REALES de Binance para ETHUSDT
+2025-10-18 18:12:33,494 - INFO - Obtenidos 1000 registros REALES para ETHUSDT
+2025-10-18 18:12:33,494 - INFO - Obteniendo datos REALES de Binance para BNBUSDT
+2025-10-18 18:12:34,599 - INFO - Obtenidos 1000 registros REALES para BNBUSDT
+2025-10-18 18:12:34,599 - INFO - Obteniendo datos REALES de Binance para ADAUSDT
+2025-10-18 18:12:35,760 - INFO - Obtenidos 1000 registros REALES para ADAUSDT
+2025-10-18 18:12:35,760 - INFO - Obteniendo datos REALES de Binance para SOLUSDT
+2025-10-18 18:12:36,746 - INFO - Obtenidos 1000 registros REALES para SOLUSDT
+2025-10-18 18:12:36,746 - INFO - Obteniendo datos REALES de Binance para XRPUSDT
+2025-10-18 18:12:37,884 - INFO - Obtenidos 1000 registros REALES para XRPUSDT
+2025-10-18 18:12:37,884 - INFO - Obteniendo datos REALES de Binance para DOTUSDT
+2025-10-18 18:12:39,029 - INFO - Obtenidos 1000 registros REALES para DOTUSDT
+2025-10-18 18:12:39,029 - INFO - Obteniendo datos REALES de Binance para LINKUSDT
+2025-10-18 18:12:40,067 - INFO - Obtenidos 1000 registros REALES para LINKUSDT
+2025-10-18 18:12:40,068 - INFO - Obteniendo datos REALES de Binance para LTCUSDT
+2025-10-18 18:12:41,000 - INFO - Obtenidos 1000 registros REALES para LTCUSDT
+2025-10-18 18:12:41,000 - INFO - Obteniendo datos REALES de Binance para AVAXUSDT
+2025-10-18 18:12:41,948 - INFO - Obtenidos 1000 registros REALES para AVAXUSDT
+2025-10-18 18:12:41,948 - INFO - Total: 10000 registros de datos REALES descargados
+2025-10-18 18:12:41,951 - INFO - Iniciando optimizacion ULTRA-FLEXIBLE con datos REALES
+2025-10-18 18:12:41,952 - INFO - Criterios MINIMOS para detectar CUALQUIER oportunidad
+2025-10-18 18:12:41,954 - INFO - Probando 50 combinaciones ultra-flexibles
+2025-10-18 18:12:41,954 - INFO - Optimizacion ultra-flexible 1/50
+2025-10-18 18:12:50,146 - INFO - Optimizacion ultra-flexible 2/50
+2025-10-18 18:12:57,562 - INFO - Optimizacion ultra-flexible 3/50
+2025-10-18 18:13:04,729 - INFO - Optimizacion ultra-flexible 4/50
+2025-10-18 18:13:11,992 - INFO - Optimizacion ultra-flexible 5/50
+2025-10-18 18:13:23,085 - INFO - Optimizacion ultra-flexible 6/50
+2025-10-18 18:13:34,127 - INFO - Optimizacion ultra-flexible 7/50
+2025-10-18 18:13:42,210 - INFO - Optimizacion ultra-flexible 8/50
+2025-10-18 18:13:50,358 - INFO - Optimizacion ultra-flexible 9/50
+2025-10-18 18:13:59,745 - INFO - Optimizacion ultra-flexible 10/50
+2025-10-18 18:14:07,793 - INFO - Optimizacion ultra-flexible 11/50
+2025-10-18 18:14:18,450 - INFO - Optimizacion ultra-flexible 12/50
+2025-10-18 18:14:26,821 - INFO - Optimizacion ultra-flexible 13/50
+2025-10-18 18:14:34,716 - INFO - Optimizacion ultra-flexible 14/50
+2025-10-18 18:14:41,642 - INFO - Optimizacion ultra-flexible 15/50
+2025-10-18 18:14:48,985 - INFO - Optimizacion ultra-flexible 16/50
+2025-10-18 18:14:56,449 - INFO - Optimizacion ultra-flexible 17/50
+2025-10-18 18:15:03,253 - INFO - Optimizacion ultra-flexible 18/50
+2025-10-18 18:15:09,667 - INFO - Optimizacion ultra-flexible 19/50
+2025-10-18 18:15:16,870 - INFO - Optimizacion ultra-flexible 20/50
+2025-10-18 18:15:23,826 - INFO - Optimizacion ultra-flexible 21/50
+2025-10-18 18:15:31,590 - INFO - Optimizacion ultra-flexible 22/50
+2025-10-18 18:15:38,086 - INFO - Optimizacion ultra-flexible 23/50
+2025-10-18 18:15:46,060 - INFO - Optimizacion ultra-flexible 24/50
+2025-10-18 18:15:53,832 - INFO - Optimizacion ultra-flexible 25/50
+2025-10-18 18:16:02,758 - INFO - Optimizacion ultra-flexible 26/50
+2025-10-18 18:16:10,487 - INFO - Optimizacion ultra-flexible 27/50
+2025-10-18 18:16:21,116 - INFO - Optimizacion ultra-flexible 28/50
+2025-10-18 18:16:29,926 - INFO - Optimizacion ultra-flexible 29/50
+2025-10-18 18:16:36,635 - INFO - Optimizacion ultra-flexible 30/50
+2025-10-18 18:16:43,332 - INFO - Optimizacion ultra-flexible 31/50
+2025-10-18 18:16:51,332 - INFO - Optimizacion ultra-flexible 32/50
+2025-10-18 18:16:57,815 - INFO - Optimizacion ultra-flexible 33/50
+2025-10-18 18:17:05,150 - INFO - Optimizacion ultra-flexible 34/50
+2025-10-18 18:17:11,455 - INFO - Optimizacion ultra-flexible 35/50
+2025-10-18 18:17:18,140 - INFO - Optimizacion ultra-flexible 36/50
+2025-10-18 18:17:26,513 - INFO - Optimizacion ultra-flexible 37/50
+2025-10-18 18:17:33,573 - INFO - Optimizacion ultra-flexible 38/50
+2025-10-18 18:17:40,046 - INFO - Optimizacion ultra-flexible 39/50
+2025-10-18 18:17:47,185 - INFO - Optimizacion ultra-flexible 40/50
+2025-10-18 18:17:54,005 - INFO - Optimizacion ultra-flexible 41/50
+2025-10-18 18:18:00,746 - INFO - Optimizacion ultra-flexible 42/50
+2025-10-18 18:18:07,305 - INFO - Optimizacion ultra-flexible 43/50
+2025-10-18 18:18:13,726 - INFO - Optimizacion ultra-flexible 44/50
+2025-10-18 18:18:20,480 - INFO - Optimizacion ultra-flexible 45/50
+2025-10-18 18:18:28,206 - INFO - Optimizacion ultra-flexible 46/50
+2025-10-18 18:18:34,855 - INFO - Optimizacion ultra-flexible 47/50
+2025-10-18 18:18:41,283 - INFO - Optimizacion ultra-flexible 48/50
+2025-10-18 18:18:48,371 - INFO - Optimizacion ultra-flexible 49/50
+2025-10-18 18:18:56,783 - INFO - Optimizacion ultra-flexible 50/50
+2025-10-18 18:19:04,685 - INFO - Optimizacion ultra-flexible completada. 50 configuraciones analizadas
+2025-10-18 18:19:04,700 - INFO - Resultados guardados en: ultra_flexible_results_20251018_181904.json
+2025-10-18 18:19:04,701 - INFO - Optimizacion ultra-flexible completada

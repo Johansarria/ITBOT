@@ -1,0 +1,197 @@
+//@version=6
+// ITBOT NAS100 & Indices Optimizer - Versión especializada para índices
+indicator("ITBOT NAS100 Optimizer", shorttitle="ITBOT-NAS", overlay=true)
+
+// === PARÁMETROS OPTIMIZADOS PARA ÍNDICES ===
+fast_length = input.int(5, title="Fast MA Length", minval=1, maxval=50)
+slow_length = input.int(20, title="Slow MA Length", minval=1, maxval=100)
+threshold = input.float(0.08, title="Trend Threshold % (Optimized for Indices)", minval=0.01, maxval=1.0, step=0.01)
+vol_sma_length = input.int(20, title="Volumen SMA Length", minval=5, maxval=100)
+vol_lookback = input.int(150, title="Ventana volumen", minval=20, maxval=2000)
+height_factor = input.float(0.15, title="Altura del volumen", minval=0.05, maxval=0.3, step=0.01)
+show_signals = input.bool(true, title="Show Entry Signals")
+show_trend_bg = input.bool(true, title="Show Trend Background")
+
+// === FILTROS OPTIMIZADOS PARA ÍNDICES ===
+rsi_length = input.int(14, title="RSI Length (Standard for Indices)", minval=5, maxval=50)
+rsi_overbought = input.float(75, title="RSI Overbought (Conservative)", minval=60, maxval=90)
+rsi_oversold = input.float(25, title="RSI Oversold (Conservative)", minval=10, maxval=40)
+volume_multiplier = input.float(1.8, title="Volume Confirmation (Moderate)", minval=1.0, maxval=3.0, step=0.1)
+momentum_length = input.int(8, title="Momentum Length (Balanced)", minval=5, maxval=20)
+use_advanced_filters = input.bool(true, title="Use Advanced Filters")
+
+// === FILTROS ESPECÍFICOS PARA ÍNDICES ===
+session_filter = input.bool(true, title="Enable Session Filter (Market Hours)")
+spread_filter = input.bool(true, title="Enable Spread Filter")
+max_spread_pips = input.float(2.0, title="Max Spread (Points)", minval=0.5, maxval=10.0, step=0.1)
+
+// === CÁLCULOS DE TENDENCIA CON FORZADO DE RECÁLCULO ===
+// Función para forzar recálculo de EMAs usando request.security
+get_ema_data() =>
+    [ta.ema(close, fast_length), ta.ema(close, slow_length)]
+
+// Función para forzar recálculo de señales usando request.security
+get_signal_data() =>
+    // Recalcular EMAs localmente para señales
+    local_fast_ma = ta.ema(close, fast_length)
+    local_slow_ma = ta.ema(close, slow_length)
+    local_ma_diff_percent = math.abs(local_slow_ma) > 0 ? ((local_fast_ma - local_slow_ma) / local_slow_ma) * 100 : 0
+    local_trend_bullish = local_ma_diff_percent > threshold
+    local_trend_bearish = local_ma_diff_percent < -threshold
+    
+    // Calcular señales básicas
+    local_basic_buy = local_trend_bullish and not local_trend_bullish[1]
+    local_basic_sell = local_trend_bearish and not local_trend_bearish[1]
+    
+    // Calcular indicadores para filtros
+    local_rsi = ta.rsi(close, rsi_length)
+    local_momentum = ta.mom(close, momentum_length)
+    local_vol_sma = ta.sma(volume, vol_sma_length)
+    local_atr = ta.atr(14)
+    
+    // Filtros avanzados
+    local_volume_confirmation = volume > (local_vol_sma * volume_multiplier)
+    local_rsi_bullish_filter = local_rsi < rsi_oversold
+    local_rsi_bearish_filter = local_rsi > rsi_overbought
+    local_momentum_bullish = local_momentum > 0
+    local_momentum_bearish = local_momentum < 0
+    local_price_confirmation_sell = close < open
+    local_price_confirmation_buy = close > open
+    local_min_volatility = local_atr > (local_atr[20] * 0.8)
+    local_current_spread = high - low
+    local_spread_ok = not spread_filter or local_current_spread <= max_spread_pips
+    
+    // Señales optimizadas
+    local_indices_buy = local_basic_buy and local_volume_confirmation and local_rsi_bullish_filter and local_momentum_bullish and local_price_confirmation_buy and local_min_volatility and local_spread_ok
+    local_indices_sell = local_basic_sell and local_volume_confirmation and local_rsi_bearish_filter and local_momentum_bearish and local_price_confirmation_sell and local_min_volatility and local_spread_ok
+    
+    [local_basic_buy, local_basic_sell, local_indices_buy, local_indices_sell]
+
+// Obtener EMAs con recálculo forzado
+[fast_ma_raw, slow_ma_raw] = request.security(syminfo.tickerid, timeframe.period, get_ema_data())
+
+// Obtener señales con recálculo forzado
+[basic_buy_raw, basic_sell_raw, indices_buy_raw, indices_sell_raw] = request.security(syminfo.tickerid, timeframe.period, get_signal_data())
+
+// === SISTEMA DE VALIDACIÓN DE DATOS PARA EMAs ===
+// Validación de datos de entrada
+is_valid_data = not na(close) and close > 0 and not na(high) and not na(low)
+
+// Calcular EMAs locales para fallback
+fast_ma_local = ta.ema(close, fast_length)
+slow_ma_local = ta.ema(close, slow_length)
+
+// EMAs con validación múltiple y fallback robusto
+fast_ma_validated = na(fast_ma_raw) or not is_valid_data ? fast_ma_local : fast_ma_raw
+slow_ma_validated = na(slow_ma_raw) or not is_valid_data ? slow_ma_local : slow_ma_raw
+
+// Verificación de coherencia de EMAs
+fast_ma_coherent = math.abs(fast_ma_validated - close) < (close * 0.5) // No más del 50% de diferencia
+slow_ma_coherent = math.abs(slow_ma_validated - close) < (close * 0.5)
+
+// EMAs finales con validación de coherencia
+fast_ma = fast_ma_coherent ? fast_ma_validated : fast_ma_local
+slow_ma = slow_ma_coherent ? slow_ma_validated : slow_ma_local
+
+// Cálculo de tendencia con validación adicional y protección contra división por cero
+ma_diff_percent = math.abs(slow_ma) > 0 and is_valid_data ? ((fast_ma - slow_ma) / slow_ma) * 100 : 0
+trend_bullish = ma_diff_percent > threshold
+trend_bearish = ma_diff_percent < -threshold
+trend_neutral = math.abs(ma_diff_percent) <= threshold
+
+// === INDICADORES PARA FILTROS ===
+rsi = ta.rsi(close, rsi_length)
+momentum = ta.mom(close, momentum_length)
+vol_sma = ta.sma(volume, vol_sma_length)
+atr = ta.atr(14)
+
+// === FILTROS ESPECÍFICOS PARA ÍNDICES ===
+// Filtro de sesión (horarios de mercado activo)
+is_market_session = true // Simplificado - en producción usar time() functions
+current_spread = high - low // Aproximación del spread
+spread_ok = not spread_filter or current_spread <= max_spread_pips
+
+// === FILTROS AVANZADOS ===
+volume_confirmation = volume > (vol_sma * volume_multiplier)
+rsi_bullish_filter = rsi < rsi_oversold
+rsi_bearish_filter = rsi > rsi_overbought
+momentum_bullish = momentum > 0
+momentum_bearish = momentum < 0
+price_confirmation_sell = close < open
+price_confirmation_buy = close > open
+
+// Filtro de volatilidad mínima para índices
+min_volatility = atr > (atr[20] * 0.8) // ATR debe ser al menos 80% del promedio
+
+// === SEÑALES ULTRA SIMPLIFICADAS BASADAS EN CRUCES DE EMAs ===
+// Señales directas basadas en cruces de EMAs
+basic_buy_signal = ta.crossover(fast_ma, slow_ma)
+basic_sell_signal = ta.crossunder(fast_ma, slow_ma)
+
+// Señales finales - directas sin filtros complejos
+buy_signal = basic_buy_signal
+sell_signal = basic_sell_signal
+
+// === DEBUG INFO REMOVIDO ===
+// Tabla de debug removida para limpiar la visualización
+
+// === VOLUMEN EN PANEL SEPARADO ===
+// Colores para el volumen
+vol_color = volume > vol_sma ? color.new(color.green, 60) : color.new(color.red, 60)
+vol_sma_color = color.new(color.blue, 40)
+
+// === VISUALIZACIÓN ===
+trend_color = trend_bullish ? color.new(color.green, 85) : 
+             trend_bearish ? color.new(color.red, 85) : 
+             color.new(color.yellow, 90)
+bgcolor(show_trend_bg ? trend_color : na, title="Trend Background")
+
+// Señales optimizadas para índices con parámetros de renderizado específicos
+plotshape(show_signals and buy_signal, title="NAS100 Buy Signal", 
+          location=location.belowbar, color=color.new(color.lime, 0), 
+          style=shape.triangleup, size=size.normal, text="BUY",
+          force_overlay=true, editable=true, show_last=500)
+
+plotshape(show_signals and sell_signal, title="NAS100 Sell Signal", 
+          location=location.abovebar, color=color.new(color.red, 0), 
+          style=shape.triangledown, size=size.normal, text="SELL",
+          force_overlay=true, editable=true, show_last=500)
+
+// Señales básicas para comparación con parámetros de renderizado específicos
+plotshape(show_signals and basic_buy_signal and not buy_signal, title="Basic Buy", 
+          location=location.belowbar, color=color.new(color.green, 70), 
+          style=shape.triangleup, size=size.small, text="buy",
+          force_overlay=true, editable=true, show_last=500)
+
+plotshape(show_signals and basic_sell_signal and not sell_signal, title="Basic Sell", 
+          location=location.abovebar, color=color.new(color.orange, 70), 
+          style=shape.triangledown, size=size.small, text="sell",
+          force_overlay=true, editable=true, show_last=500)
+
+// === VOLUMEN EN PANEL SEPARADO ===
+plot(volume, title="Volumen", style=plot.style_columns, color=vol_color, display=display.pane)
+plot(vol_sma, title="Volumen SMA", color=vol_sma_color, linewidth=2, display=display.pane)
+
+// === TABLA DE INFORMACIÓN ELIMINADA ===
+// La tabla de información ha sido removida para limpiar la visualización
+
+// === ALERTAS OPTIMIZADAS PARA ÍNDICES ===
+alertcondition(buy_signal, title="NAS100 Buy Alert OPTIMIZED", 
+               message="🟢 NAS100 OPTIMIZED BUY signal on {{ticker}} at {{close}}")
+alertcondition(sell_signal, title="NAS100 Sell Alert OPTIMIZED", 
+               message="🔴 NAS100 OPTIMIZED SELL signal on {{ticker}} at {{close}}")
+
+// Alertas básicas
+alertcondition(basic_buy_signal, title="NAS100 Buy Alert BASIC", 
+               message="🟡 NAS100 BASIC BUY signal on {{ticker}} at {{close}}")
+alertcondition(basic_sell_signal, title="NAS100 Sell Alert BASIC", 
+               message="🟡 NAS100 BASIC SELL signal on {{ticker}} at {{close}}")
+
+// === PLOTS DE EMAs CON RENDERIZADO OPTIMIZADO ===
+// Parámetros específicos para evitar problemas de scroll
+plot(fast_ma, color=color.blue, linewidth=2, title="Fast EMA", 
+     trackprice=false, histbase=0, join=true, editable=true, 
+     show_last=500, force_overlay=true)
+plot(slow_ma, color=color.red, linewidth=2, title="Slow EMA", 
+     trackprice=false, histbase=0, join=true, editable=true, 
+     show_last=500, force_overlay=true)

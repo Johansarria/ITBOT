@@ -1,0 +1,69 @@
+{
+  "system_name": "REALISTIC 5% MONTHLY SYSTEM",
+  "analysis_timestamp": "2025-10-18T18:44:31.934056",
+  "target_monthly_return": 0.05,
+  "performance": {
+    "initial_capital": 10000,
+    "final_capital": 8686.045480583422,
+    "total_return": -0.13139545194165786,
+    "monthly_return": -0.03680538320408944,
+    "win_rate": 0.22666666666666666,
+    "total_trades": 75,
+    "winning_trades": 17,
+    "sharpe_ratio": -0.7372131948739199,
+    "max_drawdown": -0.13139545194165786,
+    "avg_trade_duration": 3.2533333333333334,
+    "meets_target": "False"
+  },
+  "symbol_performance": {
+    "BTCUSDT": {
+      "total_trades": 9,
+      "win_rate": 0.0,
+      "total_pnl": -178.96729279484487,
+      "avg_pnl": -19.885254754982768,
+      "best_trade": -5.272195985482711,
+      "worst_trade": -36.91379556102638
+    },
+    "ETHUSDT": {
+      "total_trades": 16,
+      "win_rate": 0.25,
+      "total_pnl": -123.9000036108629,
+      "avg_pnl": -7.743750225678934,
+      "best_trade": 46.394343759699936,
+      "worst_trade": -32.3801005905716
+    },
+    "BNBUSDT": {
+      "total_trades": 15,
+      "win_rate": 0.26666666666666666,
+      "total_pnl": -153.8184708152417,
+      "avg_pnl": -10.254564721016115,
+      "best_trade": 40.059752211288085,
+      "worst_trade": -39.807991978986024
+    },
+    "ADAUSDT": {
+      "total_trades": 13,
+      "win_rate": 0.07692307692307693,
+      "total_pnl": -276.0458192709931,
+      "avg_pnl": -21.234293790076393,
+      "best_trade": 41.67301310698542,
+      "worst_trade": -56.32828639356517
+    },
+    "SOLUSDT": {
+      "total_trades": 22,
+      "win_rate": 0.36363636363636365,
+      "total_pnl": -318.6652136348219,
+      "avg_pnl": -14.48478243794645,
+      "best_trade": 51.52726533260392,
+      "worst_trade": -77.78215711017107
+    }
+  },
+  "risk_management": {
+    "max_risk_per_trade": 0.02,
+    "max_position_size": 0.15,
+    "min_win_rate": 0.55,
+    "min_reward_risk_ratio": 2.5,
+    "max_daily_trades": 5,
+    "compounding_limit": 0.5,
+    "drawdown_limit": 0.15
+  }
+}

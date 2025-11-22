@@ -1,0 +1,18 @@
+{
+  "timestamp": "20251014_022936",
+  "initial_capital": 10000.0,
+  "final_capital": 9969.231065307938,
+  "roi": -0.003076893469206152,
+  "monthly_roi": -5425.017837030147,
+  "target_achieved": false,
+  "total_trades": 1,
+  "win_rate": 0.0,
+  "api_stats": {
+    "total_requests": 5,
+    "successful_fetches": 5,
+    "cache_hits": 2,
+    "cache_hit_rate": 0.2857142857142857,
+    "api_failures": {},
+    "success_rate": 1.0
+  }
+}

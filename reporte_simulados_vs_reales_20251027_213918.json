@@ -1,0 +1,101 @@
+{
+  "simulados": {
+    "BITCOIN": {
+      "roi_mensual": 360.97,
+      "win_rate": 99.7,
+      "total_trades": 1195,
+      "capital_inicial": 1000,
+      "capital_final": 76802.83,
+      "profit_factor": 1829.33,
+      "max_drawdown": 1.19
+    },
+    "NAS100": {
+      "roi_mensual": 15.2,
+      "win_rate": 85.0,
+      "total_trades": 180,
+      "capital_inicial": 1000,
+      "capital_final": 1152.0,
+      "profit_factor": 5.67,
+      "max_drawdown": 3.2
+    },
+    "SP500": {
+      "roi_mensual": 12.8,
+      "win_rate": 82.5,
+      "total_trades": 165,
+      "capital_inicial": 1000,
+      "capital_final": 1128.0,
+      "profit_factor": 4.89,
+      "max_drawdown": 2.8
+    },
+    "GOLD": {
+      "roi_mensual": 8.9,
+      "win_rate": 78.3,
+      "total_trades": 145,
+      "capital_inicial": 1000,
+      "capital_final": 1089.0,
+      "profit_factor": 3.45,
+      "max_drawdown": 4.1
+    },
+    "ETHEREUM": {
+      "roi_mensual": 25.4,
+      "win_rate": 88.2,
+      "total_trades": 220,
+      "capital_inicial": 1000,
+      "capital_final": 1254.0,
+      "profit_factor": 7.23,
+      "max_drawdown": 2.5
+    }
+  },
+  "reales": {
+    "BITCOIN": {
+      "roi_mensual": -8.79,
+      "win_rate": 30.8,
+      "total_trades": 13,
+      "capital_inicial": 1000,
+      "capital_final": 912.1,
+      "profit_factor": 0.45,
+      "max_drawdown": 15.67
+    },
+    "NAS100": {
+      "roi_mensual": 0.0,
+      "win_rate": 0.0,
+      "total_trades": 0,
+      "capital_inicial": 1000,
+      "capital_final": 1000.0,
+      "profit_factor": 0.0,
+      "max_drawdown": 0.0
+    },
+    "SP500": {
+      "roi_mensual": 0.0,
+      "win_rate": 0.0,
+      "total_trades": 0,
+      "capital_inicial": 1000,
+      "capital_final": 1000.0,
+      "profit_factor": 0.0,
+      "max_drawdown": 0.0
+    },
+    "GOLD": {
+      "roi_mensual": 0.0,
+      "win_rate": 0.0,
+      "total_trades": 0,
+      "capital_inicial": 1000,
+      "capital_final": 1000.0,
+      "profit_factor": 0.0,
+      "max_drawdown": 0.0
+    },
+    "ETHEREUM": {
+      "roi_mensual": 4.65,
+      "win_rate": 46.2,
+      "total_trades": 39,
+      "capital_inicial": 1000,
+      "capital_final": 1063.59,
+      "profit_factor": 1.12,
+      "max_drawdown": 22.11
+    }
+  },
+  "diferencias": {
+    "roi_diferencia": -195.255,
+    "wr_diferencia": -55.45,
+    "trades_diferencia": -1363
+  }
+}

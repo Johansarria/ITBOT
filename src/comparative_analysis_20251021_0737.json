@@ -1,0 +1,129 @@
+{
+  "timestamp": "2025-10-21T12:37:10.930004+00:00",
+  "analysis_type": "comparative_breakout_analysis",
+  "data_timeframe": "21_octubre_2025_12:35_UTC",
+  "symbol_analysis": {
+    "BTCUSDT": {
+      "symbol": "BTCUSDT",
+      "timestamp": "2025-10-21T12:37:10.930004+00:00",
+      "current_price": 109012.74,
+      "trend_state": "neutral",
+      "trend_strength": -0.03999216771908714,
+      "breakout_potential": 20,
+      "breakout_direction": "neutral",
+      "confidence": 20,
+      "volume_ratio": 1.7342506661912607,
+      "volatility_ratio": 1.0309214962920694,
+      "rsi": 64.00027873518582,
+      "support_level": 108901.32,
+      "resistance_level": 109245.99,
+      "technical_signals": [
+        "Volumen elevado"
+      ],
+      "volume_support": true,
+      "entry_price": 109012.74,
+      "price_change_5min": 0.06986630667756161,
+      "price_change_10min": -0.21350898097037704
+    },
+    "ETHUSDT": {
+      "symbol": "ETHUSDT",
+      "timestamp": "2025-10-21T12:37:10.930004+00:00",
+      "current_price": 3902.22,
+      "trend_state": "neutral",
+      "trend_strength": -0.02093241749948957,
+      "breakout_potential": 20,
+      "breakout_direction": "neutral",
+      "confidence": 20,
+      "volume_ratio": 1.6733492019298126,
+      "volatility_ratio": 1.0187279089023225,
+      "rsi": 61.78053155062762,
+      "support_level": 3899.77,
+      "resistance_level": 3908.18,
+      "technical_signals": [
+        "Volumen elevado"
+      ],
+      "volume_support": true,
+      "entry_price": 3902.22,
+      "price_change_5min": 0.059232136126216896,
+      "price_change_10min": -0.1525006524776248
+    },
+    "ADAUSDT": {
+      "symbol": "ADAUSDT",
+      "timestamp": "2025-10-21T12:37:10.930004+00:00",
+      "current_price": 0.6492,
+      "trend_state": "neutral",
+      "trend_strength": 0.0015403810902918271,
+      "breakout_potential": 20,
+      "breakout_direction": "neutral",
+      "confidence": 20,
+      "volume_ratio": 1.525337209307996,
+      "volatility_ratio": 1.0265976651823328,
+      "rsi": 64.10256410256392,
+      "support_level": 0.6484,
+      "resistance_level": 0.6505,
+      "technical_signals": [
+        "Volumen elevado"
+      ],
+      "volume_support": true,
+      "entry_price": 0.6492,
+      "price_change_5min": 0.12338062924121267,
+      "price_change_10min": -0.19984627209838093
+    },
+    "DOTUSDT": {
+      "symbol": "DOTUSDT",
+      "timestamp": "2025-10-21T12:37:10.930004+00:00",
+      "current_price": 3.018,
+      "trend_state": "neutral",
+      "trend_strength": -0.016564518800749082,
+      "breakout_potential": 20,
+      "breakout_direction": "neutral",
+      "confidence": 20,
+      "volume_ratio": 1.5918535713281823,
+      "volatility_ratio": 1.0213395830763539,
+      "rsi": 63.93442622950823,
+      "support_level": 3.016,
+      "resistance_level": 3.021,
+      "technical_signals": [
+        "Volumen elevado"
+      ],
+      "volume_support": true,
+      "entry_price": 3.018,
+      "price_change_5min": 0.06631299734747281,
+      "price_change_10min": -0.09930486593843475
+    },
+    "LINKUSDT": {
+      "symbol": "LINKUSDT",
+      "timestamp": "2025-10-21T12:37:10.930004+00:00",
+      "current_price": 18.12,
+      "trend_state": "neutral",
+      "trend_strength": -0.11575988093267872,
+      "breakout_potential": 20,
+      "breakout_direction": "neutral",
+      "confidence": 20,
+      "volume_ratio": 1.6576491610775514,
+      "volatility_ratio": 1.0181818181818179,
+      "rsi": 57.69230769230788,
+      "support_level": 18.1,
+      "resistance_level": 18.22,
+      "technical_signals": [
+        "Volumen elevado"
+      ],
+      "volume_support": true,
+      "entry_price": 18.12,
+      "price_change_5min": 0.0,
+      "price_change_10min": -0.5488474204171123
+    }
+  },
+  "executive_summary": {
+    "market_condition": "mixed_signals",
+    "total_symbols_analyzed": 5,
+    "high_potential_breakouts": 0,
+    "dominant_trend": "mixed",
+    "risk_level": "low",
+    "key_developments": []
+  },
+  "comparative_analysis": {
+    "status": "No hay análisis anterior para comparar"
+  },
+  "trading_recommendations": []
+}

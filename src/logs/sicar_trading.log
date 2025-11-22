@@ -1,0 +1,28 @@
+2025-10-16 18:35:57 | INFO | sicar.trading | 💰 TRADE EJECUTADO
+2025-10-16 18:35:57 | INFO | sicar.trading |    Símbolo: ETHUSDT
+2025-10-16 18:35:57 | INFO | sicar.trading |    Lado: BUY
+2025-10-16 18:35:57 | INFO | sicar.trading |    Cantidad: 0.100000
+2025-10-16 18:35:57 | INFO | sicar.trading |    Precio: $2150.5000
+2025-10-16 18:35:57 | INFO | sicar.trading |    Valor: $215.05
+2025-10-16 18:35:57 | INFO | sicar.trading |    ID: TEST_001
+2025-10-16 18:36:01 | INFO | sicar.trading | 💰 TRADE EJECUTADO
+2025-10-16 18:36:01 | INFO | sicar.trading |    Símbolo: ETHUSDT
+2025-10-16 18:36:01 | INFO | sicar.trading |    Lado: BUY
+2025-10-16 18:36:01 | INFO | sicar.trading |    Cantidad: 0.200000
+2025-10-16 18:36:01 | INFO | sicar.trading |    Precio: $2175.2500
+2025-10-16 18:36:01 | INFO | sicar.trading |    Valor: $435.05
+2025-10-16 18:36:01 | INFO | sicar.trading |    ID: INTEGRATION_TEST_001
+2025-10-17 04:02:04 | INFO | sicar.trading | 💰 TRADE EJECUTADO
+2025-10-17 04:02:04 | INFO | sicar.trading |    Símbolo: ETHUSDT
+2025-10-17 04:02:04 | INFO | sicar.trading |    Lado: BUY
+2025-10-17 04:02:04 | INFO | sicar.trading |    Cantidad: 0.100000
+2025-10-17 04:02:04 | INFO | sicar.trading |    Precio: $2150.5000
+2025-10-17 04:02:04 | INFO | sicar.trading |    Valor: $215.05
+2025-10-17 04:02:04 | INFO | sicar.trading |    ID: TEST_001
+2025-10-17 04:02:08 | INFO | sicar.trading | 💰 TRADE EJECUTADO
+2025-10-17 04:02:08 | INFO | sicar.trading |    Símbolo: ETHUSDT
+2025-10-17 04:02:08 | INFO | sicar.trading |    Lado: BUY
+2025-10-17 04:02:08 | INFO | sicar.trading |    Cantidad: 0.200000
+2025-10-17 04:02:08 | INFO | sicar.trading |    Precio: $2175.2500
+2025-10-17 04:02:08 | INFO | sicar.trading |    Valor: $435.05
+2025-10-17 04:02:08 | INFO | sicar.trading |    ID: INTEGRATION_TEST_001

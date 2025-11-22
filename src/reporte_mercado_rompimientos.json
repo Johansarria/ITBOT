@@ -1,0 +1,54 @@
+{
+  "stats_24h": {
+    "total_analisis": 27,
+    "simbolos_unicos": 9,
+    "rupturas_alcistas": 0,
+    "rupturas_bajistas": 0,
+    "neutrales": 27,
+    "confianza_promedio": 0.0,
+    "rsi_promedio": 49.044444444444444,
+    "volumen_ratio_promedio": 0.61,
+    "momentum_promedio": -1.2451851851851852,
+    "top_simbolos_activos": {
+      "AVAXUSDT": 3,
+      "LINKUSDT": 3,
+      "XRPUSDT": 3,
+      "DOTUSDT": 3,
+      "BNBUSDT": 3
+    },
+    "distribucion_recomendaciones": {
+      "MANTENER": 27
+    },
+    "patrones_frecuentes": {
+      "TRES_CUERVOS_NEGROS": 15,
+      "NEUTRAL": 12
+    }
+  },
+  "stats_1h": {
+    "total_analisis": 27,
+    "simbolos_unicos": 9,
+    "rupturas_alcistas": 0,
+    "rupturas_bajistas": 0,
+    "neutrales": 27,
+    "confianza_promedio": 0.0,
+    "rsi_promedio": 49.044444444444444,
+    "volumen_ratio_promedio": 0.61,
+    "momentum_promedio": -1.2451851851851852,
+    "top_simbolos_activos": {
+      "AVAXUSDT": 3,
+      "LINKUSDT": 3,
+      "XRPUSDT": 3,
+      "DOTUSDT": 3,
+      "BNBUSDT": 3
+    },
+    "distribucion_recomendaciones": {
+      "MANTENER": 27
+    },
+    "patrones_frecuentes": {
+      "TRES_CUERVOS_NEGROS": 15,
+      "NEUTRAL": 12
+    }
+  },
+  "oportunidades": [],
+  "timestamp": "2025-10-21T18:43:36.317817"
+}

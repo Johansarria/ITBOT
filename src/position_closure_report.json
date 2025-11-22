@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-10-22T04:42:13.637214",
+  "total_positions_closed": 2,
+  "positions": [
+    {
+      "symbol": "ADAUSDT",
+      "side": "sell",
+      "entry_price": 0.6381,
+      "exit_price": 0.632,
+      "quantity": 39.178812098417175,
+      "pnl_data": {
+        "pnl_per_unit": 0.006099999999999994,
+        "total_pnl": 0.23899075380034454,
+        "pnl_percentage": 0.9559630152013782
+      },
+      "close_timestamp": "2025-10-22T04:42:12.541654"
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "side": "sell",
+      "entry_price": 19.36,
+      "exit_price": 19.45,
+      "quantity": 1.2911931818181819,
+      "pnl_data": {
+        "pnl_per_unit": -0.08999999999999986,
+        "total_pnl": -0.11620738636363619,
+        "pnl_percentage": -0.4648760330578506
+      },
+      "close_timestamp": "2025-10-22T04:42:13.617872"
+    }
+  ],
+  "summary": {
+    "total_pnl": 0.12278336743670835,
+    "average_pnl_percentage": 0.2455434910717638
+  }
+}

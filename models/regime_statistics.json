@@ -1,0 +1,45 @@
+{
+  "regime_stats": {
+    "0": {
+      "name": "Lateral/Consolidación",
+      "count": 80,
+      "percentage": 14.545454545454545,
+      "avg_volatility": 0.005355410716480013,
+      "avg_momentum": -0.011491308706468669,
+      "avg_volume_ratio": 0.9469483077625986,
+      "avg_rsi": 43.37423676082293
+    },
+    "1": {
+      "name": "Tendencia Alcista",
+      "count": 166,
+      "percentage": 30.181818181818183,
+      "avg_volatility": 0.0034178836092149914,
+      "avg_momentum": 0.019443973702443343,
+      "avg_volume_ratio": 0.997941838663942,
+      "avg_rsi": 68.38009999713023
+    },
+    "2": {
+      "name": "Tendencia Bajista",
+      "count": 112,
+      "percentage": 20.363636363636363,
+      "avg_volatility": 0.0063165398124247684,
+      "avg_momentum": 0.036610130748826464,
+      "avg_volume_ratio": 1.014442106909749,
+      "avg_rsi": 68.98546509977687
+    },
+    "3": {
+      "name": "Alta Volatilidad/Pánico",
+      "count": 192,
+      "percentage": 34.909090909090914,
+      "avg_volatility": 0.005551369986100805,
+      "avg_momentum": -0.020219346930806664,
+      "avg_volume_ratio": 1.0184113777700652,
+      "avg_rsi": 36.07018271911087
+    }
+  },
+  "model_info": {
+    "n_regimes": 4,
+    "trained_at": "2025-10-21T10:35:52.354908",
+    "model_type": "KMeans"
+  }
+}

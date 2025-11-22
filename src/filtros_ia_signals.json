@@ -1,0 +1,46 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "signal_type": "HOLD",
+    "confidence": 53.333333333333336,
+    "reasoning": "Se\u00f1al de MANTENER: T\u00e9cnico=45.0, Sentimiento=35.0, Volumen=80.0",
+    "timestamp": "2025-10-22T06:24:38.393797",
+    "technical_score": 45,
+    "sentiment_score": 35,
+    "volume_score": 80,
+    "risk_level": "MEDIUM"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "signal_type": "HOLD",
+    "confidence": 53.333333333333336,
+    "reasoning": "Se\u00f1al de MANTENER: T\u00e9cnico=45.0, Sentimiento=35.0, Volumen=80.0",
+    "timestamp": "2025-10-22T06:24:40.842525",
+    "technical_score": 45,
+    "sentiment_score": 35,
+    "volume_score": 80,
+    "risk_level": "MEDIUM"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "signal_type": "HOLD",
+    "confidence": 53.333333333333336,
+    "reasoning": "Se\u00f1al de MANTENER: T\u00e9cnico=40.0, Sentimiento=45.0, Volumen=75.0",
+    "timestamp": "2025-10-22T06:24:44.014547",
+    "technical_score": 40,
+    "sentiment_score": 45,
+    "volume_score": 75,
+    "risk_level": "MEDIUM"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "signal_type": "BUY",
+    "confidence": 55.0,
+    "reasoning": "Se\u00f1al de COMPRA: T\u00e9cnico=60.0, Sentimiento=45.0, Volumen=60.0",
+    "timestamp": "2025-10-22T06:24:48.488094",
+    "technical_score": 60,
+    "sentiment_score": 45,
+    "volume_score": 60,
+    "risk_level": "MEDIUM"
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "system_name": "OPTIMIZED VARIABLE CAPITAL 5% SYSTEM",
+  "analysis_timestamp": "2025-10-18T18:59:17.042884",
+  "target_monthly_return": 0.05,
+  "capital_range": "$200-$500 USDT",
+  "performance": {
+    "initial_capital": 200,
+    "final_capital": 200,
+    "meets_target": false,
+    "monthly_return": 0,
+    "total_return": 0,
+    "win_rate": 0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "sharpe_ratio": 0,
+    "max_drawdown": 0,
+    "avg_trade_duration": 0,
+    "profit_factor": 0,
+    "expectancy": 0,
+    "scaling_events": 0
+  },
+  "symbol_performance": {},
+  "configuration": {
+    "current_capital": 200,
+    "quality_filters": {
+      "min_volume_spike": 2.5,
+      "min_price_movement": 0.8,
+      "max_spread": 0.15,
+      "min_confidence": 0.85,
+      "trend_alignment": true,
+      "momentum_threshold": 0.7,
+      "volatility_filter": 0.06,
+      "rsi_range": [
+        40,
+        60
+      ],
+      "macd_strength": 0.5,
+      "volume_consistency": 0.8,
+      "price_stability": 0.95
+    },
+    "compounding_config": {
+      "base_rate": 0.4,
+      "max_rate": 0.7,
+      "performance_bonus": 0.2,
+      "scaling_bonus": 0.15,
+      "drawdown_penalty": 0.8
+    },
+    "safety_config": {
+      "max_drawdown": 0.08,
+      "min_sharpe": 1.5,
+      "volatility_limit": 0.06,
+      "consecutive_loss_limit": 2,
+      "daily_loss_limit": 0.02
+    },
+    "scaling_config": {
+      "performance_threshold": 0.12,
+      "scaling_factor": 1.15,
+      "min_win_rate_to_scale": 0.75,
+      "min_trades_to_scale": 15,
+      "max_drawdown_to_scale": 0.05,
+      "scaling_cooldown_days": 5
+    }
+  }
+}

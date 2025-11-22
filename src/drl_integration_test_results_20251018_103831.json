@@ -1,0 +1,98 @@
+{
+  "timestamp": "2025-10-18T10:38:12.107154",
+  "tests": {
+    "drl_adapter_creation": {
+      "status": "PASSED",
+      "message": "Adaptador DRL creado exitosamente",
+      "details": {
+        "initial_capital": 10000.0,
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT"
+        ],
+        "state_dim": 20,
+        "action_dim": 3
+      }
+    },
+    "integrated_system_creation": {
+      "status": "PASSED",
+      "message": "Sistema integrado creado exitosamente",
+      "details": {
+        "trading_mode": "hybrid",
+        "drl_enabled": true,
+        "manual_enabled": true,
+        "symbols_count": 3
+      }
+    },
+    "market_data_processing": {
+      "status": "PASSED",
+      "message": "Datos de mercado procesados correctamente",
+      "details": {
+        "market_data_symbols": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "ADAUSDT"
+        ],
+        "current_capital": 10000.0,
+        "portfolio_value": 10000.0
+      }
+    },
+    "drl_signals": {
+      "status": "PASSED",
+      "message": "Se\u00f1ales DRL generadas para 2 s\u00edmbolos",
+      "details": {
+        "signals_generated": 2,
+        "total_symbols": 3
+      }
+    },
+    "manual_trading": {
+      "status": "PASSED",
+      "message": "Orden manual ejecutada correctamente",
+      "details": {
+        "order_id": "5468e96c",
+        "symbol": "BTCUSDT",
+        "side": "buy",
+        "quantity": 0.001
+      }
+    },
+    "monitoring_system": {
+      "status": "PASSED",
+      "message": "Sistema de monitoreo funcionando correctamente",
+      "details": {
+        "monitoring_active": true,
+        "metrics_collected": 1,
+        "session_duration": 0.05009405
+      }
+    },
+    "trading_modes": {
+      "status": "PASSED",
+      "message": "Cambio de modos de trading exitoso",
+      "details": {
+        "modes_tested": [
+          "manual",
+          "drl",
+          "hybrid"
+        ],
+        "current_mode": "hybrid"
+      }
+    },
+    "integrated_summary": {
+      "status": "PASSED",
+      "message": "Resumen integrado generado correctamente",
+      "details": {
+        "fields_verified": 7,
+        "current_capital": 9954.031577499996,
+        "trading_mode": "hybrid",
+        "drl_enabled": true
+      }
+    }
+  },
+  "overall_success": true,
+  "errors": [],
+  "summary": {
+    "total_tests": 8,
+    "passed_tests": 8,
+    "failed_tests": 0,
+    "success_rate": 100.0
+  }
+}

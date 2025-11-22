@@ -1,0 +1,61 @@
+{
+  "analysis_timestamp": "2025-10-18T18:36:02.645478",
+  "target_monthly_return": 0.05,
+  "projected_daily_return": 0.001,
+  "projected_monthly_return": 0.030439087548101724,
+  "meets_target": false,
+  "portfolio_allocation": {
+    "allocations": {},
+    "total_allocation": 0
+  },
+  "top_opportunities": [],
+  "volatility_opportunities": [],
+  "compound_projection": {
+    "initial_capital": 1000,
+    "final_capital": 1030.4390875481017,
+    "total_return": 0.030439087548101724,
+    "monthly_return": 0.030439087548101724,
+    "daily_returns": [
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001,
+      0.001
+    ],
+    "compound_effect": 1.00042629859039
+  },
+  "total_symbols_analyzed": 15,
+  "strong_signals_found": 0,
+  "strategy_components": {
+    "multi_timeframe": true,
+    "volatility_detection": true,
+    "portfolio_optimization": true,
+    "compound_growth": true,
+    "leverage_used": false
+  }
+}

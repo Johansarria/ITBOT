@@ -1,0 +1,28 @@
+2025-10-18 19:18:00,687 - INFO - Configuración cargada desde first_candle_strategy_config.json
+2025-10-18 19:18:00,687 - INFO - === SISTEMA DE PAPER TRADING EN TIEMPO REAL INICIALIZADO ===
+2025-10-18 19:18:00,687 - INFO - Capital inicial: $250.00
+2025-10-18 19:18:00,695 - INFO - Símbolos monitoreados: ['BTCUSDT', 'ETHUSDT', 'ADAUSDT', 'DOTUSDT', 'LINKUSDT']
+2025-10-18 19:18:00,696 - INFO - 🚀 INICIANDO SISTEMA EN TIEMPO REAL
+2025-10-18 19:18:00,697 - INFO - 🌅 Nueva sesión iniciada: 2025-10-18
+2025-10-18 19:29:51,160 - INFO - Sistema detenido
+2025-10-18 19:29:51,161 - INFO - Sistema detenido por usuario
+2025-10-18 19:29:51,166 - INFO - Datos de sesión guardados
+2025-10-19 13:42:03,159 - INFO - Configuración cargada desde first_candle_strategy_config.json
+2025-10-19 13:42:03,159 - INFO - === SISTEMA DE PAPER TRADING EN TIEMPO REAL INICIALIZADO ===
+2025-10-19 13:42:03,159 - INFO - Capital inicial: $250.00
+2025-10-19 13:42:03,160 - INFO - Símbolos monitoreados: ['BTCUSDT', 'ETHUSDT', 'ADAUSDT', 'DOTUSDT', 'LINKUSDT']
+2025-10-19 13:42:03,163 - INFO - 🚀 INICIANDO SISTEMA EN TIEMPO REAL
+2025-10-19 13:42:03,163 - INFO - 🌅 Nueva sesión iniciada: 2025-10-19
+2025-10-19 16:08:04,963 - ERROR - Error obteniendo datos de BTCUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BTCUSDT&interval=1h&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x0000025AA080FD90>, 'Connection to api.binance.com timed out. (connect timeout=None)'))
+2025-10-19 16:08:09,684 - ERROR - Error obteniendo datos de ETHUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ETHUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA04755D0>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:08:21,844 - ERROR - Error obteniendo datos de ADAUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ADAUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA07FD110>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:08:22,865 - ERROR - Error obteniendo datos de DOTUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=DOTUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA07DC1D0>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:08:23,882 - ERROR - Error obteniendo datos de LINKUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=LINKUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA046FD90>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:09:24,936 - ERROR - Error obteniendo datos de BTCUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BTCUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA07D2610>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:09:25,936 - ERROR - Error obteniendo datos de ETHUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ETHUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA07E43D0>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:09:26,947 - ERROR - Error obteniendo datos de ADAUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ADAUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA07DC650>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:09:27,978 - ERROR - Error obteniendo datos de DOTUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=DOTUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025A9E2DF350>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 16:09:28,981 - ERROR - Error obteniendo datos de LINKUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=LINKUSDT&interval=1h&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000025AA07FF890>: Failed to resolve 'api.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2025-10-19 17:30:44,031 - INFO - Sistema detenido
+2025-10-19 17:30:44,035 - INFO - Sistema detenido por usuario
+2025-10-19 17:30:44,037 - INFO - Datos de sesión guardados

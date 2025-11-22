@@ -1,0 +1,42 @@
+{
+  "feature_importance": {
+    "volatility": "0.1314736",
+    "momentum": "0.13132085",
+    "trend_direction": "0.12736823",
+    "rsi": "0.12727791",
+    "trend_strength": "0.12306886",
+    "hour": "0.122771166",
+    "day_of_week": "0.1212734",
+    "volume_ratio": "0.11544592",
+    "regime_0": "0.0",
+    "regime_1": "0.0",
+    "regime_2": "0.0",
+    "regime_3": "0.0",
+    "causal_relations": "0.0",
+    "causal_sentiment": "0.0"
+  },
+  "feature_names": [
+    "volatility",
+    "momentum",
+    "rsi",
+    "volume_ratio",
+    "trend_strength",
+    "trend_direction",
+    "regime_0",
+    "regime_1",
+    "regime_2",
+    "regime_3",
+    "causal_relations",
+    "causal_sentiment",
+    "hour",
+    "day_of_week"
+  ],
+  "strategy_names": {
+    "0": "momentum",
+    "1": "mean_reversion",
+    "2": "breakout",
+    "3": "hold"
+  },
+  "trained_at": "2025-10-21T10:35:52.673479",
+  "model_type": "XGBoost"
+}

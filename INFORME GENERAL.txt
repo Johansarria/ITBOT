@@ -1,0 +1,153 @@
+INFORME GENERAL DEL PROYECTO SICAR (2025)
+
+1. Visión General
+- Nombre: SICAR (Sistema Inteligente de Consulta y Análisis de Rupturas)
+- Objetivo: Generar señales de trading de criptomonedas robustas y explicables, evitando sobreajuste y falsas rupturas mediante optimizaciones de datos, filtros de volatilidad y validación multifactor.
+- Arquitectura: Frontend React (Vite) + Backend Web API Express + Núcleo analítico en Python (PatchTST, análisis técnico, sentimiento, validación de rupturas) + archivos de resultados/REPORTES consumidos por el frontend.
+
+2. Componentes Principales
+- Frontend (React, Vite): dashboard interactivo, visualización de predicciones, reportes XAI, consenso IA y panel de validación de rupturas.
+- Web API (Node/Express): expone endpoints REST que sirven CSV/JSON/TXT generados por el pipeline Python.
+- Núcleo Python (src/):
+  - PatchTSTIntegration (module_patchtst_integration.py): integra modelo PatchTST con análisis estructural, sentimiento, ATR dinámico y validación de rupturas.
+  - PatchTST (module_patchtst.py): preparación, arquitectura y señales PatchTST (horizonte 96h).
+  - CryptoDataLoader (crypto_data_loader.py): carga datos (Binance/Yahoo), indicadores técnicos, escalado y features para PatchTST.
+  - MarketSentimentAnalyzer (market_sentiment.py): Fear & Greed + funding rates (ccxt/binance) con fallbacks resilientes.
+  - BreakoutValidator (breakout_validator.py): sistema anti-fakeout de 6 factores.
+  - Pipeline (patchtst_sicar_pipeline.py): orquesta entrenamiento/carga, predicción, generación de reportes.
+
+3. Flujo de Datos y Señales
+- Datos → Indicadores/Features → Modelo PatchTST → Señal preliminar (BUY/SELL/HOLD) → Enriquecimiento: tendencia, volumen, volatilidad, niveles estructurales, sentimiento, ATR → Validación de ruptura 6 factores → Confianza ajustada + recomendaciones.
+- Resultados se guardan en `reports/` y `results/` y el backend los expone a la UI.
+
+4. Endpoints Web API (webapi/server.js)
+- `GET /api/predictions`: `results/predictions_24_96h.csv`
+- `GET /api/risk`: `results/risk_analysis.json`
+- `GET /api/risk-multi`: `results/risk_multi.json`
+- `GET /api/trade-plan`: `results/trade_plan.json`
+- `GET /api/forex-plan`: `results/forex_indices_trade_plan.json`
+- `GET /api/quantiles`: `results/quantiles.json`
+- `GET /api/report-xai`: TXT dinámico por símbolo en `reports/`
+- `GET /api/consensus-xai`: TXT de consenso multi-IA en `reports/`
+- `GET /api/report-xai-summary`: resumen decisión/confianza a partir del TXT XAI
+- `GET /api/consensus-xai-summary`: resumen consenso/confianza/sentimiento medio
+- `GET /api/assets`: activos disponibles y metadatos
+- `GET /api/breakout-validation`: JSON de validación de rupturas (por símbolo o default)
+- `GET /api/last-updated`: últimas fechas de actualización de archivos clave
+- `POST /api/run-pipeline`: dispara `src/patchtst_sicar_pipeline.py` (modo normal o quick)
+
+5. Frontend (frontend/src/App.jsx)
+- Selección de símbolo y sincronización con análisis.
+- Visualización de predicciones (Plotly) y bandas P10/P50/P90.
+- Tarjetas de reporte XAI y consenso IA con resúmenes extraídos del backend.
+- Panel de validación de rupturas:
+  - Estado: VALID/INVALID/PENDING
+  - Score: total y umbral
+  - Factores con checks (volumen/momentum/tiempo/proximidad/volatilidad/sentimiento)
+  - Advertencias y recomendaciones.
+- Indicadores de niveles de entrada/SL/TP.
+
+6. Núcleo Analítico (Python)
+6.1 PatchTSTIntegration (src/module_patchtst_integration.py)
+- Inicializa/entrena/carga PatchTST con configuración optimizada para cripto.
+- Genera señal y enriquece con:
+  - Tendencia (slope últimas 72h)
+  - Volatilidad reciente
+  - Niveles estructurales (365 días): soportes/resistencias, posición en rango
+  - Sentimiento de mercado combinado: Fear & Greed + funding rates
+  - ATR dinámico: factor de volatilidad según nivel (LOW/NORMAL/HIGH)
+  - Validación anti-fakeout: aplica factor según estado VALID/INVALID/PENDING
+- Guarda validación de rupturas en `reports/breakout_validation_{SYMBOL}.json` y default.
+
+6.2 PatchTST (src/module_patchtst.py)
+- Config por defecto: seq_len=512, pred_len=96, patch_len=16, stride=8, d_model=128–256, n_heads 8–16.
+- Construcción del modelo, entrenamiento, generación de señales.
+- Mapeo de features estilo ETTh1 adaptado a OHLCV cripto.
+
+6.3 CryptoDataLoader (src/crypto_data_loader.py)
+- Fuentes: Yahoo (fallback) y Binance (ccxt/python-binance según contextos).
+- Indicadores técnicos: `ta` (RSI, Bollinger, ATR), escalado `StandardScaler/MinMaxScaler`.
+- Ponderación temporal exponencial (EWMA) para dar más peso a datos recientes.
+- Ventanas:
+  - Momentum: 90 días
+  - Estructural: 365 días (niveles, rango)
+- ATR dinámico: calcula `current_atr_percent`, clasifica nivel de volatilidad y define `volatility_factor`.
+
+6.4 MarketSentimentAnalyzer (src/market_sentiment.py)
+- Fear & Greed Index: API Alternative.me con robustez de parseo y fallbacks.
+- Funding rates (ccxt.binance): conversión por símbolo, con fallback cuando no disponible.
+- Score combinado: 60% F&G + 40% funding, clasificación BULLISH/BEARISH/NEUTRAL, señales de miedo/codicia extrema.
+
+6.5 BreakoutValidator (src/breakout_validator.py)
+- Sistema 6 factores (score binario por factor; umbral por defecto 4):
+  1) Volumen: >1.5x media 20 días
+  2) Momentum: RSI con espacio (no sobre compra/venta)
+  3) Tiempo: alineación ventanas H4/D1 aproximada via slopes
+  4) Proximidad: distancia a resistencias/soportes
+  5) Volatilidad: bandas de Bollinger y thresholds
+  6) Sentimiento: evita operar contra extremos
+- Retorna estado VALID/INVALID/PENDING, score total, advertencias y recomendación.
+
+7. Optimizaciones Implementadas
+- #1 Reducir ventana de entrenamiento para momentum de 365 a 90 días.
+- #2 Ponderación temporal exponencial (EWMA) con mayor peso a datos recientes.
+- #3 Integración de sentimiento: Fear & Greed + funding rates con detección de extremos y score combinado.
+- #4 Filtros ATR dinámicos: ajuste de sensibilidad (reducción de confianza bajo alta volatilidad).
+- #5 Sistema anti-fakeout: validación de rupturas con 6 factores y aplicación de factor de confianza.
+
+8. Librerías Instaladas
+8.1 Frontend (frontend/package.json)
+- dependencias: `react`, `react-dom`, `react-plotly.js`, `plotly.js`
+- devDependencies: `vite`
+
+8.2 Web API (webapi/package.json)
+- dependencias: `express`, `cors`, `papaparse`
+
+8.3 Python (requirements.txt y src/requirements_realtime.txt)
+- Análisis/ML/DL: `pandas`, `numpy`, `scipy`, `scikit-learn`, `xgboost`, `tensorflow`, `keras`, `transformers`, `torch`, `accelerate`
+- NLP: `spacy`
+- Datos/APIs: `openai`, `anthropic`, `yfinance`, `python-binance`, `requests`
+- Trading/Backtesting: `backtrader`, `vectorbt`
+- Visualización: `matplotlib`, `plotly`, `seaborn`
+- Utilidades: `python-dotenv`, `jupyterlab`, `beautifulsoup4`, `schedule`
+- Tiempo real (src/requirements_realtime.txt): `websocket-client`, `requests`, `pandas`, `numpy`, `python-binance`, `streamlit`, `plotly`, `asyncio-mqtt`, `schedule`
+- Técnicos utilizados en código: `ta`, `ccxt` (importados en `src`, considerar instalación si no están en requirements base).
+
+9. Seguridad y Buenas Prácticas
+- No se exponen claves ni secretos en el repositorio.
+- Uso de fallbacks robustos cuando APIs fallan o datos no están disponibles.
+- Reducción proactiva de confianza en condiciones adversas (miedo extremo, alta volatilidad, proximidad a resistencias).
+
+10. Estado Actual (verificado en pruebas)
+- Señales generadas con baja confianza en mercados de alta volatilidad y ruptura inválida.
+- Validación de ruptura funcionando (ejemplo BTC-USD: INVALID, score 3/4, factor de confianza 0.5 aplicado).
+- Guardado de validaciones en `reports/` y consumo desde frontend.
+
+11. Ejecución y Desarrollo
+- Frontend: `npm run dev` en `frontend/` (Vite dev server).
+- Web API: `node server.js` en `webapi/`.
+- Pipeline Python: vía `POST /api/run-pipeline` o ejecución directa `python src/patchtst_sicar_pipeline.py`.
+- Pruebas de integración: `test_optimizaciones.py` ejecuta flujo completo de generación de señal y valida consistencia.
+
+12. Próximos Pasos Sugeridos
+- Añadir tests unitarios para cada factor del BreakoutValidator.
+- Consolidar dependencias (añadir `ccxt` y `ta` a requirements si faltan en entorno de producción).
+- Extender soporte de símbolos y normalización de tickers entre Binance/Yahoo.
+- Persistir métricas y logs de validaciones para análisis estadístico (éxito por factor/mercado).
+
+13. Estructura de Directorios (parcial)
+- `frontend/` (React + Vite)
+- `webapi/` (Express)
+- `src/` (núcleo Python)
+  - `module_patchtst_integration.py`
+  - `module_patchtst.py`
+  - `crypto_data_loader.py`
+  - `market_sentiment.py`
+  - `breakout_validator.py`
+  - `patchtst_sicar_pipeline.py`
+- `results/` (CSV/JSON consumidos por la API)
+- `reports/` (TXT/JSON consumidos por la UI)
+
+14. Conclusión
+- SICAR quedó fortalecido contra sobreajuste y falsas señales mediante un pipeline moderno que combina ML temporal (PatchTST) con filtros de mercado (sentimiento, ATR) y validación multifactor. La arquitectura separa claramente la UI, API y núcleo analítico, permitiendo escalabilidad y observabilidad.
+

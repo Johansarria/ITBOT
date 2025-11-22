@@ -1,0 +1,53 @@
+{
+  "system_name": "ULTIMATE 5% MONTHLY SYSTEM",
+  "analysis_timestamp": "2025-10-18T18:51:41.767374",
+  "target_monthly_return": 0.05,
+  "performance": {
+    "initial_capital": 10000,
+    "final_capital": 10000,
+    "meets_target": false,
+    "monthly_return": 0,
+    "total_return": 0,
+    "win_rate": 0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "sharpe_ratio": 0,
+    "max_drawdown": 0,
+    "avg_trade_duration": 0,
+    "profit_factor": 0,
+    "expectancy": 0,
+    "calmar_ratio": 0,
+    "sortino_ratio": 0
+  },
+  "symbol_performance": {},
+  "configuration": {
+    "quality_filters": {
+      "min_volume_spike": 1.8,
+      "min_price_movement": 0.4,
+      "max_spread": 0.15,
+      "min_confidence": 0.75,
+      "trend_alignment": true,
+      "momentum_threshold": 0.6,
+      "volatility_filter": 0.08,
+      "rsi_range": [
+        45,
+        65
+      ],
+      "macd_strength": 0.3
+    },
+    "compounding_config": {
+      "base_rate": 0.6,
+      "max_rate": 0.85,
+      "performance_bonus": 0.25,
+      "streak_bonus": 0.15,
+      "drawdown_penalty": 0.3
+    },
+    "safety_config": {
+      "max_drawdown": 0.12,
+      "min_sharpe": 1.5,
+      "volatility_limit": 0.08,
+      "consecutive_loss_limit": 3,
+      "daily_loss_limit": 0.03
+    }
+  }
+}

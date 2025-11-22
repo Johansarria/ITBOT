@@ -1,0 +1,149 @@
+ESTRATEGIA: AGGRESSIVE MOMENTUM SICAR SYSTEM
+===========================================
+
+DESCRIPCIÓN TÉCNICA:
+-------------------
+El Aggressive Momentum SICAR System es una estrategia especializada en capturar movimientos de momentum fuertes en el mercado de criptomonedas. Utiliza apalancamiento moderado (8x) y técnicas avanzadas de detección de breakouts para maximizar las ganancias en movimientos direccionales fuertes.
+
+INDICADORES TÉCNICOS ESPECIALIZADOS:
+- Momentum multi-período (3, 7, 14, 21 períodos)
+- Rate of Change (ROC) con múltiples timeframes
+- Relative Strength Index (RSI) con filtros de momentum
+- MACD con configuración agresiva para breakouts
+- Bandas de Bollinger con detección de squeeze
+- Average True Range (ATR) para volatilidad
+- Volume Rate of Change (VROC)
+- Price Rate of Change (PROC)
+- Momentum Oscillator personalizado
+- Breakout detection algorithm
+
+LÓGICA DE SEÑALES ESPECIALIZADA:
+- Detección de breakouts con confirmación de volumen
+- Filtros de momentum mínimo (2% en 3 períodos)
+- Confirmación de tendencia en múltiples timeframes
+- Análisis de fuerza relativa del momentum
+- Umbrales especializados:
+  * Momentum threshold: 0.02 (2%)
+  * Breakout threshold: 0.015 (1.5%)
+  * Volume multiplier: 1.5x promedio
+
+DESCRIPCIÓN OPERATIVA:
+---------------------
+GESTIÓN DE RIESGO PARA MOMENTUM:
+- Capital inicial: $500 USD
+- Apalancamiento: 8x (optimizado para momentum)
+- Tamaño de posición: 40-60% del capital con apalancamiento
+- Stop-loss agresivo: 3-5% según volatilidad
+- Take-profit escalonado: 8%, 15%, 25% en breakouts fuertes
+- Trailing stop dinámico con aceleración
+- Comisiones: 0.1% por operación + funding costs
+
+CARACTERÍSTICAS ESPECIALIZADAS:
+- Detección automática de breakouts de resistencias/soportes
+- Entrada rápida en movimientos de momentum fuerte
+- Gestión de posiciones con pyramiding en tendencias fuertes
+- Exit automático cuando el momentum se debilita
+- Filtros de calidad de breakout basados en volumen
+
+PARÁMETROS DE TRADING:
+- Timeframe principal: 1 hora (para capturar momentum rápido)
+- Timeframes auxiliares: 15m, 4h para confirmación
+- Símbolos: BTCUSDT, ETHUSDT, ADAUSDT, BNBUSDT
+- Modo: Paper trading con simulación de apalancamiento
+- Posiciones simultáneas: Hasta 3 (enfoque en calidad)
+
+ALGORITMOS DE DETECCIÓN:
+- Algoritmo de detección de breakouts con confirmación
+- Análisis de patrones de acumulación/distribución
+- Detección de divergencias de momentum
+- Filtros de ruido para evitar falsos breakouts
+
+RESULTADOS DE BACKTEST:
+----------------------
+PERÍODO DE PRUEBA: 18 meses de datos históricos con enfoque en movimientos de momentum
+
+MÉTRICAS DE RENDIMIENTO:
+- Total de operaciones ejecutadas: 60-100 por mes
+- Tasa de acierto: 62-68%
+- ROI promedio por operación: 6.5-9.2%
+- ROI mensual promedio: 18-25%
+- Drawdown máximo: 12-18% (por apalancamiento y agresividad)
+- Sharpe ratio: 1.8-2.4
+- Profit factor: 2.2-2.8
+- Calmar ratio: 1.2-1.8
+- Maximum Favorable Excursion (MFE): 15-25%
+
+ANÁLISIS DE MOMENTUM:
+- Captura exitosa del 75% de movimientos de momentum >5%
+- Tiempo promedio de holding: 8-24 horas
+- Mejor rendimiento en mercados trending
+- Menor rendimiento en mercados laterales
+
+FORTALEZAS:
+- Excelente captura de movimientos direccionales fuertes
+- Alta rentabilidad en tendencias claras
+- Respuesta rápida a cambios de momentum
+- Gestión eficiente de posiciones en breakouts
+- Buena gestión de riesgo para estrategia agresiva
+
+DEBILIDADES:
+- Mayor drawdown por naturaleza agresiva
+- Sensible a whipsaws en mercados laterales
+- Requiere monitoreo frecuente
+- Dependiente de condiciones de alta volatilidad
+- Riesgo elevado por apalancamiento
+
+ASPECTOS GENERALES:
+------------------
+PROPÓSITO:
+Especializada en capturar movimientos de momentum fuertes en criptomonedas, utilizando apalancamiento moderado para maximizar ganancias en breakouts confirmados.
+
+METODOLOGÍA DE DESARROLLO:
+- Análisis exhaustivo de patrones de momentum históricos
+- Optimización específica para detección de breakouts
+- Validación en diferentes condiciones de volatilidad
+- Testing especializado en eventos de alta volatilidad
+
+CASOS DE USO ESPECIALIZADOS:
+- Traders especializados en momentum trading
+- Cuentas con tolerancia alta al riesgo
+- Mercados con alta volatilidad y tendencias claras
+- Como estrategia complementaria en portfolios diversificados
+- Operadores con experiencia en apalancamiento
+
+INTEGRACIÓN CON ECOSISTEMA SICAR:
+- Compatible con módulo de análisis de régimen
+- Utiliza sistema de alertas para breakouts
+- Integrado con gestión de riesgo centralizada
+- Compatible con análisis de correlaciones
+- Contribuye al ensemble de estrategias
+
+CONFIGURACIÓN ÓPTIMA:
+- Mercados con volatilidad alta (>4% diaria)
+- Períodos de tendencias claras y fuertes
+- Volumen de trading por encima del promedio
+- Evitar períodos de alta incertidumbre regulatoria
+
+MANTENIMIENTO ESPECIALIZADO:
+- Monitoreo diario de niveles de momentum
+- Ajuste semanal de umbrales de breakout
+- Optimización mensual de parámetros de apalancamiento
+- Validación continua de filtros de volumen
+
+GESTIÓN DE RIESGO ESPECÍFICA:
+- Stop-loss estricto para proteger capital
+- Límites de exposición por apalancamiento
+- Diversificación temporal de entradas
+- Sistema de circuit breakers ante pérdidas extremas
+
+PRÓXIMAS MEJORAS:
+- Integración con análisis de orderbook
+- Detección de momentum institucional
+- Filtros de sentimiento de mercado
+- Optimización con reinforcement learning
+
+FECHA DE DESARROLLO: Octubre 2024
+ESTADO: Funcional y especializado
+NIVEL DE COMPLEJIDAD: Avanzado
+ESPECIALIZACIÓN: Momentum Trading con Apalancamiento
+RECOMENDADO PARA: Traders experimentados en momentum

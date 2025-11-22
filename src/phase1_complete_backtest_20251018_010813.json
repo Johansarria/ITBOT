@@ -1,0 +1,282 @@
+{
+  "timestamp": "2025-10-18T01:08:13.007504",
+  "phase": "Fase 1 - Backtest Completo Multi-Asset",
+  "initial_capital": 50000,
+  "summary": {
+    "total_asset_classes": 1,
+    "total_symbols_tested": 10
+  },
+  "asset_class_results": {
+    "cryptocurrencies": {
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "DOGEUSDT",
+        "AVAXUSDT",
+        "MATICUSDT"
+      ],
+      "performance": {
+        "initial_capital": 50000.0,
+        "final_capital": 49793.740005479805,
+        "total_return": -206.2599945201946,
+        "total_return_pct": -0.41251998904038917,
+        "total_trades": 5,
+        "winning_trades": 1,
+        "win_rate": 20.0,
+        "asset_class_stats": {
+          "cryptocurrencies": {
+            "trades": 5,
+            "win_rate": 20.0,
+            "total_return": -206.25999452019641,
+            "avg_return_per_trade": -41.25199890403928
+          }
+        },
+        "trade_history": [
+          {
+            "symbol": "BTCUSDT",
+            "asset_class": "cryptocurrencies",
+            "side": "short",
+            "quantity": 0.0018126871104686977,
+            "entry_price": 101719.4,
+            "entry_time": "2025-05-12 17:08:08.964099",
+            "position_size": 184.38544526460964,
+            "signal_strength": 0.23970107884399255,
+            "status": "closed",
+            "exit_price": 106924.0,
+            "exit_time": "2025-10-18 01:08:09.713441",
+            "pnl": -9.434311335145395,
+            "return_pct": -5.116624753980073
+          },
+          {
+            "symbol": "ETHUSDT",
+            "asset_class": "cryptocurrencies",
+            "side": "short",
+            "quantity": 0.07785596134725961,
+            "entry_price": 2424.8,
+            "entry_time": "2025-05-12 17:08:08.964099",
+            "position_size": 188.78513507483513,
+            "signal_strength": 0.24632906548570965,
+            "status": "closed",
+            "exit_price": 3872.25,
+            "exit_time": "2025-10-18 01:08:09.713441",
+            "pnl": -112.69261125209091,
+            "return_pct": -59.693582975915525
+          },
+          {
+            "symbol": "BNBUSDT",
+            "asset_class": "cryptocurrencies",
+            "side": "short",
+            "quantity": 0.21002035004662467,
+            "entry_price": 641.93,
+            "entry_time": "2025-05-12 17:08:08.964099",
+            "position_size": 134.81836330542976,
+            "signal_strength": 0.17658177476438255,
+            "status": "closed",
+            "exit_price": 1090.73,
+            "exit_time": "2025-10-18 01:08:09.713441",
+            "pnl": -94.25713310092517,
+            "return_pct": -69.91416509588275
+          },
+          {
+            "symbol": "ADAUSDT",
+            "asset_class": "cryptocurrencies",
+            "side": "short",
+            "quantity": 198.29727385335397,
+            "entry_price": 0.7741,
+            "entry_time": "2025-05-12 17:08:08.964099",
+            "position_size": 153.5019196898813,
+            "signal_strength": 0.20160071427449272,
+            "status": "closed",
+            "exit_price": 0.6311,
+            "exit_time": "2025-10-18 01:08:09.713441",
+            "pnl": 28.35651016102962,
+            "return_pct": 18.473065495414033
+          },
+          {
+            "symbol": "SOLUSDT",
+            "asset_class": "cryptocurrencies",
+            "side": "short",
+            "quantity": 0.9935939505757254,
+            "entry_price": 166.97,
+            "entry_time": "2025-05-12 17:08:08.964099",
+            "position_size": 165.90038192762887,
+            "signal_strength": 0.2185620322540765,
+            "status": "closed",
+            "exit_price": 185.32,
+            "exit_time": "2025-10-18 01:08:09.713441",
+            "pnl": -18.232448993064555,
+            "return_pct": -10.989998203270044
+          }
+        ]
+      },
+      "symbol_count": 10
+    }
+  },
+  "combined_portfolio": {
+    "selected_symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT"
+    ],
+    "results": {
+      "initial_capital": 50000,
+      "final_capital": 49783.78501649469,
+      "total_return": -216.21498350531328,
+      "total_return_pct": -0.4324299670106266,
+      "total_trades": 3,
+      "winning_trades": 0,
+      "win_rate": 0.0,
+      "asset_class_stats": {
+        "cryptocurrencies": {
+          "trades": 3,
+          "win_rate": 0.0,
+          "total_return": -216.21498350531283,
+          "avg_return_per_trade": -72.07166116843761
+        }
+      },
+      "trade_history": [
+        {
+          "symbol": "BTCUSDT",
+          "asset_class": "cryptocurrencies",
+          "side": "short",
+          "quantity": 0.0018126871104686977,
+          "entry_price": 101719.4,
+          "entry_time": "2025-05-12 17:08:11.763428",
+          "position_size": 184.38544526460964,
+          "signal_strength": 0.23970107884399255,
+          "status": "closed",
+          "exit_price": 106906.6,
+          "exit_time": "2025-10-18 01:08:12.037080",
+          "pnl": -9.40277057942325,
+          "return_pct": -5.099518872506141
+        },
+        {
+          "symbol": "ETHUSDT",
+          "asset_class": "cryptocurrencies",
+          "side": "short",
+          "quantity": 0.07785596134725961,
+          "entry_price": 2424.8,
+          "entry_time": "2025-05-12 17:08:11.763428",
+          "position_size": 188.78513507483513,
+          "signal_strength": 0.24632906548570965,
+          "status": "closed",
+          "exit_price": 3871.05,
+          "exit_time": "2025-10-18 01:08:12.037080",
+          "pnl": -112.59918409847421,
+          "return_pct": -59.644094358297586
+        },
+        {
+          "symbol": "BNBUSDT",
+          "asset_class": "cryptocurrencies",
+          "side": "short",
+          "quantity": 0.21002035004662467,
+          "entry_price": 641.93,
+          "entry_time": "2025-05-12 17:08:11.763428",
+          "position_size": 134.81836330542976,
+          "signal_strength": 0.17658177476438255,
+          "status": "closed",
+          "exit_price": 1090.52,
+          "exit_time": "2025-10-18 01:08:12.037080",
+          "pnl": -94.21302882741537,
+          "return_pct": -69.88145124857851
+        }
+      ]
+    },
+    "backtester": "<multi_asset_backtester.MultiAssetBacktester object at 0x000001EB9949C290>"
+  },
+  "correlation_analysis": {
+    "timestamp": "2025-10-18T01:08:13.002273",
+    "analysis_summary": {
+      "total_assets": 2,
+      "data_periods": 179,
+      "asset_classes": 1
+    },
+    "correlation_matrices": {
+      "short_term_pearson": {
+        "BTCUSDT": {
+          "BTCUSDT": 1.0,
+          "ETHUSDT": 0.9392662712044667
+        },
+        "ETHUSDT": {
+          "BTCUSDT": 0.9392662712044667,
+          "ETHUSDT": 1.0
+        }
+      },
+      "medium_term_pearson": {
+        "BTCUSDT": {
+          "BTCUSDT": 1.0,
+          "ETHUSDT": 0.8141952220850657
+        },
+        "ETHUSDT": {
+          "BTCUSDT": 0.8141952220850657,
+          "ETHUSDT": 1.0
+        }
+      },
+      "long_term_pearson": {
+        "BTCUSDT": {
+          "BTCUSDT": 1.0,
+          "ETHUSDT": 0.7773719132901896
+        },
+        "ETHUSDT": {
+          "BTCUSDT": 0.7773719132901896,
+          "ETHUSDT": 1.0
+        }
+      }
+    },
+    "asset_class_analysis": {
+      "cryptocurrencies": {
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT"
+        ],
+        "count": 2,
+        "avg_correlation": 0.7773719132901896,
+        "max_correlation": 0.7773719132901896,
+        "min_correlation": 0.7773719132901896
+      }
+    },
+    "diversification_opportunities": [],
+    "portfolio_suggestions": {
+      "selected_assets": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "asset_count": 2,
+      "avg_correlation": 0.8141952220850657,
+      "max_correlation": 0.8141952220850657,
+      "asset_class_distribution": {
+        "cryptocurrencies": 2
+      },
+      "diversification_score": 0.18580477791493433
+    }
+  },
+  "advanced_metrics": {
+    "by_asset_class": {
+      "cryptocurrencies": {
+        "total_return_pct": -0.41251998904038917,
+        "total_trades": 5,
+        "win_rate": 20.0,
+        "sharpe_ratio": -0.753616040187678,
+        "profit_factor": 0.12086323679383798,
+        "max_drawdown": -0.12375599671211675
+      }
+    },
+    "combined_portfolio": {
+      "total_return_pct": -0.4324299670106266,
+      "total_trades": 3,
+      "win_rate": 0.0,
+      "sharpe_ratio": -1.5781972660716153,
+      "profit_factor": 0.0,
+      "max_drawdown": -0.12972899010318797
+    }
+  },
+  "recommendations": [
+    "Mejor rendimiento: cryptocurrencies con -0.41% de retorno",
+    "Mejorar diversificación del portfolio"
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "system_name": "VARIABLE CAPITAL 5% SYSTEM",
+  "analysis_timestamp": "2025-10-18T18:56:41.504450",
+  "target_monthly_return": 0.05,
+  "capital_range": "$200-$500 USDT",
+  "performance": {
+    "initial_capital": 200,
+    "final_capital": 167.85328281224668,
+    "current_capital": 167.85328281224668,
+    "total_return": -0.16073358593876663,
+    "monthly_return": -0.03576805816822559,
+    "win_rate": 0.3541666666666667,
+    "total_trades": 96,
+    "winning_trades": 34,
+    "sharpe_ratio": -0.6357368189597405,
+    "max_drawdown": -0.16251566110846086,
+    "avg_trade_duration": 77.1875,
+    "profit_factor": 0.5118204290860151,
+    "expectancy": -0.20823596786630713,
+    "meets_target": "False",
+    "scaling_events": 0,
+    "scaling_history": []
+  },
+  "symbol_performance": {
+    "ADAUSDT": {
+      "total_trades": 12,
+      "win_rate": 0.5,
+      "total_pnl": 0.06335261597735757,
+      "avg_pnl": 0.005279384664779798,
+      "best_trade": 1.00256789522775,
+      "worst_trade": -1.0395425295405991
+    },
+    "DOTUSDT": {
+      "total_trades": 5,
+      "win_rate": 0.2,
+      "total_pnl": -1.206059450054176,
+      "avg_pnl": -0.24121189001083518,
+      "best_trade": 1.968109502850331,
+      "worst_trade": -0.9774939406939384
+    },
+    "LINKUSDT": {
+      "total_trades": 17,
+      "win_rate": 0.23529411764705882,
+      "total_pnl": -5.113216024921315,
+      "avg_pnl": -0.3007774132306656,
+      "best_trade": 0.6286444360916286,
+      "worst_trade": -0.7601643713500432
+    },
+    "MATICUSDT": {
+      "total_trades": 20,
+      "win_rate": 0.4,
+      "total_pnl": -5.23389909285415,
+      "avg_pnl": -0.26169495464270753,
+      "best_trade": 1.1534961914411999,
+      "worst_trade": -1.1751346528555238
+    },
+    "ATOMUSDT": {
+      "total_trades": 9,
+      "win_rate": 0.3333333333333333,
+      "total_pnl": -2.8145610502048193,
+      "avg_pnl": -0.31272900557831323,
+      "best_trade": 0.7394862119501895,
+      "worst_trade": -1.4292570211802642
+    },
+    "FTMUSDT": {
+      "total_trades": 10,
+      "win_rate": 0.5,
+      "total_pnl": 0.7159842800272918,
+      "avg_pnl": 0.07159842800272916,
+      "best_trade": 1.1987554771980409,
+      "worst_trade": -0.8998676302306755
+    },
+    "SANDUSDT": {
+      "total_trades": 10,
+      "win_rate": 0.3,
+      "total_pnl": -3.071845900013063,
+      "avg_pnl": -0.30718459000130627,
+      "best_trade": 0.9041188786521672,
+      "worst_trade": -1.4117296575429403
+    },
+    "MANAUSDT": {
+      "total_trades": 13,
+      "win_rate": 0.3076923076923077,
+      "total_pnl": -3.330408293122606,
+      "avg_pnl": -0.25618525331712355,
+      "best_trade": 1.0936731918178695,
+      "worst_trade": -1.3447663253593753
+    }
+  },
+  "configuration": {
+    "current_capital": 167.85328281224668,
+    "quality_filters": {
+      "min_volume_spike": 1.44,
+      "min_price_movement": 0.32,
+      "max_spread": 0.24,
+      "min_confidence": 0.6100000000000001,
+      "trend_alignment": true,
+      "momentum_threshold": 0.42,
+      "volatility_filter": 0.104
+    },
+    "compounding_config": {
+      "base_rate": 0.42,
+      "max_rate": 0.6799999999999999,
+      "performance_bonus": 0.16,
+      "scaling_bonus": 0.2,
+      "drawdown_penalty": 0.6199999999999999
+    },
+    "safety_config": {
+      "max_drawdown": 0.13799999999999998,
+      "min_sharpe": 1.2,
+      "volatility_limit": 0.092,
+      "consecutive_loss_limit": 4,
+      "daily_loss_limit": 0.036000000000000004
+    },
+    "scaling_config": {
+      "performance_threshold": 0.15,
+      "scaling_factor": 1.25,
+      "min_win_rate_to_scale": 0.65,
+      "min_trades_to_scale": 20,
+      "max_drawdown_to_scale": 0.08,
+      "scaling_cooldown_days": 7
+    }
+  }
+}

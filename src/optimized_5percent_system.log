@@ -1,0 +1,28 @@
+2025-10-18 18:40:22,336 - INFO - 🎯 OPTIMIZED 5% MONTHLY SYSTEM INICIALIZADO
+2025-10-18 18:40:22,338 - INFO - 💰 Capital inicial: $10,000.00
+2025-10-18 18:40:22,338 - INFO - 🎯 Objetivo: 5.0% mensual
+2025-10-18 18:40:22,339 - INFO - 🛡️ Máximo riesgo por trade: 1.0%
+2025-10-18 18:40:22,340 - INFO - 📊 Win rate mínimo: 65.0%
+2025-10-18 18:40:22,340 - INFO - 🎯 INICIANDO SISTEMA OPTIMIZADO PARA 5% MENSUAL
+2025-10-18 18:40:22,340 - INFO - 📊 Analizando BTCUSDT con filtros de calidad...
+2025-10-18 18:40:22,548 - INFO - 📊 Analizando ETHUSDT con filtros de calidad...
+2025-10-18 18:40:22,711 - INFO - 📊 Analizando BNBUSDT con filtros de calidad...
+2025-10-18 18:40:22,860 - INFO - ✅ SISTEMA OPTIMIZADO COMPLETADO
+2025-10-18 18:40:22,860 - ERROR - Error en sistema optimizado: 'final_capital'
+2025-10-18 18:41:01,424 - INFO - 🎯 OPTIMIZED 5% MONTHLY SYSTEM INICIALIZADO
+2025-10-18 18:41:01,431 - INFO - 💰 Capital inicial: $10,000.00
+2025-10-18 18:41:01,431 - INFO - 🎯 Objetivo: 5.0% mensual
+2025-10-18 18:41:01,431 - INFO - 🛡️ Máximo riesgo por trade: 1.0%
+2025-10-18 18:41:01,431 - INFO - 📊 Win rate mínimo: 65.0%
+2025-10-18 18:41:01,431 - INFO - 🎯 INICIANDO SISTEMA OPTIMIZADO PARA 5% MENSUAL
+2025-10-18 18:41:01,431 - INFO - 📊 Analizando BTCUSDT con filtros de calidad...
+2025-10-18 18:41:01,604 - INFO - 📊 Analizando ETHUSDT con filtros de calidad...
+2025-10-18 18:41:01,722 - INFO - 📊 Analizando BNBUSDT con filtros de calidad...
+2025-10-18 18:41:01,841 - INFO - ✅ SISTEMA OPTIMIZADO COMPLETADO
+2025-10-18 18:41:01,841 - INFO - 💰 Capital final: $10,000.00
+2025-10-18 18:41:01,841 - INFO - 📈 Retorno total: 0.00%
+2025-10-18 18:41:01,841 - INFO - 🎯 Retorno mensual: 0.00%
+2025-10-18 18:41:01,841 - INFO - 🏆 Cumple objetivo: NO
+2025-10-18 18:41:01,841 - INFO - 📊 Total trades: 0
+2025-10-18 18:41:01,841 - INFO - 🎲 Win rate: 0.0%
+2025-10-18 18:41:01,841 - INFO - 📉 Max drawdown: 0.00%

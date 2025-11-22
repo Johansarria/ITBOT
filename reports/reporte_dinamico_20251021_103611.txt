@@ -1,0 +1,22 @@
+REPORTE COGNITIVO DINÁMICO SICAR
+Generado: 2025-10-21 10:36:11
+Decisión: SELL
+Estrategia: momentum
+Confianza: 0.85
+==================================================
+
+**Reporte Cognitivo de Decisión de Trading - SICAR**
+
+**DECISIÓN PRINCIPAL:** El sistema SICAR ha decidido vender activos. Esta acción se basa en una estrategia de momentum, que busca aprovechar tendencias de mercado. Aunque el régimen de mercado es desconocido, la decisión de venta sugiere que se anticipa una disminución en el valor de los activos.
+
+**TRADUCCIÓN DE MÉTRICAS:** La confianza en esta decisión es alta, con un valor de 0.85, lo que indica que el sistema tiene una fuerte convicción en la validez de su análisis. Sin embargo, no se dispone de datos dinámicos, lo que limita la evaluación de la volatilidad y la tendencia actual del mercado.
+
+**CONTEXTO DE MERCADO:** A pesar de la falta de información sobre el régimen de mercado, la decisión de venta puede ser una respuesta a condiciones inciertas o a señales de debilidad en el rendimiento de los activos. Esto es común en situaciones donde los datos son limitados.
+
+**FACTORES DETERMINANTES:** Los factores más relevantes que influyeron en esta decisión son: 
+1. La alta confianza en el análisis de momentum.
+2. La ausencia de datos dinámicos que podrían haber proporcionado un contexto más claro.
+
+**NIVEL DE CERTEZA:** Con una confianza alta, el riesgo de esta decisión se considera moderado; el sistema está dispuesto a actuar con base en su análisis, a pesar de la falta de información completa.
+
+**IMPLICACIONES PRÁCTICAS:** Esta decisión de venta podría proteger el portafolio de pérdidas potenciales en un entorno incierto, permitiendo al sistema reorientar sus inversiones hacia oportunidades más favorables en el futuro.

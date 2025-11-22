@@ -1,0 +1,16 @@
+2025-10-18 19:02:10,540 - INFO - === INICIANDO SISTEMA DE ROMPIMIENTO DE PRIMERA VELA ===
+2025-10-18 19:02:10,541 - INFO - Capital inicial: $250.00
+2025-10-18 19:02:10,542 - INFO - Objetivo: 5.0% mensual
+2025-10-18 19:02:10,543 - INFO - Generando datos de mercado optimizados para primera vela...
+2025-10-18 19:02:10,608 - INFO - Calculando indicadores de primera vela...
+2025-10-18 19:02:10,632 - INFO - Generando señales de rompimiento...
+2025-10-18 19:02:10,805 - INFO - Simulando trading con estrategia de primera vela...
+2025-10-18 19:02:10,974 - INFO - === RESULTADOS DEL SISTEMA DE PRIMERA VELA ===
+2025-10-18 19:02:10,980 - INFO - Retorno total: 0.00%
+2025-10-18 19:02:10,982 - INFO - Retorno mensual: 0.00%
+2025-10-18 19:02:10,982 - INFO - Total de trades: 0
+2025-10-18 19:02:10,983 - INFO - Tasa de aciertos: 0.0%
+2025-10-18 19:02:10,983 - INFO - Factor de ganancia: 0.00
+2025-10-18 19:02:10,984 - INFO - Máximo drawdown: 0.00%
+2025-10-18 19:02:10,984 - INFO - Capital final: $250.00
+2025-10-18 19:02:10,984 - INFO - ¿Cumple objetivo?: NO

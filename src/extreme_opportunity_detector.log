@@ -1,0 +1,61 @@
+2025-10-18 18:23:27,150 - INFO - Detector EXTREMO de oportunidades inicializado
+2025-10-18 18:23:27,150 - INFO - Criterios EXTREMOS: 5 trades, 10% validacion
+2025-10-18 18:23:27,150 - INFO - Objetivo: Detectar CUALQUIER configuracion con potencial positivo
+2025-10-18 18:23:27,150 - INFO - Descargando 6 MESES de datos historicos REALES...
+2025-10-18 18:23:27,150 - INFO - Obteniendo datos REALES de Binance para BTCUSDT
+2025-10-18 18:23:28,289 - INFO - Obtenidos 1000 registros REALES para BTCUSDT
+2025-10-18 18:23:28,289 - INFO - Obteniendo datos REALES de Binance para ETHUSDT
+2025-10-18 18:23:29,298 - INFO - Obtenidos 1000 registros REALES para ETHUSDT
+2025-10-18 18:23:29,298 - INFO - Obteniendo datos REALES de Binance para BNBUSDT
+2025-10-18 18:23:30,211 - INFO - Obtenidos 1000 registros REALES para BNBUSDT
+2025-10-18 18:23:30,211 - INFO - Obteniendo datos REALES de Binance para ADAUSDT
+2025-10-18 18:23:31,569 - INFO - Obtenidos 1000 registros REALES para ADAUSDT
+2025-10-18 18:23:31,574 - INFO - Obteniendo datos REALES de Binance para SOLUSDT
+2025-10-18 18:23:32,766 - INFO - Obtenidos 1000 registros REALES para SOLUSDT
+2025-10-18 18:23:32,767 - INFO - Obteniendo datos REALES de Binance para XRPUSDT
+2025-10-18 18:23:34,141 - INFO - Obtenidos 1000 registros REALES para XRPUSDT
+2025-10-18 18:23:34,142 - INFO - Obteniendo datos REALES de Binance para DOTUSDT
+2025-10-18 18:23:35,229 - INFO - Obtenidos 1000 registros REALES para DOTUSDT
+2025-10-18 18:23:35,229 - INFO - Obteniendo datos REALES de Binance para LINKUSDT
+2025-10-18 18:23:36,257 - INFO - Obtenidos 1000 registros REALES para LINKUSDT
+2025-10-18 18:23:36,259 - INFO - Obteniendo datos REALES de Binance para LTCUSDT
+2025-10-18 18:23:37,289 - INFO - Obtenidos 1000 registros REALES para LTCUSDT
+2025-10-18 18:23:37,289 - INFO - Obteniendo datos REALES de Binance para AVAXUSDT
+2025-10-18 18:23:38,161 - INFO - Obtenidos 1000 registros REALES para AVAXUSDT
+2025-10-18 18:23:38,161 - INFO - Total: 10000 registros de datos REALES descargados
+2025-10-18 18:23:38,163 - INFO - Iniciando deteccion EXTREMA de oportunidades con datos REALES
+2025-10-18 18:23:38,165 - INFO - Criterios MINIMOS ABSOLUTOS para detectar CUALQUIER potencial
+2025-10-18 18:23:38,165 - INFO - Analizando 30 configuraciones EXTREMAS
+2025-10-18 18:23:38,165 - INFO - Deteccion extrema 1/30
+2025-10-18 18:23:42,658 - INFO - Deteccion extrema 2/30
+2025-10-18 18:23:47,170 - INFO - Deteccion extrema 3/30
+2025-10-18 18:23:51,125 - INFO - Deteccion extrema 4/30
+2025-10-18 18:23:55,219 - INFO - Deteccion extrema 5/30
+2025-10-18 18:23:59,053 - INFO - Deteccion extrema 6/30
+2025-10-18 18:24:02,587 - INFO - Deteccion extrema 7/30
+2025-10-18 18:24:05,918 - INFO - Deteccion extrema 8/30
+2025-10-18 18:24:10,200 - INFO - Deteccion extrema 9/30
+2025-10-18 18:24:15,061 - INFO - Deteccion extrema 10/30
+2025-10-18 18:24:20,028 - INFO - Deteccion extrema 11/30
+2025-10-18 18:24:24,214 - INFO - Deteccion extrema 12/30
+2025-10-18 18:24:28,950 - INFO - Deteccion extrema 13/30
+2025-10-18 18:24:33,908 - INFO - Deteccion extrema 14/30
+2025-10-18 18:24:38,783 - INFO - Deteccion extrema 15/30
+2025-10-18 18:24:42,757 - INFO - Deteccion extrema 16/30
+2025-10-18 18:24:47,008 - INFO - Deteccion extrema 17/30
+2025-10-18 18:24:51,055 - INFO - Deteccion extrema 18/30
+2025-10-18 18:24:55,069 - INFO - Deteccion extrema 19/30
+2025-10-18 18:24:59,355 - INFO - Deteccion extrema 20/30
+2025-10-18 18:25:03,574 - INFO - Deteccion extrema 21/30
+2025-10-18 18:25:07,839 - INFO - Deteccion extrema 22/30
+2025-10-18 18:25:12,296 - INFO - Deteccion extrema 23/30
+2025-10-18 18:25:16,806 - INFO - Deteccion extrema 24/30
+2025-10-18 18:25:21,382 - INFO - Deteccion extrema 25/30
+2025-10-18 18:25:25,070 - INFO - Deteccion extrema 26/30
+2025-10-18 18:25:29,251 - INFO - Deteccion extrema 27/30
+2025-10-18 18:25:33,121 - INFO - Deteccion extrema 28/30
+2025-10-18 18:25:36,997 - INFO - Deteccion extrema 29/30
+2025-10-18 18:25:40,697 - INFO - Deteccion extrema 30/30
+2025-10-18 18:25:44,582 - INFO - Deteccion extrema completada. 30 configuraciones analizadas
+2025-10-18 18:25:44,589 - INFO - Resultados guardados en: extreme_opportunities_20251018_182544.json
+2025-10-18 18:25:44,590 - INFO - Deteccion extrema de oportunidades completada

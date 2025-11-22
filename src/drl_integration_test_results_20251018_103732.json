@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-10-18T10:37:27.593757",
+  "tests": {
+    "drl_adapter_creation": {
+      "status": "FAILED",
+      "message": "Error creando adaptador DRL: DRLConfig.__init__() got an unexpected keyword argument 'dropout'",
+      "error": "DRLConfig.__init__() got an unexpected keyword argument 'dropout'"
+    }
+  },
+  "overall_success": false,
+  "errors": [
+    "TEST 1 FAILED: DRLConfig.__init__() got an unexpected keyword argument 'dropout'"
+  ]
+}

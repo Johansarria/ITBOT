@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-10-22T04:51:55.300350",
+  "total_positions": 2,
+  "active_positions": 0,
+  "closed_positions": 2,
+  "active_by_query": 0,
+  "closed_by_query": 2,
+  "unique_statuses": [
+    "CLOSED"
+  ],
+  "positions_detail": [
+    {
+      "id": 1,
+      "symbol": "ADAUSDT",
+      "side": "sell",
+      "status": "CLOSED",
+      "exit_price": 0.632,
+      "close_reason": "Manual closure - Risk management"
+    },
+    {
+      "id": 2,
+      "symbol": "AVAXUSDT",
+      "side": "sell",
+      "status": "CLOSED",
+      "exit_price": 19.45,
+      "close_reason": "Manual closure - Risk management"
+    }
+  ]
+}

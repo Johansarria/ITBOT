@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-10-23T02:39:06.995941",
+  "test_type": "simplified",
+  "results": {
+    "ml_models_exist": true,
+    "training_data_extraction": true,
+    "paper_trading_components": true,
+    "ai_connections_active": true,
+    "multi_timeframe_implementation": true,
+    "training_logs": true
+  },
+  "summary": {
+    "total_tests": 6,
+    "passed_tests": 6,
+    "success_rate": 1.0
+  }
+}

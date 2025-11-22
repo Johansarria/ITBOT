@@ -1,0 +1,64 @@
+{
+  "timestamp": "2025-10-18T10:29:49.067641",
+  "execution_time_seconds": 1.995511,
+  "total_tests": 6,
+  "passed_tests": 5,
+  "success_rate": 0.8333333333333334,
+  "phase_2_status": "COMPLETED",
+  "individual_results": {
+    "test_1_agent_creation": {
+      "passed": true,
+      "agent_created": true,
+      "components_verified": true,
+      "action_space_valid": true,
+      "message": "Agente DRL creado exitosamente"
+    },
+    "test_2_multi_objective_rewards": {
+      "passed": true,
+      "base_reward": -0.367328084971887,
+      "scenario_rewards": [
+        -0.3141853553424988,
+        -0.429363830056226,
+        -0.38356650067188053
+      ],
+      "reward_variation": true,
+      "message": "Sistema de recompensas multi-objetivo funcionando"
+    },
+    "test_3_regime_detection": {
+      "passed": false,
+      "error": "Debe detectar múltiples regímenes",
+      "message": "Error en detección de regímenes: Debe detectar múltiples regímenes"
+    },
+    "test_4_prioritized_replay": {
+      "passed": true,
+      "buffer_size": 50,
+      "experiences_stored": true,
+      "sampling_works": true,
+      "message": "Buffer de replay funcionando correctamente"
+    },
+    "test_5_drl_validation": {
+      "passed": true,
+      "robustness_score": 0.72,
+      "validation_passed": true,
+      "sharpe_ratio": 0.8,
+      "max_drawdown": 0.08,
+      "message": "Sistema de validación DRL funcionando"
+    },
+    "test_6_training_integration": {
+      "passed": true,
+      "episodes_completed": 5,
+      "avg_episode_reward": -0.007136340466296895,
+      "experiences_stored": 250,
+      "training_successful": true,
+      "message": "Integración de entrenamiento exitosa"
+    }
+  },
+  "summary": {
+    "drl_agent_functional": true,
+    "multi_objective_rewards": true,
+    "regime_detection_integrated": false,
+    "prioritized_replay_working": true,
+    "validation_system_functional": true,
+    "training_integration_successful": true
+  }
+}

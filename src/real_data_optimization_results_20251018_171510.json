@@ -1,0 +1,20 @@
+{
+  "optimization_timestamp": "2025-10-18T17:15:10.583886",
+  "optimization_type": "Real Data Parameter Optimization",
+  "anti_overfitting_enabled": true,
+  "symbols_analyzed": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "ADAUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOTUSDT",
+    "LINKUSDT",
+    "LTCUSDT",
+    "AVAXUSDT"
+  ],
+  "total_configurations": 0,
+  "valid_configurations": 0,
+  "results": []
+}

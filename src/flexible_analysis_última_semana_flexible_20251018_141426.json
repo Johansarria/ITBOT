@@ -1,0 +1,380 @@
+{
+  "period_name": "Última Semana Flexible",
+  "start_date": "2025-10-11T14:12:50.518723",
+  "end_date": "2025-10-18T14:12:50.518723",
+  "total_opportunities": 53039,
+  "opportunities_by_session": {
+    "Asian": 14333,
+    "European": 19422,
+    "American": 19284
+  },
+  "opportunities_by_symbol": {
+    "BTCUSDT": 1805,
+    "ETHUSDT": 3578,
+    "BNBUSDT": 4581,
+    "ADAUSDT": 3839,
+    "XRPUSDT": 3973,
+    "SOLUSDT": 4850,
+    "DOTUSDT": 3790,
+    "LINKUSDT": 4321,
+    "LTCUSDT": 3813,
+    "BCHUSDT": 2266,
+    "UNIUSDT": 4022,
+    "XLMUSDT": 3614,
+    "VETUSDT": 3889,
+    "FILUSDT": 3848,
+    "TRXUSDT": 850
+  },
+  "statistics": {
+    "total_opportunities": 53039,
+    "avg_confidence": 0.9999998988184254,
+    "avg_price_move_pct": 0.1768773425227255,
+    "avg_volume_ratio": 2.077766446513714,
+    "bullish_count": 25797,
+    "bearish_count": 27242,
+    "sessions_distribution": {
+      "Asian": 14333,
+      "European": 19422,
+      "American": 19284
+    },
+    "symbols_distribution": {
+      "BTCUSDT": 1805,
+      "ETHUSDT": 3578,
+      "BNBUSDT": 4581,
+      "ADAUSDT": 3839,
+      "XRPUSDT": 3973,
+      "SOLUSDT": 4850,
+      "DOTUSDT": 3790,
+      "LINKUSDT": 4321,
+      "LTCUSDT": 3813,
+      "BCHUSDT": 2266,
+      "UNIUSDT": 4022,
+      "XLMUSDT": 3614,
+      "VETUSDT": 3889,
+      "FILUSDT": 3848,
+      "TRXUSDT": 850
+    }
+  },
+  "sample_opportunities": [
+    {
+      "timestamp": "2025-10-11T19:13:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.136,
+      "volume_ratio": 1.0,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111553.89,
+        "high": 111553.89,
+        "low": 111287.62,
+        "close": 111401.74,
+        "volume": 104.71458
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:19:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.06,
+      "volume_ratio": 1.08,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111316.26,
+        "high": 111450.0,
+        "low": 111250.0,
+        "close": 111250.01,
+        "volume": 35.41145
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:20:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.197,
+      "volume_ratio": 2.76,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111250.0,
+        "high": 111250.0,
+        "low": 111000.0,
+        "close": 111031.17,
+        "volume": 91.91024
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:21:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.086,
+      "volume_ratio": 0.84,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111031.16,
+        "high": 111212.0,
+        "low": 111000.0,
+        "close": 111126.19,
+        "volume": 34.0464
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:26:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.247,
+      "volume_ratio": 0.72,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111082.69,
+        "high": 111357.16,
+        "low": 111082.69,
+        "close": 111357.16,
+        "volume": 25.14828
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:28:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.099,
+      "volume_ratio": 0.75,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111310.54,
+        "high": 111508.65,
+        "low": 111310.54,
+        "close": 111420.99,
+        "volume": 25.00548
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:33:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.1,
+      "volume_ratio": 0.61,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111299.99,
+        "high": 111299.99,
+        "low": 111154.42,
+        "close": 111188.86,
+        "volume": 17.93944
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:34:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.076,
+      "volume_ratio": 0.97,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111188.87,
+        "high": 111188.87,
+        "low": 111064.51,
+        "close": 111104.54,
+        "volume": 28.27021
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:36:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.064,
+      "volume_ratio": 0.6,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111198.46,
+        "high": 111269.83,
+        "low": 111198.24,
+        "close": 111269.83,
+        "volume": 16.91307
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:38:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.095,
+      "volume_ratio": 0.68,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111202.0,
+        "high": 111217.98,
+        "low": 111082.37,
+        "close": 111096.52,
+        "volume": 18.53516
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:41:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.054,
+      "volume_ratio": 0.68,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111132.22,
+        "high": 111156.46,
+        "low": 111060.47,
+        "close": 111072.22,
+        "volume": 17.53644
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:52:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.054,
+      "volume_ratio": 3.09,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111116.28,
+        "high": 111145.85,
+        "low": 110963.88,
+        "close": 111055.84,
+        "volume": 67.10059
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:53:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.099,
+      "volume_ratio": 1.44,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111055.83,
+        "high": 111177.05,
+        "low": 110955.8,
+        "close": 111165.93,
+        "volume": 32.88981
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:54:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.23,
+      "volume_ratio": 1.95,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111165.94,
+        "high": 111165.94,
+        "low": 110879.0,
+        "close": 110910.62,
+        "volume": 44.89958
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:56:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.098,
+      "volume_ratio": 0.63,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 110943.71,
+        "high": 111060.0,
+        "low": 110919.6,
+        "close": 111052.0,
+        "volume": 14.87064
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:57:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.104,
+      "volume_ratio": 0.98,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111052.01,
+        "high": 111188.88,
+        "low": 110976.78,
+        "close": 111167.73,
+        "volume": 22.86187
+      }
+    },
+    {
+      "timestamp": "2025-10-11T19:58:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.064,
+      "volume_ratio": 0.52,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111167.72,
+        "high": 111195.4,
+        "low": 111082.86,
+        "close": 111097.0,
+        "volume": 12.10386
+      }
+    },
+    {
+      "timestamp": "2025-10-11T20:00:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bullish_breakout",
+      "price_move_pct": 0.079,
+      "volume_ratio": 1.0,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111178.3,
+        "high": 111368.29,
+        "low": 111149.97,
+        "close": 111266.01,
+        "volume": 28.25022
+      }
+    },
+    {
+      "timestamp": "2025-10-11T20:01:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.112,
+      "volume_ratio": 0.88,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111266.0,
+        "high": 111266.01,
+        "low": 111111.02,
+        "close": 111141.73,
+        "volume": 24.88356
+      }
+    },
+    {
+      "timestamp": "2025-10-11T20:02:00",
+      "symbol": "BTCUSDT",
+      "session": "Asian",
+      "signal_type": "bearish_breakout",
+      "price_move_pct": 0.051,
+      "volume_ratio": 0.73,
+      "confidence": 1.0,
+      "candle_data": {
+        "open": 111141.73,
+        "high": 111222.0,
+        "low": 111084.59,
+        "close": 111084.6,
+        "volume": 19.41221
+      }
+    }
+  ]
+}

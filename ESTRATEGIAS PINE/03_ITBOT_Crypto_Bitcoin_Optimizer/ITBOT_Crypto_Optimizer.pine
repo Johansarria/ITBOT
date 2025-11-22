@@ -1,0 +1,193 @@
+//@version=6
+// ITBOT Crypto & Bitcoin Optimizer - Versión especializada para criptomonedas
+indicator("ITBOT Crypto Optimizer", shorttitle="ITBOT-CRYPTO", overlay=true)
+
+// === PARÁMETROS OPTIMIZADOS PARA CRYPTO ===
+fast_length = input.int(3, title="Fast MA Length (Aggressive)", minval=1, maxval=50)
+slow_length = input.int(12, title="Slow MA Length (Reactive)", minval=1, maxval=100)
+threshold = input.float(0.15, title="Trend Threshold % (Higher for Crypto)", minval=0.01, maxval=2.0, step=0.01)
+vol_sma_length = input.int(15, title="Volumen SMA Length", minval=5, maxval=100)
+vol_lookback = input.int(100, title="Ventana volumen", minval=20, maxval=2000)
+height_factor = input.float(0.20, title="Altura del volumen", minval=0.05, maxval=0.3, step=0.01)
+show_signals = input.bool(true, title="Show Entry Signals")
+show_trend_bg = input.bool(true, title="Show Trend Background")
+
+// === FILTROS OPTIMIZADOS PARA CRYPTO ===
+rsi_length = input.int(10, title="RSI Length (Fast for Crypto)", minval=5, maxval=50)
+rsi_overbought = input.float(80, title="RSI Overbought (Aggressive)", minval=60, maxval=90)
+rsi_oversold = input.float(20, title="RSI Oversold (Aggressive)", minval=10, maxval=40)
+volume_multiplier = input.float(2.5, title="Volume Confirmation (High)", minval=1.0, maxval=5.0, step=0.1)
+momentum_length = input.int(5, title="Momentum Length (Fast)", minval=3, maxval=20)
+use_advanced_filters = input.bool(true, title="Use Advanced Filters")
+
+// === FILTROS ESPECÍFICOS PARA CRYPTO ===
+volatility_filter = input.bool(true, title="Enable Volatility Filter")
+min_volatility_multiplier = input.float(1.2, title="Min Volatility Multiplier", minval=0.5, maxval=3.0, step=0.1)
+pump_dump_filter = input.bool(true, title="Enable Pump/Dump Protection")
+max_candle_size = input.float(3.0, title="Max Candle Size % (Anti Pump/Dump)", minval=1.0, maxval=10.0, step=0.1)
+whale_volume_filter = input.bool(true, title="Enable Whale Volume Detection")
+whale_volume_threshold = input.float(4.0, title="Whale Volume Threshold", minval=2.0, maxval=10.0, step=0.5)
+
+// === CÁLCULOS DE TENDENCIA ===
+fast_ma = ta.ema(close, fast_length) // EMA para mayor reactividad en crypto
+slow_ma = ta.ema(close, slow_length)
+ma_diff_percent = ((fast_ma - slow_ma) / slow_ma) * 100
+trend_bullish = ma_diff_percent > threshold
+trend_bearish = ma_diff_percent < -threshold
+trend_neutral = math.abs(ma_diff_percent) <= threshold
+
+// === INDICADORES PARA FILTROS ===
+rsi = ta.rsi(close, rsi_length)
+momentum = ta.mom(close, momentum_length)
+vol_sma = ta.sma(volume, vol_sma_length)
+atr = ta.atr(14)
+atr_avg = ta.sma(atr, 20)
+
+// === FILTROS ESPECÍFICOS PARA CRYPTO ===
+// Filtro de volatilidad mínima
+volatility_ok = not volatility_filter or atr > (atr_avg * min_volatility_multiplier)
+
+// Filtro anti pump/dump
+candle_size_percent = math.abs(close - open) / open * 100
+pump_dump_ok = not pump_dump_filter or candle_size_percent <= max_candle_size
+
+// Filtro de volumen ballena
+whale_volume_detected = volume > (vol_sma * whale_volume_threshold)
+whale_filter_ok = not whale_volume_filter or not whale_volume_detected
+
+// === FILTROS AVANZADOS ===
+volume_confirmation = volume > (vol_sma * volume_multiplier)
+rsi_bullish_filter = rsi < rsi_oversold
+rsi_bearish_filter = rsi > rsi_overbought
+momentum_bullish = momentum > 0
+momentum_bearish = momentum < 0
+price_confirmation_sell = close < open
+price_confirmation_buy = close > open
+
+// Filtro de divergencia para crypto
+price_higher = high > high[1]
+price_lower = low < low[1]
+rsi_higher = rsi > rsi[1]
+rsi_lower = rsi < rsi[1]
+bullish_divergence = price_lower and rsi_higher
+bearish_divergence = price_higher and rsi_lower
+
+// === SEÑALES BÁSICAS ===
+basic_buy_signal = trend_bullish and not trend_bullish[1]
+basic_sell_signal = trend_bearish and not trend_bearish[1]
+
+// === SEÑALES OPTIMIZADAS PARA CRYPTO ===
+crypto_buy_conditions = basic_buy_signal and volume_confirmation and rsi_bullish_filter and momentum_bullish and price_confirmation_buy and volatility_ok and pump_dump_ok and whale_filter_ok
+
+crypto_sell_conditions = basic_sell_signal and volume_confirmation and rsi_bearish_filter and momentum_bearish and price_confirmation_sell and volatility_ok and pump_dump_ok and whale_filter_ok
+
+// Señales con divergencia
+crypto_buy_divergence = bullish_divergence and volume_confirmation and volatility_ok
+crypto_sell_divergence = bearish_divergence and volume_confirmation and volatility_ok
+
+buy_signal = use_advanced_filters ? (crypto_buy_conditions or crypto_buy_divergence) : basic_buy_signal
+sell_signal = use_advanced_filters ? (crypto_sell_conditions or crypto_sell_divergence) : basic_sell_signal
+
+// === VOLUMEN RELATIVO ESCALADO ===
+vol_max = ta.highest(volume, vol_lookback)
+vol_rel = volume / vol_max
+vol_sma_rel = vol_sma / vol_max
+
+price_low = ta.lowest(low, vol_lookback)
+price_high = ta.highest(high, vol_lookback)
+price_range = price_high - price_low
+
+offset = price_range * height_factor
+vol_bottom = price_low
+vol_plot = vol_bottom + (offset * vol_rel)
+vol_sma_plot = vol_bottom + (offset * vol_sma_rel)
+
+// === COLORES ESPECÍFICOS PARA CRYPTO ===
+vol_color = whale_volume_detected ? color.new(color.purple, 40) : 
+           volume > vol_sma ? color.new(color.lime, 60) : color.new(color.red, 60)
+vol_sma_color = color.new(color.orange, 40)
+
+// === VISUALIZACIÓN ===
+plot(fast_ma, color=color.new(color.cyan, 0), linewidth=2, title="Fast EMA")
+plot(slow_ma, color=color.new(color.magenta, 0), linewidth=2, title="Slow EMA")
+
+trend_color = trend_bullish ? color.new(color.lime, 85) : 
+             trend_bearish ? color.new(color.red, 85) : 
+             color.new(color.yellow, 90)
+bgcolor(show_trend_bg ? trend_color : na, title="Trend Background")
+
+// Señales optimizadas para crypto
+plotshape(show_signals and crypto_buy_conditions, title="Crypto Buy Signal", 
+          location=location.belowbar, color=color.new(color.lime, 0), 
+          style=shape.triangleup, size=size.normal, text="BUY🚀")
+
+plotshape(show_signals and crypto_sell_conditions, title="Crypto Sell Signal", 
+          location=location.abovebar, color=color.new(color.red, 0), 
+          style=shape.triangledown, size=size.normal, text="SELL💥")
+
+// Señales de divergencia
+plotshape(show_signals and crypto_buy_divergence, title="Crypto Buy Divergence", 
+          location=location.belowbar, color=color.new(color.blue, 0), 
+          style=shape.diamond, size=size.small, text="DIV+")
+
+plotshape(show_signals and crypto_sell_divergence, title="Crypto Sell Divergence", 
+          location=location.abovebar, color=color.new(color.purple, 0), 
+          style=shape.diamond, size=size.small, text="DIV-")
+
+// Señales básicas para comparación
+plotshape(show_signals and basic_buy_signal and not buy_signal, title="Basic Buy", 
+          location=location.belowbar, color=color.new(color.green, 70), 
+          style=shape.triangleup, size=size.tiny, text="buy")
+
+plotshape(show_signals and basic_sell_signal and not sell_signal, title="Basic Sell", 
+          location=location.abovebar, color=color.new(color.orange, 70), 
+          style=shape.triangledown, size=size.tiny, text="sell")
+
+// === VOLUMEN CON DETECCIÓN DE BALLENAS ===
+plot(vol_plot, title="Volumen", style=plot.style_columns, color=vol_color)
+plot(vol_sma_plot, title="Volumen SMA", color=vol_sma_color, linewidth=2)
+
+// Línea de volumen ballena
+whale_line = vol_bottom + (offset * whale_volume_threshold * vol_sma_rel)
+plot(whale_volume_filter ? whale_line : na, title="Whale Volume Line", 
+     color=color.new(color.purple, 50), linewidth=1, style=plot.style_line)
+
+// === TABLA DE INFORMACIÓN PARA CRYPTO ===
+var table info_table = table.new(position.top_right, 2, 6, bgcolor=color.black, border_width=1)
+if barstate.islast
+    table.cell(info_table, 0, 0, "CRYPTO MODE", text_color=color.cyan, text_size=size.small)
+    table.cell(info_table, 1, 0, "ACTIVE", text_color=color.cyan, text_size=size.small)
+    table.cell(info_table, 0, 1, "RSI", text_color=color.white, text_size=size.small)
+    table.cell(info_table, 1, 1, str.tostring(rsi, "#.##"), text_color=color.white, text_size=size.small)
+    table.cell(info_table, 0, 2, "ATR Ratio", text_color=color.white, text_size=size.small)
+    table.cell(info_table, 1, 2, str.tostring(atr/atr_avg, "#.##"), text_color=color.white, text_size=size.small)
+    table.cell(info_table, 0, 3, "Vol Ratio", text_color=color.white, text_size=size.small)
+    table.cell(info_table, 1, 3, str.tostring(volume/vol_sma, "#.##"), text_color=color.white, text_size=size.small)
+    table.cell(info_table, 0, 4, "Whale Vol", text_color=color.white, text_size=size.small)
+    table.cell(info_table, 1, 4, whale_volume_detected ? "🐋" : "✓", 
+               text_color=whale_volume_detected ? color.purple : color.green, text_size=size.small)
+    table.cell(info_table, 0, 5, "Volatility", text_color=color.white, text_size=size.small)
+    table.cell(info_table, 1, 5, volatility_ok ? "✓" : "⚠", 
+               text_color=volatility_ok ? color.green : color.yellow, text_size=size.small)
+
+// === ALERTAS OPTIMIZADAS PARA CRYPTO ===
+alertcondition(crypto_buy_conditions, title="Crypto Buy Alert OPTIMIZED", 
+               message="🚀 CRYPTO OPTIMIZED BUY signal on {{ticker}} at {{close}} - RSI: " + str.tostring(rsi))
+alertcondition(crypto_sell_conditions, title="Crypto Sell Alert OPTIMIZED", 
+               message="💥 CRYPTO OPTIMIZED SELL signal on {{ticker}} at {{close}} - RSI: " + str.tostring(rsi))
+
+// Alertas de divergencia
+alertcondition(crypto_buy_divergence, title="Crypto Buy Divergence Alert", 
+               message="💎 CRYPTO BULLISH DIVERGENCE on {{ticker}} at {{close}}")
+alertcondition(crypto_sell_divergence, title="Crypto Sell Divergence Alert", 
+               message="⚡ CRYPTO BEARISH DIVERGENCE on {{ticker}} at {{close}}")
+
+// Alerta de volumen ballena
+alertcondition(whale_volume_detected, title="Whale Volume Alert", 
+               message="🐋 WHALE VOLUME DETECTED on {{ticker}} - Volume: " + str.tostring(volume))
+
+// Alertas básicas
+alertcondition(basic_buy_signal, title="Crypto Buy Alert BASIC", 
+               message="🟡 CRYPTO BASIC BUY signal on {{ticker}} at {{close}}")
+alertcondition(basic_sell_signal, title="Crypto Sell Alert BASIC", 
+               message="🟡 CRYPTO BASIC SELL signal on {{ticker}} at {{close}}")

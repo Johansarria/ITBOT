@@ -1,0 +1,533 @@
+{
+  "timestamp": "20251014_055623",
+  "target_monthly_roi": 0.15,
+  "best_config": {
+    "total_return": 1.0675983982164194,
+    "monthly_roi": 1.0675983982164194,
+    "total_trades": 28,
+    "win_rate": 0.7142857142857143,
+    "profit_factor": 2.602121636408535,
+    "max_drawdown": 1.0755607213425298,
+    "score": 107.28873440431511,
+    "target_achieved": "True",
+    "config": {
+      "risk_per_trade": 0.1,
+      "stop_loss_pct": 0.1,
+      "take_profit_pct": 0.15,
+      "position_size_pct": 0.7,
+      "confidence_threshold": 0.55,
+      "max_positions": 3
+    }
+  },
+  "all_results": [
+    {
+      "total_return": 1.0675983982164194,
+      "monthly_roi": 1.0675983982164194,
+      "total_trades": 28,
+      "win_rate": 0.7142857142857143,
+      "profit_factor": 2.602121636408535,
+      "max_drawdown": 1.0755607213425298,
+      "score": 107.28873440431511,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.1,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.55,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.8143212971521061,
+      "monthly_roi": 0.8143212971521061,
+      "total_trades": 44,
+      "win_rate": 0.25,
+      "profit_factor": 1.8620346888005588,
+      "max_drawdown": 0.9688554053393825,
+      "score": 78.60970633624706,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.05,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.65,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.8812026516198818,
+      "monthly_roi": 0.8812026516198818,
+      "total_trades": 24,
+      "win_rate": 0.5416666666666666,
+      "profit_factor": 2.0791277981721743,
+      "max_drawdown": 1.0663759416086358,
+      "score": 78.42607939661146,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.1,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.75,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.8087710783955073,
+      "monthly_roi": 0.8087710783955073,
+      "total_trades": 26,
+      "win_rate": 0.5384615384615384,
+      "profit_factor": 2.0771423045520634,
+      "max_drawdown": 0.9740186313886146,
+      "score": 76.71683008487142,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.1,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.55,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.7745827018278847,
+      "monthly_roi": 0.7745827018278847,
+      "total_trades": 42,
+      "win_rate": 0.2857142857142857,
+      "profit_factor": 1.8346939121993255,
+      "max_drawdown": 0.9542088311963861,
+      "score": 74.80905345924813,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.55,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.7153454200873799,
+      "monthly_roi": 0.7153454200873799,
+      "total_trades": 13,
+      "win_rate": 0.6153846153846154,
+      "profit_factor": 2.29746577452489,
+      "max_drawdown": 0.7896624052154724,
+      "score": 73.83377180090558,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.08,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.75,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.6479624947338875,
+      "monthly_roi": 0.6479624947338875,
+      "total_trades": 31,
+      "win_rate": 0.3870967741935484,
+      "profit_factor": 2.01790207102766,
+      "max_drawdown": 0.813335154177865,
+      "score": 67.55044795864308,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.75,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.5953014732368463,
+      "monthly_roi": 0.5953014732368463,
+      "total_trades": 73,
+      "win_rate": 0.3013698630136986,
+      "profit_factor": 1.6998173251775528,
+      "max_drawdown": 0.9216389156321398,
+      "score": 61.47377205412715,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.05,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.75,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.28672257271626006,
+      "monthly_roi": 0.28672257271626006,
+      "total_trades": 10,
+      "win_rate": 0.7,
+      "profit_factor": 3.129207166203244,
+      "max_drawdown": 0.35125616470966414,
+      "score": 61.40152069817525,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.1,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.75,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.45635436220552544,
+      "monthly_roi": 0.45635436220552544,
+      "total_trades": 65,
+      "win_rate": 0.27692307692307694,
+      "profit_factor": 1.7292924139583539,
+      "max_drawdown": 0.7110225812488177,
+      "score": 57.915692836156744,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.65,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.5596708600903246,
+      "monthly_roi": 0.5596708600903246,
+      "total_trades": 89,
+      "win_rate": 0.3707865168539326,
+      "profit_factor": 1.5648123571152124,
+      "max_drawdown": 0.9375500261479671,
+      "score": 57.153438609864885,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.1,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.65,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.6580129747868959,
+      "monthly_roi": 0.6580129747868959,
+      "total_trades": 26,
+      "win_rate": 0.5384615384615384,
+      "profit_factor": 2.0286083492655544,
+      "max_drawdown": 1.0724439126209757,
+      "score": 56.23441610952713,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.05,
+        "stop_loss_pct": 0.1,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.65,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.4112889961239154,
+      "monthly_roi": 0.4112889961239154,
+      "total_trades": 76,
+      "win_rate": 0.3026315789473684,
+      "profit_factor": 1.6409272715033583,
+      "max_drawdown": 0.7147643592484126,
+      "score": 52.852585943951865,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.08,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.55,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.4428313372334658,
+      "monthly_roi": 0.4428313372334658,
+      "total_trades": 23,
+      "win_rate": 0.5652173913043478,
+      "profit_factor": 2.167236247482714,
+      "max_drawdown": 0.7318409695448799,
+      "score": 52.16779554701668,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.08,
+        "stop_loss_pct": 0.1,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.75,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.38727682505387745,
+      "monthly_roi": 0.38727682505387745,
+      "total_trades": 34,
+      "win_rate": 0.35294117647058826,
+      "profit_factor": 1.8254842209318634,
+      "max_drawdown": 0.5817177939318576,
+      "score": 51.95545854752527,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.05,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.55,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.2568731760384624,
+      "monthly_roi": 0.2568731760384624,
+      "total_trades": 30,
+      "win_rate": 0.43333333333333335,
+      "profit_factor": 2.0138421942649973,
+      "max_drawdown": 0.3544232025153937,
+      "score": 51.771246087393195,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.1,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.55,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.5212038932794385,
+      "monthly_roi": 0.5212038932794385,
+      "total_trades": 45,
+      "win_rate": 0.4666666666666667,
+      "profit_factor": 1.5883440501089459,
+      "max_drawdown": 0.9674271177458235,
+      "score": 51.46580727507546,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.1,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.75,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.3438402100208908,
+      "monthly_roi": 0.3438402100208908,
+      "total_trades": 46,
+      "win_rate": 0.2391304347826087,
+      "profit_factor": 1.7292322512476301,
+      "max_drawdown": 0.563784411725843,
+      "score": 51.26973162392541,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.08,
+        "stop_loss_pct": 0.03,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.75,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.4554372164007656,
+      "monthly_roi": 0.4554372164007656,
+      "total_trades": 33,
+      "win_rate": 0.42424242424242425,
+      "profit_factor": 1.7556649992926185,
+      "max_drawdown": 0.8085464131994405,
+      "score": 47.65789945787921,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.08,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.65,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.4273191794825405,
+      "monthly_roi": 0.4273191794825405,
+      "total_trades": 60,
+      "win_rate": 0.5,
+      "profit_factor": 1.5883755721636292,
+      "max_drawdown": 0.9542220587491269,
+      "score": 45.904570732433996,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.1,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.55,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.49605665897513557,
+      "monthly_roi": 0.49605665897513557,
+      "total_trades": 26,
+      "win_rate": 0.5769230769230769,
+      "profit_factor": 1.6553012473416933,
+      "max_drawdown": 1.0003137301172385,
+      "score": 40.6814534035301,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.1,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.65,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.254245466896232,
+      "monthly_roi": 0.254245466896232,
+      "total_trades": 29,
+      "win_rate": 0.5862068965517241,
+      "profit_factor": 1.7080040736231465,
+      "max_drawdown": 0.585779372127473,
+      "score": 39.4397567505155,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.05,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.1,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.75,
+        "max_positions": 2
+      }
+    },
+    {
+      "total_return": 0.32101798419530786,
+      "monthly_roi": 0.32101798419530786,
+      "total_trades": 10,
+      "win_rate": 0.5,
+      "profit_factor": 2.072392430866257,
+      "max_drawdown": 0.5821386762833703,
+      "score": 38.71878891402484,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.05,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.2,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.65,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.27810583924811216,
+      "monthly_roi": 0.27810583924811216,
+      "total_trades": 14,
+      "win_rate": 0.5,
+      "profit_factor": 1.6874308689097057,
+      "max_drawdown": 0.5746876578639347,
+      "score": 32.95050972071154,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.15,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.55,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.17391425272436573,
+      "monthly_roi": 0.17391425272436573,
+      "total_trades": 13,
+      "win_rate": 0.3076923076923077,
+      "profit_factor": 1.8556932269823054,
+      "max_drawdown": 0.35266404078626606,
+      "score": 30.96900165679247,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.65,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.1628104820605151,
+      "monthly_roi": 0.1628104820605151,
+      "total_trades": 10,
+      "win_rate": 0.4,
+      "profit_factor": 1.7337079683093708,
+      "max_drawdown": 0.3652391606589424,
+      "score": 28.356169856198093,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.02,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.3,
+        "confidence_threshold": 0.55,
+        "max_positions": 1
+      }
+    },
+    {
+      "total_return": 0.32774005629378333,
+      "monthly_roi": 0.32774005629378333,
+      "total_trades": 32,
+      "win_rate": 0.375,
+      "profit_factor": 1.4140209611891255,
+      "max_drawdown": 0.9515004077511063,
+      "score": 22.839194853714268,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.1,
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.5,
+        "confidence_threshold": 0.65,
+        "max_positions": 3
+      }
+    },
+    {
+      "total_return": 0.32640755334991334,
+      "monthly_roi": 0.32640755334991334,
+      "total_trades": 14,
+      "win_rate": 0.2857142857142857,
+      "profit_factor": 1.4909895013098426,
+      "max_drawdown": 0.7841671729331221,
+      "score": 21.056577415719367,
+      "target_achieved": "True",
+      "config": {
+        "risk_per_trade": 0.08,
+        "stop_loss_pct": 0.05,
+        "take_profit_pct": 0.25,
+        "position_size_pct": 0.7,
+        "confidence_threshold": 0.55,
+        "max_positions": 1
+      }
+    }
+  ],
+  "summary": {
+    "total_configurations_tested": 28,
+    "configurations_achieving_target": 28,
+    "best_monthly_roi": 1.0675983982164194
+  }
+}

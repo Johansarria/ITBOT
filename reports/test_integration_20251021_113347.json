@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-10-21T11:33:47.814046",
+  "integration_summary": {
+    "status": "ACTIVE",
+    "uptime_hours": 0.03,
+    "total_operations": 9
+  },
+  "system_performance": {
+    "decisions_per_hour": 0.0,
+    "patterns_per_hour": 0.0,
+    "analyses_per_hour": 9.0,
+    "integration_success_rate": 1.0
+  },
+  "current_configuration": {
+    "monitoring_interval": 15,
+    "performance_log_interval": 300,
+    "auto_optimization": true,
+    "adaptive_thresholds": true,
+    "real_time_feedback": true
+  },
+  "recommendations": [
+    "Sistema funcionando dentro de parámetros normales"
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "timestamp": "2025-10-22T04:43:25.193728",
+  "positions_investigated": 2,
+  "investigation_results": [
+    {
+      "position": [
+        1,
+        "ADAUSDT",
+        "sell",
+        39.178812098417175,
+        0.6381,
+        0.650862,
+        0.612576,
+        "2025-10-21T22:23:29.112812",
+        "CLOSED",
+        0.632,
+        "2025-10-22T04:42:12.541654",
+        0.23899075380034454,
+        "Manual closure - Risk management"
+      ],
+      "price_data_count": 6,
+      "stop_loss_analysis": {
+        "should_trigger": false,
+        "reason": "Stop loss no alcanzado",
+        "triggered_at": null,
+        "trigger_price": null
+      }
+    },
+    {
+      "position": [
+        2,
+        "AVAXUSDT",
+        "sell",
+        1.2911931818181819,
+        19.36,
+        19.7472,
+        18.5856,
+        "2025-10-21T22:23:40.380161",
+        "CLOSED",
+        19.45,
+        "2025-10-22T04:42:13.617872",
+        -0.11620738636363619,
+        "Manual closure - Risk management"
+      ],
+      "price_data_count": 6,
+      "stop_loss_analysis": {
+        "should_trigger": false,
+        "reason": "Stop loss no alcanzado",
+        "triggered_at": null,
+        "trigger_price": null
+      }
+    }
+  ],
+  "file_status": {
+    "alerta_auto_trading_integrada.py": {
+      "exists": true,
+      "size": 23567,
+      "modified": "2025-10-21T22:18:36.225927"
+    },
+    "auto_trading_alerts.db": {
+      "exists": true,
+      "size": 16384,
+      "modified": "2025-10-22T04:42:13.632562"
+    },
+    "trading_bot.py": {
+      "exists": false,
+      "size": 0,
+      "modified": null
+    },
+    "stop_loss_monitor.py": {
+      "exists": false,
+      "size": 0,
+      "modified": null
+    }
+  },
+  "stop_loss_references": {
+    "alerta_auto_trading_integrada.py": [
+      {
+        "line_number": 59,
+        "content": "'stop_loss_pct': 2.0,  # % de stop loss"
+      },
+      {
+        "line_number": 105,
+        "content": "stop_loss REAL,"
+      },
+      {
+        "line_number": 291,
+        "content": "# Calcular stop loss y take profit"
+      },
+      {
+        "line_number": 293,
+        "content": "stop_loss = signal.price * (1 - self.trading_config['stop_loss_pct'] / 100)"
+      },
+      {
+        "line_number": 297,
+        "content": "stop_loss = signal.price * (1 + self.trading_config['stop_loss_pct'] / 100)"
+      },
+      {
+        "line_number": 310,
+        "content": "'stop_loss': stop_loss,"
+      },
+      {
+        "line_number": 326,
+        "content": "(signal_id, symbol, side, quantity, entry_price, stop_loss, take_profit, timestamp)"
+      },
+      {
+        "line_number": 334,
+        "content": "stop_loss,"
+      },
+      {
+        "line_number": 359,
+        "content": "logger.info(f\"   🛑 Stop Loss: ${stop_loss:,.2f}\")"
+      },
+      {
+        "line_number": 371,
+        "content": "\"\"\"Monitorear posiciones activas para stop loss / take profit.\"\"\""
+      },
+      {
+        "line_number": 379,
+        "content": "stop_loss = position['stop_loss']"
+      },
+      {
+        "line_number": 387,
+        "content": "if current_price <= stop_loss:"
+      },
+      {
+        "line_number": 389,
+        "content": "close_reason = f\"Stop Loss alcanzado: ${current_price:,.2f} <= ${stop_loss:,.2f}\""
+      },
+      {
+        "line_number": 394,
+        "content": "if current_price >= stop_loss:"
+      },
+      {
+        "line_number": 396,
+        "content": "close_reason = f\"Stop Loss alcanzado: ${current_price:,.2f} >= ${stop_loss:,.2f}\""
+      }
+    ]
+  },
+  "conclusions": [
+    "❌ No se encontró archivo de monitoreo de stop loss"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "test_summary": {
+    "total_tests": 8,
+    "passed_tests": 3,
+    "failed_tests": 5,
+    "success_rate": 37.5,
+    "timestamp": "2025-10-16T10:12:35.909584"
+  },
+  "test_results": [
+    {
+      "test": "basic_functionality",
+      "status": "PASSED"
+    },
+    {
+      "test": "market_orders",
+      "status": "FAILED",
+      "error": "'BinanceDataProvider' object has no attribute 'get_ticker_price'"
+    },
+    {
+      "test": "limit_orders",
+      "status": "FAILED",
+      "error": "'BinanceDataProvider' object has no attribute 'get_ticker_price'"
+    },
+    {
+      "test": "position_management",
+      "status": "FAILED",
+      "error": "'BinanceDataProvider' object has no attribute 'get_ticker_price'"
+    },
+    {
+      "test": "stop_loss_take_profit",
+      "status": "FAILED",
+      "error": "'BTCUSDT'"
+    },
+    {
+      "test": "multiple_positions",
+      "status": "PASSED"
+    },
+    {
+      "test": "slippage_and_fees",
+      "status": "FAILED",
+      "error": "Capital usado deber\u00eda incluir comisiones"
+    },
+    {
+      "test": "performance_metrics",
+      "status": "PASSED"
+    }
+  ],
+  "final_engine_state": {
+    "initial_capital": 10000.0,
+    "current_capital": 10000.0,
+    "total_position_value": 0,
+    "total_portfolio_value": 10000.0,
+    "total_pnl": 0.0,
+    "unrealized_pnl": 0,
+    "total_return_pct": 0.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "win_rate": 0,
+    "max_drawdown": 0.0,
+    "open_positions": 0,
+    "pending_orders": 0
+  },
+  "final_positions": [],
+  "trade_history_sample": []
+}

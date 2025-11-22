@@ -1,0 +1,54 @@
+
+=== REPORTE SICAR SIMPLIFICADO - DATOS 100% REALES ===
+Fecha: 2025-10-14 02:29:11
+APIs Utilizadas: CoinGecko ✅, Binance ✅ (yfinance ❌ excluido)
+
+📊 RESUMEN FINANCIERO:
+Capital Inicial: $10,000.00
+Capital Final: $9,969.23
+P&L Total: $-30.77
+
+📈 RENDIMIENTO:
+ROI Total: -0.31%
+ROI Mensual Proyectado: -571816.92%
+ROI Anualizado: -6957105.88%
+Objetivo 15% Mensual: ❌ NO ALCANZADO
+
+🔄 ESTADÍSTICAS DE TRADING:
+Símbolos Procesados: 3
+Señales Generadas: 288
+Operaciones Ejecutadas: 1
+Operaciones Ganadoras: 0
+Tasa de Éxito: 0.0%
+Comisiones Totales: $2.70
+
+⏱️ DURACIÓN:
+Tiempo de Backtest: 0:00:01.394731
+
+🔧 CONFIGURACIÓN:
+Símbolos: BTC-USD, ETH-USD, ADA-USD
+Días de Datos: 7
+Stop Loss: 5.0%
+Take Profit: 10.0%
+Tamaño Posición: 30.0%
+
+📋 ÚLTIMAS OPERACIONES:
+
+1. BTC-USD - 2025-10-14 02:29
+   Entrada: $123563.38 | Salida: $122415.74
+   P&L: $-28.04 (-0.93%)
+   Duración: 0:00:00
+
+
+🌐 CALIDAD DE DATOS:
+Requests Totales: 5
+Tasa de Éxito: 100.0%
+Cache Hit Rate: 28.6%
+Datos 100% Reales: ✅ CONFIRMADO
+
+🎯 CONCLUSIÓN:
+⚠️ OPTIMIZACIÓN REQUERIDA: Ajustar parámetros para mejorar rendimiento
+
+Estado del Sistema: OPERATIVO ✅
+Calidad de Datos: EXCELENTE ✅
+Gestión de Riesgo: ACTIVA ✅

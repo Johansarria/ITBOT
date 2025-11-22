@@ -1,0 +1,49 @@
+===============================================
+ITBOT TREND ANALYZER - ULTRA EARLY SIGNALS
+===============================================
+
+📊 DESCRIPCIÓN GENERAL:
+Estrategia avanzada de análisis de tendencias con señales ultra-tempranas para detectar reversiones en el momento exacto del pico, antes de caídas significativas.
+
+🎯 CARACTERÍSTICAS PRINCIPALES:
+• Señales de entrada basadas en cruces de medias móviles (MA 5 y MA 20)
+• Sistema de señales de salida ultra-tempranas para maximizar ganancias
+• Detección inmediata de reversión en picos
+• Gestión de posiciones con stop-loss dinámico
+• Análisis de volumen integrado
+• Información en tiempo real (RSI, Momentum, MA Gap %)
+
+⚡ SEÑALES ULTRA-TEMPRANAS:
+1. Peak Reversal: Precio hace nuevo máximo pero cierra por debajo
+2. Immediate Weakness: Precio no puede sostener nivel alto
+3. Instant Rejection: Velas con mechas superiores significativas
+4. Momentum Loss: Pérdida de momentum en máximos
+
+📈 PARÁMETROS OPTIMIZADOS:
+• Fast MA: 5 períodos (reactividad)
+• Slow MA: 20 períodos (estabilidad)
+• RSI: 14 períodos (70/30 niveles)
+• Momentum: 10 períodos
+• Stop Loss: 2% configurable
+
+🔔 ALERTAS INCLUIDAS:
+• Señales de compra/venta básicas
+• Alertas de RSI sobrecomprado
+• Alertas de pérdida de momentum
+• Alertas de stop-loss
+• Alertas de divergencia bajista
+• Alertas de pre-cruce de medias
+• Alertas de agotamiento en picos
+
+💡 USO RECOMENDADO:
+Ideal para traders que buscan salidas precisas en el momento exacto del pico, minimizando pérdidas por reversiones tardías. Especialmente efectiva en mercados volátiles donde las reversiones son rápidas.
+
+🎨 VISUALIZACIÓN:
+• Medias móviles coloreadas (azul/rojo)
+• Señales BUY/SELL claramente marcadas
+• Volumen en panel separado
+• Tabla informativa con datos en tiempo real
+• Fondo de tendencia opcional
+
+⚠️ NOTA IMPORTANTE:
+Esta versión incluye las últimas mejoras para detectar agotamiento en picos ANTES de caídas significativas, solucionando el problema de señales tardías.

@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-10-18T10:37:01.496497",
+  "tests": {
+    "drl_adapter_creation": {
+      "status": "FAILED",
+      "message": "Error creando adaptador DRL: unexpected indent (paper_trading_system.py, line 946)",
+      "error": "unexpected indent (paper_trading_system.py, line 946)"
+    }
+  },
+  "overall_success": false,
+  "errors": [
+    "TEST 1 FAILED: unexpected indent (paper_trading_system.py, line 946)"
+  ]
+}

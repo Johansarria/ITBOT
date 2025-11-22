@@ -1,0 +1,16 @@
+2025-10-18 19:03:48,031 - INFO - === INICIANDO SISTEMA OPTIMIZADO DE PRIMERA VELA ===
+2025-10-18 19:03:48,033 - INFO - Capital inicial: $250.00
+2025-10-18 19:03:48,033 - INFO - Objetivo: 5.0% mensual
+2025-10-18 19:03:48,034 - INFO - Win rate objetivo: 55.0%
+2025-10-18 19:03:48,034 - INFO - Generando datos de mercado optimizados...
+2025-10-18 19:03:48,122 - INFO - Calculando indicadores optimizados...
+2025-10-18 19:03:48,149 - INFO - Generando señales optimizadas...
+2025-10-18 19:03:48,290 - INFO - Simulando trading optimizado...
+2025-10-18 19:03:48,431 - INFO - === RESULTADOS DEL SISTEMA OPTIMIZADO ===
+2025-10-18 19:03:48,431 - INFO - Retorno total: -0.23%
+2025-10-18 19:03:48,431 - INFO - Retorno mensual: -0.08%
+2025-10-18 19:03:48,431 - INFO - Total de trades: 12
+2025-10-18 19:03:48,440 - INFO - Tasa de aciertos: 25.0%
+2025-10-18 19:03:48,440 - INFO - Factor de ganancia: 0.83
+2025-10-18 19:03:48,440 - INFO - Máximo drawdown: 0.90%
+2025-10-18 19:03:48,440 - INFO - Capital final: $249.43

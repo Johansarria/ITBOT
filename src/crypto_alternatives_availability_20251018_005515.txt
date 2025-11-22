@@ -1,0 +1,242 @@
+
+REPORTE DE DISPONIBILIDAD CRYPTO & ALTERNATIVAS - SICAR
+======================================================
+Fecha: 2025-10-18 00:55:15
+
+RESUMEN EJECUTIVO:
+- Total instrumentos evaluados: 36
+- Instrumentos disponibles: 0
+- Tasa de éxito: 0.0%
+
+ANÁLISIS POR CATEGORÍAS:
+
+CRIPTOMONEDAS PRINCIPALES:
+-------------------------
+  Bitcoin (BTCUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 24 puntos
+    Errores: Error precio actual: '>' not supported between instances of 'dict' and 'int', Error datos históricos: 'close'
+
+  Ethereum (ETHUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 24 puntos
+    Errores: Error precio actual: '>' not supported between instances of 'dict' and 'int', Error datos históricos: 'close'
+
+  BNB (BNBUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 24 puntos
+    Errores: Error precio actual: '>' not supported between instances of 'dict' and 'int', Error datos históricos: 'close'
+
+  XRP (XRPUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Cardano (ADAUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 24 puntos
+    Errores: Error precio actual: '>' not supported between instances of 'dict' and 'int', Error datos históricos: 'close'
+
+  Solana (SOLUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 24 puntos
+    Errores: Error precio actual: '>' not supported between instances of 'dict' and 'int', Error datos históricos: 'close'
+
+  Dogecoin (DOGEUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Polygon (MATICUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Litecoin (LTCUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Bitcoin_Cash (BCHUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+
+TOKENS DEFI:
+-----------
+  Uniswap (UNIUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Chainlink (LINKUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Aave (AAVEUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Compound (COMPUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  SushiSwap (SUSHIUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  PancakeSwap (CAKEUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Curve (CRVUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Yearn_Finance (YFIUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+
+BLOCKCHAINS LAYER 1:
+-------------------
+  Avalanche (AVAXUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Polkadot (DOTUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Cosmos (ATOMUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Algorand (ALGOUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Tezos (XTZUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Near_Protocol (NEARUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Fantom (FTMUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Harmony (ONEUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+
+STABLECOINS:
+-----------
+  USDC (USDCUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Binance_USD (BUSDUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  DAI (DAIUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  TrueUSD (TUSDUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Pax_Dollar (USDPUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+
+MEME COINS:
+----------
+  Dogecoin (DOGEUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Shiba_Inu (SHIBUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Floki (FLOKIUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  SafeMoon (SAFEMOONUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+
+  Baby_Doge (BABYDOGEUSDT): ❌ NO DISPONIBLE
+    Precio actual: N/A
+    Cambio 24h: N/A
+    Datos históricos: 0 puntos
+    Errores: No se pudo obtener precio actual, No se pudieron obtener datos históricos
+

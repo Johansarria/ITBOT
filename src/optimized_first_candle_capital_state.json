@@ -1,0 +1,21 @@
+{
+  "current_capital": 250.0,
+  "initial_capital": 250.0,
+  "performance": {
+    "total_return": -0.0022785763945686313,
+    "monthly_return": -0.0007595254648562104,
+    "total_trades": 12,
+    "winning_trades": 3,
+    "losing_trades": 9,
+    "win_rate": 0.25,
+    "avg_win": 0.9330474625324986,
+    "avg_loss": 0.37430960958218895,
+    "profit_factor": 0.8309052529838269,
+    "max_drawdown": 0.008966317424108014,
+    "sharpe_ratio": -0.08247860988423318,
+    "initial_capital": 250.0,
+    "final_capital": 249.43035590135784,
+    "meets_target": "False"
+  },
+  "timestamp": "2025-10-18T19:03:48.445865"
+}

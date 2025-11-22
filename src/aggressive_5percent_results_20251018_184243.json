@@ -1,0 +1,113 @@
+{
+  "system_name": "AGGRESSIVE 5% MONTHLY SYSTEM",
+  "analysis_timestamp": "2025-10-18T18:42:43.014063",
+  "target_monthly_return": 0.05,
+  "performance": {
+    "initial_capital": 10000,
+    "final_capital": 1.6699144775166065e+190,
+    "total_return": 1.6699144775166065e+186,
+    "monthly_return": 22585.927411658362,
+    "win_rate": 0.5028555887952135,
+    "total_trades": 3677,
+    "winning_trades": 1849,
+    "sharpe_ratio": 0.06723815124214301,
+    "max_drawdown": -0.19771636958085695,
+    "meets_target": "True"
+  },
+  "symbol_performance": {
+    "BTCUSDT": {
+      "total_trades": 351,
+      "win_rate": 0.5128205128205128,
+      "avg_pnl": 0.39268438006296735,
+      "best_trade": 16.466772153957987,
+      "worst_trade": -0.9999484660493804
+    },
+    "ETHUSDT": {
+      "total_trades": 382,
+      "win_rate": 0.5026178010471204,
+      "avg_pnl": 0.6943872706109513,
+      "best_trade": 52.217294001422744,
+      "worst_trade": -0.9999976191101516
+    },
+    "BNBUSDT": {
+      "total_trades": 366,
+      "win_rate": 0.5355191256830601,
+      "avg_pnl": 1.4474530768326404,
+      "best_trade": 64.97685785072825,
+      "worst_trade": -0.9999989984121974
+    },
+    "ADAUSDT": {
+      "total_trades": 306,
+      "win_rate": 0.5,
+      "avg_pnl": 1.9110814119966761,
+      "best_trade": 52.15651446837061,
+      "worst_trade": -0.9999819963147649
+    },
+    "SOLUSDT": {
+      "total_trades": 371,
+      "win_rate": 0.4743935309973046,
+      "avg_pnl": 1.809301242961378,
+      "best_trade": 161.89070053836153,
+      "worst_trade": -0.999005752931734
+    },
+    "DOTUSDT": {
+      "total_trades": 378,
+      "win_rate": 0.4497354497354497,
+      "avg_pnl": 0.751753449655682,
+      "best_trade": 45.91680597697633,
+      "worst_trade": -0.9999916984680224
+    },
+    "LINKUSDT": {
+      "total_trades": 391,
+      "win_rate": 0.5421994884910486,
+      "avg_pnl": 7.106657703272726,
+      "best_trade": 1712.6797383976452,
+      "worst_trade": -0.9999999835561972
+    },
+    "AVAXUSDT": {
+      "total_trades": 369,
+      "win_rate": 0.5284552845528455,
+      "avg_pnl": 2.2442019766231045,
+      "best_trade": 125.22710077065283,
+      "worst_trade": -0.9999999913958679
+    },
+    "MATICUSDT": {
+      "total_trades": 371,
+      "win_rate": 0.4474393530997305,
+      "avg_pnl": 1.4613861360899896,
+      "best_trade": 42.465421490181974,
+      "worst_trade": -0.9999999999136613
+    },
+    "ATOMUSDT": {
+      "total_trades": 392,
+      "win_rate": 0.5331632653061225,
+      "avg_pnl": 1.7162888824526854,
+      "best_trade": 70.91819650598414,
+      "worst_trade": -0.9999959938546088
+    }
+  },
+  "strategies": {
+    "momentum": {
+      "weight": 0.3,
+      "active": true
+    },
+    "mean_reversion": {
+      "weight": 0.2,
+      "active": true
+    },
+    "breakout": {
+      "weight": 0.3,
+      "active": true
+    },
+    "volatility": {
+      "weight": 0.2,
+      "active": true
+    }
+  },
+  "risk_management": {
+    "max_risk_per_trade": 0.05,
+    "min_win_rate": 0.45,
+    "min_reward_risk_ratio": 2.0,
+    "max_daily_trades": 10
+  }
+}

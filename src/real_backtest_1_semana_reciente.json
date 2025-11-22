@@ -1,0 +1,10 @@
+{
+  "error": "No se ejecutaron trades",
+  "period_info": {
+    "name": "1 Semana Reciente",
+    "start_date": "2025-10-11T13:55:32.394610",
+    "end_date": "2025-10-17T13:55:32.394610",
+    "duration_days": 6
+  },
+  "trade_details": []
+}

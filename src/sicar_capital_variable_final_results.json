@@ -1,0 +1,17 @@
+{
+  "session_duration": "0:00:03.814173",
+  "cycles_completed": 35,
+  "signals_generated": 0,
+  "trades_executed": 0,
+  "initial_capital": 200.0,
+  "final_capital": 200.0,
+  "total_roi": 0.0,
+  "total_pnl": 0.0,
+  "total_trades": 0,
+  "winning_trades": 0,
+  "win_rate": 0,
+  "active_positions": 0,
+  "total_reinvested": 0.0,
+  "base_capital": 200.0,
+  "average_pnl_per_trade": 0
+}

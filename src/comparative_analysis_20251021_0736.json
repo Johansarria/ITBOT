@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-10-21T12:36:50.439021+00:00",
+  "analysis_type": "comparative_breakout_analysis",
+  "data_timeframe": "21_octubre_2025_12:35_UTC",
+  "symbol_analysis": {
+    "BTCUSDT": {
+      "symbol": "BTCUSDT",
+      "timestamp": "2025-10-21T12:36:50.439021+00:00",
+      "current_price": 109012.74,
+      "trend_state": "neutral",
+      "trend_strength": -0.03999216771908714,
+      "breakout_potential": 20,
+      "breakout_direction": "neutral",
+      "confidence": 20,
+      "volume_ratio": 1.7342506661912607,
+      "volatility_ratio": 1.0309214962920694,
+      "rsi": 64.00027873518582,
+      "support_level": 108901.32,
+      "resistance_level": 109245.99,
+      "technical_signals": [
+        "Volumen elevado"
+      ],
+      "volume_support": 

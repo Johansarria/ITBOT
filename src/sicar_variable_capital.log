@@ -1,0 +1,55 @@
+2025-10-18 12:43:51,298 - INFO - Starting trading cycle...
+2025-10-18 12:43:51,298 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:51,320 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:51,322 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:51,323 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:51,326 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:51,328 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:51,328 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:51,331 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:51,333 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:51,338 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:52,340 - INFO - Starting trading cycle...
+2025-10-18 12:43:52,340 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:52,342 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:52,344 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:52,346 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:52,348 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:52,350 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:52,350 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:52,352 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:52,354 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:52,356 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:53,357 - INFO - Starting trading cycle...
+2025-10-18 12:43:53,357 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:53,359 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:53,370 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:53,370 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:53,377 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:53,381 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:53,384 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:53,389 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:53,390 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:53,401 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:54,406 - INFO - Starting trading cycle...
+2025-10-18 12:43:54,407 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:54,409 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:54,409 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:54,411 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:54,416 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:54,419 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:54,420 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:54,424 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:54,425 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:54,433 - INFO - Cycle completed: 0 trades, Capital: $200.00
+2025-10-18 12:43:55,436 - INFO - Starting trading cycle...
+2025-10-18 12:43:55,436 - ERROR - Error getting data for BTCUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:55,439 - ERROR - Error in SICAR analysis for BTCUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:55,439 - ERROR - Error processing BTCUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:55,439 - ERROR - Error getting data for ETHUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:55,439 - ERROR - Error in SICAR analysis for ETHUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:55,439 - ERROR - Error processing ETHUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:55,439 - ERROR - Error getting data for ADAUSDT: 'BinanceDataProvider' object has no attribute 'get_klines'
+2025-10-18 12:43:55,446 - ERROR - Error in SICAR analysis for ADAUSDT: 'EnsembleSicarSystem' object has no attribute 'generate_signal'
+2025-10-18 12:43:55,448 - ERROR - Error processing ADAUSDT: operands could not be broadcast together with shapes (19,) (20,) 
+2025-10-18 12:43:55,452 - INFO - Cycle completed: 0 trades, Capital: $200.00

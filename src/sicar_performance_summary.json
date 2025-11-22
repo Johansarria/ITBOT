@@ -1,0 +1,20 @@
+{
+  "capital_summary": {
+    "initial_capital": 200.0,
+    "current_capital": 200.0,
+    "base_capital": 200.0,
+    "available_capital": 200.0,
+    "total_roi_percentage": 0.0,
+    "total_reinvested": 0.0,
+    "capital_growth": 0.0
+  },
+  "trading_performance": {
+    "total_trades": 0,
+    "winning_trades": 0,
+    "win_rate_percentage": 0,
+    "total_pnl": 0.0,
+    "average_pnl_per_trade": 0,
+    "active_positions": 0
+  },
+  "recent_trades": []
+}

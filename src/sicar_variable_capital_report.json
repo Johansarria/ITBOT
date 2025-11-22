@@ -1,0 +1,35 @@
+{
+  "system_status": {
+    "active": true,
+    "last_cycle": "2025-10-18T12:43:56.453363",
+    "symbols_monitored": 3,
+    "active_positions": 0
+  },
+  "capital_management": {
+    "initial_capital_original": 200.0,
+    "current_base_capital": 200.0,
+    "current_capital": 200.0,
+    "total_roi_percentage": 0.0,
+    "current_cycle_roi_percentage": 0.0,
+    "total_profits": 0.0,
+    "total_reinvested": 0.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "win_rate_percentage": 0.0,
+    "capital_growth": 0.0,
+    "reinvestment_cycles": 0
+  },
+  "trading_performance": {
+    "signal_accuracy": 0,
+    "recent_signals_count": 0,
+    "active_positions_value": 0,
+    "total_portfolio_value": 200.0
+  },
+  "active_positions": {},
+  "recent_signals": [],
+  "next_reinvestment_threshold": {
+    "current_roi": 0.0,
+    "target_roi_for_reinvestment": 5.0,
+    "amount_needed": 10.0
+  }
+}

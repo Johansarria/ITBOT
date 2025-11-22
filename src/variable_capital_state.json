@@ -1,0 +1,156 @@
+{
+  "config": {
+    "min_capital": 200.0,
+    "max_capital": 500.0,
+    "reinvestment_threshold": 0.05,
+    "max_position_size": 0.25
+  },
+  "current_state": {
+    "current_capital": 203.29533745238092,
+    "initial_capital": 200.0,
+    "total_profits": 3.2953374523809487,
+    "total_reinvested": 0.0,
+    "total_trades": 3,
+    "winning_trades": 3,
+    "win_rate": 100.0
+  },
+  "trade_history": [
+    {
+      "timestamp": "2025-10-18T12:42:35.692650",
+      "symbol": "BTCUSDT",
+      "action": "buy",
+      "price": 45000,
+      "quantity": 0.0005444444444444444,
+      "position_size": 24.5,
+      "capital_before": 200.0,
+      "confidence": 0.7,
+      "volatility": 0.03,
+      "status": "closed",
+      "pnl": 0.9799999999999969,
+      "pnl_percentage": 3.9999999999999867
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.692650",
+      "symbol": "BTCUSDT",
+      "action": "sell",
+      "price": 46800,
+      "quantity": 0.0005444444444444444,
+      "position_size": 25.479999999999997,
+      "capital_after": 200.98,
+      "pnl": 0.9799999999999969,
+      "pnl_percentage": 3.9999999999999867,
+      "status": "closed"
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "symbol": "ETHUSDT",
+      "action": "buy",
+      "price": 2800,
+      "quantity": 0.006460071428571428,
+      "position_size": 18.088199999999997,
+      "capital_before": 200.98,
+      "confidence": 0.6,
+      "volatility": 0.04,
+      "status": "closed",
+      "pnl": 0.9690107142857158,
+      "pnl_percentage": 5.3571428571428665
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "symbol": "ETHUSDT",
+      "action": "sell",
+      "price": 2950,
+      "quantity": 0.006460071428571428,
+      "position_size": 19.057210714285713,
+      "capital_after": 201.9490107142857,
+      "pnl": 0.9690107142857158,
+      "pnl_percentage": 5.3571428571428665,
+      "status": "closed"
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "symbol": "ADAUSDT",
+      "action": "buy",
+      "price": 0.45,
+      "quantity": 44.877557936507934,
+      "position_size": 20.19490107142857,
+      "capital_before": 201.9490107142857,
+      "confidence": 0.8,
+      "volatility": 0.05,
+      "status": "closed",
+      "pnl": 1.346326738095236,
+      "pnl_percentage": 6.666666666666655
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "symbol": "ADAUSDT",
+      "action": "sell",
+      "price": 0.48,
+      "quantity": 44.877557936507934,
+      "position_size": 21.541227809523807,
+      "capital_after": 203.29533745238092,
+      "pnl": 1.346326738095236,
+      "pnl_percentage": 6.666666666666655,
+      "status": "closed"
+    }
+  ],
+  "capital_history": [
+    {
+      "timestamp": "2025-10-18T12:42:35.692650",
+      "current_capital": 175.5,
+      "base_capital": 200.0,
+      "total_roi": -12.25,
+      "current_roi": -12.25
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693219",
+      "current_capital": 200.98,
+      "base_capital": 200.0,
+      "total_roi": 0.4899999999999949,
+      "current_roi": 0.4899999999999949
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "current_capital": 182.8918,
+      "base_capital": 200.0,
+      "total_roi": -8.554100000000005,
+      "current_roi": -8.554100000000005
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "current_capital": 201.9490107142857,
+      "base_capital": 200.0,
+      "total_roi": 0.9745053571428457,
+      "current_roi": 0.9745053571428457
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.693836",
+      "current_capital": 181.75410964285712,
+      "base_capital": 200.0,
+      "total_roi": -9.122945178571442,
+      "current_roi": -9.122945178571442
+    },
+    {
+      "timestamp": "2025-10-18T12:42:35.695467",
+      "current_capital": 203.29533745238092,
+      "base_capital": 200.0,
+      "total_roi": 1.6476687261904603,
+      "current_roi": 1.6476687261904603
+    }
+  ],
+  "performance_summary": {
+    "initial_capital_original": 200.0,
+    "current_base_capital": 200.0,
+    "current_capital": 203.29533745238092,
+    "total_roi_percentage": 1.6476687261904603,
+    "current_cycle_roi_percentage": 1.6476687261904603,
+    "total_profits": 3.2953374523809487,
+    "total_reinvested": 0.0,
+    "total_trades": 3,
+    "winning_trades": 3,
+    "win_rate_percentage": 100.0,
+    "capital_growth": 3.2953374523809202,
+    "reinvestment_cycles": 0
+  },
+  "last_updated": "2025-10-18T12:42:35.696754"
+}

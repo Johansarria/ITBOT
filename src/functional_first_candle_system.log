@@ -1,0 +1,35 @@
+2025-10-18 19:07:21,272 - INFO - === SISTEMA FUNCIONAL DE PRIMERA VELA INICIALIZADO ===
+2025-10-18 19:07:21,272 - INFO - Capital inicial: $250.00
+2025-10-18 19:07:21,273 - INFO - Objetivo mensual: 5.0%
+2025-10-18 19:07:21,273 - INFO - Win rate objetivo: 60.0%
+2025-10-18 19:07:21,274 - INFO - === EJECUTANDO SISTEMA FUNCIONAL DE PRIMERA VELA ===
+2025-10-18 19:07:21,274 - INFO - Generando datos de mercado funcionales...
+2025-10-18 19:07:21,339 - INFO - Calculando indicadores funcionales...
+2025-10-18 19:07:21,456 - INFO - Generando señales funcionales...
+2025-10-18 19:07:21,580 - INFO - Señales generadas: 41
+2025-10-18 19:07:21,581 - INFO - Simulando trading funcional...
+2025-10-18 19:07:21,581 - INFO - Escalando capital: factor 1.06
+2025-10-18 19:07:21,582 - INFO - Escalando capital: factor 1.10
+2025-10-18 19:07:21,582 - INFO - Escalando capital: factor 1.08
+2025-10-18 19:07:21,583 - INFO - Escalando capital: factor 1.12
+2025-10-18 19:07:21,583 - INFO - Escalando capital: factor 1.16
+2025-10-18 19:07:21,583 - INFO - Escalando capital: factor 1.14
+2025-10-18 19:07:21,584 - INFO - Escalando capital: factor 1.18
+2025-10-18 19:07:21,584 - INFO - Escalando capital: factor 1.16
+2025-10-18 19:07:21,584 - INFO - Escalando capital: factor 1.20
+2025-10-18 19:07:21,584 - INFO - Escalando capital: factor 1.18
+2025-10-18 19:07:21,585 - INFO - Escalando capital: factor 1.48
+2025-10-18 19:07:21,585 - INFO - Escalando capital: factor 1.46
+2025-10-18 19:07:21,585 - INFO - Trading completado. Trades ejecutados: 41
+2025-10-18 19:07:21,585 - INFO - Calculando rendimiento funcional...
+2025-10-18 19:07:21,586 - INFO - === RESULTADOS DEL SISTEMA FUNCIONAL ===
+2025-10-18 19:07:21,586 - INFO - Retorno total: 191.22%
+2025-10-18 19:07:21,588 - INFO - Retorno mensual: 191.22%
+2025-10-18 19:07:21,588 - INFO - Logro del objetivo: 3824.4%
+2025-10-18 19:07:21,588 - INFO - Total de trades: 41
+2025-10-18 19:07:21,588 - INFO - Tasa de aciertos: 53.7%
+2025-10-18 19:07:21,588 - INFO - Factor de ganancia: 2.11
+2025-10-18 19:07:21,588 - INFO - Máximo drawdown: 7.39%
+2025-10-18 19:07:21,589 - INFO - Capital final: $728.06
+2025-10-18 19:07:21,589 - INFO - Cumple objetivo 5% mensual: SÍ
+2025-10-18 19:07:21,591 - INFO - 🎉 ¡OBJETIVO LOGRADO! Sistema funcional exitoso

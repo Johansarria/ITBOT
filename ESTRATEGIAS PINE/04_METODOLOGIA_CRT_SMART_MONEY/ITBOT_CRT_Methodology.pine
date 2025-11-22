@@ -1,0 +1,347 @@
+//@version=6
+strategy("ITBOT CRT Methodology - Smart Money Liquidity Sweep", 
+         shorttitle="ITBOT CRT", 
+         overlay=true, 
+         initial_capital=10000, 
+         default_qty_type=strategy.percent_of_equity, 
+         default_qty_value=2, 
+         commission_type=strategy.commission.percent, 
+         commission_value=0.1,
+         slippage=2)
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 📊 CONFIGURACIÓN DE PARÁMETROS
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Configuración de Horarios
+g_time = "⏰ CONFIGURACIÓN DE HORARIOS"
+session_start = input.int(8, "Hora de Inicio de Sesión Clave (24h)", minval=0, maxval=23, group=g_time)
+session_end = input.int(9, "Hora de Fin de Sesión Clave (24h)", minval=0, maxval=23, group=g_time)
+timezone_setting = input.string("UTC", "Zona Horaria", options=["UTC", "America/New_York", "Europe/London", "Asia/Tokyo"], group=g_time)
+
+// Configuración de Confirmación
+g_confirm = "✅ CONFIGURACIÓN DE CONFIRMACIÓN"
+min_breakout_pips = input.float(5.0, "Mínimo Breakout (pips)", minval=1.0, step=0.5, group=g_confirm)
+max_retrace_percent = input.float(80.0, "Máximo Retroceso Permitido (%)", minval=10.0, maxval=100.0, step=5.0, group=g_confirm)
+confirmation_candles = input.int(2, "Velas de Confirmación", minval=1, maxval=5, group=g_confirm)
+
+// Configuración de Gestión de Riesgo
+g_risk = "⚠️ GESTIÓN DE RIESGO"
+risk_reward_ratio = input.float(2.0, "Ratio Riesgo:Beneficio", minval=0.5, maxval=5.0, step=0.1, group=g_risk)
+max_risk_percent = input.float(1.0, "Riesgo Máximo por Operación (%)", minval=0.1, maxval=5.0, step=0.1, group=g_risk)
+use_trailing_stop = input.bool(false, "Usar Trailing Stop", group=g_risk)
+trailing_percent = input.float(1.0, "Trailing Stop (%)", minval=0.1, maxval=3.0, step=0.1, group=g_risk)
+
+// Configuración de Alertas
+g_alerts = "🔔 CONFIGURACIÓN DE ALERTAS"
+enable_alerts = input.bool(true, "Activar Alertas", group=g_alerts)
+alert_manipulation = input.bool(true, "Alerta de Manipulación Detectada", group=g_alerts)
+alert_entry = input.bool(true, "Alerta de Entrada", group=g_alerts)
+alert_exit = input.bool(true, "Alerta de Salida", group=g_alerts)
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 🕐 FUNCIONES DE TIEMPO Y SESIÓN
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Función para verificar si estamos en la sesión clave
+is_key_session() =>
+    current_hour = hour(time, timezone_setting)
+    current_hour >= session_start and current_hour < session_end
+
+// Función para verificar si es el inicio de una nueva sesión
+is_new_session() =>
+    current_hour = hour(time, timezone_setting)
+    prev_hour = hour(time[1], timezone_setting)
+    current_hour == session_start and prev_hour != session_start
+
+// Función para verificar si es el final de la sesión clave
+is_session_end() =>
+    current_hour = hour(time, timezone_setting)
+    current_hour == session_end
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 📈 VARIABLES DE ESTADO Y TRACKING
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Variables para el rango de la sesión clave
+var float session_high = na
+var float session_low = na
+var int session_start_bar = na
+var bool session_active = false
+
+// Variables para detección de manipulación
+var bool manipulation_detected = false
+var string manipulation_direction = na  // "bullish" o "bearish"
+var float manipulation_level = na
+var int manipulation_bar = na
+var bool waiting_for_confirmation = false
+var int confirmation_count = 0
+var bool entry_signal = false
+
+// Variables para gestión de posiciones
+var float entry_price = na
+var float stop_loss = na
+var float take_profit = na
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 🚫 CONTROL DE UNA OPERACIÓN POR DÍA
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Variables para controlar una sola operación por día
+var bool trade_taken_today = false
+var int last_trade_day = na
+var bool position_closed_today = false
+
+// Función para verificar si es un nuevo día
+is_new_day() =>
+    current_day = dayofweek(time, timezone_setting)
+    prev_day = dayofweek(time[1], timezone_setting)
+    current_day != prev_day
+
+// Resetear variables al inicio de cada nuevo día
+if is_new_day()
+    trade_taken_today := false
+    position_closed_today := false
+    last_trade_day := dayofweek(time, timezone_setting)
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 🎯 LÓGICA PRINCIPAL DE LA ESTRATEGIA CRT
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// 1. IDENTIFICACIÓN DEL RANGO DE LA SESIÓN CLAVE
+if is_new_session()
+    session_high := high
+    session_low := low
+    session_start_bar := bar_index
+    session_active := true
+    manipulation_detected := false
+    manipulation_direction := na
+    waiting_for_confirmation := false
+    confirmation_count := 0
+    entry_signal := false
+
+// Actualizar el rango durante la sesión clave
+if is_key_session() and session_active
+    session_high := math.max(session_high, high)
+    session_low := math.min(session_low, low)
+
+// Finalizar la sesión clave
+if is_session_end()
+    session_active := false
+
+// 2. DETECCIÓN DE MANIPULACIÓN DE LIQUIDEZ (SOLO SI NO HAY OPERACIÓN HOY)
+if not session_active and not manipulation_detected and not na(session_high) and not na(session_low) and not trade_taken_today
+    
+    // Calcular el tamaño del rango en pips
+    range_pips = (session_high - session_low) / syminfo.mintick * syminfo.pointvalue
+    
+    // Verificar breakout del máximo (posible manipulación bajista)
+    if high > session_high + (min_breakout_pips * syminfo.mintick)
+        // Verificar si el precio retrocedió dentro del rango
+        retrace_level = session_high + (min_breakout_pips * syminfo.mintick)
+        max_allowed_retrace = retrace_level - ((retrace_level - session_low) * max_retrace_percent / 100)
+        
+        if close <= session_high and close >= max_allowed_retrace
+            manipulation_detected := true
+            manipulation_direction := "bearish"
+            manipulation_level := session_high
+            manipulation_bar := bar_index
+            waiting_for_confirmation := true
+            confirmation_count := 0
+    
+    // Verificar breakout del mínimo (posible manipulación alcista)
+    if low < session_low - (min_breakout_pips * syminfo.mintick)
+        // Verificar si el precio retrocedió dentro del rango
+        retrace_level = session_low - (min_breakout_pips * syminfo.mintick)
+        max_allowed_retrace = retrace_level + ((session_high - retrace_level) * max_retrace_percent / 100)
+        
+        if close >= session_low and close <= max_allowed_retrace
+            manipulation_detected := true
+            manipulation_direction := "bullish"
+            manipulation_level := session_low
+            manipulation_bar := bar_index
+            waiting_for_confirmation := true
+            confirmation_count := 0
+
+// 3. CONFIRMACIÓN Y GENERACIÓN DE SEÑALES (SOLO SI NO HAY OPERACIÓN HOY)
+if waiting_for_confirmation and manipulation_detected and not trade_taken_today
+    
+    if manipulation_direction == "bullish"
+        // Para señal alcista: buscar confirmación de fuerza compradora
+        if close > open and close > close[1]
+            confirmation_count += 1
+        else
+            confirmation_count := 0
+            
+        // Generar señal de entrada alcista
+        if confirmation_count >= confirmation_candles and not entry_signal
+            entry_signal := true
+            entry_price := close
+            stop_loss := manipulation_level - (min_breakout_pips * syminfo.mintick)
+            take_profit := session_high + ((session_high - stop_loss) * (risk_reward_ratio - 1))
+            waiting_for_confirmation := false
+            trade_taken_today := true
+            
+    if manipulation_direction == "bearish"
+        // Para señal bajista: buscar confirmación de fuerza vendedora
+        if close < open and close < close[1]
+            confirmation_count += 1
+        else
+            confirmation_count := 0
+            
+        // Generar señal de entrada bajista
+        if confirmation_count >= confirmation_candles and not entry_signal
+            entry_signal := true
+            entry_price := close
+            stop_loss := manipulation_level + (min_breakout_pips * syminfo.mintick)
+            take_profit := session_low - ((stop_loss - session_low) * (risk_reward_ratio - 1))
+            waiting_for_confirmation := false
+            trade_taken_today := true
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 📊 EJECUCIÓN DE ÓRDENES
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Calcular el tamaño de la posición basado en el riesgo
+calculate_position_size() =>
+    if not na(entry_price) and not na(stop_loss)
+        risk_amount = strategy.equity * max_risk_percent / 100
+        risk_per_share = math.abs(entry_price - stop_loss)
+        position_size = risk_amount / risk_per_share
+        math.min(position_size, strategy.equity / entry_price)
+    else
+        na
+
+// Ejecutar entrada alcista
+if entry_signal and manipulation_direction == "bullish" and strategy.position_size == 0
+    pos_size = calculate_position_size()
+    if not na(pos_size)
+        strategy.entry("CRT Long", strategy.long, qty=pos_size)
+        
+        if enable_alerts and alert_entry
+            alert("🟢 CRT ENTRADA ALCISTA: " + str.tostring(close, "#.#####") + " | SL: " + str.tostring(stop_loss, "#.#####") + " | TP: " + str.tostring(take_profit, "#.#####"), alert.freq_once_per_bar)
+
+// Ejecutar entrada bajista
+if entry_signal and manipulation_direction == "bearish" and strategy.position_size == 0
+    pos_size = calculate_position_size()
+    if not na(pos_size)
+        strategy.entry("CRT Short", strategy.short, qty=pos_size)
+        
+        if enable_alerts and alert_entry
+            alert("🔴 CRT ENTRADA BAJISTA: " + str.tostring(close, "#.#####") + " | SL: " + str.tostring(stop_loss, "#.#####") + " | TP: " + str.tostring(take_profit, "#.#####"), alert.freq_once_per_bar)
+
+// Gestión de salidas
+if strategy.position_size != 0 and not na(stop_loss) and not na(take_profit)
+    if strategy.position_size > 0  // Posición larga
+        if use_trailing_stop
+            trail_offset = close * trailing_percent / 100
+            strategy.exit("Exit Long", "CRT Long", stop=stop_loss, limit=take_profit, trail_price=close, trail_offset=trail_offset)
+        else
+            strategy.exit("Exit Long", "CRT Long", stop=stop_loss, limit=take_profit)
+            
+    if strategy.position_size < 0  // Posición corta
+        if use_trailing_stop
+            trail_offset = close * trailing_percent / 100
+            strategy.exit("Exit Short", "CRT Short", stop=stop_loss, limit=take_profit, trail_price=close, trail_offset=trail_offset)
+        else
+            strategy.exit("Exit Short", "CRT Short", stop=stop_loss, limit=take_profit)
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 🎨 VISUALIZACIÓN ULTRA LIMPIA - SOLO TRADES EJECUTADOS
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Variables para tracking limpio
+var bool just_entered = false
+var bool just_exited = false
+
+// Detectar entrada ejecutada (cambio de 0 a posición)
+if strategy.position_size != 0 and strategy.position_size[1] == 0
+    just_entered := true
+
+// Detectar salida ejecutada (cambio de posición a 0)
+if strategy.position_size == 0 and strategy.position_size[1] != 0
+    just_exited := true
+
+// Marcar SOLO entradas ejecutadas
+if just_entered
+    is_long = strategy.position_size > 0
+    entry_color = is_long ? color.new(color.lime, 0) : color.new(color.red, 0)
+    entry_text = is_long ? "🟢 LONG" : "🔴 SHORT"
+    entry_style = is_long ? label.style_triangleup : label.style_triangledown
+    
+    label.new(x=bar_index, y=close, text=entry_text + "\n" + str.tostring(close, "#.####"), 
+              color=entry_color, textcolor=color.white, style=entry_style, size=size.large)
+    just_entered := false
+
+// Marcar SOLO salidas ejecutadas
+if just_exited
+    exit_color = color.new(color.blue, 0)
+    exit_text = "🏁 EXIT"
+    
+    // Obtener PnL de la última operación cerrada
+    if strategy.closedtrades > 0
+        last_trade_pnl = strategy.closedtrades.profit(strategy.closedtrades - 1)
+        pnl_emoji = last_trade_pnl > 0 ? "✅" : "❌"
+        exit_text := exit_text + "\n" + pnl_emoji + " " + str.tostring(last_trade_pnl, "#.##")
+    
+    label.new(x=bar_index, y=close, text=exit_text + "\n" + str.tostring(close, "#.####"), 
+              color=exit_color, textcolor=color.white, style=label.style_xcross, size=size.large)
+    just_exited := false
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 📊 TABLA DE INFORMACIÓN SIMPLIFICADA
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+if barstate.islast
+    // Crear tabla ultra compacta
+    var table info_table = table.new(position.top_right, 2, 5, bgcolor=color.new(color.black, 85), border_width=1)
+    
+    // Título
+    table.cell(info_table, 0, 0, "🎯 CRT", text_color=color.white, bgcolor=color.new(color.blue, 30), text_size=size.normal)
+    table.cell(info_table, 1, 0, "CLEAN", text_color=color.white, bgcolor=color.new(color.blue, 30), text_size=size.normal)
+    
+    // Posición actual
+    position_text = strategy.position_size > 0 ? "🟢 LONG" : strategy.position_size < 0 ? "🔴 SHORT" : "⚪ FLAT"
+    table.cell(info_table, 0, 1, "Estado", text_color=color.white, bgcolor=color.new(color.gray, 70))
+    table.cell(info_table, 1, 1, position_text, text_color=color.white, bgcolor=color.new(color.black, 50))
+    
+    // PnL actual o total
+    display_pnl = strategy.position_size != 0 ? strategy.openprofit : strategy.netprofit
+    pnl_text = str.tostring(display_pnl, "#.##") + " USD"
+    pnl_color = display_pnl > 0 ? color.lime : display_pnl < 0 ? color.red : color.gray
+    table.cell(info_table, 0, 2, "PnL", text_color=color.white, bgcolor=color.new(color.gray, 70))
+    table.cell(info_table, 1, 2, pnl_text, text_color=pnl_color, bgcolor=color.new(color.black, 50))
+    
+    // Estadísticas
+    stats_text = str.tostring(strategy.closedtrades, "#") + " ops"
+    if strategy.closedtrades > 0
+        winrate = (strategy.wintrades / strategy.closedtrades) * 100
+        stats_text := stats_text + " | " + str.tostring(winrate, "#") + "%"
+    table.cell(info_table, 0, 3, "Stats", text_color=color.white, bgcolor=color.new(color.gray, 70))
+    table.cell(info_table, 1, 3, stats_text, text_color=color.white, bgcolor=color.new(color.black, 50))
+    
+    // Estado diario
+    daily_status = trade_taken_today ? "🟠 USADO" : "🟢 LIBRE"
+    table.cell(info_table, 0, 4, "Hoy", text_color=color.white, bgcolor=color.new(color.gray, 70))
+    table.cell(info_table, 1, 4, daily_status, text_color=color.white, bgcolor=color.new(color.black, 50))
+
+// ═══════════════════════════════════════════════════════════════════════════════════════
+// 🔔 ALERTAS ULTRA LIMPIAS - SOLO TRADES EJECUTADOS
+// ═══════════════════════════════════════════════════════════════════════════════════════
+
+// Alerta de entrada ejecutada
+if just_entered and enable_alerts and alert_entry
+    direction = strategy.position_size > 0 ? "LONG" : "SHORT"
+    entry_alert_text = "🎯 CRT: " + direction + " ejecutado en " + str.tostring(close, "#.####")
+    alert(entry_alert_text, alert.freq_once_per_bar)
+
+// Alerta de salida ejecutada
+if just_exited and enable_alerts and alert_exit
+    pnl_result = ""
+    if strategy.closedtrades > 0
+        pnl = strategy.closedtrades.profit(strategy.closedtrades - 1)
+        pnl_emoji = pnl > 0 ? "✅" : "❌"
+        pnl_result := " " + pnl_emoji + " " + str.tostring(pnl, "#.##") + " USD"
+    
+    exit_alert_text = "🏁 CRT: Salida ejecutada en " + str.tostring(close, "#.####") + pnl_result
+    alert(exit_alert_text, alert.freq_once_per_bar)

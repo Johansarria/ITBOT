@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-10-18T08:11:50.829291",
+  "execution_time_seconds": 2.545553,
+  "total_tests": 6,
+  "passed_tests": 2,
+  "success_rate": 0.3333333333333333,
+  "phase_2_status": "PARTIALLY_COMPLETED",
+  "individual_results": {
+    "test_1_agent_creation": {
+      "passed": false,
+      "error": "Policy network no encontrada",
+      "message": "Error creando agente DRL: Policy network no encontrada"
+    },
+    "test_2_multi_objective_rewards": {
+      "passed": true,
+      "base_reward": -0.367328084971887,
+      "scenario_rewards": [
+        -0.3141853553424988,
+        -0.429363830056226,
+        -0.38356650067188053
+      ],
+      "reward_variation": true,
+      "message": "Sistema de recompensas multi-objetivo funcionando"
+    },
+    "test_3_regime_detection": {
+      "passed": false,
+      "error": "All arrays must be of the same length",
+      "message": "Error en detección de regímenes: All arrays must be of the same length"
+    },
+    "test_4_prioritized_replay": {
+      "passed": true,
+      "buffer_size": 50,
+      "experiences_stored": true,
+      "sampling_works": true,
+      "message": "Buffer de replay funcionando correctamente"
+    },
+    "test_5_drl_validation": {
+      "passed": false,
+      "error": "All arrays must be of the same length",
+      "message": "Error en validación DRL: All arrays must be of the same length"
+    },
+    "test_6_training_integration": {
+      "passed": false,
+      "error": "All arrays must be of the same length",
+      "message": "Error en integración de entrenamiento: All arrays must be of the same length"
+    }
+  },
+  "summary": {
+    "drl_agent_functional": false,
+    "multi_objective_rewards": true,
+    "regime_detection_integrated": false,
+    "prioritized_replay_working": true,
+    "validation_system_functional": false,
+    "training_integration_successful": false
+  }
+}

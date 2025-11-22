@@ -1,0 +1,16 @@
+{
+  "status": "UNKNOWN",
+  "confidence": 0.0,
+  "factors": {},
+  "warnings": [],
+  "recommendation": "",
+  "breakout_factor": 0.5,
+  "symbol": "BTC-USD",
+  "timestamp": "2025-11-18T22:36:47.767956",
+  "level_tested": null,
+  "current_price": 0,
+  "breakout_type": "BULLISH",
+  "total_score": 0,
+  "validation_threshold": 4,
+  "is_valid": false
+}

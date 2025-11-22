@@ -1,0 +1,30 @@
+{
+  "generation_date": "2025-10-16T22:01:12.181277",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "ADAUSDT",
+    "SOLUSDT"
+  ],
+  "base_prices": {
+    "BTCUSDT": 85000.0,
+    "ETHUSDT": 4200.0,
+    "ADAUSDT": 1.85,
+    "SOLUSDT": 180.0,
+    "DOTUSDT": 12.5
+  },
+  "volatilities": {
+    "BTCUSDT": 0.025,
+    "ETHUSDT": 0.035,
+    "ADAUSDT": 0.045,
+    "SOLUSDT": 0.04,
+    "DOTUSDT": 0.05
+  },
+  "market_trends": {
+    "BTCUSDT": 0.0002,
+    "ETHUSDT": 0.0003,
+    "ADAUSDT": 0.0001,
+    "SOLUSDT": 0.0002,
+    "DOTUSDT": 0.0001
+  }
+}

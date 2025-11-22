@@ -1,0 +1,21 @@
+2025-10-18 18:44:31,076 - INFO - ⚖️ REALISTIC 5% MONTHLY SYSTEM INICIALIZADO
+2025-10-18 18:44:31,076 - INFO - 💰 Capital inicial: $10,000.00
+2025-10-18 18:44:31,077 - INFO - 🎯 Objetivo: 5.0% mensual
+2025-10-18 18:44:31,077 - INFO - 🛡️ Máximo riesgo por trade: 2.0%
+2025-10-18 18:44:31,077 - INFO - 📊 Win rate mínimo: 55.00000000000001%
+2025-10-18 18:44:31,078 - INFO - 🔄 Límite compounding: 50.0%
+2025-10-18 18:44:31,078 - INFO - ⚖️ INICIANDO SISTEMA REALISTA PARA 5% MENSUAL
+2025-10-18 18:44:31,078 - INFO - 📊 Analizando BTCUSDT con parámetros realistas...
+2025-10-18 18:44:31,264 - INFO - 📊 Analizando ETHUSDT con parámetros realistas...
+2025-10-18 18:44:31,417 - INFO - 📊 Analizando BNBUSDT con parámetros realistas...
+2025-10-18 18:44:31,587 - INFO - 📊 Analizando ADAUSDT con parámetros realistas...
+2025-10-18 18:44:31,762 - INFO - 📊 Analizando SOLUSDT con parámetros realistas...
+2025-10-18 18:44:31,934 - INFO - ⚖️ SISTEMA REALISTA COMPLETADO
+2025-10-18 18:44:31,934 - INFO - 💰 Capital final: $8,686.05
+2025-10-18 18:44:31,935 - INFO - 📈 Retorno total: -13.14%
+2025-10-18 18:44:31,935 - INFO - 🎯 Retorno mensual: -3.68%
+2025-10-18 18:44:31,936 - INFO - 🏆 Cumple objetivo: NO
+2025-10-18 18:44:31,936 - INFO - 📊 Total trades: 75
+2025-10-18 18:44:31,936 - INFO - 🎲 Win rate: 22.7%
+2025-10-18 18:44:31,936 - INFO - 📉 Max drawdown: -13.14%
+2025-10-18 18:44:31,936 - INFO - ⏱️ Duración promedio: 3.3 horas

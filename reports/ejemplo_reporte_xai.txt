@@ -1,0 +1,27 @@
+=== REPORTE COGNITIVO SICAR ===
+Timestamp: 2025-11-12 07:38:14
+
+DECISIÓN: BUY
+El sistema ha decidido ejecutar una estrategia de seguimiento de tendencia basándose en el análisis del mercado en tendencia alcista sostenida.
+
+RAZONAMIENTO: La estrategia de momentum fue seleccionada debido a señales de continuación de tendencia. El sistema detectó que el precio está siguiendo una dirección clara con suficiente fuerza para justificar seguir la tendencia.
+
+CONFIANZA: MUY ALTA (85.0%)
+La confianza en esta decisión se basa en la convergencia de múltiples indicadores y la claridad de las señales del régimen de mercado identificado.
+
+FACTORES CLAVE:
+• Momentum Alcista
+• Volumen Confirmatorio
+• Ruptura Resistencia
+
+GESTIÓN DE RIESGO:
+• Señal fuerte detectada, riesgo moderado
+• Stop-loss automático configurado según volatilidad
+• Tamaño de posición calculado según gestión de capital
+
+CONTEXTO ADICIONAL:
+• Price: 45250.500
+• Volume Ratio: 1.350
+• Rsi: 65.200
+
+=== FIN DEL REPORTE ===

@@ -1,0 +1,45 @@
+
+=== REPORTE DE ANÁLISIS ROI ===
+Objetivo: 15.0% ROI mensual después de fees
+
+RENDIMIENTO ACTUAL:
+- Duración del backtest: 74 días (2.4 meses)
+- Capital inicial: $500.00
+- Capital final: $499.92
+- Retorno total: -0.02%
+- ROI mensual (antes de fees): -0.01%
+- Fees estimados: $0.69
+- ROI mensual (después de fees): -0.06%
+
+MÉTRICAS DE RIESGO:
+- Volatilidad anualizada: 6.63%
+- Sharpe ratio: -0.01
+- Drawdown máximo: -4.10%
+- Operaciones totales: 78
+- Operaciones por día: 1.05
+
+ANÁLISIS DE BRECHA:
+- ROI objetivo: 15.0%
+- ROI actual: -0.06%
+- Brecha a cubrir: 15.06%
+- Factor de mejora necesario: infx
+
+ESTRATEGIAS DE MEJORA RECOMENDADAS:
+1. Implementar apalancamiento controlado (2x-3x)
+2. Aumentar frecuencia de trading
+3. Optimizar umbrales de señales
+4. Implementar arbitraje entre exchanges
+
+PROYECCIONES:
+- Para alcanzar 15% mensual necesitamos:
+  * Mejorar el rendimiento en infx
+  * Generar $75.00 adicionales por mes
+  * Mantener drawdown < 10%
+  * Sharpe ratio > 2.0
+
+PRÓXIMOS PASOS:
+1. Implementar cálculo de fees en tiempo real
+2. Optimizar estrategias de trading
+3. Implementar gestión de riesgo avanzada
+4. Considerar apalancamiento controlado
+5. Aumentar frecuencia de operaciones

@@ -1,0 +1,138 @@
+#region Using declarations
+using System;
+using NinjaTrader.Cbi;
+using NinjaTrader.Gui.Tools;
+using NinjaTrader.NinjaScript;
+using NinjaTrader.Data;
+using NinjaTrader.NinjaScript.Strategies;
+using NinjaTrader.NinjaScript.Indicators;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+#endregion
+
+
+namespace NinjaTrader.NinjaScript.Strategies
+{
+    public class InsideBarEMA200Break : Strategy
+    {
+        private EMA ema200;
+        private double insideHigh = 0;
+        private double insideLow = 0;
+        private bool waitingInsideBar = false;
+        private bool longSetup = false;
+        private bool shortSetup = false;
+        private bool tradePlacedToday = false;
+
+        [NinjaScriptProperty]
+        [Range(0, double.MaxValue)]
+        [Display(Name = "Stop Loss (ticks)", Order = 1, GroupName = "Parameters")]
+        public double StopLossTicks { get; set; } = 120;
+
+        [NinjaScriptProperty]
+        [Range(0, double.MaxValue)]
+        [Display(Name = "Take Profit (ticks)", Order = 2, GroupName = "Parameters")]
+        public double TakeProfitTicks { get; set; } = 360;
+
+        protected override void OnStateChange()
+        {
+            if (State == State.SetDefaults)
+            {
+                Name = "InsideBarEMA200Break";
+                Calculate = Calculate.OnBarClose;
+                EntriesPerDirection = 1;
+                EntryHandling = EntryHandling.AllEntries;
+                IsExitOnSessionCloseStrategy = false;
+                ExitOnSessionCloseSeconds = 0;
+                IncludeCommission = true;
+                IsInstantiatedOnEachOptimizationIteration = false;
+            }
+            else if (State == State.DataLoaded)
+            {
+                ema200 = EMA(200);
+                AddChartIndicator(ema200);
+            }
+        }
+
+        protected override void OnBarUpdate()
+        {
+            if (CurrentBar < 210)
+                return;
+
+            // Cierre forzado a las 11:30
+            if (ToTime(Time[0]) >= 113000)
+            {
+                if (Position.MarketPosition != MarketPosition.Flat)
+                    ExitAllPositions();
+
+                tradePlacedToday = false;
+                return;
+            }
+
+            // Limitar operaciones a horario NY (8:30 - 11:30)
+            if (ToTime(Time[0]) < 083000 || ToTime(Time[0]) > 113000)
+                return;
+
+            // Evitar más de una operación por día
+            if (tradePlacedToday)
+                return;
+
+            double emaValue = ema200[0];
+
+            // Detectar ruptura de la EMA200
+            if (Close[1] < emaValue && Close[0] > emaValue)
+            {
+                // Ruptura alcista
+                waitingInsideBar = true;
+                longSetup = true;
+                shortSetup = false;
+            }
+            else if (Close[1] > emaValue && Close[0] < emaValue)
+            {
+                // Ruptura bajista
+                waitingInsideBar = true;
+                shortSetup = true;
+                longSetup = false;
+            }
+
+            // Buscar Inside Bar tras la ruptura
+            if (waitingInsideBar)
+            {
+                bool isInsideBar = High[0] < High[1] && Low[0] > Low[1];
+                if (isInsideBar)
+                {
+                    insideHigh = High[0];
+                    insideLow = Low[0];
+                }
+
+                // Confirmación: vela cierra en dirección y rompe el rango de la inside bar
+                if (insideHigh > 0 && insideLow > 0)
+                {
+                    if (longSetup && Close[0] > insideHigh && Close[0] > emaValue)
+                    {
+                        EnterLongLimit(0, true, 1, insideHigh, "LongInsideBarBreak");
+                        SetStopLoss("LongInsideBarBreak", CalculationMode.Ticks, StopLossTicks, false);
+                        SetProfitTarget("LongInsideBarBreak", CalculationMode.Ticks, TakeProfitTicks);
+                        waitingInsideBar = false;
+                        tradePlacedToday = true;
+                    }
+                    else if (shortSetup && Close[0] < insideLow && Close[0] < emaValue)
+                    {
+                        EnterShortLimit(0, true, 1, insideLow, "ShortInsideBarBreak");
+                        SetStopLoss("ShortInsideBarBreak", CalculationMode.Ticks, StopLossTicks, false);
+                        SetProfitTarget("ShortInsideBarBreak", CalculationMode.Ticks, TakeProfitTicks);
+                        waitingInsideBar = false;
+                        tradePlacedToday = true;
+                    }
+                }
+            }
+        }
+
+        private void ExitAllPositions()
+        {
+            if (Position.MarketPosition == MarketPosition.Long)
+                ExitLong("ForceExit", "LongInsideBarBreak");
+            else if (Position.MarketPosition == MarketPosition.Short)
+                ExitShort("ForceExit", "ShortInsideBarBreak");
+        }
+    }
+}

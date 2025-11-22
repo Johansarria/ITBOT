@@ -1,0 +1,1017 @@
+{
+  "timestamp": "20251018_173912",
+  "optimization_type": "hybrid_flexible_extended",
+  "total_configurations": 30,
+  "valid_configurations": 0,
+  "data_period_days": 180,
+  "symbols_analyzed": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "ADAUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOTUSDT",
+    "LINKUSDT",
+    "LTCUSDT",
+    "AVAXUSDT"
+  ],
+  "criteria": {
+    "min_trades_required": 20,
+    "out_sample_percentage": 20,
+    "max_iterations": 30
+  },
+  "anti_overfitting_enabled": true,
+  "results": [
+    {
+      "parameters": {
+        "min_price_movement": 0.5,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.1,
+        "confidence_threshold": 0.75
+      },
+      "metrics": {
+        "total_trades": 682,
+        "win_rate": 0.5,
+        "total_return": 0.2146377181572298,
+        "sharpe_ratio": 2.7874913032865036,
+        "max_drawdown": 0.21589373604592837,
+        "confidence_score": 0.25691494988826447,
+        "robustness_score": 0.40491124258492023,
+        "overfitting_risk": 0.8383876103705599,
+        "walkforward_score": 0.16059814405184797
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.5,
+        "min_volume_ratio": 1.2,
+        "max_spread_pct": 0.4,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 1260,
+        "win_rate": 0.4873015873015873,
+        "total_return": 0.28780100261170083,
+        "sharpe_ratio": 2.3631085656171598,
+        "max_drawdown": 0.3269453436087163,
+        "confidence_score": 0.2510805135199584,
+        "robustness_score": 0.3888954235609687,
+        "overfitting_risk": 0.5485030212461598,
+        "walkforward_score": 0.23557818697379718
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.5,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.4,
+        "confidence_threshold": 0.7
+      },
+      "metrics": {
+        "total_trades": 867,
+        "win_rate": 0.46251441753171857,
+        "total_return": 0.16847440957935306,
+        "sharpe_ratio": 2.0285962507512028,
+        "max_drawdown": 0.30706977515316164,
+        "confidence_score": 0.22138796048400256,
+        "robustness_score": 0.3121022826753546,
+        "overfitting_risk": 0.5691332377715619,
+        "walkforward_score": 0.1981021580822479
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.5,
+        "min_volume_ratio": 1.8,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.8
+      },
+      "metrics": {
+        "total_trades": 354,
+        "win_rate": 0.4858757062146893,
+        "total_return": 0.0856542946356749,
+        "sharpe_ratio": 3.4648979835552907,
+        "max_drawdown": 0.17706177703855924,
+        "confidence_score": 0.20922099055383378,
+        "robustness_score": 0.24458377527403508,
+        "overfitting_risk": 0.5177521895575834,
+        "walkforward_score": 0.08548875251317181
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.8,
+        "min_volume_ratio": 1.2,
+        "max_spread_pct": 0.25,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 871,
+        "win_rate": 0.4592422502870264,
+        "total_return": 0.10684061331970404,
+        "sharpe_ratio": 1.6750752138902538,
+        "max_drawdown": 0.2914675929900205,
+        "confidence_score": 0.19691447258980133,
+        "robustness_score": 0.22473682829194716,
+        "overfitting_risk": 0.6448727718690921,
+        "walkforward_score": 0.14328754885700304
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.0,
+        "min_volume_ratio": 1.2,
+        "max_spread_pct": 0.15,
+        "confidence_threshold": 0.7
+      },
+      "metrics": {
+        "total_trades": 667,
+        "win_rate": 0.46476761619190404,
+        "total_return": 0.08903116326068083,
+        "sharpe_ratio": 1.196701547550114,
+        "max_drawdown": 0.26264071821508017,
+        "confidence_score": 0.19554387871421866,
+        "robustness_score": 0.21468087429319913,
+        "overfitting_risk": 0.8686764445887756,
+        "walkforward_score": 0.1087981009153185
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 2.0,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.15,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 139,
+        "win_rate": 0.49640287769784175,
+        "total_return": 0.028717356809949912,
+        "sharpe_ratio": 4.9169450790821525,
+        "max_drawdown": 0.08985810617893426,
+        "confidence_score": 0.1952856026095195,
+        "robustness_score": 0.18227476106451088,
+        "overfitting_risk": 0.05259188914512976,
+        "walkforward_score": 0.03905755689524566
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.8,
+        "min_volume_ratio": 2.0,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 349,
+        "win_rate": 0.45558739255014324,
+        "total_return": 0.035119329146462396,
+        "sharpe_ratio": 1.3485206620064374,
+        "max_drawdown": 0.16800366322510735,
+        "confidence_score": 0.1827082398070714,
+        "robustness_score": 0.17985552610088365,
+        "overfitting_risk": 0.07037738058717358,
+        "walkforward_score": 0.09507864407299159
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 2.0,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.2,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 141,
+        "win_rate": 0.5035460992907801,
+        "total_return": 0.01787746698072927,
+        "sharpe_ratio": 8.695417709416533,
+        "max_drawdown": 0.09609560992711219,
+        "confidence_score": 0.1822326235152113,
+        "robustness_score": 0.12234700907242542,
+        "overfitting_risk": 0,
+        "walkforward_score": 0.06755239267635339
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.8,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.4,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 626,
+        "win_rate": 0.4536741214057508,
+        "total_return": 0.04743979069959187,
+        "sharpe_ratio": 6.997202869919185,
+        "max_drawdown": 0.28088388328980257,
+        "confidence_score": 0.18223200226993772,
+        "robustness_score": 0.17880547783367895,
+        "overfitting_risk": 0,
+        "walkforward_score": 0.12120081115147845
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.25,
+        "confidence_threshold": 0.8
+      },
+      "metrics": {
+        "total_trades": 79,
+        "win_rate": 0.3924050632911392,
+        "total_return": -0.0302656273125073,
+        "sharpe_ratio": -195.98544015653593,
+        "max_drawdown": 0.08204116607774571,
+        "confidence_score": 0.1812447468374419,
+        "robustness_score": 0.25707084163194927,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.006079062462746697
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.2,
+        "min_volume_ratio": 2.0,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.8
+      },
+      "metrics": {
+        "total_trades": 204,
+        "win_rate": 0.46568627450980393,
+        "total_return": 0.01867078175031661,
+        "sharpe_ratio": -2.4502387351336794,
+        "max_drawdown": 0.14166075610272574,
+        "confidence_score": 0.17725111658502868,
+        "robustness_score": 0.14780814162945224,
+        "overfitting_risk": 0,
+        "walkforward_score": 0.06321464048327059
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.2,
+        "min_volume_ratio": 2.0,
+        "max_spread_pct": 0.4,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 237,
+        "win_rate": 0.4641350210970464,
+        "total_return": 0.02334619943422551,
+        "sharpe_ratio": -0.6700531355568445,
+        "max_drawdown": 0.14440983521243106,
+        "confidence_score": 0.17599939075087437,
+        "robustness_score": 0.14430685814753222,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.049257449510886314
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 2.0,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 141,
+        "win_rate": 0.46099290780141844,
+        "total_return": 0.018985050987103028,
+        "sharpe_ratio": 29.055026932764424,
+        "max_drawdown": 0.09577077136499364,
+        "confidence_score": 0.17562044090636875,
+        "robustness_score": 0.14715149751104428,
+        "overfitting_risk": 0,
+        "walkforward_score": 0.030033956752283524
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 2.0,
+        "min_volume_ratio": 1.8,
+        "max_spread_pct": 0.15,
+        "confidence_threshold": 0.7
+      },
+      "metrics": {
+        "total_trades": 122,
+        "win_rate": 0.4672131147540984,
+        "total_return": 0.012783560487758024,
+        "sharpe_ratio": 111.74385817410707,
+        "max_drawdown": 0.09252127857577896,
+        "confidence_score": 0.17531600292406913,
+        "robustness_score": 0.1390881748766063,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.030217883247049382
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.75
+      },
+      "metrics": {
+        "total_trades": 80,
+        "win_rate": 0.4375,
+        "total_return": 0.017380448792760534,
+        "sharpe_ratio": -3.0367793686197566,
+        "max_drawdown": 0.0699428425707274,
+        "confidence_score": 0.17346411395868896,
+        "robustness_score": 0.16701608668830129,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.012790533397313324
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.0,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 509,
+        "win_rate": 0.43418467583497056,
+        "total_return": -0.0436648691418377,
+        "sharpe_ratio": 2.1833027722006992,
+        "max_drawdown": 0.2571314460356298,
+        "confidence_score": 0.1689239251416291,
+        "robustness_score": 0.1583626511743134,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.08474066305276143
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.1,
+        "confidence_threshold": 0.75
+      },
+      "metrics": {
+        "total_trades": 81,
+        "win_rate": 0.48148148148148145,
+        "total_return": -0.00723265528715072,
+        "sharpe_ratio": -0.34533423193400953,
+        "max_drawdown": 0.06716885724380552,
+        "confidence_score": 0.16859848195224775,
+        "robustness_score": 0.0973352254485655,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.000523763920351257
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.8,
+        "min_volume_ratio": 2.0,
+        "max_spread_pct": 0.2,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 353,
+        "win_rate": 0.45609065155807366,
+        "total_return": 0.025395042481313794,
+        "sharpe_ratio": 0.36923351633860757,
+        "max_drawdown": 0.17280999352972495,
+        "confidence_score": 0.16673386951842398,
+        "robustness_score": 0.11650054325684961,
+        "overfitting_risk": 0.6162767948234407,
+        "walkforward_score": 0.0733310873783289
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 2.5,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.4,
+        "confidence_threshold": 0.75
+      },
+      "metrics": {
+        "total_trades": 39,
+        "win_rate": 0.48717948717948717,
+        "total_return": 0.004822733302884217,
+        "sharpe_ratio": -1.425579979582408,
+        "max_drawdown": 0.04896678505483716,
+        "confidence_score": 0.15728455756240292,
+        "robustness_score": 0.04404057230393877,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.0
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.2,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 78,
+        "win_rate": 0.4230769230769231,
+        "total_return": -0.017757895642773493,
+        "sharpe_ratio": -2.7483830329533148,
+        "max_drawdown": 0.07649267290713369,
+        "confidence_score": 0.15579777312695697,
+        "robustness_score": 0.11719105415547633,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.01044002804015613
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 1.2,
+        "max_spread_pct": 0.2,
+        "confidence_threshold": 0.8
+      },
+      "metrics": {
+        "total_trades": 212,
+        "win_rate": 0.45754716981132076,
+        "total_return": 0.014076366356859677,
+        "sharpe_ratio": -3.6951980944959484,
+        "max_drawdown": 0.14008606755667125,
+        "confidence_score": 0.1546517311103399,
+        "robustness_score": 0.06774388519043205,
+        "overfitting_risk": 0.825723838733211,
+        "walkforward_score": 0.04984985520707262
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 2.5,
+        "max_spread_pct": 0.1,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 112,
+        "win_rate": 0.45535714285714285,
+        "total_return": -0.007489383106629631,
+        "sharpe_ratio": 3.0716767464982047,
+        "max_drawdown": 0.09097884651287148,
+        "confidence_score": 0.15169831128119612,
+        "robustness_score": 0.06108121421308558,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.004049724223811119
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.15,
+        "confidence_threshold": 0.6
+      },
+      "metrics": {
+        "total_trades": 253,
+        "win_rate": 0.43873517786561267,
+        "total_return": 0.011343175532797192,
+        "sharpe_ratio": -1.606044535310257,
+        "max_drawdown": 0.16336512611915555,
+        "confidence_score": 0.1513892366129767,
+        "robustness_score": 0.07732556875887163,
+        "overfitting_risk": 0.6131368028908641,
+        "walkforward_score": 0.07685583762754146
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.8,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.25,
+        "confidence_threshold": 0.7
+      },
+      "metrics": {
+        "total_trades": 121,
+        "win_rate": 0.4214876033057851,
+        "total_return": -0.020633276776424177,
+        "sharpe_ratio": -113.04760717698318,
+        "max_drawdown": 0.10417717865252915,
+        "confidence_score": 0.14700581765902573,
+        "robustness_score": 0.08421529757960242,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.01077209590010332
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 2.5,
+        "min_volume_ratio": 1.2,
+        "max_spread_pct": 0.1,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 76,
+        "win_rate": 0.4605263157894737,
+        "total_return": 0.019676829224441694,
+        "sharpe_ratio": -0.8172981309383167,
+        "max_drawdown": 0.056653131165338565,
+        "confidence_score": 0.14650958644766035,
+        "robustness_score": 0.031142929901938995,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.03701925236123362
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 0.8,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.3,
+        "confidence_threshold": 0.7
+      },
+      "metrics": {
+        "total_trades": 621,
+        "win_rate": 0.44605475040257647,
+        "total_return": 0.007064287133363001,
+        "sharpe_ratio": 2.4772358120456226,
+        "max_drawdown": 0.2989609227500939,
+        "confidence_score": 0.13949198414885414,
+        "robustness_score": 0.020738586309438,
+        "overfitting_risk": 0.6309904276352587,
+        "walkforward_score": 0.1571526361938204
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.0,
+        "min_volume_ratio": 1.5,
+        "max_spread_pct": 0.15,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 502,
+        "win_rate": 0.450199203187251,
+        "total_return": 0.0022406662447729156,
+        "sharpe_ratio": 0.6662710749500119,
+        "max_drawdown": 0.21974396344657063,
+        "confidence_score": 0.13829212922304598,
+        "robustness_score": 0.012180998413263954,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.06555100371769919
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.5,
+        "min_volume_ratio": 3.0,
+        "max_spread_pct": 0.2,
+        "confidence_threshold": 0.7
+      },
+      "metrics": {
+        "total_trades": 78,
+        "win_rate": 0.4358974358974359,
+        "total_return": 0.002292840350297008,
+        "sharpe_ratio": -2.542874019102056,
+        "max_drawdown": 0.0733289600508558,
+        "confidence_score": 0.1354533330794606,
+        "robustness_score": 0.01843332863888231,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.009224570875900463
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    },
+    {
+      "parameters": {
+        "min_price_movement": 1.2,
+        "min_volume_ratio": 2.0,
+        "max_spread_pct": 0.4,
+        "confidence_threshold": 0.75
+      },
+      "metrics": {
+        "total_trades": 235,
+        "win_rate": 0.41702127659574467,
+        "total_return": -0.0007525822709114972,
+        "sharpe_ratio": -0.9182446266769345,
+        "max_drawdown": 0.1443121184080257,
+        "confidence_score": 0.1272356331624145,
+        "robustness_score": 0.008051714656132858,
+        "overfitting_risk": 1.0,
+        "walkforward_score": 0.06756803821535698
+      },
+      "validation_passed": false,
+      "symbols_tested": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOTUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "AVAXUSDT"
+      ],
+      "period_tested": "180 dias"
+    }
+  ]
+}

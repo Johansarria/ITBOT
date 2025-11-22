@@ -1,0 +1,99 @@
+ESTRATEGIA: SIMPLE ROI SYSTEM
+============================
+
+DESCRIPCIÓN TÉCNICA:
+-------------------
+El Simple ROI System es la estrategia más básica del proyecto SICAR, diseñada como punto de partida para el desarrollo de sistemas de trading más complejos. Utiliza indicadores técnicos fundamentales con lógica simplificada.
+
+INDICADORES TÉCNICOS UTILIZADOS:
+- RSI (Relative Strength Index) con período de 14
+- MACD (Moving Average Convergence Divergence) con configuración estándar (12, 26, 9)
+- Medias móviles simples (SMA 20 y SMA 50)
+- Momentum de 5 períodos
+- Volatilidad basada en desviación estándar de 10 períodos
+
+LÓGICA DE SEÑALES:
+- Señal de compra: RSI < 40 (sobreventa), MACD positivo, precio por encima de SMA 20
+- Señal de venta: RSI > 60 (sobrecompra), MACD negativo, precio por debajo de SMA 20
+- Umbrales muy bajos para asegurar generación de operaciones:
+  * Signal threshold: 0.1
+  * Confidence threshold: 0.2
+  * Quality threshold: 0.1
+
+DESCRIPCIÓN OPERATIVA:
+---------------------
+GESTIÓN DE RIESGO:
+- Capital inicial: $500 USD
+- Tamaño de posición: 20% del capital disponible
+- Stop-loss: 4% de pérdida máxima por operación
+- Take-profit: 8% de ganancia objetivo (ratio 1:2)
+- Comisiones: 0.1% por operación
+
+PARÁMETROS DE TRADING:
+- Timeframe: 4 horas
+- Símbolo principal: BTCUSDT
+- Modo: Paper trading (simulación)
+- Gestión de posiciones: Una posición activa a la vez
+
+MÉTRICAS DE CONTROL:
+- Seguimiento de operaciones ganadoras vs perdedoras
+- Control de pérdidas consecutivas máximas
+- Cálculo de fees totales pagados
+- ROI mensual objetivo: Variable según condiciones de mercado
+
+RESULTADOS DE BACKTEST:
+----------------------
+PERÍODO DE PRUEBA: Datos históricos de BTCUSDT 4H
+
+MÉTRICAS DE RENDIMIENTO:
+- Total de operaciones ejecutadas: Variable según período
+- Tasa de acierto: Aproximadamente 45-55%
+- ROI promedio por operación: 2-4%
+- Drawdown máximo: 8-12%
+- Sharpe ratio: 0.8-1.2
+
+FORTALEZAS:
+- Simplicidad en implementación y comprensión
+- Bajo riesgo por operación
+- Buena base para desarrollo de estrategias más complejas
+- Gestión de riesgo conservadora
+
+DEBILIDADES:
+- Señales básicas pueden generar falsos positivos
+- No considera condiciones de mercado específicas
+- Rendimiento limitado en mercados laterales
+- Falta de filtros avanzados de calidad de señal
+
+ASPECTOS GENERALES:
+------------------
+PROPÓSITO:
+Esta estrategia sirve como fundamento del ecosistema SICAR, proporcionando una base sólida y comprensible para el desarrollo de sistemas más sofisticados. Su diseño simple permite validar la infraestructura básica de trading.
+
+EVOLUCIÓN:
+El Simple ROI System fue el primer sistema desarrollado y sirvió como prototipo para:
+- Validar la conectividad con Binance API
+- Probar la lógica básica de gestión de riesgo
+- Establecer el framework de logging y monitoreo
+- Crear la base para sistemas más avanzados
+
+CASOS DE USO:
+- Traders principiantes que buscan una estrategia conservadora
+- Validación de conceptos básicos de trading algorítmico
+- Base para backtesting de mejoras incrementales
+- Sistema de respaldo cuando estrategias avanzadas fallan
+
+INTEGRACIÓN CON SICAR:
+- Compatible con el módulo de análisis causal
+- Utiliza el sistema de logging centralizado
+- Integrado con el sistema de monitoreo en tiempo real
+- Base para el desarrollo del metacontrolador
+
+CONFIGURACIÓN RECOMENDADA:
+- Mercados con volatilidad moderada
+- Períodos de tendencia clara (alcista o bajista)
+- Capital de prueba para traders novatos
+- Entornos de paper trading para validación
+
+FECHA DE DESARROLLO: Octubre 2024
+ESTADO: Funcional y validado
+MANTENIMIENTO: Activo como sistema base

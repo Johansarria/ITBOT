@@ -1,0 +1,77 @@
+===============================================
+ITBOT CRYPTO & BITCOIN OPTIMIZER
+===============================================
+
+📊 DESCRIPCIÓN GENERAL:
+Estrategia especializada para criptomonedas con parámetros ultra-agresivos optimizados para la alta volatilidad y velocidad de los mercados crypto, especialmente Bitcoin y altcoins principales.
+
+🎯 CARACTERÍSTICAS PRINCIPALES:
+• Parámetros ultra-reactivos para mercados crypto 24/7
+• Medias móviles agresivas (MA 3 y MA 12)
+• Umbrales de RSI extremos (80/20) para crypto
+• Filtros de volumen intensificados
+• Gestión de riesgo adaptada a la volatilidad crypto
+
+⚡ OPTIMIZACIONES PARA CRYPTO:
+• Fast MA: 3 períodos (máxima reactividad)
+• Slow MA: 12 períodos (balance velocidad/estabilidad)
+• Threshold: 0.15% (ajustado para movimientos crypto)
+• RSI Overbought: 80 (agresivo para crypto)
+• RSI Oversold: 20 (agresivo para crypto)
+• Volume Multiplier: 2.5 (confirmación alta)
+
+🔥 CARACTERÍSTICAS AGRESIVAS:
+• Momentum Length: 5 períodos (detección rápida)
+• RSI Length: 10 períodos (reactividad extrema)
+• Volume Height: 20% (visualización intensa)
+• Trend Background: Activado por defecto
+
+💰 MERCADOS OBJETIVO:
+• Bitcoin (BTC/USD, BTC/USDT)
+• Ethereum (ETH/USD, ETH/USDT)
+• Altcoins principales (ADA, DOT, LINK, etc.)
+• Pares crypto/crypto
+• Mercados DeFi tokens
+
+📈 VENTAJAS EN CRYPTO:
+• Captura movimientos rápidos típicos de crypto
+• Evita el ruido común en mercados 24/7
+• Aprovecha la alta volatilidad para ganancias rápidas
+• Filtros intensos para evitar señales falsas
+• Adaptado a los patrones únicos de volumen crypto
+
+🕐 TIMEFRAMES RECOMENDADOS:
+• 1m - 5m: Scalping crypto intensivo
+• 15m - 1h: Trading intraday
+• 4h - 1D: Swing trading crypto
+• 1W: Análisis de tendencia macro
+
+⚠️ GESTIÓN DE RIESGO CRYPTO:
+• Stop-loss ajustado a volatilidad crypto
+• Señales tempranas para salidas rápidas
+• Confirmación de volumen intensificada
+• Filtros anti-ruido para mercados 24/7
+
+🌟 CASOS DE USO ESPECÍFICOS:
+• Trading de Bitcoin durante alta volatilidad
+• Scalping en altcoins durante pumps
+• Detección de reversiones en mercados bajistas crypto
+• Aprovechamiento de breakouts en resistencias clave
+
+💡 RECOMENDACIONES:
+• Usar en timeframes bajos para máxima efectividad
+• Combinar con análisis fundamental crypto
+• Monitorear noticias y eventos del ecosistema
+• Ajustar tamaño de posición según volatilidad
+
+🚨 ADVERTENCIAS:
+• Estrategia de alto riesgo/alta recompensa
+• Requiere monitoreo constante
+• No recomendada para principiantes
+• Volatilidad crypto puede generar pérdidas rápidas
+
+🔔 ALERTAS CRYPTO:
+• Señales de entrada/salida optimizadas
+• Alertas de momentum para movimientos rápidos
+• Notificaciones de volumen anómalo
+• Alertas de RSI en niveles extremos

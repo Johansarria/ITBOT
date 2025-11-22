@@ -1,0 +1,400 @@
+2025-10-16 18:35:58 | ERROR | sicar.errors | ❌ ERROR SYNC_WRITE: [WinError 5] Acceso denegado: 'data\\paper_trading_session.json' -> 'data\\paper_trading_session.json.bak'
+2025-10-16 18:35:58 | ERROR | sicar.errors |    Contexto: {
+  "file": "data\\paper_trading_session.json"
+}
+2025-10-16 18:35:58 | ERROR | sicar.errors | ❌ ERROR SYNC_UPDATE: [WinError 5] Acceso denegado: 'data\\paper_trading_session.json' -> 'data\\paper_trading_session.json.bak'
+2025-10-16 18:35:58 | ERROR | sicar.errors |    Contexto: {
+  "updates": {
+    "auto_trading": true,
+    "auto_trading_changed_at": "2025-10-16T18:35:58.530605",
+    "auto_trading_reason": "Prueba del sistema"
+  }
+}
+2025-10-16 18:36:01 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-16 18:38:36 | ERROR | sicar.errors | ❌ ERROR CALLBACKS_SETUP: 'EnhancedBreakoutDetector' object has no attribute 'add_observer'
+2025-10-16 18:46:03 | ERROR | sicar.errors | ❌ ERROR CALLBACKS_SETUP: 'EnhancedBreakoutDetector' object has no attribute 'add_observer'
+2025-10-16 18:52:14 | ERROR | sicar.errors | ❌ ERROR CALLBACKS_SETUP: 'EnhancedBreakoutDetector' object has no attribute 'add_observer'
+2025-10-16 18:52:36 | ERROR | sicar.errors | ❌ ERROR CALLBACKS_SETUP: 'EnhancedBreakoutDetector' object has no attribute 'add_observer'
+2025-10-16 22:23:14 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:19 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:24 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:29 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:34 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:39 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:44 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_signals_count_var'
+2025-10-16 22:23:57 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: unsupported format string passed to StringVar.__format__
+2025-10-16 22:24:02 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: unsupported format string passed to StringVar.__format__
+2025-10-16 22:24:07 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: unsupported format string passed to StringVar.__format__
+2025-10-16 22:24:12 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: unsupported format string passed to StringVar.__format__
+2025-10-16 22:24:17 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: unsupported format string passed to StringVar.__format__
+2025-10-16 22:24:22 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: unsupported format string passed to StringVar.__format__
+2025-10-16 22:24:35 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:24:40 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:24:45 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:24:50 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:24:55 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:25:00 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:25:05 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:25:10 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:25:15 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:25:20 | ERROR | sicar.errors | ❌ ERROR PORTFOLIO_METRICS_UPDATE: 'EnhancedDashboard' object has no attribute 'portfolio_status_var'
+2025-10-16 22:53:03 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_CALLBACK: 'EnhancedDashboard' object has no attribute 'paper_trading_engine'
+2025-10-17 04:02:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 08:30:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 08:30:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 08:30:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:30:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:28 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:28 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:31:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:28 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:28 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:28 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:38 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:48 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:32:58 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:08 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:18 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:39 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:39 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:39 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:49 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:49 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:49 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:59 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:33:59 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:09 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:09 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:09 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:39 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:39 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:49 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:49 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:49 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:59 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:34:59 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:09 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:09 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:09 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:19 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:29 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:39 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:40 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:40 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:50 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:50 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 08:35:50 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_PROCESSING: 'min_signal_interval'
+2025-10-17 14:22:15 | ERROR | sicar.errors | ❌ ERROR SCALPING_START: Error iniciando ScalpingEngine: 'ScalpingEngine' object has no attribute 'start'
+2025-10-17 14:33:00 | ERROR | sicar.errors | ❌ ERROR SCALPING_PROCESSING: Error procesando scalping: 'ScalpingEngine' object has no attribute 'create_position'
+2025-10-17 14:40:31 | ERROR | sicar.errors | ❌ ERROR SCALPING_PROCESSING: Error procesando scalping: 'ScalpingEngine' object has no attribute 'create_position'
+2025-10-17 14:44:31 | ERROR | sicar.errors | ❌ ERROR SCALPING_PROCESSING: Error procesando scalping: 'ScalpingEngine' object has no attribute 'create_position'
+2025-10-17 14:58:31 | ERROR | sicar.errors | ❌ ERROR SCALPING_PROCESSING: Error procesando scalping: 'ScalpingEngine' object has no attribute 'create_position'
+2025-10-17 18:00:11 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:11 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:11 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:31 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:31 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:32 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:52 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:52 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:00:52 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:13 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:13 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:13 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:33 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:33 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:33 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:53 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:53 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:01:54 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:14 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:14 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:14 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:34 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:34 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:44 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:54 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:02:55 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:15 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:15 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:15 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:35 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:35 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:45 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:55 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:03:55 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:06 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:26 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:26 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:36 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:47 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:04:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:07 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:37 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:37 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:47 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 18:05:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-17 19:34:51 | ERROR | sicar.errors | ❌ ERROR BREAKOUT_CONSOLE: EnhancedDashboard._update_status_texts() missing 1 required positional argument: 'trading_data'
+2025-10-17 20:13:07 | ERROR | sicar.errors | ❌ ERROR PRICE_UPDATE_ERROR: 'SicarLogger' object has no attribute 'log_info'
+2025-10-17 20:13:07 | ERROR | sicar.errors |    Contexto: {
+  "symbol": "BTCUSDT"
+}
+2025-10-18 02:00:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:00:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:00:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:00:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:00:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:01:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:01:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:01:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:01:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:01:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:02:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:02:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:02:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:02:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:02:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:02:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:03:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:03:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:03:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:03:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:03:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:04:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:04:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:04:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:04:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:04:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:04:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:05:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:05:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:05:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 02:05:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:30:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:30:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:30:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:30:46 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:30:46 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:31:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:31:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:31:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:31:46 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:31:46 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:31:46 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:32:16 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:32:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:32:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:32:47 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:33:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:33:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:33:47 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:33:47 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:33:47 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:34:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:34:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:34:17 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:34:48 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:34:48 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:34:48 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:35:18 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:35:18 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:35:48 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 08:35:48 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 10:48:11 | ERROR | sicar.errors | ❌ ERROR UPDATE_LOOP: main thread is not in main loop
+2025-10-18 10:48:53 | ERROR | sicar.errors | ❌ ERROR UPDATE_LOOP: main thread is not in main loop
+2025-10-18 18:00:26 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:00:26 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:00:26 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:00:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:00:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:01:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:01:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:01:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:01:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:01:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:01:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:02:27 | ERROR | sicar.errors | ❌ ERROR GUARANTEED_BREAKOUT: Error generando breakout garantizado: 'SicarLogger' object has no attribute 'log_warning'
+2025-10-18 18:02:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:02:27 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:02:57 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:03:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:03:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:03:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:03:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:03:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:03:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:04:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:04:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:04:28 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:04:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:04:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:04:58 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:05:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:05:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:05:29 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:05:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:05:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-18 18:05:59 | ERROR | sicar.errors | ❌ ERROR TRADING_METRICS: 'PaperTradingEngine' object has no attribute 'get_balance'
+2025-10-21 11:12:45 | ERROR | sicar.errors | ❌ ERROR MODELS_INIT: Error inicializando modelos: 'SicarLogger' object has no attribute 'log_info'
+2025-10-21 11:15:16 | ERROR | sicar.errors | ❌ ERROR SYSTEMS_INIT: Error inicializando sistemas: 'EnhancedXAIBreakoutSystem' object has no attribute 'start'
+2025-10-21 11:15:16 | ERROR | sicar.errors | ❌ ERROR INTEGRATION_START: Error iniciando integración: 'EnhancedXAIBreakoutSystem' object has no attribute 'start'
+2025-10-21 11:16:16 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_XAI: Error generando análisis XAI integrado: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:16:16 | ERROR | sicar.errors | ❌ ERROR AUTONOMOUS_START: Error iniciando sistema autónomo: 'EnhancedXAIBreakoutSystem' object has no attribute 'start'
+2025-10-21 11:16:31 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_XAI: Error generando análisis XAI integrado: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:16:46 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_XAI: Error generando análisis XAI integrado: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:01 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_XAI: Error generando análisis XAI integrado: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:35 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:17:35 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:17:36 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:17:50 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:18:05 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:18:06 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:06 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:06 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:07 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:20 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:18:35 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:37 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:18:38 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:18:50 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:19:05 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR XAI_ANALYSIS: Error en análisis XAI: generate_dynamic_cognitive_report() missing 7 required positional arguments: 'metacontroller', 'regime_classifier', 'causal_cartographer', 'market_data', 'decision', 'strategy', and 'confidence'
+2025-10-21 11:19:08 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:19:20 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:19:35 | ERROR | sicar.errors | ❌ ERROR INTEGRATED_RECOMMENDATION: Error generando recomendación: 'str' object has no attribute 'get'
+2025-10-21 11:23:41 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:23:41 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:23:41 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:23:42 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:23:42 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:12 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:12 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:12 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:12 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:12 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:42 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:42 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:42 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:43 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:24:43 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:13 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:13 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:13 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:13 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:13 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:33 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:33 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:33 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:33 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:25:34 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:31:47 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:31:47 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:31:48 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:31:48 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:31:48 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:18 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:18 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:18 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:18 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:18 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:48 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:48 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:49 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:49 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:32:49 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:33:19 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:33:19 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:33:19 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:33:19 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-21 11:33:19 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:58:59 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:00 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:01 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:01 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:01 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:32 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:32 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:32 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:32 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:32 | ERROR | sicar.errors | ❌ ERROR ANOMALY_DETECTION: Error en detección de anomalías: This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+2025-10-22 16:59:35 | ERROR | sicar.errors | ❌ ERROR AUTONOMOUS_STOP: Error deteniendo sistema: 'EnhancedXAIBreakoutSystem' object has no attribute 'stop'

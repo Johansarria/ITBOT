@@ -1,0 +1,290 @@
+{
+  "analysis_info": {
+    "timestamp": "2025-10-21T04:59:59.251854",
+    "symbols_analyzed": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "ADAUSDT",
+      "DOTUSDT",
+      "LINKUSDT"
+    ],
+    "data_timeframe": "20:15 - 20:39 UTC",
+    "analysis_type": "comparative_breakout_analysis"
+  },
+  "current_market_analysis": {
+    "BTCUSDT": {
+      "current_price": 110161.8,
+      "price_range_pct": 0.148,
+      "position_in_range": 20.7,
+      "trend_strength": {
+        "direction": "bullish",
+        "strength": "weak",
+        "position_in_range": 20.7,
+        "volatility": 639.43
+      },
+      "volume_analysis": {
+        "trend": "increasing",
+        "score": 7,
+        "signal": "bullish",
+        "supports_breakout": true
+      },
+      "breakout_potential": {
+        "score": 90,
+        "distance_to_resistance_pct": 0.117,
+        "distance_to_support_pct": 0.031,
+        "volume_score": 2,
+        "likely_direction": "bearish"
+      },
+      "support_resistance": {
+        "immediate_support": 110128.09,
+        "immediate_resistance": 110291.17,
+        "current_price": 110161.8,
+        "support_strength": "strong",
+        "resistance_strength": "strong"
+      },
+      "technical_signals": [
+        "Volumen creciente - Momentum positivo"
+      ]
+    },
+    "ETHUSDT": {
+      "current_price": 3959.87,
+      "price_range_pct": 0.214,
+      "position_in_range": 48.0,
+      "trend_strength": {
+        "direction": "bearish",
+        "strength": "moderate",
+        "position_in_range": 48.0,
+        "volatility": 31.85
+      },
+      "volume_analysis": {
+        "trend": "increasing",
+        "score": 7,
+        "signal": "bullish",
+        "supports_breakout": true
+      },
+      "breakout_potential": {
+        "score": 70,
+        "distance_to_resistance_pct": 0.111,
+        "distance_to_support_pct": 0.103,
+        "volume_score": 2,
+        "likely_direction": "bearish"
+      },
+      "support_resistance": {
+        "immediate_support": 3955.81,
+        "immediate_resistance": 3964.26,
+        "current_price": 3959.87,
+        "support_strength": "strong",
+        "resistance_strength": "strong"
+      },
+      "technical_signals": [
+        "En zona neutral - Esperando dirección",
+        "Volumen creciente - Momentum positivo",
+        "Presión bajista presente"
+      ]
+    },
+    "ADAUSDT": {
+      "current_price": 0.6612,
+      "price_range_pct": 0.455,
+      "position_in_range": 60.0,
+      "trend_strength": {
+        "direction": "bullish",
+        "strength": "moderate",
+        "position_in_range": 60.0,
+        "volatility": 0.0063
+      },
+      "volume_analysis": {
+        "trend": "significantly_increasing",
+        "score": 9,
+        "signal": "very_bullish",
+        "supports_breakout": true
+      },
+      "breakout_potential": {
+        "score": 70,
+        "distance_to_resistance_pct": 0.181,
+        "distance_to_support_pct": 0.272,
+        "volume_score": 3,
+        "likely_direction": "bullish"
+      },
+      "support_resistance": {
+        "immediate_support": 0.6594,
+        "immediate_resistance": 0.6624,
+        "current_price": 0.6612,
+        "support_strength": "strong",
+        "resistance_strength": "strong"
+      },
+      "technical_signals": [
+        "Volumen excepcional - Alta probabilidad de movimiento",
+        "Tendencia alcista confirmada"
+      ]
+    },
+    "DOTUSDT": {
+      "current_price": 3.068,
+      "price_range_pct": 0.392,
+      "position_in_range": 33.3,
+      "trend_strength": {
+        "direction": "bullish",
+        "strength": "weak",
+        "position_in_range": 33.3,
+        "volatility": 0.0295
+      },
+      "volume_analysis": {
+        "trend": "increasing",
+        "score": 7,
+        "signal": "bullish",
+        "supports_breakout": true
+      },
+      "breakout_potential": {
+        "score": 50,
+        "distance_to_resistance_pct": 0.261,
+        "distance_to_support_pct": 0.13,
+        "volume_score": 2,
+        "likely_direction": "bearish"
+      },
+      "support_resistance": {
+        "immediate_support": 3.064,
+        "immediate_resistance": 3.076,
+        "current_price": 3.068,
+        "support_strength": "strong",
+        "resistance_strength": "strong"
+      },
+      "technical_signals": [
+        "Volumen creciente - Momentum positivo"
+      ]
+    },
+    "LINKUSDT": {
+      "current_price": 18.78,
+      "price_range_pct": 0.48,
+      "position_in_range": 33.3,
+      "trend_strength": {
+        "direction": "bullish",
+        "strength": "weak",
+        "position_in_range": 33.3,
+        "volatility": 0.234
+      },
+      "volume_analysis": {
+        "trend": "increasing",
+        "score": 7,
+        "signal": "bullish",
+        "supports_breakout": true
+      },
+      "breakout_potential": {
+        "score": 50,
+        "distance_to_resistance_pct": 0.319,
+        "distance_to_support_pct": 0.16,
+        "volume_score": 2,
+        "likely_direction": "bearish"
+      },
+      "support_resistance": {
+        "immediate_support": 18.75,
+        "immediate_resistance": 18.84,
+        "current_price": 18.78,
+        "support_strength": "strong",
+        "resistance_strength": "strong"
+      },
+      "technical_signals": [
+        "Volumen creciente - Momentum positivo"
+      ]
+    }
+  },
+  "comparative_analysis": {
+    "market_evolution": {
+      "previous_condition": "technical_correction",
+      "current_condition": "bullish_momentum_building",
+      "time_elapsed": "25 minutos",
+      "significant_changes": [
+        "Volumen excepcional en 1 símbolos",
+        "Mayoría de símbolos en tendencia alcista"
+      ]
+    },
+    "opportunity_changes": {
+      "BTCUSDT": {
+        "previous_retracement": 0.4,
+        "current_breakout_potential": 90,
+        "trend_change": "bullish",
+        "volume_improvement": true
+      },
+      "ETHUSDT": {
+        "previous_retracement": 0.7,
+        "current_breakout_potential": 70,
+        "trend_change": "bearish",
+        "volume_improvement": true
+      },
+      "ADAUSDT": {
+        "previous_retracement": 0.5,
+        "current_breakout_potential": 70,
+        "trend_change": "bullish",
+        "volume_improvement": true
+      },
+      "DOTUSDT": {
+        "previous_retracement": 0.6,
+        "current_breakout_potential": 50,
+        "trend_change": "bullish",
+        "volume_improvement": true
+      },
+      "LINKUSDT": {
+        "previous_retracement": 0.4,
+        "current_breakout_potential": 50,
+        "trend_change": "bullish",
+        "volume_improvement": true
+      }
+    },
+    "new_developments": [
+      "BTCUSDT: Breakout bearish inminente (Score: 90)",
+      "ADAUSDT: Volumen excepcional detectado"
+    ],
+    "risk_assessment": {
+      "market_risk": "medium",
+      "volatility_risk": "medium",
+      "liquidity_risk": "low",
+      "specific_risks": []
+    }
+  },
+  "executive_summary": {
+    "market_condition": "bullish_momentum_building",
+    "time_since_last_analysis": "25 minutos",
+    "high_potential_breakouts": 1,
+    "medium_potential_breakouts": 4,
+    "symbols_with_exceptional_volume": [
+      "ADAUSDT"
+    ],
+    "dominant_trend": "bullish",
+    "key_developments": [
+      "BTCUSDT: Breakout bearish inminente (Score: 90)",
+      "ADAUSDT: Volumen excepcional detectado"
+    ],
+    "overall_risk_level": "medium"
+  },
+  "trading_recommendations": {
+    "immediate_opportunities": [
+      {
+        "symbol": "BTCUSDT",
+        "action": "prepare_for_breakout",
+        "direction": "bearish",
+        "confidence": 90,
+        "entry_level": 110128.09
+      }
+    ],
+    "watch_list": [
+      {
+        "symbol": "ETHUSDT",
+        "reason": "medium_breakout_potential",
+        "score": 70,
+        "key_level": 3964.26
+      },
+      {
+        "symbol": "ADAUSDT",
+        "reason": "medium_breakout_potential",
+        "score": 70,
+        "key_level": 0.6624
+      }
+    ],
+    "risk_management": [
+      "Monitorear volumen para confirmación de breakouts",
+      "Establecer stop-loss ajustados por volatilidad",
+      "Considerar correlaciones entre símbolos",
+      "Preparar para volatilidad aumentada"
+    ],
+    "position_sizing": {}
+  },
+  "next_analysis_schedule": "2025-10-21T05:29:59.251854"
+}

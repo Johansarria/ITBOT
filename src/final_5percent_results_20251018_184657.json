@@ -1,0 +1,47 @@
+{
+  "system_name": "FINAL OPTIMIZED 5% MONTHLY SYSTEM",
+  "analysis_timestamp": "2025-10-18T18:46:57.768548",
+  "target_monthly_return": 0.05,
+  "performance": {
+    "initial_capital": 10000,
+    "final_capital": 10000,
+    "meets_target": false,
+    "monthly_return": 0,
+    "total_return": 0,
+    "win_rate": 0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "sharpe_ratio": 0,
+    "max_drawdown": 0,
+    "avg_trade_duration": 0,
+    "profit_factor": 0,
+    "expectancy": 0
+  },
+  "symbol_performance": {},
+  "configuration": {
+    "quality_filters": {
+      "min_volume_spike": 2.0,
+      "min_price_movement": 0.4,
+      "max_spread": 0.15,
+      "min_confidence": 0.75,
+      "trend_alignment": true,
+      "momentum_strength": 0.6,
+      "volatility_filter": true
+    },
+    "compounding_strategy": {
+      "base_reinvestment": 0.3,
+      "performance_bonus": 0.2,
+      "max_reinvestment": 0.6,
+      "drawdown_reduction": 0.8
+    },
+    "safety_limits": {
+      "max_drawdown": 0.12,
+      "min_sharpe": 1.5,
+      "max_correlation": 0.7,
+      "volatility_limit": 0.08
+    },
+    "max_risk_per_trade": 0.015,
+    "min_win_rate": 0.7,
+    "min_reward_risk_ratio": 3.0
+  }
+}

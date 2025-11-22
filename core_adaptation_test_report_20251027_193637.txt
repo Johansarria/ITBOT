@@ -1,0 +1,69 @@
+================================================================================
+REPORTE DE TESTING - ADAPTACIÓN CORE SICAR
+================================================================================
+Fecha: 2025-10-27 19:36:37
+Status General: POOR
+
+RESUMEN:
+  Tests Ejecutados: 7
+  Tests Exitosos: 1
+  Tests Fallidos: 6
+  Tasa de Éxito: 14.3%
+
+MÓDULOS TESTADOS:
+  ✓ indices_config: FAILED
+  ✓ data_adapter: FAILED
+  ✓ parameters_calibrator: FAILED
+  ✓ market_filters: FAILED
+  ✓ data_validator: PASSED
+  ✓ config_migration: FAILED
+  ✓ integration: FAILED
+
+DETALLES POR MÓDULO:
+--------------------------------------------------
+
+INDICES_CONFIG:
+  Status: FAILED
+  Mensaje: Error en módulo indices_config
+  Error: No module named 'src.indices.indices_config'
+
+DATA_ADAPTER:
+  Status: FAILED
+  Mensaje: Error en adaptador de datos
+  Error: No module named 'src.indices.indices_data_adapter'
+
+PARAMETERS_CALIBRATOR:
+  Status: FAILED
+  Mensaje: Error en calibrador de parámetros
+  Error: No module named 'src.indices.indices_parameters_calibrator'
+
+MARKET_FILTERS:
+  Status: FAILED
+  Mensaje: Error en filtros de mercado
+  Error: No module named 'src.indices.us_market_filters'
+
+DATA_VALIDATOR:
+  Status: PASSED
+  Mensaje: Validador de datos funcionando correctamente
+  Detalles:
+    - validator_creation: True
+    - validation_successful: True
+    - has_quality_score: True
+    - quality_level: good
+
+CONFIG_MIGRATION:
+  Status: FAILED
+  Mensaje: Error en adaptador de configuración
+  Error: No module named 'src.indices.config_migration_adapter'
+
+INTEGRATION:
+  Status: FAILED
+  Mensaje: Error en integración de módulos
+  Error: No module named 'src.indices.indices_config'
+
+RECOMENDACIONES:
+  • Revisar módulos fallidos: indices_config, data_adapter, parameters_calibrator, market_filters, config_migration, integration
+  • Implementar tests adicionales para módulos críticos
+  • Mejorar cobertura de testing y validación
+
+================================================================================

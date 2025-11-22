@@ -1,0 +1,92 @@
+{
+  "symbols": ["BTCUSDT", "ETHUSDT", "ADAUSDT", "DOTUSDT", "LINKUSDT"],
+  "monitoring_interval": 30,
+  "health_check_interval": 60,
+  "alert_cooldown": 300,
+  "thresholds": {
+    "cpu_warning": 70,
+    "cpu_critical": 85,
+    "memory_warning": 75,
+    "memory_critical": 90,
+    "disk_warning": 80,
+    "disk_critical": 95,
+    "api_timeout": 10,
+    "analysis_delay_warning": 300,
+    "analysis_delay_critical": 900
+  },
+  "notifications": {
+    "telegram": {
+      "enabled": true,
+      "bot_token": "",
+      "chat_id": "",
+      "note": "Configurar bot_token y chat_id para habilitar notificaciones Telegram"
+    },
+    "email": {
+      "enabled": true,
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username": "",
+      "password": "",
+      "recipients": [],
+      "note": "Configurar credenciales de email para habilitar notificaciones por correo"
+    },
+    "webhook": {
+      "enabled": false,
+      "url": "",
+      "headers": {},
+      "note": "Configurar URL para habilitar notificaciones webhook"
+    },
+    "desktop": {
+      "enabled": true,
+      "note": "Notificaciones de escritorio habilitadas por defecto"
+    }
+  },
+  "first_candle_system": {
+    "script_path": "C:\\Users\\johan\\OneDrive\\Escritorio\\SICAR\\sicar_project\\src\\real_time_first_candle_system.py",
+    "log_file": "C:\\Users\\johan\\OneDrive\\Escritorio\\SICAR\\sicar_project\\src\\logs\\real_time_first_candle.log",
+    "expected_analysis_interval": 3600
+  },
+  "database_path": "proactive_monitoring.db",
+  "log_retention_days": 30,
+  "max_alert_history": 1000,
+  "symbol_specific_settings": {
+    "BTCUSDT": {
+      "priority": "high",
+      "alert_threshold_multiplier": 1.0,
+      "monitoring_frequency": "normal"
+    },
+    "ETHUSDT": {
+      "priority": "high", 
+      "alert_threshold_multiplier": 1.0,
+      "monitoring_frequency": "normal"
+    },
+    "ADAUSDT": {
+      "priority": "medium",
+      "alert_threshold_multiplier": 1.2,
+      "monitoring_frequency": "normal"
+    },
+    "DOTUSDT": {
+      "priority": "medium",
+      "alert_threshold_multiplier": 1.2,
+      "monitoring_frequency": "normal"
+    },
+    "LINKUSDT": {
+      "priority": "medium",
+      "alert_threshold_multiplier": 1.2,
+      "monitoring_frequency": "normal"
+    }
+  },
+  "advanced_features": {
+    "auto_restart_first_candle": true,
+    "predictive_alerts": true,
+    "performance_trending": true,
+    "anomaly_detection": true,
+    "multi_timeframe_analysis": true
+  },
+  "reporting": {
+    "daily_summary": true,
+    "weekly_report": true,
+    "performance_dashboard": true,
+    "export_format": "json"
+  }
+}

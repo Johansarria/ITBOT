@@ -1,0 +1,44 @@
+{
+  "timestamp": "20251018_180707",
+  "optimization_type": "hybrid_flexible_extended",
+  "total_configurations": 30,
+  "valid_configurations": 0,
+  "data_period_days": 180,
+  "symbols_analyzed": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "ADAUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOTUSDT",
+    "LINKUSDT",
+    "LTCUSDT",
+    "AVAXUSDT"
+  ],
+  "criteria": {
+    "min_trades_required": 20,
+    "out_sample_percentage": 20,
+    "max_iterations": 30
+  },
+  "anti_overfitting_enabled": true,
+  "results": [
+    {
+      "parameters": {
+        "min_price_movement": 2.5,
+        "min_volume_ratio": 1.8,
+        "max_spread_pct": 0.15,
+        "confidence_threshold": 0.65
+      },
+      "metrics": {
+        "total_trades": 61,
+        "win_rate": 0.5901639344262295,
+        "total_return": 0.05125159363477906,
+        "sharpe_ratio": 1.9995289985840725,
+        "max_drawdown": 0.04238532045065742,
+        "confidence_score": 0.24468845000222286,
+        "robustness_score": 0.2652323725065862,
+        "overfitting_risk": 0.3619222963216822,
+        "walkforward_score": 0.024943353419000856
+      },
+      "validation_passed": 

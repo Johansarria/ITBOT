@@ -1,0 +1,95 @@
+{
+  "BTC-USD": {
+    "risk_metrics": {
+      "var_95": -0.007202711009645102,
+      "max_drawdown": -0.3093611235818708,
+      "sharpe_ratio": 0.0028591114210703697,
+      "support_level": 89253.78,
+      "resistance_level": 96043.0,
+      "support_distance_pct": 3.8130761473967385,
+      "resistance_distance_pct": 3.5035236331231596,
+      "risk_score": 5.714552878122369,
+      "risk_level": "MEDIUM"
+    },
+    "current_price": 92792.01,
+    "price_volatility": 0.02358195607453211,
+    "support_resistance": {
+      "support_level": 89253.78,
+      "resistance_level": 96043.0,
+      "support_distance_pct": 3.8130761473967385,
+      "resistance_distance_pct": 3.5035236331231596
+    },
+    "risk_assessment": {
+      "overall_risk": "MEDIUM",
+      "risk_score": 5.714552878122369,
+      "recommendation": "Se\u00f1al HOLD con 50.0% confianza. Riesgo medium. Sin se\u00f1ales claras de soporte/resistencia."
+    },
+    "market_conditions": {
+      "var_95": -0.007202711009645102,
+      "max_drawdown": -0.3093611235818708,
+      "sharpe_ratio": 0.0028591114210703697
+    }
+  },
+  "ETH-USD": {
+    "risk_metrics": {
+      "var_95": -0.011607908218841178,
+      "max_drawdown": -0.6528216196111235,
+      "sharpe_ratio": 0.0036749691303935555,
+      "support_level": 2946.56,
+      "resistance_level": 3223.38,
+      "support_distance_pct": 5.216904598004332,
+      "resistance_distance_pct": 3.6876676724332156,
+      "risk_score": 6.153440883623331,
+      "risk_level": "HIGH"
+    },
+    "current_price": 3108.74,
+    "price_volatility": 0.038095523975368646,
+    "support_resistance": {
+      "support_level": 2946.56,
+      "resistance_level": 3223.38,
+      "support_distance_pct": 5.216904598004332,
+      "resistance_distance_pct": 3.6876676724332156
+    },
+    "risk_assessment": {
+      "overall_risk": "HIGH",
+      "risk_score": 6.153440883623331,
+      "recommendation": "Se\u00f1al HOLD con 50.0% confianza. Riesgo high. Sin se\u00f1ales claras de soporte/resistencia."
+    },
+    "market_conditions": {
+      "var_95": -0.011607908218841178,
+      "max_drawdown": -0.6528216196111235,
+      "sharpe_ratio": 0.0036749691303935555
+    }
+  },
+  "LINK-USD": {
+    "risk_metrics": {
+      "var_95": -0.01630249396959449,
+      "max_drawdown": -0.6637022397891966,
+      "sharpe_ratio": 0.004607265623991513,
+      "support_level": 13.06,
+      "resistance_level": 14.29,
+      "support_distance_pct": 5.293691080493101,
+      "resistance_distance_pct": 3.6258158085569256,
+      "risk_score": 6.621034865711467,
+      "risk_level": "HIGH"
+    },
+    "current_price": 13.79,
+    "price_volatility": 0.054158551685733365,
+    "support_resistance": {
+      "support_level": 13.06,
+      "resistance_level": 14.29,
+      "support_distance_pct": 5.293691080493101,
+      "resistance_distance_pct": 3.6258158085569256
+    },
+    "risk_assessment": {
+      "overall_risk": "HIGH",
+      "risk_score": 6.621034865711467,
+      "recommendation": "Se\u00f1al HOLD con 50.0% confianza. Riesgo high. Sin se\u00f1ales claras de soporte/resistencia."
+    },
+    "market_conditions": {
+      "var_95": -0.01630249396959449,
+      "max_drawdown": -0.6637022397891966,
+      "sharpe_ratio": 0.004607265623991513
+    }
+  }
+}

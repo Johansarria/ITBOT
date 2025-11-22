@@ -1,0 +1,413 @@
+2025-10-19 17:46:21,917 - __main__ - INFO - ✅ Configuración cargada desde proactive_monitoring_config.json
+2025-10-19 17:46:21,976 - __main__ - INFO - ✅ Base de datos de monitoreo inicializada
+2025-10-19 17:46:21,976 - __main__ - INFO - 🚀 Sistema de Monitoreo Proactivo 24/7 Multi-Símbolo inicializado
+2025-10-19 17:46:21,976 - __main__ - INFO - 📊 Símbolos monitoreados: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT
+2025-10-19 17:46:21,976 - __main__ - INFO - 💾 Base de datos: proactive_monitoring.db
+2025-10-19 17:46:21,977 - __main__ - INFO - 🔄 Iniciando bucle de monitoreo principal
+2025-10-19 17:46:21,979 - __main__ - INFO - 💓 Iniciando bucle de verificación de salud
+2025-10-19 17:46:21,980 - __main__ - INFO - 📢 Iniciando procesamiento de alertas
+2025-10-19 17:46:22,644 - __main__ - INFO - 📢 Alerta enviada: info - 🚀 Sistema de Monitoreo Iniciado
+2025-10-19 17:46:22,649 - __main__ - INFO - 🚀 Sistema de monitoreo proactivo iniciado
+2025-10-19 17:46:24,788 - __main__ - INFO - 📢 Alerta enviada: critical - 🔄 Cambio de Estado del Sistema
+2025-10-19 18:06:30,965 - __main__ - INFO - ✅ Configuración cargada desde proactive_monitoring_config.json
+2025-10-19 18:06:30,969 - __main__ - INFO - ✅ Base de datos de monitoreo inicializada
+2025-10-19 18:06:30,969 - __main__ - INFO - 🚀 Sistema de Monitoreo Proactivo 24/7 Multi-Símbolo inicializado
+2025-10-19 18:06:30,969 - __main__ - INFO - 📊 Símbolos monitoreados: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT
+2025-10-19 18:06:30,969 - __main__ - INFO - 💾 Base de datos: proactive_monitoring.db
+2025-10-19 18:06:30,970 - __main__ - INFO - 🔄 Iniciando bucle de monitoreo principal
+2025-10-19 18:06:30,971 - __main__ - INFO - 💓 Iniciando bucle de verificación de salud
+2025-10-19 18:06:30,971 - __main__ - INFO - 📢 Iniciando procesamiento de alertas
+2025-10-19 18:06:31,632 - __main__ - INFO - 📢 Alerta enviada: info - 🚀 Sistema de Monitoreo Iniciado
+2025-10-19 18:06:31,632 - __main__ - INFO - 🚀 Sistema de monitoreo proactivo iniciado
+2025-10-19 18:06:33,954 - __main__ - INFO - 📢 Alerta enviada: critical - 🔄 Cambio de Estado del Sistema
+2025-10-19 18:06:40,104 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-19 18:06:41,026 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 18:13:24,747 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-19 18:13:25,359 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 18:57:54,410 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-19 19:08:32,347 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:11:12,358 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-19 19:13:48,046 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:18:56,984 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:21:33,537 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-19 19:24:07,428 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:29:18,083 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:34:25,415 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:39:31,727 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:44:41,573 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:49:47,630 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 19:55:01,013 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 20:00:11,906 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 20:55:31,565 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-19 22:20:08,902 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-19 23:03:10,532 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-19 23:27:50,447 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con LINKUSDT
+2025-10-20 00:00:13,013 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 00:47:40,890 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-20 00:54:04,135 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 02:55:15,825 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-20 12:15:24,143 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-20 12:15:25,157 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 14:15:11,169 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 15:33:51,943 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 17:13:47,615 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ADAUSDT
+2025-10-20 17:13:48,850 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con DOTUSDT
+2025-10-20 17:13:49,721 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con LINKUSDT
+2025-10-20 17:20:26,536 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ADAUSDT
+2025-10-20 17:20:27,595 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con DOTUSDT
+2025-10-20 17:20:28,306 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con LINKUSDT
+2025-10-20 17:22:14,900 - __main__ - INFO - 📢 Alerta enviada: critical - 📡 Sin Conectividad API
+2025-10-20 17:22:15,807 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con BTCUSDT
+2025-10-20 17:22:16,547 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ETHUSDT
+2025-10-20 17:26:40,100 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ADAUSDT
+2025-10-20 17:26:40,897 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con DOTUSDT
+2025-10-20 17:26:41,695 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con LINKUSDT
+2025-10-20 19:01:17,913 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 20:06:29,293 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 20:27:52,205 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 20:33:42,201 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 22:46:01,326 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 22:57:55,340 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-20 23:43:05,140 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-21 03:10:37,288 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-21 04:59:57,516 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 08:33:38,038 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 10:21:27,929 - __main__ - INFO - 📢 Alerta enviada: emergency - 🚨 Sistema First Candle Detenido
+2025-10-21 10:22:05,174 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:22:05,177 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:23:19,086 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:23:19,087 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:23:55,870 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:23:55,871 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:24:34,261 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:24:34,263 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:25:10,813 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:25:10,814 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:25:47,949 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:25:47,952 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:26:24,718 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:26:24,720 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:27:03,449 - __main__ - INFO - 📢 Alerta enviada: emergency - 🚨 Sistema First Candle Detenido
+2025-10-21 10:27:03,584 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 10:27:03,585 - __main__ - ERROR - ❌ Error verificando First Candle: [WinError 123] El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+2025-10-21 10:32:27,638 - __main__ - INFO - ✅ Configuración cargada desde proactive_monitoring_config.json
+2025-10-21 10:32:27,641 - __main__ - INFO - ✅ Base de datos de monitoreo inicializada
+2025-10-21 10:32:27,642 - __main__ - INFO - 🚀 Sistema de Monitoreo Proactivo 24/7 Multi-Símbolo inicializado
+2025-10-21 10:32:27,643 - __main__ - INFO - 📊 Símbolos monitoreados: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT
+2025-10-21 10:32:27,644 - __main__ - INFO - 💾 Base de datos: proactive_monitoring.db
+2025-10-21 10:32:27,646 - __main__ - INFO - 🔄 Iniciando bucle de monitoreo principal
+2025-10-21 10:32:27,647 - __main__ - INFO - 💓 Iniciando bucle de verificación de salud
+2025-10-21 10:32:27,647 - __main__ - INFO - 📢 Iniciando procesamiento de alertas
+2025-10-21 10:32:28,397 - __main__ - INFO - 📢 Alerta enviada: info - 🚀 Sistema de Monitoreo Iniciado
+2025-10-21 10:32:28,400 - __main__ - INFO - 🚀 Sistema de monitoreo proactivo iniciado
+2025-10-21 10:32:30,318 - __main__ - INFO - 📢 Alerta enviada: critical - 🔄 Cambio de Estado del Sistema
+2025-10-21 11:07:44,484 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 11:17:42,027 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-21 11:41:46,965 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 11:59:43,516 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 12:11:29,523 - __main__ - INFO - 📢 Alerta enviada: emergency - 🚨 Sistema First Candle Detenido
+2025-10-21 12:11:29,791 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-21 12:11:29,821 - __main__ - INFO - 🔄 Reiniciando sistema desde: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\real_time_first_candle_system.py
+2025-10-21 12:11:30,634 - __main__ - INFO - 📢 Alerta enviada: warning - 🔄 Reiniciando Sistema First Candle
+2025-10-21 12:12:08,081 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 12:17:44,723 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 12:51:02,805 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 12:56:45,208 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:01:52,053 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:06:58,771 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:13:26,373 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:18:32,252 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:23:38,280 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:28:43,125 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:33:49,977 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:38:57,219 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:43:58,911 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:49:06,205 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:54:11,219 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 13:59:17,058 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:04:22,368 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:09:26,445 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:14:31,272 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:19:35,627 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:24:37,515 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:30:21,222 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:35:25,459 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 14:54:26,936 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 14:55:05,571 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:05:13,908 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:10:18,012 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:16:40,264 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:24:57,784 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:27:34,071 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 15:30:07,666 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:35:17,482 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:38:33,812 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-21 15:40:27,743 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:45:33,622 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:50:41,177 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 15:55:45,453 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:00:51,729 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:05:59,046 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:11:04,881 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:16:10,910 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:21:18,872 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:26:25,343 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:31:30,107 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:36:37,777 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:41:44,309 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:46:50,308 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:51:56,999 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 16:56:29,729 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-21 16:57:09,351 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:02:15,366 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:08:30,176 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:11:36,322 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-21 17:13:32,831 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:17:16,289 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 17:19:09,129 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:21:11,334 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-21 17:23:45,704 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-21 17:24:23,634 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:29:58,217 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 17:29:58,886 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:35:32,321 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:39:13,623 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 17:41:04,131 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:46:37,495 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:52:12,828 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 17:57:46,905 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:02:49,093 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:07:57,014 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:13:04,607 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:18:13,223 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:20:47,859 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 18:23:17,785 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:28:30,923 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:34:06,535 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:38:05,280 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-21 18:39:23,922 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-21 18:43:26,694 - __main__ - INFO - 🛑 Deteniendo sistema de monitoreo...
+2025-10-22 06:33:36,725 - __main__ - INFO - ✅ Configuración cargada desde proactive_monitoring_config.json
+2025-10-22 06:33:36,731 - __main__ - INFO - ✅ Base de datos de monitoreo inicializada
+2025-10-22 06:33:36,732 - __main__ - INFO - 🚀 Sistema de Monitoreo Proactivo 24/7 Multi-Símbolo inicializado
+2025-10-22 06:33:36,732 - __main__ - INFO - 📊 Símbolos monitoreados: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT
+2025-10-22 06:33:36,732 - __main__ - INFO - 💾 Base de datos: proactive_monitoring.db
+2025-10-22 06:33:36,732 - __main__ - INFO - 🔄 Iniciando bucle de monitoreo principal
+2025-10-22 06:33:36,732 - __main__ - INFO - 💓 Iniciando bucle de verificación de salud
+2025-10-22 06:33:36,741 - __main__ - INFO - 📢 Iniciando procesamiento de alertas
+2025-10-22 06:33:39,707 - __main__ - INFO - 📢 Alerta enviada: info - 🚀 Sistema de Monitoreo Iniciado
+2025-10-22 06:33:39,715 - __main__ - INFO - 🚀 Sistema de monitoreo proactivo iniciado
+2025-10-22 06:33:42,429 - __main__ - INFO - 📢 Alerta enviada: critical - 🔄 Cambio de Estado del Sistema
+2025-10-22 06:33:49,237 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 06:33:52,152 - __main__ - INFO - 📢 Alerta enviada: emergency - 🚨 Sistema First Candle Detenido
+2025-10-22 06:33:52,263 - __main__ - WARNING - ⚠️ Sistema First Candle no está ejecutándose, intentando reiniciar...
+2025-10-22 06:33:52,276 - __main__ - INFO - 🔄 Reiniciando sistema desde: C:\Users\johan\OneDrive\Escritorio\SICAR\sicar_project\src\real_time_first_candle_system.py
+2025-10-22 06:33:55,203 - __main__ - INFO - 📢 Alerta enviada: warning - 🔄 Reiniciando Sistema First Candle
+2025-10-22 06:42:15,641 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 06:49:21,451 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 07:06:47,508 - __main__ - INFO - 📢 Alerta enviada: critical - 📡 Sin Conectividad API
+2025-10-22 07:34:23,683 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 07:35:38,750 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 08:40:43,618 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 08:45:50,559 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 09:56:23,205 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 10:04:05,890 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 11:29:46,056 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 11:40:03,233 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 12:21:33,326 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 12:29:19,546 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ADAUSDT
+2025-10-22 12:31:16,581 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 12:37:03,065 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 12:39:37,281 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 12:44:46,695 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 13:12:11,335 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 13:21:08,800 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 13:33:55,080 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 13:39:39,025 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 14:26:36,989 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 14:49:06,270 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 15:03:48,789 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 15:10:55,456 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 15:54:55,530 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 16:54:40,473 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 16:57:10,316 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 17:04:39,926 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 17:05:55,756 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 17:43:57,718 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 17:48:29,619 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 17:53:41,591 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 18:04:01,372 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 18:24:31,570 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 18:31:41,277 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-22 18:50:44,849 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 18:56:23,003 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 19:37:13,059 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 19:39:13,363 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 20:14:30,687 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 20:20:46,044 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 20:52:41,187 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 20:57:43,711 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:01:31,645 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 21:02:48,613 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:07:49,454 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:13:25,061 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:14:40,965 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 21:18:30,106 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:23:37,716 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:24:16,616 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 21:29:17,495 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:30:33,538 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 21:34:23,370 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:48:02,350 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 21:49:17,249 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 22:06:37,477 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-22 22:18:29,468 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:21:07,961 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 22:23:43,964 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:28:53,715 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:34:04,612 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:39:13,071 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:44:25,099 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:49:35,114 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:52:14,511 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 22:54:49,902 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 22:55:34,717 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-22 23:00:09,225 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:02:06,130 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 23:05:20,994 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 23:05:23,572 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:10:29,210 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:15:36,042 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:20:47,720 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:25:58,319 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:31:11,396 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:34:25,244 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-22 23:36:22,717 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:40:54,493 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 23:41:34,788 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:46:45,805 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:47:26,215 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 23:51:57,108 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-22 23:55:10,993 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-22 23:57:07,293 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:02:19,115 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:07:26,871 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:12:35,874 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:17:44,831 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:22:56,630 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:27:28,063 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 00:28:09,480 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:33:18,420 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:38:27,016 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 00:38:29,697 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:43:39,328 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:48:48,145 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:53:56,293 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 00:59:04,665 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 01:04:14,582 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 01:04:56,082 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 01:09:24,417 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 01:19:52,531 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 01:44:34,625 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 01:47:49,040 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 01:49:46,215 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 01:54:46,079 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:00:23,351 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:05:58,826 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:06:38,105 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 02:09:07,480 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 02:11:38,477 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:14:07,942 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 02:16:39,317 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 02:16:41,722 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:21:46,202 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:27:20,212 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:29:59,045 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 02:32:27,025 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:37:25,328 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 02:38:04,618 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 02:38:06,763 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:45:32,048 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 02:51:06,688 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:17:20,491 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:22:28,786 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:25:43,007 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 03:27:38,734 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:32:46,380 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:37:55,118 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:43:03,261 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:48:13,959 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:49:32,790 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 03:50:13,592 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 03:53:25,962 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 03:58:34,402 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:03:42,273 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:08:52,340 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:14:00,741 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:16:35,050 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 04:19:10,262 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:24:17,267 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:26:13,398 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 04:29:26,889 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:32:39,915 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 04:34:36,164 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:39:42,256 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:40:23,177 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 04:44:50,676 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:47:24,751 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 04:50:00,728 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 04:55:07,221 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:00:14,479 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:04:44,912 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 05:05:25,468 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:10:30,454 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:11:50,078 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 05:15:38,727 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:20:43,281 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:25:50,508 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:30:21,357 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 05:31:01,280 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:36:09,794 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:41:17,775 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:46:26,321 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:51:34,112 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 05:52:15,930 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 05:56:45,473 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:01:53,875 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:05:06,635 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 06:07:02,513 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:12:09,779 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:17:17,989 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:20:35,943 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 06:22:31,656 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:26:23,313 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 06:27:41,874 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:32:49,402 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:35:27,122 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 06:38:03,303 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:43:12,042 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:48:18,198 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:53:30,212 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 06:58:39,357 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:03:47,921 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:08:58,491 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:14:07,158 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:19:16,374 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:24:22,895 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:29:28,190 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:34:39,353 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:37:16,599 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 07:39:51,496 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:44:54,907 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 07:48:08,253 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 08:23:42,203 - __main__ - INFO - 📢 Alerta enviada: critical - 🔥 CPU Crítico
+2025-10-23 08:23:45,897 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta
+2025-10-23 08:23:48,535 - __main__ - INFO - 📢 Alerta enviada: critical - 🌐 Sin Conectividad de Red
+2025-10-23 08:23:51,052 - __main__ - INFO - 📢 Alerta enviada: critical - 📡 Sin Conectividad API
+2025-10-23 08:23:53,403 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con BTCUSDT
+2025-10-23 08:23:55,703 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ETHUSDT
+2025-10-23 08:23:58,676 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con ADAUSDT
+2025-10-23 08:24:00,974 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con DOTUSDT
+2025-10-23 08:24:03,299 - __main__ - INFO - 📢 Alerta enviada: error - 📊 Problema con LINKUSDT
+2025-10-23 08:24:37,429 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ CPU Alto
+2025-10-23 08:28:45,596 - __main__ - INFO - 📢 Alerta enviada: warning - ⚠️ Memoria Alta

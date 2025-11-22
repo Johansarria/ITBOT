@@ -1,0 +1,42 @@
+{
+  "config": {
+    "initial_capital": 200.0,
+    "max_capital": 500.0,
+    "reinvestment_threshold": 0.05,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "ADAUSDT",
+      "DOTUSDT"
+    ]
+  },
+  "current_state": {
+    "current_capital": 200.0,
+    "base_capital": 200.0,
+    "available_capital": 200.0,
+    "total_reinvested": 0.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "total_pnl": 0.0
+  },
+  "active_positions": {},
+  "trade_history": [],
+  "performance_history": [
+    {
+      "start_time": "2025-10-18T12:45:52.250885",
+      "duration_hours": 48,
+      "initial_capital": 200.0,
+      "trades_executed": 0,
+      "signals_generated": 0,
+      "symbols_processed": 4,
+      "end_time": "2025-10-18T12:45:57.769192",
+      "final_capital": 200.0,
+      "capital_change": 0.0,
+      "roi_session": 0.0,
+      "active_positions": 0,
+      "win_rate": 0,
+      "total_pnl": 0.0
+    }
+  ],
+  "last_updated": "2025-10-18T12:45:57.769192"
+}

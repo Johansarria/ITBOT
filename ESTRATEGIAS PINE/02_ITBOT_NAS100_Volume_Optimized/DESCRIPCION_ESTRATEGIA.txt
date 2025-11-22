@@ -1,0 +1,55 @@
+===============================================
+ITBOT NAS100 - VOLUME OPTIMIZED STRATEGY
+===============================================
+
+📊 DESCRIPCIÓN GENERAL:
+Estrategia especializada para el índice NAS100 (NASDAQ-100) con optimizaciones específicas para el comportamiento de este mercado y análisis avanzado de volumen.
+
+🎯 CARACTERÍSTICAS PRINCIPALES:
+• Parámetros optimizados específicamente para NAS100
+• Análisis de volumen proporcional al fondo del gráfico
+• Filtros de volumen para confirmar señales
+• Gestión de riesgo adaptada a la volatilidad del NASDAQ
+• Señales tempranas de salida para proteger ganancias
+
+📈 OPTIMIZACIONES PARA NAS100:
+• Medias móviles ajustadas para la velocidad del NASDAQ
+• Umbrales de RSI adaptados a la volatilidad del índice
+• Multiplicador de volumen calibrado para el mercado tecnológico
+• Factores de altura de volumen optimizados
+
+⚙️ PARÁMETROS ESPECÍFICOS:
+• Fast MA: Configurada para reactividad en mercados tech
+• Slow MA: Balanceada para evitar ruido del NASDAQ
+• Volume SMA: Optimizada para patrones de volumen del índice
+• Volume Multiplier: Ajustado para confirmaciones precisas
+• Height Factor: Calibrado para visualización proporcional
+
+🔍 ANÁLISIS DE VOLUMEN AVANZADO:
+• Volumen mostrado en panel separado (solución NAS100)
+• Colores dinámicos según intensidad del volumen
+• SMA de volumen para identificar patrones
+• Filtros de volumen para validar señales
+
+📊 VISUALIZACIÓN ESPECIALIZADA:
+• Volumen en panel inferior separado
+• Medias móviles con colores optimizados
+• Señales BUY/SELL adaptadas al comportamiento del NASDAQ
+• Fondo de tendencia opcional para claridad visual
+
+💡 USO RECOMENDADO:
+Ideal para trading en el índice NASDAQ-100, especialmente durante sesiones de alta volatilidad. Los filtros de volumen ayudan a evitar señales falsas comunes en mercados tecnológicos.
+
+⚡ VENTAJAS ESPECÍFICAS:
+• Reduce señales falsas típicas del NASDAQ
+• Aprovecha los patrones de volumen únicos del sector tech
+• Optimizada para los horarios de mayor actividad del mercado US
+• Gestión de riesgo adaptada a la volatilidad tecnológica
+
+🕐 TIMEFRAMES RECOMENDADOS:
+• 5m - 15m: Para scalping en sesión US
+• 1h - 4h: Para swing trading
+• 1D: Para análisis de tendencia a largo plazo
+
+⚠️ CONSIDERACIONES:
+Esta estrategia está específicamente calibrada para el comportamiento del NAS100 y puede no ser óptima para otros índices o mercados.

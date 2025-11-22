@@ -1,0 +1,39 @@
+{
+  "report_id": "integration_1761132296",
+  "timestamp": "2025-10-22T06:24:56.453216",
+  "report_type": "integration_status",
+  "version": "1.0",
+  "session_status": {
+    "active": true,
+    "auto_trading": true,
+    "initial_capital": 250.0,
+    "current_capital": 249.95000249999998,
+    "total_trades": 0,
+    "last_restart": "Capital adjustment to $250 USDT + Advanced improvements"
+  },
+  "trading_performance": {
+    "total_trades": 0,
+    "winning_trades": 0,
+    "losing_trades": 0,
+    "win_rate": 0.0,
+    "total_pnl": 0.0,
+    "avg_trade_value": 0.0
+  },
+  "system_health": {
+    "timestamp": "2025-10-22T06:24:56.453216",
+    "status": "warning",
+    "issues": [
+      "❌ Log de trades detallado no encontrado: logs/trades_detailed.log"
+    ]
+  },
+  "file_stats": {
+    "logs_count": 6,
+    "data_files_count": 1,
+    "total_log_size_mb": 0.49
+  },
+  "executive_summary": {
+    "status": "🟢 Sistema activo y operando",
+    "activity": "📊 Sin actividad de trading reciente",
+    "health": "⚠️ Advertencias detectadas"
+  }
+}

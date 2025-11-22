@@ -1,0 +1,47 @@
+{
+  "telegram": {
+    "bot_token": "",
+    "chat_id": "",
+    "enabled": true
+  },
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "username": "",
+    "password": "",
+    "to_email": "",
+    "enabled": true
+  },
+  "webhook": {
+    "url": "",
+    "enabled": false
+  },
+  "monitoring": {
+    "check_interval": 30,
+    "health_check_interval": 60,
+    "max_retry_attempts": 3,
+    "backup_timeout": 300
+  },
+  "thresholds": {
+    "min_disk_space_gb": 1.0,
+    "max_memory_usage_percent": 90,
+    "max_cpu_usage_percent": 95
+  },
+  "critical_times": {
+    "analysis_hour_utc": 8,
+    "pre_check_minutes": 5,
+    "post_check_minutes": 5,
+    "backup_delay_minutes": 2
+  },
+  "system_paths": {
+    "main_script": "real_time_first_candle_system.py",
+    "backup_script": "backup_first_candle_system.py",
+    "log_file": "real_time_first_candle.log",
+    "watchdog_log": "execution_watchdog.log"
+  },
+  "alerts": {
+    "retry_attempts": 3,
+    "retry_delay_seconds": 5,
+    "max_message_length": 4000
+  }
+}
