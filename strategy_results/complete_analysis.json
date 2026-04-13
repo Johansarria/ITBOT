@@ -1,0 +1,203 @@
+{
+  "execution_timestamp": "2025-09-20T16:29:19.628953",
+  "execution_duration": 0.032626,
+  "system_config": {
+    "initial_capital": 500.0,
+    "target_monthly_return": 30.0,
+    "target_symbols": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "execution_mode": "validation"
+  },
+  "validation_results": {
+    "timestamp": "2025-09-20T16:29:19.628953",
+    "config": {
+      "initial_capital": 500.0,
+      "target_monthly_return": 30.0,
+      "symbols": [
+        "BNBUSDT",
+        "SOLUSDT"
+      ]
+    },
+    "symbol_analysis": {
+      "BNBUSDT": {
+        "signal_type": "BUY",
+        "signal_strength": "medium",
+        "total_score": 1.7,
+        "confidence": 17.0,
+        "quality_passed": "True",
+        "position_size": 23.31047992164545,
+        "simulated_return": 0.09183331878046883,
+        "indicators": {
+          "rsi_14": 91.66017571509698,
+          "macd_line": 26.59179390050224,
+          "bb_position": 0.9213280742592282,
+          "ema_trend": "BULLISH"
+        },
+        "component_scores": {
+          "rsi": -2.5,
+          "macd": 2.0,
+          "bollinger": -1.5,
+          "ema": 1.5,
+          "momentum": 1.2,
+          "volume": 1.0
+        },
+        "reasons": [
+          "RSI14 sobrecompra extrema (91.7)",
+          "Confirmación RSI21 sobrecompra",
+          "MACD alcista fuerte (26.592)",
+          "Histograma MACD positivo",
+          "Precio cerca banda superior (0.92)"
+        ]
+      },
+      "SOLUSDT": {
+        "signal_type": "BUY",
+        "signal_strength": "medium",
+        "total_score": 1.7000000000000002,
+        "confidence": 17.0,
+        "quality_passed": "True",
+        "position_size": 34.393063583815035,
+        "simulated_return": 0.0319486621672075,
+        "indicators": {
+          "rsi_14": 82.69134275007201,
+          "macd_line": 17.91466134824745,
+          "bb_position": 0.8232538033547383,
+          "ema_trend": "BULLISH"
+        },
+        "component_scores": {
+          "rsi": -2.5,
+          "macd": 2.0,
+          "bollinger": 0.0,
+          "ema": 1.5,
+          "momentum": 1.2,
+          "volume": -0.5
+        },
+        "reasons": [
+          "RSI14 sobrecompra extrema (82.7)",
+          "Confirmación RSI21 sobrecompra",
+          "MACD alcista fuerte (17.915)",
+          "Histograma MACD positivo",
+          "Tendencia alcista corto plazo (EMA9>EMA21)"
+        ]
+      }
+    },
+    "performance_summary": {
+      "total_signals_analyzed": 2,
+      "strong_signals": 2,
+      "strong_signal_rate": 100.0,
+      "profitable_signals": 2,
+      "profitability_rate": 100.0,
+      "average_signal_score": 1.7000000000000002,
+      "daily_return_projection": 3.0945495236919083,
+      "monthly_return_projection": 92.83648571075724,
+      "daily_target_achievement_rate": 309.45495236919083,
+      "monthly_target_achievement_rate": 309.45495236919083,
+      "daily_target_achievable": "True",
+      "monthly_target_achievable": "True",
+      "confidence_level": 1.0
+    },
+    "recommendations": [
+      "Considerar reducir riesgo - proyección diaria excede significativamente el objetivo del 1%",
+      "Objetivo diario del 1.0% alcanzable - implementar stops estrictos y monitoreo diario"
+    ]
+  },
+  "backtest_30d": {
+    "period_days": 30,
+    "initial_capital": 500.0,
+    "final_capital": 537.7175461844039,
+    "total_return_pct": 7.5435092368807775,
+    "monthly_return_projection": 73.36048572032244,
+    "total_trades": 154,
+    "winning_trades": 76,
+    "win_rate": 49.35064935064935,
+    "max_drawdown": 1.7445566921873206,
+    "sharpe_ratio": 6.498702744122763,
+    "avg_daily_return": 2.445349524010748,
+    "volatility": 5.973302947281621,
+    "target_achievement": {
+      "monthly_target": 30.0,
+      "projected_monthly": 73.36048572032244,
+      "achievement_rate": 2.4453495240107483,
+      "target_met": true
+    },
+    "performance_grade": "A+"
+  },
+  "backtest_60d": {
+    "period_days": 60,
+    "initial_capital": 500.0,
+    "final_capital": 572.8262343584848,
+    "total_return_pct": 14.565246871696969,
+    "monthly_return_projection": 68.66752775121259,
+    "total_trades": 298,
+    "winning_trades": 139,
+    "win_rate": 46.644295302013425,
+    "max_drawdown": 3.1430579780905203,
+    "sharpe_ratio": 5.505890966196141,
+    "avg_daily_return": 2.2889175917070843,
+    "volatility": 6.599375203423259,
+    "target_achievement": {
+      "monthly_target": 30.0,
+      "projected_monthly": 68.66752775121259,
+      "achievement_rate": 2.288917591707086,
+      "target_met": true
+    },
+    "performance_grade": "A+"
+  },
+  "current_signals": {
+    "timestamp": "2025-09-20T16:29:19.660215",
+    "signals": {
+      "BNBUSDT": {
+        "signal_type": "BUY",
+        "strength": "medium",
+        "score": 1.7,
+        "confidence": 17.0,
+        "quality_passed": true,
+        "position_size": 23.31047992164545,
+        "current_price": 422.1294290396946,
+        "reasons": [
+          "RSI14 sobrecompra extrema (91.7)",
+          "Confirmación RSI21 sobrecompra",
+          "MACD alcista fuerte (26.592)"
+        ]
+      },
+      "SOLUSDT": {
+        "signal_type": "BUY",
+        "strength": "medium",
+        "score": 1.7000000000000002,
+        "confidence": 17.0,
+        "quality_passed": true,
+        "position_size": 34.393063583815035,
+        "current_price": 264.88520832048164,
+        "reasons": [
+          "RSI14 sobrecompra extrema (82.7)",
+          "Confirmación RSI21 sobrecompra",
+          "MACD alcista fuerte (17.915)"
+        ]
+      }
+    },
+    "summary": {
+      "total_symbols": 2,
+      "buy_signals": 2,
+      "sell_signals": 0,
+      "hold_signals": 0,
+      "avg_confidence": 17.0,
+      "market_sentiment": "BULLISH"
+    }
+  },
+  "performance_summary": {
+    "validation_passed": "True",
+    "validation_confidence": 1.0,
+    "daily_return_projection": 3.0945495236919083,
+    "backtest_30d_return": 73.36048572032244,
+    "backtest_30d_target_met": true,
+    "backtest_60d_return": 68.66752775121259,
+    "backtest_60d_target_met": true,
+    "avg_win_rate": 47.99747232633139,
+    "max_drawdown": 3.1430579780905203,
+    "overall_assessment": "EXCELLENT"
+  },
+  "recommendations": [
+    "Mejorar filtros de calidad para aumentar tasa de éxito"
+  ]
+}

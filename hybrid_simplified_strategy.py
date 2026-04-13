@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Híbrida Simplificada para 15% Mensual
+# Estrategia Híbrida Simplificada para 20% Mensual
 Combina lo mejor de las estrategias anteriores con máxima simplicidad
 """
 
@@ -503,7 +503,7 @@ class SimplifiedBacktester:
             'gross_loss': gross_loss,
             'max_drawdown_pct': max_drawdown,
             'avg_signal_score': np.mean([t.get('signal_score', 0) for t in closed_trades]) if closed_trades else 0,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }
@@ -542,7 +542,7 @@ def run_hybrid_simplified_test(data: pd.DataFrame = None):
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual estimado: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS SIMPLIFICADAS")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -564,7 +564,7 @@ def run_hybrid_simplified_test(data: pd.DataFrame = None):
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual estimado: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         
         f.write("ESTADÍSTICAS:\n")
         f.write("-" * 15 + "\n")

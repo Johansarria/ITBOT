@@ -1,0 +1,21 @@
+{
+  "period_days": 60,
+  "initial_capital": 500.0,
+  "final_capital": 572.8262343584848,
+  "total_return_pct": 14.565246871696969,
+  "monthly_return_projection": 68.66752775121259,
+  "total_trades": 298,
+  "winning_trades": 139,
+  "win_rate": 46.644295302013425,
+  "max_drawdown": 3.1430579780905203,
+  "sharpe_ratio": 5.505890966196141,
+  "avg_daily_return": 2.2889175917070843,
+  "volatility": 6.599375203423259,
+  "target_achievement": {
+    "monthly_target": 30.0,
+    "projected_monthly": 68.66752775121259,
+    "achievement_rate": 2.288917591707086,
+    "target_met": true
+  },
+  "performance_grade": "A+"
+}

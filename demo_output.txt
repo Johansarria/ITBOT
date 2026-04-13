@@ -1,0 +1,128 @@
+================================================================================
+🚀 DEMO: PAPER TRADING EN TIEMPO REAL - BINANCE
+Actualización automática cada 30 segundos
+Hora actual: 2024-12-19 14:35:22
+================================================================================
+
+📊 DATOS DE MERCADO EN TIEMPO REAL
+--------------------------------------------------------------------------------
+Símbolo    Precio       24h %      Volumen 24h     Última Act.         
+--------------------------------------------------------------------------------
+SOLUSDT    $198.45      ↗+2.71%    2.45M           14:35:22            
+BNBUSDT    $715.30      ↗+1.77%    1.85M           14:35:22            
+ADAUSDT    $0.9234      ↘-1.66%    3.20M           14:35:22            
+
+💼 POSICIONES ACTUALES
+--------------------------------------------------------------------------------
+Símbolo    Cantidad     Precio Prom  PnL Real     PnL No Real 
+--------------------------------------------------------------------------------
+SOLUSDT    0.842100     $195.20      $+0.00       $+2.74      
+BNBUSDT    0.233400     $708.50      $+0.00       $+1.59      
+ADAUSDT    0            $0.00        $-5.23       $0.00       
+
+📈 TRADES RECIENTES
+--------------------------------------------------------------------------------
+Hora       Símbolo    Lado   Cantidad     Precio      
+--------------------------------------------------------------------------------
+14:32:15   SOLUSDT    ↗BUY   0.842100     $195.20     
+14:28:42   BNBUSDT    ↗BUY   0.233400     $708.50     
+14:15:33   ADAUSDT    ↘SELL  540.12       $0.9156     
+
+📊 RENDIMIENTO DEL PORTAFOLIO
+--------------------------------------------------------------------------------
+💰 Valor Total del Portafolio: $1.50K
+💵 Balance en USDT: $1.33K
+📈 PnL Total: $-1.33
+📊 Retorno Total: -0.09%
+🔄 Total de Trades: 5
+
+================================================================================
+Esta es una demostración del sistema de Paper Trading
+En funcionamiento real, los datos se actualizarían cada 30 segundos
+================================================================================
+
+--- ACTUALIZACIÓN 2/3 ---
+
+================================================================================
+🚀 DEMO: PAPER TRADING EN TIEMPO REAL - BINANCE
+Actualización automática cada 30 segundos
+Hora actual: 2024-12-19 14:35:27
+================================================================================
+
+📊 DATOS DE MERCADO EN TIEMPO REAL
+--------------------------------------------------------------------------------
+Símbolo    Precio       24h %      Volumen 24h     Última Act.         
+--------------------------------------------------------------------------------
+SOLUSDT    $199.12      ↗+3.05%    2.45M           14:35:27            
+BNBUSDT    $712.85      ↗+1.43%    1.85M           14:35:27            
+ADAUSDT    $0.9198      ↘-2.05%    3.20M           14:35:27            
+
+💼 POSICIONES ACTUALES
+--------------------------------------------------------------------------------
+Símbolo    Cantidad     Precio Prom  PnL Real     PnL No Real 
+--------------------------------------------------------------------------------
+SOLUSDT    0.842100     $195.20      $+0.00       $+3.30      
+BNBUSDT    0.233400     $708.50      $+0.00       $+1.01      
+ADAUSDT    0            $0.00        $-5.23       $0.00       
+
+📈 TRADES RECIENTES
+--------------------------------------------------------------------------------
+Hora       Símbolo    Lado   Cantidad     Precio      
+--------------------------------------------------------------------------------
+14:32:15   SOLUSDT    ↗BUY   0.842100     $195.20     
+14:28:42   BNBUSDT    ↗BUY   0.233400     $708.50     
+14:15:33   ADAUSDT    ↘SELL  540.12       $0.9156     
+
+📊 RENDIMIENTO DEL PORTAFOLIO
+--------------------------------------------------------------------------------
+💰 Valor Total del Portafolio: $1.50K
+💵 Balance en USDT: $1.33K
+📈 PnL Total: $-0.92
+📊 Retorno Total: -0.06%
+🔄 Total de Trades: 5
+
+================================================================================
+
+🎉 CARACTERÍSTICAS DEL SISTEMA COMPLETO:
+
+✅ Conexión en tiempo real con Binance WebSocket
+✅ Actualización automática cada 30 segundos
+✅ Estrategia de trading automatizada (Momentum + RSI)
+✅ Gestión de posiciones y riesgo
+✅ Cálculo de PnL en tiempo real
+✅ Visualización clara en consola con tablas organizadas
+✅ Historial de trades con timestamps
+✅ Métricas de rendimiento detalladas
+✅ Soporte para múltiples pares de trading
+✅ Simulación de fees y slippage
+✅ Indicadores técnicos integrados
+
+📋 FUNCIONALIDADES IMPLEMENTADAS:
+
+🔄 Motor de Trading:
+   - Estrategia basada en momentum y RSI
+   - Detección de divergencias
+   - Gestión automática de stop-loss y take-profit
+   - Cálculo de tamaño de posición dinámico
+
+📊 Visualización en Tiempo Real:
+   - Tablas actualizadas cada 30 segundos
+   - Datos de mercado en vivo
+   - Estado de posiciones
+   - Historial de trades
+   - Métricas de rendimiento
+
+🔗 Conectividad:
+   - WebSocket de Binance para datos en tiempo real
+   - Manejo de reconexión automática
+   - Procesamiento de múltiples streams
+
+💼 Gestión de Portafolio:
+   - Capital inicial: $1,500 USDT
+   - Distribución: $500 por par (SOL, BNB, ADA)
+   - Tracking de PnL realizado y no realizado
+   - Cálculo de retorno total
+
+================================================================================
+SISTEMA DE PAPER TRADING COMPLETAMENTE FUNCIONAL
+================================================================================

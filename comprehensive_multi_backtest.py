@@ -239,7 +239,7 @@ class ComprehensiveMultiBacktester:
             'monthly_return_pct': portfolio_monthly_return,
             'win_rate_pct': portfolio_winrate,
             'max_drawdown_pct': portfolio_drawdown,
-            'target_achieved': portfolio_monthly_return >= 15.0
+            'target_achieved': portfolio_monthly_return >= 20.0
         }
 
 
@@ -443,7 +443,7 @@ class SingleInstrumentBacktester:
             'gross_loss': gross_loss,
             'max_drawdown_pct': max_drawdown,
             'avg_signal_score': np.mean([t.get('signal_score', 0) for t in closed_trades]) if closed_trades else 0,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }

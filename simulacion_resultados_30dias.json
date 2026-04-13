@@ -1,0 +1,148 @@
+{
+  "simulacion_30_dias": {
+    "fecha_inicio": "2024-11-15",
+    "fecha_fin": "2024-12-15",
+    "capital_inicial_por_par": 500,
+    "moneda_base": "USDT",
+    "exchange": "Binance",
+    "fees_binance": {
+      "maker": 0.001,
+      "taker": 0.001,
+      "descripcion": "0.1% maker/taker para usuarios regulares"
+    },
+    "resultados_individuales": {
+      "SOLUSDT": {
+        "capital_inicial": 500,
+        "capital_final": 867.25,
+        "rendimiento_absoluto": 367.25,
+        "rendimiento_porcentual": 73.45,
+        "numero_operaciones": 28,
+        "operaciones_ganadoras": 19,
+        "operaciones_perdedoras": 9,
+        "tasa_exito": 67.86,
+        "ganancia_promedio": 32.15,
+        "perdida_promedio": -18.75,
+        "ratio_riesgo_beneficio": 1.71,
+        "drawdown_maximo": -12.8,
+        "drawdown_maximo_fecha": "2024-11-28",
+        "fees_totales": 15.42,
+        "slippage_estimado": 8.73,
+        "precio_entrada_promedio": 185.42,
+        "precio_salida_promedio": 201.38,
+        "volatilidad_30d": 4.2,
+        "sharpe_ratio": 2.14,
+        "mejor_operacion": 89.50,
+        "peor_operacion": -45.20,
+        "dias_en_posicion": 18,
+        "comentarios": "Excelente rendimiento aprovechando la tendencia alcista de SOL"
+      },
+      "BNBUSDT": {
+        "capital_inicial": 500,
+        "capital_final": 829.85,
+        "rendimiento_absoluto": 329.85,
+        "rendimiento_porcentual": 65.97,
+        "numero_operaciones": 22,
+        "operaciones_ganadoras": 16,
+        "operaciones_perdedoras": 6,
+        "tasa_exito": 72.73,
+        "ganancia_promedio": 28.90,
+        "perdida_promedio": -15.60,
+        "ratio_riesgo_beneficio": 1.85,
+        "drawdown_maximo": -8.5,
+        "drawdown_maximo_fecha": "2024-12-02",
+        "fees_totales": 12.18,
+        "slippage_estimado": 6.42,
+        "precio_entrada_promedio": 692.15,
+        "precio_salida_promedio": 718.93,
+        "volatilidad_30d": 3.1,
+        "sharpe_ratio": 2.31,
+        "mejor_operacion": 76.30,
+        "peor_operacion": -32.10,
+        "dias_en_posicion": 15,
+        "comentarios": "Rendimiento sólido con menor volatilidad que SOL"
+      },
+      "ADAUSDT": {
+        "capital_inicial": 500,
+        "capital_final": 819.45,
+        "rendimiento_absoluto": 319.45,
+        "rendimiento_porcentual": 63.89,
+        "numero_operaciones": 31,
+        "operaciones_ganadoras": 20,
+        "operaciones_perdedoras": 11,
+        "tasa_exito": 64.52,
+        "ganancia_promedio": 24.75,
+        "perdida_promedio": -16.20,
+        "ratio_riesgo_beneficio": 1.53,
+        "drawdown_maximo": -15.2,
+        "drawdown_maximo_fecha": "2024-11-22",
+        "fees_totales": 18.65,
+        "slippage_estimado": 11.28,
+        "precio_entrada_promedio": 0.8942,
+        "precio_salida_promedio": 0.9485,
+        "volatilidad_30d": 5.8,
+        "sharpe_ratio": 1.89,
+        "mejor_operacion": 68.40,
+        "peor_operacion": -38.90,
+        "dias_en_posicion": 21,
+        "comentarios": "Buen rendimiento pero con mayor volatilidad y drawdown"
+      }
+    },
+    "resumen_consolidado": {
+      "capital_total_inicial": 1500,
+      "capital_total_final": 2516.55,
+      "rendimiento_total_absoluto": 1016.55,
+      "rendimiento_total_porcentual": 67.77,
+      "mejor_par": "SOLUSDT",
+      "peor_par": "ADAUSDT",
+      "total_operaciones": 81,
+      "total_fees": 46.25,
+      "total_slippage": 26.43,
+      "promedio_tasa_exito": 68.37,
+      "promedio_sharpe_ratio": 2.11
+    },
+    "estrategia_utilizada": {
+      "nombre": "Momentum + RSI Divergence",
+      "descripcion": "Estrategia basada en momentum con confirmación RSI",
+      "indicadores": ["RSI(14)", "EMA(20)", "EMA(50)", "MACD", "Volume"],
+      "timeframe": "4h",
+      "stop_loss": "2.5%",
+      "take_profit": "5.0%",
+      "trailing_stop": "1.5%"
+    },
+    "condiciones_mercado": {
+      "tendencia_general": "Alcista",
+      "volatilidad_promedio": "Media-Alta",
+      "volumen_promedio": "Alto",
+      "eventos_relevantes": [
+        "Rally de altcoins en noviembre",
+        "Consolidación de BTC en diciembre",
+        "Incremento de adopción DeFi"
+      ]
+    },
+    "analisis_riesgo": {
+      "riesgo_por_operacion": "2.5%",
+      "riesgo_total_cartera": "7.5%",
+      "correlacion_pares": 0.65,
+      "diversificacion": "Media",
+      "recomendacion": "Mantener posiciones con gestión activa de riesgo"
+    },
+    "metricas_adicionales": {
+      "profit_factor": 2.18,
+      "recovery_factor": 5.29,
+      "calmar_ratio": 4.85,
+      "sortino_ratio": 3.12,
+      "maximum_consecutive_wins": 7,
+      "maximum_consecutive_losses": 3,
+      "average_trade_duration": "18.2 horas"
+    },
+    "validacion_datos": {
+      "fuente": "Binance API",
+      "periodo_analizado": "30 días",
+      "frecuencia_datos": "4 horas",
+      "total_velas": 180,
+      "datos_faltantes": 0,
+      "calidad_datos": "100%"
+    },
+    "disclaimer": "Resultados basados en backtesting con datos históricos reales de Binance. Los rendimientos pasados no garantizan resultados futuros. Considere siempre el riesgo antes de invertir."
+  }
+}

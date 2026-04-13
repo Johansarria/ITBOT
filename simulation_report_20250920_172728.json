@@ -1,0 +1,17 @@
+{
+  "simulation_info": {
+    "start_time": "2025-09-20T17:27:28.096991",
+    "end_time": "2025-09-20T17:28:13.260307",
+    "duration_seconds": 45.163316,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "ADAUSDT"
+    ],
+    "initial_capital": 500.0,
+    "final_capital": 500.0
+  },
+  "performance_metrics": {},
+  "trades": [],
+  "equity_curve": []
+}

@@ -37,7 +37,8 @@ class RealDataBacktester:
             'mean_reversion': {'allocation': 0.25, 'timeframe': '15m', 'lookback': 50},
             'breakout_momentum': {'allocation': 0.20, 'timeframe': '1h', 'lookback': 30},
             'temporal_arbitrage': {'allocation': 0.15, 'timeframe': '30m', 'lookback': 40},
-            'volatility_trading': {'allocation': 0.05, 'timeframe': '4h', 'lookback': 25}
+            'volatility_trading': {'allocation': 0.05, 'timeframe': '4h', 'lookback': 25},
+            'tsmom': {'allocation': 0.20, 'timeframe': '1h', 'lookback': 50}
         }
         
         # Pares de alta liquidez para testing
@@ -275,7 +276,54 @@ class RealDataBacktester:
         
         return signals
 
-    def execute_strategy(self, symbol, df, strategy_name):
+    def tsmom_strategy(self, df):
+        """
+        Estrategia Time Series Momentum (TSMOM)
+        - Direccionalidad basada en momentum de serie temporal (precio vs. lookback)
+        - Filtros de tendencia multi-EMA y confirmación de momentum (MACD, RSI)
+        - Filtro de volumen para evitar señales en baja liquidez
+        Señales: 1 (long), -1 (short), 0 (flat)
+        """
+        signals = pd.Series(index=df.index, data=0)
+        
+        # Parámetros
+        lookback = 50
+        try:
+            # si existe config en el backtester, úsala
+            lookback = int(self.strategies_config.get('tsmom', {}).get('lookback', lookback))
+        except Exception:
+            pass
+        
+        # Momentum de serie temporal (retorno simple sobre lookback)
+        ts_mom = (df['close'] / df['close'].shift(lookback)) - 1.0
+        
+        # Filtros de tendencia y momentum
+        trend_up = (df['ema_21'] > df['ema_50']) & (df['ema_50'] > df['ema_200'])
+        trend_down = (df['ema_21'] < df['ema_50']) & (df['ema_50'] < df['ema_200'])
+        price_above_ma = df['close'] > df['ema_200']
+        price_below_ma = df['close'] < df['ema_200']
+        macd_up = df['macd_histogram'] > 0
+        macd_down = df['macd_histogram'] < 0
+        macd_improving = df['macd_histogram'] > df['macd_histogram'].shift(1)
+        macd_worsening = df['macd_histogram'] < df['macd_histogram'].shift(1)
+        rsi_bull = df['rsi'] > 55
+        rsi_bear = df['rsi'] < 45
+        vol_filter = df['volume'] > df['volume_sma']
+        
+        # Condiciones
+        buy_condition = (
+            (ts_mom > 0) & trend_up & price_above_ma & macd_up & macd_improving & rsi_bull & vol_filter
+        )
+        sell_condition = (
+            (ts_mom < 0) & trend_down & price_below_ma & macd_down & macd_worsening & rsi_bear & vol_filter
+        )
+        
+        signals[buy_condition] = 1
+        signals[sell_condition] = -1
+        
+        return signals
+
+    def execute_strategy(self, symbol, df, strategy_name, long_only=False):
         """
         Ejecutar estrategia específica y calcular trades
         """
@@ -284,7 +332,8 @@ class RealDataBacktester:
             'mean_reversion': self.mean_reversion_strategy,
             'breakout_momentum': self.breakout_momentum_strategy,
             'temporal_arbitrage': self.temporal_arbitrage_strategy,
-            'volatility_trading': self.volatility_trading_strategy
+            'volatility_trading': self.volatility_trading_strategy,
+            'tsmom': self.tsmom_strategy,
         }
         
         if strategy_name not in strategy_methods:
@@ -293,6 +342,9 @@ class RealDataBacktester:
         # Obtener señales
         signals = strategy_methods[strategy_name](df)
         
+        # Forzar long-only si se solicita (señales -1 pasan a 0/flat)
+        if long_only:
+            signals = signals.mask(signals < 0, 0)
         # Ejecutar trades basado en señales
         trades = []
         position = None
@@ -350,12 +402,14 @@ class RealDataBacktester:
         
         return trades
 
-    def run_full_backtest(self):
+    def run_full_backtest(self, days=90, strategies=None, long_only=False):
         """
-        Ejecutar backtest completo con todas las estrategias
+        Ejecutar backtest completo con todas o algunas estrategias
+        - strategies: lista opcional de nombres de estrategias a ejecutar
+        - long_only: si True, ignora cortos (señales -1 se convierten a 0)
         """
         print("\n" + "="*80)
-        print("🚀 INICIANDO BACKTEST CON DATOS REALES DE BINANCE (90 DÍAS)")
+        print(f"🚀 INICIANDO BACKTEST CON DATOS REALES DE BINANCE ({days} DÍAS)")
         print("="*80)
         
         all_trades = []
@@ -363,11 +417,12 @@ class RealDataBacktester:
         for pair in self.trading_pairs:
             print(f"\n📊 Procesando {pair}...")
             
-            for strategy_name in self.strategies_config.keys():
+            strategies_to_run = strategies or list(self.strategies_config.keys())
+            for strategy_name in strategies_to_run:
                 timeframe = self.strategies_config[strategy_name]['timeframe']
                 
                 # Obtener datos históricos
-                df = self.fetch_historical_data(pair, timeframe, days=90)
+                df = self.fetch_historical_data(pair, timeframe, days=days)
                 
                 if df is None or len(df) < 100:
                     print(f"⚠️ Datos insuficientes para {pair} en {timeframe}")
@@ -377,7 +432,7 @@ class RealDataBacktester:
                 df = self.calculate_technical_indicators(df)
                 
                 # Ejecutar estrategia
-                trades = self.execute_strategy(pair, df, strategy_name)
+                trades = self.execute_strategy(pair, df, strategy_name, long_only=long_only)
                 all_trades.extend(trades)
                 
                 if trades:
@@ -389,7 +444,7 @@ class RealDataBacktester:
         
         return all_trades
 
-    def analyze_results(self, trades):
+    def analyze_results(self, trades, days=90):
         """
         Analizar resultados del backtest
         """
@@ -433,13 +488,13 @@ class RealDataBacktester:
         max_drawdown = drawdown.min()
         
         # Proyección mensual
-        days_in_backtest = 90
+        days_in_backtest = days
         daily_return = total_return / days_in_backtest
         monthly_return = daily_return * 30
         
         # Mostrar resultados
         print("\n" + "="*80)
-        print("📊 RESULTADOS DEL BACKTEST - DATOS REALES BINANCE (90 DÍAS)")
+        print(f"📊 RESULTADOS DEL BACKTEST - DATOS REALES BINANCE ({days} DÍAS)")
         print("="*80)
         
         print(f"\n💰 RENDIMIENTO GENERAL:")
@@ -459,38 +514,53 @@ class RealDataBacktester:
         print(f"  Profit Factor:        {profit_factor:.2f}")
         print(f"  Drawdown Máximo:      {max_drawdown:.2f}%")
         
-        print(f"\n🎯 RENDIMIENTO POR ESTRATEGIA:")
-        for strategy in strategy_stats.index:
-            trades_count = strategy_stats.loc[strategy, ('pnl_amount', 'count')]
-            total_pnl_strat = strategy_stats.loc[strategy, ('pnl_amount', 'sum')]
-            avg_duration = strategy_stats.loc[strategy, ('duration', 'mean')]
-            
-            strategy_win_rate = len(df_trades[(df_trades['strategy'] == strategy) & (df_trades['pnl_amount'] > 0)]) / trades_count * 100
-            
-            print(f"  {strategy.upper()}:")
-            print(f"    Trades: {trades_count}, PnL: ${total_pnl_strat:.2f}, WR: {strategy_win_rate:.1f}%, Duración: {avg_duration:.1f}h")
+        # Guardar resultados en archivo JSON local (ruta relativa cross-platform)
+        try:
+            results = {
+                'days': days,
+                'initial_capital': self.initial_capital,
+                'total_pnl': float(total_pnl),
+                'total_return_pct': float(total_return),
+                'monthly_return_pct': float(monthly_return),
+                'win_rate_pct': float(win_rate),
+                'profit_factor': float(profit_factor),
+                'max_drawdown_pct': float(max_drawdown),
+                'strategy_stats': df_trades.groupby('strategy')['pnl_amount'].sum().to_dict(),
+                'pair_stats': df_trades.groupby('symbol')['pnl_amount'].sum().to_dict(),
+            }
+            import os, json
+            out_dir = os.path.join(os.path.dirname(__file__))
+            out_file = os.path.join(out_dir, f"REAL_BACKTEST_RESULTS_{days}D.json")
+            with open(out_file, 'w', encoding='utf-8') as f:
+                json.dump(results, f, ensure_ascii=False, indent=2)
+            print(f"\n💾 Resultados guardados en: {out_file}")
+        except Exception as e:
+            print(f"\n⚠️ No se pudieron guardar los resultados: {e}")
         
-        print(f"\n🏆 TOP 5 PARES MÁS RENTABLES:")
-        top_pairs = pair_stats.sort_values(('pnl_amount', 'sum'), ascending=False).head(5)
-        for pair in top_pairs.index:
-            trades_count = top_pairs.loc[pair, ('pnl_amount', 'count')]
-            total_pnl_pair = top_pairs.loc[pair, ('pnl_amount', 'sum')]
-            print(f"  {pair}: {trades_count} trades, PnL: ${total_pnl_pair:.2f}")
+        # Mostrar resultados por estrategia y por par
+        print("\n🎯 RENDIMIENTO POR ESTRATEGIA:")
+        for strat, group in df_trades.groupby('strategy'):
+            pnl = group['pnl_amount'].sum()
+            wr = (len(group[group['pnl_amount'] > 0]) / len(group)) * 100
+            dur = group['duration'].mean()
+            print(f"  {strat.upper()}:\n    Trades: {len(group)}, PnL: ${pnl:.2f}, WR: {wr:.1f}%, Duración: {dur:.1f}h")
         
-        # Validación del objetivo
-        print(f"\n🎯 EVALUACIÓN DE OBJETIVO (15% MENSUAL):")
+        print("\n🏆 TOP 5 PARES MÁS RENTABLES:")
+        top_pairs = df_trades.groupby('symbol')['pnl_amount'].sum().sort_values(ascending=False).head(5)
+        for sym, pnl in top_pairs.items():
+            cnt = len(df_trades[df_trades['symbol'] == sym])
+            print(f"  {sym}: {cnt} trades, PnL: ${pnl:.2f}")
+        
+        # Evaluación rápida del objetivo 15% mensual
+        print("\n🎯 EVALUACIÓN DE OBJETIVO (15% MENSUAL):")
         if monthly_return >= 15:
-            print(f"  ✅ OBJETIVO SUPERADO: {monthly_return:.2f}% vs 15% target")
-        elif monthly_return >= 12:
-            print(f"  ⚡ CERCA DEL OBJETIVO: {monthly_return:.2f}% vs 15% target")
-        elif monthly_return >= 8:
-            print(f"  ⚠️ RENDIMIENTO MODERADO: {monthly_return:.2f}% vs 15% target")
+            print("  ✅ EN RUTA: >= 15% mensual")
         else:
             print(f"  ❌ BAJO RENDIMIENTO: {monthly_return:.2f}% vs 15% target")
         
         # Guardar resultados detallados
         results_summary = {
-            'backtest_period': '90_days_real_binance_data',
+            'backtest_period': f'{days}_days_real_binance_data',
             'initial_capital': self.initial_capital,
             'final_capital': self.initial_capital + total_pnl,
             'total_pnl': total_pnl,
@@ -505,26 +575,31 @@ class RealDataBacktester:
             'timestamp': datetime.now().isoformat()
         }
         
-        with open('/home/johan/itbot_linux/strategies/REAL_BACKTEST_RESULTS_90D.json', 'w') as f:
-            json.dump(results_summary, f, indent=2, default=str)
-        
-        print(f"\n💾 Resultados guardados en: strategies/REAL_BACKTEST_RESULTS_90D.json")
+        try:
+            import os, json
+            out_dir = os.path.join(os.path.dirname(__file__))
+            out_file = os.path.join(out_dir, f"REAL_BACKTEST_RESULTS_{days}D.json")
+            with open(out_file, 'w', encoding='utf-8') as f:
+                json.dump(results_summary, f, indent=2, default=str)
+            print(f"\n💾 Resultados guardados en: {out_file}")
+        except Exception as e:
+            print(f"\n⚠️ No se pudieron guardar los resultados detallados: {e}")
         print("="*80)
         
         return results_summary
 
 if __name__ == "__main__":
     print("🚀 INICIANDO BACKTEST CON DATOS REALES DE BINANCE")
-    print("📅 Período: Últimos 90 días")
+    print("📅 Período: Últimos 30 días")
     print("💰 Capital inicial: $10,000")
     
     # Crear y ejecutar backtester
     backtester = RealDataBacktester(initial_capital=10000)
     
     # Ejecutar backtest completo
-    trades = backtester.run_full_backtest()
+    trades = backtester.run_full_backtest(days=30)
     
     # Analizar y mostrar resultados
-    results = backtester.analyze_results(trades)
+    results = backtester.analyze_results(trades, days=30)
     
     print("\n🏁 BACKTEST COMPLETADO CON DATOS REALES")

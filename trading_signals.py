@@ -27,6 +27,7 @@ class StrategyType(Enum):
     TREND_FOLLOWING = "trend_following"  # Para índices
     BREAKOUT = "breakout"  # Para commodities
     PROBABILITY = "probability"  # Estrategia probabilística general
+    TSMOM = "tsmom"  # Momentum de series temporales (spot)
 
 @dataclass
 class TradingSignal:
@@ -130,6 +131,18 @@ class StrategyEngine:
                 risk_reward_ratio=2.0,
                 stop_loss_pct=0.02,
                 take_profit_pct=0.04
+            ),
+            
+            # Estrategia TSMOM para crypto spot
+            StrategyType.TSMOM: StrategyConfig(
+                strategy_type=StrategyType.TSMOM,
+                symbols=['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT'],
+                timeframe='4h',
+                min_confidence=65.0,
+                max_risk_per_trade=0.015,
+                risk_reward_ratio=2.0,
+                stop_loss_pct=0.03,
+                take_profit_pct=0.06
             )
         }
         
@@ -164,6 +177,8 @@ class StrategyEngine:
             return self._breakout_strategy(symbol, market_signal, config)
         elif strategy_type == StrategyType.PROBABILITY:
             return self._probability_strategy(symbol, market_signal, config)
+        elif strategy_type == StrategyType.TSMOM:
+            return self._tsmom_strategy(symbol, market_signal, config)
             
         return None
         
@@ -494,6 +509,71 @@ class StrategyEngine:
             
         return None
         
+    def _tsmom_strategy(self, symbol: str, market_signal: MarketSignal,
+                        config: StrategyConfig) -> Optional[TradingSignal]:
+        """Estrategia TSMOM (Time Series Momentum) para crypto spot.
+        Se apoya en alineación de medias, momentum de EMAs y confirmaciones básicas.
+        """
+        indicators = market_signal.indicators
+        reasons: List[str] = []
+        confidence_factors: List[float] = []
+
+        current_price = self.portfolio_manager.current_prices.get(symbol)
+        if not current_price:
+            return None
+
+        # Condiciones TSMOM
+        conditions = {
+            'ma_alignment': False,
+            'ema_momentum': False,
+            'price_above_ma': False,
+            'macd_hist_positive': False,
+            'rsi_above_55': False,
+        }
+
+        # Alineación de medias (tendencia base)
+        if (indicators.sma_20 and indicators.sma_50 and indicators.ema_12 and indicators.ema_26 and
+            indicators.sma_20 > indicators.sma_50 and indicators.ema_12 > indicators.ema_26):
+            conditions['ma_alignment'] = True
+            reasons.append("Medias alineadas (SMA20>SMA50 y EMA12>EMA26)")
+            confidence_factors.append(80)
+
+        # Momentum de EMAs: EMA12 por encima de SMA20 (aceleración)
+        if (indicators.ema_12 and indicators.sma_20 and indicators.ema_12 > indicators.sma_20):
+            conditions['ema_momentum'] = True
+            reasons.append("EMA12 > SMA20 (aceleración de corto plazo)")
+            confidence_factors.append(70)
+
+        # Precio por encima de la media de corto plazo
+        if (indicators.sma_20 and current_price > indicators.sma_20 * 1.003):  # +0.3%
+            conditions['price_above_ma'] = True
+            reasons.append("Precio > SMA20 (sesgo alcista)")
+            confidence_factors.append(60)
+
+        # MACD histograma positivo (inercia alcista)
+        if (getattr(indicators, 'macd_histogram', None) is not None and indicators.macd_histogram is not None and
+            indicators.macd_histogram > 0):
+            conditions['macd_hist_positive'] = True
+            reasons.append("MACD histograma positivo")
+            confidence_factors.append(65)
+
+        # RSI con fuerza pero sin sobrecompra
+        if indicators.rsi and 55 <= indicators.rsi <= 75:
+            conditions['rsi_above_55'] = True
+            reasons.append(f"RSI fuerte ({indicators.rsi:.1f})")
+            confidence_factors.append(60)
+
+        conditions_met = sum(1 for v in conditions.values() if v)
+        if conditions_met >= 3:
+            signal_type = SignalType.STRONG_BUY if conditions_met >= 4 else SignalType.BUY
+            confidence = float(np.mean(confidence_factors)) if confidence_factors else 60.0
+            return self._create_trading_signal(
+                symbol, signal_type, StrategyType.TSMOM, current_price,
+                config, confidence, reasons
+            )
+
+        return None
+        
     def _create_trading_signal(self, symbol: str, signal_type: SignalType, 
                              strategy_type: StrategyType, entry_price: float,
                              config: StrategyConfig, confidence: float, 
@@ -520,7 +600,8 @@ class StrategyEngine:
             StrategyType.MEAN_REVERSION: 8,
             StrategyType.TREND_FOLLOWING: 24,
             StrategyType.BREAKOUT: 6,
-            StrategyType.PROBABILITY: 12
+            StrategyType.PROBABILITY: 12,
+            StrategyType.TSMOM: 12,
         }
         
         expiry = datetime.now() + timedelta(hours=expiry_hours.get(strategy_type, 8))

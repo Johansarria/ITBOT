@@ -1,0 +1,66 @@
+{
+  "regime_detection": {
+    "use_hmm": true,
+    "atr_period": 14,
+    "percentile_window": 252,
+    "low_vol_threshold": 40,
+    "high_vol_threshold": 80,
+    "hmm_components": 3,
+    "hmm_covariance_type": "full"
+  },
+  "strategies": {
+    "trend_following": {
+      "sma_fast": 10,
+      "sma_slow": 20,
+      "atr_multiplier": 2.0,
+      "min_trend_strength": 0.6,
+      "enabled": true
+    },
+    "mean_reversion": {
+      "rsi_period": 14,
+      "rsi_oversold": 30,
+      "rsi_overbought": 70,
+      "bb_period": 20,
+      "bb_std_dev": 2.0,
+      "enabled": true
+    },
+    "conservative": {
+      "ema_fast": 12,
+      "ema_slow": 26,
+      "rsi_neutral_low": 40,
+      "rsi_neutral_high": 60,
+      "min_volume_ratio": 1.2,
+      "enabled": true
+    }
+  },
+  "risk_management": {
+    "max_daily_loss": 0.05,
+    "max_total_drawdown": 0.15,
+    "emergency_stop_drawdown": 0.20,
+    "max_position_size": 0.25,
+    "max_correlation_exposure": 0.60,
+    "min_liquidity_ratio": 0.10,
+    "stop_loss_atr_multiplier": 2.0,
+    "take_profit_ratio": 2.0
+  },
+  "backtesting": {
+    "train_ratio": 0.7,
+    "walk_forward_periods": 4,
+    "monte_carlo_simulations": 100,
+    "commission_rate": 0.001,
+    "slippage_rate": 0.0005,
+    "min_trade_interval_hours": 1
+  },
+  "execution": {
+    "max_trades_per_day": 10,
+    "min_signal_confidence": 0.6,
+    "regime_confirmation_periods": 3,
+    "signal_aggregation_method": "weighted_average"
+  },
+  "logging": {
+    "level": "INFO",
+    "save_trades": true,
+    "save_signals": true,
+    "save_regime_changes": true
+  }
+}

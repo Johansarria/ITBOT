@@ -1,0 +1,46 @@
+{
+  "metrics": {
+    "initial_capital": 500.0,
+    "final_capital": 543.7351351487669,
+    "total_return_pct": 8.747027029753372,
+    "total_return_usdt": 43.73513514876686,
+    "daily_return_pct": 0.2915675676584457,
+    "monthly_return_pct": 8.747027029753372,
+    "max_drawdown_pct": 1.331928424703473,
+    "max_drawdown_usdt": 7.24216282014627,
+    "sharpe_ratio": 8.970159337561524,
+    "sortino_ratio": 23.728409808217695,
+    "calmar_ratio": 6.567189998742403,
+    "win_rate": 46.666666666666664,
+    "profit_factor": 1.9041349676901567,
+    "avg_win_pct": 1.5378580405270175,
+    "avg_loss_pct": -0.6994959873208575,
+    "max_consecutive_wins": 4,
+    "max_consecutive_losses": 9,
+    "total_trades": 120,
+    "winning_trades": 56,
+    "losing_trades": 64,
+    "total_commission_usdt": 25.849084473560403,
+    "avg_trade_duration_minutes": 5.025,
+    "trades_per_day": 120.0,
+    "daily_target_achievement": 0.5831351353168914,
+    "monthly_target_achievement": 0.5831351353168915,
+    "risk_adjusted_return": 1.1074922542627101,
+    "volatility_pct": 7.898048041497612,
+    "var_95_pct": -0.5721683394844914,
+    "expected_shortfall_pct": -0.5721683394844999
+  },
+  "execution_stats": {
+    "total_signals_generated": 300,
+    "total_trades_executed": 120,
+    "signal_to_trade_ratio": 0.4,
+    "execution_time_minutes": 0.23118924999999999
+  },
+  "summary": {
+    "strategy_version": "V4 Ultra-Agresiva",
+    "capital_base": 500.0,
+    "objetivo_mensual": "15%",
+    "periodo_testing": "30 días",
+    "timestamp": "20250921_123849"
+  }
+}

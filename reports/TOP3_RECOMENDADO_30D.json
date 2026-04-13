@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-09-20T13:22:31.190468",
+  "top3_ccxt": [
+    "AVAX/USDT",
+    "MATIC/USDT",
+    "DOT/USDT"
+  ],
+  "summary": {
+    "period_days": 30,
+    "initial_capital": 10000,
+    "final_capital": 10169.05113130359,
+    "total_pnl": 169.0511313035899,
+    "total_return_pct": 1.690511313035899,
+    "monthly_return_pct": 1.690511313035899,
+    "total_trades": 53,
+    "win_rate_pct": 41.509433962264154,
+    "profit_factor": 1.1620754851707544,
+    "max_drawdown_pct": -2.412512795148128
+  },
+  "estrategias": {
+    "breakout_momentum": {
+      "allocation": 0.65,
+      "timeframe": "1h",
+      "lookback": 40
+    },
+    "mean_reversion": {
+      "allocation": 0.35,
+      "timeframe": "1h",
+      "lookback": 20
+    }
+  }
+}

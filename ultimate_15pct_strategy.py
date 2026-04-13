@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Definitiva 15% Mensual
+Estrategia Definitiva 20% Mensual
 Versión final optimizada con filtros mejorados y gestión de riesgo superior
 """
 
@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 
 class Ultimate15PctStrategy:
     """
-    Estrategia definitiva diseñada específicamente para alcanzar 15% mensual
+    Estrategia definitiva diseñada específicamente para alcanzar 20% mensual
     """
     
     def __init__(self, config: Dict[str, Any] = None):
@@ -820,7 +820,7 @@ class UltimateBacktester:
             'avg_signal_score': avg_signal_score,
             'avg_confirmations': avg_confirmations,
             'partial_profit_rate': partial_profit_rate,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }
@@ -873,11 +873,11 @@ def generate_ultimate_test_data(days: int = 120, initial_price: float = 18000) -
     return df
 
 
-def run_ultimate_15pct_test():
+def run_ultimate_20pct_test():
     """
     Ejecuta test de la estrategia definitiva
     """
-    print("🏆 Iniciando test de Estrategia DEFINITIVA 15% Mensual")
+    print("🏆 Iniciando test de Estrategia DEFINITIVA 20% Mensual")
     print("=" * 70)
     
     # Generar datos optimizados
@@ -903,7 +903,7 @@ def run_ultimate_15pct_test():
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS DEFINITIVAS")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -918,16 +918,16 @@ def run_ultimate_15pct_test():
     
     # Guardar resultados definitivos
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"ultimate_15pct_results_{timestamp}.txt"
+    filename = f"ultimate_20pct_results_{timestamp}.txt"
     
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS ESTRATEGIA DEFINITIVA 15% MENSUAL\n")
+        f.write("RESULTADOS ESTRATEGIA DEFINITIVA 20% MENSUAL\n")
         f.write("=" * 55 + "\n\n")
         f.write(f"Balance inicial: ${results['initial_balance']:,.2f}\n")
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         
         f.write("ESTADÍSTICAS DEFINITIVAS:\n")
         f.write("-" * 30 + "\n")
@@ -975,4 +975,4 @@ def run_ultimate_15pct_test():
 
 
 if __name__ == "__main__":
-    results = run_ultimate_15pct_test()
+    results = run_ultimate_20pct_test()

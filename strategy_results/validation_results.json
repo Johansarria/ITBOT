@@ -1,0 +1,92 @@
+{
+  "timestamp": "2025-09-20T16:29:19.628953",
+  "config": {
+    "initial_capital": 500.0,
+    "target_monthly_return": 30.0,
+    "symbols": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ]
+  },
+  "symbol_analysis": {
+    "BNBUSDT": {
+      "signal_type": "BUY",
+      "signal_strength": "medium",
+      "total_score": 1.7,
+      "confidence": 17.0,
+      "quality_passed": "True",
+      "position_size": 23.31047992164545,
+      "simulated_return": 0.09183331878046883,
+      "indicators": {
+        "rsi_14": 91.66017571509698,
+        "macd_line": 26.59179390050224,
+        "bb_position": 0.9213280742592282,
+        "ema_trend": "BULLISH"
+      },
+      "component_scores": {
+        "rsi": -2.5,
+        "macd": 2.0,
+        "bollinger": -1.5,
+        "ema": 1.5,
+        "momentum": 1.2,
+        "volume": 1.0
+      },
+      "reasons": [
+        "RSI14 sobrecompra extrema (91.7)",
+        "Confirmación RSI21 sobrecompra",
+        "MACD alcista fuerte (26.592)",
+        "Histograma MACD positivo",
+        "Precio cerca banda superior (0.92)"
+      ]
+    },
+    "SOLUSDT": {
+      "signal_type": "BUY",
+      "signal_strength": "medium",
+      "total_score": 1.7000000000000002,
+      "confidence": 17.0,
+      "quality_passed": "True",
+      "position_size": 34.393063583815035,
+      "simulated_return": 0.0319486621672075,
+      "indicators": {
+        "rsi_14": 82.69134275007201,
+        "macd_line": 17.91466134824745,
+        "bb_position": 0.8232538033547383,
+        "ema_trend": "BULLISH"
+      },
+      "component_scores": {
+        "rsi": -2.5,
+        "macd": 2.0,
+        "bollinger": 0.0,
+        "ema": 1.5,
+        "momentum": 1.2,
+        "volume": -0.5
+      },
+      "reasons": [
+        "RSI14 sobrecompra extrema (82.7)",
+        "Confirmación RSI21 sobrecompra",
+        "MACD alcista fuerte (17.915)",
+        "Histograma MACD positivo",
+        "Tendencia alcista corto plazo (EMA9>EMA21)"
+      ]
+    }
+  },
+  "performance_summary": {
+    "total_signals_analyzed": 2,
+    "strong_signals": 2,
+    "strong_signal_rate": 100.0,
+    "profitable_signals": 2,
+    "profitability_rate": 100.0,
+    "average_signal_score": 1.7000000000000002,
+    "daily_return_projection": 3.0945495236919083,
+    "monthly_return_projection": 92.83648571075724,
+    "daily_target_achievement_rate": 309.45495236919083,
+    "monthly_target_achievement_rate": 309.45495236919083,
+    "daily_target_achievable": "True",
+    "monthly_target_achievable": "True",
+    "confidence_level": 1.0
+  },
+  "recommendations": [
+    "Considerar reducir riesgo - proyección diaria excede significativamente el objetivo del 1%",
+    "Objetivo diario del 1.0% alcanzable - implementar stops estrictos y monitoreo diario"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-09-20T16:29:19.660215",
+  "signals": {
+    "BNBUSDT": {
+      "signal_type": "BUY",
+      "strength": "medium",
+      "score": 1.7,
+      "confidence": 17.0,
+      "quality_passed": true,
+      "position_size": 23.31047992164545,
+      "current_price": 422.1294290396946,
+      "reasons": [
+        "RSI14 sobrecompra extrema (91.7)",
+        "Confirmación RSI21 sobrecompra",
+        "MACD alcista fuerte (26.592)"
+      ]
+    },
+    "SOLUSDT": {
+      "signal_type": "BUY",
+      "strength": "medium",
+      "score": 1.7000000000000002,
+      "confidence": 17.0,
+      "quality_passed": true,
+      "position_size": 34.393063583815035,
+      "current_price": 264.88520832048164,
+      "reasons": [
+        "RSI14 sobrecompra extrema (82.7)",
+        "Confirmación RSI21 sobrecompra",
+        "MACD alcista fuerte (17.915)"
+      ]
+    }
+  },
+  "summary": {
+    "total_symbols": 2,
+    "buy_signals": 2,
+    "sell_signals": 0,
+    "hold_signals": 0,
+    "avg_confidence": 17.0,
+    "market_sentiment": "BULLISH"
+  }
+}

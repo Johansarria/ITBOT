@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Conservadora 15% Mensual
-Enfoque en consistencia y control de riesgo para alcanzar 15% mensual sostenible
+# Estrategia Conservadora 20% Mensual
+Enfoque en consistencia y control de riesgo para alcanzar 20% mensual sostenible
 """
 
 import pandas as pd
@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 
 class Conservative15PctStrategy:
     """
-    Estrategia conservadora diseñada para alcanzar 15% mensual de forma consistente
+    Estrategia conservadora diseñada para alcanzar 20% mensual de forma consistente
     """
     
     def __init__(self, config: Dict[str, Any] = None):
@@ -709,7 +709,7 @@ class ConservativeBacktester:
             'max_drawdown_pct': max_drawdown,
             'max_drawdown_periods': drawdown_periods,
             'avg_quality_score': avg_quality_score,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }
@@ -770,7 +770,7 @@ def run_conservative_strategy_test():
     """
     Ejecuta test de la estrategia conservadora
     """
-    print("🛡️ Iniciando test de Estrategia Conservadora 15% Mensual")
+    print("🛡️ Iniciando test de Estrategia Conservadora 20% Mensual")
     print("=" * 60)
     
     # Generar datos
@@ -792,7 +792,7 @@ def run_conservative_strategy_test():
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS CONSERVADORAS")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -809,13 +809,13 @@ def run_conservative_strategy_test():
     filename = f"conservative_15pct_results_{timestamp}.txt"
     
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS ESTRATEGIA CONSERVADORA 15% MENSUAL\n")
+        f.write("RESULTADOS ESTRATEGIA CONSERVADORA 20% MENSUAL\n")
         f.write("=" * 50 + "\n\n")
         f.write(f"Balance inicial: ${results['initial_balance']:,.2f}\n")
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         
         f.write("ESTADÍSTICAS CONSERVADORAS:\n")
         f.write("-" * 30 + "\n")

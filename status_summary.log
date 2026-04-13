@@ -1,0 +1,1144 @@
+2025-09-26 20:57:05,756 - [2025-09-26 20:57:05] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:05,763 - 
+============================================================
+2025-09-26 20:57:05,763 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:57:05,763 - ============================================================
+2025-09-26 20:57:05,772 - 
+                                     Valor
+Timestamp              2025-09-26 20:57:05
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63912.32
+ATR                                  73.57
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:05,772 - ============================================================
+2025-09-26 20:57:05,774 - [2025-09-26 20:57:05] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:05,776 - 
+============================================================
+2025-09-26 20:57:05,776 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:57:05,776 - ============================================================
+2025-09-26 20:57:05,778 - 
+                                    Valor
+Timestamp             2025-09-26 20:57:05
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65118.42
+ATR                                 87.87
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:05,778 - ============================================================
+2025-09-26 20:57:05,778 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:57:05,778 - ============================================================
+2025-09-26 20:57:20,795 - [2025-09-26 20:57:20] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:20,799 - 
+============================================================
+2025-09-26 20:57:20,799 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:57:20,800 - ============================================================
+2025-09-26 20:57:20,802 - 
+                                     Valor
+Timestamp              2025-09-26 20:57:20
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65137.75
+ATR                                 129.42
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:20,802 - ============================================================
+2025-09-26 20:57:20,805 - [2025-09-26 20:57:20] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:20,809 - 
+============================================================
+2025-09-26 20:57:20,809 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:57:20,809 - ============================================================
+2025-09-26 20:57:20,811 - 
+                                    Valor
+Timestamp             2025-09-26 20:57:20
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64933.86
+ATR                                126.44
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:20,811 - ============================================================
+2025-09-26 20:57:20,811 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:57:20,811 - ============================================================
+2025-09-26 20:57:35,818 - [2025-09-26 20:57:35] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:35,820 - 
+============================================================
+2025-09-26 20:57:35,820 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:57:35,820 - ============================================================
+2025-09-26 20:57:35,823 - 
+                                     Valor
+Timestamp              2025-09-26 20:57:35
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63940.42
+ATR                                  55.55
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:35,823 - ============================================================
+2025-09-26 20:57:35,826 - [2025-09-26 20:57:35] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:35,834 - 
+============================================================
+2025-09-26 20:57:35,834 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:57:35,834 - ============================================================
+2025-09-26 20:57:35,836 - 
+                                    Valor
+Timestamp             2025-09-26 20:57:35
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64794.83
+ATR                                174.99
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:35,836 - ============================================================
+2025-09-26 20:57:35,836 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:57:35,836 - ============================================================
+2025-09-26 20:57:50,851 - [2025-09-26 20:57:50] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:50,853 - 
+============================================================
+2025-09-26 20:57:50,853 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:57:50,853 - ============================================================
+2025-09-26 20:57:50,854 - 
+                                     Valor
+Timestamp              2025-09-26 20:57:50
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63960.57
+ATR                                 147.54
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:50,855 - ============================================================
+2025-09-26 20:57:50,856 - [2025-09-26 20:57:50] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:50,859 - 
+============================================================
+2025-09-26 20:57:50,860 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:57:50,860 - ============================================================
+2025-09-26 20:57:50,862 - 
+                                    Valor
+Timestamp             2025-09-26 20:57:50
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65190.86
+ATR                                 50.53
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:50,862 - ============================================================
+2025-09-26 20:57:50,862 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:57:50,862 - ============================================================
+2025-09-26 20:58:05,891 - [2025-09-26 20:58:05] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:05,891 - 
+============================================================
+2025-09-26 20:58:05,897 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:58:05,897 - ============================================================
+2025-09-26 20:58:05,899 - 
+                                     Valor
+Timestamp              2025-09-26 20:58:05
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64030.65
+ATR                                 103.82
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:05,899 - ============================================================
+2025-09-26 20:58:05,901 - [2025-09-26 20:58:05] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:05,901 - 
+============================================================
+2025-09-26 20:58:05,901 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:58:05,901 - ============================================================
+2025-09-26 20:58:05,907 - 
+                                    Valor
+Timestamp             2025-09-26 20:58:05
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65088.58
+ATR                                157.38
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:05,908 - ============================================================
+2025-09-26 20:58:05,908 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:58:05,908 - ============================================================
+2025-09-26 20:58:20,926 - [2025-09-26 20:58:20] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:20,928 - 
+============================================================
+2025-09-26 20:58:20,928 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:58:20,929 - ============================================================
+2025-09-26 20:58:20,931 - 
+                                     Valor
+Timestamp              2025-09-26 20:58:20
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64006.98
+ATR                                 188.07
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:20,931 - ============================================================
+2025-09-26 20:58:20,933 - [2025-09-26 20:58:20] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:20,937 - 
+============================================================
+2025-09-26 20:58:20,937 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:58:20,937 - ============================================================
+2025-09-26 20:58:20,938 - 
+                                    Valor
+Timestamp             2025-09-26 20:58:20
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64600.58
+ATR                                 84.10
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:20,938 - ============================================================
+2025-09-26 20:58:20,938 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:58:20,938 - ============================================================
+2025-09-26 20:58:35,947 - [2025-09-26 20:58:35] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:35,949 - 
+============================================================
+2025-09-26 20:58:35,949 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:58:35,950 - ============================================================
+2025-09-26 20:58:35,951 - 
+                                     Valor
+Timestamp              2025-09-26 20:58:35
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65251.08
+ATR                                  82.99
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:35,951 - ============================================================
+2025-09-26 20:58:35,953 - [2025-09-26 20:58:35] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:35,957 - 
+============================================================
+2025-09-26 20:58:35,958 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:58:35,958 - ============================================================
+2025-09-26 20:58:35,960 - 
+                                    Valor
+Timestamp             2025-09-26 20:58:35
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    66011.46
+ATR                                120.24
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:35,960 - ============================================================
+2025-09-26 20:58:35,960 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:58:35,960 - ============================================================
+2025-09-26 20:58:50,979 - [2025-09-26 20:58:50] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:50,981 - 
+============================================================
+2025-09-26 20:58:50,981 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:58:50,981 - ============================================================
+2025-09-26 20:58:50,983 - 
+                                     Valor
+Timestamp              2025-09-26 20:58:50
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     62660.82
+ATR                                 137.94
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:50,984 - ============================================================
+2025-09-26 20:58:50,986 - [2025-09-26 20:58:50] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:50,989 - 
+============================================================
+2025-09-26 20:58:50,989 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:58:50,989 - ============================================================
+2025-09-26 20:58:50,992 - 
+                                    Valor
+Timestamp             2025-09-26 20:58:50
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    66389.95
+ATR                                 70.35
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:50,992 - ============================================================
+2025-09-26 20:58:50,992 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:58:50,992 - ============================================================
+2025-09-26 20:59:06,004 - [2025-09-26 20:59:06] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:06,007 - 
+============================================================
+2025-09-26 20:59:06,008 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:59:06,008 - ============================================================
+2025-09-26 20:59:06,010 - 
+                                     Valor
+Timestamp              2025-09-26 20:59:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63871.02
+ATR                                 176.88
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:06,010 - ============================================================
+2025-09-26 20:59:06,014 - [2025-09-26 20:59:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:06,019 - 
+============================================================
+2025-09-26 20:59:06,019 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:59:06,020 - ============================================================
+2025-09-26 20:59:06,022 - 
+                                    Valor
+Timestamp             2025-09-26 20:59:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    63716.44
+ATR                                 57.18
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:06,022 - ============================================================
+2025-09-26 20:59:06,022 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:59:06,023 - ============================================================
+2025-09-26 20:59:21,038 - [2025-09-26 20:59:21] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:21,041 - 
+============================================================
+2025-09-26 20:59:21,041 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:59:21,041 - ============================================================
+2025-09-26 20:59:21,043 - 
+                                     Valor
+Timestamp              2025-09-26 20:59:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     66371.41
+ATR                                 192.63
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:21,043 - ============================================================
+2025-09-26 20:59:21,045 - [2025-09-26 20:59:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:21,049 - 
+============================================================
+2025-09-26 20:59:21,049 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:59:21,050 - ============================================================
+2025-09-26 20:59:21,051 - 
+                                    Valor
+Timestamp             2025-09-26 20:59:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    67400.73
+ATR                                 70.28
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:21,052 - ============================================================
+2025-09-26 20:59:21,052 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:59:21,052 - ============================================================
+2025-09-26 20:59:36,066 - [2025-09-26 20:59:36] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:36,068 - 
+============================================================
+2025-09-26 20:59:36,068 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:59:36,068 - ============================================================
+2025-09-26 20:59:36,070 - 
+                                     Valor
+Timestamp              2025-09-26 20:59:36
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65559.94
+ATR                                  74.68
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:36,070 - ============================================================
+2025-09-26 20:59:36,089 - [2025-09-26 20:59:36] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:36,091 - 
+============================================================
+2025-09-26 20:59:36,091 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:59:36,091 - ============================================================
+2025-09-26 20:59:36,093 - 
+                                    Valor
+Timestamp             2025-09-26 20:59:36
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64717.90
+ATR                                158.45
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:36,093 - ============================================================
+2025-09-26 20:59:36,093 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:59:36,093 - ============================================================
+2025-09-26 20:59:51,109 - [2025-09-26 20:59:51] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:51,111 - 
+============================================================
+2025-09-26 20:59:51,111 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 20:59:51,111 - ============================================================
+2025-09-26 20:59:51,113 - 
+                                     Valor
+Timestamp              2025-09-26 20:59:51
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     66694.87
+ATR                                 141.13
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:51,113 - ============================================================
+2025-09-26 20:59:51,115 - [2025-09-26 20:59:51] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:51,119 - 
+============================================================
+2025-09-26 20:59:51,119 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 20:59:51,119 - ============================================================
+2025-09-26 20:59:51,121 - 
+                                    Valor
+Timestamp             2025-09-26 20:59:51
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65360.20
+ATR                                124.72
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:51,121 - ============================================================
+2025-09-26 20:59:51,121 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 20:59:51,121 - ============================================================
+2025-09-26 21:00:06,132 - [2025-09-26 21:00:06] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:06,137 - 
+============================================================
+2025-09-26 21:00:06,137 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:00:06,137 - ============================================================
+2025-09-26 21:00:06,137 - 
+                                     Valor
+Timestamp              2025-09-26 21:00:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     62770.74
+ATR                                  56.89
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:06,137 - ============================================================
+2025-09-26 21:00:06,137 - [2025-09-26 21:00:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:06,137 - 
+============================================================
+2025-09-26 21:00:06,137 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:00:06,137 - ============================================================
+2025-09-26 21:00:06,145 - 
+                                    Valor
+Timestamp             2025-09-26 21:00:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65333.98
+ATR                                184.26
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:06,145 - ============================================================
+2025-09-26 21:00:06,145 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:00:06,145 - ============================================================
+2025-09-26 21:00:21,153 - [2025-09-26 21:00:21] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:21,155 - 
+============================================================
+2025-09-26 21:00:21,157 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:00:21,157 - ============================================================
+2025-09-26 21:00:21,157 - 
+                                     Valor
+Timestamp              2025-09-26 21:00:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     66103.02
+ATR                                 124.90
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:21,157 - ============================================================
+2025-09-26 21:00:21,159 - [2025-09-26 21:00:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:21,163 - 
+============================================================
+2025-09-26 21:00:21,163 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:00:21,163 - ============================================================
+2025-09-26 21:00:21,165 - 
+                                    Valor
+Timestamp             2025-09-26 21:00:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65987.58
+ATR                                160.35
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:21,165 - ============================================================
+2025-09-26 21:00:21,165 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:00:21,165 - ============================================================
+2025-09-26 21:00:36,171 - [2025-09-26 21:00:36] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:36,173 - 
+============================================================
+2025-09-26 21:00:36,175 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:00:36,175 - ============================================================
+2025-09-26 21:00:36,175 - 
+                                     Valor
+Timestamp              2025-09-26 21:00:36
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63814.84
+ATR                                 112.95
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:36,175 - ============================================================
+2025-09-26 21:00:36,177 - [2025-09-26 21:00:36] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:36,181 - 
+============================================================
+2025-09-26 21:00:36,181 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:00:36,181 - ============================================================
+2025-09-26 21:00:36,183 - 
+                                    Valor
+Timestamp             2025-09-26 21:00:36
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64990.59
+ATR                                 79.35
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:36,183 - ============================================================
+2025-09-26 21:00:36,183 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:00:36,183 - ============================================================
+2025-09-26 21:00:51,204 - [2025-09-26 21:00:51] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:51,207 - 
+============================================================
+2025-09-26 21:00:51,207 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:00:51,207 - ============================================================
+2025-09-26 21:00:51,207 - 
+                                     Valor
+Timestamp              2025-09-26 21:00:51
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64454.86
+ATR                                 156.89
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:51,207 - ============================================================
+2025-09-26 21:00:51,207 - [2025-09-26 21:00:51] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:51,215 - 
+============================================================
+2025-09-26 21:00:51,215 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:00:51,215 - ============================================================
+2025-09-26 21:00:51,219 - 
+                                    Valor
+Timestamp             2025-09-26 21:00:51
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    66299.01
+ATR                                 77.96
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:51,219 - ============================================================
+2025-09-26 21:00:51,219 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:00:51,219 - ============================================================
+2025-09-26 21:01:06,211 - [2025-09-26 21:01:06] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:06,214 - 
+============================================================
+2025-09-26 21:01:06,214 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:01:06,215 - ============================================================
+2025-09-26 21:01:06,216 - 
+                                     Valor
+Timestamp              2025-09-26 21:01:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     68434.16
+ATR                                 181.72
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:06,216 - ============================================================
+2025-09-26 21:01:06,218 - [2025-09-26 21:01:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:06,221 - 
+============================================================
+2025-09-26 21:01:06,222 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:01:06,222 - ============================================================
+2025-09-26 21:01:06,224 - 
+                                    Valor
+Timestamp             2025-09-26 21:01:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    63103.05
+ATR                                143.02
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:06,224 - ============================================================
+2025-09-26 21:01:06,224 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:01:06,224 - ============================================================
+2025-09-26 21:01:21,245 - [2025-09-26 21:01:21] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:21,248 - 
+============================================================
+2025-09-26 21:01:21,248 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:01:21,248 - ============================================================
+2025-09-26 21:01:21,251 - 
+                                     Valor
+Timestamp              2025-09-26 21:01:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65679.31
+ATR                                  74.42
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:21,251 - ============================================================
+2025-09-26 21:01:21,253 - [2025-09-26 21:01:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:21,256 - 
+============================================================
+2025-09-26 21:01:21,256 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:01:21,256 - ============================================================
+2025-09-26 21:01:21,257 - 
+                                    Valor
+Timestamp             2025-09-26 21:01:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65322.54
+ATR                                181.18
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:21,257 - ============================================================
+2025-09-26 21:01:21,258 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:01:21,258 - ============================================================
+2025-09-26 21:01:36,270 - [2025-09-26 21:01:36] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:36,273 - 
+============================================================
+2025-09-26 21:01:36,273 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:01:36,273 - ============================================================
+2025-09-26 21:01:36,276 - 
+                                     Valor
+Timestamp              2025-09-26 21:01:36
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65329.90
+ATR                                 198.23
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:36,276 - ============================================================
+2025-09-26 21:01:36,279 - [2025-09-26 21:01:36] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:36,282 - 
+============================================================
+2025-09-26 21:01:36,282 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:01:36,282 - ============================================================
+2025-09-26 21:01:36,287 - 
+                                    Valor
+Timestamp             2025-09-26 21:01:36
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65242.90
+ATR                                 84.48
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:36,289 - ============================================================
+2025-09-26 21:01:36,289 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:01:36,290 - ============================================================
+2025-09-26 21:01:51,304 - [2025-09-26 21:01:51] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:51,308 - 
+============================================================
+2025-09-26 21:01:51,309 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:01:51,309 - ============================================================
+2025-09-26 21:01:51,310 - 
+                                     Valor
+Timestamp              2025-09-26 21:01:51
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65436.61
+ATR                                 162.47
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:51,310 - ============================================================
+2025-09-26 21:01:51,312 - [2025-09-26 21:01:51] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:51,315 - 
+============================================================
+2025-09-26 21:01:51,315 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:01:51,316 - ============================================================
+2025-09-26 21:01:51,317 - 
+                                    Valor
+Timestamp             2025-09-26 21:01:51
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65945.09
+ATR                                171.33
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:51,317 - ============================================================
+2025-09-26 21:01:51,318 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:01:51,319 - ============================================================
+2025-09-26 21:02:06,328 - [2025-09-26 21:02:06] [DEBUG] Ejecutando log_status...
+2025-09-26 21:02:06,328 - 
+============================================================
+2025-09-26 21:02:06,328 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:02:06,328 - ============================================================
+2025-09-26 21:02:06,328 - 
+                                     Valor
+Timestamp              2025-09-26 21:02:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64391.55
+ATR                                  59.69
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:02:06,328 - ============================================================
+2025-09-26 21:02:06,337 - [2025-09-26 21:02:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:02:06,342 - 
+============================================================
+2025-09-26 21:02:06,342 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:02:06,342 - ============================================================
+2025-09-26 21:02:06,344 - 
+                                    Valor
+Timestamp             2025-09-26 21:02:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65744.07
+ATR                                158.63
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:02:06,344 - ============================================================
+2025-09-26 21:02:06,344 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:02:06,344 - ============================================================
+2025-09-26 21:02:21,361 - [2025-09-26 21:02:21] [DEBUG] Ejecutando log_status...
+2025-09-26 21:02:21,364 - 
+============================================================
+2025-09-26 21:02:21,364 - RESUMEN DE ESTADO - ESTRATEGIA ADTG
+2025-09-26 21:02:21,364 - ============================================================
+2025-09-26 21:02:21,367 - 
+                                     Valor
+Timestamp              2025-09-26 21:02:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65525.08
+ATR                                  92.18
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:02:21,367 - ============================================================
+2025-09-26 21:02:21,369 - [2025-09-26 21:02:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:02:21,372 - 
+============================================================
+2025-09-26 21:02:21,373 - RESUMEN DE PAPER TRADING - ESTRATEGIA ADTG
+2025-09-26 21:02:21,373 - ============================================================
+2025-09-26 21:02:21,373 - 
+                                    Valor
+Timestamp             2025-09-26 21:02:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    62759.18
+ATR                                185.75
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:02:21,373 - ============================================================
+2025-09-26 21:02:21,373 - [NOTA] Todas las órdenes fueron simuladas - NO se ejecutaron operaciones reales
+2025-09-26 21:02:21,373 - ============================================================

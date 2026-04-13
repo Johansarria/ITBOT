@@ -1,0 +1,259 @@
+2025-09-20 15:13:01,265 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:13:01,265 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:13:01,265 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:13:01,265 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:13:01,268 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:13:01,272 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:13:01,279 - strategies.main_strategy_runner - ERROR - Error en análisis completo: Object of type bool is not JSON serializable
+2025-09-20 15:13:01,281 - strategies.main_strategy_runner - ERROR - Error en main: Object of type bool is not JSON serializable
+2025-09-20 15:16:38,998 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:16:38,998 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:16:38,998 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:16:38,998 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:16:38,998 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:16:39,002 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:16:39,008 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:16:39,008 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:16:39,080 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:16:39,080 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:16:39,202 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:16:39,202 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:16:39,207 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:16:39,213 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:18:26,879 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:18:26,879 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:18:26,885 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:18:26,885 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:18:26,885 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:18:26,887 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:18:26,893 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:18:26,893 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:18:26,944 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:18:26,944 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:18:27,020 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:18:27,020 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:18:27,035 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:18:27,040 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:19:14,319 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:19:14,319 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:19:14,319 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:19:14,319 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:19:14,319 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:19:14,328 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:19:14,333 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:19:14,333 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:19:14,443 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:19:14,443 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:19:14,618 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:19:14,618 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:19:14,635 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:19:14,641 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:20:16,668 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:20:16,670 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:20:16,671 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:20:16,671 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:20:16,671 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:20:16,676 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:20:16,680 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:20:16,680 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:20:16,817 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:20:16,817 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:20:17,032 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:20:17,032 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:20:17,034 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:20:17,041 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:20:45,520 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:20:45,527 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:20:45,527 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:20:45,527 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:20:45,527 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:20:45,527 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:20:45,535 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:20:45,535 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:20:45,679 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:20:45,679 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:20:45,907 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:20:45,907 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:20:45,915 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:20:45,922 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:22:01,946 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:22:01,952 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:22:01,952 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:22:01,952 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:22:01,953 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:22:01,954 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:22:01,961 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:22:01,961 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:22:02,075 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:22:02,075 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:22:02,258 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:22:02,258 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:22:02,269 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:22:02,275 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:23:20,424 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:23:20,424 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:23:20,424 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:23:20,426 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:23:20,426 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:23:20,427 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:23:20,432 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:23:20,432 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:23:20,548 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:23:20,548 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:23:20,743 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:23:20,745 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:23:20,746 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:23:20,753 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:31:17,571 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:31:17,572 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:31:17,572 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:31:17,572 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:31:17,572 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:31:17,574 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:31:17,579 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:31:17,579 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:31:17,690 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:31:17,690 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:31:17,913 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:31:17,913 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:31:17,919 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:31:17,923 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:31:52,046 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:31:52,047 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:31:52,047 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:31:52,049 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:31:52,049 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:31:52,050 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:31:52,055 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:31:52,055 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:31:52,179 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:31:52,179 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:31:52,369 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:31:52,369 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:31:52,369 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:31:52,386 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:32:37,782 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:32:37,782 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:32:37,784 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:32:37,784 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:32:37,786 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:32:37,790 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:32:37,797 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:32:37,797 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:32:37,922 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:32:37,922 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:32:38,126 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:32:38,126 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:32:38,129 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:32:38,135 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:34:08,367 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:34:08,367 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:34:08,367 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:34:08,367 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:34:08,369 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:34:08,371 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:34:08,376 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:34:08,376 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:34:08,378 - strategies.main_strategy_runner - ERROR - Error en análisis completo: 'MarketSignal' object has no attribute 'direction'
+2025-09-20 15:34:08,378 - strategies.main_strategy_runner - ERROR - Error en main: 'MarketSignal' object has no attribute 'direction'
+2025-09-20 15:34:43,208 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:34:43,208 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:34:43,208 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:34:43,208 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:34:43,208 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:34:43,208 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:34:43,223 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:34:43,223 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:34:43,339 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:34:43,339 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:34:43,533 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:34:43,533 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:34:43,548 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:34:43,553 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:35:22,458 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:35:22,458 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:35:22,460 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:35:22,460 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:35:22,460 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:35:22,465 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:35:22,468 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:35:22,471 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:35:22,479 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:35:22,479 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:35:22,492 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:35:22,492 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:35:22,502 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:35:22,505 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 15:38:41,479 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 15:38:41,479 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 15:38:41,479 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 15:38:41,479 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 15:38:41,479 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 15:38:41,486 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 15:38:41,495 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 15:38:41,495 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 15:38:41,505 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:38:41,505 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 15:38:41,520 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 15:38:41,520 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 15:38:41,530 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 15:38:41,531 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado
+2025-09-20 16:27:39,277 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 16:27:39,277 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 16:27:39,277 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 16:27:39,277 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 16:27:39,277 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 16:27:39,285 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 16:27:39,290 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 16:27:39,290 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 16:27:39,297 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:27:39,300 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 16:27:39,310 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:27:39,310 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 16:27:39,316 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 16:27:39,331 - strategies.main_strategy_runner - ERROR - Error en análisis completo: 'target_achievable'
+2025-09-20 16:27:39,334 - strategies.main_strategy_runner - ERROR - Error en main: 'target_achievable'
+2025-09-20 16:28:15,188 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 16:28:15,188 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 16:28:15,188 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 16:28:15,188 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 16:28:15,188 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 16:28:15,196 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 16:28:15,200 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 16:28:15,204 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 16:28:15,212 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:28:15,212 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 16:28:15,225 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:28:15,225 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 16:28:15,231 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 16:28:15,231 - strategies.main_strategy_runner - ERROR - Error en análisis completo: 'target_achievable'
+2025-09-20 16:28:15,231 - strategies.main_strategy_runner - ERROR - Error en main: 'target_achievable'
+2025-09-20 16:28:49,680 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 16:28:49,680 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 16:28:49,680 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 16:28:49,684 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 16:28:49,684 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 16:28:49,688 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 16:28:49,694 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 16:28:49,694 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 16:28:49,704 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:28:49,705 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 16:28:49,718 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:28:49,718 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 16:28:49,727 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 16:28:49,727 - strategies.main_strategy_runner - ERROR - Error en análisis completo: 'target_achievable'
+2025-09-20 16:28:49,727 - strategies.main_strategy_runner - ERROR - Error en main: 'target_achievable'
+2025-09-20 16:29:19,628 - strategies.advanced_spot_strategy - INFO - Estrategia Spot Avanzada inicializada - Capital: $500.0
+2025-09-20 16:29:19,628 - strategies.main_strategy_runner - INFO - AdvancedSpotTradingSystem inicializado
+2025-09-20 16:29:19,628 - strategies.main_strategy_runner - INFO - === EJECUTANDO ANÁLISIS COMPLETO DEL SISTEMA ===
+2025-09-20 16:29:19,628 - strategies.main_strategy_runner - INFO - === INICIANDO VALIDACIÓN DE ESTRATEGIA ===
+2025-09-20 16:29:19,628 - strategies.main_strategy_runner - INFO - Analizando BNBUSDT...
+2025-09-20 16:29:19,633 - strategies.main_strategy_runner - INFO - Analizando SOLUSDT...
+2025-09-20 16:29:19,636 - strategies.main_strategy_runner - INFO - Validación de estrategia completada
+2025-09-20 16:29:19,636 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (30 días) ===
+2025-09-20 16:29:19,644 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:29:19,644 - strategies.main_strategy_runner - INFO - === EJECUTANDO BACKTEST HISTÓRICO (60 días) ===
+2025-09-20 16:29:19,660 - strategies.main_strategy_runner - INFO - Backtest histórico completado
+2025-09-20 16:29:19,660 - strategies.main_strategy_runner - INFO - === GENERANDO SEÑALES ACTUALES ===
+2025-09-20 16:29:19,661 - strategies.main_strategy_runner - INFO - Señales actuales generadas
+2025-09-20 16:29:19,667 - strategies.main_strategy_runner - INFO - Análisis completo del sistema finalizado

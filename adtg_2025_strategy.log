@@ -1,0 +1,1506 @@
+2025-09-26 18:59:13,371 - ADTG_BTCUSDT - WARNING - Binance API no disponible. Modo simulación activado.
+2025-09-26 19:01:49,697 - ADTG_BTCUSDT - WARNING - Binance API no disponible. Modo simulación activado.
+2025-09-26 19:01:49,697 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:01:49,697 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO - [ATR] ATR estimado (simulación): $2634.40
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0370
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [COND] Condición: normal
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 1.0%
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $2634.40
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI (simulación)
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $71,200.00
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $66,984.96
+2025-09-26 19:01:49,708 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $75,415.04
+2025-09-26 19:01:49,711 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $4,215.04 (5.9%)
+2025-09-26 19:01:49,711 - ADTG_BTCUSDT - INFO - [SIM] Simulando colocación de órdenes (modo simulación)
+2025-09-26 19:01:49,711 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:01:49,712 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:10:30,610 - ADTG_BTCUSDT - WARNING - API keys no configuradas. Usando modo simulación.
+2025-09-26 19:10:30,610 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:10:30,610 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:10:30,610 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:10:30,610 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:10:30,610 - ADTG_BTCUSDT - INFO - [ATR] ATR estimado (simulación): $2634.40
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0370
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [COND] Condición: normal
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 1.0%
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $2634.40
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI (simulación)
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $71,200.00
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $66,984.96
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $75,415.04
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $4,215.04 (5.9%)
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO - [SIM] Simulando colocación de órdenes (modo simulación)
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:10:30,613 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:11:14,561 - ADTG_BTCUSDT - INFO - [OK] Conexión a Binance establecida. Servidor: {'serverTime': 1758931874742}
+2025-09-26 19:11:14,563 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:11:14,563 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:11:14,563 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:11:14,565 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:11:16,693 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $526.26
+2025-09-26 19:11:16,693 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:11:16,694 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0048
+2025-09-26 19:11:16,695 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:11:16,695 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:11:16,695 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $526.26
+2025-09-26 19:11:18,016 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109514.45, EMA50: $109795.64
+2025-09-26 19:11:18,019 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:11:18,020 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:11:18,675 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:11:18,675 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:11:18,676 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,594.42
+2025-09-26 19:11:18,676 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,752.40
+2025-09-26 19:11:18,676 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,436.44
+2025-09-26 19:11:18,677 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $842.02 (0.8%)
+2025-09-26 19:11:18,908 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $108752.40: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:19,138 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $108847.17: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:19,365 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $108970.13: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:19,596 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $109106.58: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:19,822 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $109252.61: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:20,051 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $109406.20: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:20,281 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden buy @ $109566.10: APIError(code=-2010): Account has insufficient balance for requested action.
+2025-09-26 19:11:20,512 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden sell @ $109731.44: APIError(code=-2010): Account has insufficient balance for requested action.
+2025-09-26 19:11:20,744 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden sell @ $109901.58: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:21,393 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden sell @ $110076.05: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:22,044 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden sell @ $110254.44: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:22,698 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando orden sell @ $110436.44: APIError(code=-1013): Filter failure: LOT_SIZE
+2025-09-26 19:11:22,698 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 0/12 (0.0%)
+2025-09-26 19:11:22,699 - ADTG_BTCUSDT - WARNING - [WARNING] Sistema pausado - Error colocando grid
+2025-09-26 19:11:22,699 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:15:26,019 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:15:26,036 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:15:26,036 - ADTG_BTCUSDT - ERROR - [ERROR] Error conectando a Binance: 'AdaptiveDailyTargetGrid' object has no attribute 'paper_balance'
+2025-09-26 19:15:26,039 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:15:26,039 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:15:26,040 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:15:26,040 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:15:26,040 - ADTG_BTCUSDT - INFO - [ATR] ATR estimado (simulación): $2634.40
+2025-09-26 19:15:26,041 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:15:26,041 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0370
+2025-09-26 19:15:26,042 - ADTG_BTCUSDT - INFO -    [COND] Condición: normal
+2025-09-26 19:15:26,042 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 1.0%
+2025-09-26 19:15:26,042 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $2634.40
+2025-09-26 19:15:26,042 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI (simulación)
+2025-09-26 19:15:26,043 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:15:26,043 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:15:26,043 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $71,200.00
+2025-09-26 19:15:26,043 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $66,984.96
+2025-09-26 19:15:26,044 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $75,415.04
+2025-09-26 19:15:26,044 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $4,215.04 (5.9%)
+2025-09-26 19:15:26,044 - ADTG_BTCUSDT - INFO - [SIM] Simulando colocación de órdenes (modo simulación)
+2025-09-26 19:15:26,045 - ADTG_BTCUSDT - ERROR - [ERROR] Error colocando órdenes del grid: cannot access local variable 'time' where it is not associated with a value
+2025-09-26 19:15:26,045 - ADTG_BTCUSDT - WARNING - [WARNING] Sistema pausado - Error colocando grid
+2025-09-26 19:15:26,045 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:16:06,852 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:16:09,381 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $526.26
+2025-09-26 19:16:09,381 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:16:09,381 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0048
+2025-09-26 19:16:09,382 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:16:09,382 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:16:09,382 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $526.26
+2025-09-26 19:16:10,905 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109516.65, EMA50: $109796.68
+2025-09-26 19:16:10,905 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:16:10,905 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:16:11,142 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:16:11,142 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:16:11,145 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,617.31
+2025-09-26 19:16:11,145 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,775.29
+2025-09-26 19:16:11,145 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,459.33
+2025-09-26 19:16:11,145 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $842.02 (0.8%)
+2025-09-26 19:16:11,147 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108775.29 [ID: PAPER_1758932171147_0]
+2025-09-26 19:16:11,147 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108870.06 [ID: PAPER_1758932171147_1]
+2025-09-26 19:16:11,147 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108993.02 [ID: PAPER_1758932171147_2]
+2025-09-26 19:16:11,147 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109129.47 [ID: PAPER_1758932171147_3]
+2025-09-26 19:16:11,147 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109275.50 [ID: PAPER_1758932171147_4]
+2025-09-26 19:16:11,147 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109429.09 [ID: PAPER_1758932171147_5]
+2025-09-26 19:16:11,152 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000380 @ $109588.99 [ID: PAPER_1758932171152_6]
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109754.33 [ID: PAPER_1758932171154_7]
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109924.47 [ID: PAPER_1758932171154_8]
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110098.94 [ID: PAPER_1758932171154_9]
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110277.33 [ID: PAPER_1758932171154_10]
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000377 @ $110459.33 [ID: PAPER_1758932171154_11]
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:16:11,154 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:16:11,613 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:16:12,492 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:16:13,376 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:16:44,304 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:16:44,769 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:16:45,229 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:17:16,608 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:17:17,127 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:17:17,617 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:17:48,959 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:17:49,436 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:17:50,327 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:18:21,672 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:18:22,193 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:18:22,657 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:18:54,010 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:18:54,473 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:18:54,928 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:19:26,290 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:19:26,752 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:19:27,220 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:19:58,586 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:19:59,046 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:19:59,927 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:20:31,494 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:20:32,382 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:20:32,847 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:21:04,622 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:21:05,083 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:21:05,964 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:21:37,310 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:21:37,770 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:21:38,231 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:22:08,876 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:22:08,876 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:22:08,877 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:22:08,877 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:22:08,877 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:22:08,877 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:22:08,879 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:22:11,775 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $526.96
+2025-09-26 19:22:11,775 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:22:11,788 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0048
+2025-09-26 19:22:11,788 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:22:11,788 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:22:11,788 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $526.96
+2025-09-26 19:22:12,243 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109514.94, EMA50: $109795.88
+2025-09-26 19:22:12,243 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:22:12,258 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:22:12,905 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:22:12,905 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:22:12,905 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,599.53
+2025-09-26 19:22:12,905 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,756.39
+2025-09-26 19:22:12,912 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,442.67
+2025-09-26 19:22:12,912 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $843.14 (0.8%)
+2025-09-26 19:22:12,912 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108756.39 [ID: PAPER_1758932532912_0]
+2025-09-26 19:22:12,912 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108851.29 [ID: PAPER_1758932532912_1]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108974.41 [ID: PAPER_1758932532913_2]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109111.04 [ID: PAPER_1758932532913_3]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109257.27 [ID: PAPER_1758932532913_4]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109411.06 [ID: PAPER_1758932532913_5]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000380 @ $109571.17 [ID: PAPER_1758932532913_6]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109736.73 [ID: PAPER_1758932532913_7]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109907.10 [ID: PAPER_1758932532913_8]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $110081.80 [ID: PAPER_1758932532913_9]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110260.42 [ID: PAPER_1758932532913_10]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000377 @ $110442.67 [ID: PAPER_1758932532913_11]
+2025-09-26 19:22:12,913 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:22:12,916 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:22:12,917 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:22:13,796 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:22:14,665 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:22:15,558 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:22:46,482 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:22:46,946 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:22:47,406 - ADTG_BTCUSDT - ERROR - [ERROR] Error calculando PnL: float division by zero
+2025-09-26 19:23:05,189 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:23:05,189 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:23:05,189 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:23:05,191 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:23:05,191 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:23:05,191 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:23:05,192 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:23:07,290 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $526.96
+2025-09-26 19:23:07,292 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:23:07,292 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0048
+2025-09-26 19:23:07,292 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:23:07,292 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:23:07,292 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $526.96
+2025-09-26 19:23:08,604 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109514.99, EMA50: $109795.90
+2025-09-26 19:23:08,604 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:23:08,604 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:23:09,244 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:23:09,256 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:23:09,256 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,600.00
+2025-09-26 19:23:09,256 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,756.86
+2025-09-26 19:23:09,257 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,443.14
+2025-09-26 19:23:09,257 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $843.14 (0.8%)
+2025-09-26 19:23:09,257 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108756.86 [ID: PAPER_1758932589257_0]
+2025-09-26 19:23:09,257 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108851.76 [ID: PAPER_1758932589257_1]
+2025-09-26 19:23:09,259 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108974.88 [ID: PAPER_1758932589259_2]
+2025-09-26 19:23:09,259 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109111.51 [ID: PAPER_1758932589259_3]
+2025-09-26 19:23:09,259 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109257.74 [ID: PAPER_1758932589259_4]
+2025-09-26 19:23:09,259 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109411.53 [ID: PAPER_1758932589259_5]
+2025-09-26 19:23:09,259 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000380 @ $109571.64 [ID: PAPER_1758932589259_6]
+2025-09-26 19:23:09,260 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109737.20 [ID: PAPER_1758932589260_7]
+2025-09-26 19:23:09,260 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109907.57 [ID: PAPER_1758932589260_8]
+2025-09-26 19:23:09,260 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $110082.27 [ID: PAPER_1758932589260_9]
+2025-09-26 19:23:09,260 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110260.89 [ID: PAPER_1758932589260_10]
+2025-09-26 19:23:09,262 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000377 @ $110443.14 [ID: PAPER_1758932589262_11]
+2025-09-26 19:23:09,262 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:23:09,262 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:23:09,264 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:24:53,855 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:24:53,855 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:24:53,855 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:24:53,855 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:24:53,855 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:24:53,855 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:24:53,859 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:24:56,388 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $530.73
+2025-09-26 19:24:56,388 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:24:56,388 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0048
+2025-09-26 19:24:56,390 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:24:56,390 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:24:56,390 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $530.73
+2025-09-26 19:24:57,285 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109506.69, EMA50: $109791.97
+2025-09-26 19:24:57,285 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:24:57,285 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:24:57,937 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:24:57,937 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:24:57,937 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,513.45
+2025-09-26 19:24:57,939 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,664.29
+2025-09-26 19:24:57,939 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,362.61
+2025-09-26 19:24:57,939 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $849.16 (0.8%)
+2025-09-26 19:24:57,940 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108664.29 [ID: PAPER_1758932697940_0]
+2025-09-26 19:24:57,940 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108759.86 [ID: PAPER_1758932697940_1]
+2025-09-26 19:24:57,940 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108883.86 [ID: PAPER_1758932697940_2]
+2025-09-26 19:24:57,942 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109021.47 [ID: PAPER_1758932697942_3]
+2025-09-26 19:24:57,942 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109168.74 [ID: PAPER_1758932697942_4]
+2025-09-26 19:24:57,942 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109323.63 [ID: PAPER_1758932697942_5]
+2025-09-26 19:24:57,942 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109484.89 [ID: PAPER_1758932697942_6]
+2025-09-26 19:24:57,942 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109651.63 [ID: PAPER_1758932697942_7]
+2025-09-26 19:24:57,944 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109823.22 [ID: PAPER_1758932697944_8]
+2025-09-26 19:24:57,946 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109999.16 [ID: PAPER_1758932697944_9]
+2025-09-26 19:24:57,946 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110179.07 [ID: PAPER_1758932697946_10]
+2025-09-26 19:24:57,947 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110362.61 [ID: PAPER_1758932697947_11]
+2025-09-26 19:24:57,947 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:24:57,948 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:24:57,948 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:25:02,204 - ADTG_BTCUSDT - INFO - ================================================================================
+2025-09-26 19:25:02,204 - ADTG_BTCUSDT - INFO - [STATUS] ESTADO ACTUAL ADTG 2025
+2025-09-26 19:25:02,204 - ADTG_BTCUSDT - INFO - ================================================================================
+2025-09-26 19:25:02,204 - ADTG_BTCUSDT - INFO - +-------------------+-------------+
+| Métrica           | Valor       |
++===================+=============+
+| Precio BTC        | $109,512.26 |
++-------------------+-------------+
+| Balance Actual    | $0.00       |
++-------------------+-------------+
+| PnL Diario (Abs)  | $+0.00      |
++-------------------+-------------+
+| PnL Diario (%)    | +0.00%      |
++-------------------+-------------+
+| Target Diario     | 0.7%        |
++-------------------+-------------+
+| Condición Mercado | flat        |
++-------------------+-------------+
+| ATR               | $530.73     |
++-------------------+-------------+
+| Trading Activo    | SI          |
++-------------------+-------------+
+| Órdenes Grid      | 12          |
++-------------------+-------------+
+2025-09-26 19:25:02,207 - ADTG_BTCUSDT - INFO - ================================================================================
+2025-09-26 19:27:18,873 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:27:18,873 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:27:18,873 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:27:18,883 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:27:18,884 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:27:18,884 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:27:18,884 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:27:20,974 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $532.71
+2025-09-26 19:27:20,975 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:27:20,975 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:27:20,976 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:27:20,976 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:27:20,976 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $532.71
+2025-09-26 19:27:21,861 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109511.63, EMA50: $109794.31
+2025-09-26 19:27:21,861 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:27:21,862 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:27:22,510 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:27:22,512 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:27:22,512 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,577.12
+2025-09-26 19:27:22,513 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,724.79
+2025-09-26 19:27:22,513 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,429.45
+2025-09-26 19:27:22,514 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $852.33 (0.8%)
+2025-09-26 19:27:22,514 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108724.79 [ID: PAPER_1758932842514_0]
+2025-09-26 19:27:22,515 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108820.72 [ID: PAPER_1758932842515_1]
+2025-09-26 19:27:22,515 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108945.18 [ID: PAPER_1758932842515_2]
+2025-09-26 19:27:22,516 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109083.31 [ID: PAPER_1758932842516_3]
+2025-09-26 19:27:22,516 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109231.12 [ID: PAPER_1758932842516_4]
+2025-09-26 19:27:22,516 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109386.59 [ID: PAPER_1758932842516_5]
+2025-09-26 19:27:22,517 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000380 @ $109548.45 [ID: PAPER_1758932842517_6]
+2025-09-26 19:27:22,517 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109715.81 [ID: PAPER_1758932842517_7]
+2025-09-26 19:27:22,518 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109888.05 [ID: PAPER_1758932842518_8]
+2025-09-26 19:27:22,518 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $110064.65 [ID: PAPER_1758932842518_9]
+2025-09-26 19:27:22,519 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110245.22 [ID: PAPER_1758932842519_10]
+2025-09-26 19:27:22,519 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000377 @ $110429.45 [ID: PAPER_1758932842519_11]
+2025-09-26 19:27:22,519 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:27:22,519 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:27:22,519 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:34:10,455 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:34:10,455 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:34:10,455 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:34:10,457 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:34:10,459 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:34:10,459 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:34:10,459 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:34:12,556 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $532.71
+2025-09-26 19:34:12,556 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:34:12,556 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:34:12,556 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:34:12,559 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:34:12,559 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $532.71
+2025-09-26 19:34:14,071 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109507.94, EMA50: $109792.56
+2025-09-26 19:34:14,071 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:34:14,071 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:34:14,304 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:34:14,305 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:34:14,305 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,526.48
+2025-09-26 19:34:14,305 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,674.15
+2025-09-26 19:34:14,305 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,378.81
+2025-09-26 19:34:14,306 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $852.33 (0.8%)
+2025-09-26 19:34:14,306 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108674.15 [ID: PAPER_1758933254306_0]
+2025-09-26 19:34:14,306 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108770.08 [ID: PAPER_1758933254306_1]
+2025-09-26 19:34:14,307 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108894.54 [ID: PAPER_1758933254307_2]
+2025-09-26 19:34:14,307 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109032.67 [ID: PAPER_1758933254307_3]
+2025-09-26 19:34:14,307 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109180.48 [ID: PAPER_1758933254307_4]
+2025-09-26 19:34:14,307 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109335.95 [ID: PAPER_1758933254307_5]
+2025-09-26 19:34:14,308 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109497.81 [ID: PAPER_1758933254308_6]
+2025-09-26 19:34:14,308 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109665.17 [ID: PAPER_1758933254308_7]
+2025-09-26 19:34:14,308 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109837.41 [ID: PAPER_1758933254308_8]
+2025-09-26 19:34:14,309 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $110014.01 [ID: PAPER_1758933254308_9]
+2025-09-26 19:34:14,309 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110194.58 [ID: PAPER_1758933254309_10]
+2025-09-26 19:34:14,309 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000377 @ $110378.81 [ID: PAPER_1758933254309_11]
+2025-09-26 19:34:14,309 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:34:14,310 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:34:14,310 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:35:11,571 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:35:11,571 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:35:11,571 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:35:11,571 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:35:11,571 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:35:11,583 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:35:11,583 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:35:13,064 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $532.71
+2025-09-26 19:35:13,072 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:35:13,076 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:35:13,078 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:35:13,085 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:35:13,086 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $532.71
+2025-09-26 19:35:14,396 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109507.17, EMA50: $109792.20
+2025-09-26 19:35:14,396 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:35:14,396 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,518.49
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,666.16
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,370.82
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $852.33 (0.8%)
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108666.16 [ID: PAPER_1758933315046_0]
+2025-09-26 19:35:15,046 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108762.09 [ID: PAPER_1758933315046_1]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108886.55 [ID: PAPER_1758933315053_2]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109024.68 [ID: PAPER_1758933315053_3]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109172.49 [ID: PAPER_1758933315053_4]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109327.96 [ID: PAPER_1758933315053_5]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109489.82 [ID: PAPER_1758933315053_6]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109657.18 [ID: PAPER_1758933315053_7]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109829.42 [ID: PAPER_1758933315053_8]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $110006.02 [ID: PAPER_1758933315053_9]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110186.59 [ID: PAPER_1758933315053_10]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110370.82 [ID: PAPER_1758933315053_11]
+2025-09-26 19:35:15,053 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:35:15,056 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:35:15,056 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:37:36,451 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:37:36,451 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:37:36,451 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:37:36,457 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:37:36,457 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:37:36,457 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:37:36,457 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:37:38,978 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $533.71
+2025-09-26 19:37:38,978 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:37:38,978 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:37:38,981 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:37:38,981 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:37:38,981 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $533.71
+2025-09-26 19:37:40,506 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109502.74, EMA50: $109790.10
+2025-09-26 19:37:40,506 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:37:40,507 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:37:41,153 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:37:41,154 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:37:41,154 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,472.24
+2025-09-26 19:37:41,154 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,618.30
+2025-09-26 19:37:41,155 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,326.18
+2025-09-26 19:37:41,155 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $853.94 (0.8%)
+2025-09-26 19:37:41,155 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000384 @ $108618.30 [ID: PAPER_1758933461155_0]
+2025-09-26 19:37:41,155 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108714.42 [ID: PAPER_1758933461155_1]
+2025-09-26 19:37:41,155 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108839.11 [ID: PAPER_1758933461155_2]
+2025-09-26 19:37:41,157 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108977.50 [ID: PAPER_1758933461157_3]
+2025-09-26 19:37:41,157 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109125.59 [ID: PAPER_1758933461157_4]
+2025-09-26 19:37:41,157 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109281.36 [ID: PAPER_1758933461157_5]
+2025-09-26 19:37:41,158 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109443.52 [ID: PAPER_1758933461158_6]
+2025-09-26 19:37:41,158 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109611.20 [ID: PAPER_1758933461158_7]
+2025-09-26 19:37:41,158 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109783.75 [ID: PAPER_1758933461158_8]
+2025-09-26 19:37:41,158 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109960.68 [ID: PAPER_1758933461158_9]
+2025-09-26 19:37:41,159 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110141.60 [ID: PAPER_1758933461159_10]
+2025-09-26 19:37:41,159 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110326.18 [ID: PAPER_1758933461159_11]
+2025-09-26 19:37:41,161 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:37:41,161 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:37:41,162 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:39:52,259 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:39:52,260 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:39:52,260 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:39:52,262 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:39:52,262 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:39:52,263 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:39:52,263 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:39:53,924 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $534.66
+2025-09-26 19:39:53,924 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:39:53,926 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:39:53,926 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:39:53,926 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:39:53,926 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $534.66
+2025-09-26 19:39:54,394 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109507.54, EMA50: $109792.37
+2025-09-26 19:39:54,407 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:39:54,412 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:39:54,650 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:39:54,650 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:39:54,650 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,522.30
+2025-09-26 19:39:54,651 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,666.85
+2025-09-26 19:39:54,651 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,377.75
+2025-09-26 19:39:54,651 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $855.45 (0.8%)
+2025-09-26 19:39:54,652 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108666.85 [ID: PAPER_1758933594652_0]
+2025-09-26 19:39:54,652 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108763.13 [ID: PAPER_1758933594652_1]
+2025-09-26 19:39:54,652 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108888.05 [ID: PAPER_1758933594652_2]
+2025-09-26 19:39:54,653 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109026.68 [ID: PAPER_1758933594652_3]
+2025-09-26 19:39:54,653 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109175.04 [ID: PAPER_1758933594653_4]
+2025-09-26 19:39:54,653 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109331.08 [ID: PAPER_1758933594653_5]
+2025-09-26 19:39:54,653 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109493.53 [ID: PAPER_1758933594653_6]
+2025-09-26 19:39:54,653 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109661.50 [ID: PAPER_1758933594653_7]
+2025-09-26 19:39:54,654 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109834.36 [ID: PAPER_1758933594654_8]
+2025-09-26 19:39:54,654 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $110011.61 [ID: PAPER_1758933594654_9]
+2025-09-26 19:39:54,654 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110192.85 [ID: PAPER_1758933594654_10]
+2025-09-26 19:39:54,656 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000377 @ $110377.75 [ID: PAPER_1758933594656_11]
+2025-09-26 19:39:54,656 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:39:54,657 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:39:54,659 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:46:59,850 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:46:59,851 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:46:59,851 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:46:59,853 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:46:59,853 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:46:59,854 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:46:59,854 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:47:02,396 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $534.66
+2025-09-26 19:47:02,396 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:47:02,396 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:47:02,396 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:47:02,396 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:47:02,399 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $534.66
+2025-09-26 19:47:03,292 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109504.25, EMA50: $109790.82
+2025-09-26 19:47:03,292 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:47:03,292 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:47:03,947 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:47:03,949 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:47:03,949 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,488.01
+2025-09-26 19:47:03,949 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,632.56
+2025-09-26 19:47:03,949 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,343.46
+2025-09-26 19:47:03,949 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $855.45 (0.8%)
+2025-09-26 19:47:03,951 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000384 @ $108632.56 [ID: PAPER_1758934023951_0]
+2025-09-26 19:47:03,951 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108728.84 [ID: PAPER_1758934023951_1]
+2025-09-26 19:47:03,951 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108853.76 [ID: PAPER_1758934023951_2]
+2025-09-26 19:47:03,951 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108992.39 [ID: PAPER_1758934023951_3]
+2025-09-26 19:47:03,953 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109140.75 [ID: PAPER_1758934023953_4]
+2025-09-26 19:47:03,953 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109296.79 [ID: PAPER_1758934023953_5]
+2025-09-26 19:47:03,953 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109459.24 [ID: PAPER_1758934023953_6]
+2025-09-26 19:47:03,960 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109627.21 [ID: PAPER_1758934023960_7]
+2025-09-26 19:47:03,960 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109800.07 [ID: PAPER_1758934023960_8]
+2025-09-26 19:47:03,960 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109977.32 [ID: PAPER_1758934023960_9]
+2025-09-26 19:47:03,960 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110158.56 [ID: PAPER_1758934023960_10]
+2025-09-26 19:47:03,960 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110343.46 [ID: PAPER_1758934023960_11]
+2025-09-26 19:47:03,960 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:47:03,962 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:47:03,962 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 19:48:12,853 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Conexión a Binance establecida para datos en tiempo real
+2025-09-26 19:48:12,855 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Modo: Paper Trading - NO se ejecutarán órdenes reales
+2025-09-26 19:48:12,855 - ADTG_BTCUSDT - INFO - [PAPER TRADING] Capital virtual: $500.00
+2025-09-26 19:48:12,857 - ADTG_BTCUSDT - INFO - [START] Iniciando Adaptive Daily Target Grid (ADTG) 2025 Edition
+2025-09-26 19:48:12,857 - ADTG_BTCUSDT - INFO - [CAPITAL] Capital inicial: $500.00
+2025-09-26 19:48:12,857 - ADTG_BTCUSDT - INFO - [SYMBOL] Símbolo: BTCUSDT
+2025-09-26 19:48:12,858 - ADTG_BTCUSDT - INFO - [RESET] Iniciando reset diario para 2025-09-27
+2025-09-26 19:48:15,800 - ADTG_BTCUSDT - INFO - [ATR] ATR calculado: $534.66
+2025-09-26 19:48:15,800 - ADTG_BTCUSDT - INFO - [TARGET] Meta diaria calculada:
+2025-09-26 19:48:15,800 - ADTG_BTCUSDT - INFO -    [VOL] Volatilidad ratio: 0.0049
+2025-09-26 19:48:15,800 - ADTG_BTCUSDT - INFO -    [COND] Condición: flat
+2025-09-26 19:48:15,800 - ADTG_BTCUSDT - INFO -    [TARGET] Target: 0.7%
+2025-09-26 19:48:15,800 - ADTG_BTCUSDT - INFO -    [ATR] ATR: $534.66
+2025-09-26 19:48:16,284 - ADTG_BTCUSDT - INFO - [EMA] EMA20: $109504.25, EMA50: $109790.82
+2025-09-26 19:48:16,286 - ADTG_BTCUSDT - INFO - [EMA] Diferencia EMA: 0.0026 (0.26%)
+2025-09-26 19:48:16,286 - ADTG_BTCUSDT - INFO - [MARKET] Mercado lateral: SI
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [GRID] Grid creado:
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO -    [LEVELS] Niveles: 12
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO -    [PRICE] Precio actual: $109,488.00
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO -    [LOWER] Límite inferior: $108,632.55
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO -    [UPPER] Límite superior: $110,343.45
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO -    [RANGE] Rango: $855.45 (0.8%)
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000384 @ $108632.55 [ID: PAPER_1758934096528_0]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108728.83 [ID: PAPER_1758934096528_1]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000383 @ $108853.75 [ID: PAPER_1758934096528_2]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $108992.38 [ID: PAPER_1758934096528_3]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000382 @ $109140.74 [ID: PAPER_1758934096528_4]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109296.78 [ID: PAPER_1758934096528_5]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: buy 0.000381 @ $109459.23 [ID: PAPER_1758934096528_6]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000380 @ $109627.20 [ID: PAPER_1758934096528_7]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109800.06 [ID: PAPER_1758934096528_8]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000379 @ $109977.31 [ID: PAPER_1758934096528_9]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110158.55 [ID: PAPER_1758934096528_10]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [PAPER ORDER] Orden simulada: sell 0.000378 @ $110343.45 [ID: PAPER_1758934096528_11]
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [ORDERS] Órdenes colocadas: 12/12 (100.0%)
+2025-09-26 19:48:16,528 - ADTG_BTCUSDT - INFO - [OK] Sistema activado - Grid colocado exitosamente
+2025-09-26 19:48:16,544 - ADTG_BTCUSDT - INFO - [RESET] Reset diario completado para 2025-09-27
+2025-09-26 20:57:05,748 - __main__ - WARNING - [BINANCE] Credenciales no encontradas. Usando modo paper trading.
+2025-09-26 20:57:05,748 - __main__ - INFO - [INIT] Estrategia ADTG inicializada - Capital: $500.0 - Símbolo: BTCUSDT
+2025-09-26 20:57:05,750 - __main__ - INFO - [START] Iniciando estrategia ADTG 2025...
+2025-09-26 20:57:05,752 - __main__ - INFO - [DAILY_RESET] Iniciando reset diario...
+2025-09-26 20:57:05,752 - __main__ - INFO - [PAPER] 0 órdenes simuladas canceladas
+2025-09-26 20:57:05,752 - __main__ - INFO - [DAILY_RESET] Reset completado para 2025-09-26
+2025-09-26 20:57:05,752 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:57:05,752 - __main__ - INFO - [MARKET] Condición: flat, ATR: 132.94
+2025-09-26 20:57:05,755 - __main__ - INFO - [GRID] Grid creado: 4 niveles, rango: $65204.18 - $65663.40
+2025-09-26 20:57:05,755 - __main__ - INFO - [PAPER] 4 órdenes simuladas colocadas
+2025-09-26 20:57:05,756 - __main__ - INFO - [GRID] Grid colocado exitosamente
+2025-09-26 20:57:05,756 - __main__ - INFO - [2025-09-26 20:57:05] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:05,774 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:57:05
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63912.32
+ATR                                  73.57
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:05,774 - __main__ - INFO - [2025-09-26 20:57:05] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:05,778 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:57:05
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65118.42
+ATR                                 87.87
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:20,794 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:57:20,794 - __main__ - INFO - [MARKET] Condición: flat, ATR: 155.31
+2025-09-26 20:57:20,796 - __main__ - INFO - [2025-09-26 20:57:20] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:20,804 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:57:20
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65137.75
+ATR                                 129.42
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:20,805 - __main__ - INFO - [2025-09-26 20:57:20] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:20,814 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:57:20
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64933.86
+ATR                                126.44
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:35,816 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:57:35,817 - __main__ - INFO - [MARKET] Condición: flat, ATR: 196.63
+2025-09-26 20:57:35,818 - __main__ - INFO - [2025-09-26 20:57:35] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:35,825 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:57:35
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63940.42
+ATR                                  55.55
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:35,826 - __main__ - INFO - [2025-09-26 20:57:35] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:35,839 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:57:35
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64794.83
+ATR                                174.99
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:57:50,850 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:57:50,851 - __main__ - INFO - [MARKET] Condición: flat, ATR: 77.04
+2025-09-26 20:57:50,851 - __main__ - INFO - [2025-09-26 20:57:50] [DEBUG] Ejecutando log_status...
+2025-09-26 20:57:50,856 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:57:50
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63960.57
+ATR                                 147.54
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:57:50,856 - __main__ - INFO - [2025-09-26 20:57:50] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:57:50,864 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:57:50
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65190.86
+ATR                                 50.53
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:05,891 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:58:05,891 - __main__ - INFO - [MARKET] Condición: flat, ATR: 112.70
+2025-09-26 20:58:05,891 - __main__ - INFO - [2025-09-26 20:58:05] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:05,901 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:58:05
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64030.65
+ATR                                 103.82
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:05,901 - __main__ - INFO - [2025-09-26 20:58:05] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:05,910 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:58:05
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65088.58
+ATR                                157.38
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:20,925 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:58:20,926 - __main__ - INFO - [MARKET] Condición: flat, ATR: 93.67
+2025-09-26 20:58:20,926 - __main__ - INFO - [2025-09-26 20:58:20] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:20,933 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:58:20
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64006.98
+ATR                                 188.07
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:20,933 - __main__ - INFO - [2025-09-26 20:58:20] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:20,941 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:58:20
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64600.58
+ATR                                 84.10
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:35,946 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:58:35,946 - __main__ - INFO - [MARKET] Condición: flat, ATR: 95.53
+2025-09-26 20:58:35,947 - __main__ - INFO - [2025-09-26 20:58:35] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:35,952 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:58:35
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65251.08
+ATR                                  82.99
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:35,953 - __main__ - INFO - [2025-09-26 20:58:35] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:35,964 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:58:35
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    66011.46
+ATR                                120.24
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:58:50,978 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:58:50,978 - __main__ - INFO - [MARKET] Condición: flat, ATR: 82.90
+2025-09-26 20:58:50,979 - __main__ - INFO - [2025-09-26 20:58:50] [DEBUG] Ejecutando log_status...
+2025-09-26 20:58:50,985 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:58:50
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     62660.82
+ATR                                 137.94
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:58:50,986 - __main__ - INFO - [2025-09-26 20:58:50] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:58:50,993 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:58:50
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    66389.95
+ATR                                 70.35
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:06,002 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:59:06,003 - __main__ - INFO - [MARKET] Condición: flat, ATR: 113.16
+2025-09-26 20:59:06,005 - __main__ - INFO - [2025-09-26 20:59:06] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:06,013 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:59:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63871.02
+ATR                                 176.88
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:06,014 - __main__ - INFO - [2025-09-26 20:59:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:06,025 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:59:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    63716.44
+ATR                                 57.18
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:21,037 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:59:21,038 - __main__ - INFO - [MARKET] Condición: flat, ATR: 127.69
+2025-09-26 20:59:21,038 - __main__ - INFO - [2025-09-26 20:59:21] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:21,044 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:59:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     66371.41
+ATR                                 192.63
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:21,045 - __main__ - INFO - [2025-09-26 20:59:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:21,056 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:59:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    67400.73
+ATR                                 70.28
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:36,065 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:59:36,066 - __main__ - INFO - [MARKET] Condición: flat, ATR: 166.51
+2025-09-26 20:59:36,066 - __main__ - INFO - [2025-09-26 20:59:36] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:36,070 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:59:36
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65559.94
+ATR                                  74.68
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:36,089 - __main__ - INFO - [2025-09-26 20:59:36] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:36,096 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:59:36
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64717.90
+ATR                                158.45
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 20:59:51,109 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 20:59:51,109 - __main__ - INFO - [MARKET] Condición: flat, ATR: 94.76
+2025-09-26 20:59:51,109 - __main__ - INFO - [2025-09-26 20:59:51] [DEBUG] Ejecutando log_status...
+2025-09-26 20:59:51,115 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 20:59:51
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     66694.87
+ATR                                 141.13
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 20:59:51,115 - __main__ - INFO - [2025-09-26 20:59:51] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 20:59:51,123 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 20:59:51
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65360.20
+ATR                                124.72
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:06,132 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:00:06,132 - __main__ - INFO - [MARKET] Condición: flat, ATR: 59.59
+2025-09-26 21:00:06,132 - __main__ - INFO - [2025-09-26 21:00:06] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:06,137 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:00:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     62770.74
+ATR                                  56.89
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:06,137 - __main__ - INFO - [2025-09-26 21:00:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:06,147 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:00:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65333.98
+ATR                                184.26
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:21,153 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:00:21,153 - __main__ - INFO - [MARKET] Condición: flat, ATR: 60.54
+2025-09-26 21:00:21,153 - __main__ - INFO - [2025-09-26 21:00:21] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:21,159 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:00:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     66103.02
+ATR                                 124.90
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:21,161 - __main__ - INFO - [2025-09-26 21:00:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:21,167 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:00:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65987.58
+ATR                                160.35
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:36,171 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:00:36,171 - __main__ - INFO - [MARKET] Condición: flat, ATR: 90.87
+2025-09-26 21:00:36,171 - __main__ - INFO - [2025-09-26 21:00:36] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:36,177 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:00:36
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     63814.84
+ATR                                 112.95
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:36,177 - __main__ - INFO - [2025-09-26 21:00:36] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:36,188 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:00:36
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    64990.59
+ATR                                 79.35
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:00:51,202 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:00:51,204 - __main__ - INFO - [MARKET] Condición: flat, ATR: 145.95
+2025-09-26 21:00:51,204 - __main__ - INFO - [2025-09-26 21:00:51] [DEBUG] Ejecutando log_status...
+2025-09-26 21:00:51,207 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:00:51
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64454.86
+ATR                                 156.89
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:00:51,207 - __main__ - INFO - [2025-09-26 21:00:51] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:00:51,219 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:00:51
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    66299.01
+ATR                                 77.96
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:06,210 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:01:06,210 - __main__ - INFO - [MARKET] Condición: flat, ATR: 160.70
+2025-09-26 21:01:06,211 - __main__ - INFO - [2025-09-26 21:01:06] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:06,218 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:01:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     68434.16
+ATR                                 181.72
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:06,218 - __main__ - INFO - [2025-09-26 21:01:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:06,225 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:01:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    63103.05
+ATR                                143.02
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:21,245 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:01:21,245 - __main__ - INFO - [MARKET] Condición: flat, ATR: 144.44
+2025-09-26 21:01:21,246 - __main__ - INFO - [2025-09-26 21:01:21] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:21,252 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:01:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65679.31
+ATR                                  74.42
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:21,253 - __main__ - INFO - [2025-09-26 21:01:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:21,260 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:01:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65322.54
+ATR                                181.18
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:36,269 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:01:36,270 - __main__ - INFO - [MARKET] Condición: flat, ATR: 89.60
+2025-09-26 21:01:36,270 - __main__ - INFO - [2025-09-26 21:01:36] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:36,278 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:01:36
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65329.90
+ATR                                 198.23
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:36,279 - __main__ - INFO - [2025-09-26 21:01:36] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:36,291 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:01:36
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65242.90
+ATR                                 84.48
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:01:51,302 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:01:51,302 - __main__ - INFO - [MARKET] Condición: flat, ATR: 194.54
+2025-09-26 21:01:51,305 - __main__ - INFO - [2025-09-26 21:01:51] [DEBUG] Ejecutando log_status...
+2025-09-26 21:01:51,311 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:01:51
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65436.61
+ATR                                 162.47
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:01:51,312 - __main__ - INFO - [2025-09-26 21:01:51] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:01:51,324 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:01:51
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65945.09
+ATR                                171.33
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:02:06,328 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:02:06,328 - __main__ - INFO - [MARKET] Condición: flat, ATR: 107.62
+2025-09-26 21:02:06,328 - __main__ - INFO - [2025-09-26 21:02:06] [DEBUG] Ejecutando log_status...
+2025-09-26 21:02:06,337 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:02:06
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     64391.55
+ATR                                  59.69
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:02:06,337 - __main__ - INFO - [2025-09-26 21:02:06] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:02:06,346 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:02:06
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    65744.07
+ATR                                158.63
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66
+2025-09-26 21:02:21,360 - __main__ - INFO - [DAILY_TARGET] Objetivo diario: $4.60 (0.92%)
+2025-09-26 21:02:21,361 - __main__ - INFO - [MARKET] Condición: flat, ATR: 193.16
+2025-09-26 21:02:21,361 - __main__ - INFO - [2025-09-26 21:02:21] [DEBUG] Ejecutando log_status...
+2025-09-26 21:02:21,367 - __main__ - INFO - 
+                                     Valor
+Timestamp              2025-09-26 21:02:21
+Capital Inicial                500.00 USDT
+Capital Actual                 500.00 USDT
+Balance de Billetera           500.00 USDT
+Ganancia/Pérdida (%)                 0.00%
+Órdenes Abiertas                         0
+Órdenes Cerradas                         0
+Precio Actual                     65525.08
+ATR                                  92.18
+EMA_Corta                             0.00
+EMA_Larga                             0.00
+Estado del Sistema                  Activo
+Grid Colocado                           Sí
+Daily Reset                     2025-09-26
+Daily Target                     4.60 USDT
+Daily PnL                        0.00 USDT
+Daily PnL (%)                        0.00%
+Daily Target Achieved                   No
+2025-09-26 21:02:21,369 - __main__ - INFO - [2025-09-26 21:02:21] [DEBUG] Ejecutando show_paper_trading_summary...
+2025-09-26 21:02:21,375 - __main__ - INFO - 
+                                    Valor
+Timestamp             2025-09-26 21:02:21
+Capital Inicial               500.00 USDT
+Capital Actual                500.00 USDT
+Balance de Billetera          500.00 USDT
+Ganancia/Pérdida (%)                0.00%
+Órdenes Simuladas                       4
+Precio Actual                    62759.18
+ATR                                185.75
+Estado del Sistema                 Activo
+Grid Colocado                          Sí
+Daily Target                    4.60 USDT
+Daily PnL                       0.00 USDT
+Daily PnL (%)                       0.00%
+Total Trades                           88
+Win Rate (%)                       64.77%
+Sharpe Ratio                         2.66

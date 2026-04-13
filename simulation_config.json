@@ -1,0 +1,138 @@
+{
+  "simulation": {
+    "name": "Real-Time Trading Simulation",
+    "description": "Simulación de trading en tiempo real con datos de Binance",
+    "initial_capital": 500.0,
+    "currency": "USDT",
+    "symbols": ["BTCUSDT", "ETHUSDT", "ADAUSDT", "SOLUSDT"],
+    "update_interval_seconds": 10,
+    "max_simulation_hours": 24
+  },
+  "strategy": {
+    "name": "Multi-Indicator Strategy",
+    "enabled": true,
+    "parameters": {
+      "sma_short_period": 10,
+      "sma_long_period": 20,
+      "rsi_period": 14,
+      "rsi_oversold": 30,
+      "rsi_overbought": 70,
+      "bollinger_period": 20,
+      "bollinger_std_dev": 2.0,
+      "signal_threshold": 2,
+      "min_signal_strength": 0.6
+    },
+    "entry_conditions": {
+      "require_volume_confirmation": true,
+      "min_volume_ratio": 1.2,
+      "max_spread_pct": 0.1,
+      "trend_confirmation_required": true
+    },
+    "exit_conditions": {
+      "take_profit_pct": 4.0,
+      "stop_loss_pct": 2.0,
+      "trailing_stop_enabled": true,
+      "trailing_stop_pct": 1.5,
+      "max_hold_time_minutes": 60
+    }
+  },
+  "risk_management": {
+    "max_risk_per_trade_pct": 2.0,
+    "max_daily_loss_pct": 5.0,
+    "max_drawdown_pct": 10.0,
+    "max_open_positions": 3,
+    "max_positions_per_symbol": 1,
+    "position_sizing_method": "fixed_risk",
+    "kelly_criterion_enabled": false,
+    "correlation_limit": 0.7
+  },
+  "costs": {
+    "commission_rate": 0.001,
+    "spread_cost_pct": 0.0005,
+    "slippage_pct": 0.0002,
+    "funding_rate_daily": 0.0001
+  },
+  "market_conditions": {
+    "volatility_adjustment": true,
+    "market_hours_only": false,
+    "weekend_trading": true,
+    "news_impact_consideration": false,
+    "liquidity_filter_enabled": true,
+    "min_daily_volume": 1000000
+  },
+  "performance_tracking": {
+    "benchmark_symbol": "BTCUSDT",
+    "calculate_sharpe_ratio": true,
+    "calculate_sortino_ratio": true,
+    "calculate_calmar_ratio": true,
+    "rolling_window_days": 30,
+    "performance_update_frequency": "real_time"
+  },
+  "visualization": {
+    "real_time_charts": true,
+    "chart_update_interval_seconds": 30,
+    "show_equity_curve": true,
+    "show_drawdown_chart": true,
+    "show_trade_distribution": true,
+    "show_performance_metrics": true,
+    "chart_theme": "dark",
+    "save_charts": true
+  },
+  "logging": {
+    "log_level": "INFO",
+    "log_to_file": true,
+    "log_to_console": true,
+    "detailed_trade_logs": true,
+    "market_data_logs": true,
+    "performance_logs": true,
+    "error_logs": true,
+    "log_rotation_size_mb": 100
+  },
+  "alerts": {
+    "enabled": true,
+    "telegram_notifications": false,
+    "email_notifications": false,
+    "console_alerts": true,
+    "alert_conditions": {
+      "large_loss_pct": 3.0,
+      "large_gain_pct": 5.0,
+      "drawdown_threshold_pct": 8.0,
+      "daily_loss_threshold_pct": 4.0,
+      "connection_errors": true
+    }
+  },
+  "data_sources": {
+    "primary": "binance",
+    "backup": "none",
+    "real_time_data": true,
+    "historical_data_days": 30,
+    "data_validation": true,
+    "outlier_detection": true,
+    "data_smoothing": false
+  },
+  "advanced_features": {
+    "machine_learning_signals": false,
+    "sentiment_analysis": false,
+    "multi_timeframe_analysis": true,
+    "portfolio_optimization": false,
+    "dynamic_position_sizing": true,
+    "adaptive_parameters": false,
+    "regime_detection": false
+  },
+  "simulation_modes": {
+    "paper_trading": true,
+    "live_trading": false,
+    "backtest_mode": false,
+    "stress_testing": false,
+    "monte_carlo_simulation": false
+  },
+  "output": {
+    "generate_report": true,
+    "report_format": "json",
+    "export_trades": true,
+    "export_equity_curve": true,
+    "export_metrics": true,
+    "save_charts_as_images": true,
+    "compress_output": false
+  }
+}

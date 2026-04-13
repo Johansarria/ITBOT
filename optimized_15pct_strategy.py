@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Optimizada 15% Mensual
+# Estrategia Optimizada 20% Mensual
 Versión balanceada entre agresividad y control de riesgo
 """
 
@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 
 class Optimized15PctStrategy:
     """
-    Estrategia optimizada para alcanzar 15% mensual con riesgo controlado
+    Estrategia optimizada para alcanzar 20% mensual con riesgo controlado
     """
     
     def __init__(self, config: Dict[str, Any] = None):
@@ -612,7 +612,7 @@ class OptimizedBacktester:
             'avg_win': avg_win,
             'avg_loss': avg_loss,
             'max_drawdown_pct': max_drawdown,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }
@@ -673,7 +673,7 @@ def run_optimized_strategy_test():
     """
     Ejecuta test de la estrategia optimizada
     """
-    print("🎯 Iniciando test de Estrategia Optimizada 15% Mensual")
+    print("🎯 Iniciando test de Estrategia Optimizada 20% Mensual")
     print("=" * 60)
     
     # Generar datos
@@ -695,7 +695,7 @@ def run_optimized_strategy_test():
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS DETALLADAS")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -712,13 +712,13 @@ def run_optimized_strategy_test():
     filename = f"optimized_15pct_results_{timestamp}.txt"
     
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS ESTRATEGIA OPTIMIZADA 15% MENSUAL\n")
+        f.write("RESULTADOS ESTRATEGIA OPTIMIZADA 20% MENSUAL\n")
         f.write("=" * 50 + "\n\n")
         f.write(f"Balance inicial: ${results['initial_balance']:,.2f}\n")
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         
         f.write("ESTADÍSTICAS DETALLADAS:\n")
         f.write("-" * 25 + "\n")

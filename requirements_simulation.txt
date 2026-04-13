@@ -1,0 +1,104 @@
+# Requisitos para la Simulación de Trading en Tiempo Real
+# Instalar con: pip install -r requirements_simulation.txt
+
+# APIs y conexiones
+requests>=2.31.0
+websockets>=11.0.3
+aiohttp>=3.8.5
+
+# Análisis de datos y cálculos
+numpy>=1.24.3
+pandas>=2.0.3
+scipy>=1.11.1
+
+# Visualización
+matplotlib>=3.7.2
+seaborn>=0.12.2
+plotly>=5.15.0
+
+# Indicadores técnicos
+TA-Lib>=0.4.25
+pandas-ta>=0.3.14b0
+
+# Análisis estadístico
+statsmodels>=0.14.0
+sklearn>=1.3.0
+
+# Manejo de fechas y tiempo
+python-dateutil>=2.8.2
+pytz>=2023.3
+
+# Configuración y logging
+pydantic>=2.1.1
+pydantic-settings>=2.0.2
+loguru>=0.7.0
+
+# Utilidades
+tqdm>=4.65.0
+colorama>=0.4.6
+rich>=13.4.2
+
+# Async y concurrencia
+aiofiles>=23.1.0
+asyncio-throttle>=1.0.2
+
+# Criptografía y seguridad
+cryptography>=41.0.3
+
+# Base de datos (opcional)
+sqlalchemy>=2.0.19
+alembic>=1.11.1
+
+# Testing (opcional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.1
+
+# Jupyter notebooks (opcional)
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Optimización numérica
+numba>=0.57.1
+
+# Manejo de archivos
+openpyxl>=3.1.2
+
+# Networking avanzado
+httpx>=0.24.1
+
+# Monitoreo de sistema
+psutil>=5.9.5
+
+# Compresión
+lz4>=4.3.2
+
+# Formato de datos
+orjson>=3.9.2
+
+# Validación de datos
+cerberus>=1.3.4
+
+# CLI mejorado
+click>=8.1.6
+typer>=0.9.0
+
+# Configuración avanzada
+omegaconf>=2.3.0
+hydra-core>=1.3.2
+
+# Métricas avanzadas
+empyrical>=0.5.5
+quantlib>=1.31
+
+# Notificaciones
+plyer>=2.1.0
+
+# Manejo de errores
+sentry-sdk>=1.29.2
+
+# Paralelización
+joblib>=1.3.1
+
+# Formato de salida
+tabulate>=0.9.0
+prettytable>=3.8.0

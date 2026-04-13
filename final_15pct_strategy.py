@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Final 15% Mensual
+Estrategia Final 20% Mensual
 Versión balanceada que combina lo mejor de todas las estrategias anteriores
 """
 
@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 
 class Final15PctStrategy:
     """
-    Estrategia final optimizada para alcanzar consistentemente 15% mensual
+    Estrategia final optimizada para alcanzar consistentemente 20% mensual
     """
     
     def __init__(self, config: Dict[str, Any] = None):
@@ -690,7 +690,7 @@ class FinalBacktester:
             'max_drawdown_pct': max_drawdown,
             'trades_with_scale_out': len(trades_with_scale_out),
             'avg_scale_outs_per_trade': avg_scale_outs,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }
@@ -751,7 +751,7 @@ def run_final_strategy_test():
     """
     Ejecuta test de la estrategia final
     """
-    print("🏆 Iniciando test de Estrategia Final 15% Mensual")
+    print("🏆 Iniciando test de Estrategia Final 20% Mensual")
     print("=" * 60)
     
     # Generar datos
@@ -773,7 +773,7 @@ def run_final_strategy_test():
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS FINALES")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -787,16 +787,16 @@ def run_final_strategy_test():
     
     # Guardar resultados
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"final_15pct_results_{timestamp}.txt"
+    filename = f"final_20pct_results_{timestamp}.txt"
     
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS ESTRATEGIA FINAL 15% MENSUAL\n")
+        f.write("RESULTADOS ESTRATEGIA FINAL 20% MENSUAL\n")
         f.write("=" * 45 + "\n\n")
         f.write(f"Balance inicial: ${results['initial_balance']:,.2f}\n")
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         
         f.write("ESTADÍSTICAS FINALES:\n")
         f.write("-" * 25 + "\n")

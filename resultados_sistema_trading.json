@@ -1,0 +1,167 @@
+{
+  "basic_results": {
+    "initial_capital": 10000,
+    "final_capital": 10000,
+    "total_trades": 1,
+    "total_signals": 1,
+    "strategy_performance": {
+      "MeanReversion": {
+        "total_signals": 1,
+        "avg_confidence": 0.022525750998716773,
+        "buy_signals": 0,
+        "sell_signals": 1,
+        "regimes_used": [
+          "HIGH_VOL"
+        ]
+      }
+    },
+    "regime_distribution": {
+      "HIGH_VOL": {
+        "count": 63,
+        "percentage": 62.37623762376238
+      },
+      "MED_VOL": {
+        "count": 38,
+        "percentage": 37.62376237623762
+      }
+    },
+    "equity_curve": [
+      {
+        "timestamp": "2024-11-13T00:00:00",
+        "equity": 10000
+      }
+    ],
+    "trades": [
+      {
+        "timestamp": "2024-11-13T00:00:00",
+        "signal_type": "SELL",
+        "entry_price": 29006.130472599398,
+        "position_size": 0.03447547065764765,
+        "strategy": "MeanReversion",
+        "regime": "HIGH_VOL",
+        "confidence": 0.022525750998716773
+      }
+    ]
+  },
+  "regime_performance": {
+    "total_signals": 102,
+    "avg_confidence": 0.672847238158702,
+    "regime_distribution": {
+      "HIGH_VOL": 61.76470588235294,
+      "MED_VOL": 37.254901960784316,
+      "LOW_VOL": 0.9803921568627451
+    },
+    "avg_confidence_by_regime": {
+      "HIGH_VOL": 0.7413002768219039,
+      "MED_VOL": 0.5644127896371195,
+      "LOW_VOL": 0.4808148461970916
+    },
+    "regime_counts": {
+      "HIGH_VOL": 63,
+      "MED_VOL": 38,
+      "LOW_VOL": 1
+    }
+  },
+  "strategy_performance": {
+    "MeanReversion": {
+      "total_signals": 1,
+      "avg_confidence": 0.022525750998716773,
+      "buy_signals": 0,
+      "sell_signals": 1,
+      "regimes_used": [
+        "HIGH_VOL"
+      ]
+    }
+  },
+  "regime_distribution": {
+    "HIGH_VOL": {
+      "count": 63,
+      "percentage": 62.37623762376238
+    },
+    "MED_VOL": {
+      "count": 38,
+      "percentage": 37.62376237623762
+    }
+  },
+  "system_config": {
+    "regime_detection": {
+      "use_hmm": true,
+      "atr_period": 14,
+      "percentile_window": 252,
+      "low_vol_threshold": 40,
+      "high_vol_threshold": 80
+    },
+    "strategies": {
+      "trend_following": {
+        "sma_fast": 10,
+        "sma_slow": 20,
+        "atr_multiplier": 2.0
+      },
+      "mean_reversion": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70,
+        "bb_period": 20
+      },
+      "conservative": {
+        "ema_fast": 12,
+        "ema_slow": 26,
+        "rsi_neutral_low": 40,
+        "rsi_neutral_high": 60
+      }
+    },
+    "risk_management": {
+      "max_daily_loss": 0.05,
+      "max_total_drawdown": 0.15,
+      "emergency_stop_drawdown": 0.2
+    },
+    "backtesting": {
+      "train_ratio": 0.7,
+      "walk_forward_periods": 4,
+      "monte_carlo_simulations": 100
+    }
+  },
+  "data_summary": {
+    "total_periods": 366,
+    "date_range": {
+      "start": "2024-01-01T00:00:00",
+      "end": "2024-12-31T00:00:00"
+    },
+    "price_range": {
+      "min": 21235.49383827716,
+      "max": 72437.24633437865,
+      "start": 45000.0,
+      "end": 26123.346123472133
+    }
+  },
+  "detailed_analysis": {
+    "buy_hold_performance": {
+      "total_return": -41.94811972561748,
+      "max_drawdown": -113.78167221355886,
+      "volatility": 72.59779768258775
+    },
+    "regime_volatility_analysis": {
+      "MED_VOL": {
+        "mean_return": 0.00696035046448232,
+        "volatility": 0.07206846262158467,
+        "periods": 38
+      },
+      "HIGH_VOL": {
+        "mean_return": 0.007151814180539846,
+        "volatility": 0.042043234217398286,
+        "periods": 63
+      }
+    },
+    "signal_distribution": {
+      "by_regime": {
+        "LOW_VOL": 0,
+        "MED_VOL": 0,
+        "HIGH_VOL": 1,
+        "UNKNOWN": 0
+      },
+      "by_strategy": {
+        "MeanReversion": 1
+      }
+    }
+  }
+}

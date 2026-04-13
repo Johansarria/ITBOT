@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-09-20T13:21:48.129181",
+  "top3_symbols_raw": [
+    "AVAXUSDT",
+    "MATICUSDT",
+    "DOTUSDT"
+  ],
+  "top3_ccxt": [
+    "AVAX/USDT",
+    "MATIC/USDT",
+    "DOT/USDT"
+  ],
+  "summary": {
+    "period_days": 30,
+    "initial_capital": 10000,
+    "final_capital": 10058.69172631699,
+    "total_pnl": 58.69172631698997,
+    "total_return_pct": 0.5869172631698998,
+    "monthly_return_pct": 0.5869172631698998,
+    "total_trades": 1724,
+    "win_rate_pct": 44.5475638051044,
+    "profit_factor": 1.0096890819943287,
+    "max_drawdown_pct": -4.260877796052269
+  }
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "symbol": "ETHUSDT",
+    "period": "2024-01-01 to 2024-03-31",
+    "total_return": 3.7510543494712465,
+    "daily_return_avg": 0.04167838166079163,
+    "monthly_return_avg": 1.250351449823749,
+    "total_trades": 1,
+    "win_rate": 100.0,
+    "profit_factor": Infinity,
+    "max_drawdown": 0.0,
+    "sharpe_ratio": 0,
+    "meets_daily_target": 

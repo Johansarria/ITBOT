@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Agresiva para 15% Rentabilidad Mensual
+# Estrategia Agresiva para 20% Rentabilidad Mensual
 Combina múltiples indicadores técnicos, gestión de riesgo dinámica y parámetros optimizados
 """
 
@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 
 class Aggressive15PctStrategy:
     """
-    Estrategia agresiva diseñada para generar mínimo 15% de rentabilidad mensual
+    Estrategia agresiva diseñada para generar mínimo 20% de rentabilidad mensual
     """
     
     def __init__(self, config: Dict[str, Any] = None):
@@ -378,7 +378,7 @@ class Aggressive15PctStrategy:
     def get_strategy_info(self) -> Dict[str, Any]:
         """Retorna información de la estrategia"""
         return {
-            'name': 'Aggressive 15% Monthly Strategy',
+            'name': 'Aggressive 20% Monthly Strategy',
             'target_monthly_return': 0.15,
             'risk_per_trade': self.config['risk_per_trade'],
             'max_daily_trades': self.max_daily_trades,
@@ -576,7 +576,7 @@ class AggressiveBacktester:
             'max_drawdown_pct': max_drawdown,
             'balance_history': self.balance_history,
             'trades': self.trades,
-            'target_achieved': monthly_return >= 15.0
+            'target_achieved': monthly_return >= 20.0
         }
 
 
@@ -615,7 +615,7 @@ def run_aggressive_strategy_test():
     """
     Ejecuta test de la estrategia agresiva
     """
-    print("🚀 Iniciando test de Estrategia Agresiva para 15% Mensual")
+    print("🚀 Iniciando test de Estrategia Agresiva para 20% Mensual")
     print("=" * 60)
     
     # Generar datos de prueba
@@ -637,7 +637,7 @@ def run_aggressive_strategy_test():
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS DE TRADING")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -651,13 +651,13 @@ def run_aggressive_strategy_test():
     filename = f"aggressive_15pct_results_{timestamp}.txt"
     
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS ESTRATEGIA AGRESIVA 15% MENSUAL\n")
+        f.write("RESULTADOS ESTRATEGIA AGRESIVA 20% MENSUAL\n")
         f.write("=" * 50 + "\n\n")
         f.write(f"Balance inicial: ${results['initial_balance']:,.2f}\n")
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         f.write(f"Total de operaciones: {results['total_trades']}\n")
         f.write(f"Win Rate: {results['win_rate_pct']:.2f}%\n")
         f.write(f"Máximo Drawdown: {results['max_drawdown_pct']:.2f}%\n\n")

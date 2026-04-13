@@ -1,0 +1,46 @@
+{
+  "metrics": {
+    "initial_capital": 500.0,
+    "final_capital": 500.0,
+    "total_return_pct": 0.0,
+    "total_return_usdt": 0.0,
+    "daily_return_pct": 0.0,
+    "monthly_return_pct": 0.0,
+    "max_drawdown_pct": 0.0,
+    "max_drawdown_usdt": 0.0,
+    "sharpe_ratio": 0.0,
+    "sortino_ratio": 0.0,
+    "calmar_ratio": 0.0,
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "avg_win_pct": 0.0,
+    "avg_loss_pct": 0.0,
+    "max_consecutive_wins": 0,
+    "max_consecutive_losses": 0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "losing_trades": 0,
+    "total_commission_usdt": 0.0,
+    "avg_trade_duration_minutes": 0.0,
+    "trades_per_day": 0.0,
+    "daily_target_achievement": 0.0,
+    "monthly_target_achievement": 0.0,
+    "risk_adjusted_return": 0.0,
+    "volatility_pct": 0.0,
+    "var_95_pct": 0.0,
+    "expected_shortfall_pct": 0.0
+  },
+  "execution_stats": {
+    "total_signals_generated": 1200,
+    "total_trades_executed": 0,
+    "signal_to_trade_ratio": 0.0,
+    "execution_time_minutes": 0.37858185
+  },
+  "summary": {
+    "strategy_version": "V4 Ultra-Agresiva",
+    "capital_base": 500.0,
+    "objetivo_mensual": "15%",
+    "periodo_testing": "30 días",
+    "timestamp": "20250921_121548"
+  }
+}

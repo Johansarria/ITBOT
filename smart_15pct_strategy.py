@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Estrategia Inteligente 15% Mensual
+# Estrategia Inteligente 20% Mensual
 Combina Machine Learning, filtros de calidad y gestión de riesgo adaptativa
 """
 
@@ -17,7 +17,7 @@ warnings.filterwarnings('ignore')
 
 class Smart15PctStrategy:
     """
-    Estrategia inteligente que combina ML y análisis técnico para 15% mensual
+    Estrategia inteligente que combina ML y análisis técnico para 20% mensual
     """
     
     def __init__(self, config: Dict[str, Any] = None):
@@ -641,7 +641,7 @@ class SmartBacktester:
             'winning_trades': len(winning_trades),
             'win_rate_pct': win_rate,
             'max_drawdown_pct': max_drawdown,
-            'target_achieved': monthly_return >= 15.0,
+            'target_achieved': monthly_return >= 20.0,
             'balance_history': self.balance_history,
             'trades': self.trades
         }
@@ -697,7 +697,7 @@ def run_smart_strategy_test():
     """
     Ejecuta test de la estrategia inteligente
     """
-    print("🧠 Iniciando test de Estrategia Inteligente 15% Mensual")
+    print("🧠 Iniciando test de Estrategia Inteligente 20% Mensual")
     print("=" * 60)
     
     # Generar datos
@@ -719,7 +719,7 @@ def run_smart_strategy_test():
     print(f"Balance final: ${results['final_balance']:,.2f}")
     print(f"Retorno total: {results['total_return_pct']:.2f}%")
     print(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%")
-    print(f"\n🎯 OBJETIVO 15% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
+    print(f"\n🎯 OBJETIVO 20% MENSUAL: {'✅ ALCANZADO' if results['target_achieved'] else '❌ NO ALCANZADO'}")
     
     print(f"\n📊 ESTADÍSTICAS DE TRADING")
     print(f"Total de operaciones: {results['total_trades']}")
@@ -732,13 +732,13 @@ def run_smart_strategy_test():
     filename = f"smart_15pct_results_{timestamp}.txt"
     
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS ESTRATEGIA INTELIGENTE 15% MENSUAL\n")
+        f.write("RESULTADOS ESTRATEGIA INTELIGENTE 20% MENSUAL\n")
         f.write("=" * 50 + "\n\n")
         f.write(f"Balance inicial: ${results['initial_balance']:,.2f}\n")
         f.write(f"Balance final: ${results['final_balance']:,.2f}\n")
         f.write(f"Retorno total: {results['total_return_pct']:.2f}%\n")
         f.write(f"Retorno mensual promedio: {results['monthly_return_pct']:.2f}%\n")
-        f.write(f"Objetivo 15% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
+        f.write(f"Objetivo 20% mensual: {'ALCANZADO' if results['target_achieved'] else 'NO ALCANZADO'}\n\n")
         f.write(f"Total de operaciones: {results['total_trades']}\n")
         f.write(f"Win Rate: {results['win_rate_pct']:.2f}%\n")
         f.write(f"Máximo Drawdown: {results['max_drawdown_pct']:.2f}%\n\n")
