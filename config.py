@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     TELEGRAM_BOT_TOKEN: str
     TELEGRAM_CHAT_ID: int
     ADMIN_TELEGRAM_ID: int
-    KILL_SWITCH_PASSWORD: Optional[str] = "emergency123"  # Password por defecto
+    KILL_SWITCH_PASSWORD: Optional[str] = None  # Configurar en .env: KILL_SWITCH_PASSWORD=tu_clave_segura
     # Si es True, antes de confirmar se pedirá contraseña adicional (por defecto False para compatibilidad con tests)
     KILL_SWITCH_REQUIRE_PASSWORD: bool = False
     BINANCE_API_KEY: str
@@ -55,13 +55,15 @@ class Settings(BaseSettings):
     INTERNAL_API_SECRET: Optional[str] = os.getenv("INTERNAL_API_SECRET")
 
     # --- GESTIÓN DE RIESGO ---
-    # Parámetros de riesgo fundamentales para el MVP
-    DEFAULT_RISK_PERCENTAGE: float = 1.0  # Mantenido por compatibilidad con lógica existente de riesgo manual.
-    MAX_DAILY_OPERATIONS: int = 10  # Límite de operaciones por día, no modificado en esta tarea.
-    MAX_TRADE_RISK_PCT: float = 1.0 # Mantenido por si es usado en cálculos de riesgo por operación individuales.
+    # Parámetros de riesgo optimizados para objetivo diario del 1%
+    DEFAULT_RISK_PERCENTAGE: float = 1.5  # Aumentado para objetivo diario más agresivo
+    MAX_DAILY_OPERATIONS: int = 15  # Aumentado para más oportunidades diarias
+    MAX_TRADE_RISK_PCT: float = 1.5 # Aumentado para objetivo diario del 1%
+    DAILY_TARGET_PCT: float = 1.0  # Objetivo diario del 1%
+    MAX_DAILY_LOSS_PCT: float = 2.0  # Límite de pérdida diaria
 
-    RISK_PER_TRADE_STOP_LOSS_PCT: float = 2.0
-    RISK_PER_TRADE_TAKE_PROFIT_PCT: float = 4.0
+    RISK_PER_TRADE_STOP_LOSS_PCT: float = 1.5  # Reducido para trades más frecuentes
+    RISK_PER_TRADE_TAKE_PROFIT_PCT: float = 2.5  # Ajustado para ratio 1:1.67
     RISK_MAX_EXPOSURE_PCT: float = 30.0
     RISK_MAX_DAILY_DRAWDOWN_PCT: float = 3.0
     RISK_MAX_CONCURRENT_TRADES: int = 2
