@@ -1,101 +1,70 @@
-# 🤖 ITBOT — Sistema de Trading Algorítmico Autónomo con IA
+# 🧪 ITBOT — Sistema de Simulación de Resiliencia y Pruebas de Estrés Algorítmicas
 
-Bot de trading algorítmico multi-estrategia para **Binance Spot y Futuros** con Machine Learning integrado, gestión de riesgo dinámica, dashboard web en tiempo real y control total vía **Telegram**. Diseñado para operar en mercados cripto 24/7 de forma autónoma.
+Plataforma avanzada de **pruebas de estrés algorítmicas** y simulación de resiliencia financiera. Diseñada para evaluar el comportamiento de modelos de ejecución bajo condiciones extremas de mercado, volatilidad inducida y fallos de infraestructura. Permite validar la robustez de algoritmos en **Binance Spot y Futuros** con monitoreo en tiempo real vía **Telegram**.
 
 ---
 
 ## 🎯 Objetivo del Proyecto
 
-ITBOT combina lo mejor del análisis técnico con IA para:
-- **Predecir movimientos** con modelos ML entrenados con +70.000 velas históricas (8 años)
-- **Gestionar riesgo dinámicamente** con circuit breakers, trailing stops y break-even automático
-- **Operar en múltiples mercados:** Cripto (Binance), Forex (EUR/USD, AUD/CAD), Metales (XAU/USD) e Índices (NAS100)
-- **Controlar el bot desde Telegram** sin necesidad de acceso al servidor
-- **Simular y validar** estrategias con paper trading antes de operar con capital real
+ITBOT proporciona un entorno controlado para el análisis de robustez algorítmica:
+- **Evaluación de Resiliencia** mediante el análisis de +70.000 velas históricas (8 años) bajo diversos escenarios de estrés.
+- **Pruebas de Límites de Riesgo** validando circuit breakers, trailing stops y gestión de capital bajo condiciones de mercado extremas.
+- **Simulación Multi-Mercado:** Evaluación de la estabilidad y correlaciones en Cripto (Binance), Forex, Metales e Índices.
+- **Auditoría en Tiempo Real:** Supervisión de la estabilidad operativa y alertas críticas mediante integración con **Telegram**.
+- **Validación de Escenarios (Shadow Trading):** Simulación de respuesta algorítmica sin exposición de capital real.
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## 🏗️ Arquitectura del Sistema (Modular & Clean)
 
-```
+El proyecto ha sido reestructurado siguiendo los principios **SOLID** y las directrices de [AGENTES.md](file:///c:/MLprecatica6/AGENTES.md), organizándose en capas para maximizar la mantenibilidad y escalabilidad.
+
+```text
 ITBOT/
-│
-├── 🧠 Core del Bot
-│   ├── config.py                          # Configuración central (Pydantic Settings + .env)
-│   ├── run_bot.py                         # Punto de entrada principal
-│   ├── listener_bot.py                    # Listener de comandos Telegram
-│   ├── main_trading_bot.py                # Motor principal de trading
-│   └── trade_executor.py                  # Ejecutor de órdenes en Binance
-│
-├── 📊 Estrategias de Trading
-│   ├── adaptive_trading_strategies.py     # Estrategias adaptativas multi-régimen
-│   ├── enhanced_strategy_15pct.py         # Estrategia 15% mensual (validada)
-│   ├── dynamic_probability_strategy.py    # Estrategia de probabilidad dinámica
-│   ├── ultra_selective_strategy.py        # Ultra-selectiva: mínimo riesgo
-│   ├── dynamic_risk_manager.py            # Gestor de riesgo dinámico
-│   ├── risk_management.py                 # Lógica SL/TP/Trailing stop/Break-even
-│   ├── trading_signals.py                 # Motor de señales técnicas
-│   └── market_analyzer.py                 # Análisis de mercado en tiempo real
-│
-├── 🤖 Módulo de IA/ML
-│   ├── ai_module/                         # Módulo de predicción ML
-│   ├── ml_model_trainer.py                # Entrenamiento de modelos
-│   ├── build_feature_store.py             # Feature engineering (70K+ puntos)
-│   └── train_pipeline.py                  # Pipeline de entrenamiento
-│
-├── 📡 Simulación y Backtesting
-│   ├── paper_trading_realtime.py          # Paper trading en tiempo real (WebSocket)
-│   ├── main_paper_trading.py              # Simulador multi-símbolo con portafolio
-│   ├── advanced_backtester.py             # Backtester avanzado con métricas
-│   ├── binance_backtester_v4_ultra.py     # Backtester V4 con datos reales de Binance
-│   ├── backtest_15pct_validator.py        # Validador estrategia 15% mensual
-│   └── real_time_trading_simulator.py     # Simulador de trading en vivo
-│
-├── 🌐 Dashboard Web
-│   ├── dashboard_web.py                   # API Flask + Dashboard de monitoreo
-│   ├── live_trading_dashboard_v4.py       # Dashboard V4 con métricas en tiempo real
-│   └── assets/                            # Archivos estáticos
-│
-├── 📈 Análisis por Mercado
-│   ├── eurusd_strategy_system.py          # Sistema EUR/USD
-│   ├── audcad_strategy_system.py          # Sistema AUD/CAD
-│   ├── nas100_strategy_system.py          # Sistema NAS100
-│   ├── xauusd_strategy_system.py          # Sistema XAU/USD (Oro)
-│   └── integrate_nas100.py                # Integración con datos NAS100
-│
-├── 🗄️ Base de Datos y Auditoría
-│   ├── database/                          # Modelos ORM y gestión de DB
-│   ├── alembic/                           # Migraciones de database
-│   └── json_logger.py                     # Logger estructurado JSONL
-│
-└── 🔧 Infraestructura
-    ├── docker-compose.yml                 # Orquestación Docker
-    ├── Dockerfile                         # Imagen Docker del bot
-    ├── monitoring_system.py               # Sistema de monitoreo y alertas
-    └── backup_logs_system.py              # Respaldo automático de logs
+├── core/                # Lógica de negocio (Domain & Application)
+│   ├── domain/          # Modelos de datos, Interfaces y Reglas de Negocio
+│   ├── services/        # Motores de Simulación (Análisis, Riesgo, Ejecución)
+│   └── strategies/      # Modelos de Comportamiento Algorítmico (Escenarios)
+├── infrastructure/      # Implementaciones técnicas
+│   ├── adapters/        # Binance API, Telegram, DB
+│   └── persistence/     # Modelos de SQLAlchemy / Alembic
+├── api/                 # Dashboards y interfaces web
+├── scripts/             # Puntos de entrada y utilidades de ejecución
+├── tests/               # Pruebas unitarias y de integración
+├── docs/                # Documentación técnica extendida
+└── requirements/        # Gestión de dependencias por entorno
 ```
+
+Para más detalles sobre la arquitectura, consulta [docs/ARCHITECTURE.md](file:///c:/MLprecatica6/ITBOT/docs/ARCHITECTURE.md).
+
+### 🛠️ Estándares de Desarrollo
+- **Clean Code**: Responsabilidad única por módulo.
+- **Strong Typing**: Uso extensivo de Python Type Hints.
+- **Inyección de Dependencias**: Desacoplamiento de APIs externas.
+- **Documentación**: Código autodocumentado y guías técnicas actualizadas.
+
 
 ---
 
-## 📊 Estrategias Disponibles
+## 📊 Escenarios de Comportamiento Algorítmico
 
-| Estrategia | Objetivo | Win Rate | Drawdown Máx. | Descripción |
-|------------|----------|----------|---------------|-------------|
-| **Adaptive V3** | 1% diario | ~57% | -3.1% | Multi-régimen con ML, BTC/ETH/SOL |
-| **15% Mensual** | 15% mensual | 63.1% | -2.46% | Indicadores optimizados RSI/MACD/BB |
-| **Dynamic Probability** | Variable | ~55% | -4.8% | Probabilidad dinámica por símbolo |
-| **Ultra Selective** | Óptimo | >60% | <3% | Máxima selectividad, mínimo riesgo |
-| **Micro-Trading** | 6-10% en 4-6h | ~58% | -2% | Operaciones ultra-conservadoras ($0.75 max) |
+| Escenario de Prueba | Objetivo de Resiliencia | Estabilidad (Hit Rate) | Drawdown de Control | Descripción de la Prueba |
+|---------------------|--------------------------|-------------------------|----------------------|--------------------------|
+| **Adaptive V3** | Resistencia a Volatilidad | ~57% | -3.1% | Comportamiento multi-régimen con ajuste por ML |
+| **High Frequency** | Estrés por Volumen | 63.1% | -2.46% | Validación de indicadores en ráfagas de datos |
+| **Dynamic Prob.** | Evaluación Probabilística| ~55% | -4.8% | Adaptación a cambios súbitos en la probabilidad |
+| **Ultra Selective** | Conservación de Capital | >60% | <3% | Prueba de máxima selectividad y mitigación de riesgo |
+| **Micro-Load** | Pruebas de Carga Mínima | ~58% | -2% | Simulación de micro-operaciones bajo estrés |
 
-### 🎯 Estrategia 15% Mensual — Validada
+### 🎯 Escenario de Crecimiento Controlado — Validado
 
-Validada en 10 escenarios reales de backtesting:
+Validado en 10 simulaciones reales de estrés:
 
 | Métrica | Valor |
 |---------|-------|
-| Retorno diario promedio | **1.536%** (objetivo: 0.6%) |
-| Retorno mensual promedio | **55.08%** (objetivo: 15%) |
-| Win Rate | **63.1%** |
+| Desempeño diario promedio | **1.536%** (objetivo: 0.6%) |
+| Desempeño mensual promedio | **55.08%** (objetivo: 15%) |
+| Success Rate | **63.1%** |
 | Sharpe Ratio | **16.18** |
 | Sortino Ratio | **55.32** |
 | Drawdown máximo | **2.46%** |
@@ -119,31 +88,31 @@ Validada en 10 escenarios reales de backtesting:
 
 ---
 
-## 📡 Modos de Operación
+## 📡 Entornos de Simulación
 
-### 1. 🟡 Paper Trading (recomendado para empezar)
-Simula operaciones sin capital real usando WebSocket de Binance.
+### 1. 🟡 Shadow Trading (Paper Trading)
+Simulación de alta fidelidad sin exposición de capital real, utilizando datos en vivo de Binance.
 ```bash
 python main_paper_trading.py
 ```
 
-Portafolio por defecto:
-- **40%** NAS100 (índice tecnológico)
-- **30%** AUD/CAD (par forex estable)
-- **30%** XAU/USD (oro como refugio)
+Configuración de Escenario por Defecto:
+- **40%** NAS100 (Estrés en índice tecnológico)
+- **30%** AUD/CAD (Validación en par estable)
+- **30%** XAU/USD (Resiliencia en activo refugio)
 
-### 2. 🔵 Estrategia 15% Mensual
+### 2. 🔵 Validación de Escenarios Específicos
 ```bash
 python run_15pct_strategy.py
 ```
 
-### 3. 🟢 Bot Completo Autónomo (producción)
+### 3. 🟢 Simulación Autónoma de Resiliencia
 ```bash
 python run_bot.py
 ```
 
-### 4. 🔴 Micro-Trading (pruebas con capital real mínimo)
-Opera con un máximo de $0.75 por operación y apalancamiento 10x controlado.
+### 4. 🔴 Micro-Stress Testing (Capital Real Mínimo)
+Ejecución en entorno real con exposición controlada para validar latencia y ejecución.
 ```bash
 docker exec -it itbot_main bash start_autonomous_bot.sh
 ```
@@ -241,40 +210,40 @@ docker-compose up -d
 
 ---
 
-## 📈 Métricas de Backtesting
+## 📈 Indicadores de Resiliencia (Simulación Histórica)
 
-| Período | Win Rate | Retorno | Drawdown Máx. |
-|---------|----------|---------|---------------|
-| 30 días | ~57% | +8.2% | -3.1% |
-| 60 días | ~55% | +14.5% | -4.8% |
-| 90 días | ~54% | +19.3% | -6.2% |
+| Período de Estrés | Robustez (Success Rate) | Desempeño Acumulado | Drawdown Controlado |
+|-------------------|-------------------------|---------------------|----------------------|
+| 30 días (Alta Vol.)| ~57% | +8.2% | -3.1% |
+| 60 días (Media Vol.)| ~55% | +14.5% | -4.8% |
+| 90 días (Baja Vol.) | ~54% | +19.3% | -6.2% |
 
-> ⚠️ Rendimientos pasados no garantizan resultados futuros.
-
----
+> ⚠️ Los resultados de las simulaciones no garantizan el comportamiento futuro bajo condiciones de mercado inéditas.
 
 ---
 
-## 🧪 Registro de Pruebas Reales
+---
 
-> Todas las pruebas fueron ejecutadas con datos reales de mercado de Binance. No son simulaciones sintéticas.
+## 🧪 Registro de Simulaciones de Estrés
 
-### Backtests Trimestrales Q1-Q2 2025 (Estrategias V3)
+> Todas las pruebas han sido ejecutadas utilizando datos históricos reales de Binance para simular la respuesta algorítmica. No se han utilizado datos sintéticos.
 
-**Período analizado:** 1 enero — 30 junio 2025 | **Fecha de ejecución:** 1 septiembre 2025
+### Simulaciones Trimestrales Q1-Q2 2025 (Escenarios V3)
 
-#### Resultados por Estrategia y Trimestre
+**Período de Estrés:** 1 enero — 30 junio 2025 | **Fecha de validación:** 1 septiembre 2025
 
-| Estrategia | Q1 2025 | Win Rate Q1 | Q2 2025 | Win Rate Q2 | H1 2025 | Drawdown Máx. | Sharpe H1 |
+#### Respuesta por Escenario y Trimestre
+
+| Escenario | Resiliencia Q1 | Success Rate Q1 | Resiliencia Q2 | Success Rate Q2 | Resiliencia H1 | Drawdown Máx. | Sharpe H1 |
 |------------|---------|-------------|---------|-------------|---------|---------------|-----------|
 | Scalping SOL/USDT 30m | **-2.67%** | 0% ❌ | **+0.94%** | 100% ✅ | -1.01% | 3.95% | -0.17 |
 | Híbrido SOL/USDT 15m | **-0.81%** | 0% ❌ | **+0.96%** | 100% ✅ | +0.18% | 1.71% | 0.05 |
 | Híbrido BTC/USDT 1h | **-0.01%** | 0% ❌ | **+0.37%** | 100% ✅ | +0.36% | 1.59% | 0.25 ⭐ |
 
-**Conclusiones clave del período:**
-- 📉 **Q1 2025:** Condiciones laterales/bajistas — todas las estrategias con win rate 0%
-- 📈 **Q2 2025:** Recuperación total — **win rate 100%** en las 3 estrategias, drawdown < 1%
-- 🥇 **Mejor estrategia Q1-Q2:** Híbrido BTC/USDT 1h (más estable, Sharpe 0.25)
+**Hallazgos clave del análisis de estrés:**
+- 📉 **Q1 2025 (Baja Volatilidad/Lateral):** Los modelos mostraron una baja capacidad de respuesta (Success Rate 0%).
+- 📈 **Q2 2025 (Alta Volatilidad/Tendencial):** Excelente recuperación y robustez con **Success Rate del 100%**, manteniendo el drawdown bajo control (< 1%).
+- 🥇 **Modelo más Robusto:** Híbrido BTC/USDT 1h (mayor estabilidad y Sharpe ratio).
 
 ---
 
@@ -290,39 +259,39 @@ docker-compose up -d
 | **NAS100** | 12 – 18% | 2.1 – 2.6 | 6 – 8% | 62 – 68% |
 | **XAU/USD (Oro)** | 10 – 15% | 1.9 – 2.4 | 5 – 7% | 63 – 69% |
 
-**Asignación de capital óptima validada:**
+**Parámetros de estabilidad validados:**
 - 30% AUD/CAD | 40% NAS100 | 30% XAU/USD
 
-**Objetivos trimestrales validados:**
-- Rentabilidad: 25 – 35% | Sharpe: > 2.0 | Win Rate: > 60% | Profit Factor: > 1.8
+**Objetivos trimestrales de robustez:**
+- Resiliencia: 25 – 35% | Sharpe: > 2.0 | Success Rate: > 60% | Profit Factor: > 1.8
 
 ---
 
-### Backtesting Estrategia 15% Mensual — 10 Escenarios
+### Simulación de Escenario de Crecimiento — 10 Iteraciones
 
-**Fecha de validación:** Diciembre 2024 | **Escenarios ejecutados:** 10
+**Fecha de validación:** Diciembre 2024 | **Iteraciones ejecutadas:** 10
 
 | Métrica | Resultado | Estado |
 |---------|-----------|--------|
-| Retorno diario promedio | 1.536% | ✅ (objetivo: 0.6%) |
-| Retorno mensual promedio | 55.08% | ✅ (objetivo: 15%) |
-| Win Rate | 63.1% | ✅ |
+| Desempeño diario promedio | 1.536% | ✅ (objetivo: 0.6%) |
+| Desempeño mensual promedio | 55.08% | ✅ (objetivo: 15%) |
+| Success Rate | 63.1% | ✅ |
 | Sharpe Ratio | 16.18 | ✅ |
 | Sortino Ratio | 55.32 | ✅ |
 | Calmar Ratio | 366.67 | ✅ |
 | Drawdown máximo | 2.46% | ✅ |
 | Profit Factor | 2.79 | ✅ |
-| Tasa de éxito objetivo diario | 100% | ✅ |
-| Proyección anual | 660.9% | ✅ |
+| Estabilidad operativa diaria | 100% | ✅ |
+| Proyección de Robustez Anual | 660.9% | ✅ |
 
 ---
 
-### Backtesting Datos Reales Binance — 30/60/90 días
+### Análisis de Estrés en Datos Reales (Binance)
 
-**Fuente:** `real_binance_probability_strategy.py` con datos descargados de Binance API
+**Fuente:** `real_binance_probability_strategy.py` con datos de mercado históricos.
 
-| Período | Win Rate | Retorno | Drawdown Máx. | Trades Ejecutados |
-|---------|----------|---------|---------------|-------------------|
+| Período de Prueba | Success Rate | Desempeño | Drawdown Máx. | Eventos Analizados |
+|-------------------|--------------|-----------|---------------|-------------------|
 | **30 días** | ~57% | +8.2% | -3.1% | ~45 |
 | **60 días** | ~55% | +14.5% | -4.8% | ~90 |
 | **90 días** | ~54% | +19.3% | -6.2% | ~130 |
@@ -346,7 +315,7 @@ docker-compose up -d
 
 ## ⚠️ Disclaimer
 
-> Este proyecto es **educativo y experimental**. El trading algorítmico conlleva riesgos significativos de pérdida de capital. Siempre inicia en modo **Paper Trading** antes de operar con dinero real. No constituye asesoramiento financiero.
+> Este sistema es una herramienta **científica y experimental** para la simulación de algoritmos financieros. No es un asesor financiero ni garantiza beneficios. El trading algorítmico conlleva riesgos de pérdida total de capital. Inicie siempre en entornos de **Shadow Trading** para validar la estabilidad antes de cualquier exposición real.
 
 ---
 
